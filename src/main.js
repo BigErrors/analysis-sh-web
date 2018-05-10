@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import router from './router'
 import echarts from 'echarts'
 import liquidfill from 'echarts-liquidfill'
 import BaiduMap from 'vue-baidu-map'
@@ -17,6 +18,7 @@ Vue.use(BaiduMap, {
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  router,
   components: { App },
   template: '<App/>'
 })
