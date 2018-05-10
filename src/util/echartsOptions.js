@@ -1,4 +1,4 @@
-// 设置柱图
+// 柱图
 let setBar = (data) => {
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(item => {
@@ -111,6 +111,7 @@ let setBar = (data) => {
   return option
 }
 
+// 雷达图
 let setRadar = (data) => {
   let option = {
     title: {},
@@ -122,6 +123,19 @@ let setRadar = (data) => {
           color: '#1194F8'
         }
       },
+      axisLine: {
+        show: true
+      },
+      splitNumber: 2,
+      splitLine: {
+        show: true
+      },
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: 'rgba(255,255,255,0)'
+        }
+      },
       indicator: data.map(item => {
         return {name: item.mingcheng, max: 10}
       })
@@ -129,6 +143,13 @@ let setRadar = (data) => {
     series: [{
       name: 'radar',
       type: 'radar',
+      itemStyle: {
+        color: '#26CEFF',
+        opacity: 1
+      },
+      areaStyle: {
+        color: '#1669EE'
+      },
       data: [
         {
           value: data.map(item => {
@@ -142,6 +163,7 @@ let setRadar = (data) => {
   return option
 }
 
+// 折线图
 let setLine = (data) => {
   let option = {
     title: {},
@@ -226,43 +248,160 @@ let setLine = (data) => {
   return option
 }
 
-let setFill = (data) => {
+let setLine2 = (data) => {
   let option = {
-    series: [{
-      type: 'liquidFill',
-      radius: '95%',
-      color: ['#5c52f3'],
+    title: {},
+    tooltip: {
+      trigger: 'axis'
+    },
+    color: ['#1254C2', '#00FFFF'],
+    grid: {
+      containLabel: true
+    },
+    toolbox: {},
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: '#1194F8'
+      },
+      splitLine: {
+        show: false
+      },
+      boundaryGap: false,
+      data: [0, 3, 6, 9, 12, 15, 18, 21, 24]
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: false
+      },
+      splitLine: {
+        show: false
+      },
+      splitNumber: 1,
+      max: 8,
+      min: 6
+    },
+    series: [
+      {
+        name: '历史同期',
+        type: 'line',
+        // smooth: true,
+        symbolSize: 1,
+        lineStyle: {
+          width: 1
+        },
+        data: []
+      }, {
+        name: '和谐指数',
+        type: 'line',
+        // smooth: true,
+        symbolSize: 1,
+        lineStyle: {
+          width: 1
+        },
+        areaStyle: {
+          opacity: 0.4
+        },
+        data: []
+      }
+    ]
+  }
+  // 数据动态更新
+  // let i = 1
+  // .slice(0, i)
+  option.xAxis.data = data.map(item => {
+    return item['time']
+  })
+  option.series[0].data = data.map(item => {
+    return item['gankongzs_ls']
+  })
+  option.series[1].data = data.map(item => {
+    return item['gankongzs']
+  })
+  // setInterval(() => {
+  //   i++
+  //   option.xAxis.data = data.slice(0, i).map(item => {
+  //     return item['time']
+  //   })
+  //   option.series[0].data = data.slice(0, i).map(item => {
+  //     return item['gankongzs_ls']
+  //   })
+  //   option.series[1].data = data.slice(0, i).map(item => {
+  //     return item['gankongzs']
+  //   })
+  // }, 5000)
+  return option
+}
+
+// 液体填充
+let fillOption = (center, data, color) => {
+  color = color || '#3699F1'
+  return {
+    type: 'liquidFill',
+    radius: '75%',
+    center: center,
+    color: [color],
+    itemStyle: {
+      opacity: 0.5
+    },
+    emphasis: {
       itemStyle: {
-        opacity: 1
+        opacity: 0.5
+      }
+    },
+    outline: {
+      borderDistance: 1,
+      itemStyle: {
+        borderColor: color,
+        borderWidth: 2,
+        shadowBlur: 8
+      }
+    },
+    backgroundStyle: {
+      color: 'transparent'
+    },
+    label: {
+      color: '#ffffff',
+      fontSize: 13,
+      fontWeight: 'normal',
+      formatter: function () {
+        return data < 1 ? data * 100 + '%' : data
+      }
+    },
+    animationDuration: 1000,
+    animationDurationUpdate: 1000,
+    period: 3000,
+    data: [0.25, 0.1]
+  }
+}
+
+let setFill = (data, color, text) => {
+  let option = {
+    title: {
+      text: text,
+      textStyle: {
+        color: '#1194F8',
+        fontSize: 12
       },
-      emphasis: {
-        itemStyle: {
-          opacity: 0.9
-        }
-      },
-      outline: {
-        borderDistance: 2,
-        itemStyle: {
-          borderColor: '#5c52f3',
-          borderWidth: 1,
-          shadowBlur: 8
-        }
-      },
-      backgroundStyle: {
-        color: 'transparent'
-      },
-      label: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'normal'
-      },
-      animationDuration: 1000,
-      animationDurationUpdate: 1000,
-      period: 3000,
-      data: [data]
-    }]
+      bottom: -5,
+      left: 0
+    },
+    series: [fillOption(['50%', '38%'], data, color)]
   }
   return option
 }
 
-export default {setBar, setRadar, setLine, setFill}
+export default {setBar, setRadar, setLine, setLine2, setFill}
