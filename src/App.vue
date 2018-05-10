@@ -156,6 +156,7 @@ import zhongdianjg from '@/json/shehuimd_ditusj_zhongdianjg'
 import zhongdianry from '@/json/shehuimd_ditusj_zhongdianry'
 import sifas from '@/json/shehuimd_ditusj_sifas'
 import zhongdiansj2 from '@/json/shehuimd_ditusj_zhongdiansj'
+import shijians from '@/json/shehuimd_shijians'
 
 export default {
   name: 'App',
@@ -190,8 +191,8 @@ export default {
       chooseEventVal: 'all',
       chooseEventVal2: 'nothing',
       locked: true, // 给重点事件自动弹框上锁
-      allEventLength: [1, 2, 3, ',', 4, 5, 6], // 所有事件数组
-      todayEventLength: [2, ',', 1, 4, 2], // 今日事件数组
+      allEventLength: '123,856',
+      todayEventLength: '0,042',
       s110ld: [],
       s110ld1: [],
       s110ld2: [],
@@ -280,6 +281,18 @@ export default {
       this.s110ld = s110ld
       this.sfalvzx = sfalvzx
       this.stiaojieanj = stiaojieanj
+      // 事件量数据
+      this.allEventLength = this.strFormat(shijians[0]['quannianlj'])
+      this.todayEventLength = this.strFormat(shijians[0]['jinri'])
+    },
+    // 事件量数据格式化--千位分隔
+    strFormat (str) {
+      if (str.length === 2) {
+        str = '00' + str
+      } else if (str.length === 3) {
+        str = '0' + str
+      }
+      return ((str || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'))
     },
     // 初始化图表
     initChart () {
@@ -320,6 +333,9 @@ export default {
           vue.zhibiaofxNow['zhongdainjg'] = vue.zhibiaofx['zhongdainjg'][time1]
           vue.zhibiaofxNow['zhongdianry'] = vue.zhibiaofx['zhongdianry'][time1]
           vue.zhibiaofxNow['zhongdiansj'] = vue.zhibiaofx['zhongdiansj'][time1]
+          // 事件量--全年与今日
+          vue.allEventLength = vue.strFormat(shijians[time1]['quannianlj'])
+          vue.todayEventLength = vue.strFormat(shijians[time1]['jinri'])
         } else {
           time1 = 0
           vue.chuliqk = chuliqk[time1]
