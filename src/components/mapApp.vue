@@ -538,13 +538,13 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
   #mapApp {
     height: 100%;
-    background: url('/static/图层 1.png');
+    background: url('/static/图层 1.png') !important;
   }
 
-  .container {
+  #mapApp .container {
     display: -webkit-flex;
     display: flex;
     /* flex-wrap属性定义，如果一条轴线排不下，如何换行。 */
@@ -558,38 +558,38 @@ export default {
     align-items: stretch;
   }
 
-  .rowDirection {
+  #mapApp .rowDirection {
     flex-direction: row;
   }
 
-  .columnDirection {
+  #mapApp .columnDirection {
     flex-direction: column;
   }
 
-  .top {
+  #mapApp .top {
     width: 100%;
     min-width: 1920px;
     height: 99px;
     background: url('/static/头部.png');
   }
 
-  .content {
+  #mapApp .content {
     height: 100%;
   }
 
-  .left {
+  #mapApp .left {
     flex: none;
     max-width: 445px;
     min-width: 445px;
   }
 
-  .right {
+  #mapApp .right {
     flex: none;
     max-width: 445px;
     min-width: 445px;
   }
 
-  .center {
+  #mapApp .center {
     flex: auto;
     min-width: 1030px;
   }
@@ -601,7 +601,7 @@ export default {
     margin: 10px 13px 14px 13px;
   }
 
-    .c11 {
+  .c11 {
     position: fixed;
     left: 0;
     top: 0;

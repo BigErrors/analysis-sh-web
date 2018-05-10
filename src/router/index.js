@@ -16,6 +16,11 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/mapApp',
+      name: 'mapApp',
+      component: mapApp
     }
   ]
 })

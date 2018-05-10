@@ -1,5 +1,7 @@
 <template>
-  <router-view id='App'></router-view>
+  <div id='App'>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -14,7 +16,6 @@ export default {
   methods: {},
   created () {},
   mounted () {}
-
 }
 </script>
 
@@ -43,6 +44,5 @@ export default {
 
   #App {
     height: 100%;
-    background: url('/static/图层 1.png');
   }
 </style>
