@@ -253,7 +253,7 @@ export default {
       // 开启关系拖拽
       map.enableInertialDragging()
       // 开启鼠标滚动缩放
-      // map.enableScrollWheelZoom()
+      map.enableScrollWheelZoom()
       // 地图数据初始化
       this.init(this.s110ld, 's110ld')
       this.init(this.sfalvzx, 'sfalvzx')
@@ -602,12 +602,12 @@ export default {
   }
 
   .c11 {
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    /* z-index: -1; */
     /* margin: 0 13px 14px 13px; */
   }
 
