@@ -5,7 +5,7 @@
       <div class='item left container columnDirection'>
         <div class='l1'>
           <div class='num1'>{{zhishufxNow.gankongzs}}</div>
-          <div class='num2' :style='{"color": zhishufxNow.tongbi>0?"red":"green"}'>{{`${Math.round(zhishufxNow.tongbi*100)}%`}}</div>
+          <div class='num2' :style='{"color": zhishufxNow.tongbi>0?"#FC4A4A":"#67FF6B"}'>{{`${Math.round(zhishufxNow.tongbi*100)}%`}}</div>
           <div class='chart'></div>
         </div>
         <div class='l2'>
@@ -13,7 +13,7 @@
            <thead></thead>
            <tbody>
             <tr v-for='(value, key, index) in zhibiaofxNow' :key='key + index' :class='{"stripe": index%2 ===0 ? true:false}'>
-              <td class='td type'>{{key | nameFormat}}</td>
+              <td class='td type cursor' @click='changeRouter(key)'>{{key | nameFormat}}</td>
               <td  class='td '>
                 <span class="today">{{value.jinrixz | numFormat}}</span><br>
                 <span class="text" :class='{"paddingLeft":(key==="110"||key==="falvzx"||key==="renmintj")?true:false}'>今日新增</span>
@@ -51,9 +51,10 @@
             </bm-marker>
             <!-- <bm-marker  @click="test(item)" v-for = "item in zhongdiansj" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}"></bm-marker> -->
             <!-- 海量点 -->
-            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SIZE_HUGE" color="rgba(255,68,68,0.9)" size="BMAP_POINT_SHAPE_CIRCLE"></bm-point-collection>
-            <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SIZE_HUGE" color="rgba(212,191,49,0.9)" size="BMAP_POINT_SHAPE_CIRCLE"></bm-point-collection>
-            <bm-point-collection :points="greenEvent" shape="BMAP_POINT_SIZE_HUGE" color="rgba(3,185,238,0.9)" size="BMAP_POINT_SHAPE_CIRCLE"></bm-point-collection>
+            <!-- bm-point-collection标签的顺序对应cavans图层的绘制顺序 -->
+            <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(3,185,238,0.9)" size="BMAP_POINT_SIZE_SMALLER"></bm-point-collection>
+            <bm-point-collection :points="yellowEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(225,222,0,0.9)" size="BMAP_POINT_SIZE_SMALL"></bm-point-collection>
+            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,68,68,0.9)" size="BMAP_POINT_SIZE_NORMAL"></bm-point-collection>
           </baidu-map>
           <div class='c12' :class="{c12anmishow:showall,c12anmihide:hideall}">
             <div class="c12content choosed" @click="ifshow">
@@ -418,6 +419,9 @@ export default {
     },
     chooseEvent2 (name) {
       this.chooseEventVal2 = name
+    },
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {
@@ -429,11 +433,11 @@ export default {
     this.updateMapData()
   },
   computed: {
-    greenEvent: function () {
+    blueEvent: function () {
       let arr = []
       return arr.concat(this.s110ld3, this.sfalvzx3, this.stiaojieanj3)
     },
-    blueEvent: function () {
+    yellowEvent: function () {
       let arr = []
       return arr.concat(this.s110ld2, this.sfalvzx2, this.stiaojieanj2)
     },
@@ -747,7 +751,7 @@ export default {
 
   .l1 .num1 {
     float: left;
-    margin: 40px 0px 41px 28px;
+    margin: 66px 0px 41px 28px;
     height: 56px;
     width: 50px;
     line-height: 56px;
@@ -757,7 +761,7 @@ export default {
   }
   .l1 .num2 {
     float: left;
-    margin: 40px 0px 41px 10px;
+    margin: 66px 0px 41px 13px;
     height: 56px;
     width: 50px;
     line-height: 70px;
@@ -767,9 +771,9 @@ export default {
   }
   .l1 .chart {
     float: left;
-    margin: 40px 0px 21px 20px;
+    margin: 40px 10px 21px 30px;
     height: 90px;
-    width: 200px;
+    width: 250px;
   }
 
   .l2 {
@@ -797,6 +801,10 @@ export default {
 
   .r4Content .stripe{
     background: rgba(7,30,74,0.8)
+  }
+
+  .cursor{
+    cursor: pointer;
   }
 
   .l2Content .type{

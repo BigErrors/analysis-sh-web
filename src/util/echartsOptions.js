@@ -59,6 +59,7 @@ let setBar = (data) => {
     color: ['#0847D6', '#1763F2', '#5D9BFF', '#FFFF00'],
     legend: {
       x: 'right',
+      top: 20,
       textStyle: {
         color: '#FFFFFF',
         fontSize: 13
@@ -81,7 +82,7 @@ let setBar = (data) => {
       type: 'bar',
       name: '人民调解',
       stack: 'one',
-      barWidth: 12,
+      barWidth: 30,
       data: data.map(item => {
         return item['renmintj']
       })
@@ -89,7 +90,7 @@ let setBar = (data) => {
       type: 'bar',
       name: '法律咨询',
       stack: 'one',
-      barWidth: 12,
+      barWidth: 30,
       data: data.map(item => {
         return item['falvzx']
       })
@@ -97,6 +98,7 @@ let setBar = (data) => {
       type: 'bar',
       name: '110',
       stack: 'one',
+      barWidth: 30,
       data: data.map(item => {
         return item['110']
       })
@@ -173,6 +175,7 @@ let setLine = (data) => {
     color: ['#FFF225', '#30FF8D', '#26CEFF'],
     legend: {
       x: 'right',
+      top: 20,
       textStyle: {
         color: '#FFFFFF',
         fontSize: 13
@@ -256,6 +259,9 @@ let setLine2 = (data) => {
     },
     color: ['#1254C2', '#00FFFF'],
     grid: {
+      left: 15,
+      top: 0,
+      bottom: 0,
       containLabel: true
     },
     toolbox: {},
