@@ -7,56 +7,28 @@
     <div class="supermarket_content">
       <div class="supermarket_nav_main">
         <img class="supermarket_nav_logo" src="/static/marketImages/icon_logo.png"/>
-        <span class="supermarket_nav_span">模型超市</span>
+        <span class="supermarket_nav_span">数据应用</span>
       </div>
       <div class="supermarket_main">
         <div class="supermarket_main_row">
           <div class="supermaket_main_col">
-            <img class="col1" src="/static/marketImages/1.png" />
-            <span class="col1">家暴专题模型</span>
-          </div>
-          <div class="supermaket_main_col">
-            <img class="col1" src="/static/marketImages/7.png" />
-            <span class="col1">重点事件挖掘</span>
-          </div>
-          <div class="supermaket_main_col">
-            <img class="col1" src="/static/marketImages/8.png" />
-            <span class="col1">和谐指数</span>
+            <img class="col1" src="/static/dataAppImages/1.png" />
+            <span class="col1">同案同调</span>
           </div>
         </div>
         <div class="supermarket_main_row">
           <div class="supermaket_main_col">
-            <img class="col2" src="/static/marketImages/10.png" />
-            <span class="col2">案件密度模型</span>
-          </div>
-          <div class="supermaket_main_col">
-            <img class="col2" src="/static/marketImages/5.png" />
-            <span class="col2">重点机构挖掘</span>
-          </div>
-          <div class="supermaket_main_col">
-            <img class="col2" src="/static/marketImages/9.png" />
-            <span class="col2">情绪指数</span>
+            <img class="col2" src="/static/dataAppImages/2.png" />
+            <span class="col2">智能推送</span>
           </div>
         </div>
         <div class="supermarket_main_row">
           <div class="supermaket_main_col">
-            <img class="col3" src="/static/marketImages/2.png" />
-            <span class="col3">案件热词分析</span>
-          </div>
-          <div class="supermaket_main_col">
-            <img class="col3" src="/static/marketImages/6.png" />
-            <span class="col3">调解员画像分析</span>
+            <img class="col2" src="/static/dataAppImages/3.png" />
+            <span class="col2">历史档案分析</span>
           </div>
         </div>
         <div class="supermarket_main_row">
-          <div class="supermaket_main_col">
-            <img class="col4" src="/static/marketImages/3.png" />
-            <span class="col4">重点人员挖掘</span>
-          </div>
-          <div class="supermaket_main_col">
-            <img class="col4" src="/static/marketImages/4.png" />
-            <span class="col4">数据碰撞分析</span>
-          </div>
         </div>
       </div>
     </div>

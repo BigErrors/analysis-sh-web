@@ -10,6 +10,7 @@ import mzhongdianry from '@/components/mockpages/zhongdianry'
 import mzhongdiansj from '@/components/mockpages/zhongdiansj'
 import moduleChoose from '@/components/moduleChoose'
 import modelSupermarket from '@/components/modelSupermarket'
+import modelDataApp from '@/components/modelDataApp'
 
 Vue.use(Router)
 
@@ -67,6 +68,10 @@ const router = new Router({
       path: '/modelSupermarket',
       name: 'modelSupermarket',
       component: modelSupermarket
+    }, {
+      path: '/modelDataApp',
+      name: 'modelDataApp',
+      component: modelDataApp
     }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
   <div id='mapApp' class='container columnDirection'>
-    <div class='item top' @click='changeRouter("moduleChoose")'></div>
+    <div class='item top' style='cursor: pointer;' @click='changeRouter("moduleChoose")'></div>
     <div class='item container rowDirection content'>
       <div class='item left container columnDirection'>
         <div class='l1'>

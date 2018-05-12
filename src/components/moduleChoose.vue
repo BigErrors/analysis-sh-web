@@ -6,14 +6,14 @@
     <div class="module_center"></div>
     <div class="module_content">
       <div class="enjoy_carousel_container">
-        <div class="enjoy_carousel_once_6 bg1" @click='changeRouter("")' :class="{once_6_first:mark===1,once_6_second:mark===2,once_6_third:mark===3,once_6_fourth:mark===4,once_6_fifth:mark===5,once_6_sixth:mark===6}">
+        <div class="enjoy_carousel_once_6 bg1" @click='changeRouter("modelSupermarket")' :class="{once_6_first:mark===1,once_6_second:mark===2,once_6_third:mark===3,once_6_fourth:mark===4,once_6_fifth:mark===5,once_6_sixth:mark===6}">
           <div v-if="mark===2" class="righttop"></div>
           <div v-if="mark===2" class="lefttop"></div>
           <div v-if="mark===2" class="rightbottom"></div>
           <div v-if="mark===2" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型超市</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg2" @click='changeRouter("")' :class="{once_6_first:mark===6,once_6_second:mark===1,once_6_third:mark===2,once_6_fourth:mark===3,once_6_fifth:mark===4,once_6_sixth:mark===5}">
+        <div class="enjoy_carousel_once_6 bg2" @click='changeRouter("modelDataApp")' :class="{once_6_first:mark===6,once_6_second:mark===1,once_6_third:mark===2,once_6_fourth:mark===3,once_6_fifth:mark===4,once_6_sixth:mark===5}">
           <div v-if="mark===1" class="righttop"></div>
           <div v-if="mark===1" class="lefttop"></div>
           <div v-if="mark===1" class="rightbottom"></div>
@@ -27,14 +27,14 @@
           <div v-if="mark===6" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据展示</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg4" @click='changeRouter("")' :class="{once_6_first:mark===4,once_6_second:mark===5,once_6_third:mark===6,once_6_fourth:mark===1,once_6_fifth:mark===2,once_6_sixth:mark===3}">
+        <div class="enjoy_carousel_once_6 bg4" @click='changeRouter("modelSupermarket")' :class="{once_6_first:mark===4,once_6_second:mark===5,once_6_third:mark===6,once_6_fourth:mark===1,once_6_fifth:mark===2,once_6_sixth:mark===3}">
           <div v-if="mark===5" class="righttop"></div>
           <div v-if="mark===5" class="lefttop"></div>
           <div v-if="mark===5" class="rightbottom"></div>
           <div v-if="mark===5" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型超市</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg5" @click='changeRouter("")' :class="{once_6_first:mark===3,once_6_second:mark===4,once_6_third:mark===5,once_6_fourth:mark===6,once_6_fifth:mark===1,once_6_sixth:mark===2}">
+        <div class="enjoy_carousel_once_6 bg5" @click='changeRouter("modelDataApp")' :class="{once_6_first:mark===3,once_6_second:mark===4,once_6_third:mark===5,once_6_fourth:mark===6,once_6_fifth:mark===1,once_6_sixth:mark===2}">
           <div v-if="mark===4" class="righttop"></div>
           <div v-if="mark===4" class="lefttop"></div>
           <div v-if="mark===4" class="rightbottom"></div>
