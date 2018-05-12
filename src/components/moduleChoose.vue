@@ -143,6 +143,19 @@ export default {
   background-position: center;
   background-repeat:no-repeat;
 }
+.module_userInfo{
+  position: fixed;
+  left: 1920px;
+  top: 0px;
+  width: 70px;
+  height: 70px;
+  background: url('/static/moduleImages/logout.png');
+  transform: translate(-80px,10px);
+  cursor: pointer;
+}
+.module_userInfo:hover{
+  background: url('/static/moduleImages/logout2.png');
+}
 .module_center{
   width: 100%;
   margin:95px 0 45px 0;

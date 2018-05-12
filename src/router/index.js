@@ -9,6 +9,7 @@ import mzhongdianjg from '@/components/mockpages/zhongdianjg'
 import mzhongdianry from '@/components/mockpages/zhongdianry'
 import mzhongdiansj from '@/components/mockpages/zhongdiansj'
 import moduleChoose from '@/components/moduleChoose'
+import modelSupermarket from '@/components/modelSupermarket'
 
 Vue.use(Router)
 
@@ -62,6 +63,10 @@ const router = new Router({
       path: '/moduleChoose',
       name: 'moduleChoose',
       component: moduleChoose
+    }, {
+      path: '/modelSupermarket',
+      name: 'modelSupermarket',
+      component: modelSupermarket
     }
   ]
 })
