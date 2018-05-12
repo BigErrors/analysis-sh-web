@@ -4,11 +4,11 @@
       <img class="supermarket_header_icon" src="/static/loginImages/icon_logo.png" />
       <span class="supermarket_header_title">上海市司法局-社会矛盾风险感控大数据平台</span>
     </div>
-    <div class="supermarket_content">
-      <div class="supermarket_nav_main">
+      <div class="supermarket_nav_main" style="margin: 10px 30px;">
         <img class="supermarket_nav_logo" src="/static/marketImages/icon_logo.png"/>
         <span class="supermarket_nav_span">数据应用</span>
       </div>
+    <div class="supermarket_content">
       <div class="supermarket_main">
         <div class="supermarket_main_row">
           <div class="supermaket_main_col">
@@ -56,7 +56,7 @@ export default {
 }
 .supermarket_header{
   width: 100%;
-  height: 55px;
+  height: 75px;
   background:rgba(6,20,57,1);
   padding-left: 50px;
 }
@@ -65,16 +65,17 @@ export default {
   height: 34px;
   position: absolute;
   left: 12px;
-  top:10px;
+  top:17px;
 }
 .supermarket_header_title{
-  line-height: 55px;
+  line-height: 75px;
   color: white;
+  font-size: 25px;
 }
 .supermarket_content{
   width: 100%;
   box-sizing: border-box;
-  padding:0 30px;
+  padding:0 100px;
   position: relative;
 }
 .supermarket_nav_main{
@@ -102,7 +103,8 @@ export default {
   width: 100%;
   flex-direction: row;
   justify-content:center;
-  align-items:flex-start
+  align-items:flex-start;
+  padding-top: 30px;
 }
 .supermarket_main_row{
   flex: 1;
@@ -118,18 +120,25 @@ export default {
   width: 70%;
   display: block;
   cursor: pointer;
+  box-shadow: 0px 0px 20px #1194F8;
 }
 .supermaket_main_col span{
   display: block;
   width: 70%;
   text-align: center;
   margin-top: 18px;
-  font-size:14px;
+  font-size: 16px;
+  color: #717171;
   cursor: pointer;
 }
 .supermaket_main_col:hover{
   color:#1194F8
 }
+
+.supermaket_main_col img:hover{
+  box-shadow: 0px 0px 20px #1194F8;
+}
+
 .col1{
   margin-left: 0;
 }

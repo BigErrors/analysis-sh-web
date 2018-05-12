@@ -52,9 +52,9 @@
             <!-- <bm-marker  @click="test(item)" v-for = "item in zhongdiansj" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}"></bm-marker> -->
             <!-- 海量点 -->
             <!-- bm-point-collection标签的顺序对应cavans图层的绘制顺序 -->
-            <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(3,185,238,0.9)" size="BMAP_POINT_SIZE_SMALLER"></bm-point-collection>
-            <bm-point-collection :points="yellowEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(225,222,0,0.9)" size="BMAP_POINT_SIZE_SMALL"></bm-point-collection>
-            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,68,68,0.9)" size="BMAP_POINT_SIZE_BIG"></bm-point-collection>
+            <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(0,255,253,1)" size="BMAP_POINT_SIZE_SMALLER"></bm-point-collection>
+            <bm-point-collection :points="yellowEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,255,0,1)" size="BMAP_POINT_SIZE_SMALL"></bm-point-collection>
+            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,70,68,1)" size="BMAP_POINT_SIZE_BIG"></bm-point-collection>
           </baidu-map>
           <div class='c12' :class="{c12anmishow:showall,c12anmihide:hideall}">
             <div class="c12content choosed" @click="ifshow">
@@ -755,7 +755,7 @@ export default {
 
   .l1 .num1 {
     float: left;
-    margin: 66px 0px 41px 28px;
+    margin: 56px 0px 41px 40px;
     height: 56px;
     width: 50px;
     line-height: 56px;
@@ -765,7 +765,7 @@ export default {
   }
   .l1 .num2 {
     float: left;
-    margin: 66px 0px 41px 13px;
+    margin: 56px 0px 41px 13px;
     height: 56px;
     width: 50px;
     line-height: 70px;
@@ -775,7 +775,7 @@ export default {
   }
   .l1 .chart {
     float: left;
-    margin: 40px 10px 21px 30px;
+    margin: 40px 10px 21px 6px;
     height: 90px;
     width: 250px;
   }

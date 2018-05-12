@@ -88,7 +88,7 @@ export default {
 }
 .supermarket_header{
   width: 100%;
-  height: 55px;
+  height: 75px;
   background:rgba(6,20,57,1);
   padding-left: 50px;
 }
@@ -97,11 +97,12 @@ export default {
   height: 34px;
   position: absolute;
   left: 12px;
-  top:10px;
+  top:17px;
 }
 .supermarket_header_title{
-  line-height: 55px;
+  line-height: 75px;
   color: white;
+  font-size: 25px;
 }
 .supermarket_content{
   width: 100%;
@@ -135,6 +136,7 @@ export default {
   flex-direction: row;
   justify-content:center;
   align-items:flex-start;
+  padding-top: 30px;
 }
 .supermarket_main_row{
   flex: 1;
@@ -150,13 +152,15 @@ export default {
   width: 70%;
   display: block;
   cursor: pointer;
+  box-shadow: 0px 0px 20px #1194F8;
 }
 .supermaket_main_col span{
   display: block;
   width: 70%;
   text-align: center;
   margin-top: 18px;
-  font-size:14px;
+  font-size: 16px;
+  color: #717171;
   cursor: pointer;
 }
 .supermaket_main_col:hover{
