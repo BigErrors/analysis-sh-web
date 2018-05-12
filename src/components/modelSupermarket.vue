@@ -4,11 +4,15 @@
       <img class="supermarket_header_icon" src="/static/loginImages/icon_logo.png" />
       <span class="supermarket_header_title">上海市司法局-社会矛盾风险感控大数据平台</span>
     </div>
-    <div class="supermarket_content">
-      <div class="supermarket_nav_main">
+      <div class="supermarket_nav_main" style="margin: 10px 30px;">
         <img class="supermarket_nav_logo" src="/static/marketImages/icon_logo.png"/>
         <span class="supermarket_nav_span">模型超市</span>
       </div>
+    <div class="supermarket_content">
+      <!-- <div class="supermarket_nav_main">
+        <img class="supermarket_nav_logo" src="/static/marketImages/icon_logo.png"/>
+        <span class="supermarket_nav_span">模型超市</span>
+      </div> -->
       <div class="supermarket_main">
         <div class="supermarket_main_row">
           <div class="supermaket_main_col">
@@ -102,7 +106,7 @@ export default {
 .supermarket_content{
   width: 100%;
   box-sizing: border-box;
-  padding:0 30px;
+  padding:0 100px;
   position: relative;
 }
 .supermarket_nav_main{
@@ -130,7 +134,7 @@ export default {
   width: 100%;
   flex-direction: row;
   justify-content:center;
-  align-items:flex-start
+  align-items:flex-start;
 }
 .supermarket_main_row{
   flex: 1;
@@ -158,6 +162,11 @@ export default {
 .supermaket_main_col:hover{
   color:#1194F8
 }
+
+.supermaket_main_col img:hover{
+  box-shadow: 0px 0px 20px #1194F8;
+}
+
 .col1{
   margin-left: 0;
 }
