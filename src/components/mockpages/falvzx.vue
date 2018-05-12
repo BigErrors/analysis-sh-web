@@ -16,5 +16,6 @@ export default {
  #mfalvzx{
    height: 100%;
    background: url('/static/mackpages/法律咨询服务.png');
+   background-size:  1920px 1080px;
  }
 </style>

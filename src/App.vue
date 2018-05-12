@@ -24,7 +24,8 @@ export default {
   body {
     margin: 0px;
     height: 100%;
-    min-height: 1080px;
+    width: 100%;
+    /* min-height: 1080px; */
     min-width: 1920px;
     overflow-y: auto;
     overflow-x: hidden;

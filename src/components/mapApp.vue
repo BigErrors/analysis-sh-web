@@ -1,6 +1,6 @@
 <template>
   <div id='mapApp' class='container columnDirection'>
-    <div class='item top'></div>
+    <div class='item top' @click='changeRouter("moduleChoose")'></div>
     <div class='item container rowDirection content'>
       <div class='item left container columnDirection'>
         <div class='l1'>
@@ -54,7 +54,7 @@
             <!-- bm-point-collection标签的顺序对应cavans图层的绘制顺序 -->
             <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(3,185,238,0.9)" size="BMAP_POINT_SIZE_SMALLER"></bm-point-collection>
             <bm-point-collection :points="yellowEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(225,222,0,0.9)" size="BMAP_POINT_SIZE_SMALL"></bm-point-collection>
-            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,68,68,0.9)" size="BMAP_POINT_SIZE_NORMAL"></bm-point-collection>
+            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,68,68,0.9)" size="BMAP_POINT_SIZE_BIG"></bm-point-collection>
           </baidu-map>
           <div class='c12' :class="{c12anmishow:showall,c12anmihide:hideall}">
             <div class="c12content choosed" @click="ifshow">
@@ -215,7 +215,7 @@ export default {
   },
   filters: {
     nameFormat (value) {
-      let types = ['110', 'falvzx', 'renmintj', 'zhongdiansj', 'zhongdianry', 'zhongdainjg']
+      let types = ['110', 'falvzx', 'renmintj', 'zhongdiansj', 'zhongdianry', 'zhongdianjg']
       switch (value) {
         case types[0]:
           return '110联动'
@@ -266,12 +266,12 @@ export default {
       this.zhishufxNow = zhishufx[0]
       this.zhishufx = zhishufx
       // 指标分析数据--将6类数据分类
-      let types = ['110', 'falvzx', 'renmintj', 'zhongdiansj', 'zhongdianry', 'zhongdainjg']
+      let types = ['110', 'falvzx', 'renmintj', 'zhongdiansj', 'zhongdianry', 'zhongdianjg']
       types.map((type) => { this.zhibiaofx[type] = jsonUtil.merge(zhibiaofx, type) })
       this.zhibiaofxNow['110'] = this.zhibiaofx['110'][0]
       this.zhibiaofxNow['falvzx'] = this.zhibiaofx['falvzx'][0]
       this.zhibiaofxNow['renmintj'] = this.zhibiaofx['renmintj'][0]
-      this.zhibiaofxNow['zhongdainjg'] = this.zhibiaofx['zhongdainjg'][0]
+      this.zhibiaofxNow['zhongdianjg'] = this.zhibiaofx['zhongdianjg'][0]
       this.zhibiaofxNow['zhongdianry'] = this.zhibiaofx['zhongdianry'][0]
       this.zhibiaofxNow['zhongdiansj'] = this.zhibiaofx['zhongdiansj'][0]
       // 处理情况数据
@@ -331,7 +331,7 @@ export default {
           vue.zhibiaofxNow['110'] = vue.zhibiaofx['110'][time1]
           vue.zhibiaofxNow['falvzx'] = vue.zhibiaofx['falvzx'][time1]
           vue.zhibiaofxNow['renmintj'] = vue.zhibiaofx['renmintj'][time1]
-          vue.zhibiaofxNow['zhongdainjg'] = vue.zhibiaofx['zhongdainjg'][time1]
+          vue.zhibiaofxNow['zhongdianjg'] = vue.zhibiaofx['zhongdianjg'][time1]
           vue.zhibiaofxNow['zhongdianry'] = vue.zhibiaofx['zhongdianry'][time1]
           vue.zhibiaofxNow['zhongdiansj'] = vue.zhibiaofx['zhongdiansj'][time1]
           // 事件量--全年与今日
@@ -360,7 +360,7 @@ export default {
           let i = parseInt(Math.random() * length)
           _this.labelXuhao = zhongdiansj2[i].xuhao
           _this.$nextTick(function () {
-            console.log(document.getElementsByClassName('BMapLabel')[1].parentElement)
+            // console.log(document.getElementsByClassName('BMapLabel')[1].parentElement)
             document.getElementsByClassName('BMapLabel')[1].parentElement.style.zIndex = 1
           })
         }
@@ -421,6 +421,7 @@ export default {
       this.chooseEventVal2 = name
     },
     changeRouter (name) {
+      console.log(name)
       this.$router.push({name: name})
     }
   },
@@ -542,10 +543,13 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
   #mapApp {
-    height: 100%;
-    background: url('/static/图层 1.png') !important;
+    /* height: 100%; */
+    min-height: 1080px;
+    min-width: 1920px;
+    background: url('/static/图层 1.png');
+    background-size: 1920px 1080px;
   }
 
   #mapApp .container {
@@ -601,17 +605,17 @@ export default {
   .c1 {
     position: relative;
     width: 1003px;
-    height: 634px;
+    height: 626px;
     margin: 10px 13px 14px 13px;
   }
 
   .c11 {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    /* z-index: -1; */
+    z-index: -1;
     /* margin: 0 13px 14px 13px; */
   }
 
@@ -859,7 +863,7 @@ export default {
   .r1 {
     width: 431px;
     height: 112px;
-    margin: 0 15px 12px 0;
+    margin: -18px 15px 12px 0;
     background: url('/static/形状 1553.png');
   }
 
@@ -889,7 +893,7 @@ export default {
 
   .r1 .r12 {
     height: 24px;
-    width: 306px;
+    width: 330px;
     margin-top: 16px;
     padding: 2px 25px 2px 95px;
   }

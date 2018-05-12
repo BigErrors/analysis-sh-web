@@ -16,5 +16,6 @@ export default {
  #m110{
    height: 100%;
    background: url('/static/mackpages/110联动.png');
+   background-size:  1920px 1080px;
  }
 </style>

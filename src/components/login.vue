@@ -3,7 +3,9 @@
     <div class="title">
       <i class="icon icon-logo-login"></i>
       <h2>上海市司法局</h2>
-      <h2>社会矛盾风险感控大数据平台</h2>
+      <!-- <h2>社会矛盾风险感控大数据平台</h2> -->
+    </div>
+    <div class="title1">
     </div>
     <div class="m-login">
       <div class="wrap-login">
@@ -11,14 +13,14 @@
         <div class="login-frame">
           <div class="bar-input">
             <i class="icon icon-user"></i>
-            <input type="text" id="name" class="form-control" :value='userName' placeholder="请输入用户名" data-necessary="true" reservation="用户名"/>
-            <a class="btn btn-gray-delete" @click='userName=""'>&times;</a>
+            <input type="text" id="name" class="form-control" :class='{blue: !userNameStatus}' v-model='userName' placeholder="请输入用户名" data-necessary="true" reservation="用户名" @focus='changeStatus("userName")'/>
+            <a class="btn btn-gray-delete" :class='{hide: userNameStatus}' @click='clearContent("userName")'>&times;</a>
             <div class="errorBar"></div>
           </div>
           <div class="bar-input">
             <i class="icon icon-lock"></i>
-            <input type="password" id="password" class="form-control" :value='userPwd' placeholder="请输入密码" data-necessary="true" reservation="密码"/>
-            <a class="btn btn-gray-delete" @click='userPwd=""'>&times;</a>
+            <input type="password" id="password" class="form-control" :class='{blue: !userPwdStatus}' v-model='userPwd' placeholder="请输入密码" data-necessary="true" reservation="密码" @focus='changeStatus("userPwd")'/>
+            <a class="btn btn-gray-delete" :class='{hide: userPwdStatus}' @click='clearContent("userPwd")'>&times;</a>
             <div class="errorBar"></div>
           </div>
           <div class="bar-option" style="position:relative">
@@ -45,7 +47,9 @@ export default {
   data () {
     return {
       userName: 'admin',
-      userPwd: '123456'
+      userPwd: '123456',
+      userNameStatus: true,
+      userPwdStatus: true
     }
   },
   watch: {},
@@ -53,7 +57,25 @@ export default {
   filters: {},
   methods: {
     changeRouter () {
-      this.$router.push({name: 'mapApp'})
+      if (this.userName && this.userPwd) { this.$router.push({name: 'moduleChoose'}) } else { alert('用户名或密码不能为空') }
+    },
+    changeStatus (type) {
+      if (type === 'userName') {
+        this.userNameStatus = false
+        this.userPwdStatus = true
+      } else {
+        this.userNameStatus = true
+        this.userPwdStatus = false
+      }
+    },
+    clearContent (type) {
+      if (type === 'userName') {
+        this.userName = ''
+        this.userNameStatus = !this.userNameStatus
+      } else {
+        this.userPwd = ''
+        this.userPwdStatus = !this.userPwdStatus
+      }
     }
   },
   created () {},
@@ -61,7 +83,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.login{
+  max-height: 100%;
+  max-width: 100%;
+}
 .icon-logo-login {
   width: 39px;
   height: 40px;
@@ -382,22 +408,32 @@ textarea {
 }
 #login .title {
   position: absolute;
-  top: 235px;
+  top: 207px;
+  left: 0;
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+#login .title i {
+  margin: 0 6px 5px 0;
+}
+#login .title h2 {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24px;
+  color: #AFD0FF;
+}
+#login .title1 {
+  position: absolute;
+  top: 256px;
   left: 0;
   width: 100%;
   height: 40px;
   padding-top: 27px;
   line-height: 40px;
   text-align: center;
-}
-#login .title i {
-  margin: 0 16px 0 36px;
-}
-#login .title h2 {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 23px;
-  color: #4d84fe;
+  background: url('/static/loginImages/icon_title.png') no-repeat center;
 }
 #login .m-gallery {
   position: relative;
@@ -603,5 +639,10 @@ textarea {
 }
 .content-null {
   border-color: #fd2740 !important;
+}
+
+.blue{
+  color: #4d84fe !important;
+  border: 1px solid rgba(77,132,254, 0.5) !important;
 }
 </style>

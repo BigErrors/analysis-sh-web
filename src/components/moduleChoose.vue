@@ -6,42 +6,42 @@
     <div class="module_center"></div>
     <div class="module_content">
       <div class="enjoy_carousel_container">
-        <div class="enjoy_carousel_once_6 bg1" :class="{once_6_first:mark===1,once_6_second:mark===2,once_6_third:mark===3,once_6_fourth:mark===4,once_6_fifth:mark===5,once_6_sixth:mark===6}">
+        <div class="enjoy_carousel_once_6 bg1" @click='changeRouter("")' :class="{once_6_first:mark===1,once_6_second:mark===2,once_6_third:mark===3,once_6_fourth:mark===4,once_6_fifth:mark===5,once_6_sixth:mark===6}">
           <div v-if="mark===2" class="righttop"></div>
           <div v-if="mark===2" class="lefttop"></div>
           <div v-if="mark===2" class="rightbottom"></div>
           <div v-if="mark===2" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型超市</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg2" :class="{once_6_first:mark===6,once_6_second:mark===1,once_6_third:mark===2,once_6_fourth:mark===3,once_6_fifth:mark===4,once_6_sixth:mark===5}">
+        <div class="enjoy_carousel_once_6 bg2" @click='changeRouter("")' :class="{once_6_first:mark===6,once_6_second:mark===1,once_6_third:mark===2,once_6_fourth:mark===3,once_6_fifth:mark===4,once_6_sixth:mark===5}">
           <div v-if="mark===1" class="righttop"></div>
           <div v-if="mark===1" class="lefttop"></div>
           <div v-if="mark===1" class="rightbottom"></div>
           <div v-if="mark===1" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据应用</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg3" :class="{once_6_first:mark===5,once_6_second:mark===6,once_6_third:mark===1,once_6_fourth:mark===2,once_6_fifth:mark===3,once_6_sixth:mark===4}">
+        <div class="enjoy_carousel_once_6 bg3" @click='changeRouter("mapApp")' :class="{once_6_first:mark===5,once_6_second:mark===6,once_6_third:mark===1,once_6_fourth:mark===2,once_6_fifth:mark===3,once_6_sixth:mark===4}">
           <div v-if="mark===6" class="righttop"></div>
           <div v-if="mark===6" class="lefttop"></div>
           <div v-if="mark===6" class="rightbottom"></div>
           <div v-if="mark===6" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据展示</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg4" :class="{once_6_first:mark===4,once_6_second:mark===5,once_6_third:mark===6,once_6_fourth:mark===1,once_6_fifth:mark===2,once_6_sixth:mark===3}">
+        <div class="enjoy_carousel_once_6 bg4" @click='changeRouter("")' :class="{once_6_first:mark===4,once_6_second:mark===5,once_6_third:mark===6,once_6_fourth:mark===1,once_6_fifth:mark===2,once_6_sixth:mark===3}">
           <div v-if="mark===5" class="righttop"></div>
           <div v-if="mark===5" class="lefttop"></div>
           <div v-if="mark===5" class="rightbottom"></div>
           <div v-if="mark===5" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型超市</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg5" :class="{once_6_first:mark===3,once_6_second:mark===4,once_6_third:mark===5,once_6_fourth:mark===6,once_6_fifth:mark===1,once_6_sixth:mark===2}">
+        <div class="enjoy_carousel_once_6 bg5" @click='changeRouter("")' :class="{once_6_first:mark===3,once_6_second:mark===4,once_6_third:mark===5,once_6_fourth:mark===6,once_6_fifth:mark===1,once_6_sixth:mark===2}">
           <div v-if="mark===4" class="righttop"></div>
           <div v-if="mark===4" class="lefttop"></div>
           <div v-if="mark===4" class="rightbottom"></div>
           <div v-if="mark===4" class="leftbottom"></div>
           <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据应用</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg6" :class="{once_6_first:mark===2,once_6_second:mark===3,once_6_third:mark===4,once_6_fourth:mark===5,once_6_fifth:mark===6,once_6_sixth:mark===1}">
+        <div class="enjoy_carousel_once_6 bg6" @click='changeRouter("mapApp")' :class="{once_6_first:mark===2,once_6_second:mark===3,once_6_third:mark===4,once_6_fourth:mark===5,once_6_fifth:mark===6,once_6_sixth:mark===1}">
           <div v-if="mark===3" class="righttop"></div>
           <div v-if="mark===3" class="lefttop"></div>
           <div v-if="mark===3" class="rightbottom"></div>
@@ -68,6 +68,11 @@ export default {
     }
   },
   methods: {
+    changeRouter (name) {
+      if (name !== '') {
+        this.$router.push({name: name})
+      }
+    },
     changemark: function (fn) {
       let _this = this
       this.timer = ''
@@ -117,12 +122,12 @@ export default {
       } else {
         _this.mark = 1
       }
-    }, 10000)
+    }, 5000)
   }
 }
 </script>
 
-<style>
+<style scoped>
 .module_container{
   height: 100%;
   width: 100%;

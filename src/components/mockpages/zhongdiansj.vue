@@ -14,8 +14,7 @@ export default {
 
 <style>
   #mzhongdiansj {
-    height: 1080px;
-    width: 1920px;
+    height: 100%;
     background: url('/static/mackpages/重点事件分析.png') no-repeat fixed top;
     background-size: 1920px 1080px;
   }
