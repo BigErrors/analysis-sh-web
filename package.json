@@ -11,9 +11,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2",
     "echarts": "4.1.0",
-    "echarts-liquidfill":"2.0.0",
+    "echarts-liquidfill": "2.0.0",
+    "element-ui": "^2.3.8",
+    "vue": "^2.5.2",
     "vue-baidu-map": "0.21.9",
     "vue-router": "^3.0.1"
   },

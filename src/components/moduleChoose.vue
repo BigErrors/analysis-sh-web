@@ -1,7 +1,7 @@
 <template>
   <div class="module_container">
     <div class="module_header">
-      <div class="module_userInfo"></div>
+      <div class="module_userInfo" @click="changeRouter('login')"></div>
     </div>
     <div class="module_center"></div>
     <div class="module_content">
@@ -62,8 +62,7 @@ export default {
     return {
       mark: 1,
       timer: '',
-      timer2: '', // 这个timer给鼠标移动事件，鼠标移动就给循环上锁
-      lockTimer: false, // 给循环上锁
+      timerOut: '', // 这个timer给鼠标移动事件，鼠标移动就给循环上锁
       lockClick: false // 给点击上锁，防止连续点击
     }
   },
@@ -75,7 +74,8 @@ export default {
     },
     changemark: function (fn) {
       let _this = this
-      this.timer = ''
+      clearInterval(_this.timer)
+      _this.timer = null
       if (fn === 'next' && this.lockClick === false) {
         this.lockClick = true
         if (this.mark < 6) {
@@ -84,8 +84,8 @@ export default {
           this.mark = 1
         }
         setTimeout(function () {
+          _this.timer = setInterval(_this.timerFn, 5000)
           _this.lockClick = false
-          _this.lockTimer = false
         }, 2000)
       } else if (fn === 'last' && this.lockClick === false) {
         this.lockClick = true
@@ -95,9 +95,16 @@ export default {
           this.mark = 6
         }
         setTimeout(function () {
+          _this.timer = setInterval(_this.timerFn, 5000)
           _this.lockClick = false
-          _this.lockTimer = false
         }, 2000)
+      }
+    },
+    timerFn: function () {
+      if (this.mark < 6) {
+        this.mark++
+      } else {
+        this.mark = 1
       }
     },
     moving: function () {
@@ -115,14 +122,7 @@ export default {
   },
   mounted: function () {
     let _this = this
-    this.timer = setInterval(function () {
-      console.log(_this.lockTimer)
-      if (_this.mark < 6 && _this.lockTimer === false) {
-        _this.mark++
-      } else {
-        _this.mark = 1
-      }
-    }, 5000)
+    this.timer = setInterval(_this.timerFn, 5000)
   }
 }
 </script>

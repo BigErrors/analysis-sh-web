@@ -1,7 +1,7 @@
 <template>
   <div id='mapApp' class='container columnDirection'>
-    <div class='item top' style='cursor: pointer;' @click='changeRouter("moduleChoose")'></div>
     <div class='item container rowDirection content'>
+      <div class='item top' style='cursor: pointer;' @click='changeRouter("moduleChoose")'></div>
       <div class='item left container columnDirection'>
         <div class='l1'>
           <div class='num1'>{{zhishufxNow.gankongzs}}</div>
@@ -33,18 +33,13 @@
       </div>
       <div class='item center container columnDirection'>
         <div class='c1'>
-          <baidu-map class='c11' :center='center' :zoom='zoom' @ready='handler'>
+          <div class="shade"></div>
+          <baidu-map class='c11' :center='center' :zoom='zoom' @ready='handler' :minZoom='minZoom' @zoomend = zoomChange>
             <bm-marker v-for = "item in zhongdianjg" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/重点机构.png', size: {width: 21, height: 30}}"></bm-marker>
             <bm-marker v-for = "item in zhongdianry" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/重点人员.png', size: {width: 21, height: 30}}"></bm-marker>
             <bm-marker v-for = "item in sifas" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/司法所.png', size: {width: 21, height: 30}}"></bm-marker>
-               <!-- 展示弹框的一种方式，这种方案样式不好改
-              <bm-info-window
-              :show="xuhao === item.xuhao"
-              :position="{'lng':item.lon,'lat':item.lat}"
-              @close="changeXuhao('')"
-              :title="item.biaoti">
-              <p>{{item.dizhi}}</p>
-              </bm-info-window>-->
+            <!-- 展示弹框的一种方式，这种方案样式不好改
+            <bm-info-window :show="xuhao === item.xuhao"  :position="{'lng':item.lon,'lat':item.lat}"  @close="changeXuhao('')"  :title="item.biaoti"> <p>{{item.dizhi}}</p></bm-info-window>-->
             <!-- 重点事件的点 -->
             <bm-marker  @click="changeLabelInfo(item.xuhao,$event)" v-for = "item in zhongdiansj2" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}">
               <bm-label v-if="labelXuhao===item.xuhao" :content="item.biaoti+'</br>'+item.shijian+'</br>'+item.dizhi"  :position="{'lng':item.lon,'lat':item.lat}" :labelStyle="labelStyle" title=""/>
@@ -52,9 +47,13 @@
             <!-- <bm-marker  @click="test(item)" v-for = "item in zhongdiansj" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}"></bm-marker> -->
             <!-- 海量点 -->
             <!-- bm-point-collection标签的顺序对应cavans图层的绘制顺序 -->
-            <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(0,255,253,1)" size="BMAP_POINT_SIZE_SMALLER"></bm-point-collection>
-            <bm-point-collection :points="yellowEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,255,0,1)" size="BMAP_POINT_SIZE_SMALL"></bm-point-collection>
-            <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,70,68,1)" size="BMAP_POINT_SIZE_BIG"></bm-point-collection>
+            <bm-point-collection :points="blueEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(0,255,253,1)" size="BMAP_POINT_SIZE_SMALL"></bm-point-collection>
+            <bm-point-collection :points="yellowEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,255,0,1)" ></bm-point-collection>
+            <!-- 重要事件现在改为全部展示 -->
+            <!-- <bm-point-collection :points="redEvent" shape="BMAP_POINT_SHAPE_CIRCLE" color="rgba(255,70,68,1)" size="BMAP_POINT_SIZE_BIG"></bm-point-collection> -->
+            <!-- <bm-marker v-for = "(item,index) in redEvent" :position="{'lng':item.lon,'lat':item.lat}" :key=index :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}">
+              <bm-label :content="item.biaoti+'</br>'+item.shijian+'</br>'+item.dizhi"  :position="{'lng':item.lon,'lat':item.lat}" :labelStyle="labelStyle" title=""/>
+            </bm-marker> -->
           </baidu-map>
           <div class='c12' :class="{c12anmishow:showall,c12anmihide:hideall}">
             <div class="c12content choosed" @click="ifshow">
@@ -168,7 +167,8 @@ export default {
       zhibiaofxNow: {},
       zhibiaofx: {},
       center: {lng: 0, lat: 0},
-      zoom: 3,
+      zoom: 11,
+      minZoom: 11,
       chuliqk: {},
       zhongdiansj: [],
       zhongdiansjBackup: [],
@@ -191,7 +191,7 @@ export default {
       hideall2: false,
       chooseEventVal: 'all',
       chooseEventVal2: 'nothing',
-      locked: true, // 给重点事件自动弹框上锁
+      locked: false, // 给重点事件自动弹框上锁
       allEventLength: '123,856',
       todayEventLength: '0,042',
       s110ld: [],
@@ -259,6 +259,7 @@ export default {
       this.init(this.s110ld, 's110ld')
       this.init(this.sfalvzx, 'sfalvzx')
       this.init(this.stiaojieanj, 'stiaojieanj')
+      this.zhongdiansj2 = this.redEvent
     },
     // 构建初始化数据
     initData () {
@@ -358,9 +359,8 @@ export default {
         if (_this.locked === false) {
           let length = _this.zhongdiansj2.length
           let i = parseInt(Math.random() * length)
-          _this.labelXuhao = zhongdiansj2[i].xuhao
+          _this.labelXuhao = _this.zhongdiansj2[i].xuhao
           _this.$nextTick(function () {
-            // console.log(document.getElementsByClassName('BMapLabel')[1].parentElement)
             document.getElementsByClassName('BMapLabel')[1].parentElement.style.zIndex = 1
           })
         }
@@ -369,11 +369,11 @@ export default {
     init (arr, name) {
       for (let item in arr) {
         if (parseInt(arr[item].jibie) === 3) {
-          this[name + '3'].push({'lng': arr[item].lon, 'lat': arr[item].lat})
+          this[name + '3'].push({'lng': arr[item].lon, 'lat': arr[item].lat, 'dengji': arr[item].dengji})
         } else if (parseInt(arr[item].jibie) === 2) {
-          this[name + '2'].push({'lng': arr[item].lon, 'lat': arr[item].lat})
+          this[name + '2'].push({'lng': arr[item].lon, 'lat': arr[item].lat, 'dengji': arr[item].dengji})
         } else {
-          this[name + '1'].push({'lng': arr[item].lon, 'lat': arr[item].lat})
+          this[name + '1'].push({'lon': arr[item].lon, 'lat': arr[item].lat, 'dengji': arr[item].dengji, 'biaoti': arr[item].biaoti, 'dizhi': arr[item].dizhi, 'shijian': arr[item].shijian, 'xuhao': arr[item].xuhao})
         }
       }
     },
@@ -421,8 +421,11 @@ export default {
       this.chooseEventVal2 = name
     },
     changeRouter (name) {
-      console.log(name)
       this.$router.push({name: name})
+    },
+    // 地图缩放事件
+    zoomChange (ev) {
+      this.zoom = ev.target.getZoom()
     }
   },
   created () {
@@ -436,11 +439,61 @@ export default {
   computed: {
     blueEvent: function () {
       let arr = []
-      return arr.concat(this.s110ld3, this.sfalvzx3, this.stiaojieanj3)
+      let _zoom = this.zoom
+      let _s110ld3 = this.s110ld3
+      let _sfalvzx3 = this.sfalvzx3
+      let _stiaojieanj3 = this.stiaojieanj3
+      if (_zoom === 11) {
+        _s110ld3 = this.s110ld3.filter(item => item.dengji === '11')
+        _sfalvzx3 = this.sfalvzx3.filter(item => item.dengji === '11')
+        _stiaojieanj3 = this.stiaojieanj3.filter(item => item.dengji === '11')
+      } else if (_zoom === 12) {
+        _s110ld3 = this.s110ld3.filter(item => item.dengji === '11' || item.dengji === '12')
+        _sfalvzx3 = this.sfalvzx3.filter(item => item.dengji === '11' || item.dengji === '12')
+        _stiaojieanj3 = this.stiaojieanj3.filter(item => item.dengji === '11' || item.dengji === '12')
+      } else if (_zoom === 13) {
+        _s110ld3 = this.s110ld3.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13')
+        _sfalvzx3 = this.sfalvzx3.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13')
+        _stiaojieanj3 = this.stiaojieanj3.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13')
+      } else if (_zoom === 14) {
+        _s110ld3 = this.s110ld3.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13' || item.dengji === '14')
+        _sfalvzx3 = this.sfalvzx3.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13' || item.dengji === '14')
+        _stiaojieanj3 = this.stiaojieanj3.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13' || item.dengji === '14')
+      } else if (_zoom >= 15) {
+        _s110ld3 = this.s110ld3
+        _sfalvzx3 = this.sfalvzx3
+        _stiaojieanj3 = this.stiaojieanj3
+      }
+      return arr.concat(_s110ld3, _sfalvzx3, _stiaojieanj3)
     },
     yellowEvent: function () {
       let arr = []
-      return arr.concat(this.s110ld2, this.sfalvzx2, this.stiaojieanj2)
+      let _zoom = this.zoom
+      let _s110ld2 = this.s110ld2
+      let _sfalvzx2 = this.sfalvzx2
+      let _stiaojieanj2 = this.stiaojieanj2
+      if (_zoom === 11) {
+        _s110ld2 = this.s110ld2.filter(item => item.dengji === '11')
+        _sfalvzx2 = this.sfalvzx2.filter(item => item.dengji === '11')
+        _stiaojieanj2 = this.stiaojieanj2.filter(item => item.dengji === '11')
+      } else if (_zoom === 12) {
+        _s110ld2 = this.s110ld2.filter(item => item.dengji === '11' || item.dengji === '12')
+        _sfalvzx2 = this.sfalvzx2.filter(item => item.dengji === '11' || item.dengji === '12')
+        _stiaojieanj2 = this.stiaojieanj2.filter(item => item.dengji === '11' || item.dengji === '12')
+      } else if (_zoom === 13) {
+        _s110ld2 = this.s110ld2.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13')
+        _sfalvzx2 = this.sfalvzx2.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13')
+        _stiaojieanj2 = this.stiaojieanj2.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13')
+      } else if (_zoom === 14) {
+        _s110ld2 = this.s110ld2.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13' || item.dengji === '14')
+        _sfalvzx2 = this.sfalvzx2.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13' || item.dengji === '14')
+        _stiaojieanj2 = this.stiaojieanj2.filter(item => item.dengji === '11' || item.dengji === '12' || item.dengji === '13' || item.dengji === '14')
+      } else if (_zoom >= 15) {
+        _s110ld2 = this.s110ld2
+        _sfalvzx2 = this.sfalvzx2
+        _stiaojieanj2 = this.stiaojieanj2
+      }
+      return arr.concat(_s110ld2, _sfalvzx2, _stiaojieanj2)
     },
     redEvent: function () {
       let arr = []
@@ -473,9 +526,8 @@ export default {
   },
   watch: {
     chooseEventVal: function (to, from) {
-      this.locked = true
       if (to === 's110ld') {
-        this.zhongdiansj2 = []
+        this.zhongdiansj2 = this.redEvent
         this.init(this.s110ld, 's110ld')
         this.sfalvzx1 = []
         this.sfalvzx2 = []
@@ -484,7 +536,7 @@ export default {
         this.stiaojieanj2 = []
         this.stiaojieanj3 = []
       } else if (to === 'sfalvzx') {
-        this.zhongdiansj2 = []
+        this.zhongdiansj2 = this.redEvent
         this.init(this.sfalvzx, 'sfalvzx')
         this.s110ld1 = []
         this.s110ld2 = []
@@ -493,7 +545,7 @@ export default {
         this.stiaojieanj2 = []
         this.stiaojieanj3 = []
       } else if (to === 'stiaojieanj') {
-        this.zhongdiansj2 = []
+        this.zhongdiansj2 = this.redEvent
         this.init(this.stiaojieanj, 'stiaojieanj')
         this.s110ld1 = []
         this.s110ld2 = []
@@ -502,7 +554,7 @@ export default {
         this.sfalvzx2 = []
         this.sfalvzx3 = []
       } else if (to === 'all') {
-        this.zhongdiansj2 = []
+        this.zhongdiansj2 = this.redEvent
         this.init(this.s110ld, 's110ld')
         this.init(this.sfalvzx, 'sfalvzx')
         this.init(this.stiaojieanj, 'stiaojieanj')
@@ -548,8 +600,17 @@ export default {
     /* height: 100%; */
     min-height: 1080px;
     min-width: 1920px;
+  }
+  .shade{
+    width:100%;
+    height: 100%;
+    position: fixed;
     background: url('/static/图层 1.png');
     background-size: 1920px 1080px;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    pointer-events: none;
   }
 
   #mapApp .container {
@@ -579,22 +640,29 @@ export default {
     min-width: 1920px;
     height: 99px;
     background: url('/static/头部.png');
+    z-index: 99;
+    position: absolute;
+    left: 0;
+    top:0;
   }
 
   #mapApp .content {
     height: 100%;
+    padding-top:99px;
   }
 
   #mapApp .left {
     flex: none;
     max-width: 445px;
     min-width: 445px;
+    z-index: 99;
   }
 
   #mapApp .right {
     flex: none;
     max-width: 445px;
     min-width: 445px;
+    z-index: 99;
   }
 
   #mapApp .center {
@@ -615,7 +683,7 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 1;
     /* margin: 0 13px 14px 13px; */
   }
 
@@ -629,7 +697,7 @@ export default {
     border:1px solid #1669ee;
     background:rgba(22,105,238,0.2);
     box-shadow:inset 0 0 10px #1b9bfe;
-    z-index: 1;
+    z-index: 3;
     color:#039dff;
     overflow: hidden;
     border-radius: 6px;
@@ -690,13 +758,15 @@ export default {
     position: absolute;
     top:8px;
     left: 50%;
-    transform: translate(-97%)
+    transform: translate(-97%);
+    z-index: 99;
   }
   .c15{
     position: absolute;
     top:8px;
     left: 50%;
-    transform: translate(33%)
+    transform: translate(33%);
+    z-index: 99;
   }
   .c14content{
     display: inline-block;
@@ -737,6 +807,7 @@ export default {
     height: 315px;
     margin: 0 13px 17px 13px;
     background: url('/static/各区情况.png');
+    z-index: 99;
   }
 
   .c2Content {
