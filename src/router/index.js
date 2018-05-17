@@ -12,6 +12,10 @@ import moduleChoose from '@/components/moduleChoose'
 import modelSupermarket from '@/components/modelSupermarket'
 import modelDataApp from '@/components/modelDataApp'
 import index4renmintj from '@/components/renmintj/index4renmintj'
+import peopleNum from '@/components/renmintj/peopleNum'
+import peopleType from '@/components/renmintj/peopleType'
+import totalNum from '@/components/renmintj/totalNum'
+import totalType from '@/components/renmintj/totalType'
 
 Vue.use(Router)
 
@@ -77,6 +81,22 @@ const router = new Router({
       path: '/index4renmintj',
       name: 'index4renmintj',
       component: index4renmintj
+    }, {
+      path: '/peopleNum',
+      name: 'peopleNum',
+      component: peopleNum
+    }, {
+      path: '/peopleType',
+      name: 'peopleType',
+      component: peopleType
+    }, {
+      path: '/totalNum',
+      name: 'totalNum',
+      component: totalNum
+    }, {
+      path: '/totalType',
+      name: 'totalType',
+      component: totalType
     }
   ]
 })

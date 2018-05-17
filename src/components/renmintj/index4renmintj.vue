@@ -209,7 +209,7 @@ export default {
           lng: 121.604934,
           lat: 31.230371
         },
-        radius: 6000,
+        radius: 2000,
         content: '123'
       }
     }

@@ -222,6 +222,136 @@ let setBar2 = (data) => {
   return option
 }
 
+// 柱图
+let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) => {
+  barMaxWidth = barMaxWidth || 43
+  // 找出value中的最大值
+  let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
+  let valueAxis = [{
+    type: 'value',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: axisType === 'vertical',
+      interval: 'auto',
+      color: '#4D84FE',
+      fontSize: 16,
+      formatter: dataType === 'percent' ? '{value} %' : '{value}'
+    },
+    // value最大值的类型：percent，integer
+    // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
+    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    splitLine: {
+      show: false
+    }
+  }]
+  let categoryAxis = [{
+    type: 'category',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: '#4D84FE',
+      fontSize: 16,
+      formatter: function (value) {
+        if (value.length < 6) {
+          return value
+        }
+        return value.substring(0, 6) + '...'
+      }
+    },
+    data: data.map(function (obj) {
+      return obj.name
+    }),
+    splitLine: {
+      show: false
+    }
+  }]
+  let option = {
+    title: {
+      text: '|  ' + (name || '标题'),
+      textStyle: {
+        color: '#7DA5FE',
+        fontSize: 22,
+        align: 'left'
+      },
+      // subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
+      // subtextStyle: {
+      //   color: '#7DA5FE',
+      //   fontSize: 18,
+      //   align: 'right'
+      // },
+      left: 0
+    },
+    tooltip: {
+      show: true
+    },
+    // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
+    // x轴配置项
+    xAxis: axisType === 'vertical' ? categoryAxis : valueAxis,
+    // y轴配置项
+    yAxis: axisType === 'vertical' ? valueAxis : categoryAxis,
+    // bar配置项
+    series: [{
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      z: 3,
+      itemStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: axisType === 'vertical' ? 0 : 1,
+          y2: axisType === 'vertical' ? 1 : 0,
+          colorStops: [{
+            offset: 0, color: color[0] // 0% 处的颜色
+          }, {
+            offset: 1, color: color[1] // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
+      },
+      label: {
+        show: true,
+        position: axisType === 'vertical' ? 'top' : 'right',
+        color: color[1],
+        fontSize: 20
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
+      })
+    }]
+  }
+  if (axisType === 'vertical') {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#132665'
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  if (barMaxWidth) {
+    option.series[0].barMaxWidth = barMaxWidth
+    if (axisType === 'vertical') {
+      option.series[1].barMaxWidth = barMaxWidth
+    }
+  }
+  return option
+}
+
 // 雷达图
 let setRadar = (data) => {
   let option = {
@@ -461,7 +591,110 @@ let setLine2 = (data) => {
   return option
 }
 
-// 液体填充
+let setLine3 = (data, name, updateTime) => {
+  let option = {
+    title: {
+      text: '|  ' + (name || '标题'),
+      textStyle: {
+        color: '#7DA5FE',
+        fontSize: 22,
+        align: 'left'
+      },
+      subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
+      subtextStyle: {
+        color: '#7DA5FE',
+        fontSize: 18,
+        align: 'right'
+      },
+      left: 0
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    color: ['#1254C2'],
+    grid: {
+      left: 15,
+      right: 15,
+      top: 60,
+      bottom: 30,
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        color: '#1194F8'
+      },
+      splitLine: {
+        show: false
+      },
+      boundaryGap: true,
+      data: []
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        color: '#1194F8'
+      },
+      splitLine: {
+        show: false
+      },
+      splitNumber: 7,
+      max: 300,
+      min: 0
+    },
+    series: [{
+      name: name,
+      type: 'line',
+      smooth: true,
+      symbolSize: 8,
+      lineStyle: {
+        width: 1
+      },
+      areaStyle: {
+        opacity: 0.8,
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 1,
+          y2: 0,
+          colorStops: [{
+            offset: 0, color: '#495AFF' // 0% 处的颜色
+          }, {
+            offset: 1, color: '#0ACFFE' // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
+      },
+      label: {
+        show: true,
+        position: 'top',
+        color: '#0AAAD9',
+        fontSize: 20
+      },
+      data: []
+    }]
+  }
+  option.xAxis.data = data.map(function (item) { return item.month })
+  option.series[0].data = data.map(function (item) { return item.num })
+  return option
+}
+
+// 液体填充配置项
 let fillOption = (center, data, color, fillData, fillFontSize, borderColor) => {
   color = color || '#3699F1'
   return {
@@ -503,6 +736,7 @@ let fillOption = (center, data, color, fillData, fillFontSize, borderColor) => {
   }
 }
 
+// 液体填充
 let setFill = (data, color, text, fillData, fillFontSize, borderColor) => {
   let option = {
     title: {
@@ -520,6 +754,7 @@ let setFill = (data, color, text, fillData, fillFontSize, borderColor) => {
   return option
 }
 
+// 圆环图
 let setPie = (data1, data2) => {
   let option = {
     color: ['#1C53B3', '#3E79DF', '#FF936D', '#45FFA9', '#FDBF5E', '#FFF281', '#FF7279'],
@@ -576,4 +811,4 @@ let setPie = (data1, data2) => {
   }
   return option
 }
-export default {setBar, setBar2, setRadar, setLine, setLine2, setFill, setPie}
+export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setFill, setPie}
