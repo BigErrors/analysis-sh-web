@@ -41,7 +41,7 @@
             <!-- 展示弹框的一种方式，这种方案样式不好改
             <bm-info-window :show="xuhao === item.xuhao"  :position="{'lng':item.lon,'lat':item.lat}"  @close="changeXuhao('')"  :title="item.biaoti"> <p>{{item.dizhi}}</p></bm-info-window>-->
             <!-- 重点事件的点 -->
-            <bm-marker  @click="changeLabelInfo(item.xuhao,$event)" v-for = "item in zhongdiansj2" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}">
+            <bm-marker  @click="changeLabelInfo(item.xuhao,$event)" v-for = "item in zhongdiansj2" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.gif', size: {width: 38, height: 38}}">
               <bm-label v-if="labelXuhao===item.xuhao" :content="item.biaoti+'</br>'+item.shijian+'</br>'+item.dizhi"  :position="{'lng':item.lon,'lat':item.lat}" :labelStyle="labelStyle" title=""/>
             </bm-marker>
             <!-- <bm-marker  @click="test(item)" v-for = "item in zhongdiansj" :position="{'lng':item.lon,'lat':item.lat}" :key=item.xuhao :icon="{url: '/static/pointer.png', size: {width: 19, height: 19}}"></bm-marker> -->

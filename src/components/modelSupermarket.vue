@@ -79,7 +79,7 @@
       </div>
     </div>
     <div v-if="showWhich==='dial'" class="supermarket_content2">
-      <div class="supermarket_carousel_page">{{whichPage}}/9</div>
+      <div class="supermarket_carousel_page">{{whichPage}}/10</div>
       <el-carousel
         :interval="5000"
         type="card"
@@ -130,6 +130,11 @@
           <img class="supermarket_card_img" src="/static/marketImages/9.png" />
           <span class="supermarket_card_span">家暴专题模型</span>
           <span v-show="this.whichPage===9" class="supermarket_card_span2">凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快了</span>
+        </el-carousel-item>
+        <el-carousel-item>
+          <img class="supermarket_card_img" src="/static/marketImages/10.png" />
+          <span class="supermarket_card_span">家暴专题模型</span>
+          <span v-show="this.whichPage===10" class="supermarket_card_span2">凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快凉快了</span>
         </el-carousel-item>
       </el-carousel>
     </div>
