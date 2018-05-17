@@ -11,6 +11,7 @@ import mzhongdiansj from '@/components/mockpages/zhongdiansj'
 import moduleChoose from '@/components/moduleChoose'
 import modelSupermarket from '@/components/modelSupermarket'
 import modelDataApp from '@/components/modelDataApp'
+import index4renmintj from '@/components/renmintj/index4renmintj'
 
 Vue.use(Router)
 
@@ -72,6 +73,10 @@ const router = new Router({
       path: '/modelDataApp',
       name: 'modelDataApp',
       component: modelDataApp
+    }, {
+      path: '/index4renmintj',
+      name: 'index4renmintj',
+      component: index4renmintj
     }
   ]
 })
