@@ -24,7 +24,9 @@
           </div>
         </div>
       </div>
-      <div v-show="false" class='zIndex3 area1 target1'></div>
+      <div class="echart_container">
+        <div class='zIndex3 area1 target1'></div>
+      </div>
     </div>
     <div class="totalNum_content_top">
       <div class="totalNum_content_title clearfix">
@@ -38,7 +40,9 @@
           </div>
         </div>
       </div>
-       <div v-show="false" class='zIndex3 area1 target2'></div>
+      <div class="echart_container2">
+         <div class='zIndex3 area2 target2'></div>
+      </div>
     </div>
     <div class="totalNum_content_bottom">
       <div class="totalNum_content_title clearfix">
@@ -92,7 +96,9 @@
       <div class="totalNum_content_title_left">
           <span class="totalNum_content_span1">历年案件增长趋势</span>
         </div>
-      <div v-show="false" class='zIndex3 area2 target4'></div>
+        <div class="echart_container3">
+          <div class='zIndex3 area3 target4'></div>
+        </div>
     </div>
   </div>
 
@@ -143,14 +149,17 @@ export default {
   }
 
   .area1 {
-    width: 929px;
-    height: 558px;
+    width: 900px;
+    height: 471px;
   }
 
   .area2 {
-    float: left;
     width: 929px;
-    height: 304px;
+    height: 471px;
+  }
+  .area3{
+    width: 929px;
+    height:255px;
   }
 
   .totalNum_header{
@@ -337,6 +346,9 @@ export default {
   .totalNum_table_tbody td{
     padding:7px 0;
   }
+  .totalNum_table_tbody tr:nth-of-type(2n){
+    background:rgba(19,38,101,1);
+  }
   .circle{
     border-radius:100%;
     width:23px;
@@ -354,5 +366,18 @@ export default {
   }
   .circle4{
     background:rgba(205,205,205,1);
+  }
+  .echart_container{
+    width:900px;
+    margin-left:23px;
+  }
+  .echart_container2{
+    width:929px;
+    margin-left:0px;
+  }
+  .echart_container3{
+    width:929px;
+    height:255px;
+    float:left;
   }
 </style>
