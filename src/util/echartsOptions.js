@@ -282,12 +282,12 @@ let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) =
     //     fontSize: 22,
     //     align: 'left'
     //   },
-    //   // subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
-    //   // subtextStyle: {
-    //   //   color: '#7DA5FE',
-    //   //   fontSize: 18,
-    //   //   align: 'right'
-    //   // },
+    //   subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
+    //   subtextStyle: {
+    //     color: '#7DA5FE',
+    //     fontSize: 18,
+    //     align: 'right'
+    //   },
     //   left: 0
     // },
     tooltip: {
@@ -694,12 +694,12 @@ let setLine3 = (data, name, updateTime) => {
   return option
 }
 // 折线图--没有area属性
-let setLine4 = (data, name, color) => {
+let setLine4 = (data, dataType, color) => {
   let option = {
     grid: {
       left: 15,
-      top: 0,
-      bottom: 0,
+      top: 15,
+      bottom: 15,
       containLabel: true
     },
     color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
@@ -730,7 +730,8 @@ let setLine4 = (data, name, color) => {
       },
       axisLabel: {
         show: true,
-        color: '#4D84FE'
+        color: '#4D84FE',
+        formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
         show: false
@@ -751,15 +752,16 @@ let setLine4 = (data, name, color) => {
       lineStyle: {
         width: 1
       },
-      labelStyle: {
-        show: true
+      label: {
+        show: true,
+        fontSize: 18,
+        formatter: dataType === 'integer' ? '{c}' : '{c} %'
       },
       data: data[index].map(item => {
         return item['value']
       })
     })
   })
-  console.log(option)
   return option
 }
 
