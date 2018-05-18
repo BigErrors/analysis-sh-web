@@ -944,4 +944,68 @@ let setPie2 = (data, name, updateTime) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2}
+let setFunnel = () => {
+  let option = {
+    color: ['rgba(11,83,243,0.2)', 'rgba(11,83,243,0.4)', 'rgba(11,83,243,0.6)', 'rgba(11,83,243,0.8)', 'rgba(11,83,243,1)'],
+    series: [
+      {
+        name: '1',
+        type: 'funnel',
+        label: {
+          position: 'right',
+          formatter: '{b|{b}}\n\r\r\r{a|{a}}',
+          rich: {
+            b: {
+              fontSize: 19,
+              color: '#0134A5'
+
+            },
+            a: {
+              fontSize: 25,
+              color: '#001F77'
+            }
+          },
+          backgroundColor: {
+            image: '/static/icon-label.png'
+          }
+        },
+        labelLine: {
+          show: true,
+          length: 60,
+          lineStyle: {
+            color: '#5C8EFE',
+            type: 'dotted'
+          }
+
+        },
+        data: [
+          {value: 20, name: '信访', other: 1},
+          {value: 40, name: '其他', other: 1},
+          {value: 60, name: '主动调解', other: 1},
+          {value: 80, name: '公安移送', other: 1},
+          {value: 100, name: '当事人申请', other: 1}
+        ]
+      },
+      {
+        name: '2',
+        type: 'funnel',
+        label: {
+          position: 'inside',
+          formatter: '{b}',
+          color: '#B1C5FF',
+          fontSize: 19
+        },
+        data: [
+          {value: 20, name: '信访', other: 1},
+          {value: 40, name: '其他', other: 1},
+          {value: 60, name: '主动调解', other: 1},
+          {value: 80, name: '公安移送', other: 1},
+          {value: 100, name: '当事人申请', other: 1}
+        ]
+      }
+    ]
+  }
+  return option
+}
+
+export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setFunnel}
