@@ -1,5 +1,5 @@
 <template>
-<div id='peopleNum' class='shade'>
+<div id='totalNum' class='shade'>
   <div class='zIndex3 area1 target1'></div>
   <div class='zIndex3 area1 target2'></div>
   <div class='zIndex3 area2 target3'></div>
@@ -10,7 +10,7 @@
 <script>
 import eos from '@/util/echartsOptions'
 export default {
-  name: 'peopleNum',
+  name: 'totalNum',
   data () {
     return {}
   },
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scope>
-  #peopleNum {
+  #totalNum {
     min-height: 1080px;
     min-width: 1920px;
     overflow-y: auto;
