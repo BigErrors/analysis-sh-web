@@ -1,84 +1,37 @@
 <template>
-<div id='renmintj' class='shade'>
-  <div class='zIndex3 renmintj 1'></div>
-  <div class='zIndex3 renmintj 2'></div>
-  <div class='zIndex3 pie'></div>
-  <div class='zIndex3 line'></div>
-  <div class='zIndex3 bar'></div>
-  <baidu-map class='zIndex3 map' :center='center' :zoom='zoom' :minZoom='minZoom' @ready='handler'>
-    <bm-circle :center="circlePath.center" :radius="circlePath.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
-    </bm-circle>
-    <bm-label  :position="circlePath.center" :content='circlePath.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
-    <bm-circle :center="circlePath1.center" :radius="circlePath1.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
-    </bm-circle>
-    <bm-label  :position="circlePath1.center" :content='circlePath1.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
-  </baidu-map>
+<div id='peopleNum' class='shade'>
+  <div class='zIndex3 area1 target1'></div>
+  <div class='zIndex3 area1 target2'></div>
+  <div class='zIndex3 area2 target3'></div>
+  <div class='zIndex3 area2 target4'></div>
 </div>
 </template>
 
 <script>
 import eos from '@/util/echartsOptions'
-import style from '@/json/mapStyle'
-import qushifx from '@/json/shehuimd_qushifx'
-import gequqk from '@/json/shehuimd_gequqk'
 export default {
-  name: 'renmintj',
+  name: 'peopleNum',
   data () {
-    return {
-      center: {lng: 0, lat: 0},
-      zoom: 11,
-      minZoom: 11,
-      circlePath: {
-        center: {
-          lng: 121.504934,
-          lat: 31.130371
-        },
-        radius: 6000,
-        content: '2000'
-      },
-      circlePath1: {
-        center: {
-          lng: 121.604934,
-          lat: 31.230371
-        },
-        radius: 3000,
-        content: '123'
-      }
-    }
+    return {}
   },
   methods: {
     // 绘制echarts
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
-    },
-    // 地图配置
-    handler ({BMap, map}) {
-      this.center.lng = 121.504934
-      this.center.lat = 31.130371
-      this.zoom = 11
-      // 设置地图样式
-      map.setMapStyle({styleJson: style})
-      // 开启关系拖拽
-      map.enableInertialDragging()
-      // 开启鼠标滚动缩放
-      map.enableScrollWheelZoom()
-      // 地图数据初始化
     }
   },
   created () {},
   mounted () {
-    this.draw('1', eos.setFill(0.72, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [0.72], '17', '#7BA6ED'))
-    this.draw('2', eos.setFill(0.3, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [0.3], '17', '#7BA6ED'))
-    this.draw('pie', eos.setPie([{value: 679, name: '一般调解'}, {value: 1548, name: '专业调解'}], [{value: 310, name: '婚姻家庭'}, {value: 369, name: '邻里纠纷'}, {value: 1048, name: '知识产权'}, {value: 251, name: '涉校纠纷'}, {value: 249, name: '医患纠纷'}]))
-    this.draw('line', eos.setLine(qushifx))
-    this.draw('bar', eos.setBar2(gequqk))
+    this.draw('target1', eos.setLine3([{month: '2017-10', num: 199}, {month: '2017-11', num: 194}, {month: '2017-12', num: 165}, {month: '2018-01', num: 78}, {month: '2018-02', num: 104}, {month: '2018-03', num: 7}]))
+    this.draw('target2', eos.setBar3([{value: 0, name: '松江'}, {value: 0, name: '浦东'}, {value: 1, name: '普陀'}, {value: 3, name: '奉贤'}, {value: 6, name: '虹口'}, {value: 6, name: '长宁'}, {value: 6, name: '崇明'}, {value: 6, name: '金山'}, {value: 7, name: '嘉定'}, {value: 14, name: '闵行'}, {value: 16, name: '宝山'}, {value: 16, name: '黄浦'}, {value: 18, name: '青浦'}, {value: 26, name: '徐汇'}, {value: 27, name: '静安'}, {value: 37, name: '杨浦'}], ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
+    this.draw('target4', eos.setBar3([{value: 57, name: '2015年'}, {value: 2847, name: '2016年'}, {value: 2504, name: '2017年'}, {value: 189, name: '2018年'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', '标题', '更新时间', 25))
   }
 }
 </script>
 
 <style scope>
-  #renmintj {
+  #peopleNum {
     min-height: 1080px;
     min-width: 1920px;
     overflow-y: auto;
@@ -86,49 +39,20 @@ export default {
   .shade {
     background-color: #0b1740;
   }
-  /* .shade{
-    width:100%;
-    height: 100%;
-    position: fixed;
-    background: url('/static/图层 1.png');
-    background-size: 1920px 1080px;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    pointer-events: none;
-  } */
 
   .zIndex3 {
-    z-index: 2;
+    z-index: 3;
   }
 
-  .renmintj {
+  .area1 {
     float: left;
-    width: 90px;
-    height: 126px;
+    width: 929px;
+    height: 558px;
   }
 
-  .pie {
+  .area2 {
     float: left;
-    width: 500px;
-    height: 500px;
-  }
-
-  .line {
-    float: left;
-    width: 391px;
-    height: 264px;
-  }
-
-  .bar {
-    float: left;
-    width: 963px;
-    height: 265px;
-  }
-
-  .map{
-    float: left;
-    width: 831px;
-    height: 607px;
+    width: 929px;
+    height: 304px;
   }
 </style>
