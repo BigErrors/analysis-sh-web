@@ -275,21 +275,21 @@ let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) =
     }
   }]
   let option = {
-    title: {
-      text: '|  ' + (name || '标题'),
-      textStyle: {
-        color: '#7DA5FE',
-        fontSize: 22,
-        align: 'left'
-      },
-      // subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
-      // subtextStyle: {
-      //   color: '#7DA5FE',
-      //   fontSize: 18,
-      //   align: 'right'
-      // },
-      left: 0
-    },
+    // title: {
+    //   text: '|  ' + (name || '标题'),
+    //   textStyle: {
+    //     color: '#7DA5FE',
+    //     fontSize: 22,
+    //     align: 'left'
+    //   },
+    //   // subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
+    //   // subtextStyle: {
+    //   //   color: '#7DA5FE',
+    //   //   fontSize: 18,
+    //   //   align: 'right'
+    //   // },
+    //   left: 0
+    // },
     tooltip: {
       show: true
     },
@@ -590,24 +590,24 @@ let setLine2 = (data) => {
   // }, 5000)
   return option
 }
-
+// 折线图--有area属性
 let setLine3 = (data, name, updateTime) => {
   let option = {
-    title: {
-      text: '|  ' + (name || '标题'),
-      textStyle: {
-        color: '#7DA5FE',
-        fontSize: 22,
-        align: 'left'
-      },
-      subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
-      subtextStyle: {
-        color: '#7DA5FE',
-        fontSize: 18,
-        align: 'right'
-      },
-      left: 0
-    },
+    // title: {
+    //   text: '|  ' + (name || '标题'),
+    //   textStyle: {
+    //     color: '#7DA5FE',
+    //     fontSize: 22,
+    //     align: 'left'
+    //   },
+    //   subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
+    //   subtextStyle: {
+    //     color: '#7DA5FE',
+    //     fontSize: 18,
+    //     align: 'right'
+    //   },
+    //   left: 0
+    // },
     tooltip: {
       trigger: 'axis'
     },
@@ -691,6 +691,75 @@ let setLine3 = (data, name, updateTime) => {
   }
   option.xAxis.data = data.map(function (item) { return item.month })
   option.series[0].data = data.map(function (item) { return item.num })
+  return option
+}
+// 折线图--没有area属性
+let setLine4 = (data, name, color) => {
+  let option = {
+    grid: {
+      left: 15,
+      top: 0,
+      bottom: 0,
+      containLabel: true
+    },
+    color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: '#4D84FE'
+      },
+      splitLine: {
+        show: false
+      },
+      boundaryGap: true,
+      data: []
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        color: '#4D84FE'
+      },
+      splitLine: {
+        show: false
+      }
+    },
+    series: []
+  }
+  // 设置category对应数据
+  option.xAxis.data = data[0].map(item => {
+    return item['name']
+  })
+  // 添加系列并设置对应数据
+  data.map((series, index) => {
+    option.series.push({
+      name: index,
+      type: 'line',
+      symbolSize: 1,
+      lineStyle: {
+        width: 1
+      },
+      labelStyle: {
+        show: true
+      },
+      data: data[index].map(item => {
+        return item['value']
+      })
+    })
+  })
+  console.log(option)
   return option
 }
 
@@ -811,4 +880,66 @@ let setPie = (data1, data2) => {
   }
   return option
 }
-export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setFill, setPie}
+
+// 圆环图
+let setPie2 = (data, name, updateTime) => {
+  let option = {
+    // title: {
+    //   text: '|  ' + (name || '标题'),
+    //   textStyle: {
+    //     color: '#7DA5FE',
+    //     fontSize: 22,
+    //     align: 'left'
+    //   },
+    //   subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
+    //   subtextStyle: {
+    //     color: '#7DA5FE',
+    //     fontSize: 18,
+    //     align: 'right'
+    //   },
+    //   left: 0
+    // },
+    color: ['#7DA5FE', '#F24848', '#FFC400', '#0E57FC', '#3674FF'],
+    series: [
+      {
+        name: '调解',
+        type: 'pie',
+        radius: ['40%', '55%'],
+        label: {
+          normal: {
+            formatter: '{c|{c}}\n {hr|}\n {b|{b}}',
+            rich: {
+              c: {
+                color: '#FFC600',
+                fontSize: 20,
+                lineHeight: 21,
+                align: 'center'
+              },
+
+              hr: {
+                borderColor: '#4D84FE',
+                width: '100%',
+                borderWidth: 1,
+                height: 0
+              },
+              b: {
+                color: '#B8CEFF',
+                fontSize: 16,
+                lineHeight: 20
+              }
+            }
+          }
+        },
+        labelLine: {
+          lineStyle: {
+            color: '#4D84FE'
+          }
+        },
+        data: data
+      }
+    ]
+  }
+  return option
+}
+
+export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2}
