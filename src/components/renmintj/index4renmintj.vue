@@ -1,11 +1,11 @@
 <template>
 <div id='renmintj' class='shade'>
   <div class='renmintj_header'>
-    <div class="renmintj_back"></div>
+    <div class="renmintj_back" @click="changeRouter('mapApp')" style="cursor: pointer;"></div>
   </div>
   <div class='renmintj_container'>
     <div class="renmintj_left">
-      <div class="renmintj_left_once">
+      <div class="renmintj_left_once" @click="changeRouter('totalNum')" style="cursor: pointer;">
         <span class="renmintj_title_span">业务数量</span>
         <div class="renmintj_main">
           <div class="renmintj_main_once">
@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="renmintj_left_once">
+      <div class="renmintj_left_once" @click="changeRouter('totalType')" style="cursor: pointer;">
         <span class="renmintj_title_span">类型分布</span>
         <div class='zIndex3 pie'></div>
       </div>
@@ -94,7 +94,7 @@
           </div>
         </div>
       </div>
-      <div class="renmintj_right_once">
+      <div class="renmintj_right_once" @click="changeRouter('peopleNum')" style="cursor: pointer;">
         <span class="renmintj_title_span">人员总数</span>
         <div class="renmintj_right_renyuan">
           <div class="renmintj_right_fl">
@@ -230,22 +230,25 @@ export default {
       // 开启关系拖拽
       map.enableInertialDragging()
       // 开启鼠标滚动缩放
-      map.enableScrollWheelZoom()
+      // map.enableScrollWheelZoom()
       // 地图数据初始化
+    },
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {},
   mounted () {
     this.draw('1', eos.setFill(0.72, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [0.72], '17', '#7BA6ED'))
     this.draw('2', eos.setFill(0.3, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [0.3], '17', '#7BA6ED'))
-    this.draw('pie', eos.setPie([{value: 679, name: '一般调解'}, {value: 1548, name: '专业调解'}], [{value: 310, name: '婚姻家庭'}, {value: 369, name: '邻里纠纷'}, {value: 1048, name: '知识产权'}, {value: 251, name: '涉校纠纷'}, {value: 249, name: '医患纠纷'}]))
+    this.draw('pie', eos.setPie([{value: 679, name: '其他'}, {value: 1548, name: '专调'}], [{value: 310, name: '婚姻家庭'}, {value: 369, name: '邻里纠纷'}, {value: 1048, name: '知识产权'}, {value: 251, name: '涉校纠纷'}, {value: 249, name: '医患纠纷'}]))
     this.draw('line', eos.setLine(qushifx))
     this.draw('bar', eos.setBar2(gequqk))
   }
 }
 </script>
 
-<style scope>
+<style scoped>
   #renmintj {
     min-height: 1080px;
     min-width: 1920px;
@@ -333,6 +336,9 @@ export default {
     position:absolute;
     top:39px;
     left:1px;
+  }
+  .anchorBL{
+    display:none;
   }
   .renmintj_center_once{
     width:100%;

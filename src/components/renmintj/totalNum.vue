@@ -1,14 +1,14 @@
 <template>
 <div id='totalNum' class='shade'>
   <div class="totalNum_header">
-    <div class="totalNum_back"></div>
+    <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalNum_nav">
     <span class="totalNum_nav_span">首页 > 调解案件</span>
   </div>
   <div class="totalNum_nav2">
-    <span class="totalNum_nav2_span active">数量分析</span>
-    <span class="totalNum_nav2_span">类型分析</span>
+    <span class="totalNum_nav2_span active"  @click="changeRouter('totalNum')">数量分析</span>
+    <span class="totalNum_nav2_span"  @click="changeRouter('totalType')">类型分析</span>
   </div>
   <div class="totalNum_content">
     <div class="totalNum_content_top">
@@ -25,7 +25,6 @@
         </div>
       </div>
       <div class="echart_container">
-        <div class='zIndex3 area1 target1'></div>
       </div>
     </div>
     <div class="totalNum_content_top">
@@ -41,7 +40,6 @@
         </div>
       </div>
       <div class="echart_container2">
-         <div class='zIndex3 area2 target2'></div>
       </div>
     </div>
     <div class="totalNum_content_bottom">
@@ -97,7 +95,6 @@
           <span class="totalNum_content_span1">历年案件增长趋势</span>
         </div>
         <div class="echart_container3">
-          <div class='zIndex3 area3 target4'></div>
         </div>
     </div>
   </div>
@@ -117,13 +114,16 @@ export default {
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
+    },
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {},
   mounted () {
-    this.draw('target1', eos.setLine3([{month: '2017-10', num: 199}, {month: '2017-11', num: 194}, {month: '2017-12', num: 165}, {month: '2018-01', num: 78}, {month: '2018-02', num: 104}, {month: '2018-03', num: 7}]))
-    this.draw('target2', eos.setBar3([{value: 0, name: '松江'}, {value: 0, name: '浦东'}, {value: 1, name: '普陀'}, {value: 3, name: '奉贤'}, {value: 6, name: '虹口'}, {value: 6, name: '长宁'}, {value: 6, name: '崇明'}, {value: 6, name: '金山'}, {value: 7, name: '嘉定'}, {value: 14, name: '闵行'}, {value: 16, name: '宝山'}, {value: 16, name: '黄浦'}, {value: 18, name: '青浦'}, {value: 26, name: '徐汇'}, {value: 27, name: '静安'}, {value: 37, name: '杨浦'}], ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
-    this.draw('target4', eos.setBar3([{value: 57, name: '2015年'}, {value: 2847, name: '2016年'}, {value: 2504, name: '2017年'}, {value: 189, name: '2018年'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', '标题', '更新时间', 25))
+    this.draw('echart_container', eos.setLine3([{month: '2017-10', num: 199}, {month: '2017-11', num: 194}, {month: '2017-12', num: 165}, {month: '2018-01', num: 78}, {month: '2018-02', num: 104}, {month: '2018-03', num: 7}]))
+    this.draw('echart_container2', eos.setBar3([{value: 0, name: '松江'}, {value: 0, name: '浦东'}, {value: 1, name: '普陀'}, {value: 3, name: '奉贤'}, {value: 6, name: '虹口'}, {value: 6, name: '长宁'}, {value: 6, name: '崇明'}, {value: 6, name: '金山'}, {value: 7, name: '嘉定'}, {value: 14, name: '闵行'}, {value: 16, name: '宝山'}, {value: 16, name: '黄浦'}, {value: 18, name: '青浦'}, {value: 26, name: '徐汇'}, {value: 27, name: '静安'}, {value: 37, name: '杨浦'}], ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
+    this.draw('echart_container3', eos.setBar3([{value: 57, name: '2015年'}, {value: 2847, name: '2016年'}, {value: 2504, name: '2017年'}, {value: 189, name: '2018年'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', '标题', '更新时间', 25))
   }
 }
 </script>
@@ -143,25 +143,6 @@ export default {
   .shade {
     background-color: #0b1740;
   }
-
-  .zIndex3 {
-    z-index: 3;
-  }
-
-  .area1 {
-    width: 900px;
-    height: 471px;
-  }
-
-  .area2 {
-    width: 929px;
-    height: 471px;
-  }
-  .area3{
-    width: 929px;
-    height:255px;
-  }
-
   .totalNum_header{
     width: 100%;
     min-width: 1920px;
@@ -369,10 +350,12 @@ export default {
   }
   .echart_container{
     width:900px;
+    height: 471px;
     margin-left:23px;
   }
   .echart_container2{
     width:929px;
+    height: 471px;
     margin-left:0px;
   }
   .echart_container3{

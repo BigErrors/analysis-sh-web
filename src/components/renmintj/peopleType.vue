@@ -21,6 +21,9 @@ export default {
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
+    },
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {},
@@ -32,7 +35,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
   #peopleNum {
     min-height: 1080px;
     min-width: 1920px;

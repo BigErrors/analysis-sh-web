@@ -5,15 +5,15 @@
   <div v-show="false" class='zIndex3 area2 target3'></div>
   <div v-show="false" class='zIndex3 area2 target4'></div>
   <div class="totalNum_header">
-    <div class="totalNum_back"></div>
+    <div class="totalNum_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalNum_nav">
     <span class="totalNum_nav_span">首页 > 调解案件</span>
   </div>
   <div class="totalNum_nav2">
-    <span class="totalNum_nav2_span active">数量分析</span>
-    <span class="totalNum_nav2_span">属性分析</span>
-    <span class="totalNum_nav2_span">画像分析</span>
+    <span class="totalNum_nav2_span active"  @click="changeRouter('peopleNum')">数量分析</span>
+    <span class="totalNum_nav2_span"  @click="changeRouter('peopleType')">属性分析</span>
+    <span class="totalNum_nav2_span"  @click="changeRouter('peoplePortrait')">画像分析</span>
   </div>
   <div class="totalNum_content">
     <div class="totalNum_content_top">
@@ -48,6 +48,9 @@ export default {
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
+    },
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {},
@@ -59,7 +62,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
   #peopleNum {
     min-height: 1080px;
     min-width: 1920px;

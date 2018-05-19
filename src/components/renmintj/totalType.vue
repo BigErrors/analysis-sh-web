@@ -1,14 +1,14 @@
 <template>
 <div id='peopleNum' class='shade'>
    <div class="totalType_header">
-    <div class="totalType_back"></div>
+    <div class="totalType_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalType_nav">
     <span class="totalType_nav_span">首页 > 调解案件</span>
   </div>
   <div class="totalType_nav2">
-    <span class="totalType_nav2_span ">数量分析</span>
-    <span class="totalType_nav2_span active">类型分析</span>
+    <span class="totalType_nav2_span"  @click="changeRouter('totalNum')">数量分析</span>
+    <span class="totalType_nav2_span active"  @click="changeRouter('totalType')">类型分析</span>
   </div>
   <div class="totalType_content">
     <div class="totalType_content_once">
@@ -57,7 +57,7 @@
     <div class="totalType_content_once">
       <div class="totalType_content_title">
         <span class="totalType_content_span">来源分析</span>
-        <div class='zIndex3 area2 target3'></div>
+        <div class='zIndex3 area3 target3'></div>
       </div>
     </div>
     <div class="totalType_content_once">
@@ -84,18 +84,22 @@ export default {
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
+    },
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {},
   mounted () {
     this.draw('target1', eos.setPie2([{value: 82, name: '民事案件'}, {value: 9, name: '行政案件'}, {value: 4, name: '其他纠纷'}, {value: 4, name: '商事纠纷'}, {value: 1, name: '刑事案件'}]))
-    this.draw('target2', eos.setLine4([[{name: 2015, value: 9}, {name: 2016, value: 12}, {name: 2017, value: 15}, {name: 2018, value: 52}]], 'percent'))
-    this.draw('target4', eos.setLine4([[{name: 2015, value: 76}, {name: 2016, value: 57}, {name: 2017, value: 58}, {name: 2018, value: 85}], [{name: 2015, value: 13}, {name: 2016, value: 33}, {name: 2017, value: 31}, {name: 2018, value: 3}], [{name: 2015, value: 12}, {name: 2016, value: 11}, {name: 2017, value: 11}, {name: 2018, value: 2}]], 'percent'))
+    this.draw('target2', eos.setLine4([[{name: '2015', value: 9}, {name: '2016', value: 12}, {name: '2017', value: 15}, {name: '2018', value: 52}]], 'percent'))
+    this.draw('target3', eos.setFunnel([{value: 20, name: '信访', other: 1}, {value: 40, name: '其他', other: 1}, {value: 60, name: '主动调解', other: 1}, {value: 80, name: '公安移送', other: 1}, {value: 100, name: '当事人申请', other: 1}]))
+    this.draw('target4', eos.setLine4([[{name: 2015, value: 76}, {name: 2016, value: 57}, {name: 2017, value: 58}, {name: 2018, value: 85}], [{name: 2015, value: 13}, {name: 2016, value: 33}, {name: 2017, value: 31}, {name: 2018, value: 3}], [{name: 2015, value: 12}, {name: 2016, value: 11}, {name: 2017, value: 11}, {name: 2018, value: 2}]], 'percent', ['当事人申请', '委托调解', '主动调解']))
   }
 }
 </script>
 
-<style scope>
+<style scoped>
   #peopleNum {
     min-height: 1080px;
     min-width: 1920px;
@@ -111,7 +115,7 @@ export default {
 
   .area1 {
     float: left;
-    width: 509px;
+    width: 501px;
     height: 389px;
   }
 
@@ -119,6 +123,13 @@ export default {
     width: 900px;
     height: 370px;
   }
+
+  .area3 {
+    width: 700px;
+    height: 389px;
+    margin: 0 100px;
+  }
+
   .totalType_header{
     width: 100%;
     min-width: 1920px;
@@ -177,8 +188,8 @@ export default {
     padding: 13px 24px 24px 24px;
   }
   .totalType_content_once{
-    width:929px;
-    height:439px;
+    width:921px;
+    height:433px;
     background: linear-gradient( rgba(0,33,129,1),rgba(0,33,129,0));
     float:left;
   }

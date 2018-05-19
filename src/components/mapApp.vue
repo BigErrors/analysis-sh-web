@@ -421,6 +421,9 @@ export default {
       this.chooseEventVal2 = name
     },
     changeRouter (name) {
+      if (name === 'renmintj') {
+        name = 'index4renmintj'
+      }
       this.$router.push({name: name})
     },
     // 地图缩放事件
@@ -798,8 +801,8 @@ export default {
     display: none;
   }
 
-  .anchorBL {
-    display: none;
+  .anchorBL{
+    display:none;
   }
 
   .c2{

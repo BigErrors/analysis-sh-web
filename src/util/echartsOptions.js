@@ -702,16 +702,6 @@ let setLine4 = (data, dataType, legend, color) => {
       bottom: 15,
       containLabel: true
     },
-    legend: {
-      orient: 'horizontal',
-      right: 20,
-      top: 20,
-      textStyle: {
-        color: '#FFFFFF',
-        fontSize: 16
-      },
-      data: []
-    },
     color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
     xAxis: {
       type: 'category',
@@ -753,13 +743,10 @@ let setLine4 = (data, dataType, legend, color) => {
   data[0].map(item => {
     option.xAxis.data.push(item['name'])
   })
-  legend.map(item => {
-    option.legend.data.push(item)
-  })
   // 添加系列并设置对应数据
   data.map((series, index) => {
     option.series.push({
-      name: legend[index],
+      name: legend && legend[index] ? legend[index] : 'seriesname',
       type: 'line',
       symbol: 'circle',
       symbolSize: 8,
@@ -776,10 +763,23 @@ let setLine4 = (data, dataType, legend, color) => {
       })
     })
   })
+  if (legend && legend.length > 0) {
+    option.legend = {
+      orient: 'horizontal',
+      right: 20,
+      top: 20,
+      textStyle: {
+        color: '#FFFFFF',
+        fontSize: 16
+      },
+      data: legend.map(item => {
+        return item
+      })
+    }
+  }
   if (data.length === 1) {
     option.series[0].label.color = '#FFC400'
   }
-  console.log(option.legend.data)
   return option
 }
 
@@ -1022,64 +1022,57 @@ let setPie3 = (data) => {
 }
 
 // 漏斗图
-let setFunnel = () => {
+let setFunnel = (data) => {
   let option = {
-    color: ['rgba(11,83,243,0.2)', 'rgba(11,83,243,0.4)', 'rgba(11,83,243,0.6)', 'rgba(11,83,243,0.8)', 'rgba(11,83,243,1)'],
+    color: ['rgba(11,83,243,1)', 'rgba(11,83,243,0.8)', 'rgba(11,83,243,0.6)', 'rgba(11,83,243,0.4)', 'rgba(11,83,243,0.2)'],
     series: [
       {
         name: '1',
         type: 'funnel',
+        maxSize: '55%',
         label: {
           position: 'right',
-          formatter: '{b|{b}}\n\r\r\r{a|{a}}',
+          formatter: '{b|{b}}\n{a|{a}}',
+          padding: [5, 5, 5, 5],
           rich: {
             b: {
               fontSize: 19,
+              align: 'center',
               color: '#0134A5'
-
             },
             a: {
               fontSize: 25,
+              align: 'center',
               color: '#001F77'
             }
           },
+          width: 120,
+          heitht: 60,
           backgroundColor: {
-            image: '/static/icon-label.png'
+            image: 'static/renmintj/icon_label.png'
           }
         },
         labelLine: {
           show: true,
-          length: 60,
+          length: 40,
           lineStyle: {
             color: '#5C8EFE',
             type: 'dotted'
           }
-
         },
-        data: [
-          {value: 20, name: '信访', other: 1},
-          {value: 40, name: '其他', other: 1},
-          {value: 60, name: '主动调解', other: 1},
-          {value: 80, name: '公安移送', other: 1},
-          {value: 100, name: '当事人申请', other: 1}
-        ]
+        data: data
       },
       {
         name: '2',
         type: 'funnel',
+        maxSize: '55%',
         label: {
           position: 'inside',
           formatter: '{b}',
           color: '#B1C5FF',
-          fontSize: 19
+          fontSize: 16
         },
-        data: [
-          {value: 20, name: '信访', other: 1},
-          {value: 40, name: '其他', other: 1},
-          {value: 60, name: '主动调解', other: 1},
-          {value: 80, name: '公安移送', other: 1},
-          {value: 100, name: '当事人申请', other: 1}
-        ]
+        data: data
       }
     ]
   }
