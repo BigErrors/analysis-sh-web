@@ -1,9 +1,5 @@
 <template>
 <div id='peopleNum' class='shade'>
-  <div v-show="false" class='zIndex3 area1 target1'></div>
-  <div v-show="false" class='zIndex3 area1 target2'></div>
-  <div v-show="false" class='zIndex3 area2 target3'></div>
-  <div v-show="false" class='zIndex3 area2 target4'></div>
    <div class="totalType_header">
     <div class="totalType_back"></div>
   </div>
@@ -19,21 +15,58 @@
       <div class="totalType_content_title">
         <span class="totalType_content_span">类型</span>
       </div>
+      <div class='zIndex3 area1 target1'></div>
+      <div class="totalType_detail">
+        <div class="totalType_detail_main">
+          <div class="totalType_detail_title">民事纠纷</div>
+          <div class="totalType_detail_content">
+            <span class="totalType_detail_span1">邻里纠纷</span>
+            <span class="totalType_detail_span2">34%</span>
+          </div>
+          <div class="totalType_detail_content">
+            <span class="totalType_detail_span1">邻里纠纷</span>
+            <span class="totalType_detail_span2">34%</span>
+          </div>
+          <div class="totalType_detail_content">
+            <span class="totalType_detail_span1">邻里纠纷</span>
+            <span class="totalType_detail_span2">34%</span>
+          </div>
+          <div class="totalType_detail_content">
+            <span class="totalType_detail_span1">邻里纠纷</span>
+            <span class="totalType_detail_span2">34%</span>
+          </div>
+          <div class="totalType_detail_content">
+            <span class="totalType_detail_span1">邻里纠纷</span>
+            <span class="totalType_detail_span2">34%</span>
+          </div>
+          <div class="totalType_detail_content">
+            <span class="totalType_detail_span1">邻里纠纷</span>
+            <span class="totalType_detail_span2">34%</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="totalType_content_once">
       <div class="totalType_content_title">
         <span class="totalType_content_span">行专占比变化趋势</span>
+        <div class="totalType_echarts_container1">
+          <div class='zIndex3 area2 target2'></div>
+        </div>
       </div>
     </div>
     <div class="totalType_content_once">
       <div class="totalType_content_title">
         <span class="totalType_content_span">来源分析</span>
+        <div class='zIndex3 area2 target3'></div>
       </div>
     </div>
     <div class="totalType_content_once">
       <div class="totalType_content_title">
         <span class="totalType_content_span">来源变化趋势图</span>
       </div>
+      <div class="totalType_echarts_container2">
+          <div class='zIndex3 area2 target4'></div>
+        </div>
     </div>
   </div>
 </div>
@@ -78,14 +111,13 @@ export default {
 
   .area1 {
     float: left;
-    width: 929px;
-    height: 558px;
+    width: 509px;
+    height: 389px;
   }
 
   .area2 {
-    float: left;
-    width: 929px;
-    height: 304px;
+    width: 900px;
+    height: 370px;
   }
   .totalType_header{
     width: 100%;
@@ -153,6 +185,12 @@ export default {
   .totalType_content_once:nth-of-type(2n){
     margin-left: 14px;
   }
+   .totalType_content_once:nth-of-type(1){
+     margin-bottom:14px;
+   }
+   .totalType_content_once:nth-of-type(2){
+     margin-bottom:14px;
+   }
   .totalType_content_title{
     display:block;
     margin-top: 21px;
@@ -166,4 +204,66 @@ export default {
     border-left: 3px solid rgba(125,165,254,1);
     display:block;
   }
+  .totalType_detail{
+    width:420px;
+    height:389px;
+    float:left;
+    background:url("/static/renmintjOther/icon_directing.png");
+    background-repeat:no-repeat;
+    background-position:left center;
+  }
+  .totalType_detail_main{
+    width:307px;
+    height:264px;
+    background:url('/static/renmintjOther/pic_frame.png');
+    margin-top:67px;
+    margin-left:56px;
+  }
+  .totalType_detail_title{
+    height:34px;
+    display:block;
+    color:rgba(174,195,255,1);
+    line-height:34px;
+    font-size:20px;
+    padding-left:8px;
+    margin-bottom:2px;
+  }
+  .totalType_detail_content{
+    height:38px;
+    display:block;
+    line-height:38px;
+    margin:0 1px;
+  }
+  .totalType_detail_content:nth-of-type(2n){
+    background:rgba(19,38,101,1);
+  }
+  .totalType_detail_span1{
+    font-size:18px;
+    font-family:HiraginoSansGB-W3;
+    color:rgba(184,206,255,1);
+    padding-left:61px;
+    display:inline-block;
+    width:70%;
+    box-sizing:border-box;
+  }
+  .totalType_detail_span2{
+    font-size:18px;
+    font-family:HiraginoSansGB-W3;
+    color:rgba(255,198,0,1);
+    display:inline-block;
+    width:25%;
+  }
+  .totalType_echarts_container1{
+    width:900px;
+    margin-left:28px;
+    height:370px;
+    margin-top:19px;
+  }
+  .totalType_echarts_container2{
+    width:900px;
+    height:370px;
+    margin-top:19px;
+    margin-left:28px;
+  }
+
 </style>
