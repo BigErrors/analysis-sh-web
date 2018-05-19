@@ -694,13 +694,23 @@ let setLine3 = (data, name, updateTime) => {
   return option
 }
 // 折线图--没有area属性
-let setLine4 = (data, dataType, color) => {
+let setLine4 = (data, dataType, legend, color) => {
   let option = {
     grid: {
       left: 15,
       top: 15,
       bottom: 15,
       containLabel: true
+    },
+    legend: {
+      orient: 'horizontal',
+      right: 20,
+      top: 20,
+      textStyle: {
+        color: '#FFFFFF',
+        fontSize: 16
+      },
+      data: []
     },
     color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
     xAxis: {
@@ -740,15 +750,19 @@ let setLine4 = (data, dataType, color) => {
     series: []
   }
   // 设置category对应数据
-  option.xAxis.data = data[0].map(item => {
-    return item['name']
+  data[0].map(item => {
+    option.xAxis.data.push(item['name'])
+  })
+  legend.map(item => {
+    option.legend.data.push(item)
   })
   // 添加系列并设置对应数据
   data.map((series, index) => {
     option.series.push({
-      name: index,
+      name: legend[index],
       type: 'line',
-      symbolSize: 1,
+      symbol: 'circle',
+      symbolSize: 8,
       lineStyle: {
         width: 1
       },
@@ -762,6 +776,10 @@ let setLine4 = (data, dataType, color) => {
       })
     })
   })
+  if (data.length === 1) {
+    option.series[0].label.color = '#FFC400'
+  }
+  console.log(option.legend.data)
   return option
 }
 
@@ -944,6 +962,66 @@ let setPie2 = (data, name, updateTime) => {
   return option
 }
 
+// 圆环图
+let setPie3 = (data) => {
+  let option = {
+    legend: {
+      orient: 'vertical',
+      bottom: '35%',
+      right: 30,
+      textStyle: {
+        color: '#7DA5FE',
+        fontSize: 16
+      },
+      data: data.map(item => {
+        return item.name
+      })
+    },
+    color: ['#4D84FE', '#F4A869', '#9979CC', '#854DB5', '#EF5665', '#EF5665', '#F77C88'],
+    series: [
+      {
+        name: '',
+        type: 'pie',
+        center: ['35%', '50%'],
+        radius: ['25%', '40%'],
+        label: {
+          normal: {
+            formatter: '{d|{d}%}\n {hr|}\n',
+            rich: {
+              c: {
+                color: '#FFC600',
+                fontSize: 17,
+                lineHeight: 12,
+                align: 'center'
+              },
+              d: {
+                color: '#FFC600',
+                fontSize: 17,
+                lineHeight: 12,
+                align: 'center'
+              },
+              hr: {
+                borderColor: '#4D84FE',
+                width: '100%',
+                borderWidth: 1,
+                height: 0
+              }
+            }
+          }
+        },
+        labelLine: {
+          lineStyle: {
+            color: '#4D84FE'
+          }
+        },
+        data: data
+      }
+    ]
+  }
+  return option
+}
+
+// 漏斗图
 let setFunnel = () => {
   let option = {
     color: ['rgba(11,83,243,0.2)', 'rgba(11,83,243,0.4)', 'rgba(11,83,243,0.6)', 'rgba(11,83,243,0.8)', 'rgba(11,83,243,1)'],
@@ -1008,4 +1086,4 @@ let setFunnel = () => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setFunnel}
+export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel}

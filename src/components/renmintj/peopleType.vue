@@ -1,84 +1,39 @@
 <template>
-<div id='renmintj' class='shade'>
-  <div class='zIndex3 renmintj 1'></div>
-  <div class='zIndex3 renmintj 2'></div>
-  <div class='zIndex3 pie'></div>
-  <div class='zIndex3 line'></div>
-  <div class='zIndex3 bar'></div>
-  <baidu-map class='zIndex3 map' :center='center' :zoom='zoom' :minZoom='minZoom' @ready='handler'>
-    <bm-circle :center="circlePath.center" :radius="circlePath.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
-    </bm-circle>
-    <bm-label  :position="circlePath.center" :content='circlePath.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
-    <bm-circle :center="circlePath1.center" :radius="circlePath1.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
-    </bm-circle>
-    <bm-label  :position="circlePath1.center" :content='circlePath1.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
-  </baidu-map>
+<div id='peopleNum' class='shade'>
+  <div class='zIndex3 area target1'></div>
+  <div class='zIndex3 area target2'></div>
+  <div class='zIndex3 area target3'></div>
+  <div class='zIndex3 area target4'></div>
+  <div class='zIndex3 area target5'></div>
+  <div class='zIndex3 area target6'></div>
 </div>
 </template>
 
 <script>
 import eos from '@/util/echartsOptions'
-import style from '@/json/mapStyle'
-import qushifx from '@/json/shehuimd_qushifx'
-import gequqk from '@/json/shehuimd_gequqk'
 export default {
-  name: 'renmintj',
+  name: 'peopleNum',
   data () {
-    return {
-      center: {lng: 0, lat: 0},
-      zoom: 11,
-      minZoom: 11,
-      circlePath: {
-        center: {
-          lng: 121.504934,
-          lat: 31.130371
-        },
-        radius: 6000,
-        content: '2000'
-      },
-      circlePath1: {
-        center: {
-          lng: 121.604934,
-          lat: 31.230371
-        },
-        radius: 3000,
-        content: '123'
-      }
-    }
+    return {}
   },
   methods: {
     // 绘制echarts
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
-    },
-    // 地图配置
-    handler ({BMap, map}) {
-      this.center.lng = 121.504934
-      this.center.lat = 31.130371
-      this.zoom = 11
-      // 设置地图样式
-      map.setMapStyle({styleJson: style})
-      // 开启关系拖拽
-      map.enableInertialDragging()
-      // 开启鼠标滚动缩放
-      map.enableScrollWheelZoom()
-      // 地图数据初始化
     }
   },
   created () {},
   mounted () {
-    this.draw('1', eos.setFill(0.72, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [0.72], '17', '#7BA6ED'))
-    this.draw('2', eos.setFill(0.3, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [0.3], '17', '#7BA6ED'))
-    this.draw('pie', eos.setPie([{value: 679, name: '一般调解'}, {value: 1548, name: '专业调解'}], [{value: 310, name: '婚姻家庭'}, {value: 369, name: '邻里纠纷'}, {value: 1048, name: '知识产权'}, {value: 251, name: '涉校纠纷'}, {value: 249, name: '医患纠纷'}]))
-    this.draw('line', eos.setLine(qushifx))
-    this.draw('bar', eos.setBar2(gequqk))
+    this.draw('target1', eos.setPie3([{name: '硕士及以上', value: 2246}, {name: '本科', value: 2873}, {name: '大专', value: 3201}, {name: '高中或中专', value: 3013}, {name: '初中及以下', value: 4017}, {name: '未知', value: 5245}]))
+    this.draw('target2', eos.setBar3([{value: 57, name: '闵行'}, {value: 2847, name: '徐汇'}, {value: 2504, name: '宝山'}, {value: 189, name: '崇明'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
+    this.draw('target3', eos.setLine4([[{name: '20-29', value: 407}, {name: '30-39', value: 2454}, {name: '40-49', value: 2572}, {name: '50-59', value: 1813}, {name: '60-69', value: 905}, {name: '70以上', value: 250}], [{name: '20-29', value: 516}, {name: '30-39', value: 1906}, {name: '40-49', value: 1688}, {name: '50-59', value: 2304}, {name: '60-69', value: 1425}, {name: '70以上', value: 385}]], 'integer', ['男性', '女性']))
   }
 }
 </script>
 
 <style scope>
-  #renmintj {
+  #peopleNum {
     min-height: 1080px;
     min-width: 1920px;
     overflow-y: auto;
@@ -86,49 +41,14 @@ export default {
   .shade {
     background-color: #0b1740;
   }
-  /* .shade{
-    width:100%;
-    height: 100%;
-    position: fixed;
-    background: url('/static/图层 1.png');
-    background-size: 1920px 1080px;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    pointer-events: none;
-  } */
 
   .zIndex3 {
-    z-index: 2;
+    z-index: 3;
   }
 
-  .renmintj {
+  .area {
     float: left;
-    width: 90px;
-    height: 126px;
-  }
-
-  .pie {
-    float: left;
-    width: 500px;
-    height: 500px;
-  }
-
-  .line {
-    float: left;
-    width: 391px;
-    height: 264px;
-  }
-
-  .bar {
-    float: left;
-    width: 963px;
-    height: 265px;
-  }
-
-  .map{
-    float: left;
-    width: 831px;
-    height: 607px;
+    width: 617px;
+    height: 435px
   }
 </style>
