@@ -13,7 +13,14 @@
   <div class="totalType_content">
     <div class="totalType_content_once">
       <div class="totalType_content_title">
-        <span class="totalType_content_span">类型</span>
+        <div class=" totalType_content_title_left">
+          <span class="totalType_content_span">类型</span>
+        </div>
+        <div class=" totalType_content_title_right">
+          <span class=" totalType_content_span5">本周</span>
+          <span class=" totalType_content_span5">本月</span>
+          <span class=" totalType_content_span5 totalType_content_active">今年</span>
+        </div>
       </div>
       <div class='zIndex3 area1 target1'></div>
       <div class="totalType_detail">
@@ -214,6 +221,43 @@ export default {
     margin-left: 28px;
     border-left: 3px solid rgba(125,165,254,1);
     display:block;
+  }
+  .totalType_content_title_left{
+    width: 50%;
+    float: left;
+    margin-top: 21px;
+  }
+  .totalType_content_span2{
+    display:block;
+    font-size:18px;
+    font-family:MicrosoftYaHei;
+    color:rgba(125,165,254,1);
+    padding-left: 42px;
+  }
+  .totalType_content_title_right{
+    width: 50%;
+    float: right;
+    margin-top:16px;
+  }
+  .totalType_content_span5{
+    font-size:16px;
+    font-family:MicrosoftYaHei;
+    padding:2px 12px;
+    float:right;
+    border-radius:15px;
+    margin-right:16px;
+    color:rgba(153,153,153,1);
+    cursor:pointer;
+  }
+  .totalType_content_active{
+    color:rgba(255,255,255,1);
+    background:rgba(77,132,254,1);
+  }
+  .totalType_content_span5:first-child{
+    margin-right:38px;
+  }
+  .right2{
+    margin-top:25px;
   }
   .totalType_detail{
     width:420px;

@@ -57,7 +57,7 @@
         <thead class="totalNum_table_thead">
         <tr>
           <td width="15%" class='td'>排名</td>
-          <td width="60%" class='td'>民称</td>
+          <td width="60%" class='td'>名称</td>
           <td width="25%" class='td'>本月新增</td>
         </tr>
         </thead>

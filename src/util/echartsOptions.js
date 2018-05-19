@@ -259,7 +259,7 @@ let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) =
     },
     axisLabel: {
       color: '#4D84FE',
-      fontSize: 16,
+      fontSize: 15,
       formatter: function (value) {
         if (value.length < 6) {
           return value
@@ -591,26 +591,8 @@ let setLine2 = (data) => {
   return option
 }
 // 折线图--有area属性
-let setLine3 = (data, name, updateTime) => {
+let setLine3 = (data) => {
   let option = {
-    // title: {
-    //   text: '|  ' + (name || '标题'),
-    //   textStyle: {
-    //     color: '#7DA5FE',
-    //     fontSize: 22,
-    //     align: 'left'
-    //   },
-    //   subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
-    //   subtextStyle: {
-    //     color: '#7DA5FE',
-    //     fontSize: 18,
-    //     align: 'right'
-    //   },
-    //   left: 0
-    // },
-    tooltip: {
-      trigger: 'axis'
-    },
     color: ['#1254C2'],
     grid: {
       left: 15,
@@ -698,6 +680,7 @@ let setLine4 = (data, dataType, legend, color) => {
   let option = {
     grid: {
       left: 15,
+      right: 15,
       top: 15,
       bottom: 15,
       containLabel: true
@@ -766,8 +749,7 @@ let setLine4 = (data, dataType, legend, color) => {
   if (legend && legend.length > 0) {
     option.legend = {
       orient: 'horizontal',
-      right: 20,
-      top: 20,
+      left: 'center',
       textStyle: {
         color: '#FFFFFF',
         fontSize: 16

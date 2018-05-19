@@ -1,9 +1,5 @@
 <template>
 <div id='peopleNum' class='shade'>
-  <div v-show="false" class='zIndex3 area1 target1'></div>
-  <div v-show="false" class='zIndex3 area1 target2'></div>
-  <div v-show="false" class='zIndex3 area2 target3'></div>
-  <div v-show="false" class='zIndex3 area2 target4'></div>
   <div class="totalNum_header">
     <div class="totalNum_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
@@ -28,10 +24,38 @@
           </div>
         </div>
       </div>
+      <div class='area1 target1'></div>
     </div>
-    <div class="totalNum_content_top"></div>
-    <div class="totalNum_content_bottom"></div>
-    <div class="totalNum_content_bottom"></div>
+    <div class="totalNum_content_top">
+      <div class="totalNum_content_title clearfix">
+        <div class="totalNum_content_title_left">
+          <span class="totalNum_content_span1">历年新增人员趋势</span>
+        </div>
+        <div class="totalNum_content_title_right">
+          <div class="totalNum_content_span_container bg1">
+            <span class="totalNum_content_span3">354人</span>
+            <span class="totalNum_content_span4">新增人员（今年）</span>
+          </div>
+        </div>
+      </div>
+      <div class='area1 target2'></div>
+    </div>
+    <div class="totalNum_content_bottom">
+      <div class="totalNum_content_title clearfix">
+        <div class="totalNum_content_title_left">
+          <span class="totalNum_content_span1">各区调解员人数</span>
+        </div>
+      </div>
+      <div class='area2 target3'></div>
+    </div>
+    <div class="totalNum_content_bottom">
+      <div class="totalNum_content_title clearfix">
+        <div class="totalNum_content_title_left">
+          <span class="totalNum_content_span1">各区新增调解员</span>
+        </div>
+      </div>
+      <div class='area2 target4'></div>
+    </div>
   </div>
 </div>
 </template>
@@ -55,9 +79,10 @@ export default {
   },
   created () {},
   mounted () {
-    this.draw('target1', eos.setLine3([{month: '2017-10', num: 199}, {month: '2017-11', num: 194}, {month: '2017-12', num: 165}, {month: '2018-01', num: 78}, {month: '2018-02', num: 104}, {month: '2018-03', num: 7}]))
-    this.draw('target2', eos.setBar3([{value: 0, name: '松江'}, {value: 0, name: '浦东'}, {value: 1, name: '普陀'}, {value: 3, name: '奉贤'}, {value: 6, name: '虹口'}, {value: 6, name: '长宁'}, {value: 6, name: '崇明'}, {value: 6, name: '金山'}, {value: 7, name: '嘉定'}, {value: 14, name: '闵行'}, {value: 16, name: '宝山'}, {value: 16, name: '黄浦'}, {value: 18, name: '青浦'}, {value: 26, name: '徐汇'}, {value: 27, name: '静安'}, {value: 37, name: '杨浦'}], ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
-    this.draw('target4', eos.setBar3([{value: 57, name: '2015年'}, {value: 2847, name: '2016年'}, {value: 2504, name: '2017年'}, {value: 189, name: '2018年'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', '标题', '更新时间', 25))
+    this.draw('target1', eos.setLine4([[{name: '2015', value: 9}, {name: '2016', value: 12}, {name: '2017', value: 15}, {name: '2018', value: 52}]], 'percent'))
+    this.draw('target2', eos.setLine4([[{name: '2015', value: 9}, {name: '2016', value: 12}, {name: '2017', value: 15}, {name: '2018', value: 52}]], 'percent'))
+    this.draw('target3', eos.setBar3([{ value: 131, name: '虹口' }, { value: 175, name: '长宁' }, { value: 209, name: '静安' }, { value: 232, name: '普陀' }, { value: 234, name: '金山' }, { value: 252, name: '黄埔' }, { value: 279, name: '杨浦' }, { value: 321, name: '青浦' }, { value: 325, name: '嘉定' }, { value: 351, name: '奉贤' }, { value: 364, name: '松江' }, { value: 375, name: '浦东' }, { value: 423, name: '崇明' }, { value: 447, name: '宝山' }, { value: 496, name: '徐汇' }, { value: 631, name: '闵行' }], ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
+    this.draw('target4', eos.setBar3([{ value: 27, name: '虹口' }, { value: 27, name: '长宁' }, { value: 17, name: '静安' }, { value: 22, name: '普陀' }, { value: 14, name: '金山' }, { value: 16, name: '黄埔' }, { value: 19, name: '杨浦' }, { value: 27, name: '青浦' }, { value: 24, name: '嘉定' }, { value: 29, name: '奉贤' }, { value: 21, name: '松江' }, { value: 8, name: '浦东' }, { value: 17, name: '崇明' }, { value: 30, name: '宝山' }, { value: 24, name: '徐汇' }, { value: 23, name: '闵行' }], ['#FF9C00', '#F8E228'], 'horizon', 'integer'))
   }
 }
 </script>
@@ -72,20 +97,16 @@ export default {
     background-color: #0b1740;
   }
 
-  .zIndex3 {
-    z-index: 3;
-  }
-
   .area1 {
     float: left;
     width: 929px;
-    height: 558px;
+    height: 270px;
   }
 
   .area2 {
     float: left;
     width: 929px;
-    height: 304px;
+    height: 436px;
   }
   .totalNum_header{
     width: 100%;
