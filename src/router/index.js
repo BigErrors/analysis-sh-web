@@ -14,6 +14,8 @@ import modelDataApp from '@/components/modelDataApp'
 import index4renmintj from '@/components/renmintj/index4renmintj'
 import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
+import peopleSearch from '@/components/renmintj/peopleSearch'
+import peoplePortrait from '@/components/renmintj/peoplePortrait'
 import totalNum from '@/components/renmintj/totalNum'
 import totalType from '@/components/renmintj/totalType'
 
@@ -89,6 +91,14 @@ const router = new Router({
       path: '/peopleType',
       name: 'peopleType',
       component: peopleType
+    }, {
+      path: '/peopleSearch',
+      name: 'peopleSearch',
+      component: peopleSearch
+    }, {
+      path: '/peoplePortrait',
+      name: 'peoplePortrait',
+      component: peoplePortrait
     }, {
       path: '/totalNum',
       name: 'totalNum',

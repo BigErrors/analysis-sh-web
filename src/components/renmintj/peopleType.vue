@@ -9,7 +9,7 @@
   <div class="peopleType_nav2">
     <span class="peopleType_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>
     <span class="peopleType_nav2_span active"  @click="changeRouter('peopleType')">属性分析</span>
-    <span class="peopleType_nav2_span"  @click="changeRouter('peoplePortrait')">画像分析</span>
+    <span class="peopleType_nav2_span"  @click="changeRouter('peopleSearch')">画像分析</span>
   </div>
   <div class="peopleType_content">
     <div class="peopleType_content_top">
