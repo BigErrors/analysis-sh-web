@@ -205,7 +205,7 @@ export default {
     height: 558px;
     float: left;
     margin-bottom: 14px;
-    background: linear-gradient( rgba(0,33,129,1),rgba(0,33,129,0));
+    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
   }
   .totalNum_content_top:first-child{
     margin-right: 14px;
@@ -214,7 +214,7 @@ export default {
     width: 929px;
     height: 305px;
     float: left;
-    background: linear-gradient( rgba(0,33,129,1),rgba(0,33,129,0));
+    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
   }
   .totalNum_content_bottom:last-child{
     margin-left: 14px;

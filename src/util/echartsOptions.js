@@ -223,10 +223,15 @@ let setBar2 = (data) => {
 }
 
 // 柱图
-let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) => {
+let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
   barMaxWidth = barMaxWidth || 43
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
+  if (portrait) {
+    maxValue = data.reduce(function (total, item) {
+      return total + item.value
+    }, 0)
+  }
   let valueAxis = [{
     type: 'value',
     axisLine: {
@@ -275,23 +280,11 @@ let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) =
     }
   }]
   let option = {
-    // title: {
-    //   text: '|  ' + (name || '标题'),
-    //   textStyle: {
-    //     color: '#7DA5FE',
-    //     fontSize: 22,
-    //     align: 'left'
-    //   },
-    //   subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
-    //   subtextStyle: {
-    //     color: '#7DA5FE',
-    //     fontSize: 18,
-    //     align: 'right'
-    //   },
-    //   left: 0
-    // },
     tooltip: {
-      show: true
+      show: false
+    },
+    grid: {
+      left: 120
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -349,6 +342,20 @@ let setBar3 = (data, color, axisType, dataType, name, updateTime, barMaxWidth) =
       option.series[1].barMaxWidth = barMaxWidth
     }
   }
+  if (portrait) {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#132665'
+      },
+      barMaxWidth: barMaxWidth,
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
   return option
 }
 
@@ -397,6 +404,58 @@ let setRadar = (data) => {
             return Number(item.shuzhi)
           }),
           name: '处理效率'
+        }
+      ]
+    }]
+  }
+  return option
+}
+
+// 雷达图
+let setRadar2 = (data) => {
+  let option = {
+    title: {},
+    tooltip: {},
+    radar: {
+      radius: '65%',
+      name: {
+        textStyle: {
+          color: '#1194F8'
+        }
+      },
+      axisLine: {
+        show: true
+      },
+      splitNumber: 2,
+      splitLine: {
+        show: true
+      },
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: 'rgba(255,255,255,0)'
+        }
+      },
+      indicator: data.map((item, index) => {
+        return {name: item.name, max: 10}
+      })
+    },
+    series: [{
+      name: 'radar',
+      type: 'radar',
+      itemStyle: {
+        color: '#FDCD0F',
+        opacity: 0
+      },
+      areaStyle: {
+        color: '#FDCD0F'
+      },
+      data: [
+        {
+          value: data.map(item => {
+            return Number(item.value)
+          }),
+          name: 'num'
         }
       ]
     }]
@@ -1061,4 +1120,86 @@ let setFunnel = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setRadar, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel}
+let setWordcloud = (data) => {
+  let option = {
+    series: [{
+      type: 'wordCloud',
+
+      // The shape of the "cloud" to draw. Can be any polar equation represented as a
+      // callback function, or a keyword present. Available presents are circle (default),
+      // cardioid (apple or heart shape curve, the most known polar equation), diamond (
+      // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
+
+      shape: 'circle',
+
+      // A silhouette image which the white area will be excluded from drawing texts.
+      // The shape option will continue to apply as the shape of the cloud to grow.
+
+      // maskImage: maskImage,
+
+      // Folllowing left/top/width/height/right/bottom are used for positioning the word cloud
+      // Default to be put in the center and has 75% x 80% size.
+
+      left: 'center',
+      top: 'center',
+      width: '70%',
+      height: '80%',
+      right: null,
+      bottom: null,
+
+      // Text size range which the value in data will be mapped to.
+      // Default to have minimum 12px and maximum 60px size.
+
+      sizeRange: [12, 60],
+
+      // Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90] by rotationStep 45
+
+      rotationRange: [-90, 90],
+      rotationStep: 45,
+
+      // size of the grid in pixels for marking the availability of the canvas
+      // the larger the grid size, the bigger the gap between words.
+
+      gridSize: 8,
+
+      // set to true to allow word being draw partly outside of the canvas.
+      // Allow word bigger than the size of the canvas to be drawn
+      drawOutOfBound: false,
+
+      // Global text style
+      textStyle: {
+        normal: {
+          fontFamily: 'sans-serif',
+          fontWeight: 'bold',
+          // Color can be a callback function or a color string
+          color: function () {
+            // Random color
+            return 'rgb(' + [
+              Math.round(Math.random() * 160),
+              Math.round(Math.random() * 160),
+              Math.round(Math.random() * 160)
+            ].join(',') + ')'
+          }
+        },
+        emphasis: {
+          shadowBlur: 10,
+          shadowColor: '#333'
+        }
+      },
+
+      // Data is an array. Each array item must have name and value property.
+      data: [{
+        name: 'Farrah Abraham',
+        value: 366,
+        // Style of single text
+        textStyle: {
+          normal: {},
+          emphasis: {}
+        }
+      }]
+    }]
+  }
+  return option
+}
+
+export default {setBar, setBar2, setBar3, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel, setWordcloud}

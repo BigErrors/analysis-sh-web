@@ -197,7 +197,7 @@ export default {
   .totalType_content_once{
     width:921px;
     height:433px;
-    background: linear-gradient( rgba(0,33,129,1),rgba(0,33,129,0));
+    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
     float:left;
   }
   .totalType_content_once:nth-of-type(2n){
