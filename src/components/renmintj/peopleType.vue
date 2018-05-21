@@ -371,9 +371,6 @@ export default {
     box-sizing:border-box;
     color:white;
   }
-  .totalNum_table tr {
-    /* line-height: 35px; */
-  }
   .totalNum_table_thead td{
     font-size:18px;
     font-family:MicrosoftYaHei;
