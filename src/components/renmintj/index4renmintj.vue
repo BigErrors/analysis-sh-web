@@ -1,7 +1,7 @@
 <template>
 <div id='renmintj' class='shade'>
   <div class='renmintj_header'>
-    <div class="renmintj_back" @click="changeRouter('mapApp')" style="cursor: pointer;"></div>
+    <!-- <div class="renmintj_back" @click="changeRouter('mapApp')" style="cursor: pointer;"></div> -->
   </div>
   <div class='renmintj_container'>
     <div class="renmintj_left">

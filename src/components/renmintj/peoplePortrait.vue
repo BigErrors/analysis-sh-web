@@ -4,7 +4,7 @@
     <div class="totalNum_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalNum_nav">
-    <span class="totalNum_nav_span">首页 > 调解案件</span>
+    <span class="totalNum_nav_span">首页 > 调解员画像分析 >详情</span>
   </div>
   <div class="totalNum_nav2">
     <span class="totalNum_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>
@@ -115,7 +115,7 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import renyuanxx from '@/json/huaxiangfx_renyuanxq'
+import renyuanxx from '@/json/renmintj/huaxiangfx_renyuanxq'
 export default {
   name: 'peoplePortrait',
   data () {

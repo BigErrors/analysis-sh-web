@@ -4,7 +4,7 @@
     <div class="totalType_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalType_nav">
-    <span class="totalType_nav_span">首页 > 调解案件</span>
+    <span class="totalType_nav_span">首页 > 调解员属性分析</span>
   </div>
   <div class="totalType_nav2">
     <span class="totalType_nav2_span"  @click="changeRouter('totalNum')">数量分析</span>

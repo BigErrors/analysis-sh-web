@@ -1,0 +1,16 @@
+[
+{"xingbie":"男","nianlingd":"20以下","shuzhi":"3"},
+{"xingbie":"男","nianlingd":"20-29","shuzhi":"407"},
+{"xingbie":"男","nianlingd":"30-39","shuzhi":"2454"},
+{"xingbie":"男","nianlingd":"40-49","shuzhi":"2572"},
+{"xingbie":"男","nianlingd":"50-59","shuzhi":"1813"},
+{"xingbie":"男","nianlingd":"60-69","shuzhi":"905"},
+{"xingbie":"男","nianlingd":"70及以上","shuzhi":"250"},
+{"xingbie":"女","nianlingd":"20以下","shuzhi":"4"},
+{"xingbie":"女","nianlingd":"20-29","shuzhi":"516"},
+{"xingbie":"女","nianlingd":"30-39","shuzhi":"1906"},
+{"xingbie":"女","nianlingd":"40-49","shuzhi":"1668"},
+{"xingbie":"女","nianlingd":"50-59","shuzhi":"2304"},
+{"xingbie":"女","nianlingd":"60-69","shuzhi":"1425"},
+{"xingbie":"女","nianlingd":"70及以上","shuzhi":"385"}
+]

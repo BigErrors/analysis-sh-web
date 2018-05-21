@@ -4,7 +4,7 @@
       <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
     </div>
     <div class="totalNum_nav">
-      <span class="totalNum_nav_span">首页 > 调解案件</span>
+      <span class="totalNum_nav_span">首页 > 调解员画像分析</span>
     </div>
     <div class="totalNum_nav2">
       <span class="totalNum_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
@@ -14,34 +14,28 @@
     <div class="totalNum_content mediators-info">
       <div class="left-bar">
         <p class="title">区域</p>
-        <p :class="(key === areaActive)?'area active':'area'" v-for="(overview,key) in areaOverviews" :key="key"
-          v-text="overview.mincgheng+'('+overview.shuzhi+')'" @click="selectArea(key,overview)"></p>
+        <p :class="(key === areaActive)?'area active':'area'" v-for="(overview,key) in areaOverviews" :key="key" v-text="overview.mincgheng+'('+overview.shuzhi+')'"
+          @click="selectArea(key,overview)"></p>
       </div>
       <div class="mediators-content">
         <div v-for="row in Math.ceil(mediators.length/5)" :key="'row'+row" :row="row" class="mediators-image">
-          <div class="mediator-info" v-for="col in 5" :key="'col'+(row*5+col)" v-if="(row-1)*5+col<=mediators.length" :col="(row-1)*5+(col-1)">
-            <img v-if="mediators[(row-1)*5+(col-1)].zhaopiandz!==''" :src="'/static/mediatorsImg/'+mediators[(row-1)*5+(col-1)].zhaopiandz" />
-
-            <img v-if="mediators[(row-1)*5+(col-1)].zhaopiandz===''"
-            :src="(mediators[(row-1)*5+(col-1)].xingbie ==='2')?'/static/mediatorsImg/Male/2 (86).jpg':'/static/mediatorsImg/Female/1 (41).jpg'" />
+          <div class="mediator-info" v-for="col in 5" :key="'col'+(row*5+col)" v-if="(row-1)*5+col<=mediators.length" :col="(row-1)*5+(col-1)" @click="changeRouter('peoplePortrait')">
+            <img v-if="mediators[(row-1)*5+(col-1)].zhaopiandz!==''" :src="'/static/mediatorsImg/'+mediators[(row-1)*5+(col-1)].zhaopiandz"/>
+            <img v-if="mediators[(row-1)*5+(col-1)].zhaopiandz===''" :src="(mediators[(row-1)*5+(col-1)].xingbie ==='2')?'/static/mediatorsImg/Male/2 (86).jpg':'/static/mediatorsImg/Female/1 (41).jpg'"/>
             <p v-text="mediators[(row-1)*5+(col-1)].xingming" class="mediator-name"></p>
             <p class="mediator-committee" v-text="mediators[(row-1)*5+(col-1)].tiaojiewyh"></p>
           </div>
         </div>
       </div>
-        <el-pagination
-      :current-page.sync="currentPage"
-      :page-size="15"
-      layout="total, prev, pager, next"
-      :total="89" class="ej-pagination">
-    </el-pagination>
+      <el-pagination :current-page.sync="currentPage" :page-size="15" layout="total, prev, pager, next" :total="89" class="ej-pagination">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import areaOverviews from '@/json/huaxiangfx_quyu'
-import mediators from '@/json/huaxiangfx_renyuanqd'
+import areaOverviews from '@/json/renmintj/huaxiangfx_quyu'
+import mediators from '@/json/renmintj/huaxiangfx_renyuanqd'
 export default {
   name: 'peopleSearch',
   data () {
