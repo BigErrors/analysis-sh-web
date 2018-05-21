@@ -115,7 +115,7 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import renyuanxx from '@/json/renmintj/huaxiangfx_renyuanxq'
+import renyuanxx from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
 export default {
   name: 'peoplePortrait',
   data () {

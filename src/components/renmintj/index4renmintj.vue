@@ -186,9 +186,9 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import style from '@/json/mapStyle'
-import qushifx from '@/json/shehuimd_qushifx'
-import gequqk from '@/json/shehuimd_gequqk'
+import style from '@/../static/json/mapStyle'
+import qushifx from '@/../static/json/shehuimd_qushifx'
+import gequqk from '@/../static/json/shehuimd_gequqk'
 export default {
   name: 'renmintj',
   data () {
