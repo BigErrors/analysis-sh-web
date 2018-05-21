@@ -21,6 +21,8 @@
      <div class="totalNum_content_leftTitle2">
        <div class="totalNum_content_leftTitle2_address">普陀区桃浦镇迎春苑居民委员会人民调解委员会</div>
      </div>
+     <div class="totalNum_content_leftContent">
+     </div>
    </div>
    <div class="totalNum_content_right1">
      <div class="module">
@@ -113,6 +115,7 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import renyuanxx from '@/json/huaxiangfx_renyuanxq'
 export default {
   name: 'peoplePortrait',
   data () {
@@ -132,7 +135,7 @@ export default {
   mounted () {
     this.draw('module2', eos.setBar3([{value: 1240, name: '恋爱纠纷'}, {value: 1564, name: '邻里空间纠纷'}, {value: 1024, name: '邻里纠纷'}, {value: 651, name: '同居纠纷'}, {value: 108, name: '婚姻纠纷'}], ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
     this.draw('module3', eos.setRadar2([{value: 1, name: '调解成功率'}, {value: 9, name: '文书质量'}, {value: 8, name: '调解效率'}, {value: 4, name: '最高学历'}, {value: 6, name: '从业年限'}, {value: 32, name: '调解数量'}]))
-    this.draw('module3', eos.setWorldcloud())
+    this.draw('totalNum_content_leftContent', eos.setWordcloud(renyuanxx.person[0].ciyun))
   }
 }
 </script>
@@ -272,6 +275,14 @@ export default {
     color: #FFFFFF;
     box-sizing:border-box;
     padding-left: 26px;
+  }
+  .totalNum_content_leftContent{
+    background: url('/static/renmintjOther/pic_boy.png') no-repeat;
+    height: 650px;
+    width: 195px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
   }
   .totalNum_content_right1{
     float: left;

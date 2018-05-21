@@ -943,23 +943,8 @@ let setPie = (data1, data2) => {
 }
 
 // 圆环图
-let setPie2 = (data, name, updateTime) => {
+let setPie2 = (data) => {
   let option = {
-    // title: {
-    //   text: '|  ' + (name || '标题'),
-    //   textStyle: {
-    //     color: '#7DA5FE',
-    //     fontSize: 22,
-    //     align: 'left'
-    //   },
-    //   subtext: '(更新于: ' + (updateTime || '更新时间') + ')',
-    //   subtextStyle: {
-    //     color: '#7DA5FE',
-    //     fontSize: 18,
-    //     align: 'right'
-    //   },
-    //   left: 0
-    // },
     color: ['#7DA5FE', '#F24848', '#FFC400', '#0E57FC', '#3674FF'],
     series: [
       {
@@ -1121,6 +1106,8 @@ let setFunnel = (data) => {
 }
 
 let setWordcloud = (data) => {
+  // let maskImage = new Image()
+  // maskImage.src = 'static/renmintjOther/pic_boy.png'
   let option = {
     series: [{
       type: 'wordCloud',
@@ -1130,7 +1117,7 @@ let setWordcloud = (data) => {
       // cardioid (apple or heart shape curve, the most known polar equation), diamond (
       // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
 
-      shape: 'circle',
+      shape: 'diamond',
 
       // A silhouette image which the white area will be excluded from drawing texts.
       // The shape option will continue to apply as the shape of the cloud to grow.
@@ -1142,8 +1129,8 @@ let setWordcloud = (data) => {
 
       left: 'center',
       top: 'center',
-      width: '70%',
-      height: '80%',
+      width: '75%',
+      height: '100%',
       right: null,
       bottom: null,
 
@@ -1188,17 +1175,10 @@ let setWordcloud = (data) => {
       },
 
       // Data is an array. Each array item must have name and value property.
-      data: [{
-        name: 'Farrah Abraham',
-        value: 366,
-        // Style of single text
-        textStyle: {
-          normal: {},
-          emphasis: {}
-        }
-      }]
+      data: data
     }]
   }
+  console.log(option)
   return option
 }
 

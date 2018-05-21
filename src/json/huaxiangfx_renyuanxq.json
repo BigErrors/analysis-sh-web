@@ -1,0 +1,2244 @@
+{
+  "person": [
+    {
+      "name": "陶剑敏", 
+      "gongzuonx": "6年", 
+      "dianhauhm": "13606299803", 
+      "tiaojiewyh": "上海市普陀区万里街道万里名轩居民委员会人民调解委员会", 
+      "ciyun": [
+        {
+          "name": "纠纷", 
+          "value": 32
+        }, 
+        {
+          "name": "劳动", 
+          "value": 15
+        }, 
+        {
+          "name": "上海", 
+          "value": 9
+        }, 
+        {
+          "name": "农民工", 
+          "value": 4
+        }, 
+        {
+          "name": "拖欠", 
+          "value": 4
+        }, 
+        {
+          "name": "合同", 
+          "value": 5
+        }, 
+        {
+          "name": "工资", 
+          "value": 4
+        }, 
+        {
+          "name": "圆通", 
+          "value": 2
+        }, 
+        {
+          "name": "劳务", 
+          "value": 2
+        }, 
+        {
+          "name": "快递", 
+          "value": 2
+        }, 
+        {
+          "name": "贸易", 
+          "value": 2
+        }, 
+        {
+          "name": "物业", 
+          "value": 2
+        }, 
+        {
+          "name": "国际", 
+          "value": 2
+        }, 
+        {
+          "name": "电镀", 
+          "value": 2
+        }, 
+        {
+          "name": "劳动服", 
+          "value": 1
+        }, 
+        {
+          "name": "金属制", 
+          "value": 1
+        }, 
+        {
+          "name": "保安", 
+          "value": 1
+        }, 
+        {
+          "name": "胡科", 
+          "value": 1
+        }, 
+        {
+          "name": "高德", 
+          "value": 1
+        }, 
+        {
+          "name": "张思明", 
+          "value": 1
+        }, 
+        {
+          "name": "徐学峰", 
+          "value": 1
+        }, 
+        {
+          "name": "刘强", 
+          "value": 1
+        }, 
+        {
+          "name": "纪晓", 
+          "value": 1
+        }, 
+        {
+          "name": "赵祥", 
+          "value": 1
+        }, 
+        {
+          "name": "张权", 
+          "value": 1
+        }, 
+        {
+          "name": "建筑", 
+          "value": 1
+        }, 
+        {
+          "name": "餐饮", 
+          "value": 1
+        }, 
+        {
+          "name": "汪华", 
+          "value": 1
+        }, 
+        {
+          "name": "杨海", 
+          "value": 1
+        }, 
+        {
+          "name": "黄永明", 
+          "value": 1
+        }, 
+        {
+          "name": "张鸣", 
+          "value": 1
+        }, 
+        {
+          "name": "森森", 
+          "value": 1
+        }, 
+        {
+          "name": "新淮", 
+          "value": 1
+        }, 
+        {
+          "name": "张清", 
+          "value": 1
+        }, 
+        {
+          "name": "高淑", 
+          "value": 1
+        }, 
+        {
+          "name": "李俊", 
+          "value": 1
+        }, 
+        {
+          "name": "婚姻", 
+          "value": 1
+        }, 
+        {
+          "name": "杜林", 
+          "value": 1
+        }, 
+        {
+          "name": "彭志华", 
+          "value": 1
+        }, 
+        {
+          "name": "小银", 
+          "value": 1
+        }, 
+        {
+          "name": "万科", 
+          "value": 1
+        }, 
+        {
+          "name": "实业", 
+          "value": 1
+        }, 
+        {
+          "name": "家庭", 
+          "value": 1
+        }, 
+        {
+          "name": "刘平", 
+          "value": 1
+        }, 
+        {
+          "name": "蒋文", 
+          "value": 1
+        }, 
+        {
+          "name": "赵详", 
+          "value": 1
+        }, 
+        {
+          "name": "林海", 
+          "value": 1
+        }, 
+        {
+          "name": "吴亚", 
+          "value": 1
+        }, 
+        {
+          "name": "张朝平", 
+          "value": 1
+        }, 
+        {
+          "name": "杨家", 
+          "value": 1
+        }, 
+        {
+          "name": "广东", 
+          "value": 1
+        }, 
+        {
+          "name": "白建", 
+          "value": 1
+        }, 
+        {
+          "name": "万象", 
+          "value": 1
+        }, 
+        {
+          "name": "李梦", 
+          "value": 1
+        }, 
+        {
+          "name": "物流", 
+          "value": 1
+        }, 
+        {
+          "name": "宁夏", 
+          "value": 1
+        }, 
+        {
+          "name": "陈国华", 
+          "value": 1
+        }, 
+        {
+          "name": "工程", 
+          "value": 1
+        }, 
+        {
+          "name": "建设", 
+          "value": 1
+        }, 
+        {
+          "name": "张登峰", 
+          "value": 1
+        }, 
+        {
+          "name": "洗衣", 
+          "value": 1
+        }, 
+        {
+          "name": "健康", 
+          "value": 1
+        }, 
+        {
+          "name": "漏水", 
+          "value": 1
+        }
+      ], 
+      "zhengti": [
+        {
+          "name": "调解成功", 
+          "value": 28
+        }, 
+        {
+          "name": "调解终止", 
+          "value": 2
+        }, 
+        {
+          "name": "未结案", 
+          "value": 2
+        }
+      ], 
+      "leixingdb": [
+        {
+          "name": "其他婚姻家庭", 
+          "value": 1
+        }, 
+        {
+          "name": "合同", 
+          "value": 5
+        }, 
+        {
+          "name": "物业管理", 
+          "value": 1
+        }, 
+        {
+          "name": "拖欠农民工工资", 
+          "value": 4
+        }, 
+        {
+          "name": "其他", 
+          "value": 5
+        }, 
+        {
+          "name": "劳动争议", 
+          "value": 15
+        }, 
+        {
+          "name": "漏水", 
+          "value": 1
+        }
+      ], 
+      "indicator": [
+        {
+          "name": "调解成功率", 
+          "max": 1
+        }, 
+        {
+          "name": "调解数量", 
+          "max": 50
+        }, 
+        {
+          "name": "从业年限", 
+          "max": 10
+        }, 
+        {
+          "name": "最高学历", 
+          "max": 5
+        }, 
+        {
+          "name": "调解效率", 
+          "max": 10
+        }, 
+        {
+          "name": "文书质量", 
+          "max": 10
+        }
+      ], 
+      "data": [
+        {
+          "value": [
+            1, 
+            32, 
+            6, 
+            4, 
+            8, 
+            9
+          ]
+        }
+      ], 
+      "anjianlb": [
+        {
+          "xuhao": "1", 
+          "mingcheng": "陈国华、宁夏盛业建设工程有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/04/03", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "C", 
+          "wenshuzl": "A", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "2", 
+          "mingcheng": "顾广东、上海杜行电镀有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/04/09", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "3", 
+          "mingcheng": "刘平、上海杜行电镀有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/04/09", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "4", 
+          "mingcheng": "李梦军、万象物流之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/04/12", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "5", 
+          "mingcheng": "任思荣、上海意尚贸易有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/04/09", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "6", 
+          "mingcheng": "盛小银、林海晨之间的其他纠纷", 
+          "shoulisj": "2018/03/13", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "C", 
+          "wenshuzl": "A", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "7", 
+          "mingcheng": "张登峰、上海赛维健康洗衣生活馆之间的合同纠纷", 
+          "shoulisj": "2018/04/18", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "8", 
+          "mingcheng": "杨家涛、孙为峰之间的拖欠农民工工资纠纷", 
+          "shoulisj": "2018/04/04", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "C", 
+          "wenshuzl": "A", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "9", 
+          "mingcheng": "白建伟、陈隆之间的拖欠农民工工资纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "C", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "10", 
+          "mingcheng": "谈维静、杨巨琴之间的漏水纠纷", 
+          "shoulisj": "2018/04/25", 
+          "jieansj": "2018/05/04", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "11", 
+          "mingcheng": "李俊、张清之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/04/09", 
+          "jieansj": "2018/04/19", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "12", 
+          "mingcheng": "杨海尧、张朝平之间的其他纠纷", 
+          "shoulisj": "2018/03/29", 
+          "jieansj": "2018/04/19", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "13", 
+          "mingcheng": "肖森森、吴亚新之间的合同纠纷", 
+          "shoulisj": "2018/04/13", 
+          "jieansj": "2018/04/16", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "14", 
+          "mingcheng": "彭志华、万科七宝国际物业之间的物业管理纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/04/09", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "15", 
+          "mingcheng": "赵详军、圆通快递公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/03/20", 
+          "jieansj": "2018/04/09", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "16", 
+          "mingcheng": "彭维会、上海新淮海劳务服务有限公司之间的合同纠纷", 
+          "shoulisj": "2018/04/02", 
+          "jieansj": "2018/04/04", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "17", 
+          "mingcheng": "蒋文琼、彭继南之间的其他纠纷", 
+          "shoulisj": "2018/03/29", 
+          "jieansj": "2018/04/04", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "18", 
+          "mingcheng": "杜林、汤先生之间的合同纠纷", 
+          "shoulisj": "2018/03/29", 
+          "jieansj": "2018/04/04", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "19", 
+          "mingcheng": "刘强、上海悟信实业有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/03/12", 
+          "jieansj": "2018/04/02", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "20", 
+          "mingcheng": "高淑勤、高德荫之间的其他婚姻家庭纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/30", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "21", 
+          "mingcheng": "黄永明、张鸣之间的合同纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "22", 
+          "mingcheng": "张权、金树龙之间的拖欠农民工工资纠纷", 
+          "shoulisj": "2018/03/05", 
+          "jieansj": "2018/03/21", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "23", 
+          "mingcheng": "赵祥军、圆通快递公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/02/11", 
+          "jieansj": "2018/03/21", 
+          "tiaojielx": "C", 
+          "wenshuzl": "A", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "24", 
+          "mingcheng": "曲琳、上海卿铨国际贸易有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/03/20", 
+          "jieansj": "2018/03/21", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "25", 
+          "mingcheng": "戴爱菊、上海市炭韩友餐饮管理有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/03/20", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "26", 
+          "mingcheng": "汪华利、上海锭利金属制品有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/03/14", 
+          "jieansj": "2018/03/20", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "27", 
+          "mingcheng": "余茂华、上海中霈建筑劳务有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/02/07", 
+          "jieansj": "2018/02/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "28", 
+          "mingcheng": "徐学峰、何纪宪之间的其他纠纷", 
+          "shoulisj": "2018/02/02", 
+          "jieansj": "2018/02/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "29", 
+          "mingcheng": "胡科林、樊西成之间的拖欠农民工工资纠纷", 
+          "shoulisj": "2018/01/17", 
+          "jieansj": "2018/02/27", 
+          "tiaojielx": "C", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "30", 
+          "mingcheng": "纪晓勇、上海市民马劳动服务有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/01/11", 
+          "jieansj": "2018/02/27", 
+          "tiaojielx": "C", 
+          "wenshuzl": "A", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "31", 
+          "mingcheng": "刘照祥、沪杰保安服务有限公司之间的其他劳动争议纠纷", 
+          "shoulisj": "2018/02/01", 
+          "jieansj": "2018/02/26", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "32", 
+          "mingcheng": "张思明、郑港建之间的其他纠纷", 
+          "shoulisj": "2018/01/30", 
+          "jieansj": "2018/02/26", 
+          "tiaojielx": "B", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }
+      ]
+    }, 
+    {
+      "name": "闫晓平", 
+      "gongzuonx": "3年", 
+      "dianhauhm": "13765558546", 
+      "tiaojiewyh": "上海市普陀区石泉路街道秋月枫舍居民委员会人民调解委员会", 
+      "ciyun": [
+        {
+          "name": "纠纷", 
+          "value": 112
+        }, 
+        {
+          "name": "邻里", 
+          "value": 58
+        }, 
+        {
+          "name": "噪音", 
+          "value": 21
+        }, 
+        {
+          "name": "漏水", 
+          "value": 15
+        }, 
+        {
+          "name": "婚姻", 
+          "value": 8
+        }, 
+        {
+          "name": "张兆", 
+          "value": 3
+        }, 
+        {
+          "name": "王亚", 
+          "value": 3
+        }, 
+        {
+          "name": "扶养", 
+          "value": 3
+        }, 
+        {
+          "name": "赡养", 
+          "value": 3
+        }, 
+        {
+          "name": "抚养", 
+          "value": 3
+        }, 
+        {
+          "name": "物业", 
+          "value": 3
+        }, 
+        {
+          "name": "杨俭", 
+          "value": 3
+        }, 
+        {
+          "name": "陈宝", 
+          "value": 2
+        }, 
+        {
+          "name": "袁璐", 
+          "value": 2
+        }, 
+        {
+          "name": "袁洪", 
+          "value": 2
+        }, 
+        {
+          "name": "左林", 
+          "value": 2
+        }, 
+        {
+          "name": "刘家乐", 
+          "value": 2
+        }, 
+        {
+          "name": "陆国", 
+          "value": 2
+        }, 
+        {
+          "name": "家庭", 
+          "value": 2
+        }, 
+        {
+          "name": "张雄", 
+          "value": 2
+        }, 
+        {
+          "name": "陈鸿", 
+          "value": 1
+        }, 
+        {
+          "name": "陈广", 
+          "value": 1
+        }, 
+        {
+          "name": "陈海", 
+          "value": 1
+        }, 
+        {
+          "name": "李毅", 
+          "value": 1
+        }, 
+        {
+          "name": "于长江", 
+          "value": 1
+        }, 
+        {
+          "name": "维新", 
+          "value": 1
+        }, 
+        {
+          "name": "张国", 
+          "value": 1
+        }, 
+        {
+          "name": "吴文", 
+          "value": 1
+        }, 
+        {
+          "name": "腾飞", 
+          "value": 2
+        }, 
+        {
+          "name": "徐晓", 
+          "value": 1
+        }, 
+        {
+          "name": "韦德", 
+          "value": 1
+        }, 
+        {
+          "name": "黄庆荣", 
+          "value": 1
+        }, 
+        {
+          "name": "陈美", 
+          "value": 1
+        }, 
+        {
+          "name": "金秀", 
+          "value": 1
+        }, 
+        {
+          "name": "叶秀英", 
+          "value": 1
+        }, 
+        {
+          "name": "李财", 
+          "value": 1
+        }, 
+        {
+          "name": "徐宁", 
+          "value": 1
+        }, 
+        {
+          "name": "华雅", 
+          "value": 1
+        }, 
+        {
+          "name": "李蔚", 
+          "value": 1
+        }, 
+        {
+          "name": "黄庆", 
+          "value": 1
+        }, 
+        {
+          "name": "庚申", 
+          "value": 1
+        }, 
+        {
+          "name": "林南轩", 
+          "value": 1
+        }, 
+        {
+          "name": "薛洁", 
+          "value": 1
+        }, 
+        {
+          "name": "朱敏", 
+          "value": 1
+        }, 
+        {
+          "name": "夏维", 
+          "value": 1
+        }, 
+        {
+          "name": "刘君", 
+          "value": 1
+        }, 
+        {
+          "name": "李焕", 
+          "value": 1
+        }, 
+        {
+          "name": "吴士", 
+          "value": 1
+        }, 
+        {
+          "name": "张立", 
+          "value": 1
+        }, 
+        {
+          "name": "叶成", 
+          "value": 1
+        }, 
+        {
+          "name": "江莲", 
+          "value": 1
+        }, 
+        {
+          "name": "王兰", 
+          "value": 1
+        }, 
+        {
+          "name": "石俊", 
+          "value": 1
+        }, 
+        {
+          "name": "吴锡", 
+          "value": 1
+        }, 
+        {
+          "name": "沈茵", 
+          "value": 1
+        }, 
+        {
+          "name": "薛剑", 
+          "value": 1
+        }, 
+        {
+          "name": "刘薇", 
+          "value": 1
+        }, 
+        {
+          "name": "陈二", 
+          "value": 1
+        }, 
+        {
+          "name": "张远", 
+          "value": 1
+        }, 
+        {
+          "name": "陈金龙", 
+          "value": 1
+        }, 
+        {
+          "name": "李马", 
+          "value": 1
+        }, 
+        {
+          "name": "荷花", 
+          "value": 1
+        }, 
+        {
+          "name": "周锁", 
+          "value": 1
+        }, 
+        {
+          "name": "陈筱", 
+          "value": 1
+        }, 
+        {
+          "name": "蔡亮", 
+          "value": 1
+        }, 
+        {
+          "name": "潘新", 
+          "value": 1
+        }, 
+        {
+          "name": "采光", 
+          "value": 1
+        }, 
+        {
+          "name": "韩文", 
+          "value": 1
+        }, 
+        {
+          "name": "孙红", 
+          "value": 1
+        }, 
+        {
+          "name": "白艳", 
+          "value": 1
+        }, 
+        {
+          "name": "王菊", 
+          "value": 1
+        }, 
+        {
+          "name": "黄曦", 
+          "value": 1
+        }, 
+        {
+          "name": "顾静", 
+          "value": 1
+        }, 
+        {
+          "name": "张金凤", 
+          "value": 1
+        }, 
+        {
+          "name": "张秀英", 
+          "value": 1
+        }, 
+        {
+          "name": "洪杰", 
+          "value": 1
+        }, 
+        {
+          "name": "陆欣", 
+          "value": 1
+        }, 
+        {
+          "name": "陆定", 
+          "value": 1
+        }, 
+        {
+          "name": "王文", 
+          "value": 1
+        }, 
+        {
+          "name": "何雅", 
+          "value": 1
+        }, 
+        {
+          "name": "高远", 
+          "value": 1
+        }, 
+        {
+          "name": "戴国", 
+          "value": 1
+        }, 
+        {
+          "name": "金梅", 
+          "value": 1
+        }, 
+        {
+          "name": "卢家强", 
+          "value": 1
+        }, 
+        {
+          "name": "金娣", 
+          "value": 1
+        }, 
+        {
+          "name": "陈彬", 
+          "value": 1
+        }, 
+        {
+          "name": "王爱平", 
+          "value": 1
+        }, 
+        {
+          "name": "王志荣", 
+          "value": 1
+        }, 
+        {
+          "name": "谭萍", 
+          "value": 1
+        }, 
+        {
+          "name": "夏菊", 
+          "value": 1
+        }, 
+        {
+          "name": "薇薇", 
+          "value": 1
+        }, 
+        {
+          "name": "阿娣", 
+          "value": 1
+        }, 
+        {
+          "name": "陈晨", 
+          "value": 1
+        }, 
+        {
+          "name": "韩奕", 
+          "value": 1
+        }, 
+        {
+          "name": "童伟", 
+          "value": 1
+        }, 
+        {
+          "name": "于文", 
+          "value": 1
+        }, 
+        {
+          "name": "李忠", 
+          "value": 1
+        }, 
+        {
+          "name": "周立", 
+          "value": 1
+        }, 
+        {
+          "name": "罗庄", 
+          "value": 1
+        }, 
+        {
+          "name": "江国", 
+          "value": 1
+        }, 
+        {
+          "name": "徐松", 
+          "value": 1
+        }, 
+        {
+          "name": "叶金", 
+          "value": 1
+        }, 
+        {
+          "name": "马晨", 
+          "value": 1
+        }, 
+        {
+          "name": "张煜", 
+          "value": 1
+        }, 
+        {
+          "name": "唐林", 
+          "value": 1
+        }, 
+        {
+          "name": "朱孝", 
+          "value": 1
+        }, 
+        {
+          "name": "杜凡", 
+          "value": 1
+        }, 
+        {
+          "name": "黎雯", 
+          "value": 1
+        }, 
+        {
+          "name": "林青", 
+          "value": 1
+        }, 
+        {
+          "name": "徐金", 
+          "value": 1
+        }, 
+        {
+          "name": "福宝", 
+          "value": 1
+        }, 
+        {
+          "name": "谢冰", 
+          "value": 1
+        }, 
+        {
+          "name": "叶桂", 
+          "value": 1
+        }, 
+        {
+          "name": "陆靖", 
+          "value": 1
+        }, 
+        {
+          "name": "王真", 
+          "value": 1
+        }, 
+        {
+          "name": "小虎", 
+          "value": 1
+        }, 
+        {
+          "name": "胡勇", 
+          "value": 1
+        }, 
+        {
+          "name": "连珠", 
+          "value": 1
+        }, 
+        {
+          "name": "李世", 
+          "value": 1
+        }, 
+        {
+          "name": "张家林", 
+          "value": 1
+        }, 
+        {
+          "name": "田虎", 
+          "value": 1
+        }, 
+        {
+          "name": "李严", 
+          "value": 1
+        }, 
+        {
+          "name": "金素", 
+          "value": 1
+        }, 
+        {
+          "name": "贾玉", 
+          "value": 1
+        }
+      ], 
+      "zhengti": [
+        {
+          "name": "调解成功", 
+          "value": 103
+        }, 
+        {
+          "name": "调解终止", 
+          "value": 1
+        }, 
+        {
+          "name": "未结案", 
+          "value": 8
+        }
+      ], 
+      "leixingdb": [
+        {
+          "name": "噪音", 
+          "value": 21
+        }, 
+        {
+          "name": "其他婚姻家庭", 
+          "value": 2
+        }, 
+        {
+          "name": "相邻权", 
+          "value": 1
+        }, 
+        {
+          "name": "婚姻", 
+          "value": 6
+        }, 
+        {
+          "name": "物业管理", 
+          "value": 3
+        }, 
+        {
+          "name": "采光", 
+          "value": 1
+        }, 
+        {
+          "name": "邻里", 
+          "value": 58
+        }, 
+        {
+          "name": "家暴", 
+          "value": 2
+        }, 
+        {
+          "name": "漏水", 
+          "value": 15
+        }, 
+        {
+          "name": "抚养、赡养、扶养", 
+          "value": 3
+        }
+      ], 
+      "indicator": [
+        {
+          "name": "调解成功率", 
+          "max": 1
+        }, 
+        {
+          "name": "调解数量", 
+          "max": 50
+        }, 
+        {
+          "name": "从业年限", 
+          "max": 10
+        }, 
+        {
+          "name": "最高学历", 
+          "max": 5
+        }, 
+        {
+          "name": "调解效率", 
+          "max": 10
+        }, 
+        {
+          "name": "文书质量", 
+          "max": 10
+        }
+      ], 
+      "data": [
+        {
+          "value": [
+            0.95, 
+            48, 
+            3, 
+            3, 
+            9, 
+            8
+          ]
+        }
+      ], 
+      "anjianlb": [
+        {
+          "xuhao": "1", 
+          "mingcheng": "黄庆荣、胡辰均之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "2", 
+          "mingcheng": "闻婧、陈海琛之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/07", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "3", 
+          "mingcheng": "叶秀英、李财隆之间的噪音纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "4", 
+          "mingcheng": "徐宁、华雅仙之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/12", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "5", 
+          "mingcheng": "李蔚文、邱在峰之间的噪音纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "6", 
+          "mingcheng": "俞广海、黄庆宏之间的噪音纠纷", 
+          "shoulisj": "2018/03/13", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "7", 
+          "mingcheng": "谈震、袁璐之间的抚养、赡养、扶养纠纷", 
+          "shoulisj": "2018/03/20", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "8", 
+          "mingcheng": "林南轩、薛洁心之间的抚养、赡养、扶养纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "D", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "9", 
+          "mingcheng": "朱敏、夏维钢之间的噪音纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "10", 
+          "mingcheng": "黄璇美、郑加和之间的婚姻纠纷", 
+          "shoulisj": "2018/03/13", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "11", 
+          "mingcheng": "李焕文、李毅之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/04", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "12", 
+          "mingcheng": "房春宝、张兆财之间的物业管理纠纷", 
+          "shoulisj": "2018/03/01", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "13", 
+          "mingcheng": "陈鸿璋、张兆财之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/02", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "14", 
+          "mingcheng": "邬星炜、吴喆文之间的噪音纠纷", 
+          "shoulisj": "2018/03/02", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "15", 
+          "mingcheng": "吴士衡、陈广珠之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/07", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "16", 
+          "mingcheng": "王亚兴、缪萍之间的漏水纠纷", 
+          "shoulisj": "2018/03/06", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "17", 
+          "mingcheng": "叶成森、张兆财之间的物业管理纠纷", 
+          "shoulisj": "2018/03/03", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "18", 
+          "mingcheng": "蔡笑云、张国玲之间的漏水纠纷", 
+          "shoulisj": "2018/03/15", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "19", 
+          "mingcheng": "马月珍、江莲鸿之间的婚姻纠纷", 
+          "shoulisj": "2018/03/21", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "20", 
+          "mingcheng": "顾维新、汤慧玲之间的漏水纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "21", 
+          "mingcheng": "洪泂、王兰铭之间的漏水纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "D", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "22", 
+          "mingcheng": "王昱鑫、邱在峰之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "23", 
+          "mingcheng": "洪有娣、谢芝华之间的婚姻纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "24", 
+          "mingcheng": "唐喆炯、石俊之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "25", 
+          "mingcheng": "周苗隆、丁琛之间的漏水纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "26", 
+          "mingcheng": "袁洪渊、郭一敏之间的漏水纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "27", 
+          "mingcheng": "华桂生、吴锡丽之间的抚养、赡养、扶养纠纷", 
+          "shoulisj": "2018/03/13", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "28", 
+          "mingcheng": "吴文泰、沈茵之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "29", 
+          "mingcheng": "薛剑明、刘薇之间的噪音纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "30", 
+          "mingcheng": "陈二林、张远亮之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "31", 
+          "mingcheng": "陈金龙、汪满芳之间的漏水纠纷", 
+          "shoulisj": "2018/03/17", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "32", 
+          "mingcheng": "于长江、李马根之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/02", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "33", 
+          "mingcheng": "王凊怡、劳桂珍之间的噪音纠纷", 
+          "shoulisj": "2018/03/04", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "34", 
+          "mingcheng": "牟辰璐、周锁贵之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/05", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "35", 
+          "mingcheng": "唐润华、陈宝祥之间的漏水纠纷", 
+          "shoulisj": "2018/03/20", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "36", 
+          "mingcheng": "左林冲、尤鸿声之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/06", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "37", 
+          "mingcheng": "管宝华、陈筱静之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "38", 
+          "mingcheng": "周婄英、金耀良之间的婚姻纠纷", 
+          "shoulisj": "2018/03/15", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "39", 
+          "mingcheng": "戎一星、蔡亮玉之间的其他婚姻家庭纠纷", 
+          "shoulisj": "2018/03/15", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "40", 
+          "mingcheng": "洪波、刘家乐之间的噪音纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "41", 
+          "mingcheng": "潘新、徐晓菲之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "42", 
+          "mingcheng": "童韦德、杨俭昌之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "43", 
+          "mingcheng": "王敖、陆如之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/09", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "44", 
+          "mingcheng": "郁柏妹、陈宝祥之间的漏水纠纷", 
+          "shoulisj": "2018/03/12", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "45", 
+          "mingcheng": "左林宝、孙红卫之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/06", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "46", 
+          "mingcheng": "卢白艳、王菊瑛之间的噪音纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "47", 
+          "mingcheng": "刘聚忠、黄曦之间的漏水纠纷", 
+          "shoulisj": "2018/03/08", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "48", 
+          "mingcheng": "陆国祥、吴量之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/03", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "49", 
+          "mingcheng": "顾静华、倪荷花之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/21", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "D", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "50", 
+          "mingcheng": "张金凤、张秀英之间的漏水纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "51", 
+          "mingcheng": "阮洪杰、陆欣之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "52", 
+          "mingcheng": "葛爱萍、干云玉之间的噪音纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "53", 
+          "mingcheng": "施启平、张立虎之间的噪音纠纷", 
+          "shoulisj": "2018/03/03", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "54", 
+          "mingcheng": "徐庚申、曹逸之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/06", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "55", 
+          "mingcheng": "陈美芳、施芝岭之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "56", 
+          "mingcheng": "马之危、陆定康之间的采光纠纷", 
+          "shoulisj": "2018/03/05", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "57", 
+          "mingcheng": "王亚兴、金秀森之间的漏水纠纷", 
+          "shoulisj": "2018/03/07", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "58", 
+          "mingcheng": "何雅纯、戴国华之间的婚姻纠纷", 
+          "shoulisj": "2018/03/02", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "59", 
+          "mingcheng": "陆国祥、吴量之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/03", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "60", 
+          "mingcheng": "刘君龚、夏斯华之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/06", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "61", 
+          "mingcheng": "金梅、韩文元之间的漏水纠纷", 
+          "shoulisj": "2018/03/05", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "62", 
+          "mingcheng": "黄约杰、张雄之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "63", 
+          "mingcheng": "黄嫣、卢家强之间的噪音纠纷", 
+          "shoulisj": "2018/03/12", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "64", 
+          "mingcheng": "吴雯琪、向金娣之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/21", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "65", 
+          "mingcheng": "杨俭华、陈彬之间的其他相邻权纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/29", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "66", 
+          "mingcheng": "王爱平、顾秀波之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/09", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "67", 
+          "mingcheng": "邱睿、王志荣之间的婚姻纠纷", 
+          "shoulisj": "2018/03/05", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "68", 
+          "mingcheng": "王亚兴、谭萍之间的漏水纠纷", 
+          "shoulisj": "2018/03/06", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "69", 
+          "mingcheng": "夏菊惠、马亨琪之间的家暴纠纷", 
+          "shoulisj": "2018/03/07", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "70", 
+          "mingcheng": "商阿娣、陈晨之间的漏水纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "71", 
+          "mingcheng": "左丽英、胡素萍之间的噪音纠纷", 
+          "shoulisj": "2018/03/05", 
+          "jieansj": "2018/03/27", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "72", 
+          "mingcheng": "韩奕玮、顾陈陈之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "73", 
+          "mingcheng": "童伟德、杨俭昌之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "74", 
+          "mingcheng": "高远珊、方有为之间的家暴纠纷", 
+          "shoulisj": "2018/03/13", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "75", 
+          "mingcheng": "张雄、唐作军之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "76", 
+          "mingcheng": "王文妹、何汉麟之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/07", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "77", 
+          "mingcheng": "尤珍江、罗庄兴之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/08", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "B", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "78", 
+          "mingcheng": "汤毅、曹耀庭之间的噪音纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "79", 
+          "mingcheng": "洪波、刘家乐之间的噪音纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "D", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "80", 
+          "mingcheng": "范唯、江国芳之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "D", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "81", 
+          "mingcheng": "俞洋、徐松英之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "82", 
+          "mingcheng": "叶金良、马晨郦之间的噪音纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "83", 
+          "mingcheng": "张煜昱、郑乐翁之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/08", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "D", 
+          "zhonghepf": "C"
+        }, 
+        {
+          "xuhao": "84", 
+          "mingcheng": "于文忠、区兆新之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/08", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "85", 
+          "mingcheng": "唐林、钱剑萍之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "86", 
+          "mingcheng": "朱孝祥、杜凡之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/21", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "87", 
+          "mingcheng": "张赟尧、邬立炜之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "88", 
+          "mingcheng": "季薇薇、贾元丰之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "D", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "89", 
+          "mingcheng": "曹黎雯、欧绍康之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "90", 
+          "mingcheng": "林青、李忠良之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/14", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "91", 
+          "mingcheng": "欧莉华、唐福宝之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "92", 
+          "mingcheng": "冯步祯、周立之间的物业管理纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "93", 
+          "mingcheng": "谬惠耀、淡凤礼之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/20", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "94", 
+          "mingcheng": "谢冰倩、葛永麟之间的噪音纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "95", 
+          "mingcheng": "叶桂祥、田露之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/15", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "96", 
+          "mingcheng": "贾宗琦、倪青之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "97", 
+          "mingcheng": "袁洪潜、陆靖杰之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "98", 
+          "mingcheng": "王真、丁思才之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "99", 
+          "mingcheng": "腾飞跃、腾飞蝶之间的其他婚姻家庭纠纷", 
+          "shoulisj": "2018/03/14", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "100", 
+          "mingcheng": "季则迎、童非之间的噪音纠纷", 
+          "shoulisj": "2018/03/20", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "101", 
+          "mingcheng": "胡勇鹤、栾玫玲之间的噪音纠纷", 
+          "shoulisj": "2018/03/23", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "102", 
+          "mingcheng": "谢婧、徐金菊之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/27", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "103", 
+          "mingcheng": "阚庭树、於莉英之间的噪音纠纷", 
+          "shoulisj": "2018/03/09", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "104", 
+          "mingcheng": "干惠谔、邱来英之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "105", 
+          "mingcheng": "孙根水、韦小虎之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/16", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "106", 
+          "mingcheng": "左佩蓉、解丽春之间的噪音纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "107", 
+          "mingcheng": "葛连珠、丁乃钢之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "108", 
+          "mingcheng": "董辰婕、张家林之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/28", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }, 
+        {
+          "xuhao": "109", 
+          "mingcheng": "唐培蓓、李世汇之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/10", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "B", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "110", 
+          "mingcheng": "田虎南、李严贞之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/26", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "B", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "111", 
+          "mingcheng": "曹知行、金素良之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/19", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "A", 
+          "zhonghepf": "A"
+        }, 
+        {
+          "xuhao": "112", 
+          "mingcheng": "袁璐、贾玉寅之间的其他邻里纠纷", 
+          "shoulisj": "2018/03/22", 
+          "jieansj": "2018/03/28", 
+          "tiaojielx": "A", 
+          "wenshuzl": "C", 
+          "zhonghepf": "B"
+        }
+      ]
+    }
+  ]
+}

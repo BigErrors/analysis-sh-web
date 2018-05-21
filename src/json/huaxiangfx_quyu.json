@@ -1,0 +1,71 @@
+[
+    {
+        "xuhao":0,
+        "mincgheng":"全部区域",
+        "shuzhi":35462
+    },{
+        "xuhao":1,
+        "mincgheng":"闵行区",
+        "shuzhi":1240
+    },{
+        "xuhao":2,
+        "mincgheng":"徐汇区",
+        "shuzhi":3248
+    },  {
+        "xuhao":3,
+        "mincgheng":"宝山区",
+        "shuzhi":985
+    },  {
+        "xuhao":4,
+        "mincgheng":"崇明区",
+        "shuzhi":324
+    },  {
+        "xuhao":5,
+        "mincgheng":"浦东区",
+        "shuzhi":984
+    },  {
+        "xuhao":6,
+        "mincgheng":"松江区",
+        "shuzhi":694
+    },  {
+        "xuhao":7,
+        "mincgheng":"奉贤区",
+        "shuzhi":638
+    },  {
+        "xuhao":8,
+        "mincgheng":"嘉定区",
+        "shuzhi":697
+    },{
+        "xuhao":9,
+        "mincgheng":"青浦区",
+        "shuzhi":894
+    },{
+        "xuhao":10,
+        "mincgheng":"杨浦区",
+        "shuzhi":681
+    },{
+        "xuhao":10,
+        "mincgheng":"黄浦区",
+        "shuzhi":681
+    },{
+        "xuhao":11,
+        "mincgheng":"金山区",
+        "shuzhi":345
+    },{
+        "xuhao":12,
+        "mincgheng":"普陀区",
+        "shuzhi":698
+    },{
+        "xuhao":13,
+        "mincgheng":"静安区",
+        "shuzhi":698
+    },{
+        "xuhao":14,
+        "mincgheng":"长宁区",
+        "shuzhi":698
+    },{
+        "xuhao":15,
+        "mincgheng":"虹口区",
+        "shuzhi":698
+    }
+]
