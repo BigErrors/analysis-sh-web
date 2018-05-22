@@ -291,9 +291,6 @@ export default {
     top:39px;
     left:1px;
   }
-  .anchorBL{
-    display:none;
-  }
   .renmintj_center_once{
     width:100%;
     height:313px;

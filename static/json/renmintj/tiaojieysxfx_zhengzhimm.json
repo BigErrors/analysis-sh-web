@@ -1,7 +1,7 @@
 [
-{"leixing":"中共党员","shuzhi":"6081"},
-{"leixing":"群众","shuzhi":"4055"},
-{"leixing":"共青团员","shuzhi":"158"},
-{"leixing":"其他","shuzhi":"8"},
-{"leixing":"未知","shuzhi":"9886"}
+{"name":"中共党员","value":"6081"},
+{"name":"群众","value":"4055"},
+{"name":"共青团员","value":"158"},
+{"name":"其他","value":"8"},
+{"name":"未知","value":"9886"}
 ]

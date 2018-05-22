@@ -363,10 +363,10 @@ export default {
     background:rgba(111,155,253,1);
   }
   .circle4{
-    background:rgba(205,205,205,1);
+    background:rgba(205,205,205,0.5);
   }
   .circle5{
-    background:rgba(205,205,205,1);
+    background:rgba(205,205,205,0.5);
   }
   .echart_container{
     width:900px;

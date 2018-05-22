@@ -30,30 +30,25 @@ export default {
     overflow-y: auto;
     overflow-x: hidden;
   }
-
   html,
   body::-webkit-scrollbar{
     width: 4px;
     background-color: #ffffff;
   }
-
   html,
   body::-webkit-scrollbar-thumb{
     background:#ebeaee;
     border-radius:4px;
   }
-
   #App {
     height: 100%;
   }
-
-      /* 分页相关 */
+  /* 分页相关 */
   .ej-pagination .el-pager li.number,
   .ej-pagination .btn-prev,
   .ej-pagination .btn-next {
     border-radius: 50% !important;
   }
-
   .ej-pagination .el-pager li.number:not(.active),
   .ej-pagination .btn-prev,
   .ej-pagination .btn-next,
@@ -65,16 +60,21 @@ export default {
     background:rgba(21,123,211,1);
     color:rgba(254,254,254,1);
   }
-
   .ej-pagination .el-icon-more:before {
     font-size: 12px;
   }
-
   .ej-pagination .el-pagination {
     bottom: 40px;
     text-align: center;
     width: 100%;
     font-size: 12px !important;
     font-weight: 400;
+  }
+  /* 去除百度地图左下角内容 */
+  .BMap_cpyCtrl {
+    display: none;
+  }
+  .anchorBL{
+    display:none;
   }
 </style>

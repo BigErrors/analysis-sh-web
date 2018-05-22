@@ -1050,7 +1050,10 @@ let setFunnel = (data) => {
         maxSize: '55%',
         label: {
           position: 'right',
-          formatter: '{b|{b}}\n{c|{c}}',
+          formatter: function (data) {
+            console.log(data.data)
+            return `{b|${data.data.name}}\n{c|${data.data.other}}`
+          },
           padding: [5, 5, 5, 5],
           rich: {
             b: {

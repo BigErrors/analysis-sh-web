@@ -51,30 +51,10 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr>
-          <td class='td'><span class="circle circle1">1</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle2">2</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle3">3</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle4">4</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-         <tr>
-          <td class='td'><span class="circle circle4">5</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
+        <tr v-for="(item,index) in benkejysxlzbpm" :key="index" v-if="index<=4">
+          <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
+          <td class='td'>{{item.mingcheng}}</td>
+          <td class='td'>{{item.zhanbi|numFormat}}</td>
         </tr>
         </tbody>
       </table>
@@ -94,30 +74,10 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr>
-          <td class='td'><span class="circle circle1">1</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle2">2</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle3">3</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle4">4</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-         <tr>
-          <td class='td'><span class="circle circle4">5</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
+        <tr v-for="(item,index) in dangyuanzbpm" :key="index" v-if="index<=4">
+          <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
+          <td class='td'>{{item.mingcheng}}</td>
+          <td class='td'>{{item.zhanbi|numFormat}}</td>
         </tr>
         </tbody>
       </table>
@@ -137,30 +97,10 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr>
-          <td class='td'><span class="circle circle1">1</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle2">2</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle3">3</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle4">4</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-         <tr>
-          <td class='td'><span class="circle circle4">5</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
+        <tr v-for="(item,index) in suiyxzbpm" :key="index" v-if="index<=4">
+          <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
+          <td class='td'>{{item.mingcheng}}</td>
+          <td class='td'>{{item.zhanbi|numFormat}}</td>
         </tr>
         </tbody>
       </table>
@@ -171,10 +111,26 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import xuelilx from '@/../static/json/renmintj/tiaojieysxfx_xuelilx'
+import zhengzhimm from '@/../static/json/renmintj/tiaojieysxfx_zhengzhimm'
+import nianlingd from '@/../static/json/renmintj/tiaojieysxfx_nianlingd'
+import benkejysxlzbpm from '@/../static/json/renmintj/tiaojieysxfx_benkejysxlzbpm'
+import dangyuanzbpm from '@/../static/json/renmintj/tiaojieysxfx_dangyuanzbpm'
+import suiyxzbpm from '@/../static/json/renmintj/tiaojieysxfx_40suiyxzbpm'
+
 export default {
   name: 'peopleType',
   data () {
-    return {}
+    return {
+      benkejysxlzbpm: benkejysxlzbpm,
+      dangyuanzbpm: dangyuanzbpm,
+      suiyxzbpm: suiyxzbpm
+    }
+  },
+  filters: {
+    numFormat (value) {
+      return value * 100 + '%'
+    }
   },
   methods: {
     // 绘制echarts
@@ -188,9 +144,17 @@ export default {
   },
   created () {},
   mounted () {
-    this.draw('target1', eos.setPie3([{name: '硕士及以上', value: 2246}, {name: '本科', value: 2873}, {name: '大专', value: 3201}, {name: '高中或中专', value: 3013}, {name: '初中及以下', value: 4017}, {name: '未知', value: 5245}]))
-    this.draw('target2', eos.setBar3([{value: 57, name: '闵行'}, {value: 2847, name: '徐汇'}, {value: 2504, name: '宝山'}, {value: 189, name: '崇明'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
-    this.draw('target3', eos.setLine4([[{name: '20-29', value: 407}, {name: '30-39', value: 2454}, {name: '40-49', value: 2572}, {name: '50-59', value: 1813}, {name: '60-69', value: 905}, {name: '70以上', value: 250}], [{name: '20-29', value: 516}, {name: '30-39', value: 1906}, {name: '40-49', value: 1688}, {name: '50-59', value: 2304}, {name: '60-69', value: 1425}, {name: '70以上', value: 385}]], 'integer', ['男性', '女性']))
+    this.draw('target1', eos.setPie3(xuelilx))
+    this.draw('target2', eos.setBar3(zhengzhimm, ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
+    this.draw('target3', eos.setLine4([nianlingd.filter((item) => {
+      if (item.xingbie === '男') {
+        return true
+      }
+    }), nianlingd.filter((item) => {
+      if (item.xingbie === '女') {
+        return true
+      }
+    })], 'integer', ['男性', '女性']))
   }
 }
 </script>
@@ -404,6 +368,9 @@ export default {
     background:rgba(111,155,253,1);
   }
   .circle4{
-    background:rgba(205,205,205,1);
+    background:rgba(205,205,205,0.5);
+  }
+  .circle5{
+    background:rgba(205,205,205,0.5);
   }
 </style>

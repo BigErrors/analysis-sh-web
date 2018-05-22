@@ -17,38 +17,18 @@
           <span class="totalType_content_span">类型</span>
         </div>
         <div class=" totalType_content_title_right">
-          <span class=" totalType_content_span5">本周</span>
-          <span class=" totalType_content_span5">本月</span>
-          <span class=" totalType_content_span5 totalType_content_active">今年</span>
+          <span class=" totalType_content_span5" @click='changeTypeData("week",$event)'>本周</span>
+          <span class=" totalType_content_span5" @click='changeTypeData("month",$event)'>本月</span>
+          <span class=" totalType_content_span5 totalType_content_active" @click='changeTypeData("year",$event)'>今年</span>
         </div>
       </div>
       <div class='zIndex3 area1 target1'></div>
       <div class="totalType_detail">
         <div class="totalType_detail_main">
           <div class="totalType_detail_title">民事纠纷</div>
-          <div class="totalType_detail_content">
-            <span class="totalType_detail_span1">邻里纠纷</span>
-            <span class="totalType_detail_span2">34%</span>
-          </div>
-          <div class="totalType_detail_content">
-            <span class="totalType_detail_span1">邻里纠纷</span>
-            <span class="totalType_detail_span2">34%</span>
-          </div>
-          <div class="totalType_detail_content">
-            <span class="totalType_detail_span1">邻里纠纷</span>
-            <span class="totalType_detail_span2">34%</span>
-          </div>
-          <div class="totalType_detail_content">
-            <span class="totalType_detail_span1">邻里纠纷</span>
-            <span class="totalType_detail_span2">34%</span>
-          </div>
-          <div class="totalType_detail_content">
-            <span class="totalType_detail_span1">邻里纠纷</span>
-            <span class="totalType_detail_span2">34%</span>
-          </div>
-          <div class="totalType_detail_content">
-            <span class="totalType_detail_span1">邻里纠纷</span>
-            <span class="totalType_detail_span2">34%</span>
+          <div class="totalType_detail_content" v-for="(item,index) in leixinfx2" :key="index">
+            <span class="totalType_detail_span1">{{item.xiaolei}}</span>
+            <span class="totalType_detail_span2">{{item.xiaoleivalue}}</span>
           </div>
         </div>
       </div>
@@ -84,13 +64,16 @@ import eos from '@/util/echartsOptions'
 import hangzhuanzb from '@/../static/json/renmintj/tiaojieaj_hangzhuanzb'
 import laiyuanfx from '@/../static/json/renmintj/tiaojieaj_laiyuanfx'
 import laiyuanbh from '@/../static/json/renmintj/tiaojieaj_laiyuanbh'
-// import leixinfx_1 from '@/../static/json/renmintj/tiaojieaj_leixinfx_1'
-// import leixinfx_2 from '@/../static/json/renmintj/tiaojieaj_leixinfx_2'
+import leixinfx1 from '@/../static/json/renmintj/tiaojieaj_leixinfx_1'
+import leixinfx2 from '@/../static/json/renmintj/tiaojieaj_leixinfx_2'
 
 export default {
   name: 'peopleNum',
   data () {
-    return {}
+    return {
+      leixinfx2: [],
+      leixinfx2Title: ''
+    }
   },
   methods: {
     // 绘制echarts
@@ -100,11 +83,28 @@ export default {
     },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    changeTypeData (type, event) {
+      document.getElementsByClassName('totalType_content_span5')[0].className = 'totalType_content_span5'
+      document.getElementsByClassName('totalType_content_span5')[1].className = 'totalType_content_span5'
+      document.getElementsByClassName('totalType_content_span5')[2].className = 'totalType_content_span5'
+      event.target.className = 'totalType_content_span5 totalType_content_active'
+      this.draw('target1', eos.setPie2(leixinfx1.filter((item) => {
+        if (item.timetype === type) { return true }
+      })))
+      this.leixinfx2 = leixinfx2.filter((item) => {
+        if (item.timetype === type && item.dalei === '民事纠纷') { return true }
+      })
     }
   },
   created () {},
   mounted () {
-    this.draw('target1', eos.setPie2([{value: 82, name: '民事案件'}, {value: 9, name: '行政案件'}, {value: 4, name: '其他纠纷'}, {value: 4, name: '商事纠纷'}, {value: 1, name: '刑事案件'}]))
+    this.draw('target1', eos.setPie2(leixinfx1.filter((item) => {
+      if (item.timetype === 'year') { return true }
+    })))
+    this.leixinfx2 = leixinfx2.filter((item) => {
+      if (item.timetype === 'year' && item.dalei === '民事纠纷') { return true }
+    })
     this.draw('target2', eos.setLine4([hangzhuanzb.reverse()], 'percent'))
     this.draw('target3', eos.setFunnel(laiyuanfx))
     // this.draw('target3', eos.setFunnel([{value: 20, name: '信访', other: 26}, {value: 40, name: '其他', other: 742}, {value: 60, name: '主动调解', other: 2105}, {value: 80, name: '公安移送', other: 710}, {value: 100, name: '当事人申请', other: 8649}]))

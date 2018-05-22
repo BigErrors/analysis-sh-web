@@ -1,8 +1,7 @@
 [
-{"name":"当事人申请","value":"8649"},
-{"name":"主动调解","value":"2105"},
-{"name":"法院","value":"827"},
-{"name":"其他","value":"742"},
-{"name":"公安","value":"710"},
-{"name":"信访","value":"26"}
+{"name":"当事人申请","other":"8649","value":"100"},
+{"name":"主动调解","other":"2105","value":"80"},
+{"name":"其他","other":"742","value":"60"},
+{"name":"公安","other":"710","value":"40"},
+{"name":"信访","other":"26","value":"20"}
 ]

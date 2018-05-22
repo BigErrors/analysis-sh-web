@@ -796,15 +796,6 @@ export default {
     text-align: center;
     color:#2ba3ff
   }
-  /* 去除百度地图左下角内容 */
-  .BMap_cpyCtrl {
-    display: none;
-  }
-
-  .anchorBL{
-    display:none;
-  }
-
   .c2{
     width: 1003px;
     height: 315px;
