@@ -14,12 +14,12 @@
   <div class="totalNum_content">
    <div class="totalNum_content_left">
      <div class="totalNum_content_leftTitle1">
-       <div class="totalNum_content_leftTitle1_name">周峰</div>
-       <div class="totalNum_content_leftTitle1_year">1</div>
-       <div class="totalNum_content_leftTitle1_phone">18017896231</div>
+       <div class="totalNum_content_leftTitle1_name">{{renyuanxx.person[0].name}}</div>
+       <div class="totalNum_content_leftTitle1_year">{{renyuanxx.person[0].gongzuonx}}</div>
+       <div class="totalNum_content_leftTitle1_phone">{{renyuanxx.person[0].dianhauhm}}</div>
      </div>
      <div class="totalNum_content_leftTitle2">
-       <div class="totalNum_content_leftTitle2_address">普陀区桃浦镇迎春苑居民委员会人民调解委员会</div>
+       <div class="totalNum_content_leftTitle2_address">{{renyuanxx.person[0].tiaojiewyh}}</div>
      </div>
      <div class="totalNum_content_leftContent">
      </div>
@@ -29,9 +29,9 @@
        <div class="totalNum_content_rightTitle">整体概览</div>
        <div class="moduleContent">
          <div class="module1">
-           <div class="module1Item"><span class="module1Num">14</span><br><span class="module1Title">调解成功</span></div>
-           <div class="module1Item"><span class="module1Num">5</span><br><span class="module1Title">调节终止</span></div>
-           <div class="module1Item"><span class="module1Num">1</span><br><span class="module1Title">未结案</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxx.person[0].zhengti[0].value}}</span><br><span class="module1Title">调解成功</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxx.person[0].zhengti[1].value}}</span><br><span class="module1Title">调节终止</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxx.person[0].zhengti[2].value}}</span><br><span class="module1Title">未结案</span></div>
          </div>
        </div>
      </div>
@@ -60,50 +60,14 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr>
-          <td class='td'><span class="circle circle1">1</span></td>
-          <td class='td'>xx与xx婚姻纠纷</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle2">2</span></td>
-          <td class='td'>xx与xx婚姻纠纷</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle3">3</span></td>
-          <td class='td'>xx与xx婚姻纠纷</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle4">4</span></td>
-          <td class='td'>xx与xx婚姻纠纷</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-         <tr>
-          <td class='td'><span class="circle circle4">5</span></td>
-          <td class='td'>xx与xx婚姻纠纷</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
-          <td class='td'>cellspacing</td>
+        <tr v-for="(item,index) in renyuanxx.person[0].anjianlb" :key="index" v-if="index<=4">
+          <td class='td'><span class="circle circle1" :class="'circle'+(index+1)">{{index+1}}</span></td>
+          <td class='td'>{{item.mingcheng}}</td>
+          <td class='td'>{{item.shoulisj}}</td>
+          <td class='td'>{{item.jieansj}}</td>
+          <td class='td'>{{item.tiaojielx}}</td>
+          <td class='td'>{{item.wenshuzl}}</td>
+          <td class='td'>{{item.zhonghepf}}</td>
         </tr>
         </tbody>
       </table>
@@ -119,7 +83,9 @@ import renyuanxx from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
 export default {
   name: 'peoplePortrait',
   data () {
-    return {}
+    return {
+      renyuanxx: renyuanxx
+    }
   },
   methods: {
     // 绘制echarts
@@ -133,8 +99,8 @@ export default {
   },
   created () {},
   mounted () {
-    this.draw('module2', eos.setBar3([{value: 1240, name: '恋爱纠纷'}, {value: 1564, name: '邻里空间纠纷'}, {value: 1024, name: '邻里纠纷'}, {value: 651, name: '同居纠纷'}, {value: 108, name: '婚姻纠纷'}], ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
-    this.draw('module3', eos.setRadar2([{value: 1, name: '调解成功率'}, {value: 9, name: '文书质量'}, {value: 8, name: '调解效率'}, {value: 4, name: '最高学历'}, {value: 6, name: '从业年限'}, {value: 32, name: '调解数量'}]))
+    this.draw('module2', eos.setBar3(renyuanxx.person[0].leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
+    this.draw('module3', eos.setRadar2(renyuanxx.person[0].data, renyuanxx.person[0].indicator))
     this.draw('totalNum_content_leftContent', eos.setWordcloud(renyuanxx.person[0].ciyun))
   }
 }
@@ -374,6 +340,9 @@ export default {
   }
   .totalNum_table_tbody td{
     padding:15px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .totalNum_table_tbody tr:nth-of-type(2n){
     background:rgba(19,38,101,1);
@@ -394,6 +363,9 @@ export default {
     background:rgba(111,155,253,1);
   }
   .circle4{
+    background:rgba(205,205,205,1);
+  }
+  .circle5{
     background:rgba(205,205,205,1);
   }
 </style>

@@ -4,7 +4,7 @@
     <div class="peopleType_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="peopleType_nav">
-    <span class="peopleType_nav_span">首页 > 调解案件</span>
+    <span class="peopleType_nav_span">首页 > 调解员类型分析</span>
   </div>
   <div class="peopleType_nav2">
     <span class="peopleType_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>

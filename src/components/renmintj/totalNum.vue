@@ -4,7 +4,7 @@
     <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalNum_nav">
-    <span class="totalNum_nav_span">首页 > 调解员数量分析</span>
+    <span class="totalNum_nav_span">首页 > 调解案件数量分析</span>
   </div>
   <div class="totalNum_nav2">
     <span class="totalNum_nav2_span active"  @click="changeRouter('totalNum')">数量分析</span>
@@ -19,7 +19,7 @@
         </div>
         <div class="totalNum_content_title_right">
           <div class="totalNum_content_span_container bg1">
-            <span class="totalNum_content_span3">7件</span>
+            <span class="totalNum_content_span3">3955件</span>
             <span class="totalNum_content_span4">本月新增</span>
           </div>
         </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="totalNum_content_title_right">
           <div class="totalNum_content_span_container bg2">
-            <span class="totalNum_content_span3 bg3">189件</span>
+            <span class="totalNum_content_span3 bg3">{{total}}件</span>
             <span class="totalNum_content_span4">全年累计（案件数量）</span>
           </div>
         </div>
@@ -48,9 +48,9 @@
           <span class="totalNum_content_span1">本月新增数量TOP5</span>
         </div>
         <div class="totalNum_content_title_right right2">
-          <span class="totalNum_content_span5">司法所</span>
-          <span class="totalNum_content_span5">调委会</span>
-          <span class="totalNum_content_span5 totalNum_content_active">区局</span>
+          <span class="totalNum_content_span5" @click='changeTop5Data("placemouthtop",$event)'>司法所</span>
+          <span class="totalNum_content_span5" @click='changeTop5Data("groupmouthtop",$event)'>调委会</span>
+          <span class="totalNum_content_span5 totalNum_content_active" @click='changeTop5Data("areamouthtop",$event)'>区局</span>
         </div>
       </div>
       <table class='totalNum_table' cellspacing='0'>
@@ -62,30 +62,10 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr>
-          <td class='td'><span class="circle circle1">1</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle2">2</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle3">3</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-        <tr>
-          <td class='td'><span class="circle circle4">4</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
-        </tr>
-         <tr>
-          <td class='td'><span class="circle circle4">5</span></td>
-          <td class='td'>baidu</td>
-          <td class='td'>cellspacing</td>
+        <tr v-for="(item,index) in top5" :key='index' v-if="index<=4">
+          <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
+          <td class='td'>{{item.name}}</td>
+          <td class='td'>{{item.value}}</td>
         </tr>
         </tbody>
       </table>
@@ -104,10 +84,14 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import anjianbh from '@/../static/json/renmintj/tiaojieaj_anjianbh'
 export default {
   name: 'totalNum',
   data () {
-    return {}
+    return {
+      total: 0,
+      top5: []
+    }
   },
   methods: {
     // 绘制echarts
@@ -117,13 +101,41 @@ export default {
     },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    changeTop5Data (type, event) {
+      document.getElementsByClassName('totalNum_content_span5')[0].className = 'totalNum_content_span5'
+      document.getElementsByClassName('totalNum_content_span5')[1].className = 'totalNum_content_span5'
+      document.getElementsByClassName('totalNum_content_span5')[2].className = 'totalNum_content_span5'
+      // document.getElementsByClassName('totalNum_content_span5').map((item) => {
+      //   item['className'] = 'totalNum_content_span5'
+      // })
+      event.target.className = 'totalNum_content_span5 totalNum_content_active'
+      this.top5 = anjianbh.filter((item) => {
+        if (item.type === type) { return true }
+      })
     }
   },
-  created () {},
+  created () {
+    // 计算总量
+    this.total = anjianbh.filter((item) => {
+      if (item.type === 'areayear') { return true }
+    }).map((item) => { return parseInt(item.value) }).reduce((total, current) => {
+      return total + current
+    })
+    this.top5 = anjianbh.filter((item) => {
+      if (item.type === 'areamouthtop') { return true }
+    })
+  },
   mounted () {
-    this.draw('echart_container', eos.setLine3([{month: '2017-10', num: 199}, {month: '2017-11', num: 194}, {month: '2017-12', num: 165}, {month: '2018-01', num: 78}, {month: '2018-02', num: 104}, {month: '2018-03', num: 7}]))
-    this.draw('echart_container2', eos.setBar3([{value: 0, name: '松江'}, {value: 0, name: '浦东'}, {value: 1, name: '普陀'}, {value: 3, name: '奉贤'}, {value: 6, name: '虹口'}, {value: 6, name: '长宁'}, {value: 6, name: '崇明'}, {value: 6, name: '金山'}, {value: 7, name: '嘉定'}, {value: 14, name: '闵行'}, {value: 16, name: '宝山'}, {value: 16, name: '黄浦'}, {value: 18, name: '青浦'}, {value: 26, name: '徐汇'}, {value: 27, name: '静安'}, {value: 37, name: '杨浦'}], ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
-    this.draw('echart_container3', eos.setBar3([{value: 57, name: '2015年'}, {value: 2847, name: '2016年'}, {value: 2504, name: '2017年'}, {value: 189, name: '2018年'}], ['#FF9C00', '#F8E228'], 'vertical', 'integer', '标题', '更新时间', 25))
+    this.draw('echart_container', eos.setLine3(anjianbh.filter((item) => {
+      if (item.type === 'sixmouth') { return true }
+    })))
+    this.draw('echart_container2', eos.setBar3(anjianbh.filter((item) => {
+      if (item.type === 'areayear') { return true }
+    }).reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
+    this.draw('echart_container3', eos.setBar3(anjianbh.filter((item) => {
+      if (item.type === 'fouryear') { return true }
+    }), ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
   }
 }
 </script>
@@ -268,6 +280,11 @@ export default {
     background-repeat:no-repeat;
     background-position:right 36px center;
   }
+  .bg4{
+    background:url("/static/renmintjOther/icon_up.png");
+    background-repeat:no-repeat;
+    background-position:right 36px center;
+  }
   .totalNum_content_span3{
     font-size:38px;
     font-family:HiraginoSansGB-W3;
@@ -346,6 +363,9 @@ export default {
     background:rgba(111,155,253,1);
   }
   .circle4{
+    background:rgba(205,205,205,1);
+  }
+  .circle5{
     background:rgba(205,205,205,1);
   }
   .echart_container{

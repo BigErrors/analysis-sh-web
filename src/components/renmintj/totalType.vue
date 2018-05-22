@@ -4,7 +4,7 @@
     <div class="totalType_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
   </div>
   <div class="totalType_nav">
-    <span class="totalType_nav_span">首页 > 调解员属性分析</span>
+    <span class="totalType_nav_span">首页 > 调解案件属性分析</span>
   </div>
   <div class="totalType_nav2">
     <span class="totalType_nav2_span"  @click="changeRouter('totalNum')">数量分析</span>
@@ -81,6 +81,12 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import hangzhuanzb from '@/../static/json/renmintj/tiaojieaj_hangzhuanzb'
+import laiyuanfx from '@/../static/json/renmintj/tiaojieaj_laiyuanfx'
+import laiyuanbh from '@/../static/json/renmintj/tiaojieaj_laiyuanbh'
+// import leixinfx_1 from '@/../static/json/renmintj/tiaojieaj_leixinfx_1'
+// import leixinfx_2 from '@/../static/json/renmintj/tiaojieaj_leixinfx_2'
+
 export default {
   name: 'peopleNum',
   data () {
@@ -99,9 +105,16 @@ export default {
   created () {},
   mounted () {
     this.draw('target1', eos.setPie2([{value: 82, name: '民事案件'}, {value: 9, name: '行政案件'}, {value: 4, name: '其他纠纷'}, {value: 4, name: '商事纠纷'}, {value: 1, name: '刑事案件'}]))
-    this.draw('target2', eos.setLine4([[{name: '2015', value: 9}, {name: '2016', value: 12}, {name: '2017', value: 15}, {name: '2018', value: 52}]], 'percent'))
-    this.draw('target3', eos.setFunnel([{value: 20, name: '信访', other: 1}, {value: 40, name: '其他', other: 1}, {value: 60, name: '主动调解', other: 1}, {value: 80, name: '公安移送', other: 1}, {value: 100, name: '当事人申请', other: 1}]))
-    this.draw('target4', eos.setLine4([[{name: 2015, value: 76}, {name: 2016, value: 57}, {name: 2017, value: 58}, {name: 2018, value: 85}], [{name: 2015, value: 13}, {name: 2016, value: 33}, {name: 2017, value: 31}, {name: 2018, value: 3}], [{name: 2015, value: 12}, {name: 2016, value: 11}, {name: 2017, value: 11}, {name: 2018, value: 2}]], 'percent', ['当事人申请', '委托调解', '主动调解']))
+    this.draw('target2', eos.setLine4([hangzhuanzb.reverse()], 'percent'))
+    this.draw('target3', eos.setFunnel(laiyuanfx))
+    // this.draw('target3', eos.setFunnel([{value: 20, name: '信访', other: 26}, {value: 40, name: '其他', other: 742}, {value: 60, name: '主动调解', other: 2105}, {value: 80, name: '公安移送', other: 710}, {value: 100, name: '当事人申请', other: 8649}]))
+    this.draw('target4', eos.setLine4([laiyuanbh.filter((item) => {
+      if (item.type === '当事人申请') { return true }
+    }).reverse(), laiyuanbh.filter((item) => {
+      if (item.type === '委托移送') { return true }
+    }).reverse(), laiyuanbh.filter((item) => {
+      if (item.type === '主动调解') { return true }
+    }).reverse()], 'percent', ['当事人申请', '委托移送', '主动调解']))
   }
 }
 </script>

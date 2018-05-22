@@ -1,0 +1,17 @@
+[
+{"timetype":"year","dalei":"民事纠纷","daleivalue":"5967"},
+{"timetype":"year","dalei":"商事纠纷","daleivalue":"126"},
+{"timetype":"year","dalei":"其他纠纷","daleivalue":"502"},
+{"timetype":"year","dalei":"行政案件","daleivalue":"527"},
+{"timetype":"year","dalei":"刑事案件","daleivalue":"36"},
+{"timetype":"mouth","dalei":"民事纠纷","daleivalue":"3304"},
+{"timetype":"mouth","dalei":"商事纠纷","daleivalue":"62"},
+{"timetype":"mouth","dalei":"行政案件","daleivalue":"295"},
+{"timetype":"mouth","dalei":"刑事案件","daleivalue":"18"},
+{"timetype":"mouth","dalei":"其他纠纷","daleivalue":"276"},
+{"timetype":"week","dalei":"民事纠纷","daleivalue":"589"},
+{"timetype":"week","dalei":"其他纠纷","daleivalue":"41"},
+{"timetype":"week","dalei":"商事纠纷","daleivalue":"3"},
+{"timetype":"week","dalei":"行政案件","daleivalue":"30"},
+{"timetype":"week","dalei":"刑事案件","daleivalue":"2"}
+]

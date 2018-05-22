@@ -179,7 +179,7 @@ let setBar2 = (data) => {
         color: '#FFFFFF',
         fontSize: 13
       },
-      data: ['人民调解', '法律咨询', '110']
+      data: ['人民调解', '法律服务', '110']
     },
     grid: {
       left: '3%',
@@ -195,7 +195,7 @@ let setBar2 = (data) => {
     // bar配置项
     series: [{
       type: 'bar',
-      name: '调解案件',
+      name: '人民调解',
       stack: 'one',
       barWidth: 30,
       data: data.map(item => {
@@ -203,7 +203,7 @@ let setBar2 = (data) => {
       })
     }, {
       type: 'bar',
-      name: '基层法律服务',
+      name: '法律服务',
       stack: 'one',
       barWidth: 30,
       data: data.map(item => {
@@ -412,7 +412,7 @@ let setRadar = (data) => {
 }
 
 // 雷达图
-let setRadar2 = (data) => {
+let setRadar2 = (data, indicator) => {
   let option = {
     title: {},
     tooltip: {},
@@ -436,9 +436,7 @@ let setRadar2 = (data) => {
           color: 'rgba(255,255,255,0)'
         }
       },
-      indicator: data.map((item, index) => {
-        return {name: item.name, max: 10}
-      })
+      indicator: indicator
     },
     series: [{
       name: 'radar',
@@ -450,14 +448,7 @@ let setRadar2 = (data) => {
       areaStyle: {
         color: '#FDCD0F'
       },
-      data: [
-        {
-          value: data.map(item => {
-            return Number(item.value)
-          }),
-          name: 'num'
-        }
-      ]
+      data: data
     }]
   }
   return option
@@ -478,7 +469,7 @@ let setLine = (data) => {
         color: '#FFFFFF',
         fontSize: 13
       },
-      data: ['人民调解', '法律咨询', '110']
+      data: ['人民调解', '法律服务', '110']
     },
     grid: {
       left: '3%',
@@ -527,14 +518,14 @@ let setLine = (data) => {
         name: '人民调解',
         type: 'line',
         data: data.map(item => {
-          return item['renmintj']
+          return item['renmintj'] || item['tiaojieaj']
         })
       },
       {
-        name: '法律咨询',
+        name: '法律服务',
         type: 'line',
         data: data.map(item => {
-          return item['falvzx']
+          return item['falvzx'] || item['jicengggflfw']
         })
       },
       {
@@ -548,7 +539,7 @@ let setLine = (data) => {
   }
   return option
 }
-
+// 折线图
 let setLine2 = (data) => {
   let option = {
     title: {},
@@ -651,6 +642,7 @@ let setLine2 = (data) => {
 }
 // 折线图--有area属性
 let setLine3 = (data) => {
+  let maxValue = data.map(function (item) { return item.value })
   let option = {
     color: ['#1254C2'],
     grid: {
@@ -694,7 +686,7 @@ let setLine3 = (data) => {
         show: false
       },
       splitNumber: 7,
-      max: 300,
+      max: maxValue,
       min: 0
     },
     series: [{
@@ -730,8 +722,8 @@ let setLine3 = (data) => {
       data: []
     }]
   }
-  option.xAxis.data = data.map(function (item) { return item.month })
-  option.series[0].data = data.map(function (item) { return item.num })
+  option.xAxis.data = data.map(function (item) { return item.name })
+  option.series[0].data = data.map(function (item) { return item.value })
   return option
 }
 // 折线图--没有area属性
@@ -1058,7 +1050,7 @@ let setFunnel = (data) => {
         maxSize: '55%',
         label: {
           position: 'right',
-          formatter: '{b|{b}}\n{a|{a}}',
+          formatter: '{b|{b}}\n{c|{c}}',
           padding: [5, 5, 5, 5],
           rich: {
             b: {
@@ -1066,7 +1058,7 @@ let setFunnel = (data) => {
               align: 'center',
               color: '#0134A5'
             },
-            a: {
+            c: {
               fontSize: 25,
               align: 'center',
               color: '#001F77'
@@ -1102,6 +1094,7 @@ let setFunnel = (data) => {
       }
     ]
   }
+  console.log(option)
   return option
 }
 

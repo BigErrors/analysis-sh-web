@@ -15,29 +15,29 @@
               <span class="renmintj_main_span2">今日新增</span>
             </div>
             <div class="renmintj_main_year">
-              <span class="renmintj_main_span1">27522</span>
+              <span class="renmintj_main_span1">23371</span>
               <span class="renmintj_main_span2">全年累计</span>
             </div>
           </div>
           <div class="renmintj_main_once">
-            <div class="renmintj_main_title">调解案件</div>
+            <div class="renmintj_main_title">110联动</div>
             <div class="renmintj_main_today">
-              <span class="renmintj_main_span1">275</span>
+              <span class="renmintj_main_span1">158</span>
               <span class="renmintj_main_span2">今日新增</span>
             </div>
             <div class="renmintj_main_year">
-              <span class="renmintj_main_span1">27522</span>
+              <span class="renmintj_main_span1">64785</span>
               <span class="renmintj_main_span2">全年累计</span>
             </div>
           </div>
           <div class="renmintj_main_once">
-            <div class="renmintj_main_title">调解案件</div>
+            <div class="renmintj_main_title">公共法律服务</div>
             <div class="renmintj_main_today">
-              <span class="renmintj_main_span1">275</span>
+              <span class="renmintj_main_span1">654</span>
               <span class="renmintj_main_span2">今日新增</span>
             </div>
             <div class="renmintj_main_year">
-              <span class="renmintj_main_span1">27522</span>
+              <span class="renmintj_main_span1">14561</span>
               <span class="renmintj_main_span2">全年累计</span>
             </div>
           </div>
@@ -56,12 +56,9 @@
       <div class="renmintj_center_map">
         <span class="renmintj_title_span">案件分布</span>
         <baidu-map  class='map' :center='center' :zoom='zoom' :minZoom='minZoom' @ready='handler'>
-          <bm-circle :center="circlePath.center" :radius="circlePath.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
+           <bm-circle v-for="(item, index) in circlePathList" :key="'circle'+index" :center="item.center" :radius="item.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
           </bm-circle>
-          <bm-label  :position="circlePath.center" :content='circlePath.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
-          <bm-circle :center="circlePath1.center" :radius="circlePath1.radius" fillColor="#FDCD0F" :fillOpacity="1" strokeColor='#FDCD0F' :strokeOpacity="1" :strokeWeight="0">
-          </bm-circle>
-          <bm-label  :position="circlePath1.center" :content='circlePath1.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
+          <bm-label v-for="(item, index) in circlePathList" :key="'label'+index" :position="item.center" :content='item.content' :labelStyle="{color: '#fff', border:0, background:'#FDCD0F', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
         </baidu-map>
       </div>
       <div class="renmintj_center_once">
@@ -73,24 +70,12 @@
       <div class="renmintj_right_once">
         <span class="renmintj_title_span">机构总数</span>
         <div class="renmintj_right_jigou">
-          <div class="renmintj_right_circle circle1">
-            <span class="renmintj_right_span1">233</span>
-            <span class="renmintj_right_span2">司法所</span>
-          </div>
-          <div class="renmintj_right_circle circle2">
-            <span class="renmintj_right_span1">6579</span>
-            <span class="renmintj_right_span2">调委会</span>
-          </div>
-          <div class="renmintj_right_circle circle3">
-            <span class="renmintj_right_span1">410</span>
-            <span class="renmintj_right_span2">公共法律服务站</span>
-          </div>
-          <div class="renmintj_right_circle circle4">
-            <span class="renmintj_right_span1">350</span>
-            <span class="renmintj_right_span2">公共法律服务室</span>
+          <div class="renmintj_right_circle" :class="'circle'+(index+1)" v-for="(item, index) in jigouzs" :key="index" v-if="index<=3">
+            <span class="renmintj_right_span1">{{item.shuliang}}</span>
+            <span class="renmintj_right_span2">{{item.mingcheng}}</span>
           </div>
           <div class="renmintj_right_fr">
-            <div class='zIndex3 renmintj 1'></div>
+            <div class='zIndex3 renmintj fill1'></div>
           </div>
         </div>
       </div>
@@ -98,33 +83,13 @@
         <span class="renmintj_title_span">人员总数</span>
         <div class="renmintj_right_renyuan">
           <div class="renmintj_right_fl">
-            <div class="renmintj_renyuan_once">
-              <span class="renmintj_renyuan_span1">1287</span>
-              <span class="renmintj_renyuan_span2">调解员</span>
-            </div>
-            <div class="renmintj_renyuan_once">
-              <span class="renmintj_renyuan_span1">1287</span>
-              <span class="renmintj_renyuan_span2">文员</span>
-            </div>
-            <div class="renmintj_renyuan_once">
-              <span class="renmintj_renyuan_span1">339</span>
-              <span class="renmintj_renyuan_span2">志愿者</span>
-            </div>
-            <div class="renmintj_renyuan_once">
-              <span class="renmintj_renyuan_span1">1287</span>
-              <span class="renmintj_renyuan_span2">公务员</span>
-            </div>
-            <div class="renmintj_renyuan_once">
-              <span class="renmintj_renyuan_span1">1287</span>
-              <span class="renmintj_renyuan_span2">社工</span>
-            </div>
-            <div class="renmintj_renyuan_once">
-              <span class="renmintj_renyuan_span1">1287</span>
-              <span class="renmintj_renyuan_span2">居村法律顾问</span>
+            <div class="renmintj_renyuan_once" v-for="(item,index) in renyuanzs" :key="index" v-if="index<=5">
+              <span class="renmintj_renyuan_span1">{{item.shuliang}}</span>
+              <span class="renmintj_renyuan_span2">{{item.mingcheng}}</span>
             </div>
           </div>
           <div class="renmintj_right_fr">
-              <div class='zIndex3 renmintj 2'></div>
+              <div class='zIndex3 renmintj fill2'></div>
           </div>
         </div>
       </div>
@@ -140,41 +105,11 @@
             </tr>
            </thead>
            <tbody class="renmintj_table_tbody">
-            <tr>
-              <td class='td'>absolute</td>
-              <td class='td'>baidu</td>
-              <td class='td'>cellspacing</td>
-              <td class='td'>data</td>
-            </tr>
-            <tr>
-              <td class='td'>absolute</td>
-              <td class='td'>baidu</td>
-              <td class='td'>cellspacing</td>
-              <td class='td'>data</td>
-            </tr>
-            <tr>
-              <td class='td'>absolute</td>
-              <td class='td'>baidu</td>
-              <td class='td'>cellspacing</td>
-              <td class='td'>data</td>
-            </tr>
-            <tr>
-              <td class='td'>absolute</td>
-              <td class='td'>baidu</td>
-              <td class='td'>cellspacing</td>
-              <td class='td'>data</td>
-            </tr>
-            <tr>
-              <td class='td'>absolute</td>
-              <td class='td'>baidu</td>
-              <td class='td'>cellspacing</td>
-              <td class='td'>data</td>
-            </tr>
-             <tr>
-              <td class='td'>absolute</td>
-              <td class='td'>baidu</td>
-              <td class='td'>cellspacing</td>
-              <td class='td'>data</td>
+            <tr v-for="(item, index) in zhongdiansj" :key="index" v-if="index<=5">
+              <td class='td'>{{item.shijianlx}}</td>
+              <td class='td'>{{item.riqi}}</td>
+              <td class='td'>{{item.diqu}}</td>
+              <td class='td'>{{item.xiangqing}}</td>
             </tr>
            </tbody>
           </table>
@@ -187,8 +122,13 @@
 <script>
 import eos from '@/util/echartsOptions'
 import style from '@/../static/json/mapStyle'
-import qushifx from '@/../static/json/shehuimd_qushifx'
-import gequqk from '@/../static/json/shehuimd_gequqk'
+import qushifx from '@/../static/json/renmintj/jicengsfdsjzpt_qushifx'
+import quyufx from '@/../static/json/renmintj/jicengsfdsjzpt_quyufx'
+import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
+import renyuanzs from '@/../static/json/renmintj/jicengsfdsjzpt_renyuanzs'
+import jigouzs from '@/../static/json/renmintj/jicengsfdsjzpt_jigouzs'
+import ditu from '@/../static/json/renmintj/jicengsfdsjzpt_ditu'
+
 export default {
   name: 'renmintj',
   data () {
@@ -196,22 +136,10 @@ export default {
       center: {lng: 0, lat: 0},
       zoom: 11,
       minZoom: 11,
-      circlePath: {
-        center: {
-          lng: 121.504934,
-          lat: 31.130371
-        },
-        radius: 6000,
-        content: '2000'
-      },
-      circlePath1: {
-        center: {
-          lng: 121.604934,
-          lat: 31.230371
-        },
-        radius: 2000,
-        content: '123'
-      }
+      circlePathList: [],
+      zhongdiansj: zhongdiansj,
+      renyuanzs: renyuanzs,
+      jigouzs: jigouzs
     }
   },
   methods: {
@@ -224,7 +152,7 @@ export default {
     handler ({BMap, map}) {
       this.center.lng = 121.504934
       this.center.lat = 31.130371
-      this.zoom = 11
+      this.zoom = 9
       // 设置地图样式
       map.setMapStyle({styleJson: style})
       // 开启关系拖拽
@@ -232,18 +160,44 @@ export default {
       // 开启鼠标滚动缩放
       // map.enableScrollWheelZoom()
       // 地图数据初始化
+      this.circlePathList = ditu.filter((item) => {
+        if (item.riqi === '18-05') {
+          return true
+        }
+      }).map((item) => {
+        return {
+          center: {
+            lng: parseFloat(item.lat),
+            lat: parseFloat(item.lon)
+          },
+          radius: (function () {
+            if (parseInt(item.shuliang) < 2000) {
+              return 2200
+            } else {
+              return item.shuliang * 1
+            }
+          }()),
+          content: item.shuliang
+        }
+      })
+      console.log(this.circlePathList)
     },
     changeRouter (name) {
       this.$router.push({name: name})
     }
   },
-  created () {},
+  created () {
+    // let vue = this
+    // this.$nextTick(function () {
+
+    // })
+  },
   mounted () {
-    this.draw('1', eos.setFill(0.72, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [0.72], '17', '#7BA6ED'))
-    this.draw('2', eos.setFill(0.3, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [0.3], '17', '#7BA6ED'))
-    this.draw('pie', eos.setPie([{value: 679, name: '其他'}, {value: 1548, name: '专调'}], [{value: 310, name: '婚姻家庭'}, {value: 369, name: '邻里纠纷'}, {value: 1048, name: '知识产权'}, {value: 251, name: '涉校纠纷'}, {value: 249, name: '医患纠纷'}]))
+    this.draw('fill1', eos.setFill(jigouzs[4].shuliang, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [jigouzs[4].shuliang], '17', '#7BA6ED'))
+    this.draw('fill2', eos.setFill(renyuanzs[6].shuliang, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [renyuanzs[6].shuliang], '17', '#7BA6ED'))
+    this.draw('pie', eos.setPie([{value: 8729, name: '普通'}, {value: 4327, name: '专调'}], [{value: 6324, name: '邻里纠纷'}, {value: 2260, name: '损害赔偿'}, {value: 1225, name: '婚姻家庭'}, {value: 540, name: '治安案件'}, {value: 517, name: '不动产'}, {value: 361, name: '劳动争议'}, {value: 332, name: '消费纠纷'}, {value: 1497, name: '其他'}]))
     this.draw('line', eos.setLine(qushifx))
-    this.draw('bar', eos.setBar2(gequqk))
+    this.draw('bar', eos.setBar2(quyufx))
   }
 }
 </script>
