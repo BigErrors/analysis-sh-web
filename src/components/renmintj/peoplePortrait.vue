@@ -14,12 +14,12 @@
   <div class="totalNum_content">
    <div class="totalNum_content_left">
      <div class="totalNum_content_leftTitle1">
-       <div class="totalNum_content_leftTitle1_name">{{renyuanxx.person[0].name}}</div>
-       <div class="totalNum_content_leftTitle1_year">{{renyuanxx.person[0].gongzuonx}}</div>
-       <div class="totalNum_content_leftTitle1_phone">{{renyuanxx.person[0].dianhauhm}}</div>
+       <div class="totalNum_content_leftTitle1_name">{{renyuanxq.person[0].name}}</div>
+       <div class="totalNum_content_leftTitle1_year">{{renyuanxq.person[0].gongzuonx}}</div>
+       <div class="totalNum_content_leftTitle1_phone">{{renyuanxq.person[0].dianhauhm}}</div>
      </div>
      <div class="totalNum_content_leftTitle2">
-       <div class="totalNum_content_leftTitle2_address">{{renyuanxx.person[0].tiaojiewyh}}</div>
+       <div class="totalNum_content_leftTitle2_address">{{renyuanxq.person[0].tiaojiewyh}}</div>
      </div>
      <div class="totalNum_content_leftContent">
      </div>
@@ -29,9 +29,9 @@
        <div class="totalNum_content_rightTitle">整体概览</div>
        <div class="moduleContent">
          <div class="module1">
-           <div class="module1Item"><span class="module1Num">{{renyuanxx.person[0].zhengti[0].value}}</span><br><span class="module1Title">调解成功</span></div>
-           <div class="module1Item"><span class="module1Num">{{renyuanxx.person[0].zhengti[1].value}}</span><br><span class="module1Title">调节终止</span></div>
-           <div class="module1Item"><span class="module1Num">{{renyuanxx.person[0].zhengti[2].value}}</span><br><span class="module1Title">未结案</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxq.person[0].zhengti[0].value}}</span><br><span class="module1Title">{{renyuanxq.person[0].zhengti[0].name}}</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxq.person[0].zhengti[1].value}}</span><br><span class="module1Title">{{renyuanxq.person[0].zhengti[1].name}}</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxq.person[0].zhengti[2].value}}</span><br><span class="module1Title">{{renyuanxq.person[0].zhengti[2].name}}</span></div>
          </div>
        </div>
      </div>
@@ -60,7 +60,7 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr v-for="(item,index) in renyuanxx.person[0].anjianlb" :key="index" v-if="index<=4">
+        <tr v-for="(item,index) in renyuanxq.person[0].anjianlb" :key="index" v-if="index<=4">
           <td class='td'><span class="circle circle1" :class="'circle'+(index+1)">{{index+1}}</span></td>
           <td class='td'>{{item.mingcheng}}</td>
           <td class='td'>{{item.shoulisj}}</td>
@@ -79,29 +79,46 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import renyuanxx from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
+import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
+// import logo from '@/../static/renmintjOther/logo.png'
 export default {
   name: 'peoplePortrait',
   data () {
     return {
-      renyuanxx: renyuanxx
+      renyuanxq: renyuanxq
     }
   },
   methods: {
     // 绘制echarts
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
-      myChart.setOption(option)
+      if (domName === 'totalNum_content_leftContent') {
+        option.maskImage.onload = function () {
+          myChart.setOption(option.option)
+        }
+      } else {
+        myChart.setOption(option)
+      }
     },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    drawWordcloud () {
+      let myChart = this.$echarts.init(document.getElementsByClassName('totalNum_content_leftContent')[0])
+      let maskImage = new Image()
+      maskImage.src = '/static/renmintjOther/logo.png'
+      maskImage.onload = function () {
+        console.log(eos.setWordcloud(renyuanxq.person[0].ciyun, maskImage))
+        myChart.setOption(eos.setWordcloud(renyuanxq.person[0].ciyun, maskImage))
+      }
     }
   },
   created () {},
   mounted () {
-    this.draw('module2', eos.setBar3(renyuanxx.person[0].leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
-    this.draw('module3', eos.setRadar2(renyuanxx.person[0].data, renyuanxx.person[0].indicator))
-    this.draw('totalNum_content_leftContent', eos.setWordcloud(renyuanxx.person[0].ciyun))
+    this.draw('module2', eos.setBar3(renyuanxq.person[0].leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
+    this.draw('module3', eos.setRadar2(renyuanxq.person[0].data, renyuanxq.person[0].indicator))
+    // this.draw('totalNum_content_leftContent', eos.setWordcloud(renyuanxq.person[0].ciyun))
+    this.drawWordcloud()
   }
 }
 </script>

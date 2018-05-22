@@ -25,7 +25,7 @@
       <div class='zIndex3 area1 target1'></div>
       <div class="totalType_detail">
         <div class="totalType_detail_main">
-          <div class="totalType_detail_title">民事纠纷</div>
+          <div class="totalType_detail_title">{{leixinfx2Title}}</div>
           <div class="totalType_detail_content" v-for="(item,index) in leixinfx2" :key="index">
             <span class="totalType_detail_span1">{{item.xiaolei}}</span>
             <span class="totalType_detail_span2">{{item.xiaoleivalue}}</span>
@@ -72,7 +72,8 @@ export default {
   data () {
     return {
       leixinfx2: [],
-      leixinfx2Title: ''
+      leixinfx2Title: '民事纠纷',
+      timetype: 'year'
     }
   },
   methods: {
@@ -80,6 +81,12 @@ export default {
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
+      if (domName === 'target1') {
+        let vue = this
+        myChart.on('click', function (params) {
+          vue.changeType2Data(params.name)
+        })
+      }
     },
     changeRouter (name) {
       this.$router.push({name: name})
@@ -89,11 +96,19 @@ export default {
       document.getElementsByClassName('totalType_content_span5')[1].className = 'totalType_content_span5'
       document.getElementsByClassName('totalType_content_span5')[2].className = 'totalType_content_span5'
       event.target.className = 'totalType_content_span5 totalType_content_active'
+      this.timetype = type
+      this.leixinfx2Title = '民事纠纷'
       this.draw('target1', eos.setPie2(leixinfx1.filter((item) => {
         if (item.timetype === type) { return true }
       })))
       this.leixinfx2 = leixinfx2.filter((item) => {
         if (item.timetype === type && item.dalei === '民事纠纷') { return true }
+      })
+    },
+    changeType2Data (type) {
+      this.leixinfx2Title = type
+      this.leixinfx2 = leixinfx2.filter((item) => {
+        if (item.timetype === this.timetype && item.dalei === type) { return true }
       })
     }
   },
@@ -286,6 +301,16 @@ export default {
     background:url('/static/renmintjOther/pic_frame.png');
     margin-top:67px;
     margin-left:56px;
+    max-height: 264px;
+    overflow-y: auto;
+  }
+  .totalType_detail_main::-webkit-scrollbar{
+    width: 4px;
+    background-color: #ffffff;
+  }
+  .totalType_detail_main::-webkit-scrollbar-thumb{
+    background:#ebeaee;
+    border-radius:4px;
   }
   .totalType_detail_title{
     height:34px;

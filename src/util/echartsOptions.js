@@ -1050,9 +1050,8 @@ let setFunnel = (data) => {
         maxSize: '55%',
         label: {
           position: 'right',
-          formatter: function (data) {
-            console.log(data.data)
-            return `{b|${data.data.name}}\n{c|${data.data.other}}`
+          formatter: function (t) {
+            return `{b|${t.data.name}}\n{c|${t.data.other}}`
           },
           padding: [5, 5, 5, 5],
           rich: {
@@ -1101,9 +1100,7 @@ let setFunnel = (data) => {
   return option
 }
 
-let setWordcloud = (data) => {
-  // let maskImage = new Image()
-  // maskImage.src = 'static/renmintjOther/pic_boy.png'
+let setWordcloud = (data, maskImage) => {
   let option = {
     series: [{
       type: 'wordCloud',
@@ -1126,7 +1123,7 @@ let setWordcloud = (data) => {
       left: 'center',
       top: 'center',
       width: '75%',
-      height: '100%',
+      height: '85%',
       right: null,
       bottom: null,
 
@@ -1174,7 +1171,6 @@ let setWordcloud = (data) => {
       data: data
     }]
   }
-  console.log(option)
   return option
 }
 
