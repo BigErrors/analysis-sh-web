@@ -4,16 +4,18 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import echarts from 'echarts'
-import liquidfill from 'echarts-liquidfill'
-import wordcloud from 'echarts-wordcloud'
+import echartsLiquidfill from 'echarts-liquidfill'
+import echartsWordcloud from 'echarts-wordcloud'
+import wordcloud from 'wordcloud'
 import BaiduMap from 'vue-baidu-map'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
-Vue.prototype.$echarts.liquidfill = liquidfill
-Vue.prototype.$echarts.wordcloud = wordcloud
+Vue.prototype.$echarts.liquidfill = echartsLiquidfill
+Vue.prototype.$echarts.wordcloud = echartsWordcloud
+Vue.prototype.$wordcloud = wordcloud
 
 Vue.use(ElementUI)
 

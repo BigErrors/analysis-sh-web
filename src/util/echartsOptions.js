@@ -1111,59 +1111,39 @@ let setWordcloud = (data, maskImage) => {
       // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
 
       shape: 'diamond',
-
-      // A silhouette image which the white area will be excluded from drawing texts.
-      // The shape option will continue to apply as the shape of the cloud to grow.
-
-      // maskImage: maskImage,
+      maskImage: maskImage,
 
       // Folllowing left/top/width/height/right/bottom are used for positioning the word cloud
       // Default to be put in the center and has 75% x 80% size.
 
-      left: 'center',
-      top: 'center',
-      width: '75%',
-      height: '85%',
-      right: null,
-      bottom: null,
+      width: '100%',
+      height: '100%',
 
       // Text size range which the value in data will be mapped to.
       // Default to have minimum 12px and maximum 60px size.
 
-      sizeRange: [12, 60],
+      sizeRange: [10, 40],
 
       // Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90] by rotationStep 45
 
-      rotationRange: [-90, 90],
-      rotationStep: 45,
+      rotationRange: [-60, 60],
+      rotationStep: 30,
 
       // size of the grid in pixels for marking the availability of the canvas
       // the larger the grid size, the bigger the gap between words.
 
-      gridSize: 8,
-
-      // set to true to allow word being draw partly outside of the canvas.
-      // Allow word bigger than the size of the canvas to be drawn
-      drawOutOfBound: false,
+      gridSize: 2,
 
       // Global text style
       textStyle: {
         normal: {
-          fontFamily: 'sans-serif',
-          fontWeight: 'bold',
-          // Color can be a callback function or a color string
           color: function () {
-            // Random color
             return 'rgb(' + [
               Math.round(Math.random() * 160),
               Math.round(Math.random() * 160),
               Math.round(Math.random() * 160)
             ].join(',') + ')'
           }
-        },
-        emphasis: {
-          shadowBlur: 10,
-          shadowColor: '#333'
         }
       },
 
@@ -1174,4 +1154,234 @@ let setWordcloud = (data, maskImage) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel, setWordcloud}
+// 地图
+let setMap = (pointData) => {
+  // let geoCoordMap = {
+  //   '闵行': [121.368, 31.172],
+  //   '奉贤': [121.481, 30.924],
+  //   '黄浦': [121.491, 31.237],
+  //   '宝山': [121.496, 31.266],
+  //   '虹口': [121.512, 31.27],
+  //   '长宁': [121.43, 31.227],
+  //   '青浦': [121.131, 31.156],
+  //   '杨浦': [121.532, 31.266],
+  //   '浦东': [121.666, 31.214],
+  //   '静安': [121.454, 31.234],
+  //   '嘉定': [121.381, 31.272],
+  //   '松江': [121.234, 31.038],
+  //   '徐汇': [121.443, 31.195],
+  //   '崇明': [121.406, 31.654],
+  //   '金山': [121.317, 30.741]
+  // }
+  let geoCoordMap = {
+    '闵行': [121.394878, 31.072511],
+    '奉贤': [121.555854, 30.8803],
+    '黄浦': [121.491, 31.237],
+    '宝山': [121.440296, 31.401281],
+    '虹口': [121.512, 31.27],
+    '长宁': [121.43, 31.227],
+    '青浦': [121.07968, 31.141832],
+    '杨浦': [121.541702, 31.270352],
+    '浦东': [121.736377, 31.088346],
+    '静安': [121.454, 31.234],
+    '嘉定': [121.20573, 31.372673],
+    '松江': [121.178709, 30.992306],
+    '徐汇': [121.43452, 31.170563],
+    '崇明': [121.563184, 31.631849],
+    '金山': [121.233758, 30.816867]
+  }
+  let convertData = function (data) {
+    let res = []
+    for (var i = 0; i < data.length; i++) {
+      let geoCoord = geoCoordMap[data[i].name]
+      if (geoCoord) {
+        res.push({
+          name: data[i].name,
+          value: geoCoord.concat(data[i].value)
+        })
+      }
+    }
+    return res
+  }
+  let getPointDataByTime = function (time) {
+    return pointData.filter((item) => {
+      if (item.riqi === time) {
+        return true
+      }
+    }).map((item) => {
+      return {
+        name: item.diqu,
+        value: item.shuliang
+      }
+    })
+  }
+
+  let sum = function (list) {
+    let s = list.map(item => {
+      return parseInt(item.value)
+    }).reduce((total, current) => {
+      return total + current
+    })
+    // console.log(s)
+    return s
+  }
+
+  let maxAndMin = function (list) {
+    list = list.map(item => {
+      return parseInt(item.value)
+    })
+    return {max: list.reduce((v1, v2) => {
+      return v1 < v2 ? v2 : v1
+    }),
+    min: list.reduce((v1, v2) => {
+      return v1 < v2 ? v1 : v2
+    })}
+  }
+
+  const sum1 = sum(getPointDataByTime('18-01'))
+  const sum2 = sum(getPointDataByTime('18-02'))
+  const sum3 = sum(getPointDataByTime('18-03'))
+  const sum4 = sum(getPointDataByTime('18-04'))
+  const sum5 = sum(getPointDataByTime('18-05'))
+  console.log(sum1, sum2, sum3, sum4, sum5)
+
+  let option = {
+    baseOption: {
+      timeline: {
+        data: ['2018/01', '2018/02', '2018/03', '2018/04', '2018/05'],
+        axisType: 'category',
+        lineStyle: {
+          width: 3,
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 1,
+            y2: 0,
+            colorStops: [{
+              offset: 0, color: '#007adf'
+            }, {
+              offset: 0.5, color: '#621ad9'
+            }, {
+              offset: 1, color: '#00ecbc'
+            }]
+          },
+          opacity: 0.9
+        },
+        symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkFBQjlCMEU4NTk3MTExRThCMkZEREU2MzkzOEUyNzg1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkFBQjlCMEU5NTk3MTExRThCMkZEREU2MzkzOEUyNzg1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QUFCOUIwRTY1OTcxMTFFOEIyRkRERTYzOTM4RTI3ODUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QUFCOUIwRTc1OTcxMTFFOEIyRkRERTYzOTM4RTI3ODUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6Or62fAAABBklEQVR42rzSvWoCQRDA8b3LIQi29wYSbUVjoiApRBFfwVpBJBAUfIgQQZRAsPchkjRa+QGa1oBvYCsBweTyX5iT9WIRUjjwY2/3ZnaXZSzP85QZsXflMNRwhz4GHwm1N3Mss4iCPEMPYUyQxScaFI6OikiO8v2AW7xhZWwcRwFjtCleW5dLTyfXZecZvtTvuMCNeNJF+n4dbCXBRhJpzLHAt/yLoOXIxC/Q1yzClXkZV3jF2s+zA9eoGAV+uLJ+CFv9I85fFJFxiE0gZyPrhzxHnruKqTzxM1K4ljX95BYy0iEdsyMekftTRwR6ryQnh+RUfdoOTZJfTjZsoMvv0T3V5T8CDADeNVMn4qZDZQAAAABJRU5ErkJggg==',
+        symbolSize: [13, 15],
+        label: {
+          color: '#1194F8',
+          fontSize: 14
+        },
+        emphasis: {
+          label: {
+            color: '#00F6FF',
+            fontSize: 14
+          }
+        },
+        checkpointStyle: {
+          symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAApCAYAAACyXOB4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkFFN0M0OEQ5NTk3MTExRTg5OUQzRUREODlDNzU4RjU3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkFFN0M0OERBNTk3MTExRTg5OUQzRUREODlDNzU4RjU3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QUU3QzQ4RDc1OTcxMTFFODk5RDNFREQ4OUM3NThGNTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QUU3QzQ4RDg1OTcxMTFFODk5RDNFREQ4OUM3NThGNTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7ZgMPXAAAE10lEQVR42syY228bRRTGvfY6cdw0TQuh3CVoG4FCRYAiAkjwxAsPvBSB+Af7gniiEgiJB5CABokKUCmFchGiQJM04LiOY2e9NmfQb6zPk1k3dRXgSJ9m43HmfD73nWTx4qB0B5KM2Zv44HRCEkmAGCHFbZFMb5NMWZAEz0qoD/S5v19y6T4JecUVkMqqxJREz5DLmsv+YFJS6h5PpgqmQJUz9JweyAy7IAN5xL37IhW6ylvEkZg21FhnWKfEYt5CjkjXsMPaYd0VyxW6NC1wlRLyVpkBh0AdTGMxTyqDhCPUNmyDHeCtV+jStICQd9W0WGUWzIHD/D0DaU9qF+Utw01DE7Q4cwe93cClQ2JphFAqhOpYxSk/Ypg3HGU9Ajm39zj4FrQgsmVoGP5inWJvW+I1w6VDYiEpT6gWIXPMcBc4xmfu+QzWWTWcNpw0fGHYhMgmZ2kMViKlpOeDPxXGnpS30GFRfLdhQeAULBuOGz43XOXgnw2nDC8arhu+EmvOBPGXBFnoAz9JJdMqgZXmIOQU38s6j9Ilw/eGjzC/iiP4i+Fpw6uGS5xd4/yKuEpr2DAj0wLXzUJgAUL3Gx4xPEOgvkucFIlz5wXDd1jtBC6toK8vtSsLSkWSBgVSM20etzkyL/HsFP0UEHA/6DHDE1jlitQfR/w8pFaIt48h0ZYy0eGzf7iUC9xXx30u094iYN+OEHrAcNbwpOEG61ksq/Ij/9/gvKOcX0efBn9J3VcJSoHPvCrBrDLHL7/PcA1lJUqAs/Arhj+wbJO9jHOWOXc2KL7DjNSSUCmoUaE8R6C77Pom0r8akHOJ8TouDX/UoYBQKvE2TM3QWr7PxWYl56LLhjUIJSTEEqtP9et8b7mgv05LU9e6lcTajE4DRZKJGx8iLpw8bLjH8Ctuy8acUY0QGgZ4rBGXpZ6Mk1NCyEuNz28llYjOJCQVm6MOUmJ6RkgNCubrg5SYnkFIqh8gP2BSeUTnCCkllkv5Hxekvs91gr2ONOhbJUsm5EaGvEGEkB9nY/I1s5MrCeuk/QJZt0ZlL1GnjvP9mOu6Mr8rseE8NZA3j4x/aDOQhXIBIivUpmuQW2ffVfQHqejvSEVX2eb8rgx5uU6eGk+ZDPwtKnOPQe5LmRCdog+oUStYah1rucM/hGz4PvAUZ2xxfjsYi0cmz75YqcMvadLlzxleNrxh+IxBzosrkr8xJZzGVToleHGTxvNMoec4twmpTkBqJKbywEoN+tMUnz9qeJZ4+lSacB93Xo64yU0DL9DrVpkyfifuGujxr2G5xtQgYqmW9KWypPCGYdHwGgPcxYIsrTIQLtK0r0JijZ64IS7sSFztcV8upCratdnbZS9n3HWN+U0C/wchdJI4c8rfw0Ubghu4cYswGes+b61uUP7DBNhmdl9lGj2DSy8xfbre94m46E9IbPLciAR6r6gk9CW7ShG3Kqkmg9omgb7EnHWF2Cp672vyghorCXteRgeSMb2gL+ndgGamviE7d74/5g35JtDADkvBHlIhsZilfLz5olqXGTu84PDfK7pLUOv0x90lhI25LAnQCyzWhkxNxtlyJIsVE9+66BfCm7hciHXu4H4qn+R+Kpx3NAtDS/zrN3mxWNNp4j+98wxd2v+/3A6H5AYHeY/+twADALmfTNaHVS4/AAAAAElFTkSuQmCC',
+          symbolSize: [21, 23]
+        },
+        controlStyle: {
+          showPlayBtn: false,
+          showPrevBtn: false,
+          showNextBtn: false
+        }
+      },
+      geo: {
+        map: 'shanghai',
+        zoom: 1.3,
+        label: {
+          emphasis: {
+            show: false
+          }
+        },
+        itemStyle: {
+          normal: {
+            areaColor: '#00467F',
+            borderColor: '#111'
+          },
+          emphasis: {
+            areaColor: '#2B91B7'
+          }
+        }
+      },
+      series: [{
+        name: '散点',
+        type: 'effectScatter',
+        coordinateSystem: 'geo',
+        showEffectOn: 'render',
+        rippleEffect: {
+          brushType: 'stroke'
+        },
+        hoverAnimation: true,
+        label: {
+          normal: {
+            formatter: function (component) {
+              return component.value[2]
+            },
+            top: 'center',
+            left: 'center',
+            show: true
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: '#FDCD0F',
+            shadowBlur: 10,
+            shadowColor: '#FDCD0F'
+          }
+        },
+        zlevel: 1
+      }]
+    },
+    options: [
+      {
+        series: [{
+          symbolSize: function (val) {
+            return (val[2] - maxAndMin(getPointDataByTime('18-01')).min) / (maxAndMin(getPointDataByTime('18-01')).max - maxAndMin(getPointDataByTime('18-01')).min) * 100
+          },
+          data: convertData(getPointDataByTime('18-01'))
+        }
+        ]
+      },
+      {
+        series: [{
+          symbolSize: function (val) {
+            return (val[2] - maxAndMin(getPointDataByTime('18-02')).min) / (maxAndMin(getPointDataByTime('18-02')).max - maxAndMin(getPointDataByTime('18-02')).min) * 100
+          },
+          data: convertData(getPointDataByTime('18-02'))
+        } ]
+      },
+      {
+        series: [{
+          symbolSize: function (val) {
+            return (val[2] - maxAndMin(getPointDataByTime('18-03')).min) / (maxAndMin(getPointDataByTime('18-03')).max - maxAndMin(getPointDataByTime('18-03')).min) * 100
+          },
+          data: convertData(getPointDataByTime('18-03'))
+        }]
+      },
+      {
+        series: [{
+          symbolSize: function (val) {
+            return (val[2] - maxAndMin(getPointDataByTime('18-04')).min) / (maxAndMin(getPointDataByTime('18-04')).max - maxAndMin(getPointDataByTime('18-04')).min) * 100
+          },
+          data: convertData(getPointDataByTime('18-04'))
+        }]
+      },
+      {
+        series: [{
+          symbolSize: function (val) {
+            return (-(val[2] - sum5) / sum5) * 40
+          },
+          data: convertData(getPointDataByTime('18-05'))
+        }]
+      }
+    ]
+  }
+  return option
+}
+
+export default {setBar, setBar2, setBar3, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel, setWordcloud, setMap}

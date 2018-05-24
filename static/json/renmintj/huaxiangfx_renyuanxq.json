@@ -19,16 +19,16 @@
           "value": 9
         }, 
         {
+          "name": "合同", 
+          "value": 5
+        }, 
+        {
           "name": "农民工", 
           "value": 4
         }, 
         {
           "name": "拖欠", 
           "value": 4
-        }, 
-        {
-          "name": "合同", 
-          "value": 5
         }, 
         {
           "name": "工资", 

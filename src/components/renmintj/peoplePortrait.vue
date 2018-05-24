@@ -21,8 +21,7 @@
      <div class="totalNum_content_leftTitle2">
        <div class="totalNum_content_leftTitle2_address">{{renyuanxq.person[0].tiaojiewyh}}</div>
      </div>
-     <div class="totalNum_content_leftContent">
-     </div>
+     <div class="totalNum_content_leftContent"></div>
    </div>
    <div class="totalNum_content_right1">
      <div class="module">
@@ -79,8 +78,8 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import wos from '@/util/wordcloudOptions'
 import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
-// import logo from '@/../static/renmintjOther/logo.png'
 export default {
   name: 'peoplePortrait',
   data () {
@@ -106,19 +105,27 @@ export default {
     drawWordcloud () {
       let myChart = this.$echarts.init(document.getElementsByClassName('totalNum_content_leftContent')[0])
       let maskImage = new Image()
-      maskImage.src = '/static/renmintjOther/logo.png'
-      maskImage.onload = function () {
-        console.log(eos.setWordcloud(renyuanxq.person[0].ciyun, maskImage))
-        myChart.setOption(eos.setWordcloud(renyuanxq.person[0].ciyun, maskImage))
+      maskImage.src = '/static/renmintjOther/pic_boy1.png'
+      let option = eos.setWordcloud(renyuanxq.person[0].ciyun, maskImage)
+      maskImage.onload = () => {
+        myChart.setOption(option)
+        myChart.on('click', function (params) {
+          console.log(params.name)
+        })
       }
+    },
+    drawWordcloud2 () {
+      this.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent')[0], wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
+        return [item.name, item.value * 10]
+      })))
     }
   },
   created () {},
   mounted () {
     this.draw('module2', eos.setBar3(renyuanxq.person[0].leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
     this.draw('module3', eos.setRadar2(renyuanxq.person[0].data, renyuanxq.person[0].indicator))
-    // this.draw('totalNum_content_leftContent', eos.setWordcloud(renyuanxq.person[0].ciyun))
-    this.drawWordcloud()
+    // this.drawWordcloud()
+    this.drawWordcloud2()
   }
 }
 </script>

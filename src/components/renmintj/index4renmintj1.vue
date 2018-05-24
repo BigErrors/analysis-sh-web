@@ -55,11 +55,7 @@
     <div class="renmintj_center">
       <div class="renmintj_center_map">
         <span class="renmintj_title_span">案件分布</span>
-        <baidu-map  class='map' :center='center' :zoom='zoom' :minZoom='minZoom' @ready='handler'>
-           <bm-circle v-for="(item, index) in circlePathList" :key="'circle'+index" :center="item.center" :radius="item.radius" fillColor="#FDCD0F" :fillOpacity="0.8" strokeColor='yellow' :strokeOpacity="0.4" :strokeWeight="3">
-          </bm-circle>
-          <bm-label v-for="(item, index) in circlePathList" :key="'label'+index" :position="item.center" :content='item.content' :labelStyle="{color:'#ffffff', border:0, background:'transparent', fontSize : '16px'}" :offset="{width: -18, height: -8}"/>
-        </baidu-map>
+        <div class='map'></div>
       </div>
       <div class="renmintj_center_once">
         <span class="renmintj_title_span">区域分析</span>
@@ -121,13 +117,13 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import style from '@/../static/json/mapStyle'
 import qushifx from '@/../static/json/renmintj/jicengsfdsjzpt_qushifx'
 import quyufx from '@/../static/json/renmintj/jicengsfdsjzpt_quyufx'
 import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
 import renyuanzs from '@/../static/json/renmintj/jicengsfdsjzpt_renyuanzs'
 import jigouzs from '@/../static/json/renmintj/jicengsfdsjzpt_jigouzs'
 import ditu from '@/../static/json/renmintj/jicengsfdsjzpt_ditu'
+import genJson4shanghai from '@/../static/json/genJson4shanghai'
 
 export default {
   name: 'renmintj',
@@ -147,40 +143,10 @@ export default {
     // 绘制echarts
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      if (domName === 'map') {
+        this.$echarts.registerMap('shanghai', genJson4shanghai)
+      }
       myChart.setOption(option)
-    },
-    // 地图配置
-    handler ({BMap, map}) {
-      this.center.lng = 121.504934
-      this.center.lat = 31.130371
-      this.zoom = 9
-      // 设置地图样式
-      map.setMapStyle({styleJson: style})
-      // 开启关系拖拽
-      map.enableInertialDragging()
-      // 开启鼠标滚动缩放
-      // map.enableScrollWheelZoom()
-      // 地图数据初始化
-      this.circlePathList = ditu.filter((item) => {
-        if (item.riqi === '18-05') {
-          return true
-        }
-      }).map((item) => {
-        return {
-          center: {
-            lng: parseFloat(item.lat),
-            lat: parseFloat(item.lon)
-          },
-          radius: (function () {
-            if (parseInt(item.shuliang) < 2000) {
-              return 2600
-            } else {
-              return item.shuliang * 0.8
-            }
-          }()),
-          content: item.shuliang
-        }
-      })
     },
     updateTableData () {
       let i = 1
@@ -200,6 +166,7 @@ export default {
   },
   created () {},
   mounted () {
+    this.draw('map', eos.setMap(ditu))
     this.draw('fill1', eos.setFill(jigouzs[4].shuliang, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [jigouzs[4].shuliang], '17', '#7BA6ED'))
     this.draw('fill2', eos.setFill(renyuanzs[6].shuliang, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [renyuanzs[6].shuliang], '17', '#7BA6ED'))
     this.draw('pie', eos.setPie([{value: 8729, name: '普通'}, {value: 4327, name: '专调'}], [{value: 6324, name: '邻里纠纷'}, {value: 2260, name: '损害赔偿'}, {value: 1225, name: '婚姻家庭'}, {value: 540, name: '治安案件'}, {value: 517, name: '不动产'}, {value: 361, name: '劳动争议'}, {value: 332, name: '消费纠纷'}, {value: 1497, name: '其他'}]))
