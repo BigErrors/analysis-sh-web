@@ -1,4 +1,4 @@
-let setOption = (data, str) => {
+let setOption = (data) => {
   let option = {
     list: data || [['foo', 12], ['bar', 6]],
     fontFamily: '"Trebuchet MS", "Heiti TC", "微軟正黑體", ' +
@@ -6,11 +6,11 @@ let setOption = (data, str) => {
     fontWeight: 'normal',
     color: 'random-dark',
     minSize: 0, // 0 to disable
-    weightFactor: 1,
-    clearCanvas: true,
+    weightFactor: 0.9,
+    clearCanvas: false,
     backgroundColor: 'rgba(255,0,0,0)', // opaque white = rgba(255, 255, 255, 1)
 
-    gridSize: 8,
+    gridSize: 12,
     drawOutOfBound: false,
     origin: null,
 
@@ -29,7 +29,7 @@ let setOption = (data, str) => {
     shuffle: true,
     rotateRatio: 0.1,
 
-    shape: 'star',
+    shape: null,
     ellipticity: 0.65,
 
     classes: null,

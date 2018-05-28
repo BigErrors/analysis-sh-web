@@ -1301,7 +1301,9 @@ let setMap = (pointData) => {
         itemStyle: {
           normal: {
             areaColor: '#00467F',
-            borderColor: '#111'
+            borderColor: '#111111',
+            shadowColor: 'rgba(255, 255, 255, 0.3)',
+            shadowBlur: 20
           },
           emphasis: {
             areaColor: '#2B91B7'

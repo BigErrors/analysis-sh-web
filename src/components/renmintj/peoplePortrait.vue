@@ -21,7 +21,9 @@
      <div class="totalNum_content_leftTitle2">
        <div class="totalNum_content_leftTitle2_address">{{renyuanxq.person[0].tiaojiewyh}}</div>
      </div>
-     <div class="totalNum_content_leftContent"></div>
+     <div class="totalNum_content_leftContent">
+       <canvas  class="totalNum_content_leftContent1" width="184px" height="647px"></canvas>
+     </div>
    </div>
    <div class="totalNum_content_right1">
      <div class="module">
@@ -115,9 +117,23 @@ export default {
       }
     },
     drawWordcloud2 () {
-      this.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent')[0], wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
+      let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
         return [item.name, item.value * 10]
-      })))
+      }))
+      let vue = this
+      let ctx = document.getElementsByClassName('totalNum_content_leftContent1')[0].getContext('2d')
+      let img = new Image()
+      img.src = 'static/renmintjOther/pic_boy.png'
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0)
+        vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent1')[0], option)
+      }
+    },
+    drawWordcloud3 () {
+      let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
+        return [item.name, item.value * 10]
+      }))
+      this.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent')[0], option)
     }
   },
   created () {},
@@ -126,6 +142,7 @@ export default {
     this.draw('module3', eos.setRadar2(renyuanxq.person[0].data, renyuanxq.person[0].indicator))
     // this.drawWordcloud()
     this.drawWordcloud2()
+    // this.drawWordcloud3()
   }
 }
 </script>
@@ -268,8 +285,8 @@ export default {
   }
   .totalNum_content_leftContent{
     background: url('/static/renmintjOther/pic_boy.png') no-repeat;
-    height: 650px;
-    width: 195px;
+    height: 647px;
+    width: 184px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 32px;
