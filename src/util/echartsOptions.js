@@ -1433,12 +1433,12 @@ let setMap2 = (data) => {
       coordinateSystem: 'geo3D',
       shading: 'lambert',
       data: data,
-      barSize: 1,
-      minHeight: 0.2,
+      barSize: 1.5,
+      minHeight: 0,
       silent: true,
       itemStyle: {
-        color: 'orange'
-        // opacity: 0.8
+        color: 'orange',
+        opacity: 1
       }
     }]
   }
