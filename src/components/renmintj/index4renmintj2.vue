@@ -1,3 +1,9 @@
+/*
+ * @Author: wupeiwen javapeiwen2010@gmail.com
+ * @Date: 2018-05-30 09:32:19
+ * @Last Modified by:   wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-05-30 09:32:19
+ */
 <template>
 <div id='renmintj' class='shade'>
   <div class='renmintj_header'>

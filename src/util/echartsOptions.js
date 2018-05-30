@@ -1156,23 +1156,6 @@ let setWordcloud = (data, maskImage) => {
 
 // 地图
 let setMap = (pointData) => {
-  // let geoCoordMap = {
-  //   '闵行': [121.368, 31.172],
-  //   '奉贤': [121.481, 30.924],
-  //   '黄浦': [121.491, 31.237],
-  //   '宝山': [121.496, 31.266],
-  //   '虹口': [121.512, 31.27],
-  //   '长宁': [121.43, 31.227],
-  //   '青浦': [121.131, 31.156],
-  //   '杨浦': [121.532, 31.266],
-  //   '浦东': [121.666, 31.214],
-  //   '静安': [121.454, 31.234],
-  //   '嘉定': [121.381, 31.272],
-  //   '松江': [121.234, 31.038],
-  //   '徐汇': [121.443, 31.195],
-  //   '崇明': [121.406, 31.654],
-  //   '金山': [121.317, 30.741]
-  // }
   let geoCoordMap = {
     '闵行': [121.394878, 31.072511],
     '奉贤': [121.555854, 30.8803],
@@ -1216,16 +1199,6 @@ let setMap = (pointData) => {
     })
   }
 
-  let sum = function (list) {
-    let s = list.map(item => {
-      return parseInt(item.value)
-    }).reduce((total, current) => {
-      return total + current
-    })
-    // console.log(s)
-    return s
-  }
-
   let maxAndMin = function (list) {
     list = list.map(item => {
       return parseInt(item.value)
@@ -1237,13 +1210,6 @@ let setMap = (pointData) => {
       return v1 < v2 ? v1 : v2
     })}
   }
-
-  const sum1 = sum(getPointDataByTime('18-01'))
-  const sum2 = sum(getPointDataByTime('18-02'))
-  const sum3 = sum(getPointDataByTime('18-03'))
-  const sum4 = sum(getPointDataByTime('18-04'))
-  const sum5 = sum(getPointDataByTime('18-05'))
-  console.log(sum1, sum2, sum3, sum4, sum5)
 
   let option = {
     baseOption: {
@@ -1376,7 +1342,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (-(val[2] - sum5) / sum5) * 40
+            return (val[2] - maxAndMin(getPointDataByTime('18-05')).min) / (maxAndMin(getPointDataByTime('18-05')).max - maxAndMin(getPointDataByTime('18-05')).min) * 100
           },
           data: convertData(getPointDataByTime('18-05'))
         }]
@@ -1386,4 +1352,97 @@ let setMap = (pointData) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel, setWordcloud, setMap}
+let setMap2 = (data) => {
+  data = data.filter(function (dataItem) {
+    return dataItem[2] > 0
+  }).map(function (dataItem) {
+    return [dataItem[0], dataItem[1], Math.sqrt(dataItem[2])]
+  })
+  let option = {
+    geo3D: {
+      map: 'shanghai',
+      // 三维地理坐标系组件组件在三维场景中的宽度。
+      boxWidth: 100,
+      // 三维地理坐标系组件组件在三维场景中的高度。
+      boxHeight: 10,
+      // 三维地理坐标系组件组件在三维场景中的深度。
+      boxDepth: 'auto',
+      // 三维地图每个区域的高度。
+      regionHeight: 2,
+      // 地面可以让整个组件有个“摆放”的地方，从而使整个场景看起来更真实，更有模型感。
+      groundPlane: {
+        show: false,
+        color: '#999'
+      },
+      // 三维地理坐标系组件 中三维图形的视觉属性，包括颜色，透明度，描边等。
+      itemStyle: {
+        color: '#00467F',
+        borderColor: '#111111',
+        shadowColor: 'rgba(255, 255, 255, 0.3)',
+        shadowBlur: 20
+      },
+      // 三维地理坐标系组件中三维图形的着色效果
+      shading: 'lambert',
+      // 光照相关的设置。
+      light: {
+        // 场景主光源的设置
+        main: {
+          intensity: 5,
+          shadow: true,
+          shadowQuality: 'high',
+          alpha: 40
+        },
+        // 全局的环境光设置。
+        ambient: {
+          intensity: 0
+        }
+      },
+      // 后处理特效的相关配置，后处理特效可以为画面添加高光，景深，环境光遮蔽（SSAO），调色等效果。可以让整个画面更富有质感。
+      postEffect: {
+        enable: true,
+        // 高光特效。
+        bloom: {
+          enable: false
+        },
+        // 景深效果。
+        depthOfField: {
+          enable: false,
+          focalRange: 10,
+          blurRadius: 10,
+          fstop: 1
+        },
+        // 环境光遮蔽
+        SSAO: {
+          radius: 1,
+          intensity: 1,
+          enable: true
+        }
+      },
+      // 用于鼠标的旋转，缩放等视角控制。
+      viewControl: {
+        distance: 150,
+        panMouseButton: 'left',
+        rotateMouseButton: 'right'
+      },
+      temporalSuperSampling: {
+        enable: true
+      }
+    },
+    series: [{
+      type: 'bar3D',
+      coordinateSystem: 'geo3D',
+      shading: 'lambert',
+      data: data,
+      barSize: 1,
+      minHeight: 0.2,
+      silent: true,
+      itemStyle: {
+        color: 'orange'
+        // opacity: 0.8
+      }
+    }]
+  }
+  return option
+}
+
+export default {setBar, setBar2, setBar3, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel, setWordcloud, setMap, setMap2}

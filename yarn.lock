@@ -1325,6 +1325,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+claygl@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/claygl/-/claygl-1.2.1.tgz#692641935c45ca825cd3e6ceb8eeadd3bad019df"
+
 clean-css@4.1.x:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.11.tgz#2ecdf145aba38f54740f26cefd0ff3e03e125d6a"
@@ -1968,6 +1972,13 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+
+echarts-gl@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/echarts-gl/-/echarts-gl-1.1.1.tgz#3df321cd4df7fee774e9a09e4dd29c9fd7e9104f"
+  dependencies:
+    claygl "^1.2.1"
+    zrender "^4.0.4"
 
 echarts-liquidfill@2.0.0:
   version "2.0.0"
@@ -6285,6 +6296,6 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zrender@4.0.4, zrender@^4.0.1:
+zrender@4.0.4, zrender@^4.0.1, zrender@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.4.tgz#910e60d888f00c9599073f23758dd23345fe48fd"

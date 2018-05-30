@@ -118,12 +118,12 @@ export default {
     },
     drawWordcloud2 () {
       let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
-        return [item.name, item.value * 10]
+        return [item.name, item.value]
       }))
       let vue = this
       let ctx = document.getElementsByClassName('totalNum_content_leftContent1')[0].getContext('2d')
       let img = new Image()
-      img.src = 'static/renmintjOther/pic_boy.png'
+      img.src = 'static/renmintjOther/pic_boy2.png'
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
         vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent1')[0], option)
