@@ -22,7 +22,7 @@
        <div class="totalNum_content_leftTitle2_address">{{renyuanxq.person[0].tiaojiewyh}}</div>
      </div>
      <div class="totalNum_content_leftContent">
-       <canvas  class="totalNum_content_leftContent1" width="184px" height="647px"></canvas>
+       <canvas  class="totalNum_content_leftContent_canvas" width="184px" height="647px"></canvas>
      </div>
    </div>
    <div class="totalNum_content_right1">
@@ -121,12 +121,12 @@ export default {
         return [item.name, item.value]
       }))
       let vue = this
-      let ctx = document.getElementsByClassName('totalNum_content_leftContent1')[0].getContext('2d')
+      let ctx = document.getElementsByClassName('totalNum_content_leftContent_canvas')[0].getContext('2d')
       let img = new Image()
       img.src = 'static/renmintjOther/pic_boy2.png'
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
-        vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent1')[0], option)
+        vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent_canvas')[0], option)
       }
     },
     drawWordcloud3 () {
@@ -224,7 +224,7 @@ export default {
     width: 489px;
     height: 868px;
     margin-right: 13px;
-    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
+    background: rgba(0,33,129,0.3);
   }
   .totalNum_content_leftTitle1{
     height: 66px;
@@ -284,12 +284,22 @@ export default {
     padding-left: 26px;
   }
   .totalNum_content_leftContent{
-    background: url('/static/renmintjOther/pic_boy.png') no-repeat;
-    height: 647px;
+    background: url('/static/renmintjOther/pic_boy1.png') no-repeat;
+    /* height: 725px;
+    width: 415px;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto; */
     width: 184px;
+    height: 647px;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 32px;
+  }
+
+  .totalNum_content_leftContent_canvas{
+    /* margin-left: 114px;
+     margin-top: 15px; */
   }
   .totalNum_content_right1{
     float: left;
