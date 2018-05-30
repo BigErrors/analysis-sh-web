@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-05-30 11:35:11
+ * @Last Modified time: 2018-05-30 15:58:25
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -12,7 +12,7 @@
   <div class='renmintj_container'>
     <div class="renmintj_left">
       <div class="renmintj_left_once" @click="changeRouter('totalNum')" style="cursor: pointer;">
-        <span class="renmintj_title_span">业务数量</span>
+        <span class="renmintj_title_span renmintj_title_span_center">业务数量</span>
         <div class="renmintj_main">
           <div class="renmintj_main_once">
             <div class="renmintj_main_title">调解案件</div>
@@ -50,27 +50,27 @@
         </div>
       </div>
       <div class="renmintj_left_once" @click="changeRouter('totalType')" style="cursor: pointer;">
-        <span class="renmintj_title_span">类型分布</span>
+        <span class="renmintj_title_span renmintj_title_span_center">类型分布</span>
         <div class='zIndex3 pie'></div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span">趋势分析</span>
+        <span class="renmintj_title_span renmintj_title_span_center">趋势分析</span>
         <div class='zIndex3 line'></div>
       </div>
     </div>
     <div class="renmintj_center">
       <div class="renmintj_center_map">
-        <span class="renmintj_title_span">案件分布</span>
+        <span class="renmintj_title_span renmintj_title_span_left">案件分布</span>
         <div class='map'></div>
       </div>
       <div class="renmintj_center_once">
-        <span class="renmintj_title_span">区域分析</span>
+        <span class="renmintj_title_span renmintj_title_span_center">区域分析</span>
         <div class='zIndex3 bar'></div>
       </div>
     </div>
     <div class="renmintj_right">
       <div class="renmintj_right_once">
-        <span class="renmintj_title_span">机构总数</span>
+        <span class="renmintj_title_span renmintj_title_span_center">机构总数</span>
         <div class="renmintj_right_jigou">
           <div class="renmintj_right_circle" :class="'circle'+(index+1)" v-for="(item, index) in jigouzs" :key="index" v-if="index<=3">
             <span class="renmintj_right_span1">{{item.shuliang}}</span>
@@ -82,7 +82,7 @@
         </div>
       </div>
       <div class="renmintj_right_once" @click="changeRouter('peopleNum')" style="cursor: pointer;">
-        <span class="renmintj_title_span">人员总数</span>
+        <span class="renmintj_title_span renmintj_title_span_center">人员总数</span>
         <div class="renmintj_right_renyuan">
           <div class="renmintj_right_fl">
             <div class="renmintj_renyuan_once" v-for="(item,index) in renyuanzs" :key="index" v-if="index<=5">
@@ -96,7 +96,7 @@
         </div>
       </div>
       <div class="renmintj_right_once">
-        <span class="renmintj_title_span">重点事件</span>
+        <span class="renmintj_title_span renmintj_title_span_center">重点事件</span>
         <table class='renmintj_right_table' cellspacing='0'>
            <thead class="renmintj_table_thead">
             <tr>
@@ -194,7 +194,9 @@ export default {
     overflow-y: auto;
   }
   .shade {
-    background-color: #0b1740;
+    background: url('/static/renmintj/pic_bg.png');
+    background-repeat:no-repeat;
+    background-position:center;
   }
 
   .renmintj_container{
@@ -224,15 +226,22 @@ export default {
     cursor:pointer;
   }
   .renmintj_title_span{
-    width:169px;
     display:inline-block;
     height:38px;
     line-height:38px;
     font-size:20px;
     font-family:HiraginoSansGB-W3;
     color:rgba(121,190,242,1);
-    padding-left:8px;
     box-sizing:border-box;
+  }
+  .renmintj_title_span_center{
+    width:100%;
+    padding-left:0;
+    text-align: center;
+  }
+  .renmintj_title_span_left{
+    width:169px;
+    padding-left:22px;
   }
   .renmintj_left{
     float:left;
@@ -243,7 +252,7 @@ export default {
   .renmintj_left_once{
     width:100%;
     height:313px;
-    background:url('/static/renmintj/pic_frame1.png');
+    background:url('/static/renmintj/pic_up.png');
     background-size:508px 313px;
   }
   .renmintj_left_once:nth-of-type(2){
@@ -264,7 +273,7 @@ export default {
   .renmintj_center_map{
     width:100%;
     height:642px;
-    background:url('/static/renmintj/pic_frame2.png');
+    background:url('/static/renmintj/pic_middle.png');
     background-size:828px 642px;
     margin-bottom:16px;
     position:relative;
@@ -279,7 +288,7 @@ export default {
   .renmintj_center_once{
     width:100%;
     height:313px;
-    background:url('/static/renmintj/pic_frame3.png');
+    background:url('/static/renmintj/pic_middle2.png');
     background-size:828px 313px;
   }
   .bar{
@@ -294,7 +303,7 @@ export default {
   .renmintj_right_once{
     width:100%;
     height:313px;
-    background:url('/static/renmintj/pic_frame1.png');
+    background:url('/static/renmintj/pic_up.png');
     background-size:508px 313px;
   }
   .renmintj_right_once:nth-of-type(2){
