@@ -359,6 +359,81 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
   return option
 }
 
+// 柱图
+let setBar4 = (data, color) => {
+  // 找出value中的最大值
+  let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
+  let valueAxis = [{
+    type: 'value',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: false
+    },
+    max: Number.parseInt(1.0 * maxValue),
+    splitLine: {
+      show: false
+    }
+  }]
+  let categoryAxis = [{
+    type: 'category',
+    axisLine: {
+      show: true,
+      lineStyle: {
+        color: '#1F3490'
+      }
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: '#1194F8',
+      fontSize: 12,
+      rotate: 45,
+      formatter: function (value) {
+        return value
+      }
+    },
+    data: data.map(function (obj) {
+      return obj.name
+    }),
+    splitLine: {
+      show: false
+    }
+  }]
+  let option = {
+    // x轴配置项
+    xAxis: categoryAxis,
+    // y轴配置项
+    yAxis: valueAxis,
+    // bar配置项
+    series: [{
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      z: 3,
+      itemStyle: {
+        color: '#1F3490'
+      },
+      label: {
+        show: true,
+        position: 'top',
+        color: '#49EAEE',
+        fontSize: 12
+      },
+      data: data.map(function (obj) {
+        return obj.value
+      })
+    }]
+  }
+  option.series[0].barMaxWidth = 1
+  return option
+}
+
 // 雷达图
 let setRadar = (data) => {
   let option = {
@@ -540,16 +615,14 @@ let setLine = (data) => {
   return option
 }
 // 折线图
-let setLine2 = (data) => {
+let setLine2 = (data, showYAxis) => {
   let option = {
-    title: {},
     tooltip: {
       trigger: 'axis'
     },
-    color: ['#1254C2', '#00FFFF'],
     grid: {
       left: 15,
-      top: 0,
+      top: 10,
       bottom: 0,
       containLabel: true
     },
@@ -569,7 +642,7 @@ let setLine2 = (data) => {
         show: false
       },
       boundaryGap: false,
-      data: [0, 3, 6, 9, 12, 15, 18, 21, 24]
+      data: []
     },
     yAxis: {
       type: 'value',
@@ -580,64 +653,72 @@ let setLine2 = (data) => {
         show: false
       },
       axisLabel: {
-        show: false
+        show: showYAxis || false,
+        color: '#1194F8'
       },
       splitLine: {
         show: false
-      },
-      splitNumber: 1,
-      max: 8,
-      min: 6
-    },
-    series: [
-      {
-        name: '历史同期',
-        type: 'line',
-        // smooth: true,
-        symbolSize: 1,
-        lineStyle: {
-          width: 1
-        },
-        data: []
-      }, {
-        name: '和谐指数',
-        type: 'line',
-        // smooth: true,
-        symbolSize: 1,
-        lineStyle: {
-          width: 1
-        },
-        areaStyle: {
-          opacity: 0.4
-        },
-        data: []
       }
-    ]
+    },
+    series: []
   }
-  // 数据动态更新
-  // let i = 1
-  // .slice(0, i)
-  option.xAxis.data = data.map(item => {
-    return item['time']
-  })
-  option.series[0].data = data.map(item => {
-    return item['gankongzs_ls']
-  })
-  option.series[1].data = data.map(item => {
-    return item['gankongzs']
-  })
-  // setInterval(() => {
-  //   i++
-  //   option.xAxis.data = data.slice(0, i).map(item => {
-  //     return item['time']
-  //   })
-  //   option.series[0].data = data.slice(0, i).map(item => {
-  //     return item['gankongzs_ls']
-  //   })
-  //   option.series[1].data = data.slice(0, i).map(item => {
-  //     return item['gankongzs']
-  //   })
-  // }, 5000)
+  if (data[0] && data[0].time) {
+    option.color = ['#1254C2', '#00FFFF']
+    option.xAxis.data = data.map(item => {
+      return item['time']
+    })
+    option.yAxis.splitNumber = 1
+    option.yAxis.max = 8
+    option.yAxis.min = 6
+    option.series[0] = {
+      name: '历史同期',
+      type: 'line',
+      smooth: true,
+      symbolSize: 1,
+      lineStyle: {
+        width: 1
+      },
+      data: data.map(item => {
+        return item['gankongzs_ls']
+      })
+    }
+    option.series[1] = {
+      name: '和谐指数',
+      type: 'line',
+      smooth: true,
+      symbolSize: 1,
+      lineStyle: {
+        width: 1
+      },
+      areaStyle: {
+        opacity: 0.4
+      },
+      data: data.map(item => {
+        return item['gankongzs']
+      })
+    }
+  }
+  if (data[0] && data[0].name) {
+    option.color = ['#00FFFF']
+    option.xAxis.data = data.map(item => {
+      return item['name']
+    })
+    option.series[0] = {
+      name: '数据',
+      type: 'line',
+      smooth: true,
+      symbolSize: 1,
+      lineStyle: {
+        width: 1
+      },
+      areaStyle: {
+        opacity: 0.4
+      },
+      data: data.map(item => {
+        return item['value']
+      })
+    }
+  }
   return option
 }
 // 折线图--有area属性
@@ -1035,6 +1116,51 @@ let setPie3 = (data) => {
         data: data
       }
     ]
+  }
+  return option
+}
+
+// 圆环图
+let setPie4 = (data, title, color) => {
+  color = color || ['#00ECF6', '#0A4179']
+  let option = {
+    title: {
+      x: 'center',
+      // y: 'bottom',
+      bottom: 6,
+      text: title || '标题',
+      textStyle: {
+        color: '#1194F8',
+        fontSize: 12
+      }
+    },
+    color: color,
+    series: [{
+      type: 'pie',
+      center: ['50%', '38%'],
+      radius: ['65%', '75%'],
+      label: {
+        show: false
+      },
+      data: data
+    }, {
+      type: 'pie',
+      center: ['50%', '38%'],
+      radius: ['0%', '65%'],
+      data: [{
+        value: 0,
+        name: data[0] + '%',
+        label: {
+          show: true,
+          position: 'center',
+          fontSize: 16,
+          color: color[0]
+        },
+        itemStyle: {
+          color: color[1]
+        }
+      }]
+    }]
   }
   return option
 }
@@ -1445,4 +1571,4 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setFunnel, setWordcloud, setMap, setMap2}
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setPie4, setFunnel, setWordcloud, setMap, setMap2}
