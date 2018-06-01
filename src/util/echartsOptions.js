@@ -1392,6 +1392,7 @@ let setMap = (pointData) => {
   let option = {
     baseOption: {
       timeline: {
+        bottom: 15,
         data: ['2018/01', '2018/02', '2018/03', '2018/04', '2018/05'],
         axisType: 'category',
         lineStyle: {
@@ -1414,7 +1415,8 @@ let setMap = (pointData) => {
         symbolSize: [13, 15],
         label: {
           color: '#1194F8',
-          fontSize: 14
+          fontSize: 14,
+          padding: [1, 0, 0, 0]
         },
         emphasis: {
           label: {
@@ -1434,7 +1436,7 @@ let setMap = (pointData) => {
       },
       geo: {
         map: 'shanghai',
-        zoom: 1.1,
+        zoom: 1.2,
         label: {
           emphasis: {
             show: false
@@ -1443,8 +1445,9 @@ let setMap = (pointData) => {
         itemStyle: {
           normal: {
             areaColor: '#1A3DAC',
-            borderColor: '#597EF6',
-            shadowColor: 'rgba(255, 255, 255, 0.3)',
+            borderColor: '#031652',
+            borderWidth: 1,
+            shadowColor: 'rgba(255, 255, 255, 0.35)',
             shadowBlur: 5
           },
           emphasis: {

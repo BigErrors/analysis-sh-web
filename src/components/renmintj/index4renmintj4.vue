@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-01 14:08:38
+ * @Last Modified time: 2018-06-01 17:35:18
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -55,7 +55,7 @@
       <div class="renmintj_center_map">
         <span class="renmintj_title_span renmintj_title_span_left">案件分布</span>
         <div class="map_title">
-          <span>业务总量</span><span>934461</span>
+          <span>业务总量</span><span><digitalRolling :height='30' :width='15' :number='yewusl' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling></span>
         </div>
         <div class="map_subtitle">
           <span>同比今年</span><span>15%</span>
@@ -63,25 +63,25 @@
         <div class='map'></div>
       </div>
       <div class="renmintj_center_once">
-        <span class="renmintj_title_span renmintj_title_span_center">重点事件</span>
-          <table class='renmintj_center_table' cellspacing='0'>
-           <thead class="renmintj_table_thead">
-            <tr>
-              <td class='td'>事件</td>
-              <td class='td'>日期</td>
-              <td class='td'>地区</td>
-              <td class='td'>详情</td>
-            </tr>
-           </thead>
-           <tbody class="renmintj_table_tbody">
-            <tr v-for="(item, index) in zhongdiansj" :key="index">
-              <td class='td'>{{item.shijianlx}}</td>
-              <td class='td'>{{item.riqi}}</td>
-              <td class='td'>{{item.diqu}}</td>
-              <td class='td'>{{item.xiangqing}}</td>
-            </tr>
-           </tbody>
-          </table>
+        <span class="renmintj_title_span renmintj_title_span_center" style="padding-left:35px;">重点事件</span>
+          <div class='renmintj_center_table'>
+            <div class="renmintj_table_thead">
+              <span class='td'>序号</span>
+              <span class='td'>事件</span>
+              <span class='td'>日期</span>
+              <span class='td'>地区</span>
+              <span class='td'>详情</span>
+            </div>
+            <rollScreen :dLength='zhongdiansj.length' :height='33' :lineNum='6' class="renminttj_table_body">
+              <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in zhongdiansj" :key="index">
+               <span class='td'>{{item.xuhao}}</span>
+               <span class='td'>{{item.shijianlx}}</span>
+               <span class='td'>{{item.riqi}}</span>
+               <span class='td'>{{item.diqu}}</span>
+               <span class='td'>{{item.xiangqing}}</span>
+              </div>
+            </rollScreen>
+          </div>
       </div>
     </div>
     <div class="renmintj_right">
@@ -136,6 +136,8 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import rollScreen from '../rollScreen.vue'
+import digitalRolling from '../digitalRolling.vue'
 import qushifx from '@/../static/json/renmintj/jicengsfdsjzpt_qushifx'
 import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
 import renyuanzs from '@/../static/json/renmintj/jicengsfdsjzpt_renyuanzs'
@@ -146,45 +148,43 @@ import ditu from '@/../static/json/renmintj/jicengsfdsjzpt_ditu'
 
 export default {
   name: 'renmintj',
+  components: {
+    rollScreen,
+    digitalRolling
+  },
   data () {
     return {
-      center: {lng: 0, lat: 0},
-      zoom: 11,
-      minZoom: 11,
-      circlePathList: [],
-      zhongdiansj: zhongdiansj.slice(0, 6),
+      myChart: {},
+      zhongdiansj: zhongdiansj,
       renyuanzs: renyuanzs,
       jigouzs: jigouzs,
-      timer: ''
+      timer: '',
+      yewusl: 2897
     }
   },
   methods: {
     // 绘制echarts
     draw (domName, option) {
-      this.$echarts.dispose(document.getElementsByClassName(domName)[0])
-      let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      if (this.myChart[domName]) {
+        this.$echarts.dispose(this.myChart[domName])
+      }
+      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       if (domName === 'map') {
         this.$echarts.registerMap('shanghai', genJson4shanghai)
       }
-      myChart.setOption(option)
+      this.myChart[domName].setOption(option)
     },
     changeType (type) {
       this.draw('line', eos.setLine2(qushifx.map((item) => { return {name: item.month, value: item[type]} }), true))
     },
-    updateTableData () {
-      let i = 1
-      let len = 6
-      let vue = this
-      vue.timer = setInterval(function () {
-        i++
-        if (i > zhongdiansj.length - 6) {
-          i = 1
-        }
-        vue.zhongdiansj = zhongdiansj.slice(i, i + len)
-      }, 1500)
-    },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    changeNum () {
+      let _this = this
+      this.timer = setInterval(function () {
+        _this.yewusl = parseInt(Math.random() * 9000) + 1000
+      }, 5000)
     }
   },
   created () {},
@@ -202,9 +202,9 @@ export default {
     this.draw('fill3', eos.setFill(9.2, '#FDBF5E', '\r\r\r\r文书质量\n', [0.3], '17', '#7BA6ED'))
     this.draw('fill4', eos.setFill(568, '#FDBF5E', '\r\r\r\r案例上报数\n', [0.3], '17', '#7BA6ED'))
     this.draw('map', eos.setMap(ditu))
+    this.changeNum()
     // this.draw('map', eos.setMap2([[121.394878, 31.072511, 10], [121.555854, 30.8803, 20], [121.491, 31.237, 5], [121.440296, 31.401281, 6], [121.512, 31.27, 7], [121.43, 31.227, 2], [121.07968, 31.141832, 9], [121.541702, 31.270352, 3],
-    //   [121.736377, 31.088346, 3], [121.454, 31.234, 6], [121.20573, 31.372673, 5], [121.178709, 30.992306, 5], [121.43452, 31.170563, 7], [121.563184, 31.631849, 3], [121.233758, 30.816867, 4]]))
-    // this.updateTableData()
+    //  [121.736377, 31.088346, 3], [121.454, 31.234, 6], [121.20573, 31.372673, 5], [121.178709, 30.992306, 5], [121.43452, 31.170563, 7], [121.563184, 31.631849, 3], [121.233758, 30.816867, 4]]))
   },
   beforeDestroy () {
     clearInterval(this.timer)
@@ -394,6 +394,7 @@ export default {
     font-size: 30px;
     display: block;
     float: left;
+    height: 30px;
   }
   .map_subtitle{
     width: 165px;
@@ -429,18 +430,25 @@ export default {
     width: 100%;
     padding:0 24px;
     box-sizing:border-box;
-    color:white;
+    font-size:14px;
+  }
+  .renmintj_center_table div{
+    width: 100%;
+    height: 33px;
+  }
+  .renmintj_center_table div span {
+    float: left;
+    display: block;
+    width: 20%;
+    line-height:33px;
+    text-align: center;
+    color:rgba(118,187,239,1);
   }
   .renmintj_table_thead{
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
     color:rgba(17,148,248,1);
     line-height:42px;
   }
-  .renmintj_table_tbody tr{
-    height:33px;
-  }
-  .renmintj_table_tbody tr:nth-of-type(2n-1){
+  .renmintj_table_tr:nth-of-type(2n-1){
     background: rgba(7,30,74,0.8)
   }
   .renmintj_right{
