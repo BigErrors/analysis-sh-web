@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-05-31 18:29:48
+ * @Last Modified time: 2018-06-01 14:08:38
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -15,16 +15,24 @@
         <span class="renmintj_title_span renmintj_title_span_center">业务数量</span>
         <div class="renmintj_main">
           <div class="renmintj_main_once">
-
+            <div class="pie yewusl1"></div>
+            <div class="yewusl_title">人民调解</div>
+            <div class="yewusl_subtitle"><span>135</span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
-
+            <div class="pie yewusl2"></div>
+            <div class="yewusl_title">110联动</div>
+            <div class="yewusl_subtitle"><span>364</span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
-
+            <div class="pie yewusl3"></div>
+            <div class="yewusl_title">公共法律服务</div>
+            <div class="yewusl_subtitle"><span>41</span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
-
+            <div class="pie yewusl4"></div>
+            <div class="yewusl_title">纠纷排查</div>
+            <div class="yewusl_subtitle"><span>301</span><br/><span>今日</span></div>
           </div>
         </div>
       </div>
@@ -39,13 +47,19 @@
       </div>
       <div class="renmintj_left_once">
         <span class="renmintj_title_span renmintj_title_span_center">趋势分析</span>
-        <nav class="renmintj_nav"><a class="active">110</a>|<a>基层公共法律</a>|<a>调解案件</a>|<a>纠纷排查</a></nav>
+        <nav class="renmintj_nav"><a class="active" @click="changeType('110')">110</a>|<a @click="changeType('jicengggflfw')">基层公共法律</a>|<a @click="changeType('tiaojieaj')">调解案件</a>|<a @click="changeType('')">纠纷排查</a></nav>
         <div class='line'></div>
       </div>
     </div>
     <div class="renmintj_center">
       <div class="renmintj_center_map">
         <span class="renmintj_title_span renmintj_title_span_left">案件分布</span>
+        <div class="map_title">
+          <span>业务总量</span><span>934461</span>
+        </div>
+        <div class="map_subtitle">
+          <span>同比今年</span><span>15%</span>
+        </div>
         <div class='map'></div>
       </div>
       <div class="renmintj_center_once">
@@ -127,7 +141,8 @@ import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
 import renyuanzs from '@/../static/json/renmintj/jicengsfdsjzpt_renyuanzs'
 import jigouzs from '@/../static/json/renmintj/jicengsfdsjzpt_jigouzs'
 import genJson4shanghai from '@/../static/json/genJson4shanghai'
-import zhengzhimm from '@/../static/json/renmintj/tiaojieysxfx_zhengzhimm'
+import leixingfb from '@/../static/json/renmintj/jicengsfdsjzpt_leixingfb'
+import ditu from '@/../static/json/renmintj/jicengsfdsjzpt_ditu'
 
 export default {
   name: 'renmintj',
@@ -153,6 +168,9 @@ export default {
       }
       myChart.setOption(option)
     },
+    changeType (type) {
+      this.draw('line', eos.setLine2(qushifx.map((item) => { return {name: item.month, value: item[type]} }), true))
+    },
     updateTableData () {
       let i = 1
       let len = 6
@@ -171,20 +189,22 @@ export default {
   },
   created () {},
   mounted () {
+    this.draw('pie1', eos.setPie4([81.2, 18.8], '行专占比'))
+    this.draw('pie2', eos.setPie4([79.1, 20.9], '协议书占比'))
+    this.draw('yewusl1', eos.setPie5(654724, [44, 204, 250]))
+    this.draw('yewusl2', eos.setPie5(354624, [240, 104, 127]))
+    this.draw('yewusl3', eos.setPie5(984701, [109, 239, 39]))
+    this.draw('yewusl4', eos.setPie5(638434, [255, 231, 62]))
+    this.draw('chart', eos.setBar4(leixingfb.filter(item => { return item.jibie === '2' }).map(item => { return {name: item.leixing, value: item.shuliang} }), ['#FF9C00', '#F8E228'], 'vertical', 'integer', 1))
+    this.draw('line', eos.setLine2(qushifx.map((item) => { return {name: item.month, value: item['110']} }), true))
     this.draw('fill1', eos.setFill(jigouzs[4].shuliang, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [jigouzs[4].shuliang], '17', '#7BA6ED'))
     this.draw('fill2', eos.setFill(renyuanzs[6].shuliang, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [renyuanzs[6].shuliang], '17', '#7BA6ED'))
     this.draw('fill3', eos.setFill(9.2, '#FDBF5E', '\r\r\r\r文书质量\n', [0.3], '17', '#7BA6ED'))
     this.draw('fill4', eos.setFill(568, '#FDBF5E', '\r\r\r\r案例上报数\n', [0.3], '17', '#7BA6ED'))
-    this.draw('pie1', eos.setPie4([81.2, 18.8], '行专占比'))
-    this.draw('pie2', eos.setPie4([79.1, 20.9], '协议书占比'))
-    this.zhengzhimm = zhengzhimm.concat(zhengzhimm)
-    this.draw('chart', eos.setBar4(this.zhengzhimm, ['#FF9C00', '#F8E228'], 'vertical', 'integer', 1))
-    this.draw('line', eos.setLine2(qushifx.map((item) => {
-      return {name: item.month, value: item['110']}
-    }), true))
+    this.draw('map', eos.setMap(ditu))
+    // this.draw('map', eos.setMap2([[121.394878, 31.072511, 10], [121.555854, 30.8803, 20], [121.491, 31.237, 5], [121.440296, 31.401281, 6], [121.512, 31.27, 7], [121.43, 31.227, 2], [121.07968, 31.141832, 9], [121.541702, 31.270352, 3],
+    //   [121.736377, 31.088346, 3], [121.454, 31.234, 6], [121.20573, 31.372673, 5], [121.178709, 30.992306, 5], [121.43452, 31.170563, 7], [121.563184, 31.631849, 3], [121.233758, 30.816867, 4]]))
     // this.updateTableData()
-    this.draw('map', eos.setMap2([[121.394878, 31.072511, 10], [121.555854, 30.8803, 20], [121.491, 31.237, 5], [121.440296, 31.401281, 6], [121.512, 31.27, 7], [121.43, 31.227, 2], [121.07968, 31.141832, 9], [121.541702, 31.270352, 3],
-      [121.736377, 31.088346, 3], [121.454, 31.234, 6], [121.20573, 31.372673, 5], [121.178709, 30.992306, 5], [121.43452, 31.170563, 7], [121.563184, 31.631849, 3], [121.233758, 30.816867, 4]]))
   },
   beforeDestroy () {
     clearInterval(this.timer)
@@ -247,6 +267,30 @@ export default {
   .renmintj_title_span_left{
     width:169px;
     padding-left:22px;
+  }
+  .pie{
+    height: 97px;
+    width: 97px;
+  }
+  .yewusl_title{
+    color: #76BBEF;
+    font-size: 14px;
+    line-height:62px;
+    text-align: center;
+    border-bottom: 1px dashed #5E7ECB;
+  }
+  .yewusl_subtitle{
+    margin-top: 8px;
+    text-align: center;
+  }
+  .yewusl_subtitle>span:nth-of-type(1){
+    color: #49EAEE;
+    font-size: 14px;
+    line-height: 26px;
+  }
+  .yewusl_subtitle>span:nth-of-type(2){
+    color: #1194F8;
+    font-size: 12px;
   }
   .renmintj_left_yewulx_content1{
     float: left;
@@ -327,6 +371,53 @@ export default {
     position:absolute;
     top:0px;
     left:0px;
+  }
+  .map_title{
+    width: 165px;
+    height: 30px;
+    position:absolute;
+    top: 55px;
+    left:0px;
+    border-bottom: 1px solid #1A3DAC;
+    padding: 5px;
+  }
+  .map_title>span:nth-of-type(1){
+    color: #79BEF2;
+    font-size: 14px;
+    padding-right: 10px;
+    display: block;
+    float: left;
+    line-height: 34px;
+  }
+  .map_title>span:nth-of-type(2){
+    color: #FFFFFF;
+    font-size: 30px;
+    display: block;
+    float: left;
+  }
+  .map_subtitle{
+    width: 165px;
+    height: 30px;
+    position:absolute;
+    top: 95px;
+    left:0px;
+    padding: 5px;
+  }
+  .map_subtitle>span:nth-of-type(1){
+    color: #79BEF2;
+    font-size: 14px;
+    padding-right: 10px;
+    display: block;
+    float: left;
+    line-height: 34px;
+  }
+  .map_subtitle>span:nth-of-type(2){
+    color: #EF687F;
+    font-size: 14px;
+    display: block;
+    float: right;
+    padding-right: 20px;
+    line-height: 36px;
   }
   .renmintj_center_once{
     width:100%;

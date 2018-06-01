@@ -1165,6 +1165,58 @@ let setPie4 = (data, title, color) => {
   return option
 }
 
+// 圆环图
+let setPie5 = (data, color) => {
+  color = color ? [`rgba(${color.join(',')},1)`, `rgba(${color.join(',')},0)`] : ['rgba(109,239,39, 1)', 'rgba(109,239,39, 0)']
+  let option = {
+    title: {
+      x: 'center',
+      y: 'center',
+      text: data,
+      textStyle: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        lineHeight: 44
+      },
+      subtext: '全年',
+      subtextStyle: {
+        color: '#1194F8',
+        fontSize: 12
+      }
+    },
+    color: color,
+    series: [{
+      type: 'pie',
+      center: ['50%', '50%'],
+      radius: ['80%', '85%'],
+      clockwise: false,
+      label: {
+        show: false
+      },
+      itemStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 1,
+          x2: 0.6,
+          y2: 0,
+          colorStops: [{
+            offset: 0, color: color[0] // 0% 处的颜色
+          }, {
+            offset: 1, color: color[1] // 100% 处的颜色
+          }],
+          globalCoord: false
+        }
+      },
+      data: [{
+        name: 'all',
+        value: '100'
+      }]
+    }]
+  }
+  return option
+}
+
 // 漏斗图
 let setFunnel = (data) => {
   let option = {
@@ -1351,11 +1403,9 @@ let setMap = (pointData) => {
             x2: 1,
             y2: 0,
             colorStops: [{
-              offset: 0, color: '#007adf'
+              offset: 0, color: '#1678CE'
             }, {
-              offset: 0.5, color: '#621ad9'
-            }, {
-              offset: 1, color: '#00ecbc'
+              offset: 1, color: '#005BFF'
             }]
           },
           opacity: 0.9
@@ -1368,13 +1418,13 @@ let setMap = (pointData) => {
         },
         emphasis: {
           label: {
-            color: '#00F6FF',
+            color: '#FFF225',
             fontSize: 14
           }
         },
         checkpointStyle: {
-          symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAApCAYAAACyXOB4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkFFN0M0OEQ5NTk3MTExRTg5OUQzRUREODlDNzU4RjU3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkFFN0M0OERBNTk3MTExRTg5OUQzRUREODlDNzU4RjU3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QUU3QzQ4RDc1OTcxMTFFODk5RDNFREQ4OUM3NThGNTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QUU3QzQ4RDg1OTcxMTFFODk5RDNFREQ4OUM3NThGNTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7ZgMPXAAAE10lEQVR42syY228bRRTGvfY6cdw0TQuh3CVoG4FCRYAiAkjwxAsPvBSB+Af7gniiEgiJB5CABokKUCmFchGiQJM04LiOY2e9NmfQb6zPk1k3dRXgSJ9m43HmfD73nWTx4qB0B5KM2Zv44HRCEkmAGCHFbZFMb5NMWZAEz0qoD/S5v19y6T4JecUVkMqqxJREz5DLmsv+YFJS6h5PpgqmQJUz9JweyAy7IAN5xL37IhW6ylvEkZg21FhnWKfEYt5CjkjXsMPaYd0VyxW6NC1wlRLyVpkBh0AdTGMxTyqDhCPUNmyDHeCtV+jStICQd9W0WGUWzIHD/D0DaU9qF+Utw01DE7Q4cwe93cClQ2JphFAqhOpYxSk/Ypg3HGU9Ajm39zj4FrQgsmVoGP5inWJvW+I1w6VDYiEpT6gWIXPMcBc4xmfu+QzWWTWcNpw0fGHYhMgmZ2kMViKlpOeDPxXGnpS30GFRfLdhQeAULBuOGz43XOXgnw2nDC8arhu+EmvOBPGXBFnoAz9JJdMqgZXmIOQU38s6j9Ilw/eGjzC/iiP4i+Fpw6uGS5xd4/yKuEpr2DAj0wLXzUJgAUL3Gx4xPEOgvkucFIlz5wXDd1jtBC6toK8vtSsLSkWSBgVSM20etzkyL/HsFP0UEHA/6DHDE1jlitQfR/w8pFaIt48h0ZYy0eGzf7iUC9xXx30u094iYN+OEHrAcNbwpOEG61ksq/Ij/9/gvKOcX0efBn9J3VcJSoHPvCrBrDLHL7/PcA1lJUqAs/Arhj+wbJO9jHOWOXc2KL7DjNSSUCmoUaE8R6C77Pom0r8akHOJ8TouDX/UoYBQKvE2TM3QWr7PxWYl56LLhjUIJSTEEqtP9et8b7mgv05LU9e6lcTajE4DRZKJGx8iLpw8bLjH8Ctuy8acUY0QGgZ4rBGXpZ6Mk1NCyEuNz28llYjOJCQVm6MOUmJ6RkgNCubrg5SYnkFIqh8gP2BSeUTnCCkllkv5Hxekvs91gr2ONOhbJUsm5EaGvEGEkB9nY/I1s5MrCeuk/QJZt0ZlL1GnjvP9mOu6Mr8rseE8NZA3j4x/aDOQhXIBIivUpmuQW2ffVfQHqejvSEVX2eb8rgx5uU6eGk+ZDPwtKnOPQe5LmRCdog+oUStYah1rucM/hGz4PvAUZ2xxfjsYi0cmz75YqcMvadLlzxleNrxh+IxBzosrkr8xJZzGVToleHGTxvNMoec4twmpTkBqJKbywEoN+tMUnz9qeJZ4+lSacB93Xo64yU0DL9DrVpkyfifuGujxr2G5xtQgYqmW9KWypPCGYdHwGgPcxYIsrTIQLtK0r0JijZ64IS7sSFztcV8upCratdnbZS9n3HWN+U0C/wchdJI4c8rfw0Ubghu4cYswGes+b61uUP7DBNhmdl9lGj2DSy8xfbre94m46E9IbPLciAR6r6gk9CW7ShG3Kqkmg9omgb7EnHWF2Cp672vyghorCXteRgeSMb2gL+ndgGamviE7d74/5g35JtDADkvBHlIhsZilfLz5olqXGTu84PDfK7pLUOv0x90lhI25LAnQCyzWhkxNxtlyJIsVE9+66BfCm7hciHXu4H4qn+R+Kpx3NAtDS/zrN3mxWNNp4j+98wxd2v+/3A6H5AYHeY/+twADALmfTNaHVS4/AAAAAElFTkSuQmCC',
-          symbolSize: [21, 23]
+          symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkUyMTUzODA2NjU2MjExRTg5QUEzQTM0ODU2NUFFNkUwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkUyMTUzODA3NjU2MjExRTg5QUEzQTM0ODU2NUFFNkUwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTIxNTM4MDQ2NTYyMTFFODlBQTNBMzQ4NTY1QUU2RTAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTIxNTM4MDU2NTYyMTFFODlBQTNBMzQ4NTY1QUU2RTAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4S76/kAAABPElEQVR42rySMUvDQBiGc5czpdi14Co4uKttKYiDKOJfcFYQEUTBH1FaEMVBd3+EuujUGnB3KDoqdC1K4iXncyWp8ejQyQ8eLt+X94XjvlcYY7xivX1UFMceHMIFXM/PDXVRI4omDOsc51KYslK6q7VqpkZ8MjvA+PDHhHiB75YQZm1G6Xt4yQXfWi3ChjHikfYUc1+8vs+2aPaVn3SDIH4Snpd4TnEXP46Dhk78Bu2lNZlyKepImQ4zjYQlqEEIz5DaH2kqK19R6USNVL8Ge81NqGb9NqzAHfRznXRuslMw5FXN5uNyTVPVP5vsq2T9DQwczSCbj3X2yducu+ypx55CMVqLtwx16NknZyDYU409Nemviolok4jVqRLhZG+Lo0P2ArIXkr062YuYHSO+nRhYJ+VHcDYp5T8CDACVXJMdqdwOTQAAAABJRU5ErkJggg==',
+          symbolSize: [21, 25]
         },
         controlStyle: {
           showPlayBtn: false,
@@ -1384,7 +1434,7 @@ let setMap = (pointData) => {
       },
       geo: {
         map: 'shanghai',
-        zoom: 1.3,
+        zoom: 1.1,
         label: {
           emphasis: {
             show: false
@@ -1392,13 +1442,13 @@ let setMap = (pointData) => {
         },
         itemStyle: {
           normal: {
-            areaColor: '#00467F',
-            borderColor: '#111111',
+            areaColor: '#1A3DAC',
+            borderColor: '#597EF6',
             shadowColor: 'rgba(255, 255, 255, 0.3)',
-            shadowBlur: 20
+            shadowBlur: 5
           },
           emphasis: {
-            areaColor: '#2B91B7'
+            areaColor: '#1A3DAC'
           }
         }
       },
@@ -1418,7 +1468,7 @@ let setMap = (pointData) => {
             },
             top: 'center',
             left: 'center',
-            show: true
+            show: false
           }
         },
         itemStyle: {
@@ -1435,7 +1485,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-01')).min) / (maxAndMin(getPointDataByTime('18-01')).max - maxAndMin(getPointDataByTime('18-01')).min) * 100
+            return (val[2] - maxAndMin(getPointDataByTime('18-01')).min) / (maxAndMin(getPointDataByTime('18-01')).max - maxAndMin(getPointDataByTime('18-01')).min) * 30
           },
           data: convertData(getPointDataByTime('18-01'))
         }
@@ -1444,7 +1494,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-02')).min) / (maxAndMin(getPointDataByTime('18-02')).max - maxAndMin(getPointDataByTime('18-02')).min) * 100
+            return (val[2] - maxAndMin(getPointDataByTime('18-02')).min) / (maxAndMin(getPointDataByTime('18-02')).max - maxAndMin(getPointDataByTime('18-02')).min) * 30
           },
           data: convertData(getPointDataByTime('18-02'))
         } ]
@@ -1452,7 +1502,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-03')).min) / (maxAndMin(getPointDataByTime('18-03')).max - maxAndMin(getPointDataByTime('18-03')).min) * 100
+            return (val[2] - maxAndMin(getPointDataByTime('18-03')).min) / (maxAndMin(getPointDataByTime('18-03')).max - maxAndMin(getPointDataByTime('18-03')).min) * 30
           },
           data: convertData(getPointDataByTime('18-03'))
         }]
@@ -1460,7 +1510,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-04')).min) / (maxAndMin(getPointDataByTime('18-04')).max - maxAndMin(getPointDataByTime('18-04')).min) * 100
+            return (val[2] - maxAndMin(getPointDataByTime('18-04')).min) / (maxAndMin(getPointDataByTime('18-04')).max - maxAndMin(getPointDataByTime('18-04')).min) * 30
           },
           data: convertData(getPointDataByTime('18-04'))
         }]
@@ -1468,7 +1518,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-05')).min) / (maxAndMin(getPointDataByTime('18-05')).max - maxAndMin(getPointDataByTime('18-05')).min) * 100
+            return (val[2] - maxAndMin(getPointDataByTime('18-05')).min) / (maxAndMin(getPointDataByTime('18-05')).max - maxAndMin(getPointDataByTime('18-05')).min) * 30
           },
           data: convertData(getPointDataByTime('18-05'))
         }]
@@ -1478,6 +1528,7 @@ let setMap = (pointData) => {
   return option
 }
 
+// 地图
 let setMap2 = (data) => {
   data = data.filter(function (dataItem) {
     return dataItem[2] > 0
@@ -1571,4 +1622,4 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setPie4, setFunnel, setWordcloud, setMap, setMap2}
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setFunnel, setWordcloud, setMap, setMap2}
