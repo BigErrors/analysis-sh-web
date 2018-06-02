@@ -381,6 +381,7 @@ let setBar4 = (data, color) => {
   }]
   let categoryAxis = [{
     type: 'category',
+    boundaryGap: true,
     axisLine: {
       show: true,
       lineStyle: {
@@ -393,7 +394,8 @@ let setBar4 = (data, color) => {
     axisLabel: {
       color: '#1194F8',
       fontSize: 12,
-      rotate: 45,
+      interval: 0,
+      rotate: 0,
       formatter: function (value) {
         return value
       }
@@ -422,8 +424,20 @@ let setBar4 = (data, color) => {
       label: {
         show: true,
         position: 'top',
-        color: '#49EAEE',
-        fontSize: 12
+        fontSize: 12,
+        formatter: '{c|{c}}\n {x|}',
+        rich: {
+          c: {
+            color: '#49EAEE',
+            align: 'center'
+          },
+          x: {
+            height: 1,
+            width: 15,
+            backgroundColor: '#49EAEE',
+            align: 'center'
+          }
+        }
       },
       data: data.map(function (obj) {
         return obj.value
@@ -1422,16 +1436,24 @@ let setMap = (pointData) => {
           label: {
             color: '#FFF225',
             fontSize: 14
+          },
+          controlStyle: {
+            color: '#00F6FF',
+            borderColor: '#00F6FF'
           }
         },
         checkpointStyle: {
           symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPCAYAAAA/I0V3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkUyMTUzODA2NjU2MjExRTg5QUEzQTM0ODU2NUFFNkUwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkUyMTUzODA3NjU2MjExRTg5QUEzQTM0ODU2NUFFNkUwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTIxNTM4MDQ2NTYyMTFFODlBQTNBMzQ4NTY1QUU2RTAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTIxNTM4MDU2NTYyMTFFODlBQTNBMzQ4NTY1QUU2RTAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4S76/kAAABPElEQVR42rySMUvDQBiGc5czpdi14Co4uKttKYiDKOJfcFYQEUTBH1FaEMVBd3+EuujUGnB3KDoqdC1K4iXncyWp8ejQyQ8eLt+X94XjvlcYY7xivX1UFMceHMIFXM/PDXVRI4omDOsc51KYslK6q7VqpkZ8MjvA+PDHhHiB75YQZm1G6Xt4yQXfWi3ChjHikfYUc1+8vs+2aPaVn3SDIH4Snpd4TnEXP46Dhk78Bu2lNZlyKepImQ4zjYQlqEEIz5DaH2kqK19R6USNVL8Ge81NqGb9NqzAHfRznXRuslMw5FXN5uNyTVPVP5vsq2T9DQwczSCbj3X2yducu+ypx55CMVqLtwx16NknZyDYU409Nemviolok4jVqRLhZG+Lo0P2ArIXkr062YuYHSO+nRhYJ+VHcDYp5T8CDACVXJMdqdwOTQAAAABJRU5ErkJggg==',
           symbolSize: [21, 25]
         },
+        autoPlay: true,
         controlStyle: {
-          showPlayBtn: false,
-          showPrevBtn: false,
-          showNextBtn: false
+          showPlayBtn: true,
+          showPrevBtn: true,
+          showNextBtn: true,
+          position: 'left',
+          color: '#1194F8',
+          borderColor: '#1194F8'
         }
       },
       geo: {

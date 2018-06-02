@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-01 17:35:18
+ * @Last Modified time: 2018-06-01 17:36:53
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -174,17 +174,20 @@ export default {
       }
       this.myChart[domName].setOption(option)
     },
+    // 趋势分析
     changeType (type) {
       this.draw('line', eos.setLine2(qushifx.map((item) => { return {name: item.month, value: item[type]} }), true))
     },
-    changeRouter (name) {
-      this.$router.push({name: name})
-    },
+    // 案件分布
     changeNum () {
       let _this = this
       this.timer = setInterval(function () {
         _this.yewusl = parseInt(Math.random() * 9000) + 1000
       }, 5000)
+    },
+    // 路由跳转
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   },
   created () {},
