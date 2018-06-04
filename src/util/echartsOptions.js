@@ -1447,13 +1447,15 @@ let setMap = (pointData) => {
           symbolSize: [21, 25]
         },
         autoPlay: true,
+        playInterval: 5000,
         controlStyle: {
           showPlayBtn: true,
           showPrevBtn: true,
           showNextBtn: true,
           position: 'left',
           color: '#1194F8',
-          borderColor: '#1194F8'
+          borderColor: '#1194F8',
+          borderWidth: 0
         }
       },
       geo: {
