@@ -146,7 +146,6 @@ export default {
     line-height: 36px;
     cursor: pointer;
     color: rgba(77, 132, 254, 1);
-
   }
 
   .left-bar .active {
