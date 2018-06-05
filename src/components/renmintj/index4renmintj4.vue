@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-01 17:36:53
+ * @Last Modified time: 2018-06-05 10:50:52
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -47,7 +47,7 @@
       </div>
       <div class="renmintj_left_once">
         <span class="renmintj_title_span renmintj_title_span_center">趋势分析</span>
-        <nav class="renmintj_nav"><a class="active" @click="changeType('110')">110</a>|<a @click="changeType('jicengggflfw')">基层公共法律</a>|<a @click="changeType('tiaojieaj')">调解案件</a>|<a @click="changeType('')">纠纷排查</a></nav>
+        <nav class="renmintj_nav"><a class="nav_a renmintj_nav_active" @click="changeType('110',$event)">110</a>|<a class="nav_a" @click="changeType('jicengggflfw',$event)">基层公共法律</a>|<a class="nav_a" @click="changeType('tiaojieaj',$event)">调解案件</a>|<a class="nav_a" @click="changeType('',$event)">纠纷排查</a></nav>
         <div class='line'></div>
       </div>
     </div>
@@ -63,7 +63,7 @@
         <div class='map'></div>
       </div>
       <div class="renmintj_center_once">
-        <span class="renmintj_title_span renmintj_title_span_center" style="padding-left:35px;">重点事件</span>
+        <span class="renmintj_title_span renmintj_title_span_center" style="padding-left:35px;" @click="changeRouter('importantEvent')">重点事件</span>
           <div class='renmintj_center_table'>
             <div class="renmintj_table_thead">
               <span class='td'>序号</span>
@@ -117,7 +117,7 @@
           <div class="renmintj_right_fl">
             <div class="renmintj_right_fl_content">
               <div class="renmintj_right_fl_content_line"><span class="numColor">7910</span><span class="typeColor">协议书</span></div>
-              <div class="renmintj_right_fl_content_line"><span class="numColor">10000</span><span class="typeColor">调解案件</span></div>
+              <div class="renmintj_right_fl_content_line"><span class="numColor">10000</span><span class="typeColor">调解成功</span></div>
             </div>
             <div class="renmintj_right_fl_content">
               <div class="pie2"></div>
@@ -175,8 +175,17 @@ export default {
       this.myChart[domName].setOption(option)
     },
     // 趋势分析
-    changeType (type) {
-      this.draw('line', eos.setLine2(qushifx.map((item) => { return {name: item.month, value: item[type]} }), true))
+    changeType (type, enent) {
+      if (type) {
+        document.getElementsByClassName('nav_a')[0].className = 'nav_a'
+        document.getElementsByClassName('nav_a')[1].className = 'nav_a'
+        document.getElementsByClassName('nav_a')[2].className = 'nav_a'
+        document.getElementsByClassName('nav_a')[3].className = 'nav_a'
+        event.target.className = 'nav_a renmintj_nav_active'
+        this.draw('line', eos.setLine2(qushifx.map((item) => { return {name: item.month, value: item[type]} }), true))
+      } else {
+        this.$message.warning({message: '暂无数据'})
+      }
     },
     // 案件分布
     changeNum () {
@@ -203,7 +212,7 @@ export default {
     this.draw('fill1', eos.setFill(jigouzs[4].shuliang, '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [jigouzs[4].shuliang], '17', '#7BA6ED'))
     this.draw('fill2', eos.setFill(renyuanzs[6].shuliang, '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [renyuanzs[6].shuliang], '17', '#7BA6ED'))
     this.draw('fill3', eos.setFill(9.2, '#FDBF5E', '\r\r\r\r文书质量\n', [0.3], '17', '#7BA6ED'))
-    this.draw('fill4', eos.setFill(568, '#FDBF5E', '\r\r\r\r案例上报数\n', [0.3], '17', '#7BA6ED'))
+    this.draw('fill4', eos.setFill(568, '#FDBF5E', '\r\r\r\r案例上报数\n', [0.31], '17', '#7BA6ED'))
     this.draw('map', eos.setMap(ditu))
     this.changeNum()
     // this.draw('map', eos.setMap2([[121.394878, 31.072511, 10], [121.555854, 30.8803, 20], [121.491, 31.237, 5], [121.440296, 31.401281, 6], [121.512, 31.27, 7], [121.43, 31.227, 2], [121.07968, 31.141832, 9], [121.541702, 31.270352, 3],
@@ -261,6 +270,7 @@ export default {
     font-size:20px;
     color:rgba(121,190,242,1);
     box-sizing:border-box;
+    cursor: pointer;
   }
   .renmintj_title_span_center{
     width:100%;
@@ -330,7 +340,7 @@ export default {
   .renmintj_nav>a:hover{
     color: rgba(255,242,37,1);
   }
-  .renmintj_nav .active {
+  .renmintj_nav_active {
     color: rgba(255,242,37,1);
   }
   .renmintj_left{
@@ -588,7 +598,7 @@ export default {
     height: 244px;
   }
   .renmintj_right_fl_content{
-     width: 160px;
+     width: 170px;
      height: 122px;
      text-align: center;
   }

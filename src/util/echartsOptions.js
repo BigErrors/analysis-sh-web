@@ -269,7 +269,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
         if (value.length < 6) {
           return value
         }
-        return value.substring(0, 6) + '...'
+        return value.substring(0, 5) + '..'
       }
     },
     data: data.map(function (obj) {
@@ -284,7 +284,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
       show: false
     },
     grid: {
-      left: 120
+      containLabel: true
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -1231,6 +1231,46 @@ let setPie5 = (data, color) => {
   return option
 }
 
+// 圆环图
+let setPie6 = (data, isPie) => {
+  isPie = isPie || false
+  let color = data.length > 4 ? ['#95B6FF', '#4D84FE', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
+  let option = {
+    legend: {
+      orient: 'center',
+      top: 'middle',
+      right: '25%',
+      textStyle: {
+        color: '#7DA5FE',
+        fontSize: 16
+      },
+      data: data.map(item => {
+        return item.name
+      })
+    },
+    tooltip: {
+      show: true
+    },
+    color: color,
+    series: [
+      {
+        name: '',
+        type: 'pie',
+        center: ['35%', '50%'],
+        radius: isPie ? ['0', '80%'] : ['65%', '80%'],
+        label: {
+          show: false
+        },
+        labelLine: {
+          show: false
+        },
+        data: data
+      }
+    ]
+  }
+  return option
+}
+
 // 漏斗图
 let setFunnel = (data) => {
   let option = {
@@ -1649,4 +1689,4 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setFunnel, setWordcloud, setMap, setMap2}
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}

@@ -166,7 +166,9 @@ export default {
     overflow-y: auto;
   }
   .shade {
-    background-color: #0b1740;
+    background: url('/static/renmintj/pic_bg.png');
+    background-repeat:no-repeat;
+    background-position:center;
   }
   .area {
     float: left;

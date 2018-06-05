@@ -141,12 +141,6 @@ export default {
 </script>
 
 <style scope>
-  .clearfix:after{
-    content:'';
-    display:block;
-    width:0;
-    clear:both
-  }
   #totalNum {
     min-height: 1080px;
     min-width: 1920px;

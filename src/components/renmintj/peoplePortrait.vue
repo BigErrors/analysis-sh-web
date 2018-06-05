@@ -213,12 +213,6 @@ export default {
     box-sizing: border-box;
     padding: 13px 24px 24px 24px;
   }
-  .clearfix:after{
-    content:'';
-    display:block;
-    width:0;
-    clear:both
-  }
   .totalNum_content_left{
     float: left;
     width: 489px;

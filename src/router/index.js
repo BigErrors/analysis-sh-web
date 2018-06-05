@@ -16,8 +16,9 @@ import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
 import peopleSearch from '@/components/renmintj/peopleSearch2'
 import peoplePortrait from '@/components/renmintj/peoplePortrait'
-import totalNum from '@/components/renmintj/totalNum'
+import totalNum from '@/components/renmintj/totalNum2'
 import totalType from '@/components/renmintj/totalType'
+import importantEvent from '@/components/renmintj/importantEvent'
 
 Vue.use(Router)
 
@@ -107,6 +108,10 @@ const router = new Router({
       path: '/totalType',
       name: 'totalType',
       component: totalType
+    }, {
+      path: '/importantEvent',
+      name: 'importantEvent',
+      component: importantEvent
     }
   ]
 })

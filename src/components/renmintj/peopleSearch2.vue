@@ -265,13 +265,13 @@ export default {
     right: 0;
     top:100px;
   }
-.ej-pagination{
+  .ej-pagination{
     margin:auto;
     text-align: center;
     margin-top: 15px;
     float: left;
     width: 100%;
-}
+  }
   .mediators-image:not(:first-child) {
     margin-top: 40px;
   }
@@ -352,7 +352,9 @@ export default {
   }
 
   .shade {
-    background-color: #0b1740;
+    background: url('/static/renmintj/pic_bg.png');
+    background-repeat:no-repeat;
+    background-position:center;
   }
 
   .totalNum_header {

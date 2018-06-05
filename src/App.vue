@@ -77,4 +77,10 @@ export default {
   .anchorBL{
     display:none;
   }
+  .clearfix:after{
+    content:'';
+    display:block;
+    width:0;
+    clear:both
+  }
 </style>

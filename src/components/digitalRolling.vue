@@ -1,6 +1,6 @@
 <template>
   <div class="digitalRolling_container" :style = "{height:height+'px'}">
-    <i v-if="types === 'image'" v-for="(item,index) in numberArr" id="digitalRolling_num" class="digitalRolling_num" :key=index
+    <i v-if="types === 'image'" v-for="(item,index) in numberArr" id="digitalRolling_num" class="digitalRolling_num" :key='index'
     :style="{width:width+'px',height:height+'px'}"
     :class="[{'digitalRolling_num0': item==='0'},
     {'digitalRolling_num1': item==='1'},
@@ -12,9 +12,9 @@
     {'digitalRolling_num7': item==='7'},
     {'digitalRolling_num8': item==='8'},
     {'digitalRolling_num9': item==='9'}]"></i>
-    <div v-for="(item,index) in numberArr" :key=index :style="{width:width+'px',height:height+'px'}" class="digitalRolling_eyes">
+    <div v-for="(item,index) in numberArr" :key='index' :style="{width:width+'px',height:height+'px'}" class="digitalRolling_eyes">
       <ul :style="{width:width+'px',height:height+'px',top:-(item*height) + 'px'}" class="digitalRolling_ul" v-if="types === 'font'" >
-        <li :style="{lineHeight:height+'px',fontSize:fontSize+'px',color:fontColor}" class="digitalRolling_li" v-for = "item in 10" :key = item>{{item-1}}</li>
+        <li :style="{lineHeight:height+'px',fontSize:fontSize+'px',color:fontColor}" class="digitalRolling_li" v-for="item in 10" :key ='item'>{{item-1}}</li>
       </ul>
     </div>
   </div>
