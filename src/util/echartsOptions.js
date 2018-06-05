@@ -244,7 +244,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
       show: axisType === 'vertical',
       interval: 'auto',
       color: '#4D84FE',
-      fontSize: 16,
+      fontSize: barMaxWidth < 16 ? barMaxWidth : 16,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
     // value最大值的类型：percent，integer
