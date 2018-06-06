@@ -266,7 +266,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
       color: '#4D84FE',
       fontSize: 15,
       formatter: function (value) {
-        if (value.length < 6) {
+        if (value.length <= 6) {
           return value
         }
         return value.substring(0, 5) + '..'
@@ -284,7 +284,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
       show: false
     },
     grid: {
-      containLabel: true
+      containLabel: false
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -911,88 +911,132 @@ let setLine4 = (data, dataType, legend, color) => {
   return option
 }
 
-// 折线图--timeline
-let setLine5 = (data, dataType, legend, color) => {
+// 折线图--dataZoom属性
+let setLine5 = () => {
+  var base = +new Date(1968, 9, 3)
+  var oneDay = 24 * 3600 * 1000
+  var date = []
+  var data = [Math.random() * 300]
+  for (var i = 1; i < 20000; i++) {
+    var now = new Date(base += oneDay)
+    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'))
+    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]))
+  }
   let option = {
-    grid: {
-      containLabel: true
+    tooltip: {
+      show: false,
+      trigger: 'axis',
+      position: function (pt) {
+        return [pt[0], '10%']
+      }
     },
-    color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
+    title: {
+      position: 'left',
+      text: '起止时间：2018/01-2018/06',
+      textStyle: {
+        color: '#00C6FF',
+        fontSize: 16
+      }
+    },
     xAxis: {
       type: 'category',
+      boundaryGap: false,
+      data: date,
       axisLine: {
-        show: false
+        lineStyle: {
+          color: '#4D84FE'
+        }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
         color: '#4D84FE'
-      },
-      splitLine: {
-        show: false
-      },
-      boundaryGap: true,
-      data: []
+      }
     },
     yAxis: {
       type: 'value',
+      boundaryGap: [0, '100%'],
+      splitLine: {
+        lineStyle: {
+          color: '#4D84FE'
+        }
+      },
       axisLine: {
-        show: false
+        lineStyle: {
+          color: '#4D84FE'
+        }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
-        show: true,
-        color: '#4D84FE',
-        formatter: dataType === 'integer' ? '{value}' : '{value} %'
-      },
-      splitLine: {
-        show: false
+        color: '#4D84FE'
       }
     },
-    series: []
-  }
-  // 设置category对应数据
-  data[0].map(item => {
-    option.xAxis.data.push(item['name'])
-  })
-  // 添加系列并设置对应数据
-  data.map((series, index) => {
-    option.series.push({
-      name: legend && legend[index] ? legend[index] : 'seriesname',
-      type: 'line',
-      symbol: 'circle',
-      symbolSize: 8,
-      lineStyle: {
-        width: 1
+    dataZoom: [{
+      type: 'inside',
+      start: 0,
+      end: 10
+    }, {
+      start: 0,
+      end: 10,
+      handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+      handleSize: '80%',
+      handleStyle: {
+        color: '#157BD3',
+        shadowBlur: 3,
+        shadowColor: 'rgba(0, 0, 0, 0.6)',
+        shadowOffsetX: 2,
+        shadowOffsetY: 2
       },
-      label: {
-        show: true,
-        fontSize: 18,
-        formatter: dataType === 'integer' ? '{c}' : '{c} %'
+      showDetail: false,
+      fillerColor: '#1F3490',
+      dataBackground: {
+        lineStyle: {
+          color: '#7D7D7D',
+          width: 1
+        },
+        areaStyle: {
+          color: '#EEEEEE'
+        }
       },
-      data: data[index].map(item => {
-        return item['value']
-      })
-    })
-  })
-  if (legend && legend.length > 0) {
-    option.legend = {
-      orient: 'horizontal',
-      left: 'center',
-      textStyle: {
-        color: '#FFFFFF',
-        fontSize: 16
-      },
-      data: legend.map(item => {
-        return item
-      })
-    }
-  }
-  if (data.length === 1) {
-    option.series[0].label.color = '#FFC400'
+      borderColor: '#1F3490'
+    }],
+    series: [
+      {
+        name: '模拟数据',
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        sampling: 'average',
+        itemStyle: {
+          normal: {
+            color: 'rgb(255, 70, 131)'
+          }
+        },
+        areaStyle: {
+          normal: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [{
+                offset: 0,
+                color: 'rgb(255, 158, 68)'
+              }, {
+                offset: 1,
+                color: 'rgb(255, 70, 131)'
+              }],
+              globalCoord: false
+            }
+          }
+        },
+        data: data
+      }
+    ]
   }
   return option
 }
@@ -1472,7 +1516,7 @@ let setWordcloud = (data, maskImage) => {
   return option
 }
 
-// 地图
+// 地图--2d
 let setMap = (pointData) => {
   let geoCoordMap = {
     '闵行': [121.394878, 31.072511],
@@ -1529,11 +1573,15 @@ let setMap = (pointData) => {
     })}
   }
 
+  let date = Array.from(new Set(pointData.map(item => {
+    return item.riqi
+  })))
+
   let option = {
     baseOption: {
       timeline: {
         bottom: 15,
-        data: ['2018/01', '2018/02', '2018/03', '2018/04', '2018/05'],
+        data: date,
         axisType: 'category',
         lineStyle: {
           width: 3,
@@ -1644,54 +1692,24 @@ let setMap = (pointData) => {
         showContent: true
       }
     },
-    options: [
-      {
-        series: [{
-          symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-01')).min) / (maxAndMin(getPointDataByTime('18-01')).max - maxAndMin(getPointDataByTime('18-01')).min) * 30 + 2
-          },
-          data: convertData(getPointDataByTime('18-01'))
-        }
-        ]
-      },
-      {
-        series: [{
-          symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-02')).min) / (maxAndMin(getPointDataByTime('18-02')).max - maxAndMin(getPointDataByTime('18-02')).min) * 30 + 2
-          },
-          data: convertData(getPointDataByTime('18-02'))
-        } ]
-      },
-      {
-        series: [{
-          symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-03')).min) / (maxAndMin(getPointDataByTime('18-03')).max - maxAndMin(getPointDataByTime('18-03')).min) * 30 + 2
-          },
-          data: convertData(getPointDataByTime('18-03'))
-        }]
-      },
-      {
-        series: [{
-          symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-04')).min) / (maxAndMin(getPointDataByTime('18-04')).max - maxAndMin(getPointDataByTime('18-04')).min) * 30 + 2
-          },
-          data: convertData(getPointDataByTime('18-04'))
-        }]
-      },
-      {
-        series: [{
-          symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-05')).min) / (maxAndMin(getPointDataByTime('18-05')).max - maxAndMin(getPointDataByTime('18-05')).min) * 30
-          },
-          data: convertData(getPointDataByTime('18-05'))
-        }]
-      }
-    ]
+    options: []
   }
+  console.log(date)
+  date.map(item => {
+    option.options.push({
+      series: [{
+        symbolSize: function (val) {
+          return (val[2] - maxAndMin(getPointDataByTime(item)).min) / (maxAndMin(getPointDataByTime(item)).max - maxAndMin(getPointDataByTime(item)).min) * 30 + 2
+        },
+        data: convertData(getPointDataByTime(item))
+      }
+      ]
+    })
+  })
   return option
 }
 
-// 地图
+// 地图--3d
 let setMap2 = (data) => {
   data = data.filter(function (dataItem) {
     return dataItem[2] > 0

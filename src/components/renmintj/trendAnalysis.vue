@@ -42,10 +42,13 @@
 </template>
 
 <script>
-// import eos from '@/util/echartsOptions'
+import eos from '@/util/echartsOptions'
+import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
+import gequxztjy from '@/../static/json/renmintj/tiaojieslxfx_gequxztjy'
+import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
 
 export default {
   name: 'trendAnalysis',
@@ -75,6 +78,12 @@ export default {
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
     },
+    drawWordcloud2 (domName) {
+      let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
+        return [item.name, item.value]
+      }))
+      this.$wordcloud(document.getElementsByClassName(domName)[0], option)
+    },
     changeNum () {
       let _this = this
       this.timer = setInterval(function () {
@@ -101,7 +110,9 @@ export default {
   },
   mounted () {
     this.changeNum()
-    // this.draw('target3', eos.setBar3(gequxztjy.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+    this.draw('target2', eos.setLine5())
+    this.draw('target3', eos.setBar3(gequxztjy.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+    this.drawWordcloud2('target4')
   },
   beforeDestroy () {
     clearInterval(this.timer)
@@ -202,6 +213,10 @@ export default {
     height: 720px;
     margin-bottom: 0;
   }
+  .target2 {
+    width: 1241px;
+    height: 720px;
+  }
   .trendAnalysis_content_right{
     width: 622px;
     float: left;
@@ -216,6 +231,14 @@ export default {
   .trendAnalysis_content_right_once:nth-of-type(2){
     height: 371px;
     margin-bottom: 0;
+  }
+  .target3 {
+    width: 622px;
+    height: 443px;
+  }
+  .target4 {
+    width: 622px;
+    height: 331px;
   }
   .trendAnalysis_content_title{
     width: 100%;

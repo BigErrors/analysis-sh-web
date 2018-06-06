@@ -77,6 +77,43 @@ export default {
   .anchorBL{
     display:none;
   }
+.el-cascader__label{
+font-size:16px;
+font-family:HiraginoSansGB-W3;
+color:rgba(94,126,203,1);
+border-radius: 2px;
+}
+.el-input--suffix .el-input__inner::-webkit-input-placeholder{
+color:rgba(94,126,203,1);
+}
+.el-input--suffix .el-input__inner{
+background:rgba(8,79,211,0.2);
+font-size:16px;
+border: rgba(123,149,246,0.98);
+}
+.el-cascader-menu{
+background:rgba(1,24,84,0.98);
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+width: 4px;
+background-color: rgba(1,24,84,1);
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+border-radius: 2px;
+background-color: transparent;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+height: 4px;
+border-radius: 2px;
+background-color: #dedfe0;
+}
   .clearfix:after{
     content:'';
     display:block;

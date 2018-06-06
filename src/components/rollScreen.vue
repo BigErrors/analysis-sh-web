@@ -89,12 +89,15 @@ export default {
     }
   },
   mounted: function () {
-    // 复制一份slot的节点，如果直接用同名slot会报错
-    if (this.dLength !== null) {
-      for (let i = 0; i < this.dLength; i++) {
-        this.$el.childNodes[0].appendChild(this.$slots.slide[i].elm.cloneNode(true))
+    let _this = this
+    setTimeout(function () {
+      // 复制一份slot的节点，如果直接用同名slot会报错
+      if (_this.dLength !== null) {
+        for (let i = 0; i < _this.dLength; i++) {
+          _this.$el.childNodes[0].appendChild(_this.$slots.slide[i].elm.cloneNode(true))
+        }
       }
-    }
+    }, 2000)
   }
 }
 </script>

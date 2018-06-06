@@ -20,6 +20,9 @@ import totalNum from '@/components/renmintj/totalNum2'
 import totalType from '@/components/renmintj/totalType2'
 import importantEvent from '@/components/renmintj/importantEvent'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
+import yewulx from '@/components/mockpages/yewulx'
+import jigoupm from '@/components/mockpages/jigoupm'
+import qushifx from '@/components/mockpages/qushifx'
 
 Vue.use(Router)
 
@@ -117,7 +120,20 @@ const router = new Router({
       path: '/trendAnalysis',
       name: 'trendAnalysis',
       component: trendAnalysis
+    }, {
+      path: '/yewulx',
+      name: 'yewulx',
+      component: yewulx
+    }, {
+      path: '/jigoupm',
+      name: 'jigoupm',
+      component: jigoupm
+    }, {
+      path: '/qushifx',
+      name: 'qushifx',
+      component: qushifx
     }
+
   ]
 })
 

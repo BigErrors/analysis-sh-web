@@ -1,83 +1,107 @@
 <template>
-<div id='totalNum' class='shade'>
-  <div class="totalNum_header">
-    <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
-  </div>
-  <div class="totalNum_nav">
-    <span class="totalNum_nav_span">首页 > 业务数量</span>
-  </div>
-  <div class="totalNum_nav2">
-    <span class="totalNum_nav2_span totalNum_nav2_span_active">人民调解</span>
-    <span class="totalNum_nav2_span">110联动</span>
-    <span class="totalNum_nav2_span">公共法律服务</span>
-    <span class="totalNum_nav2_span">纠纷排查</span>
-  </div>
-  <div class="totalNum_content">
-    <div class="totalNum_content_top">
-        <div class="statistics"><digitalRolling class="num" :height='41' :width='20' :number='jinrixz' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">今日新增</span></div>
-        <div class="statistics"><digitalRolling class="num" :height='41' :width='20' :number='quannianlj' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">全年累计</span></div>
+  <div id='totalNum' class='shade'>
+    <div class="totalNum_header">
+      <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
     </div>
-    <div class="totalNum_content_top">
-      <div class="totalNum_content_title">
-        <div class=" totalNum_content_title_left">
-          <span class="totalNum_content_span1">类型</span>
+    <div class="totalNum_nav">
+      <span class="totalNum_nav_span">首页 > 业务数量</span>
+    </div>
+    <div class="totalNum_nav2">
+      <span class="totalNum_nav2_span totalNum_nav2_span_active">人民调解</span>
+      <span class="totalNum_nav2_span">110联动</span>
+      <span class="totalNum_nav2_span">公共法律服务</span>
+      <span class="totalNum_nav2_span">纠纷排查</span>
+    </div>
+    <div class="totalNum_content">
+      <div class="totalNum_content_top">
+        <div class="statistics">
+          <digitalRolling class="num" :height='41' :width='20' :number='jinrixz' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+          <br>
+          <span class="title">今日新增</span>
         </div>
-        <div class=" totalNum_content_title_right">
-          <span class=" totalNum_content_span5" @click='changeTypeData("week",$event)'>本周</span>
-          <span class=" totalNum_content_span5" @click='changeTypeData("month",$event)'>本月</span>
-          <span class=" totalNum_content_span5 totalNum_content_active" @click='changeTypeData("year",$event)'>今年</span>
+        <div class="statistics">
+          <digitalRolling class="num" :height='41' :width='20' :number='quannianlj' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+          <br>
+          <span class="title">全年累计</span>
         </div>
       </div>
-      <div class='target2'></div>
-      <div class="totalNum_detail">
-        <div class="totalNum_detail_main">
-          <div class="totalNum_detail_title">{{leixinfx2Title}}</div>
-          <div class="totalNum_detail_content" v-for="(item,index) in leixinfx2" :key="index">
-            <span class="totalNum_detail_span1">{{item.xiaolei}}</span>
-            <span class="totalNum_detail_span2">{{item.xiaoleivalue}}</span>
+      <div class="totalNum_content_top">
+        <div class="totalNum_content_title">
+          <div class=" totalNum_content_title_left">
+            <span class="totalNum_content_span1">类型</span>
+          </div>
+          <div class=" totalNum_content_title_right">
+            <span class=" totalNum_content_span5" @click='changeTypeData("week",$event)'>本周</span>
+            <span class=" totalNum_content_span5" @click='changeTypeData("month",$event)'>本月</span>
+            <span class=" totalNum_content_span5 totalNum_content_active" @click='changeTypeData("year",$event)'>今年</span>
+          </div>
+        </div>
+        <div class='target2'></div>
+        <div class="totalNum_detail">
+          <div class="totalNum_detail_main">
+            <div class="totalNum_detail_title">{{leixinfx2Title}}</div>
+            <div class="totalNum_detail_content" v-for="(item,index) in leixinfx2" :key="index">
+              <span class="totalNum_detail_span1">{{item.xiaolei}}</span>
+              <span class="totalNum_detail_span2">{{item.xiaoleivalue}}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="totalNum_content_top">
-      <div class="totalNum_content_title clearfix">
-        <div class="totalNum_content_title_left">
-          <span class="totalNum_content_span1">案件处理状态</span>
+      <div class="totalNum_content_top">
+        <div class="totalNum_content_title clearfix">
+          <div class="totalNum_content_title_left">
+            <span class="totalNum_content_span1">案件处理状态</span>
+          </div>
+        </div>
+        <div class="target3"></div>
+      </div>
+      <div class="totalNum_content_bottom">
+        <div class="totalNum_content_title clearfix">
+          <div class="totalNum_content_title_left">
+            <span class="totalNum_content_span1">各区案件数量</span>
+          </div>
+        </div>
+        <div class="target4"></div>
+      </div>
+      <div class="totalNum_content_bottom">
+        <div class="totalNum_content_title clearfix">
+          <div class="totalNum_content_title_left">
+            <span class="totalNum_content_span1">案件来源分布</span>
+          </div>
+        </div>
+        <div class="target5"></div>
+      </div>
+      <div class="totalNum_content_bottom">
+        <div class="totalNum_content_title clearfix">
+          <div class="totalNum_content_title_left">
+            <span class="totalNum_content_span1">待办申请案件</span>
+          </div>
+        </div>
+        <div class='renmintj_center_table'>
+          <div class="renmintj_table_thead">
+            <span class='td'>类型</span>
+            <span class='td'>行政区</span>
+            <span class='td'>申请日期</span>
+            <span class='td'>简述</span>
+          </div>
+          <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
+            <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index">
+              <span class='td'>{{item.shijianlx}}</span>
+              <span class='td'>{{item.diqu}}</span>
+              <span class='td'>{{item.riqi}}</span>
+              <span class='td'>{{item.jianshu}}</span>
+            </div>
+          </rollScreen>
         </div>
       </div>
-      <div class="target3"></div>
     </div>
-    <div class="totalNum_content_bottom">
-      <div class="totalNum_content_title clearfix">
-        <div class="totalNum_content_title_left">
-          <span class="totalNum_content_span1">各区案件数量</span>
-        </div>
-      </div>
-      <div class="target4"></div>
-    </div>
-    <div class="totalNum_content_bottom">
-      <div class="totalNum_content_title clearfix">
-        <div class="totalNum_content_title_left">
-          <span class="totalNum_content_span1">案件来源分布</span>
-        </div>
-      </div>
-      <div class="target5"></div>
-    </div>
-    <div class="totalNum_content_bottom">
-      <div class="totalNum_content_title clearfix">
-        <div class="totalNum_content_title_left">
-          <span class="totalNum_content_span1">待办申请案件</span>
-        </div>
-      </div>
-      <div class="target6"></div>
-    </div>
-  </div>
 
 </div>
 </template>
 
 <script>
 import eos from '@/util/echartsOptions'
+import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import leixinfx1 from '@/../static/json/renmintj/tiaojieaj_leixinfx_1'
@@ -94,6 +118,11 @@ export default {
   data () {
     return {
       myChart: {},
+      table: {
+        zhongdiansj: [],
+        dLength: 0,
+        lineNum: 0
+      },
       timer: '',
       jinrixz: 32,
       quannianlj: 65432,
@@ -145,9 +174,20 @@ export default {
       this.leixinfx2 = leixinfx2.filter((item) => {
         if (item.timetype === this.timetype && item.dalei === type) { return true }
       })
+    },
+    getData () {
+      let vue = this
+      let reqParam = {}
+      let url = ''
+      url = '/peopleMediate/zdsj'
+      http.get(url, reqParam, (data) => {
+        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 6, data]
+      })
     }
   },
-  created () {},
+  created () {
+    this.getData()
+  },
   mounted () {
     this.changeNum()
     this.draw('target2', eos.setPie2(leixinfx1.filter((item) => {
@@ -164,7 +204,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
   #totalNum {
     min-height: 1080px;
     min-width: 1920px;
@@ -429,5 +469,30 @@ export default {
     font-size: 16px;
     line-height: 16px;
     padding-left: 54px;
+  }
+  .renmintj_center_table {
+    width: 100%;
+    padding:0 24px;
+    box-sizing:border-box;
+    font-size:14px;
+  }
+  .renmintj_center_table div{
+    width: 100%;
+    height: 33px;
+  }
+  .renmintj_center_table div span {
+    float: left;
+    display: block;
+    width: 25%;
+    line-height:33px;
+    text-align: center;
+    color:rgba(118,187,239,1);
+  }
+  .renmintj_table_thead{
+    color:rgba(17,148,248,1);
+    line-height:42px;
+  }
+  .renmintj_table_tr:nth-of-type(2n-1){
+    background: rgba(7,30,74,0.8)
   }
 </style>

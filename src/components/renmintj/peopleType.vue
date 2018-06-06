@@ -154,16 +154,16 @@ export default {
         vue['suiyxzbpm'] = data['new_tjy']
         vue.$nextTick(function () {
           vue.draw('target1', eos.setPie3(data['education_label']))
-          vue.draw('target2', eos.setBar3(data['politic'].reverse(), ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
+          vue.draw('target2', eos.setBar3(data['politic'], ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
           vue.draw('target3', eos.setLine4([data['age_LV'].filter((item) => {
             if (item.xingbie === '男') {
               return true
             }
-          }).reverse(), data['age_LV'].filter((item) => {
+          }), data['age_LV'].filter((item) => {
             if (item.xingbie === '女') {
               return true
             }
-          }).reverse()], 'integer', ['男性', '女性']))
+          })], 'integer', ['男性', '女性']))
         })
       })
     }

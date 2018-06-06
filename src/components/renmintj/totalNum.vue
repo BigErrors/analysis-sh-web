@@ -140,7 +140,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
   #totalNum {
     min-height: 1080px;
     min-width: 1920px;

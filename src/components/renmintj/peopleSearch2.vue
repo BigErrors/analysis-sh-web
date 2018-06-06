@@ -44,9 +44,9 @@
               v-model="searchName">
             </el-input>
           </div>
-          <div class="sortRight" :class="{activeshang:sortValue3,activexia:sortValue3!==''&&!sortValue3}"><span @click="sortValue3=!sortValue3" style="cursor:pointer">文书质量</span></div>
-          <div class="sortRight" :class="{activeshang:sortValue2,activexia:sortValue2!==''&&!sortValue2}"><span @click="sortValue2=!sortValue2" style="cursor:pointer">调解成功率</span></div>
-          <div class="sortRight" :class="{activeshang:sortValue1,activexia:sortValue1!==''&&!sortValue1}"><span @click="sortValue1=!sortValue1" style="cursor:pointer">调解数量</span></div>
+          <div class="sortRight" :class="{activeshang:sortValue === 'wszl'&&sortType,activexia:sortValue === 'wszl' &&!sortType}"><span @click="changeSort('wszl')" style="cursor:pointer">文书质量</span></div>
+          <div class="sortRight" :class="{activeshang:sortValue === 'tjcgl'&&sortType,activexia:sortValue ==='tjcgl'&&!sortType}"><span @click="changeSort('tjcgl')" style="cursor:pointer">调解成功率</span></div>
+          <div class="sortRight" :class="{activeshang:sortValue === 'tjsl'&&sortType,activexia:sortValue ==='tjsl'&&!sortType}"><span @click="changeSort('tjsl')" style="cursor:pointer">调解数量</span></div>
         </div>
         <div class="mediators-content">
           <!-- <div v-for="row in Math.ceil(mediators.length/5)" :key="'row'+row" :row="row" class="mediators-image">
@@ -58,9 +58,9 @@
             </div>
           </div> -->
           <div class="mediators_img_container" v-for="(item,index) in mediators" :key="item.xuhao">
-            <img class="media_info_jb" v-if ="index===0" src="/static/renmintj/jing.png"/>
-            <img class="media_info_jb" v-if ="index===1" src="/static/renmintj/yin.png"/>
-            <img class="media_info_jb" v-if ="index===2" src="/static/renmintj/tong.png"/>
+            <img class="media_info_jb" v-if ="index===0 && sortType" src="/static/renmintj/jing.png"/>
+            <img class="media_info_jb" v-if ="index===1 && sortType" src="/static/renmintj/yin.png"/>
+            <img class="media_info_jb" v-if ="index===2 && sortType" src="/static/renmintj/tong.png"/>
             <img @click="changeRouter('peoplePortrait')" class="media_info_img" v-if="item.xingbie==='2'" :src="item.zhaopiandz" onerror="src='/static/renmintj/boy.png'"/>
             <img @click="changeRouter('peoplePortrait')" class="media_info_img" v-if="item.xingbie==='1'" :src="item.zhaopiandz" onerror="src='/static/renmintj/girl.png'"/>
             <p class="mediator-name" v-text="item.xingming" ></p>
@@ -75,13 +75,65 @@
 </template>
 
 <script>
-import areaOverviews from '@/../static/json/renmintj/huaxiangfx_quyu'
 import mediators from '@/../static/json/renmintj/huaxiangfx_renyuanqd'
 export default {
   name: 'peopleSearch',
   data () {
     return {
-      areaOverviews: [],
+      areaOverview: [
+        {
+          'label': '全部区域',
+          'value': 0
+        }, {
+          'label': '闵行区',
+          'value': '闵行'
+        }, {
+          'label': '徐汇区',
+          'value': '徐汇'
+        }, {
+          'label': '宝山区',
+          'value': '宝山'
+        }, {
+          'label': '崇明区',
+          'value': '崇明'
+        }, {
+          'label': '浦东区',
+          'value': '浦东'
+        }, {
+          'label': '松江区',
+          'value': '松江'
+        }, {
+          'label': '奉贤区',
+          'value': '奉贤'
+        }, {
+          'label': '嘉定区',
+          'value': '嘉定'
+        }, {
+          'label': '青浦区',
+          'value': '青浦'
+        }, {
+          'label': '杨浦区',
+          'value': '杨浦'
+        }, {
+          'label': '黄浦区',
+          'value': '黄浦'
+        }, {
+          'label': '金山区',
+          'value': '金山'
+        }, {
+          'label': '普陀区',
+          'value': '普陀'
+        }, {
+          'label': '静安区',
+          'value': '静安'
+        }, {
+          'label': '长宁区',
+          'value': '长宁'
+        }, {
+          'label': '虹口区',
+          'value': '虹口'
+        }
+      ],
       mediators: [],
       areaActive: 0,
       currentPage: 1,
@@ -89,16 +141,13 @@ export default {
         label: '全部',
         value: '0'
       }, {
-        label: '村局调委会',
-        value: '1'
+        label: '居（社区）调委会',
+        value: '居（社区）调委会'
       }, {
-        label: '街镇调委会',
-        value: '2'
+        label: '村调委会',
+        value: '村调委会'
       }, {
-        label: '企事业单位调委会',
-        value: '3'
-      }, {
-        label: '行业、专业调委会',
+        label: '行业性、专业性调委会',
         value: '4',
         children: [{
           label: '医患纠纷',
@@ -129,23 +178,24 @@ export default {
           value: '14'
         }]
       }, {
+        label: '街道调委会',
+        value: '街道调委会'
+      }, {
+        label: '乡镇调委会',
+        value: '乡镇调委会'
+      }, {
+        label: '企事业单位调委会',
+        value: '企事业单位调委会'
+      }, {
         label: '其它调委会',
-        value: '5'
+        value: '其它调委会'
       }],
       searchName: '',
-      sortValue1: '',
-      sortValue2: '',
-      sortValue3: ''
+      sortValue: '',
+      sortType: ''
     }
   },
   computed: {
-    areaOverview: function () {
-      let newArr = []
-      for (let i of this.areaOverviews) {
-        newArr.push({'value': i.shuzhi, 'label': i.mincgheng})
-      }
-      return newArr
-    },
     areaOverviewDefault: function () {
       return [this.areaOverview[0].value]
     },
@@ -166,10 +216,17 @@ export default {
     },
     selectArea: function (key, overview) {
       this.areaActive = key
+    },
+    changeSort: function (val) {
+      if (this.sortValue === val) {
+        this.sortType = !this.sortType
+      } else {
+        this.sortValue = val
+        this.sortType = true
+      }
     }
   },
   created () {
-    this.areaOverviews = areaOverviews
     this.mediators = mediators
   },
   mounted () {}
@@ -178,6 +235,11 @@ export default {
 </script>
 
 <style scoped>
+  .shade {
+    background: url('/static/renmintj/pic_bg.png');
+    background-repeat:no-repeat;
+    background-position:center;
+  }
   .mediators_container{
     width: calc(100%);
     float: left;
@@ -265,13 +327,13 @@ export default {
     right: 0;
     top:100px;
   }
-  .ej-pagination{
+.ej-pagination{
     margin:auto;
     text-align: center;
     margin-top: 15px;
     float: left;
     width: 100%;
-  }
+}
   .mediators-image:not(:first-child) {
     margin-top: 40px;
   }
@@ -293,6 +355,9 @@ export default {
   .mediator-committee {
     font-size: 14px;
     color: #686C80;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
 
   .mediator-info img {
@@ -337,7 +402,6 @@ export default {
     line-height: 36px;
     cursor: pointer;
     color: rgba(77, 132, 254, 1);
-
   }
 
   .left-bar .active {
@@ -352,9 +416,7 @@ export default {
   }
 
   .shade {
-    background: url('/static/renmintj/pic_bg.png');
-    background-repeat:no-repeat;
-    background-position:center;
+    background-color: #0b1740;
   }
 
   .totalNum_header {

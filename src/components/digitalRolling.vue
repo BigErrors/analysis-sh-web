@@ -77,6 +77,7 @@ export default {
   .digitalRolling_container{
     position: relative;
     display: inline-block;
+    font-family: 'Microsoft Yahei';
   }
   .digitalRolling_num{
     position: relative;

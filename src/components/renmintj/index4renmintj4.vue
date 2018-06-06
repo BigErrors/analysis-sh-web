@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-06 11:20:12
+ * @Last Modified time: 2018-06-06 19:16:14
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('totalType')">业务类型</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('yewulx')">业务类型</span>
         <div class='renmintj_left_yewulx_content1'>
           <div class="pie1"></div>
         </div>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('trendAnalysis')">趋势分析</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('qushifx')">趋势分析</span>
         <nav class="renmintj_nav"><a class="nav_a renmintj_nav_active" @click="changeType('data_110',$event)">110</a>|<a class="nav_a" @click="changeType('data_jc',$event)">基层公共法律</a>|<a class="nav_a" @click="changeType('data_tj',$event)">调解案件</a>|<a class="nav_a" @click="changeType('data_pc',$event)">纠纷排查</a></nav>
         <div class='line'></div>
       </div>
@@ -86,7 +86,7 @@
     </div>
     <div class="renmintj_right">
       <div class="renmintj_right_once">
-        <span class="renmintj_title_span renmintj_title_span_center">机构总数</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('jigoupm')">机构总数</span>
         <div class="renmintj_right_jigou">
           <div class="renmintj_right_circle" :class="'circle'+(index+1)" v-for="(item, index) in MechanismNumber" :key="index" v-if="index<=3">
             <span class="renmintj_right_span1">{{item.shuliang}}</span>
@@ -139,7 +139,6 @@ import eos from '@/util/echartsOptions'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import genJson4shanghai from '@/../static/json/genJson4shanghai'
-import ditu from '@/../static/json/renmintj/jicengsfdsjzpt_ditu'
 import http from '@/util/httpUtil'
 
 export default {
@@ -235,6 +234,10 @@ export default {
           vue.draw('line', eos.setLine2(this.qushifx['data_110'].map((item) => { return {name: item.time, value: item.value} }), true))
         })
       })
+      url = '/peopleMediate/ywsj_casestatistics_dist'
+      http.get(url, reqParam, (data) => {
+        vue.draw('map', eos.setMap(data))
+      })
       url = '/peopleMediate/zdsj'
       http.get(url, reqParam, (data) => {
         [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 6, data]
@@ -285,14 +288,13 @@ export default {
           })
         })
         vue.yewusl = parseInt(Math.random() * 9000) + 1000
-      }, 5000)
+      }, 10000)
     }
   },
   created () {
     this.getData()
   },
   mounted () {
-    this.draw('map', eos.setMap(ditu))
     // this.draw('map', eos.setMap2([[121.394878, 31.072511, 10], [121.555854, 30.8803, 20], [121.491, 31.237, 5], [121.440296, 31.401281, 6], [121.512, 31.27, 7], [121.43, 31.227, 2], [121.07968, 31.141832, 9], [121.541702, 31.270352, 3],
     //  [121.736377, 31.088346, 3], [121.454, 31.234, 6], [121.20573, 31.372673, 5], [121.178709, 30.992306, 5], [121.43452, 31.170563, 7], [121.563184, 31.631849, 3], [121.233758, 30.816867, 4]]))
     this.getUpdateData()

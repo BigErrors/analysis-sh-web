@@ -1,4 +1,4 @@
-let setOption = (data) => {
+let setOption = (data, shape) => {
   // 最大值
   let maxValue = data.map(item => {
     return item[1]
@@ -14,7 +14,7 @@ let setOption = (data) => {
   // 转换系数
   let k = (40 - 10) / (maxValue - minValue)
   let option = {
-    list: data || [['foo', 12], ['bar', 6]],
+    list: data,
     fontFamily: '微软雅黑',
     fontWeight: 3,
     color: function (word, weight) {
@@ -36,6 +36,11 @@ let setOption = (data) => {
     gridSize: 10,
     rotationSteps: 30,
     rotateRatio: [-60, 60]
+  }
+  if (shape) {
+    // Available presents are circle (default), cardioid (apple or heart shape curve, the most known polar equation), diamond, square, triangle-forward, triangle, (alias of triangle-upright, pentagon, and star).
+    option.clearCanvas = true
+    option.shape = 'circle'
   }
   return option
 }

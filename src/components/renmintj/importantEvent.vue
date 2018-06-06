@@ -98,8 +98,6 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import linianxzryqs from '@/../static/json/renmintj/tiaojieslxfx_linianxzryqs'
-import gequxztjy from '@/../static/json/renmintj/tiaojieslxfx_gequxztjy'
 
 export default {
   name: 'importantEvent',
@@ -116,8 +114,8 @@ export default {
         lineNum: 0
       },
       timer: '',
-      jinrixz: 32,
-      quannianlj: 65432
+      jinrixz: 0,
+      quannianlj: 0
     }
   },
   methods: {
@@ -144,9 +142,21 @@ export default {
       let vue = this
       let reqParam = {}
       let url = ''
-      url = '/peopleMediate/zdsj'
+      url = '/peopleMediate/ZdsjUnder'
       http.get(url, reqParam, (data) => {
-        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 7, data]
+        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.KeyEvents.length, 7, data.KeyEvents]
+        vue.jinrixz = data['DigitalDisplay']['jinrixz']
+        vue.quannianlj = data['DigitalDisplay']['zongshu']
+        data['KeyEvents_Number'] = data['KeyEvents_Number'].map(item => { return {name: item.time, value: item.number} })
+        data['KeyEvents_AddCounts'] = data['KeyEvents_AddCounts'].map(item => { return {name: item.time, value: item.value} })
+        vue.$nextTick(function () {
+          vue.draw('target2', eos.setBar3(data['KeyEvents_Number'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
+          vue.draw('target3', eos.setPie6(data['KeyEvents_Source'].reverse()))
+          vue.draw('target4', eos.setBar3(data['KeyEvents_Status'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
+          vue.draw('target5', eos.setLine4([data['KeyEvents_AddCounts']].reverse(), 'integer'))
+          vue.draw('target6', eos.setPie6(data['KeyEvents_Type'], true))
+          vue.draw('target7', eos.setBar3(data['KeyEvents_EachArea'].reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer', 11))
+        })
       })
     }
   },
@@ -154,13 +164,7 @@ export default {
     this.getData()
   },
   mounted () {
-    this.changeNum()
-    this.draw('target2', eos.setBar3(gequxztjy.reverse(), ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
-    this.draw('target3', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}, {name: 3, value: 3}]))
-    this.draw('target4', eos.setBar3(gequxztjy.reverse(), ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
-    this.draw('target5', eos.setLine4([linianxzryqs], 'integer'))
-    this.draw('target6', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}, {name: 3, value: 3}, {name: 4, value: 4}, {name: 5, value: 5}, {name: 6, value: 6}, {name: 7, value: 7}], true))
-    this.draw('target7', eos.setBar3(gequxztjy.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+    // this.changeNum()
   },
   beforeDestroy () {
     clearInterval(this.timer)
