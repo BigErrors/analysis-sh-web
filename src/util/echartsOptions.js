@@ -1525,7 +1525,8 @@ let setMap = (pointData) => {
         coordinateSystem: 'geo',
         showEffectOn: 'render',
         rippleEffect: {
-          brushType: 'stroke'
+          brushType: 'stroke',
+          scale: 1.8
         },
         hoverAnimation: true,
         label: {
@@ -1545,14 +1546,23 @@ let setMap = (pointData) => {
             shadowColor: '#FDCD0F'
           }
         },
-        zlevel: 1
-      }]
+        zlevel: 1,
+        tooltip: {
+          formatter: function (component) {
+            return component.data.name + ':' + component.value[2]
+          }
+        }
+      }],
+      tooltip: {
+        show: true,
+        showContent: true
+      }
     },
     options: [
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-01')).min) / (maxAndMin(getPointDataByTime('18-01')).max - maxAndMin(getPointDataByTime('18-01')).min) * 30
+            return (val[2] - maxAndMin(getPointDataByTime('18-01')).min) / (maxAndMin(getPointDataByTime('18-01')).max - maxAndMin(getPointDataByTime('18-01')).min) * 30 + 2
           },
           data: convertData(getPointDataByTime('18-01'))
         }
@@ -1561,7 +1571,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-02')).min) / (maxAndMin(getPointDataByTime('18-02')).max - maxAndMin(getPointDataByTime('18-02')).min) * 30
+            return (val[2] - maxAndMin(getPointDataByTime('18-02')).min) / (maxAndMin(getPointDataByTime('18-02')).max - maxAndMin(getPointDataByTime('18-02')).min) * 30 + 2
           },
           data: convertData(getPointDataByTime('18-02'))
         } ]
@@ -1569,7 +1579,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-03')).min) / (maxAndMin(getPointDataByTime('18-03')).max - maxAndMin(getPointDataByTime('18-03')).min) * 30
+            return (val[2] - maxAndMin(getPointDataByTime('18-03')).min) / (maxAndMin(getPointDataByTime('18-03')).max - maxAndMin(getPointDataByTime('18-03')).min) * 30 + 2
           },
           data: convertData(getPointDataByTime('18-03'))
         }]
@@ -1577,7 +1587,7 @@ let setMap = (pointData) => {
       {
         series: [{
           symbolSize: function (val) {
-            return (val[2] - maxAndMin(getPointDataByTime('18-04')).min) / (maxAndMin(getPointDataByTime('18-04')).max - maxAndMin(getPointDataByTime('18-04')).min) * 30
+            return (val[2] - maxAndMin(getPointDataByTime('18-04')).min) / (maxAndMin(getPointDataByTime('18-04')).max - maxAndMin(getPointDataByTime('18-04')).min) * 30 + 2
           },
           data: convertData(getPointDataByTime('18-04'))
         }]

@@ -76,14 +76,14 @@
           <span class='td'>状态</span>
           <span class='td detail'>操作</span>
         </div>
-        <rollScreen :dLength='zhongdiansj.length' :height='33' :lineNum='7' class="renminttj_table_body">
-          <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in zhongdiansj" :key="index">
+        <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
+          <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index">
             <span class='td num'>{{item.xuhao}}</span>
             <span class='td'>{{item.shijianlx}}</span>
             <span class='td'>{{item.diqu}}</span>
             <span class='td'>{{item.riqi}}</span>
-            <span class='td'>{{item.xiangqing}}</span>
-            <span class='td'>{{item.xiangqing}}</span>
+            <span class='td'>{{item.jianshu}}</span>
+            <span class='td'>{{item.zhuangtai}}</span>
             <span class='td detail'><span>详情</span></span>
           </div>
         </rollScreen>
@@ -95,11 +95,11 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import linianxzryqs from '@/../static/json/renmintj/tiaojieslxfx_linianxzryqs'
 import gequxztjy from '@/../static/json/renmintj/tiaojieslxfx_gequxztjy'
-import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
 
 export default {
   name: 'importantEvent',
@@ -110,8 +110,12 @@ export default {
   data () {
     return {
       myChart: {},
+      table: {
+        zhongdiansj: [],
+        dLength: 0,
+        lineNum: 0
+      },
       timer: '',
-      zhongdiansj: zhongdiansj,
       jinrixz: 32,
       quannianlj: 65432
     }
@@ -135,9 +139,20 @@ export default {
     // 路由跳转
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    getData () {
+      let vue = this
+      let reqParam = {}
+      let url = ''
+      url = '/peopleMediate/zdsj'
+      http.get(url, reqParam, (data) => {
+        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 7, data]
+      })
     }
   },
-  created () {},
+  created () {
+    this.getData()
+  },
   mounted () {
     this.changeNum()
     this.draw('target2', eos.setBar3(gequxztjy.reverse(), ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))

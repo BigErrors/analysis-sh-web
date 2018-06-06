@@ -111,51 +111,67 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import xuelilx from '@/../static/json/renmintj/tiaojieysxfx_xuelilx'
-import zhengzhimm from '@/../static/json/renmintj/tiaojieysxfx_zhengzhimm'
-import nianlingd from '@/../static/json/renmintj/tiaojieysxfx_nianlingd'
-import benkejysxlzbpm from '@/../static/json/renmintj/tiaojieysxfx_benkejysxlzbpm'
-import dangyuanzbpm from '@/../static/json/renmintj/tiaojieysxfx_dangyuanzbpm'
-import suiyxzbpm from '@/../static/json/renmintj/tiaojieysxfx_40suiyxzbpm'
+import http from '@/util/httpUtil'
 
 export default {
   name: 'peopleType',
   data () {
     return {
-      benkejysxlzbpm: benkejysxlzbpm,
-      dangyuanzbpm: dangyuanzbpm,
-      suiyxzbpm: suiyxzbpm
+      myChart: {},
+      benkejysxlzbpm: [],
+      dangyuanzbpm: [],
+      suiyxzbpm: []
     }
   },
   filters: {
     numFormat (value) {
-      return value * 100 + '%'
+      return parseInt(value * 100) + '%'
     }
   },
   methods: {
     // 绘制echarts
     draw (domName, option) {
-      let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
-      myChart.setOption(option)
+      if (this.myChart[domName]) {
+        this.$echarts.dispose(this.myChart[domName])
+      }
+      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      this.myChart[domName].setOption(option)
     },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    getData () {
+      let vue = this
+      let reqParam = {}
+      let url = ''
+      url = '/peopleMediate/attAnalysis'
+      http.get(url, reqParam, (data) => {
+        data['education_label'] = data['education_label'].map(item => { return { name: item['leixing'], value: item['shuzhi'] } })
+        data['politic'] = data['politic'].map(item => { return { name: item['leixing'], value: item['shuzhi'] } })
+        data['age_LV'] = data['age_LV'].map(item => { return { name: item['nianlingd'], value: item['shuzhi'], xingbie: item['xingbie'] } })
+        vue['benkejysxlzbpm'] = data['edu_proportion']
+        vue['dangyuanzbpm'] = data['tjy_location']
+        vue['suiyxzbpm'] = data['new_tjy']
+        vue.$nextTick(function () {
+          vue.draw('target1', eos.setPie3(data['education_label']))
+          vue.draw('target2', eos.setBar3(data['politic'].reverse(), ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
+          vue.draw('target3', eos.setLine4([data['age_LV'].filter((item) => {
+            if (item.xingbie === '男') {
+              return true
+            }
+          }).reverse(), data['age_LV'].filter((item) => {
+            if (item.xingbie === '女') {
+              return true
+            }
+          }).reverse()], 'integer', ['男性', '女性']))
+        })
+      })
     }
   },
-  created () {},
-  mounted () {
-    this.draw('target1', eos.setPie3(xuelilx))
-    this.draw('target2', eos.setBar3(zhengzhimm, ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
-    this.draw('target3', eos.setLine4([nianlingd.filter((item) => {
-      if (item.xingbie === '男') {
-        return true
-      }
-    }), nianlingd.filter((item) => {
-      if (item.xingbie === '女') {
-        return true
-      }
-    })], 'integer', ['男性', '女性']))
-  }
+  created () {
+    this.getData()
+  },
+  mounted () {}
 }
 </script>
 

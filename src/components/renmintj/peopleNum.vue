@@ -19,7 +19,7 @@
         </div>
         <div class="totalNum_content_title_right">
           <div class="totalNum_content_span_container bg1">
-            <span class="totalNum_content_span3">5245人</span>
+            <span class="totalNum_content_span3" v-text="totalPeople"></span>
             <span class="totalNum_content_span4">调解员总数</span>
           </div>
         </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="totalNum_content_title_right">
           <div class="totalNum_content_span_container bg1">
-            <span class="totalNum_content_span3">354人</span>
+            <span class="totalNum_content_span3" v-text="newPeople"></span>
             <span class="totalNum_content_span4">新增人员（今年）</span>
           </div>
         </div>
@@ -62,33 +62,54 @@
 
 <script>
 import eos from '@/util/echartsOptions'
-import gequtjyrs from '@/../static/json/renmintj/tiaojieslxfx_gequtjyrs'
-import gequxztjy from '@/../static/json/renmintj/tiaojieslxfx_gequxztjy'
-import tiaojieyrsbhqs from '@/../static/json/renmintj/tiaojieslxfx_tiaojieyrsbhqs'
-import linianxzryqs from '@/../static/json/renmintj/tiaojieslxfx_linianxzryqs'
+import http from '@/util/httpUtil'
 
 export default {
   name: 'peopleNum',
   data () {
-    return {}
+    return {
+      myChart: {},
+      totalPeople: 0 + '人',
+      newPeople: 0 + '人'
+    }
   },
   methods: {
     // 绘制echarts
     draw (domName, option) {
-      let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
-      myChart.setOption(option)
+      if (this.myChart[domName]) {
+        this.$echarts.dispose(this.myChart[domName])
+      }
+      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      this.myChart[domName].setOption(option)
     },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    getData () {
+      let vue = this
+      let reqParam = {}
+      let url = ''
+      url = '/peopleMediate/quantityAnalysis'
+      http.get(url, reqParam, (data) => {
+        data['n_tjy'] = data['n_tjy'].map(item => { return { name: item['shijian'], value: item['shuzhi'] } })
+        data['nnew_tjy'] = data['nnew_tjy'].map(item => { return { name: item['shijian'], value: item['shuzhi'] } })
+        data['n_locationtjy'] = data['n_locationtjy'].map(item => { return { name: item['mingcheng'], value: item['shuzhi'] } })
+        data['new_locationtiy'] = data['new_locationtiy'].map(item => { return { name: item['mingcheng'], value: item['shuzhi'] } })
+        vue.totalPeople = data['n_tjy'][data['n_tjy'].length - 1].value
+        vue.newPeople = data['nnew_tjy'][data['nnew_tjy'].length - 1].value
+        vue.$nextTick(function () {
+          vue.draw('target1', eos.setLine4([data['n_tjy']], 'integer'))
+          vue.draw('target2', eos.setLine4([data['nnew_tjy']], 'integer'))
+          vue.draw('target3', eos.setBar3(data['n_locationtjy'].reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
+          vue.draw('target4', eos.setBar3(data['new_locationtiy'].reverse(), ['#FF9C00', '#F8E228'], 'horizon', 'integer'))
+        })
+      })
     }
   },
-  created () {},
-  mounted () {
-    this.draw('target1', eos.setLine4([tiaojieyrsbhqs], 'integer'))
-    this.draw('target2', eos.setLine4([linianxzryqs], 'integer'))
-    this.draw('target3', eos.setBar3(gequtjyrs.reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
-    this.draw('target4', eos.setBar3(gequxztjy.reverse(), ['#FF9C00', '#F8E228'], 'horizon', 'integer'))
-  }
+  created () {
+    this.getData()
+  },
+  mounted () {}
 }
 </script>
 
