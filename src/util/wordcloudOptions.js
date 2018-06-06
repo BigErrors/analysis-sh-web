@@ -18,15 +18,18 @@ let setOption = (data) => {
     fontFamily: '微软雅黑',
     fontWeight: 3,
     color: function (word, weight) {
+      let r = Math.random()
+      let g = Math.random()
+      let b = Math.random()
+      let limit = 0.6
       return 'rgb(' + [
-        Math.round(Math.random() * 160),
-        Math.round(Math.random() * 160),
-        Math.round(Math.random() * 160)
+        Math.round((r < limit ? limit : r) * 255),
+        Math.round((g < limit ? limit : g) * 255),
+        Math.round((b < limit ? limit : b) * 255)
       ].join(',') + ')'
     },
     weightFactor: function (weight) {
-      // console.log(10 + k * (weight - minValue))
-      return 10 + k * (weight - minValue)
+      return 15 + k * (weight - minValue)
     },
     clearCanvas: false,
     backgroundColor: 'rgba(255,255,255,0)',

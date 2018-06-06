@@ -911,6 +911,92 @@ let setLine4 = (data, dataType, legend, color) => {
   return option
 }
 
+// 折线图--timeline
+let setLine5 = (data, dataType, legend, color) => {
+  let option = {
+    grid: {
+      containLabel: true
+    },
+    color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: '#4D84FE'
+      },
+      splitLine: {
+        show: false
+      },
+      boundaryGap: true,
+      data: []
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        color: '#4D84FE',
+        formatter: dataType === 'integer' ? '{value}' : '{value} %'
+      },
+      splitLine: {
+        show: false
+      }
+    },
+    series: []
+  }
+  // 设置category对应数据
+  data[0].map(item => {
+    option.xAxis.data.push(item['name'])
+  })
+  // 添加系列并设置对应数据
+  data.map((series, index) => {
+    option.series.push({
+      name: legend && legend[index] ? legend[index] : 'seriesname',
+      type: 'line',
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: {
+        width: 1
+      },
+      label: {
+        show: true,
+        fontSize: 18,
+        formatter: dataType === 'integer' ? '{c}' : '{c} %'
+      },
+      data: data[index].map(item => {
+        return item['value']
+      })
+    })
+  })
+  if (legend && legend.length > 0) {
+    option.legend = {
+      orient: 'horizontal',
+      left: 'center',
+      textStyle: {
+        color: '#FFFFFF',
+        fontSize: 16
+      },
+      data: legend.map(item => {
+        return item
+      })
+    }
+  }
+  if (data.length === 1) {
+    option.series[0].label.color = '#FFC400'
+  }
+  return option
+}
+
 // 液体填充配置项
 let fillOption = (center, data, color, fillData, fillFontSize, borderColor) => {
   color = color || '#3699F1'
@@ -1699,4 +1785,4 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}

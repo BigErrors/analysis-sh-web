@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-05 18:09:43
+ * @Last Modified time: 2018-06-06 11:20:12
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -11,8 +11,8 @@
   </div>
   <div class='renmintj_container'>
     <div class="renmintj_left">
-      <div class="renmintj_left_once" @click="changeRouter('totalNum')" style="cursor: pointer;">
-        <span class="renmintj_title_span renmintj_title_span_center">业务数量</span>
+      <div class="renmintj_left_once">
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('totalNum')">业务数量</span>
         <div class="renmintj_main">
           <div class="renmintj_main_once">
             <div class="pie yewusl1"></div>
@@ -36,8 +36,8 @@
           </div>
         </div>
       </div>
-      <div class="renmintj_left_once" @click="changeRouter('totalType')" style="cursor: pointer;">
-        <span class="renmintj_title_span renmintj_title_span_center">业务类型</span>
+      <div class="renmintj_left_once">
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('totalType')">业务类型</span>
         <div class='renmintj_left_yewulx_content1'>
           <div class="pie1"></div>
         </div>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center">趋势分析</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('trendAnalysis')">趋势分析</span>
         <nav class="renmintj_nav"><a class="nav_a renmintj_nav_active" @click="changeType('data_110',$event)">110</a>|<a class="nav_a" @click="changeType('data_jc',$event)">基层公共法律</a>|<a class="nav_a" @click="changeType('data_tj',$event)">调解案件</a>|<a class="nav_a" @click="changeType('data_pc',$event)">纠纷排查</a></nav>
         <div class='line'></div>
       </div>
@@ -97,8 +97,8 @@
           </div>
         </div>
       </div>
-      <div class="renmintj_right_once" @click="changeRouter('peopleNum')" style="cursor: pointer;">
-        <span class="renmintj_title_span renmintj_title_span_center">人员总数</span>
+      <div class="renmintj_right_once">
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('peopleNum')">人员总数</span>
         <div class="renmintj_right_renyuan">
           <div class="renmintj_right_fl">
             <div class="renmintj_renyuan_once" v-for="(item,index) in peopleCount" :key="index" v-if="index<=5">
