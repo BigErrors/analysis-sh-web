@@ -29,13 +29,13 @@
           <span class="span1">单月最高</span><br>
           <span class="span2">{{max | numFormat }}</span>
           <span class="span1">件</span><br>
-          <span class="span3">（出现在2018/04）</span>          
+          <span class="span3">（出现在2018/04）</span>
         </div>
         <div class="trendAnalysis_content_left_once_children">
           <span class="span1">月均</span><br>
           <span class="span2">{{average | numFormat }}</span>
           <span class="span1">件</span>
-        </div>                        
+        </div>
       </div>
       <div class="trendAnalysis_content_left_once">
         <div class="target2"></div>

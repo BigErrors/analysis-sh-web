@@ -101,7 +101,7 @@ const router = new Router({
       name: 'peopleSearch',
       component: peopleSearch
     }, {
-      path: '/peoplePortrait',
+      path: '/peoplePortrait/:id',
       name: 'peoplePortrait',
       component: peoplePortrait
     }, {

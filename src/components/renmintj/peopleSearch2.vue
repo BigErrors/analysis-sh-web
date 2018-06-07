@@ -26,6 +26,7 @@
               :filterable = true
               placeholder="请输入要选择的区域"
               v-model="areaOverviewDefault"
+              @change="areaChange"
             ></el-cascader>
           </div>
           <div class="sortLeft">
@@ -35,18 +36,20 @@
               :filterable = true
               placeholder="调委会类型"
               v-model="optionDefault"
+              @change="optionChange"
             ></el-cascader>
           </div>
           <div class="sortLeft">
             <el-input
               placeholder="请输入人名搜索"
               suffix-icon="el-icon-search"
-              v-model="searchName">
+              v-model="searchName"
+               @change="search">
             </el-input>
           </div>
-          <div class="sortRight" :class="{activeshang:sortValue === 'wszl'&&sortType,activexia:sortValue === 'wszl' &&!sortType}"><span @click="changeSort('wszl')" style="cursor:pointer">文书质量</span></div>
-          <div class="sortRight" :class="{activeshang:sortValue === 'tjcgl'&&sortType,activexia:sortValue ==='tjcgl'&&!sortType}"><span @click="changeSort('tjcgl')" style="cursor:pointer">调解成功率</span></div>
-          <div class="sortRight" :class="{activeshang:sortValue === 'tjsl'&&sortType,activexia:sortValue ==='tjsl'&&!sortType}"><span @click="changeSort('tjsl')" style="cursor:pointer">调解数量</span></div>
+          <div class="sortRight" :class="{activeshang:sortValue === 'wsscore'&&sortType,activexia:sortValue === 'wsscore' &&!sortType}"><span @click="changeSort('wsscore')" style="cursor:pointer">文书质量</span></div>
+          <div class="sortRight" :class="{activeshang:sortValue === 'tjsuccessscore'&&sortType,activexia:sortValue ==='tjsuccessscore'&&!sortType}"><span @click="changeSort('tjsuccessscore')" style="cursor:pointer">调解成功率</span></div>
+          <div class="sortRight" :class="{activeshang:sortValue === 'tjnumber'&&sortType,activexia:sortValue ==='tjnumber'&&!sortType}"><span @click="changeSort('tjnumber')" style="cursor:pointer">调解数量</span></div>
         </div>
         <div class="mediators-content">
           <!-- <div v-for="row in Math.ceil(mediators.length/5)" :key="'row'+row" :row="row" class="mediators-image">
@@ -57,17 +60,17 @@
               <p class="mediator-committee" v-text="mediators[(row-1)*5+(col-1)].tiaojiewyh"></p>
             </div>
           </div> -->
-          <div class="mediators_img_container" v-for="(item,index) in mediators" :key="item.xuhao">
+          <div class="mediators_img_container" v-for="(item,index) in mediators" :key="index">
             <img class="media_info_jb" v-if ="index===0 && sortType" src="/static/renmintj/jing.png"/>
             <img class="media_info_jb" v-if ="index===1 && sortType" src="/static/renmintj/yin.png"/>
             <img class="media_info_jb" v-if ="index===2 && sortType" src="/static/renmintj/tong.png"/>
-            <img @click="changeRouter('peoplePortrait')" class="media_info_img" v-if="item.xingbie==='2'" :src="item.zhaopiandz" onerror="src='/static/renmintj/boy.png'"/>
-            <img @click="changeRouter('peoplePortrait')" class="media_info_img" v-if="item.xingbie==='1'" :src="item.zhaopiandz" onerror="src='/static/renmintj/girl.png'"/>
-            <p class="mediator-name" v-text="item.xingming" ></p>
-            <p class="mediator-committee" v-text="item.tiaojiewyh"></p>
+            <img @click="changeRouter('peoplePortrait', item.id)" class="media_info_img" v-if="item.gender==='男'||item.gender==='0'" src="/static/renmintj/boy.png" onerror="src='/static/renmintj/boy.png'"/>
+            <img @click="changeRouter('peoplePortrait', item.id)" class="media_info_img" v-if="item.gender==='女'" src="/static/renmintj/girl.png" onerror="src='/static/renmintj/girl.png'"/>
+            <p class="mediator-name" v-text="item.name" ></p>
+            <p class="mediator-committee" v-text="item.shortname"></p>
           </div>
         </div>
-        <el-pagination :current-page.sync="currentPage" :page-size="15" layout="total, prev, pager, next" :total="89" class="ej-pagination">
+        <el-pagination  @current-change="currentChange" :current-page.sync="pageInfo.currentPage" :page-size="pageInfo.pageSize" layout="total, prev, pager, next" :total="pageInfo.total" class="ej-pagination">
         </el-pagination>
       </div>
     </div>
@@ -75,7 +78,8 @@
 </template>
 
 <script>
-import mediators from '@/../static/json/renmintj/huaxiangfx_renyuanqd'
+import http from '@/util/httpUtil'
+// import mediators from '@/../static/json/renmintj/huaxiangfx_renyuanqd'
 export default {
   name: 'peopleSearch',
   data () {
@@ -136,7 +140,11 @@ export default {
       ],
       mediators: [],
       areaActive: 0,
-      currentPage: 1,
+      pageInfo: {
+        currentPage: 1,
+        pageSize: 18,
+        total: 0
+      },
       option: [{
         label: '全部',
         value: '0'
@@ -191,16 +199,10 @@ export default {
         value: '其它调委会'
       }],
       searchName: '',
-      sortValue: '',
-      sortType: ''
-    }
-  },
-  computed: {
-    areaOverviewDefault: function () {
-      return [this.areaOverview[0].value]
-    },
-    optionDefault: function () {
-      return [this.option[0].value]
+      sortValue: 'tjnumber',
+      sortType: true,
+      areaOverviewDefault: [0],
+      optionDefault: ['0']
     }
   },
   methods: {
@@ -209,10 +211,12 @@ export default {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
       myChart.setOption(option)
     },
-    changeRouter (name) {
-      this.$router.push({
-        name: name
-      })
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'peoplePortrait') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
     },
     selectArea: function (key, overview) {
       this.areaActive = key
@@ -224,10 +228,46 @@ export default {
         this.sortValue = val
         this.sortType = true
       }
+      this.getData()
+    },
+    areaChange (val) {
+      this.areaOverviewDefault = val
+      this.getData()
+    },
+    optionChange (val) {
+      this.optionDefault = val
+      this.getData()
+    },
+    currentChange (currentPage) {
+      this.pageInfo.currentPage = currentPage
+      this.getData()
+    },
+    search () {
+      this.pageInfo.currentPage = 1
+      this.getData()
+    },
+    getData () {
+      let vue = this
+      let reqParam = {
+        location: this.areaOverviewDefault[0],
+        mediationtype: this.optionDefault[0],
+        professiontype: this.optionDefault[1] ? this.optionDefault[1] : '',
+        type: this.sortValue,
+        keyword: this.searchName,
+        pagesize: this.pageInfo.pageSize,
+        currentpage: this.pageInfo.currentPage,
+        sort: this.sortType ? 1 : 0
+      }
+      let url = ''
+      url = '/peopleMediate/portrayaList'
+      http.post(url, reqParam, (data) => {
+        vue.mediators = data.pageData
+        vue.pageInfo.total = data.pageinfo.total
+      }, 'application/json')
     }
   },
   created () {
-    this.mediators = mediators
+    this.getData()
   },
   mounted () {}
 }

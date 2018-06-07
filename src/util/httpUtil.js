@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-06-07 11:54:39
+ * @Last Modified time: 2018-06-07 14:04:59
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -59,8 +59,17 @@ http.delete = (url, param, callback) => {
 }
 
 // post
-http.post = (url, param, callback) => {
-  axios.post(url, qs.stringify(param)).then((res) => {
+http.post = (url, param, callback, contentType) => {
+  let headers = {}
+  if (contentType && contentType === 'application/json') {
+    headers = {'Content-Type': 'application/json'}
+    console.log('json')
+  } else {
+    param = qs.stringify(param)
+    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    console.log('not json')
+  }
+  axios({method: 'post', url: url, data: param, headers: headers}).then((res) => {
     if (res.data.code === 1) {
       callback(res.data.data)
     } else {

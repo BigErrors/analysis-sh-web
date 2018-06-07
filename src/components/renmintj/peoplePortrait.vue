@@ -14,12 +14,12 @@
   <div class="totalNum_content">
    <div class="totalNum_content_left">
      <div class="totalNum_content_leftTitle1">
-       <div class="totalNum_content_leftTitle1_name">{{renyuanxq.person[0].name}}</div>
-       <div class="totalNum_content_leftTitle1_year">{{renyuanxq.person[0].gongzuonx}}</div>
-       <div class="totalNum_content_leftTitle1_phone">{{renyuanxq.person[0].dianhauhm}}</div>
+       <div class="totalNum_content_leftTitle1_name">{{renyuanxq.name}}</div>
+       <div class="totalNum_content_leftTitle1_year">{{renyuanxq.gongzuonx}}</div>
+       <div class="totalNum_content_leftTitle1_phone">{{renyuanxq.dianhauhm}}</div>
      </div>
      <div class="totalNum_content_leftTitle2">
-       <div class="totalNum_content_leftTitle2_address">{{renyuanxq.person[0].tiaojiewyh}}</div>
+       <div class="totalNum_content_leftTitle2_address">{{renyuanxq.tiaojiewyh}}</div>
      </div>
      <div class="totalNum_content_leftContent">
        <canvas  class="totalNum_content_leftContent_canvas" width="184px" height="647px"></canvas>
@@ -30,9 +30,9 @@
        <div class="totalNum_content_rightTitle">整体概览</div>
        <div class="moduleContent">
          <div class="module1">
-           <div class="module1Item"><span class="module1Num">{{renyuanxq.person[0].zhengti[0].value}}</span><br><span class="module1Title">{{renyuanxq.person[0].zhengti[0].name}}</span></div>
-           <div class="module1Item"><span class="module1Num">{{renyuanxq.person[0].zhengti[1].value}}</span><br><span class="module1Title">{{renyuanxq.person[0].zhengti[1].name}}</span></div>
-           <div class="module1Item"><span class="module1Num">{{renyuanxq.person[0].zhengti[2].value}}</span><br><span class="module1Title">{{renyuanxq.person[0].zhengti[2].name}}</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxq.zhengti[0].value}}</span><br><span class="module1Title">{{renyuanxq.zhengti[0].name}}</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxq.zhengti[1].value}}</span><br><span class="module1Title">{{renyuanxq.zhengti[1].name}}</span></div>
+           <div class="module1Item"><span class="module1Num">{{renyuanxq.zhengti[2].value}}</span><br><span class="module1Title">{{renyuanxq.zhengti[2].name}}</span></div>
          </div>
        </div>
      </div>
@@ -61,7 +61,7 @@
         </tr>
         </thead>
         <tbody class="totalNum_table_tbody">
-        <tr v-for="(item,index) in renyuanxq.person[0].anjianlb" :key="index" v-if="index<=4">
+        <tr v-for="(item,index) in renyuanxq.anjianlb" :key="index" v-if="index<=4">
           <td class='td'><span class="circle circle1" :class="'circle'+(index+1)">{{index+1}}</span></td>
           <td class='td'>{{item.mingcheng}}</td>
           <td class='td'>{{item.shoulisj}}</td>
@@ -81,12 +81,13 @@
 <script>
 import eos from '@/util/echartsOptions'
 import wos from '@/util/wordcloudOptions'
-import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
+import http from '@/util/httpUtil'
+// import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
 export default {
   name: 'peoplePortrait',
   data () {
     return {
-      renyuanxq: renyuanxq
+      renyuanxq: {}
     }
   },
   methods: {
@@ -108,7 +109,7 @@ export default {
       let myChart = this.$echarts.init(document.getElementsByClassName('totalNum_content_leftContent')[0])
       let maskImage = new Image()
       maskImage.src = '/static/renmintjOther/pic_boy1.png'
-      let option = eos.setWordcloud(renyuanxq.person[0].ciyun, maskImage)
+      let option = eos.setWordcloud(this.renyuanxq.ciyun, maskImage)
       maskImage.onload = () => {
         myChart.setOption(option)
         myChart.on('click', function (params) {
@@ -117,7 +118,7 @@ export default {
       }
     },
     drawWordcloud2 () {
-      let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
+      let option = wos.setOption(this.renyuanxq.ciyun.map((item) => {
         return [item.name, item.value]
       }))
       let vue = this
@@ -129,20 +130,25 @@ export default {
         vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent_canvas')[0], option)
       }
     },
-    drawWordcloud3 () {
-      let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
-        return [item.name, item.value * 10]
-      }))
-      this.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent')[0], option)
+    getData () {
+      let vue = this
+      let reqParam = {id: this.$route.params.id}
+      let url = ''
+      url = '/peopleMediate/portrait/detail'
+      http.get(url, reqParam, (data) => {
+        vue.renyuanxq = data
+        vue.$nextTick(function () {
+          vue.draw('module2', eos.setBar3(vue.renyuanxq.leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
+          vue.draw('module3', eos.setRadar2(vue.renyuanxq.data, vue.renyuanxq.indicator))
+          vue.drawWordcloud2()
+        })
+      }, 'application/json')
     }
   },
-  created () {},
+  created () {
+    this.getData()
+  },
   mounted () {
-    this.draw('module2', eos.setBar3(renyuanxq.person[0].leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
-    this.draw('module3', eos.setRadar2(renyuanxq.person[0].data, renyuanxq.person[0].indicator))
-    // this.drawWordcloud()
-    this.drawWordcloud2()
-    // this.drawWordcloud3()
   }
 }
 </script>
