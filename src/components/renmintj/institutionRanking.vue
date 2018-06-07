@@ -94,6 +94,11 @@ export default {
     return {
       date: ''
     }
+  },
+  methods: {
+    changeRouter (name) {
+      this.$router.push({name: name})
+    }
   }
 }
 </script>

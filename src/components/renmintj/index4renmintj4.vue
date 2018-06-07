@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-06-07 16:48:42
+ * @Last Modified time: 2018-06-07 17:48:35
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -37,7 +37,8 @@
         </div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('businessTypes')">业务类型</span>
+        <!-- businessTypes -->
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('yewulx')">业务类型</span>
         <div class='renmintj_left_yewulx_content1'>
           <div class="pie1"></div>
         </div>

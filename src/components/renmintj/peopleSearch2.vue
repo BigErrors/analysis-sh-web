@@ -142,7 +142,7 @@ export default {
       },
       option: [{
         label: '全部',
-        value: '0'
+        value: 0
       }, {
         label: '居（社区）调委会',
         value: '居（社区）调委会'
@@ -197,7 +197,7 @@ export default {
       sortValue: 'tjnumber',
       sortType: true,
       areaOverviewDefault: [0],
-      optionDefault: ['0']
+      optionDefault: [0]
     }
   },
   methods: {
@@ -228,6 +228,7 @@ export default {
     },
     optionChange (val) {
       this.optionDefault = val
+      console.log(this.optionDefault)
       this.getData()
     },
     currentChange (currentPage) {

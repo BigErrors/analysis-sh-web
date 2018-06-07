@@ -269,6 +269,11 @@ export default {
       }],
       optionDefault: [0]
     }
+  },
+  methods: {
+    changeRouter (name) {
+      this.$router.push({name: name})
+    }
   }
 }
 
