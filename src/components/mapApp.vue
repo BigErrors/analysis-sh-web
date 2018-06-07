@@ -232,11 +232,8 @@ export default {
       }
     },
     numFormat (num) {
-      num = (num.replace(/(^\s*)|(\s*$)/g, '') || 0).toString()
-      if (num.length > 3) {
-        num = num.slice(0, num.length - 3) + ',' + num.slice(-3)
-      }
-      return num
+      num = num || 0
+      return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
     }
   },
   methods: {

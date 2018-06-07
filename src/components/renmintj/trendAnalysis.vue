@@ -14,7 +14,29 @@
   </div>
   <div class="trendAnalysis_content">
     <div class="trendAnalysis_content_left">
-      <div class="trendAnalysis_content_left_once"></div>
+      <div class="trendAnalysis_content_left_once">
+        <div class="trendAnalysis_content_left_once_children">
+          <span class="span1">纠纷数量</span><br>
+          <span class="span2">{{ count | numFormat }}</span>
+          <span class="span1">件</span>
+        </div>
+        <div class="trendAnalysis_content_left_once_children">
+          <span class="span1">重点事件</span><br>
+          <span class="span2">{{ importantNum | numFormat }}</span>
+          <span class="span1">件</span>
+        </div>
+        <div class="trendAnalysis_content_left_once_children">
+          <span class="span1">单月最高</span><br>
+          <span class="span2">{{max | numFormat }}</span>
+          <span class="span1">件</span><br>
+          <span class="span3">（出现在2018/04）</span>          
+        </div>
+        <div class="trendAnalysis_content_left_once_children">
+          <span class="span1">月均</span><br>
+          <span class="span2">{{average | numFormat }}</span>
+          <span class="span1">件</span>
+        </div>                        
+      </div>
       <div class="trendAnalysis_content_left_once">
         <div class="target2"></div>
       </div>
@@ -65,8 +87,17 @@ export default {
         lineNum: 0
       },
       timer: '',
-      jinrixz: 32,
-      quannianlj: 65432
+      count: 154688,
+      importantNum: 210,
+      max: 1366,
+      average: 1469
+    }
+  },
+  filters: {
+    numFormat (num) {
+      num = num || 0
+      console.log(num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'))
+      return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
     }
   },
   methods: {
@@ -87,8 +118,10 @@ export default {
     changeNum () {
       let _this = this
       this.timer = setInterval(function () {
-        _this.jinrixz = parseInt(Math.random() * 90) + 10
-        _this.quannianlj = parseInt(Math.random() * 90000) + 10000
+        _this.count = parseInt(Math.random() * 900) + 150000
+        _this.importantNum = parseInt(Math.random() * 90) + 200
+        _this.max = parseInt(Math.random() * 900) + 1000
+        _this.average = parseInt(Math.random() * 900) + 1000
       }, 5000)
     },
     // 路由跳转
@@ -109,7 +142,7 @@ export default {
     // this.getData()
   },
   mounted () {
-    this.changeNum()
+    // this.changeNum()
     this.draw('target2', eos.setLine5())
     this.draw('target3', eos.setBar3(gequxztjy.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
     this.drawWordcloud2('target4')
@@ -212,6 +245,29 @@ export default {
   .trendAnalysis_content_left_once:nth-of-type(2){
     height: 720px;
     margin-bottom: 0;
+  }
+  .trendAnalysis_content_left_once_children {
+    float: left;
+    width: calc(305px - 90px);
+    height: 60px;
+    margin-top: calc((140px - 60px) / 2);
+    margin-left: 90px;
+    border-right: 1px solid  #1F3490;
+  }
+  .trendAnalysis_content_left_once_children .span1{
+    color: #5E7ECB;
+    font-size: 14px;
+  }
+  .trendAnalysis_content_left_once_children .span2{
+    color: #F6FBFF;
+    font-size: 38px;
+  }
+  .trendAnalysis_content_left_once_children .span3{
+    color: #00C6FF;
+    font-size: 12px;
+  }
+  .trendAnalysis_content_left_once_children:last-of-type {
+    border-right: 0px;
   }
   .target2 {
     width: 1241px;
