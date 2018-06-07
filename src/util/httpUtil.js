@@ -1,8 +1,8 @@
 /*
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
- * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-05 14:37:28
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-06-07 11:54:39
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -101,7 +101,8 @@ http.error = (err) => {
   } else {
     // Something happened in setting up the request that triggered an Error
     // console.log('Error', err.message)
-    Notification.error({message: err.message})
+    // Notification.error({message: err.message})
+    Notification.error({message: '数据接口请求失败，请检查网络连接'})
   }
 }
 
