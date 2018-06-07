@@ -107,6 +107,7 @@ export default {
     display: inline-block;
     position:relative;
     overflow: hidden;
+    width: 100%;
   }
   .rollScreen_list{
     transition: 1s linear;

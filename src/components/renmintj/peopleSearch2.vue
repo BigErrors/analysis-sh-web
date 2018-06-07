@@ -12,11 +12,6 @@
       <span class="totalNum_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
     </div>
     <div class="totalNum_content mediators-info">
-      <!-- <div class="left-bar">
-        <p class="title">区域</p>
-        <p :class="(key === areaActive)?'area active':'area'" v-for="(overview,key) in areaOverviews" :key="key" v-text="overview.mincgheng+'('+overview.shuzhi+')'"
-          @click="selectArea(key,overview)"></p>
-      </div> -->
       <div class="mediators_container">
         <div class = "mediators_filter">
           <div class="sortLeft">
@@ -217,9 +212,6 @@ export default {
         target = {name: name, params: { id: id }}
       }
       this.$router.push(target)
-    },
-    selectArea: function (key, overview) {
-      this.areaActive = key
     },
     changeSort: function (val) {
       if (this.sortValue === val) {

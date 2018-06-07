@@ -17,9 +17,11 @@ import peopleType from '@/components/renmintj/peopleType'
 import peopleSearch from '@/components/renmintj/peopleSearch2'
 import peoplePortrait from '@/components/renmintj/peoplePortrait'
 import totalNum from '@/components/renmintj/totalNum2'
-import totalType from '@/components/renmintj/totalType2'
+import totalType from '@/components/renmintj/totalType'
 import importantEvent from '@/components/renmintj/importantEvent'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
+import businessTypes from '@/components/renmintj/businessTypes'
+import institutionRanking from '@/components/renmintj/institutionRanking'
 import yewulx from '@/components/mockpages/yewulx'
 import jigoupm from '@/components/mockpages/jigoupm'
 import qushifx from '@/components/mockpages/qushifx'
@@ -116,6 +118,14 @@ const router = new Router({
       path: '/importantEvent',
       name: 'importantEvent',
       component: importantEvent
+    }, {
+      path: '/businessTypes',
+      name: 'businessTypes',
+      component: businessTypes
+    }, {
+      path: '/institutionRanking',
+      name: 'institutionRanking',
+      component: institutionRanking
     }, {
       path: '/trendAnalysis',
       name: 'trendAnalysis',

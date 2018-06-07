@@ -1,8 +1,8 @@
 /*
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
- * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-06 23:13:36
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-06-07 16:48:42
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('yewulx')">业务类型</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('businessTypes')">业务类型</span>
         <div class='renmintj_left_yewulx_content1'>
           <div class="pie1"></div>
         </div>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('qushifx')">趋势分析</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('trendAnalysis')">趋势分析</span>
         <nav class="renmintj_nav"><a class="nav_a renmintj_nav_active" @click="changeType('data_110',$event)">110</a>|<a class="nav_a" @click="changeType('data_jc',$event)">基层公共法律</a>|<a class="nav_a" @click="changeType('data_tj',$event)">调解案件</a>|<a class="nav_a" @click="changeType('data_pc',$event)">纠纷排查</a></nav>
         <div class='line'></div>
       </div>
@@ -55,7 +55,7 @@
       <div class="renmintj_center_map">
         <span class="renmintj_title_span renmintj_title_span_left">案件分布</span>
         <div class="map_title">
-          <span>业务总量</span><span><digitalRolling :height='30' :width='15' :number='yewusl' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling></span>
+          <span>业务总量</span><span><digitalRolling :height='30' :width='18' :number='yewusl' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling></span>
         </div>
         <div class="map_subtitle">
           <span>同比今年</span><span>15%</span>
@@ -86,7 +86,8 @@
     </div>
     <div class="renmintj_right">
       <div class="renmintj_right_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('jigoupm')">机构总数</span>
+        <!-- institutionRanking -->
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('institutionRanking')">机构总数</span>
         <div class="renmintj_right_jigou">
           <div class="renmintj_right_circle" :class="'circle'+(index+1)" v-for="(item, index) in MechanismNumber" :key="index" v-if="index<=3">
             <span class="renmintj_right_span1">{{item.shuliang}}</span>
