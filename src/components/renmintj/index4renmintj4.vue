@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-06 19:16:14
+ * @Last Modified time: 2018-06-06 23:13:36
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -224,7 +224,7 @@ export default {
       http.get(url, reqParam, (data) => {
         vue.$nextTick(function () {
           vue.draw('pie1', eos.setPie4([data.hz_percentage * 100, (1 - data.hz_percentage) * 100], '行专占比'))
-          vue.draw('chart', eos.setBar4(data.data, ['#FF9C00', '#F8E228'], 'vertical', 'integer', 1))
+          vue.draw('chart', eos.setBar4(data.data.slice(0, 9), ['#FF9C00', '#F8E228'], 'vertical', 'integer', 1))
         })
       })
       url = '/peopleMediate/qushi'

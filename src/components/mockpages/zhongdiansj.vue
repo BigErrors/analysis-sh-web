@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #mzhongdiansj {
     height: 100%;
     background: url('/static/mackpages/重点事件分析.png') no-repeat fixed top;

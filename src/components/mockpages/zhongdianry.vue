@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  #mzhongdianry{
    height: 100%;
    background: url('/static/mackpages/重点人员分析.png') no-repeat fixed top;

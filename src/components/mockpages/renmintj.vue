@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  #mrenmintj{
    height: 100%;
    background: url('/static/mackpages/人民调解.png');

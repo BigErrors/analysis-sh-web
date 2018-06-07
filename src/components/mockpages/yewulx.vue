@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  #m110{
    height: 100%;
    background: url('/static/mackpages/2业务类型.png');
