@@ -53,7 +53,7 @@ export default {
   .ej-pagination .btn-prev,
   .ej-pagination .btn-next,
   .ej-pagination .el-icon-more {
-    background-color: #0A133A !important;
+    background-color: rgba(255,255,255,0) !important;
     color:rgba(190,222,251,1);
   }
   .ej-pagination .el-pager li.number.active{

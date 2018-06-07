@@ -250,6 +250,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
     // value最大值的类型：percent，integer
     // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
     max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    splitNumber: 4,
     splitLine: {
       show: false
     }
