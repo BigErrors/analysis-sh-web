@@ -285,7 +285,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
       show: false
     },
     grid: {
-      containLabel: false
+      containLabel: true
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -562,9 +562,9 @@ let setLine = (data) => {
       data: ['人民调解', '法律服务', '110']
     },
     grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
+      left: 10,
+      right: 10,
+      bottom: 10,
       containLabel: true
     },
     toolbox: {},
@@ -636,10 +636,7 @@ let setLine2 = (data, showYAxis) => {
       trigger: 'axis'
     },
     grid: {
-      left: 15,
-      top: 10,
-      bottom: 0,
-      containLabel: true
+      containLabel: false
     },
     toolbox: {},
     xAxis: {
@@ -742,11 +739,7 @@ let setLine3 = (data) => {
   let option = {
     color: ['#1254C2'],
     grid: {
-      left: 15,
-      right: 15,
-      top: 60,
-      bottom: 30,
-      containLabel: true
+      containLabel: false
     },
     xAxis: {
       type: 'category',
@@ -826,11 +819,7 @@ let setLine3 = (data) => {
 let setLine4 = (data, dataType, legend, color) => {
   let option = {
     grid: {
-      left: 15,
-      right: 15,
-      top: 15,
-      bottom: 15,
-      containLabel: true
+      containLabel: false
     },
     color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
     xAxis: {
@@ -991,7 +980,7 @@ let setLine5 = () => {
         shadowOffsetX: 2,
         shadowOffsetY: 2
       },
-      showDetail: false,
+      showDetail: true,
       fillerColor: '#1F3490',
       dataBackground: {
         lineStyle: {
@@ -1664,6 +1653,7 @@ let setMap = (pointData) => {
           scale: 1.8
         },
         hoverAnimation: true,
+        animationDuration: 3000,
         label: {
           normal: {
             formatter: function (component) {

@@ -55,7 +55,7 @@
     <div class="importantEvent_content_bottom">
       <div class="importantEvent_content_title clearfix">
         <div class="importantEvent_content_title_left">
-          <span class="importantEvent_content_span1">各区重点事件</span>
+          <span class="importantEvent_content_span1">各区重点事件(TOP10)</span>
         </div>
       </div>
       <div class="target7"></div>
@@ -146,7 +146,7 @@ export default {
       http.get(url, reqParam, (data) => {
         [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.KeyEvents.length, 7, data.KeyEvents]
         vue.jinrixz = data['DigitalDisplay']['jinrixz']
-        vue.quannianlj = data['DigitalDisplay']['zongshu']
+        vue.quannianlj = data['DigitalDisplay']['jinnianzs']
         data['KeyEvents_Number'] = data['KeyEvents_Number'].map(item => { return {name: item.time, value: item.number} })
         data['KeyEvents_AddCounts'] = data['KeyEvents_AddCounts'].map(item => { return {name: item.time, value: item.value} })
         vue.$nextTick(function () {
@@ -185,9 +185,9 @@ export default {
   }
   .target1,.target2,.target3,.target4,.target5,.target6,.target7,.target8 {
     float: left;
-    width: calc(100% - 20px);
+    width: calc(100% - 10px);
     height: calc(100% - 10px);
-    padding: 0 10px;
+    padding: 0 5px;
   }
   .target1 {
     height: 100%;
@@ -276,7 +276,7 @@ export default {
     color: white;
   }
   .importantEvent_content_title_left{
-    width: 50%;
+    width: 60%;
     float: left;
     margin-top: 15px;
   }

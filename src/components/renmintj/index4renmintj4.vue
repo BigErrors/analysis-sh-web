@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-06-07 17:48:35
+ * @Last Modified time: 2018-06-07 19:14:15
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -446,7 +446,8 @@ export default {
     background-size:464px 286px;
   }
   .line {
-    width: 464px;
+    width: calc(464px - 20px);
+    padding: 0 10px;
     height: 220px;
   }
   .renmintj_center{
