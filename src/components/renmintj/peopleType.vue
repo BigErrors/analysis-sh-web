@@ -153,6 +153,7 @@ export default {
         vue['dangyuanzbpm'] = data['tjy_location']
         vue['suiyxzbpm'] = data['new_tjy']
         vue.$nextTick(function () {
+          console.log(data['education_label'])
           vue.draw('target1', eos.setPie3(data['education_label']))
           vue.draw('target2', eos.setBar3(data['politic'], ['#FF9C00', '#F8E228'], 'vertical', 'integer', 25))
           vue.draw('target3', eos.setLine4([data['age_LV'].filter((item) => {

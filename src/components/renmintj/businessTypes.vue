@@ -9,25 +9,25 @@
     <div class="businessTypes_nav2_container">
       <div class="businessTypes_nav2">
         <!--  @click="changeRouter('')" -->
-        <span class="businessTypes_nav2_span active">行专调节</span>
-        <span class="businessTypes_nav2_span">一般调节</span>
-      </div>
-      <div class="cas_container">
-        <span class="cas_container_span">区域：</span>
-        <el-cascader
-          class="cascader"
-          :options="option"
-          placeholder="调委会类型"
-          v-model="optionDefault"
-        ></el-cascader>
+        <span class="businessTypes_nav2_span active">行专调解</span>
+        <span class="businessTypes_nav2_span">一般调解</span>
       </div>
       <div class="cas_container">
         <span class="cas_container_span">类型：</span>
         <el-cascader
           class="cascader"
-          :options="option"
-          placeholder="调委会类型"
-          v-model="optionDefault"
+          :options="type"
+          placeholder="类型"
+          v-model="typeDefault"
+        ></el-cascader>
+      </div>
+      <div class="cas_container">
+        <span class="cas_container_span">区域：</span>
+        <el-cascader
+          class="cascader"
+          :options="area"
+          placeholder="区域"
+          v-model="areaDefault"
         ></el-cascader>
       </div>
     </div>
@@ -36,9 +36,9 @@
         <div class="businessTypes_line1">
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span">本周</span>
-              <span class="businessTypes_content_title_span">本月</span>
-              <span class="businessTypes_content_title_span active">今年</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target1==='type3'?true:false}" @click="target1='type3'">本周</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target1==='type2'?true:false}" @click="target1='type2'">本月</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target1==='type1'?true:false}" @click="target1='type1'">今年</span>
             </div>
           </div>
           <div class="businessTypes_content_main">
@@ -51,7 +51,7 @@
               <span class="businessTypes_content_span3">355197</span>
               <span class="businessTypes_content_span4">调解案件总数</span>
             </div>
-            <div class="businessTypes_content_3">
+            <div class="businessTypes_content_3 target1">
             </div>
           </div>
         </div>
@@ -59,19 +59,19 @@
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">案件数量变化</div>
             <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span">按月</span>
-              <span class="businessTypes_content_title_span active">按年</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target2==='type2'?true:false}" @click="target2='type2'">按月</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target2==='type1'?true:false}" @click="target2='type1'">按年</span>
             </div>
           </div>
-          <div class="businessTypes_content_main">
+          <div class="businessTypes_content_main target2">
           </div>
         </div>
         <div class="businessTypes_line3">
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">案件受理数(TOP5)</div>
             <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span">调解员</span>
-              <span class="businessTypes_content_title_span active">机构</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target3==='type2'?true:false}" @click="target3='type2'">调解员</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target3==='type1'?true:false}" @click="target3='type1'">机构</span>
             </div>
           </div>
           <div class="businessTypes_content_main">
@@ -80,28 +80,8 @@
               <span class="businessTypes_table_h2">名称</span>
               <span class="businessTypes_table_h3">受理数量</span>
             </div>
-            <div class="businessTypes_table_body">
-              <span class="businessTypes_table_b1">1</span>
-              <span class="businessTypes_table_b2">XXX委员会</span>
-              <span class="businessTypes_table_b3">1234</span>
-            </div>
-            <div class="businessTypes_table_body">
-              <span class="businessTypes_table_b1">1</span>
-              <span class="businessTypes_table_b2">XXX委员会</span>
-              <span class="businessTypes_table_b3">1234</span>
-            </div>
-            <div class="businessTypes_table_body">
-              <span class="businessTypes_table_b1">1</span>
-              <span class="businessTypes_table_b2">XXX委员会</span>
-              <span class="businessTypes_table_b3">1234</span>
-            </div>
-            <div class="businessTypes_table_body">
-              <span class="businessTypes_table_b1">1</span>
-              <span class="businessTypes_table_b2">XXX委员会</span>
-              <span class="businessTypes_table_b3">1234</span>
-            </div>
-            <div class="businessTypes_table_body">
-              <span class="businessTypes_table_b1">1</span>
+            <div class="businessTypes_table_body" v-for="(item, index) in 5" :key="index">
+              <span class="businessTypes_table_b1">{{index + 1}}</span>
               <span class="businessTypes_table_b2">XXX委员会</span>
               <span class="businessTypes_table_b3">1234</span>
             </div>
@@ -113,21 +93,21 @@
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">案件类型</div>
           </div>
-          <div class="businessTypes_content_main">
+          <div class="businessTypes_content_main target4">
           </div>
         </div>
         <div class="businessTypes_line2">
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">案件处理状态</div>
           </div>
-          <div class="businessTypes_content_main">
+          <div class="businessTypes_content_main target5">
           </div>
         </div>
         <div class="businessTypes_line3">
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">案件处理结果</div>
           </div>
-          <div class="businessTypes_content_main">
+          <div class="businessTypes_content_main target6">
           </div>
         </div>
       </div>
@@ -161,8 +141,8 @@
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">当事人分析</div>
             <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span">被申请人</span>
-              <span class="businessTypes_content_title_span active">申请人</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target8==='type2'?true:false}" @click="target8='type2'">被申请人</span>
+              <span class="businessTypes_content_title_span" :class="{'active':target8==='type1'?true:false}" @click="target8='type1'">申请人</span>
             </div>
           </div>
           <div class="businessTypes_content_main">
@@ -173,10 +153,10 @@
               <img class="businessTypes_content_4_img2" src="/static/renmintj/bunv.png">
               <span class="businessTypes_content_4_span3">43%</span>
             </div>
-            <div class="businessTypes_content_5">
+            <div class="businessTypes_content_5 target81">
               <span class="businessTypes_content_5_span1">户籍占比</span>
             </div>
-            <div class="businessTypes_content_6"></div>
+            <div class="businessTypes_content_6 target82"></div>
           </div>
         </div>
         <div class="businessTypes_line3">
@@ -197,7 +177,7 @@
               <span class="businessTypes_content_5_span6">70</span>
               <span class="businessTypes_content_5_span7">万元</span>
             </div>
-            <div class="businessTypes_content_6"></div>
+            <div class="businessTypes_content_6 target9"></div>
           </div>
         </div>
       </div>
@@ -206,17 +186,25 @@
 </template>
 
 <script>
+import eos from '@/util/echartsOptions'
 import rollScreen from '../rollScreen.vue'
 import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
+import zhishufx from '@/../static/json/shehuimd_zhishufx'
+
 export default {
   components: {
     rollScreen
   },
   data: function () {
     return {
+      myChart: {},
+      target1: 'type1',
+      target2: 'type1',
+      target3: 'type1',
+      target8: 'type1',
       zhongdiansj: zhongdiansj,
-      option: [{
-        'label': '全部区域',
+      area: [{
+        'label': '全市',
         'value': 0
       }, {
         'label': '闵行区',
@@ -267,13 +255,55 @@ export default {
         'label': '虹口区',
         'value': '虹口'
       }],
-      optionDefault: [0]
+      areaDefault: [0],
+      type: [{
+        'label': '道路交通事故赔偿',
+        'value': 0
+      }],
+      typeDefault: [0]
+    }
+  },
+  watch: {
+    target1: function (newValue, oldValue) {
+      this.draw('target1', eos.setPie4([(0.791 * 100).toFixed(1), ((1 - 0.791) * 100).toFixed(1)], '占比'))
+    },
+    target2: function (newValue, oldValue) {
+      this.draw('target2', eos.setLine2(zhishufx))
+    },
+    target3: function (newValue, oldValue) {
+    },
+    target8: function (newValue, oldValue) {
+      this.draw('target81', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}]))
+      this.draw('target82', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32))
     }
   },
   methods: {
+    // 绘制echarts
+    draw (domName, option) {
+      if (this.myChart[domName]) {
+        this.$echarts.dispose(this.myChart[domName])
+      }
+      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      this.myChart[domName].setOption(option)
+    },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    getData () {
+      let vue = this
+      vue.$nextTick(function () {
+        vue.draw('target1', eos.setPie4([(0.791 * 100).toFixed(1), ((1 - 0.791) * 100).toFixed(1)], '占比'))
+        vue.draw('target2', eos.setLine2(zhishufx))
+        vue.draw('target4', eos.setPie3([{name: 1, value: 1}, {name: 2, value: 2}]))
+        vue.draw('target5', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32))
+        vue.draw('target81', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}]))
+        vue.draw('target82', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32))
+        vue.draw('target9', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32))
+      })
     }
+  },
+  created () {
+    this.getData()
   }
 }
 
@@ -421,8 +451,10 @@ export default {
   .businessTypes_content_main{
     width: 100%;
     height: 242px;
+    /* background: red; */
     box-sizing: border-box;
     position:relative;
+    float:left;
   }
   .businessTypes_content_1{
     position:absolute;

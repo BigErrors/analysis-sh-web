@@ -12,6 +12,14 @@
     <span class="trendAnalysis_nav2_span">公共法律服务</span>
     <span class="trendAnalysis_nav2_span">纠纷排查</span>
   </div>
+  <div class="cas_container">
+    <el-cascader
+      class="cascader"
+      :options="area"
+      placeholder="区域"
+      v-model="areaDefault"
+    ></el-cascader>
+  </div>
   <div class="trendAnalysis_content">
     <div class="trendAnalysis_content_left">
       <div class="trendAnalysis_content_left_once">
@@ -90,7 +98,60 @@ export default {
       count: 154688,
       importantNum: 210,
       max: 1366,
-      average: 1469
+      average: 1469,
+      area: [{
+        'label': '全市',
+        'value': 0
+      }, {
+        'label': '闵行区',
+        'value': '闵行'
+      }, {
+        'label': '徐汇区',
+        'value': '徐汇'
+      }, {
+        'label': '宝山区',
+        'value': '宝山'
+      }, {
+        'label': '崇明区',
+        'value': '崇明'
+      }, {
+        'label': '浦东区',
+        'value': '浦东'
+      }, {
+        'label': '松江区',
+        'value': '松江'
+      }, {
+        'label': '奉贤区',
+        'value': '奉贤'
+      }, {
+        'label': '嘉定区',
+        'value': '嘉定'
+      }, {
+        'label': '青浦区',
+        'value': '青浦'
+      }, {
+        'label': '杨浦区',
+        'value': '杨浦'
+      }, {
+        'label': '黄浦区',
+        'value': '黄浦'
+      }, {
+        'label': '金山区',
+        'value': '金山'
+      }, {
+        'label': '普陀区',
+        'value': '普陀'
+      }, {
+        'label': '静安区',
+        'value': '静安'
+      }, {
+        'label': '长宁区',
+        'value': '长宁'
+      }, {
+        'label': '虹口区',
+        'value': '虹口'
+      }],
+      areaDefault: [0]
     }
   },
   filters: {
@@ -108,6 +169,11 @@ export default {
       }
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
+      if (domName === 'target2') {
+        this.myChart[domName].on('datazoom', function (params) {
+          console.log(params)
+        })
+      }
     },
     drawWordcloud2 (domName) {
       let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
@@ -316,27 +382,13 @@ export default {
     height: 22px;
     line-height: 22px;
   }
-  .statistics{
-    float: left;
-    width: calc(50% - 41px);
-    height: 60px;
-    margin-top: calc((285px - 60px)/2);
-    padding-left: 40px;
+  .cas_container{
+    float: right;
+    margin-right: 25px;
   }
-  .statistics::before{
-    width: 44px;
-    height: 51px;
-    content: url('/static/renmintj/icon_document.png');
-    padding-right: 10px;
-  }
-  .statistics .num {
-    display: inline-block;
-  }
-  .statistics .title {
-    display: inline-block;
-    color: #AAADB6;
-    font-size: 16px;
-    line-height: 16px;
-    padding-left: 54px;
+  .cas_container_span{
+    font-size:16px;
+    font-family:HiraginoSansGB-W3;
+    color:rgba(94,126,203,1);
   }
 </style>

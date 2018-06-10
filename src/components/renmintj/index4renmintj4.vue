@@ -1,8 +1,8 @@
 /*
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-06-07 19:14:15
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-06-08 13:54:44
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -38,7 +38,7 @@
       </div>
       <div class="renmintj_left_once">
         <!-- businessTypes -->
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('yewulx')">业务类型</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('businessTypes')">业务类型</span>
         <div class='renmintj_left_yewulx_content1'>
           <div class="pie1"></div>
         </div>

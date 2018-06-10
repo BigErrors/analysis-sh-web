@@ -105,10 +105,10 @@ export default {
     changeRouter (name) {
       this.$router.push({name: name})
     },
-    drawWordcloud () {
+    drawWordcloud (type) {
       let myChart = this.$echarts.init(document.getElementsByClassName('totalNum_content_leftContent')[0])
       let maskImage = new Image()
-      maskImage.src = '/static/renmintjOther/pic_boy1.png'
+      maskImage.src = type === 'nan' ? '/static/renmintjOther/pic_boy1.png' : ''
       let option = eos.setWordcloud(this.renyuanxq.ciyun, maskImage)
       maskImage.onload = () => {
         myChart.setOption(option)
@@ -160,7 +160,9 @@ export default {
     overflow-y: auto;
   }
   .shade {
-    background-color: #0b1740;
+    background: url('/static/renmintj/pic_bg.png');
+    background-repeat:no-repeat;
+    background-position:center;
   }
   .totalNum_header{
     width: 100%;

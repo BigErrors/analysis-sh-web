@@ -98,7 +98,6 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-
 export default {
   name: 'importantEvent',
   components: {
