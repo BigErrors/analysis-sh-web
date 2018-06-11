@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-08 13:54:44
+ * @Last Modified time: 2018-06-11 15:16:47
  */
 <template>
 <div id='renmintj' class='shade'>
@@ -17,22 +17,22 @@
           <div class="renmintj_main_once">
             <div class="pie yewusl1"></div>
             <div class="yewusl_title">人民调解</div>
-            <div class="yewusl_subtitle"><span>135</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.mbm_case_count_day"></span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl2"></div>
             <div class="yewusl_title">110联动</div>
-            <div class="yewusl_subtitle"><span>364</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.mms_alarm110info_count_day">364</span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl3"></div>
             <div class="yewusl_title">公共法律服务</div>
-            <div class="yewusl_subtitle"><span>41</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.wws_consult_count_day">41</span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl4"></div>
             <div class="yewusl_title">纠纷排查</div>
-            <div class="yewusl_subtitle"><span>301</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.cds_invest_count_day">301</span><br/><span>今日</span></div>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
           <span>业务总量</span><span><digitalRolling :height='30' :width='18' :number='yewusl' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling></span>
         </div>
         <div class="map_subtitle">
-          <span>同比今年</span><span>15%</span>
+          <span>同比今年</span><span><digitalRolling :height='14' :width='10' :number='yewutb' :fontSize='14' :fontColor='"#FFFFFF"' :numberDigits='3'></digitalRolling>%</span>
         </div>
         <div class='map'></div>
       </div>
@@ -170,7 +170,9 @@ export default {
         xys: 0,
         tjcg: 0
       },
-      yewusl: 2897,
+      yewusl: 0,
+      yewutb: 0,
+      yewuslList: [],
       timer: ''
     }
   },
@@ -182,7 +184,12 @@ export default {
       }
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       if (domName === 'map') {
+        let vue = this
         this.$echarts.registerMap('shanghai', genJson4shanghai)
+        this.myChart[domName].on('timelineChanged', function (params) {
+          vue.yewusl = vue.yewuslList[params.currentIndex].yewuzongliang
+          vue.yewutb = (vue.yewuslList[params.currentIndex].tongbi * 100).toFixed(0)
+        })
       }
       this.myChart[domName].setOption(option)
     },
@@ -238,7 +245,10 @@ export default {
       })
       url = '/peopleMediate/ywsj_casestatistics_dist'
       http.get(url, reqParam, (data) => {
-        vue.draw('map', eos.setMap(data))
+        vue.yewuslList = data.total
+        vue.yewusl = data.total[0].yewuzongliang
+        vue.yewytb = (data.total[0].tongbi * 100).toFixed(0)
+        vue.draw('map', eos.setMap(data.number))
       })
       url = '/peopleMediate/zdsj'
       http.get(url, reqParam, (data) => {
@@ -270,26 +280,7 @@ export default {
       })
     },
     getUpdateData () {
-      let vue = this
-      let reqParam = {}
-      let url = ''
       this.timer = setInterval(function () {
-        url = '/peopleMediate/ywsj_casestatistics_count'
-        http.get(url, reqParam, (data) => {
-          let obj = {}
-          data.map((item) => { obj[item['name']] = item['value'] })
-          vue.casestatistics['mbm_case_count_day'] = obj['mbm_case_count_day']
-          vue.casestatistics['mms_alarm110info_count_day'] = obj['mms_alarm110info_count_day']
-          vue.casestatistics['wws_consult_count_day'] = obj['wws_consult_count_day']
-          vue.casestatistics['cds_invest_count_day'] = obj['cds_invest_count_day']
-          vue.$nextTick(function () {
-            vue.draw('yewusl1', eos.setPie5(obj.mbm_case_count, [44, 204, 250]))
-            vue.draw('yewusl2', eos.setPie5(obj.mms_alarm110info_count, [240, 104, 127]))
-            vue.draw('yewusl3', eos.setPie5(obj.wws_consult_count, [109, 239, 39]))
-            vue.draw('yewusl4', eos.setPie5(obj.cds_invest_count, [255, 231, 62]))
-          })
-        })
-        vue.yewusl = parseInt(Math.random() * 9000) + 1000
       }, 10000)
     }
   },
@@ -299,7 +290,6 @@ export default {
   mounted () {
     // this.draw('map', eos.setMap2([[121.394878, 31.072511, 10], [121.555854, 30.8803, 20], [121.491, 31.237, 5], [121.440296, 31.401281, 6], [121.512, 31.27, 7], [121.43, 31.227, 2], [121.07968, 31.141832, 9], [121.541702, 31.270352, 3],
     //  [121.736377, 31.088346, 3], [121.454, 31.234, 6], [121.20573, 31.372673, 5], [121.178709, 30.992306, 5], [121.43452, 31.170563, 7], [121.563184, 31.631849, 3], [121.233758, 30.816867, 4]]))
-    this.getUpdateData()
   },
   beforeDestroy () {
     clearInterval(this.timer)
@@ -510,12 +500,14 @@ export default {
     line-height: 34px;
   }
   .map_subtitle>span:nth-of-type(2){
-    color: #EF687F;
+    /* color: #EF687F; */
+    color: #FFFFFF;
     font-size: 14px;
     display: block;
     float: right;
     padding-right: 20px;
-    line-height: 36px;
+    padding-top: 10px;
+    /* line-height: 36px; */
   }
   .renmintj_center_once{
     width:100%;

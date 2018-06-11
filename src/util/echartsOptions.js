@@ -503,6 +503,7 @@ let setRadar = (data) => {
 
 // 雷达图
 let setRadar2 = (data, indicator) => {
+  console.log(data)
   let option = {
     title: {},
     tooltip: {},
@@ -1565,7 +1566,9 @@ let setMap = (pointData) => {
 
   let date = Array.from(new Set(pointData.map(item => {
     return item.riqi
-  })))
+  }))).reverse()
+
+  console.log(pointData)
 
   let option = {
     baseOption: {
@@ -1685,7 +1688,6 @@ let setMap = (pointData) => {
     },
     options: []
   }
-  console.log(date)
   date.map(item => {
     option.options.push({
       series: [{

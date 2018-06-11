@@ -108,7 +108,7 @@ export default {
     drawWordcloud (type) {
       let myChart = this.$echarts.init(document.getElementsByClassName('totalNum_content_leftContent')[0])
       let maskImage = new Image()
-      maskImage.src = type === 'nan' ? '/static/renmintjOther/pic_boy1.png' : ''
+      maskImage.src = type === 'nan' ? '/static/renmintjOther/pic_boy1.png' : '/static/renmintjOther/pic_girl1.png'
       let option = eos.setWordcloud(this.renyuanxq.ciyun, maskImage)
       maskImage.onload = () => {
         myChart.setOption(option)
@@ -117,14 +117,15 @@ export default {
         })
       }
     },
-    drawWordcloud2 () {
+    drawWordcloud2 (type) {
       let option = wos.setOption(this.renyuanxq.ciyun.map((item) => {
         return [item.name, item.value]
       }))
       let vue = this
       let ctx = document.getElementsByClassName('totalNum_content_leftContent_canvas')[0].getContext('2d')
       let img = new Image()
-      img.src = 'static/renmintjOther/pic_boy2.png'
+      img.src = type ? '/static/renmintjOther/pic_girl2.png' : '/static/renmintjOther/pic_boy2.png'
+      document.getElementsByClassName('totalNum_content_leftContent')[0].style.background = type ? "url('/static/renmintjOther/pic_girl1.png') no-repeat;" : "url('/static/renmintjOther/pic_boy1.png') no-repeat;"
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
         vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent_canvas')[0], option)
@@ -138,7 +139,7 @@ export default {
       http.get(url, reqParam, (data) => {
         vue.renyuanxq = data
         vue.$nextTick(function () {
-          vue.draw('module2', eos.setBar3(vue.renyuanxq.leixingdb, ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
+          vue.draw('module2', eos.setBar3(vue.renyuanxq.leixingdb.reverse(), ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
           vue.draw('module3', eos.setRadar2(vue.renyuanxq.data, vue.renyuanxq.indicator))
           vue.drawWordcloud2()
         })

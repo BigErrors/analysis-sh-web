@@ -56,9 +56,9 @@
             </div>
           </div> -->
           <div class="mediators_img_container" v-for="(item,index) in mediators" :key="index">
-            <img class="media_info_jb" v-if ="index===0 && sortType" src="/static/renmintj/jing.png"/>
-            <img class="media_info_jb" v-if ="index===1 && sortType" src="/static/renmintj/yin.png"/>
-            <img class="media_info_jb" v-if ="index===2 && sortType" src="/static/renmintj/tong.png"/>
+            <img class="media_info_jb" v-if ="index===0 && sortType && pageInfo.currentPage===1" src="/static/renmintj/jing.png"/>
+            <img class="media_info_jb" v-if ="index===1 && sortType && pageInfo.currentPage===1" src="/static/renmintj/yin.png"/>
+            <img class="media_info_jb" v-if ="index===2 && sortType && pageInfo.currentPage===1" src="/static/renmintj/tong.png"/>
             <img @click="changeRouter('peoplePortrait', item.id)" class="media_info_img" v-if="item.gender==='男'||item.gender==='0'" src="/static/renmintj/boy.png" onerror="src='/static/renmintj/boy.png'"/>
             <img @click="changeRouter('peoplePortrait', item.id)" class="media_info_img" v-if="item.gender==='女'" src="/static/renmintj/girl.png" onerror="src='/static/renmintj/girl.png'"/>
             <p class="mediator-name" v-text="item.name" ></p>
@@ -228,7 +228,6 @@ export default {
     },
     optionChange (val) {
       this.optionDefault = val
-      console.log(this.optionDefault)
       this.getData()
     },
     currentChange (currentPage) {
