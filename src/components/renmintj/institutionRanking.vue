@@ -16,12 +16,17 @@
       <div class="institutionRanking_nav3_left active">区局</div>
       <div class="institutionRanking_nav3_left">司法所</div>
       <div class="institutionRanking_nav3_left">调委会</div>
-      <div class="institutionRanking_nav3_right">导出Excel</div>
+      <div class="institutionRanking_nav3_right" @click="getData(1)">导出Excel</div>
       <div class="institutionRanking_nav3_date">
-         <el-date-picker
+        <el-date-picker
           v-model="date"
-          type="date"
-          placeholder="选择日期">
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions">
         </el-date-picker>
       </div>
     </div>
@@ -30,60 +35,45 @@
         <thead class="institutionRanking_content_thead">
           <tr>
             <th><span class="institutionRanking_content_span">排名</span></th>
-            <th><span class="institutionRanking_content_span">名称</span></th>
-            <th><span class="institutionRanking_content_span">人员数量</span><i class="bg1"></i></th>
-            <th><span class="institutionRanking_content_span">业务总量</span><i class="bg2"></i></th>
-            <th><span class="institutionRanking_content_span">调解案件数</span><i class="bg3"></i></th>
-            <th><span class="institutionRanking_content_span">排查反馈数</span><i class="bg1"></i></th>
-            <th><span class="institutionRanking_content_span">调节案例上报数</span><i class="bg1"></i></th>
-            <th><span class="institutionRanking_content_span">咨询管理日志数</span><i class="bg1"></i></th>
-            <th><span class="institutionRanking_content_span">村居服务数</span><i class="bg1"></i></th>
-            <th><span class="institutionRanking_content_span">法宣活动数</span><i class="bg1"></i></th>
-            <th><span class="institutionRanking_content_span">业务系统使用率</span><i class="bg1"></i></th>
+            <th><span class="institutionRanking_content_span" >名称</span></th>
+            <th><span class="institutionRanking_content_span">人员数量</span><i @click="sort('people_number')" class="bg1" :class="{bg2:obj==='people_number'&&reorder==='DESC',bg3:obj==='people_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">业务总量</span><i @click="sort('yw_number')" class="bg1" :class="{bg2:obj==='yw_number'&&reorder==='DESC',bg3:obj==='yw_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">调解案件数</span><i @click="sort('aj_number')" class="bg1" :class="{bg2:obj==='aj_number'&&reorder==='DESC',bg3:obj==='aj_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">排查反馈数</span><i @click="sort('pc_number')" class="bg1" :class="{bg2:obj==='pc_number'&&reorder==='DESC',bg3:obj==='pc_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">调节案例上报数</span><i @click="sort('sb_number')" class="bg1" :class="{bg2:obj==='sb_number'&&reorder==='DESC',bg3:obj==='sb_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">咨询管理日志数</span><i @click="sort('rz_number')" class="bg1" :class="{bg2:obj==='rz_number'&&reorder==='DESC',bg3:obj==='rz_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">村居服务数</span><i @click="sort('cj_number')" class="bg1" :class="{bg2:obj==='cj_number'&&reorder==='DESC',bg3:obj==='cj_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">法宣活动数</span><i @click="sort('fx_number')" class="bg1" :class="{bg2:obj==='fx_number'&&reorder==='DESC',bg3:obj==='fx_number'&&reorder==='ASC'}"></i></th>
+            <th><span class="institutionRanking_content_span">业务系统使用率</span><i @click="sort('rate')" class="bg1" :class="{bg2:obj==='rate'&&reorder==='DESC',bg3:obj==='rate'&&reorder==='ASC'}"></i></th>
           </tr>
         </thead>
         <tbody class="institutionRanking_content_tbody">
-          <tr>
-            <td><img class="institutionRanking_content_jp" src='/static/renmintj/jingpai.png' /></td>
-            <td><div class="institutionRanking_content_jg">徐汇区司法局</div></td>
-            <td><span class="institutionRanking_content_rysl">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span4">1234</span></td>
-          </tr>
-           <tr>
-            <td><img class="institutionRanking_content_jp" src='/static/renmintj/jingpai.png' /></td>
-            <td><div class="institutionRanking_content_jg">徐汇区司法局</div></td>
-            <td><span class="institutionRanking_content_rysl">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span4">1234</span></td>
-          </tr>
-           <tr>
-            <td><img class="institutionRanking_content_jp" src='/static/renmintj/jingpai.png' /></td>
-            <td><div class="institutionRanking_content_jg">徐汇区司法局</div></td>
-            <td><span class="institutionRanking_content_rysl">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span2">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span3">1234</span></td>
-            <td><span class="institutionRanking_content_span4">1234</span></td>
+          <tr v-for="(item,index) in list" :key = index>
+            <td>
+              <span v-if="index>2||currentpage>1" class="institutionRanking_content_span2">{{index+1+(currentpage-1)*10}}</span>
+              <img v-if="index===0&&currentpage===1" class="institutionRanking_content_jp" src='/static/renmintj/jingpai.png' />
+              <img v-if="index===1&&currentpage===1" class="institutionRanking_content_jp" src='/static/renmintj/yinpai.png' />
+              <img v-if="index===2&&currentpage===1" class="institutionRanking_content_jp" src='/static/renmintj/tongpai.png' />
+            </td>
+            <td ><div class="institutionRanking_content_jg">{{item.sifaju}}</div></td>
+            <td><span class="institutionRanking_content_rysl">{{item.people_number}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.yw_number}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.aj_number}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.pc_number}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.sb_number}}</span></td>
+            <td><span class="institutionRanking_content_span3">{{item.rz_number}}</span></td>
+            <td><span class="institutionRanking_content_span3">{{item.cj_number}}</span></td>
+            <td><span class="institutionRanking_content_span3">{{item.fx_number}}</span></td>
+            <td><span class="institutionRanking_content_span4">{{item.rate*100+"%"}}</span></td>
           </tr>
         </tbody>
       </table>
+      <el-pagination
+      layout="total, prev, pager, next"
+      :total="pageTotal"
+      :page-size="10"
+      @current-change="handleCurrentChange"
+      class="ej-pagination"></el-pagination>
     </div>
   </div>
 </template>
@@ -92,18 +82,116 @@
 export default {
   data: function () {
     return {
-      date: ''
+      date: '',
+      pickerOptions: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近一个月',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近一年',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
+            picker.$emit('pick', [start, end])
+          }
+        }]
+      },
+      list: [],
+      pageTotal: 0,
+      currentpage: 1,
+      reorder: 'DESC',
+      obj: 'aj_number'
     }
   },
+  created: function () {
+    this.getData()
+  },
   methods: {
-    changeRouter (name) {
-      this.$router.push({name: name})
+    getData (excl) {
+      let _this = this
+      let excel = excl || 0
+      if (excel === 0) {
+        this.axios.post('/peopleMediate/institutionalRankings', {
+          'obj': _this.obj,
+          'reorder': _this.reorder,
+          'excl': excel,
+          'pagesize': 10,
+          'currentpage': _this.currentpage
+        }).then(function (response) {
+          let _data = response.data
+          if (_data.code === 1) {
+            _this.list = _data.data.pageData
+            _this.pageTotal = _data.data.pageinfo.total
+          }
+        }).catch(function (error) {
+          console.log(error)
+        })
+      } else {
+        this.axios({
+          method: 'post',
+          url: '/peopleMediate/institutionalRankings',
+          data: {
+            'obj': _this.obj,
+            'reorder': _this.reorder,
+            'excl': 0,
+            'pagesize': 10,
+            'currentpage': _this.currentpage
+          },
+          headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+          console.log(response)
+          let date = new Date()
+          let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+          let blob = new Blob([response.data]) // 创建一个blob对象
+          let a = document.createElement('a') // 创建一个<a></a>标签
+          a.href = URL.createObjectURL(blob) // response is a blob
+          a.download = filefix + '表格.xlsx' // 文件名称
+          a.style.display = 'none'
+          document.body.appendChild(a)
+          a.click()
+          a.remove()
+        })
+      }
+    },
+    // 分页
+    handleCurrentChange (val) {
+      console.log(val)
+      this.currentpage = val
+      this.getData()
+    },
+    // 排序
+    sort (val) {
+      if (val !== this.obj) {
+        this.reorder = 'DESC'
+      } else {
+        if (this.reorder === 'DESC') {
+          this.reorder = 'ASC'
+        } else {
+          this.reorder = 'DESC'
+        }
+      }
+      this.obj = val
+      this.getData()
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .shade {
   background: url(/static/renmintj/pic_bg.png);
   background-repeat: no-repeat;
@@ -172,7 +260,7 @@ export default {
   margin:0 34px;
 }
 .institutionRanking_nav3{
-  margin:18px 34px;
+  margin:12px 34px;
   display: block;
   height: 42px;
 }
@@ -206,6 +294,7 @@ export default {
   line-height: 36px;
   border-radius: 2px;
   width: 100px;
+  cursor: pointer;
 }
 .institutionRanking_nav3_date{
   float: right;
@@ -218,11 +307,13 @@ export default {
   box-sizing: border-box;
   display: block;
   position: relative;
-  height: 825px;
+  height: 837px;
   padding:0 34px 0 34px;
+  text-align: center
 }
 .institutionRanking_content_table{
   width: 100%;
+  margin-bottom: 10px
 }
 .institutionRanking_content_thead{
   height: 44px;
@@ -247,6 +338,7 @@ export default {
   background-repeat: no-repeat;
   vertical-align: middle;
   background-position: left 1px top 9px;
+  cursor: pointer;
 }
 .institutionRanking_content_thead .bg2{
   width: 9px;
@@ -257,6 +349,7 @@ export default {
   background-repeat: no-repeat;
   vertical-align: middle;
   background-position: left -7px top 9px;
+  cursor: pointer;
 }
 .institutionRanking_content_thead .bg3{
   width: 9px;
@@ -267,9 +360,10 @@ export default {
   background-repeat: no-repeat;
   vertical-align: middle;
   background-position: left -16px top 9px;
+  cursor: pointer;
 }
 .institutionRanking_content_tbody tr{
-  height: 76px;
+  height: 74px;
   text-align: center
 }
 .institutionRanking_content_jp{
@@ -317,6 +411,6 @@ export default {
   padding-left:5px;
 }
 .institutionRanking_content_tbody tr:nth-of-type(2n-1) td{
-  background: rgba(7,30,74,0.8);
+  background: rgba(1,41,126,0.5);
 }
 </style>

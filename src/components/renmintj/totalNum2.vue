@@ -58,7 +58,7 @@
       <div class="totalNum_content_bottom">
         <div class="totalNum_content_title clearfix">
           <div class="totalNum_content_title_left">
-            <span class="totalNum_content_span1">各区案件数量</span>
+            <span class="totalNum_content_span1">各区案件数量(TOP10)</span>
           </div>
         </div>
         <div class="target4"></div>
@@ -104,7 +104,6 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-// import xuelilx from '@/../static/json/renmintj/tiaojieysxfx_xuelilx'
 
 export default {
   name: 'totalNum',
@@ -141,14 +140,17 @@ export default {
         dLength: 0,
         lineNum: 0
       },
-      keyMap: {'人民调解': 'arenmintj', '110联动': 'a110', '公共法律服务': 'afalvfw', '纠纷排查': 'ajiufenpc'}
+      sourceData: [],
+      keyMap: {'人民调解': 'arenmintj', '110联动': 'a110', '公共法律服务': 'afalvfw', '纠纷排查': 'ajiufenpc'},
+      keyMap2: {'人民调解': 'source_rmtj', '110联动': 'source_110', '公共法律服务': 'source_jc', '纠纷排查': 'source_pc'}
     }
   },
   watch: {
     type: function (newValue, oldValue) {
       this.statistics = this.numData[this.keyMap[newValue]]
-      this.draw('target4', eos.setBar3(this.barData[this.keyMap[newValue]], ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
       this.setTypeData()
+      this.draw('target4', eos.setBar3(this.barData[this.keyMap[newValue]], ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+      this.draw('target5', eos.setPie3(this.sourceData[this.keyMap2[newValue]]))
     },
     timeType: function (newValue, oldValue) {
       this.setTypeData()
@@ -171,6 +173,15 @@ export default {
     },
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    setTypeData () {
+      this.draw('target2', eos.setPie2(this.dataFormatter3(this.typeData[this.type][this.timeType])))
+      this.type2Title = '民事纠纷'
+      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
+    },
+    setType2Data (type) {
+      this.type2Title = type
+      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
     },
     dataFormatter (data) {
       // 声明空对象
@@ -235,14 +246,17 @@ export default {
       }
       return tmpList
     },
-    setTypeData () {
-      this.draw('target2', eos.setPie2(this.dataFormatter3(this.typeData[this.type][this.timeType])))
-      this.type2Title = '民事纠纷'
-      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
-    },
-    setType2Data (type) {
-      this.type2Title = type
-      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
+    dataFormatter5 (data) {
+      // 声明空对象
+      let tmpObj = {}
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          tmpObj[key] = data[key].map((item) => {
+            return {name: item.source, value: item.number}
+          })
+        }
+      }
+      return tmpObj
     },
     getData () {
       let vue = this
@@ -277,13 +291,20 @@ export default {
           vue.setTypeData()
         })
       })
+      url = '/peopleMediate/YewuslSource'
+      http.get(url, reqParam, (data) => {
+        vue.sourceData = vue.dataFormatter5(data)
+        // 初始化渲染
+        vue.$nextTick(function () {
+          vue.draw('target5', eos.setPie3(vue.sourceData[vue.keyMap2[vue.type]]))
+        })
+      })
     }
   },
   created () {
     this.getData()
   },
   mounted () {
-    // this.draw('target5', eos.setPie3(xuelilx))
   }
 }
 </script>

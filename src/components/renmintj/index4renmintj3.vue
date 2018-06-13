@@ -1,8 +1,9 @@
 /*
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
- * @Last Modified by:   wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-05-30 09:31:53
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-06-13 15:45:02
+ * @content: echarts 三维地理坐标系 动态散点
  */
 <template>
 <div id='renmintj' class='shade'>

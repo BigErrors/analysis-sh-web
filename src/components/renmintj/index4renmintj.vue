@@ -1,3 +1,10 @@
+/*
+ * @Author: wupeiwen javapeiwen2010@gmail.com
+ * @Date: 2018-05-24 15:41:33
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-06-13 15:45:36
+ * @content: vue-baidu-map
+ */
 <template>
 <div id='renmintj' class='shade'>
   <div class='renmintj_header'>

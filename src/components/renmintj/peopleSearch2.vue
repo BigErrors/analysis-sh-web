@@ -47,14 +47,6 @@
           <div class="sortRight" :class="{activeshang:sortValue === 'tjnumber'&&sortType,activexia:sortValue ==='tjnumber'&&!sortType}"><span @click="changeSort('tjnumber')" style="cursor:pointer">调解数量</span></div>
         </div>
         <div class="mediators-content">
-          <!-- <div v-for="row in Math.ceil(mediators.length/5)" :key="'row'+row" :row="row" class="mediators-image">
-            <div class="mediator-info" v-for="col in 5" :key="'col'+(row*5+col)" v-if="(row-1)*5+col<=mediators.length" :col="(row-1)*5+(col-1)" @click="changeRouter('peoplePortrait')" style="cursor: pointer;">
-              <img v-if="mediators[(row-1)*5+(col-1)].zhaopiandz!==''" :src="'/static/mediatorsImg/'+mediators[(row-1)*5+(col-1)].zhaopiandz"/>
-              <img v-if="mediators[(row-1)*5+(col-1)].zhaopiandz===''" :src="(mediators[(row-1)*5+(col-1)].xingbie ==='2')?'/static/mediatorsImg/Male/2 (86).jpg':'/static/mediatorsImg/Female/1 (41).jpg'"/>
-              <p v-text="mediators[(row-1)*5+(col-1)].xingming" class="mediator-name"></p>
-              <p class="mediator-committee" v-text="mediators[(row-1)*5+(col-1)].tiaojiewyh"></p>
-            </div>
-          </div> -->
           <div class="mediators_img_container" v-for="(item,index) in mediators" :key="index">
             <img class="media_info_jb" v-if ="index===0 && sortType && pageInfo.currentPage===1" src="/static/renmintj/jing.png"/>
             <img class="media_info_jb" v-if ="index===1 && sortType && pageInfo.currentPage===1" src="/static/renmintj/yin.png"/>
@@ -74,7 +66,6 @@
 
 <script>
 import http from '@/util/httpUtil'
-// import mediators from '@/../static/json/renmintj/huaxiangfx_renyuanqd'
 export default {
   name: 'peopleSearch',
   data () {

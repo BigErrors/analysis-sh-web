@@ -79,7 +79,7 @@ import eos from '@/util/echartsOptions'
 import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
-// import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
+
 export default {
   name: 'peoplePortrait',
   components: {

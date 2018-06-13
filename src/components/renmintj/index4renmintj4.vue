@@ -2,7 +2,8 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-11 15:16:47
+ * @Last Modified time: 2018-06-13 15:46:15
+ * @content: echarts 二维地理坐标系 动态散点 时间轴
  */
 <template>
 <div id='renmintj' class='shade'>
