@@ -7,10 +7,10 @@
     <span class="trendAnalysis_nav_span">首页 > 趋势分析</span>
   </div>
   <div class="trendAnalysis_nav2">
-    <span class="trendAnalysis_nav2_span trendAnalysis_nav2_span_active">人民调解</span>
-    <span class="trendAnalysis_nav2_span">110联动</span>
-    <span class="trendAnalysis_nav2_span">公共法律服务</span>
-    <span class="trendAnalysis_nav2_span">纠纷排查</span>
+    <span class="trendAnalysis_nav2_span" :class="{'trendAnalysis_nav2_span_active':type==='人民调解'?true:false}" @click="type='人民调解'">人民调解</span>
+    <span class="trendAnalysis_nav2_span " :class="{'trendAnalysis_nav2_span_active':type==='110联动'?true:false}" @click="type='110联动'">110联动</span>
+    <span class="trendAnalysis_nav2_span " :class="{'trendAnalysis_nav2_span_active':type==='公共法律服务'?true:false}" @click="type='公共法律服务'">公共法律服务</span>
+    <span class="trendAnalysis_nav2_span " :class="{'trendAnalysis_nav2_span_active':type==='纠纷排查'?true:false}" @click="type='纠纷排查'">纠纷排查</span>
   </div>
   <div class="cas_container">
     <el-cascader
@@ -37,11 +37,11 @@
           <span class="span1">单月最高</span><br>
           <span class="span2">{{max | numFormat }}</span>
           <span class="span1">件</span><br>
-          <span class="span3">（出现在2018/04）</span>
+          <span class="span3">{{ '（出现在' + maxMonth + '）' }}</span>
         </div>
         <div class="trendAnalysis_content_left_once_children">
           <span class="span1">月均</span><br>
-          <span class="span2">{{average | numFormat }}</span>
+          <span class="span2">{{ average | numFormat }}</span>
           <span class="span1">件</span>
         </div>
       </div>
@@ -77,8 +77,7 @@ import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import gequxztjy from '@/../static/json/renmintj/tiaojieslxfx_gequxztjy'
-import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
+import json from '@/util/json'
 
 export default {
   name: 'trendAnalysis',
@@ -94,70 +93,25 @@ export default {
         dLength: 0,
         lineNum: 0
       },
-      timer: '',
-      count: 154688,
-      importantNum: 210,
-      max: 1366,
-      average: 1469,
-      area: [{
-        'label': '全市',
-        'value': 0
-      }, {
-        'label': '闵行区',
-        'value': '闵行'
-      }, {
-        'label': '徐汇区',
-        'value': '徐汇'
-      }, {
-        'label': '宝山区',
-        'value': '宝山'
-      }, {
-        'label': '崇明区',
-        'value': '崇明'
-      }, {
-        'label': '浦东区',
-        'value': '浦东'
-      }, {
-        'label': '松江区',
-        'value': '松江'
-      }, {
-        'label': '奉贤区',
-        'value': '奉贤'
-      }, {
-        'label': '嘉定区',
-        'value': '嘉定'
-      }, {
-        'label': '青浦区',
-        'value': '青浦'
-      }, {
-        'label': '杨浦区',
-        'value': '杨浦'
-      }, {
-        'label': '黄浦区',
-        'value': '黄浦'
-      }, {
-        'label': '金山区',
-        'value': '金山'
-      }, {
-        'label': '普陀区',
-        'value': '普陀'
-      }, {
-        'label': '静安区',
-        'value': '静安'
-      }, {
-        'label': '长宁区',
-        'value': '长宁'
-      }, {
-        'label': '虹口区',
-        'value': '虹口'
-      }],
-      areaDefault: [0]
+      count: 0,
+      importantNum: 0,
+      max: 0,
+      average: 0,
+      maxMonth: '0000-00',
+      area: json.area,
+      areaDefault: ['全市'],
+      // areaDefault: ['SHJCK01000'],
+      type: '人民调解'
+    }
+  },
+  watch: {
+    type: function (newValue, oldValue) {
+      this.getData()
     }
   },
   filters: {
     numFormat (num) {
       num = num || 0
-      console.log(num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'))
       return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
     }
   },
@@ -175,20 +129,11 @@ export default {
         })
       }
     },
-    drawWordcloud2 (domName) {
-      let option = wos.setOption(renyuanxq.person[0].ciyun.map((item) => {
-        return [item.name, item.value]
+    drawWordcloud2 (domName, data) {
+      let option = wos.setOption(data.map((item) => {
+        return [item.keyword, item.number]
       }))
       this.$wordcloud(document.getElementsByClassName(domName)[0], option)
-    },
-    changeNum () {
-      let _this = this
-      this.timer = setInterval(function () {
-        _this.count = parseInt(Math.random() * 900) + 150000
-        _this.importantNum = parseInt(Math.random() * 90) + 200
-        _this.max = parseInt(Math.random() * 900) + 1000
-        _this.average = parseInt(Math.random() * 900) + 1000
-      }, 5000)
     },
     // 路由跳转
     changeRouter (name) {
@@ -196,23 +141,27 @@ export default {
     },
     getData () {
       let vue = this
-      let reqParam = {}
+      let reqParam = {area: this.areaDefault[0], source: this.type}
       let url = ''
-      url = '/peopleMediate/zdsj'
+      url = '/peopleMediate/QushiUnder'
       http.get(url, reqParam, (data) => {
-        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 7, data]
+        vue.$nextTick(function () {
+          vue.count = data.jiufensl
+          vue.importantNum = data.zhongdiansjs
+          vue.max = data.danyuezg
+          vue.maxMonth = data.danyuezgsj
+          vue.average = data.yuejun
+          vue.draw('target2', eos.setLine5(data.meirisl))
+          vue.draw('target3', eos.setBar3(data.jiufenlx.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+          vue.drawWordcloud2('target4', data.ciyun)
+        })
       })
     }
   },
   created () {
-    // this.getData()
+    this.getData()
   },
-  mounted () {
-    // this.changeNum()
-    this.draw('target2', eos.setLine5())
-    this.draw('target3', eos.setBar3(gequxztjy.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
-    this.drawWordcloud2('target4')
-  },
+  mounted () {},
   beforeDestroy () {
     clearInterval(this.timer)
   }

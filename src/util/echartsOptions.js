@@ -503,10 +503,11 @@ let setRadar = (data) => {
 
 // 雷达图
 let setRadar2 = (data, indicator) => {
-  console.log(data)
   let option = {
     title: {},
-    tooltip: {},
+    tooltip: {
+      show: false
+    },
     radar: {
       radius: '65%',
       name: {
@@ -903,16 +904,12 @@ let setLine4 = (data, dataType, legend, color) => {
 }
 
 // 折线图--dataZoom属性
-let setLine5 = () => {
-  var base = +new Date(1968, 9, 3)
-  var oneDay = 24 * 3600 * 1000
-  var date = []
-  var data = [Math.random() * 300]
-  for (var i = 1; i < 20000; i++) {
-    var now = new Date(base += oneDay)
-    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'))
-    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]))
-  }
+let setLine5 = (data) => {
+  let date = []
+  data.map((item) => {
+    date.push(item.time)
+    return {name: item.time, value: item.value}
+  })
   let option = {
     tooltip: {
       show: false,
@@ -922,8 +919,9 @@ let setLine5 = () => {
       }
     },
     title: {
+      show: false,
       position: 'left',
-      text: '起止时间：2018/01-2018/06',
+      text: '',
       textStyle: {
         color: '#00C6FF',
         fontSize: 16

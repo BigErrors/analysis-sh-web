@@ -22,9 +22,6 @@ import importantEvent from '@/components/renmintj/importantEvent'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
 import businessTypes from '@/components/renmintj/businessTypes'
 import institutionRanking from '@/components/renmintj/institutionRanking'
-import yewulx from '@/components/mockpages/yewulx'
-import jigoupm from '@/components/mockpages/jigoupm'
-import qushifx from '@/components/mockpages/qushifx'
 
 Vue.use(Router)
 
@@ -130,20 +127,7 @@ const router = new Router({
       path: '/trendAnalysis',
       name: 'trendAnalysis',
       component: trendAnalysis
-    }, {
-      path: '/yewulx',
-      name: 'yewulx',
-      component: yewulx
-    }, {
-      path: '/jigoupm',
-      name: 'jigoupm',
-      component: jigoupm
-    }, {
-      path: '/qushifx',
-      name: 'qushifx',
-      component: qushifx
     }
-
   ]
 })
 

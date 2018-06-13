@@ -7,20 +7,20 @@
       <span class="totalNum_nav_span">首页 > 业务数量</span>
     </div>
     <div class="totalNum_nav2">
-      <span class="totalNum_nav2_span totalNum_nav2_span_active">人民调解</span>
-      <span class="totalNum_nav2_span">110联动</span>
-      <span class="totalNum_nav2_span">公共法律服务</span>
-      <span class="totalNum_nav2_span">纠纷排查</span>
+      <span class="totalNum_nav2_span" :class="{'totalNum_nav2_span_active':type==='人民调解'?true:false}" @click="type='人民调解'">人民调解</span>
+      <span class="totalNum_nav2_span " :class="{'totalNum_nav2_span_active':type==='110联动'?true:false}" @click="type='110联动'">110联动</span>
+      <span class="totalNum_nav2_span " :class="{'totalNum_nav2_span_active':type==='公共法律服务'?true:false}" @click="type='公共法律服务'">公共法律服务</span>
+      <span class="totalNum_nav2_span " :class="{'totalNum_nav2_span_active':type==='纠纷排查'?true:false}" @click="type='纠纷排查'">纠纷排查</span>
     </div>
     <div class="totalNum_content">
       <div class="totalNum_content_top">
         <div class="statistics">
-          <digitalRolling class="num" :height='41' :width='20' :number='jinrixz' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+          <digitalRolling class="num" :height='41' :width='25' :number='statistics.day' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
           <br>
           <span class="title">今日新增</span>
         </div>
         <div class="statistics">
-          <digitalRolling class="num" :height='41' :width='20' :number='quannianlj' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+          <digitalRolling class="num" :height='41' :width='25' :number='statistics.year' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
           <br>
           <span class="title">全年累计</span>
         </div>
@@ -31,18 +31,18 @@
             <span class="totalNum_content_span1">类型</span>
           </div>
           <div class=" totalNum_content_title_right">
-            <span class=" totalNum_content_span5" @click='changeTypeData("week",$event)'>本周</span>
-            <span class=" totalNum_content_span5" @click='changeTypeData("month",$event)'>本月</span>
-            <span class=" totalNum_content_span5 totalNum_content_active" @click='changeTypeData("year",$event)'>今年</span>
+          <span class="totalNum_content_span5" :class="{'totalNum_content_active':timeType==='本周'?true:false}" @click="timeType='本周'">本周</span>
+          <span class="totalNum_content_span5" :class="{'totalNum_content_active':timeType==='本月'?true:false}" @click="timeType='本月'">本月</span>
+          <span class="totalNum_content_span5" :class="{'totalNum_content_active':timeType==='今年'?true:false}" @click="timeType='今年'">今年</span>
           </div>
         </div>
         <div class='target2'></div>
         <div class="totalNum_detail">
           <div class="totalNum_detail_main">
-            <div class="totalNum_detail_title">{{leixinfx2Title}}</div>
-            <div class="totalNum_detail_content" v-for="(item,index) in leixinfx2" :key="index">
-              <span class="totalNum_detail_span1">{{item.xiaolei}}</span>
-              <span class="totalNum_detail_span2">{{item.xiaoleivalue}}</span>
+            <div class="totalNum_detail_title">{{type2Title}}</div>
+            <div class="totalNum_detail_content" v-for="(item,index) in type2" :key="index">
+              <span class="totalNum_detail_span1">{{item.name}}</span>
+              <span class="totalNum_detail_span2">{{item.value}}</span>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
             <span class="totalNum_content_span1">案件处理状态</span>
           </div>
         </div>
-        <div class="target3"></div>
+        <div class="target3" v-if="false"></div>
       </div>
       <div class="totalNum_content_bottom">
         <div class="totalNum_content_title clearfix">
@@ -77,7 +77,7 @@
             <span class="totalNum_content_span1">待办申请案件</span>
           </div>
         </div>
-        <div class='renmintj_center_table'>
+        <div class='renmintj_center_table' v-if="false">
           <div class="renmintj_table_thead">
             <span class='td'>类型</span>
             <span class='td'>行政区</span>
@@ -104,10 +104,7 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import leixinfx1 from '@/../static/json/renmintj/tiaojieaj_leixinfx_1'
-import leixinfx2 from '@/../static/json/renmintj/tiaojieaj_leixinfx_2'
-import gequxztjy from '@/../static/json/renmintj/tiaojieslxfx_gequxztjy'
-import xuelilx from '@/../static/json/renmintj/tiaojieysxfx_xuelilx'
+// import xuelilx from '@/../static/json/renmintj/tiaojieysxfx_xuelilx'
 
 export default {
   name: 'totalNum',
@@ -118,16 +115,43 @@ export default {
   data () {
     return {
       myChart: {},
+      type: '人民调解',
+      statistics: {
+        year: 0,
+        day: 0
+      },
+      numData: {
+        arenmintj: {},
+        a110: {},
+        afalvfw: {},
+        ajiufenpc: {}
+      },
+      timeType: '今年',
+      typeData: {},
+      type2Title: '',
+      type2: [],
+      barData: {
+        arenmintj: [],
+        a110: [],
+        afalvfw: [],
+        ajiufenpc: []
+      },
       table: {
         zhongdiansj: [],
         dLength: 0,
         lineNum: 0
       },
-      timer: '',
-      jinrixz: 32,
-      quannianlj: 65432,
-      leixinfx2Title: '',
-      leixinfx2: []
+      keyMap: {'人民调解': 'arenmintj', '110联动': 'a110', '公共法律服务': 'afalvfw', '纠纷排查': 'ajiufenpc'}
+    }
+  },
+  watch: {
+    type: function (newValue, oldValue) {
+      this.statistics = this.numData[this.keyMap[newValue]]
+      this.draw('target4', eos.setBar3(this.barData[this.keyMap[newValue]], ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+      this.setTypeData()
+    },
+    timeType: function (newValue, oldValue) {
+      this.setTypeData()
     }
   },
   methods: {
@@ -141,47 +165,117 @@ export default {
       if (domName === 'target2') {
         let vue = this
         this.myChart[domName].on('click', function (params) {
-          vue.changeType2Data(params.name)
+          vue.setType2Data(params.name)
         })
       }
-    },
-    changeNum () {
-      let _this = this
-      this.timer = setInterval(function () {
-        _this.jinrixz = parseInt(Math.random() * 90) + 10
-        _this.quannianlj = parseInt(Math.random() * 90000) + 10000
-      }, 5000)
     },
     changeRouter (name) {
       this.$router.push({name: name})
     },
-    changeTypeData (type, event) {
-      document.getElementsByClassName('totalNum_content_span5')[0].className = 'totalNum_content_span5'
-      document.getElementsByClassName('totalNum_content_span5')[1].className = 'totalNum_content_span5'
-      document.getElementsByClassName('totalNum_content_span5')[2].className = 'totalNum_content_span5'
-      event.target.className = 'totalNum_content_span5 totalNum_content_active'
-      this.timetype = type
-      this.leixinfx2Title = '民事纠纷'
-      this.draw('target2', eos.setPie2(leixinfx1.filter((item) => {
-        if (item.timetype === type) { return true }
-      })))
-      this.leixinfx2 = leixinfx2.filter((item) => {
-        if (item.timetype === type && item.dalei === '民事纠纷') { return true }
+    dataFormatter (data) {
+      // 声明空对象
+      let tempObj = {}
+      // 声明空数组，用于存储类别
+      let typeList = []
+      data.map(item => {
+        tempObj[item.name] = item.value
+        // 存储筛选类别
+        if (item.name.split('_day').length > 1) {
+          typeList.push(item.name.split('_day')[0])
+        }
       })
+      let typeObj = {}
+      // 对临时对象中的数据按照类别分类, 存储在新的对象中
+      typeList.map(item => {
+        typeObj[item] = {year: tempObj[item], day: tempObj[item + '_day']}
+      })
+      return typeObj
     },
-    changeType2Data (type) {
-      this.leixinfx2Title = type
-      this.leixinfx2 = leixinfx2.filter((item) => {
-        if (item.timetype === this.timetype && item.dalei === type) { return true }
+    dataFormatter2 (data) {
+      //  声明空数组
+      let tempList = []
+      // 将对象{'闸北': '123','徐汇':'456'}转成数组[{name: '闸北',value: 123},{name: '徐汇',value: 123}]
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          tempList.push({name: key, value: parseInt(data[key])})
+        }
+      }
+      // 对数组进行排序
+      tempList.sort((item1, item2) => {
+        if (item1.value < item2.value) {
+          return 1
+        }
+        if (item1.value > item2.value) {
+          return -1
+        }
+        return 0
       })
+      // 返回处理好的数据(top10)
+      return tempList.splice(0, 10).reverse()
+    },
+    dataFormatter3 (data) {
+      //  声明空数组
+      let tmpList = []
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          tmpList.push({name: key, value: parseInt(data[key]['总数'])})
+        }
+      }
+      return tmpList
+    },
+    dataFormatter4 (data) {
+      //  声明空数组
+      let tmpList = []
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          if (key !== '总数') {
+            tmpList.push({name: key, value: parseInt(data[key])})
+          }
+        }
+      }
+      return tmpList
+    },
+    setTypeData () {
+      this.draw('target2', eos.setPie2(this.dataFormatter3(this.typeData[this.type][this.timeType])))
+      this.type2Title = '民事纠纷'
+      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
+    },
+    setType2Data (type) {
+      this.type2Title = type
+      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
     },
     getData () {
       let vue = this
       let reqParam = {}
       let url = ''
-      url = '/peopleMediate/zdsj'
+      url = '/peopleMediate/ywsj_casestatistics_count'
       http.get(url, reqParam, (data) => {
-        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 6, data]
+        let newData = vue.dataFormatter(data)
+        vue.numData.arenmintj = newData.mbm_case_count
+        vue.numData.a110 = newData.mms_alarm110info_count
+        vue.numData.afalvfw = newData.wws_consult_count
+        vue.numData.ajiufenpc = newData.cds_invest_count
+        // 初始化渲染
+        vue.statistics = vue.numData.arenmintj
+      })
+      url = '/peopleMediate/ywsj_casecount_down_detial_2'
+      http.get(url, reqParam, (data) => {
+        vue.barData.arenmintj = vue.dataFormatter2(data.mbm_case_count_sql)
+        vue.barData.a110 = vue.dataFormatter2(data.mms_alarm110info_count_sql)
+        vue.barData.afalvfw = vue.dataFormatter2(data.wws_consult_count_sql)
+        vue.barData.ajiufenpc = vue.dataFormatter2(data.cds_invest_count_sql)
+        // 初始化渲染
+        vue.$nextTick(function () {
+          vue.draw('target4', eos.setBar3(vue.barData.arenmintj, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+        })
+      })
+      url = '/peopleMediate/ywsj_casecount_down_detial_1'
+      http.get(url, reqParam, (data) => {
+        vue.typeData = data
+        // 初始化渲染
+        vue.$nextTick(function () {
+          vue.setTypeData()
+        })
       })
     }
   },
@@ -189,17 +283,7 @@ export default {
     this.getData()
   },
   mounted () {
-    this.changeNum()
-    this.draw('target2', eos.setPie2(leixinfx1.filter((item) => {
-      if (item.timetype === 'year') { return true }
-    })))
-    this.leixinfx2Title = '民事纠纷'
-    this.leixinfx2 = leixinfx2.filter((item) => {
-      if (item.timetype === 'year' && item.dalei === '民事纠纷') { return true }
-    })
-    this.draw('target3', eos.setBar3(gequxztjy.reverse(), ['#FF9C00', '#F8E228'], 'vertical', 'integer'))
-    this.draw('target4', eos.setBar3(gequxztjy.reverse().slice(0, 10), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
-    this.draw('target5', eos.setPie3(xuelilx))
+    // this.draw('target5', eos.setPie3(xuelilx))
   }
 }
 </script>
@@ -444,7 +528,7 @@ export default {
     width:25%;
   }
   .statistics{
-    width: 200px;
+    width: 260px;
     height: 60px;
     padding-left: 40px;
   }

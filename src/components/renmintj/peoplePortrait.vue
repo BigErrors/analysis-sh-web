@@ -14,14 +14,14 @@
   <div class="totalNum_content">
    <div class="totalNum_content_left">
      <div class="totalNum_content_leftTitle1">
-       <div class="totalNum_content_leftTitle1_name">{{renyuanxq.name}}</div>
-       <div class="totalNum_content_leftTitle1_year">{{renyuanxq.gongzuonx}}</div>
-       <div class="totalNum_content_leftTitle1_phone">{{renyuanxq.dianhauhm}}</div>
+       <div class="totalNum_content_leftTitle1_name">{{detail.name}}</div>
+       <div class="totalNum_content_leftTitle1_year">{{detail.year + '年'}}</div>
+       <div class="totalNum_content_leftTitle1_phone">{{detail.phone}}</div>
      </div>
      <div class="totalNum_content_leftTitle2">
-       <div class="totalNum_content_leftTitle2_address">{{renyuanxq.tiaojiewyh}}</div>
+       <div class="totalNum_content_leftTitle2_address" :title='detail.address'>{{detail.address}}</div>
      </div>
-     <div class="totalNum_content_leftContent">
+     <div class="totalNum_content_leftContent" :style="{background:background}">
        <canvas  class="totalNum_content_leftContent_canvas" width="184px" height="647px"></canvas>
      </div>
    </div>
@@ -30,9 +30,7 @@
        <div class="totalNum_content_rightTitle">整体概览</div>
        <div class="moduleContent">
          <div class="module1">
-           <div class="module1Item"><span class="module1Num">{{renyuanxq.zhengti[0].value}}</span><br><span class="module1Title">{{renyuanxq.zhengti[0].name}}</span></div>
-           <div class="module1Item"><span class="module1Num">{{renyuanxq.zhengti[1].value}}</span><br><span class="module1Title">{{renyuanxq.zhengti[1].name}}</span></div>
-           <div class="module1Item"><span class="module1Num">{{renyuanxq.zhengti[2].value}}</span><br><span class="module1Title">{{renyuanxq.zhengti[2].name}}</span></div>
+           <div class="module1Item" v-for="(item,index) in detail.info" :key="index"><span class="module1Num">{{item.value}}</span><br><span class="module1Title">{{item.name}}</span></div>
          </div>
        </div>
      </div>
@@ -48,30 +46,28 @@
    <div class="totalNum_content_right2">
      <div class="totalNum_content_rightTitle">案件列表</div>
       <div class="moduleContent module4">
-      <table class='totalNum_table' cellspacing='0'>
-        <thead class="totalNum_table_thead">
-        <tr>
-          <td width="14.27%" class='td'>序号</td>
-          <td width="14.27%" class='td'>案例名称</td>
-          <td width="14.27%" class='td'>受理时间</td>
-          <td width="14.27%" class='td'>结案时间</td>
-          <td width="14.27%" class='td'>调节效率</td>
-          <td width="14.27%" class='td'>文书质量</td>
-          <td width="14.27%" class='td'>综合评分</td>
-        </tr>
-        </thead>
-        <tbody class="totalNum_table_tbody">
-        <tr v-for="(item,index) in renyuanxq.anjianlb" :key="index" v-if="index<=4">
-          <td class='td'><span class="circle circle1" :class="'circle'+(index+1)">{{index+1}}</span></td>
-          <td class='td'>{{item.mingcheng}}</td>
-          <td class='td'>{{item.shoulisj}}</td>
-          <td class='td'>{{item.jieansj}}</td>
-          <td class='td'>{{item.tiaojielx}}</td>
-          <td class='td'>{{item.wenshuzl}}</td>
-          <td class='td'>{{item.zhonghepf}}</td>
-        </tr>
-        </tbody>
-      </table>
+          <div class='renmintj_center_table'>
+            <div class="renmintj_table_thead">
+              <span class='td'>序号</span>
+              <span class='td'>案例名称</span>
+              <span class='td'>受理时间</span>
+              <span class='td'>结案时间</span>
+              <span class='td'>调解效率</span>
+              <span class='td'>文书质量</span>
+              <span class='td'>综合评分</span>
+            </div>
+            <rollScreen :dLength='table.dLength' :height='42' :lineNum='table.lineNum' class="renminttj_table_body">
+              <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.list" :key="index">
+               <span class='td' >{{item.xuhao}}</span>
+               <span class='td'>{{item.mingcheng}}</span>
+               <span class='td'>{{item.shoulisj}}</span>
+               <span class='td'>{{item.jieansj}}</span>
+               <span class='td'>{{item.tiaojielx}}</span>
+               <span class='td'>{{item.wenshuzl}}</span>
+               <span class='td'>{{item.zhonghepf}}</span>
+              </div>
+            </rollScreen>
+          </div>
       </div>
    </div>
   </div>
@@ -82,12 +78,27 @@
 import eos from '@/util/echartsOptions'
 import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
+import rollScreen from '../rollScreen.vue'
 // import renyuanxq from '@/../static/json/renmintj/huaxiangfx_renyuanxq'
 export default {
   name: 'peoplePortrait',
+  components: {
+    rollScreen
+  },
   data () {
     return {
-      renyuanxq: {}
+      detail: {
+        name: '',
+        year: '',
+        phone: '',
+        address: ''
+      },
+      table: {
+        dLength: 0,
+        lineNum: 0,
+        list: []
+      },
+      background: ''
     }
   },
   methods: {
@@ -105,27 +116,19 @@ export default {
     changeRouter (name) {
       this.$router.push({name: name})
     },
-    drawWordcloud (type) {
-      let myChart = this.$echarts.init(document.getElementsByClassName('totalNum_content_leftContent')[0])
-      let maskImage = new Image()
-      maskImage.src = type === 'nan' ? '/static/renmintjOther/pic_boy1.png' : '/static/renmintjOther/pic_girl1.png'
-      let option = eos.setWordcloud(this.renyuanxq.ciyun, maskImage)
-      maskImage.onload = () => {
-        myChart.setOption(option)
-        myChart.on('click', function (params) {
-          console.log(params.name)
-        })
-      }
-    },
-    drawWordcloud2 (type) {
-      let option = wos.setOption(this.renyuanxq.ciyun.map((item) => {
-        return [item.name, item.value]
-      }))
+    drawWordcloud2 (data, type) {
+      data = data.map((item, index) => {
+        // if (index === 0) {
+        //   item.value = 2
+        // }
+        return [item.name, parseInt(item.value)]
+      })
+      let option = wos.setOption(data)
       let vue = this
       let ctx = document.getElementsByClassName('totalNum_content_leftContent_canvas')[0].getContext('2d')
+      vue.background = type === '女' ? 'url(/static/renmintjOther/pic_girl1.png) no-repeat' : 'url(/static/renmintjOther/pic_boy1.png) no-repeat'
       let img = new Image()
-      img.src = type ? '/static/renmintjOther/pic_girl2.png' : '/static/renmintjOther/pic_boy2.png'
-      document.getElementsByClassName('totalNum_content_leftContent')[0].style.background = type ? "url('/static/renmintjOther/pic_girl1.png') no-repeat;" : "url('/static/renmintjOther/pic_boy1.png') no-repeat;"
+      img.src = type === '女' ? '/static/renmintjOther/pic_girl2.png' : '/static/renmintjOther/pic_boy2.png'
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
         vue.$wordcloud(document.getElementsByClassName('totalNum_content_leftContent_canvas')[0], option)
@@ -137,11 +140,12 @@ export default {
       let url = ''
       url = '/peopleMediate/portrait/detail'
       http.get(url, reqParam, (data) => {
-        vue.renyuanxq = data
+        [vue.detail.name, vue.detail.year, vue.detail.phone, vue.detail.address, vue.detail.gender, vue.detail.info, vue.table.dLength, vue.table.list, vue.table.lineNum] =
+         [data.name, data.gongzuonx, data.dianhauhm, data.tiaojiewyh, data.gender, data.zhengti, data.anjianlb.length, data.anjianlb, 7]
         vue.$nextTick(function () {
-          vue.draw('module2', eos.setBar3(vue.renyuanxq.leixingdb.reverse(), ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
-          vue.draw('module3', eos.setRadar2(vue.renyuanxq.data, vue.renyuanxq.indicator))
-          vue.drawWordcloud2()
+          vue.draw('module2', eos.setBar3(data.leixingdb.reverse(), ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
+          vue.draw('module3', eos.setRadar2(data.data_polt, data.indicator))
+          vue.drawWordcloud2(data.ciyun, data.gender)
         })
       }, 'application/json')
     }
@@ -285,14 +289,11 @@ export default {
     color: #FFFFFF;
     box-sizing:border-box;
     padding-left: 26px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .totalNum_content_leftContent{
-    background: url('/static/renmintjOther/pic_boy1.png') no-repeat;
-    /* height: 725px;
-    width: 415px;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto; */
     width: 184px;
     height: 647px;
     margin-top: 15px;
@@ -300,10 +301,6 @@ export default {
     margin-right: auto;
   }
 
-  .totalNum_content_leftContent_canvas{
-    /* margin-left: 114px;
-     margin-top: 15px; */
-  }
   .totalNum_content_right1{
     float: left;
     width: 1360px;
@@ -372,54 +369,34 @@ export default {
     font-size: 16px;
     color: #7EBCFD;
   }
-  .totalNum_table{
+  .renmintj_center_table {
     width: 100%;
-    padding:28px 38px 0 38px;
+    padding:0 24px;
     box-sizing:border-box;
-    color:white;
-  }
-  .totalNum_table_thead td{
-    font-size:18px;
-    font-family:MicrosoftYaHei;
-    color:rgba(77,132,254,1);
-    line-height:42px;
-    text-align:center;
-     border-bottom:2px dashed rgba(16,54,165,1);
-  }
-  .totalNum_table_tbody{
     font-size:16px;
-    font-family:MicrosoftYaHei;
-    color:rgba(225,234,255,1);
-    text-align:center;
   }
-  .totalNum_table_tbody td{
-    padding:15px 0;
+  .renmintj_center_table div{
+    width: 100%;
+    height: 42px;
+  }
+  .renmintj_center_table div span {
+    float: left;
+    display: block;
+    width: 14.2%;
+    line-height:42px;
+    text-align: center;
+    color:rgba(118,187,239,1);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
   }
-  .totalNum_table_tbody tr:nth-of-type(2n){
-    background:rgba(19,38,101,1);
+ .renmintj_table_thead{
+    color:rgba(17,148,248,1);
   }
-  .circle{
-    border-radius:100%;
-    width:23px;
-    height:23px;
-    display:inline-block;
+  .renmintj_table_tr span{
+    color: #DFF1FF !important;
   }
-  .circle1{
-    background:rgba(255,105,126,1);
-  }
-  .circle2{
-    background:rgba(251,178,74,1);
-  }
-  .circle3{
-    background:rgba(111,155,253,1);
-  }
-  .circle4{
-    background:rgba(205,205,205,0.5);
-  }
-  .circle5{
-    background:rgba(205,205,205,0.5);
+  .renmintj_table_tr:nth-of-type(2n-1){
+    background: rgba(7,30,74,0.8)
   }
 </style>
