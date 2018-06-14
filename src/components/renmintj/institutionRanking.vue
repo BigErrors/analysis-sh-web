@@ -8,8 +8,9 @@
     </div>
     <div class="institutionRanking_nav2_container">
       <div class="institutionRanking_nav2">
-        <span class="institutionRanking_nav2_span active" @click="changeRouter('')">机构排名</span>
-        <span class="institutionRanking_nav2_span" @click="changeRouter('')"></span>
+        <span class="institutionRanking_nav2_span active">机构排名</span>
+        <span class="institutionRanking_nav2_span"></span>
+        <span class="institutionRanking_nav2_span"></span>
       </div>
     </div>
     <div class="institutionRanking_nav3">
@@ -36,24 +37,25 @@
           <tr>
             <th><span class="institutionRanking_content_span">排名</span></th>
             <th><span class="institutionRanking_content_span" >名称</span></th>
-            <th><span class="institutionRanking_content_span">人员数量</span><i @click="sort('people_number')" class="bg1" :class="{bg2:obj==='people_number'&&reorder==='DESC',bg3:obj==='people_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">业务总量</span><i @click="sort('yw_number')" class="bg1" :class="{bg2:obj==='yw_number'&&reorder==='DESC',bg3:obj==='yw_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">调解案件数</span><i @click="sort('aj_number')" class="bg1" :class="{bg2:obj==='aj_number'&&reorder==='DESC',bg3:obj==='aj_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">排查反馈数</span><i @click="sort('pc_number')" class="bg1" :class="{bg2:obj==='pc_number'&&reorder==='DESC',bg3:obj==='pc_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">调节案例上报数</span><i @click="sort('sb_number')" class="bg1" :class="{bg2:obj==='sb_number'&&reorder==='DESC',bg3:obj==='sb_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">咨询管理日志数</span><i @click="sort('rz_number')" class="bg1" :class="{bg2:obj==='rz_number'&&reorder==='DESC',bg3:obj==='rz_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">村居服务数</span><i @click="sort('cj_number')" class="bg1" :class="{bg2:obj==='cj_number'&&reorder==='DESC',bg3:obj==='cj_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">法宣活动数</span><i @click="sort('fx_number')" class="bg1" :class="{bg2:obj==='fx_number'&&reorder==='DESC',bg3:obj==='fx_number'&&reorder==='ASC'}"></i></th>
-            <th><span class="institutionRanking_content_span">业务系统使用率</span><i @click="sort('rate')" class="bg1" :class="{bg2:obj==='rate'&&reorder==='DESC',bg3:obj==='rate'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('people_number')"  class="institutionRanking_content_span" :class="{'yellow':obj==='people_number'}">人员数量</span><i @click="sort('people_number')" class="bg1" :class="{bg2:obj==='people_number'&&reorder==='DESC',bg3:obj==='people_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('yw_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='yw_number'}">业务总量</span><i @click="sort('yw_number')" class="bg1" :class="{bg2:obj==='yw_number'&&reorder==='DESC',bg3:obj==='yw_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('aj_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='aj_number'}">调解案件数</span><i @click="sort('aj_number')" class="bg1" :class="{bg2:obj==='aj_number'&&reorder==='DESC',bg3:obj==='aj_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('pc_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='pc_number'}">排查反馈数</span><i @click="sort('pc_number')" class="bg1" :class="{bg2:obj==='pc_number'&&reorder==='DESC',bg3:obj==='pc_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('sb_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='sb_number'}">调节案例上报数</span><i @click="sort('sb_number')" class="bg1" :class="{bg2:obj==='sb_number'&&reorder==='DESC',bg3:obj==='sb_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('rz_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='rz_number'}">咨询管理日志数</span><i @click="sort('rz_number')" class="bg1" :class="{bg2:obj==='rz_number'&&reorder==='DESC',bg3:obj==='rz_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('cj_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='cj_number'}">村居服务数</span><i @click="sort('cj_number')" class="bg1" :class="{bg2:obj==='cj_number'&&reorder==='DESC',bg3:obj==='cj_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('fx_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='fx_number'}">法宣活动数</span><i @click="sort('fx_number')" class="bg1" :class="{bg2:obj==='fx_number'&&reorder==='DESC',bg3:obj==='fx_number'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('rate')" class="institutionRanking_content_span" :class="{'yellow':obj==='rate'}">业务系统使用率</span><i @click="sort('rate')" class="bg1" :class="{bg2:obj==='rate'&&reorder==='DESC',bg3:obj==='rate'&&reorder==='ASC'}"></i></th>
           </tr>
         </thead>
         <tbody class="institutionRanking_content_tbody">
           <tr v-for="(item,index) in list" :key = index>
             <td>
-              <span v-if="index>2||currentpage>1" class="institutionRanking_content_span2">{{index+1+(currentpage-1)*10}}</span>
-              <img v-if="index===0&&currentpage===1" class="institutionRanking_content_jp" src='/static/renmintj/jingpai.png' />
-              <img v-if="index===1&&currentpage===1" class="institutionRanking_content_jp" src='/static/renmintj/yinpai.png' />
-              <img v-if="index===2&&currentpage===1" class="institutionRanking_content_jp" src='/static/renmintj/tongpai.png' />
+              <span v-if="(index>2||currentpage>1)&&reorder==='DESC'" class="institutionRanking_content_span2">{{index+1+(currentpage-1)*10}}</span>
+              <span v-if="reorder==='ASC'" class="institutionRanking_content_span2">{{pageTotal-(index)-(currentpage-1)*10}}</span>
+              <img v-if="index===0&&currentpage===1&&reorder==='DESC'" class="institutionRanking_content_jp" src='/static/renmintj/jingpai.png' />
+              <img v-if="index===1&&currentpage===1&&reorder==='DESC'" class="institutionRanking_content_jp" src='/static/renmintj/yinpai.png' />
+              <img v-if="index===2&&currentpage===1&&reorder==='DESC'" class="institutionRanking_content_jp" src='/static/renmintj/tongpai.png' />
             </td>
             <td ><div class="institutionRanking_content_jg">{{item.sifaju}}</div></td>
             <td><span class="institutionRanking_content_rysl">{{item.people_number}}</span></td>
@@ -79,6 +81,8 @@
 </template>
 
 <script>
+import http from '@/util/httpUtil'
+
 export default {
   data: function () {
     return {
@@ -111,10 +115,10 @@ export default {
         }]
       },
       list: [],
-      pageTotal: 0,
+      pageTotal: 1,
       currentpage: 1,
       reorder: 'DESC',
-      obj: 'aj_number'
+      obj: ''
     }
   },
   created: function () {
@@ -124,52 +128,36 @@ export default {
     getData (excl) {
       let _this = this
       let excel = excl || 0
+      let url = '/peopleMediate/institutionalRankings'
+      let param = {
+        'obj': _this.obj,
+        'reorder': _this.reorder,
+        'excl': excel,
+        'pagesize': 10,
+        'currentpage': _this.currentpage
+      }
       if (excel === 0) {
-        this.axios.post('/peopleMediate/institutionalRankings', {
-          'obj': _this.obj,
-          'reorder': _this.reorder,
-          'excl': excel,
-          'pagesize': 10,
-          'currentpage': _this.currentpage
-        }).then(function (response) {
-          let _data = response.data
-          if (_data.code === 1) {
-            _this.list = _data.data.pageData
-            _this.pageTotal = _data.data.pageinfo.total
-          }
-        }).catch(function (error) {
-          console.log(error)
-        })
+        http.post(url, param, (data) => {
+          _this.list = data.pageData
+          _this.pageTotal = data.pageinfo.total
+        }, 'application/json')
       } else {
-        this.axios({
-          method: 'post',
-          url: '/peopleMediate/institutionalRankings',
-          data: {
-            'obj': _this.obj,
-            'reorder': _this.reorder,
-            'excl': 0,
-            'pagesize': 10,
-            'currentpage': _this.currentpage
-          },
-          headers: {'Content-Type': 'application/json'}
-        }).then(function (response) {
-          console.log(response)
+        http.post(url, param, (data) => {
           let date = new Date()
           let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-          let blob = new Blob([response.data]) // 创建一个blob对象
+          let blob = new Blob([data]) // 创建一个blob对象
           let a = document.createElement('a') // 创建一个<a></a>标签
           a.href = URL.createObjectURL(blob) // response is a blob
-          a.download = filefix + '表格.xlsx' // 文件名称
+          a.download = filefix + '表格.xls' // 文件名称
           a.style.display = 'none'
           document.body.appendChild(a)
           a.click()
           a.remove()
-        })
+        }, 'application/json', 'arraybuffer')
       }
     },
     // 分页
     handleCurrentChange (val) {
-      console.log(val)
       this.currentpage = val
       this.getData()
     },
@@ -186,6 +174,10 @@ export default {
       }
       this.obj = val
       this.getData()
+    },
+    // 路由跳转
+    changeRouter (name) {
+      this.$router.push({name: name})
     }
   }
 }
@@ -325,6 +317,7 @@ export default {
   height: 36px;
   line-height: 36px;
   display: inline-block;
+  cursor: pointer;
 }
 .institutionRanking_content_thead th{
   padding:0;
@@ -412,5 +405,8 @@ export default {
 }
 .institutionRanking_content_tbody tr:nth-of-type(2n-1) td{
   background: rgba(1,41,126,0.5);
+}
+.yellow{
+  color:rgba(255,198,0,1);
 }
 </style>

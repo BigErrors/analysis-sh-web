@@ -101,12 +101,23 @@ export default {
       area: json.area,
       areaDefault: ['全市'],
       // areaDefault: ['SHJCK01000'],
-      type: '人民调解'
+      type: '人民调解',
+      date: [],
+      dateLength: 0,
+      start: '',
+      end: '',
+      limit: 1
     }
   },
   watch: {
     type: function (newValue, oldValue) {
       this.getData()
+    },
+    start: function (newValue, oldValue) {
+      console.log('startDate:', newValue)
+    },
+    end: function (newValue, oldValue) {
+      console.log('endDate:', newValue)
     }
   },
   filters: {
@@ -124,8 +135,10 @@ export default {
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
       if (domName === 'target2') {
+        let vue = this
         this.myChart[domName].on('datazoom', function (params) {
-          console.log(params)
+          vue.start = vue.date[Math.round(params.start / 100 * vue.dateLength)]
+          vue.end = vue.date[Math.round(params.end / 100 * vue.dateLength)]
         })
       }
     },
@@ -151,7 +164,10 @@ export default {
           vue.max = data.danyuezg
           vue.maxMonth = data.danyuezgsj
           vue.average = data.yuejun
-          vue.draw('target2', eos.setLine5(data.meirisl))
+          vue.draw('target2', eos.setLine5(data.meirisl, (date) => {
+            vue.date = date
+            vue.dateLength = date.length
+          }))
           vue.draw('target3', eos.setBar3(data.jiufenlx.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
           vue.drawWordcloud2('target4', data.ciyun)
         })

@@ -53,6 +53,8 @@ let area = [{
   'label': '全部',
   'value': 'SHJCK01000'
 }]
-export default {
-  area
-}
+let type = [{
+  'label': '交通',
+  'value': '交通'
+}]
+export default {area, type}

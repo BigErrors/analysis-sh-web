@@ -223,7 +223,7 @@ let setBar2 = (data) => {
 }
 
 // 柱图
-let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
+let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis) => {
   barMaxWidth = barMaxWidth || 43
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
@@ -231,6 +231,17 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
     maxValue = data.reduce(function (total, item) {
       return total + item.value
     }, 0)
+  }
+  let displayValueAxis = function () {
+    let result = false
+    if (axisType === 'vertical') {
+      if (showValueAxis === false) {
+        result = false
+      } else {
+        result = true
+      }
+    }
+    return result
   }
   let valueAxis = [{
     type: 'value',
@@ -241,7 +252,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait) => {
       show: false
     },
     axisLabel: {
-      show: axisType === 'vertical',
+      show: displayValueAxis(),
       interval: 'auto',
       color: '#4D84FE',
       fontSize: barMaxWidth < 16 ? barMaxWidth : 16,
@@ -676,7 +687,7 @@ let setLine2 = (data, showYAxis) => {
     },
     series: []
   }
-  if (data[0] && data[0].time) {
+  if (data[0] && data[0]['gankongzs_ls']) {
     option.color = ['#1254C2', '#00FFFF']
     option.xAxis.data = data.map(item => {
       return item['time']
@@ -712,7 +723,7 @@ let setLine2 = (data, showYAxis) => {
       })
     }
   }
-  if (data[0] && data[0].name) {
+  if (data[0] && data[0]['value']) {
     option.color = ['#00FFFF']
     option.xAxis.data = data.map(item => {
       return item['name']
@@ -730,6 +741,27 @@ let setLine2 = (data, showYAxis) => {
       },
       data: data.map(item => {
         return item['value']
+      })
+    }
+  }
+  if (data[0] && data[0]['number']) {
+    option.color = ['#00FFFF']
+    option.xAxis.data = data.map(item => {
+      return item['time']
+    })
+    option.series[0] = {
+      name: '数量',
+      type: 'line',
+      smooth: true,
+      symbolSize: 1,
+      lineStyle: {
+        width: 1
+      },
+      areaStyle: {
+        opacity: 0.4
+      },
+      data: data.map(item => {
+        return item['number']
       })
     }
   }
@@ -904,12 +936,13 @@ let setLine4 = (data, dataType, legend, color) => {
 }
 
 // 折线图--dataZoom属性
-let setLine5 = (data) => {
+let setLine5 = (data, callback) => {
   let date = []
   data.map((item) => {
     date.push(item.time)
     return {name: item.time, value: item.value}
   })
+  callback(date)
   let option = {
     tooltip: {
       show: false,
@@ -964,10 +997,6 @@ let setLine5 = (data) => {
       }
     },
     dataZoom: [{
-      type: 'inside',
-      start: 0,
-      end: 10
-    }, {
       start: 0,
       end: 10,
       handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
@@ -979,7 +1008,8 @@ let setLine5 = (data) => {
         shadowOffsetX: 2,
         shadowOffsetY: 2
       },
-      showDetail: true,
+      showDetail: false,
+      realtime: false,
       fillerColor: '#1F3490',
       dataBackground: {
         lineStyle: {

@@ -43,12 +43,12 @@
           </div>
           <div class="businessTypes_content_main">
             <div class="businessTypes_content_1">
-              <span class="businessTypes_content_span1">217523</span>
+              <span class="businessTypes_content_span1">{{xingZhuanTJS}}</span>
               <span class="businessTypes_content_span2">行专调解数</span>
             </div>
             <div class="border"></div>
             <div class="businessTypes_content_2">
-              <span class="businessTypes_content_span3">355197</span>
+              <span class="businessTypes_content_span3">{{tiaoJieAJS}}</span>
               <span class="businessTypes_content_span4">调解案件总数</span>
             </div>
             <div class="businessTypes_content_3 target1">
@@ -80,10 +80,10 @@
               <span class="businessTypes_table_h2">名称</span>
               <span class="businessTypes_table_h3">受理数量</span>
             </div>
-            <div class="businessTypes_table_body" v-for="(item, index) in 5" :key="index">
-              <span class="businessTypes_table_b1">{{index + 1}}</span>
-              <span class="businessTypes_table_b2">XXX委员会</span>
-              <span class="businessTypes_table_b3">1234</span>
+            <div class="businessTypes_table_body" v-for="(item, index) in anJianSLS" :key="index">
+              <span class="businessTypes_table_b1">{{item.paiming}}</span>
+              <span class="businessTypes_table_b2">{{item.name}}</span>
+              <span class="businessTypes_table_b3">{{item.number}}</span>
             </div>
           </div>
         </div>
@@ -166,15 +166,15 @@
           <div class="businessTypes_content_main">
             <div class="businessTypes_content_4">
               <span class="businessTypes_content_4_span4">本年度累计</span>
-              <span class="businessTypes_content_4_span5">13652</span>
+              <span class="businessTypes_content_4_span5">{{total}}</span>
               <span class="businessTypes_content_4_span6">万元</span>
             </div>
             <div class="businessTypes_content_5">
               <span class="businessTypes_content_5_span2">单笔最大</span>
-              <span class="businessTypes_content_5_span3">500</span>
+              <span class="businessTypes_content_5_span3">{{max}}</span>
               <span class="businessTypes_content_5_span4">万元</span>
               <span class="businessTypes_content_5_span5">平均每笔</span>
-              <span class="businessTypes_content_5_span6">70</span>
+              <span class="businessTypes_content_5_span6">{{avg}}</span>
               <span class="businessTypes_content_5_span7">万元</span>
             </div>
             <div class="businessTypes_content_6 target9"></div>
@@ -188,8 +188,9 @@
 <script>
 import eos from '@/util/echartsOptions'
 import rollScreen from '../rollScreen.vue'
+import http from '@/util/httpUtil'
+import json from '@/util/json'
 import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
-import zhishufx from '@/../static/json/shehuimd_zhishufx'
 
 export default {
   components: {
@@ -203,74 +204,59 @@ export default {
       target3: 'type1',
       target8: 'type1',
       zhongdiansj: zhongdiansj,
-      area: [{
-        'label': '全市',
-        'value': 0
-      }, {
-        'label': '闵行区',
-        'value': '闵行'
-      }, {
-        'label': '徐汇区',
-        'value': '徐汇'
-      }, {
-        'label': '宝山区',
-        'value': '宝山'
-      }, {
-        'label': '崇明区',
-        'value': '崇明'
-      }, {
-        'label': '浦东区',
-        'value': '浦东'
-      }, {
-        'label': '松江区',
-        'value': '松江'
-      }, {
-        'label': '奉贤区',
-        'value': '奉贤'
-      }, {
-        'label': '嘉定区',
-        'value': '嘉定'
-      }, {
-        'label': '青浦区',
-        'value': '青浦'
-      }, {
-        'label': '杨浦区',
-        'value': '杨浦'
-      }, {
-        'label': '黄浦区',
-        'value': '黄浦'
-      }, {
-        'label': '金山区',
-        'value': '金山'
-      }, {
-        'label': '普陀区',
-        'value': '普陀'
-      }, {
-        'label': '静安区',
-        'value': '静安'
-      }, {
-        'label': '长宁区',
-        'value': '长宁'
-      }, {
-        'label': '虹口区',
-        'value': '虹口'
-      }],
-      areaDefault: [0],
-      type: [{
-        'label': '道路交通事故赔偿',
-        'value': 0
-      }],
-      typeDefault: [0]
+      area: json.area,
+      areaDefault: ['全市'],
+      // areaDefault: ['SHJCK01000'],
+      type: json.type,
+      typeDefault: ['交通'],
+      xingZhuanTJS: 0,
+      tiaoJieAJS: 0,
+      anjianslbh: {
+        year_casenumber: [],
+        month_casenumber: []
+      },
+      anjiansls: {
+        tjy_casenumber: [],
+        jg_casenumber: []
+      },
+      anJianSLS: [],
+      total: 0,
+      max: 0,
+      avg: 0
     }
   },
   watch: {
     target1: function (newValue, oldValue) {
-      this.draw('target1', eos.setPie4([(0.791 * 100).toFixed(1), ((1 - 0.791) * 100).toFixed(1)], '占比'))
+      switch (newValue) {
+        case 'type1':
+          newValue = 'year'
+          break
+        case 'type2':
+          newValue = 'month'
+          break
+        case 'type3':
+          newValue = 'week'
+          break
+      }
+      this.xingZhuanTJS = this.tiaojiezlzb[newValue + '_number1']
+      this.tiaoJieAJS = this.tiaojiezlzb[newValue + '_number2']
+      this.draw('target1', eos.setPie4([(this.tiaojiezlzb[newValue + '_zhanbi'] * 100).toFixed(1), ((1 - this.tiaojiezlzb[newValue + '_zhanbi']) * 100).toFixed(1)], '占比'))
     },
     target2: function (newValue, oldValue) {
-      this.draw('target2', eos.setLine2(zhishufx))
+      if (newValue === 'type1') {
+        newValue = 'year'
+      } else {
+        newValue = 'month'
+      }
+      this.draw('target2', eos.setLine2(this.anjianslbh[newValue + '_casenumber']))
     },
     target3: function (newValue, oldValue) {
+      if (newValue === 'type1') {
+        newValue = 'jg'
+      } else {
+        newValue = 'tjy'
+      }
+      this.anJianSLS = this.anjiansls[newValue + '_casenumber']
     },
     target8: function (newValue, oldValue) {
       this.draw('target81', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}]))
@@ -289,16 +275,41 @@ export default {
     changeRouter (name) {
       this.$router.push({name: name})
     },
+    formatData (data) {
+      return (data * 100).toFixed(1)
+    },
     getData () {
       let vue = this
-      vue.$nextTick(function () {
-        vue.draw('target1', eos.setPie4([(0.791 * 100).toFixed(1), ((1 - 0.791) * 100).toFixed(1)], '占比'))
-        vue.draw('target2', eos.setLine2(zhishufx))
-        vue.draw('target4', eos.setPie3([{name: 1, value: 1}, {name: 2, value: 2}]))
-        vue.draw('target5', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32))
-        vue.draw('target81', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}]))
-        vue.draw('target82', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32))
-        vue.draw('target9', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32))
+      let url = '/peopleMediate/YewulxUnder'
+      let param = { area: this.areaDefault[0], type: this.typeDefault[0], tjtype: '行专调解' }
+      http.get(url, param, (data) => {
+        console.log(data)
+        vue.tiaojiezlzb = data.tiaojiezlzb
+        vue.xingZhuanTJS = vue.tiaojiezlzb.year_number1
+        vue.tiaoJieAJS = vue.tiaojiezlzb.year_number2
+        vue.anjianslbh.year_casenumber = data.anjianslbh.year_casenumber.reverse()
+        vue.anjianslbh.month_casenumber = data.anjianslbh.month_casenumber.reverse()
+        vue.anjiansls.jg_casenumber = data.anjiansls.jg_casenumber
+        vue.anjiansls.tjy_casenumber = data.anjiansls.tjy_casenumber
+        vue.anJianSLS = vue.anjiansls.jg_casenumber
+        vue.total = data.peichangje.benniandlj
+        vue.max = data.peichangje.danbizd
+        vue.avg = data.peichangje.pingjunmb
+        vue.$nextTick(function () {
+          vue.draw('target1', eos.setPie4([vue.formatData(vue.tiaojiezlzb.year_zhanbi), vue.formatData(1 - vue.tiaojiezlzb.year_zhanbi)], '占比'))
+          vue.draw('target2', eos.setLine2(vue.anjianslbh.year_casenumber))
+          vue.draw('target4', eos.setPie3(data.anjianlx.map(item => {
+            return {name: item.name, value: parseInt(item.number)}
+          })))
+          // vue.draw('target5', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32))
+          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_bendi)}, {name: '外地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_waidi)}, {name: '未知', value: vue.formatData(data.dangshirfx.sqr_data.huji_weizhi)}]))
+          vue.draw('target82', eos.setBar3(data.dangshirfx.sqr_data.nlfb.map(item => {
+            return {name: item.age, value: parseInt(item.number)}
+          }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+          vue.draw('target9', eos.setBar3(data.peichangje.peichangjebh.reverse().map(item => {
+            return {name: item.time, value: item.value}
+          }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+        })
       })
     }
   },
@@ -560,6 +571,11 @@ export default {
     font-family:HiraginoSansGB-W3;
     color:rgba(118,187,239,1);
     text-align: center;
+  }
+  .businessTypes_table_body span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .businessTypes_table_b1{
     float: left;
