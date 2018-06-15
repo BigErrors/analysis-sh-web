@@ -116,7 +116,7 @@
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">今日上报案件</div>
           </div>
-          <div class="businessTypes_content_main">
+          <div class="businessTypes_content_main" v-if="true">
             <div class="businessTypes_table_header">
               <span class="businessTypes_table_h4">序号</span>
               <span class="businessTypes_table_h5">名称</span>
@@ -125,13 +125,13 @@
               <span class="businessTypes_table_h5">状态</span>
             </div>
             <div class="businessTypes_table_body_container">
-             <rollScreen :dLength='zhongdiansj.length' :height='35' :lineNum='5' class="left">
-              <div class="businessTypes_table_body2" slot="slide" v-for="(item, index) in zhongdiansj" :key="index">
-                <span class="businessTypes_table_b4">{{item.xuhao}}</span>
-                <span class="businessTypes_table_b5">上报事件1</span>
-                <span class="businessTypes_table_b5">{{item.shijianlx}}</span>
-                <span class="businessTypes_table_b5">{{item.diqu}}</span>
-                <span class="businessTypes_table_b5">代办申请</span>
+             <rollScreen :dLength='15' :height='35' :lineNum='5' class="left">
+              <div class="businessTypes_table_body2" slot="slide" v-for="(item, index) in 15" :key="index">
+                <span class="businessTypes_table_b4">{{index+1}}</span>
+                <span class="businessTypes_table_b5">上报事件名称</span>
+                <span class="businessTypes_table_b5">上报事件类型</span>
+                <span class="businessTypes_table_b5">上报事件地区</span>
+                <span class="businessTypes_table_b5">上报事件状态</span>
               </div>
             </rollScreen>
             </div>
@@ -149,9 +149,9 @@
             <div class="businessTypes_content_4">
               <span class="businessTypes_content_4_span1">性别占比</span>
               <img class="businessTypes_content_4_img1" src="/static/renmintj/bunan.png">
-              <span class="businessTypes_content_4_span2">57%</span>
+              <span class="businessTypes_content_4_span2">{{man + '%'}}</span>
               <img class="businessTypes_content_4_img2" src="/static/renmintj/bunv.png">
-              <span class="businessTypes_content_4_span3">43%</span>
+              <span class="businessTypes_content_4_span3">{{woman + '%'}}</span>
             </div>
             <div class="businessTypes_content_5 target81">
               <span class="businessTypes_content_5_span1">户籍占比</span>
@@ -190,7 +190,6 @@ import eos from '@/util/echartsOptions'
 import rollScreen from '../rollScreen.vue'
 import http from '@/util/httpUtil'
 import json from '@/util/json'
-import zhongdiansj from '@/../static/json/renmintj/jicengsfdsjzpt_zhongdiansj'
 
 export default {
   components: {
@@ -203,7 +202,11 @@ export default {
       target2: 'type1',
       target3: 'type1',
       target8: 'type1',
-      zhongdiansj: zhongdiansj,
+      table: {
+        dLength: 0,
+        lineNum: 0,
+        data: []
+      },
       area: json.area,
       areaDefault: ['全市'],
       // areaDefault: ['SHJCK01000'],
@@ -220,6 +223,8 @@ export default {
         jg_casenumber: []
       },
       anJianSLS: [],
+      woman: 0,
+      man: 0,
       total: 0,
       max: 0,
       avg: 0
@@ -259,8 +264,23 @@ export default {
       this.anJianSLS = this.anjiansls[newValue + '_casenumber']
     },
     target8: function (newValue, oldValue) {
-      this.draw('target81', eos.setPie6([{name: 1, value: 1}, {name: 2, value: 2}]))
-      this.draw('target82', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32))
+      if (newValue === 'type1') {
+        newValue = 'sqr'
+      } else {
+        newValue = 'bsqr'
+      }
+      this.man = this.formatData(this.dangshirfx[newValue + '_data'].gender_man)
+      this.woman = this.formatData(this.dangshirfx[newValue + '_data'].gender_woman)
+      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_bendi)}, {name: '外地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_waidi)}, {name: '未知', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_weizhi)}]))
+      this.draw('target82', eos.setBar3(this.dangshirfx[newValue + '_data'].nlfb.map(item => {
+        return {name: item.age, value: parseInt(item.number)}
+      }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+    },
+    areaDefault: function (newValue, oldValue) {
+      this.getData()
+    },
+    typeDefault: function (newValue, oldValue) {
+      this.getData()
     }
   },
   methods: {
@@ -283,7 +303,6 @@ export default {
       let url = '/peopleMediate/YewulxUnder'
       let param = { area: this.areaDefault[0], type: this.typeDefault[0], tjtype: '行专调解' }
       http.get(url, param, (data) => {
-        console.log(data)
         vue.tiaojiezlzb = data.tiaojiezlzb
         vue.xingZhuanTJS = vue.tiaojiezlzb.year_number1
         vue.tiaoJieAJS = vue.tiaojiezlzb.year_number2
@@ -292,6 +311,9 @@ export default {
         vue.anjiansls.jg_casenumber = data.anjiansls.jg_casenumber
         vue.anjiansls.tjy_casenumber = data.anjiansls.tjy_casenumber
         vue.anJianSLS = vue.anjiansls.jg_casenumber
+        vue.dangshirfx = data.dangshirfx
+        vue.man = vue.formatData(data.dangshirfx.sqr_data.gender_man)
+        vue.woman = vue.formatData(data.dangshirfx.sqr_data.gender_woman)
         vue.total = data.peichangje.benniandlj
         vue.max = data.peichangje.danbizd
         vue.avg = data.peichangje.pingjunmb
@@ -301,7 +323,7 @@ export default {
           vue.draw('target4', eos.setPie3(data.anjianlx.map(item => {
             return {name: item.name, value: parseInt(item.number)}
           })))
-          // vue.draw('target5', eos.setBar3([{name: 'item1', value: 246}, {name: 'item2', value: 2}, {name: 'item3', value: 786}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32))
+          vue.draw('target5', eos.setBar3([{name: '状态1', value: 246}, {name: '状态2', value: 123}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32, false, false))
           vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_bendi)}, {name: '外地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_waidi)}, {name: '未知', value: vue.formatData(data.dangshirfx.sqr_data.huji_weizhi)}]))
           vue.draw('target82', eos.setBar3(data.dangshirfx.sqr_data.nlfb.map(item => {
             return {name: item.age, value: parseInt(item.number)}

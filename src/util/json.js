@@ -1,4 +1,7 @@
 let area = [{
+  'label': '全部',
+  'value': 'SHJCK01000'
+}, {
   'label': '崇明区',
   'value': 'SHJCK01019'
 }, {
@@ -49,12 +52,47 @@ let area = [{
 }, {
   'label': '黄埔区',
   'value': 'SHJCK01002'
-}, {
-  'label': '全部',
-  'value': 'SHJCK01000'
 }]
-let type = [{
+let caseType = [{
+  'label': '民事',
+  'value': '民事'
+}, {
+  'label': '刑事',
+  'value': '刑事'
+}, {
+  'label': '治安',
+  'value': '治安'
+}, {
+  'label': '房产',
+  'value': '房产'
+}, {
+  'label': '医患',
+  'value': '医患'
+}, {
   'label': '交通',
   'value': '交通'
+}, {
+  'label': '劳动',
+  'value': '劳动'
+}, {
+  'label': '涉校',
+  'value': '涉校'
+}, {
+  'label': '知产',
+  'value': '知产'
 }]
-export default {area, type}
+
+let businessType = [{
+  'label': '人民调解',
+  'value': '人民调解'
+}, {
+  'label': '110联动',
+  'value': '110联动'
+}, {
+  'label': '公共法律服务',
+  'value': '公共法律服务'
+}, {
+  'label': '纠纷排查',
+  'value': '纠纷排查'
+}]
+export default {area, caseType, businessType}

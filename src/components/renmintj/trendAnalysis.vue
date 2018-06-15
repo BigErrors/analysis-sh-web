@@ -7,12 +7,15 @@
     <span class="trendAnalysis_nav_span">首页 > 趋势分析</span>
   </div>
   <div class="trendAnalysis_nav2">
-    <span class="trendAnalysis_nav2_span" :class="{'trendAnalysis_nav2_span_active':type==='人民调解'?true:false}" @click="type='人民调解'">人民调解</span>
-    <span class="trendAnalysis_nav2_span " :class="{'trendAnalysis_nav2_span_active':type==='110联动'?true:false}" @click="type='110联动'">110联动</span>
-    <span class="trendAnalysis_nav2_span " :class="{'trendAnalysis_nav2_span_active':type==='公共法律服务'?true:false}" @click="type='公共法律服务'">公共法律服务</span>
-    <span class="trendAnalysis_nav2_span " :class="{'trendAnalysis_nav2_span_active':type==='纠纷排查'?true:false}" @click="type='纠纷排查'">纠纷排查</span>
+    <span class="trendAnalysis_nav2_span trendAnalysis_nav2_span_active">{{typeDefault[0]}}</span>
   </div>
   <div class="cas_container">
+    <el-cascader
+      class="cascader"
+      :options="type"
+      placeholder="类型"
+      v-model="typeDefault"
+    ></el-cascader>
     <el-cascader
       class="cascader"
       :options="area"
@@ -64,7 +67,9 @@
             <span class="trendAnalysis_content_span1">纠纷热词</span>
           </div>
         </div>
-        <div class="target4"></div>
+        <div class="target4">
+          <canvas class="target4_canvas" width="530px" height="300px"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -101,23 +106,29 @@ export default {
       area: json.area,
       areaDefault: ['全市'],
       // areaDefault: ['SHJCK01000'],
-      type: '人民调解',
+      type: json.businessType,
+      typeDefault: ['人民调解'],
       date: [],
       dateLength: 0,
-      start: '',
-      end: '',
-      limit: 1
+      limit: 1,
+      dateRange: {
+        start: '',
+        end: ''
+      }
     }
   },
   watch: {
-    type: function (newValue, oldValue) {
+    typeDefault: function (newValue, oldValue) {
       this.getData()
     },
-    start: function (newValue, oldValue) {
-      console.log('startDate:', newValue)
+    areaDefault: function (newValue, oldValue) {
+      this.getData()
     },
-    end: function (newValue, oldValue) {
-      console.log('endDate:', newValue)
+    dateRange: {
+      handler: function (newValue, oldValue) {
+        console.log('dateRange:', JSON.stringify(newValue))
+      },
+      deep: true
     }
   },
   filters: {
@@ -137,8 +148,8 @@ export default {
       if (domName === 'target2') {
         let vue = this
         this.myChart[domName].on('datazoom', function (params) {
-          vue.start = vue.date[Math.round(params.start / 100 * vue.dateLength)]
-          vue.end = vue.date[Math.round(params.end / 100 * vue.dateLength)]
+          vue.dateRange.start = vue.date[Math.round(params.start / 100 * vue.dateLength)]
+          vue.dateRange.end = vue.date[Math.round(params.end / 100 * vue.dateLength)]
         })
       }
     },
@@ -146,7 +157,15 @@ export default {
       let option = wos.setOption(data.map((item) => {
         return [item.keyword, item.number]
       }))
-      this.$wordcloud(document.getElementsByClassName(domName)[0], option)
+      let vue = this
+      let ctx = document.getElementsByClassName(domName + '_canvas')[0].getContext('2d')
+      ctx.clearRect(0, 0, 530, 300)
+      let img = new Image()
+      img.src = '/static/renmintj/cloud1.png'
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0)
+        vue.$wordcloud(document.getElementsByClassName(domName + '_canvas')[0], option)
+      }
     },
     // 路由跳转
     changeRouter (name) {
@@ -154,7 +173,7 @@ export default {
     },
     getData () {
       let vue = this
-      let reqParam = {area: this.areaDefault[0], source: this.type}
+      let reqParam = {area: this.areaDefault[0], source: this.typeDefault[0]}
       let url = ''
       url = '/peopleMediate/QushiUnder'
       http.get(url, reqParam, (data) => {
@@ -238,7 +257,8 @@ export default {
   }
   .trendAnalysis_nav2{
     margin-left: 34px;
-    border-bottom: 1px solid rgba(15,59,186,1);
+    /* border-bottom: 1px solid rgba(15,59,186,1); */
+    border-bottom: 0px solid rgba(15,59,186,1);
     display: inline-block;
   }
   .trendAnalysis_nav2_span{
@@ -253,7 +273,8 @@ export default {
   }
   .trendAnalysis_nav2_span_active{
     color:rgba(255,198,0,1);
-    border-bottom: 3px solid rgba(255,198,0,1);
+    /* border-bottom: 3px solid rgba(255,198,0,1);     */
+    border-bottom: 0px solid rgba(255,198,0,1);
   }
   .trendAnalysis_content{
     width: 100%;
@@ -324,8 +345,10 @@ export default {
     height: 443px;
   }
   .target4 {
-    width: 622px;
-    height: 331px;
+    width: 532px;
+    height: 301px;
+    margin: 15px 45px;
+    background: url('/static/renmintj/cloud2.png') no-repeat;
   }
   .trendAnalysis_content_title{
     width: 100%;

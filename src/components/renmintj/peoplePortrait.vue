@@ -118,9 +118,6 @@ export default {
     },
     drawWordcloud2 (data, type) {
       data = data.map((item, index) => {
-        // if (index === 0) {
-        //   item.value = 2
-        // }
         return [item.name, parseInt(item.value)]
       })
       let option = wos.setOption(data)
