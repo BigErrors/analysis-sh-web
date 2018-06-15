@@ -1381,10 +1381,10 @@ let setPie5 = (data, color) => {
 }
 
 // 圆环图
-let setPie6 = (data, isPie, removePaddingRight) => {
+let setPie6 = (data, isPie, removePaddingRight, color) => {
   isPie = isPie || false
   removePaddingRight = removePaddingRight || false
-  let color = data.length > 4 ? ['#95B6FF', '#4D84FE', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
+  color = color || data.length > 4 ? ['#95B6FF', '#4D84FE', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
   let option = {
     legend: {
       orient: 'center',
