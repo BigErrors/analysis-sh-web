@@ -110,7 +110,7 @@ export default {
       typeDefault: ['人民调解'],
       date: [],
       dateLength: 0,
-      limit: 1,
+      limit: 0,
       dateRange: {
         start: '',
         end: ''
@@ -119,14 +119,16 @@ export default {
   },
   watch: {
     typeDefault: function (newValue, oldValue) {
+      this.limit = 0
       this.getData()
     },
     areaDefault: function (newValue, oldValue) {
+      this.limit = 0
       this.getData()
     },
     dateRange: {
       handler: function (newValue, oldValue) {
-        console.log('dateRange:', JSON.stringify(newValue))
+        this.getData()
       },
       deep: true
     }
@@ -173,20 +175,23 @@ export default {
     },
     getData () {
       let vue = this
-      let reqParam = {area: this.areaDefault[0], source: this.typeDefault[0]}
+      let reqParam = {area: this.areaDefault[0], source: this.typeDefault[0], startDate: this.dateRange.start, endDate: this.dateRange.end}
       let url = ''
       url = '/peopleMediate/QushiUnder'
       http.get(url, reqParam, (data) => {
         vue.$nextTick(function () {
+          vue.limit++
           vue.count = data.jiufensl
           vue.importantNum = data.zhongdiansjs
           vue.max = data.danyuezg
           vue.maxMonth = data.danyuezgsj
           vue.average = data.yuejun
-          vue.draw('target2', eos.setLine5(data.meirisl, (date) => {
-            vue.date = date
-            vue.dateLength = date.length
-          }))
+          if (vue.limit === 1) {
+            vue.draw('target2', eos.setLine5(data.meirisl, (date) => {
+              vue.date = date
+              vue.dateLength = date.length
+            }))
+          }
           vue.draw('target3', eos.setBar3(data.jiufenlx.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
           vue.drawWordcloud2('target4', data.ciyun)
         })
