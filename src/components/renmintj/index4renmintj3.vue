@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-13 15:45:02
+ * @Last Modified time: 2018-06-20 18:14:24
  * @content: echarts 三维地理坐标系 动态散点
  */
 <template>
@@ -317,7 +317,7 @@ export default {
   }
   .renmintj_right_span1{
     height:31px;
-    vertical-align:top;
+    /* vertical-align:top; */
     font-size:21px;
     font-family:FZLTZHK--GBK1-0;
     color:rgba(0,246,255,1);
@@ -328,7 +328,7 @@ export default {
     font-size:14px;
     font-family:HiraginoSansGB-W3;
     color:rgba(17,148,248,1);
-    vertical-align:bottom;
+    /* vertical-align:bottom; */
     display:block;
   }
   .circle1{

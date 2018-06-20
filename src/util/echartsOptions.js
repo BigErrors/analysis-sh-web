@@ -1722,7 +1722,9 @@ let setMap = (pointData) => {
     option.options.push({
       series: [{
         symbolSize: function (val) {
-          return (val[2] - maxAndMin(getPointDataByTime(item)).min) / (maxAndMin(getPointDataByTime(item)).max - maxAndMin(getPointDataByTime(item)).min) * 30 + 2
+          let denominator = maxAndMin(getPointDataByTime(item)).max === maxAndMin(getPointDataByTime(item)).min ? 1 : maxAndMin(getPointDataByTime(item)).max - maxAndMin(getPointDataByTime(item)).min
+          let numerator = val[2] === maxAndMin(getPointDataByTime(item)).min ? 1 : val[2] - maxAndMin(getPointDataByTime(item)).min
+          return numerator / denominator * 30 + 2
         },
         data: convertData(getPointDataByTime(item))
       }

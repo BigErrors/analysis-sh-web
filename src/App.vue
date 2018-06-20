@@ -114,10 +114,20 @@ height: 4px;
 border-radius: 2px;
 background-color: #dedfe0;
 }
-  .clearfix:after{
+
+.clearfix:after{
     content:'';
     display:block;
     width:0;
     clear:both
+}
+
+  .businessNumCityList .el-input--suffix .el-input__inner {
+    background: rgba(8,79,211,0) !important;
+    border: 0 !important;
+  }
+  .businessNumCityList .el-cascader__label {
+    font-size: 35px !important;
+    color: #FDC91C !important;
   }
 </style>
