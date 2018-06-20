@@ -1,19 +1,19 @@
 <template>
-  <div id='totalNum' class='shade'>
-    <div class="totalNum_header">
-      <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+  <div id='businessNum' class='shade'>
+    <div class="businessNum_header">
+      <div class="businessNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
     </div>
-    <div class="totalNum_nav">
-      <span class="totalNum_nav_span">首页 > 业务数量</span>
+    <div class="businessNum_nav">
+      <span class="businessNum_nav_span">首页 > 业务数量</span>
     </div>
-    <div class="totalNum_nav2">
-      <span class="totalNum_nav2_span" :class="{'totalNum_nav2_span_active':type==='人民调解'?true:false}" @click="type='人民调解'">人民调解</span>
-      <span class="totalNum_nav2_span " :class="{'totalNum_nav2_span_active':type==='110联动'?true:false}" @click="type='110联动'">110联动</span>
-      <span class="totalNum_nav2_span " :class="{'totalNum_nav2_span_active':type==='公共法律服务'?true:false}" @click="type='公共法律服务'">公共法律服务</span>
-      <span class="totalNum_nav2_span " :class="{'totalNum_nav2_span_active':type==='纠纷排查'?true:false}" @click="type='纠纷排查'">纠纷排查</span>
+    <div class="businessNum_nav2">
+      <span class="businessNum_nav2_span" :class="{'businessNum_nav2_span_active':type==='人民调解'?true:false}" @click="type='人民调解'">人民调解</span>
+      <span class="businessNum_nav2_span " :class="{'businessNum_nav2_span_active':type==='110联动'?true:false}" @click="type='110联动'">110联动</span>
+      <span class="businessNum_nav2_span " :class="{'businessNum_nav2_span_active':type==='公共法律服务'?true:false}" @click="type='公共法律服务'">公共法律服务</span>
+      <span class="businessNum_nav2_span " :class="{'businessNum_nav2_span_active':type==='纠纷排查'?true:false}" @click="type='纠纷排查'">纠纷排查</span>
     </div>
-    <div class="totalNum_content">
-      <div class="totalNum_content_top">
+    <div class="businessNum_content">
+      <div class="businessNum_content_top">
         <div class="statistics">
           <digitalRolling class="num" :height='41' :width='25' :number='statistics.day' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
           <br>
@@ -25,56 +25,56 @@
           <span class="title">全年累计</span>
         </div>
       </div>
-      <div class="totalNum_content_top">
-        <div class="totalNum_content_title">
-          <div class=" totalNum_content_title_left">
-            <span class="totalNum_content_span1">类型</span>
+      <div class="businessNum_content_top">
+        <div class="businessNum_content_title">
+          <div class=" businessNum_content_title_left">
+            <span class="businessNum_content_span1">类型</span>
           </div>
-          <div class=" totalNum_content_title_right">
-          <span class="totalNum_content_span5" :class="{'totalNum_content_active':timeType==='本周'?true:false}" @click="timeType='本周'">本周</span>
-          <span class="totalNum_content_span5" :class="{'totalNum_content_active':timeType==='本月'?true:false}" @click="timeType='本月'">本月</span>
-          <span class="totalNum_content_span5" :class="{'totalNum_content_active':timeType==='今年'?true:false}" @click="timeType='今年'">今年</span>
+          <div class=" businessNum_content_title_right">
+          <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='本周'?true:false}" @click="timeType='本周'">本周</span>
+          <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='本月'?true:false}" @click="timeType='本月'">本月</span>
+          <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='今年'?true:false}" @click="timeType='今年'">今年</span>
           </div>
         </div>
         <div class='target2'></div>
-        <div class="totalNum_detail">
-          <div class="totalNum_detail_main">
-            <div class="totalNum_detail_title">{{type2Title}}</div>
-            <div class="totalNum_detail_content" v-for="(item,index) in type2" :key="index">
-              <span class="totalNum_detail_span1">{{item.name}}</span>
-              <span class="totalNum_detail_span2">{{item.value}}</span>
+        <div class="businessNum_detail">
+          <div class="businessNum_detail_main">
+            <div class="businessNum_detail_title">{{type2Title}}</div>
+            <div class="businessNum_detail_content" v-for="(item,index) in type2" :key="index">
+              <span class="businessNum_detail_span1">{{item.name}}</span>
+              <span class="businessNum_detail_span2">{{item.value}}</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="totalNum_content_top">
-        <div class="totalNum_content_title clearfix">
-          <div class="totalNum_content_title_left">
-            <span class="totalNum_content_span1">案件处理状态</span>
+      <div class="businessNum_content_top">
+        <div class="businessNum_content_title clearfix">
+          <div class="businessNum_content_title_left">
+            <span class="businessNum_content_span1">案件处理状态</span>
           </div>
         </div>
         <div class="target3" v-if="false"></div>
       </div>
-      <div class="totalNum_content_bottom">
-        <div class="totalNum_content_title clearfix">
-          <div class="totalNum_content_title_left">
-            <span class="totalNum_content_span1">各区案件数量(TOP10)</span>
+      <div class="businessNum_content_bottom">
+        <div class="businessNum_content_title clearfix">
+          <div class="businessNum_content_title_left">
+            <span class="businessNum_content_span1">各区案件数量(TOP10)</span>
           </div>
         </div>
         <div class="target4"></div>
       </div>
-      <div class="totalNum_content_bottom">
-        <div class="totalNum_content_title clearfix">
-          <div class="totalNum_content_title_left">
-            <span class="totalNum_content_span1">案件来源分布</span>
+      <div class="businessNum_content_bottom">
+        <div class="businessNum_content_title clearfix">
+          <div class="businessNum_content_title_left">
+            <span class="businessNum_content_span1">案件来源分布</span>
           </div>
         </div>
         <div class="target5"></div>
       </div>
-      <div class="totalNum_content_bottom">
-        <div class="totalNum_content_title clearfix">
-          <div class="totalNum_content_title_left">
-            <span class="totalNum_content_span1">待办申请案件</span>
+      <div class="businessNum_content_bottom">
+        <div class="businessNum_content_title clearfix">
+          <div class="businessNum_content_title_left">
+            <span class="businessNum_content_span1">待办申请案件</span>
           </div>
         </div>
         <div class='renmintj_center_table' v-if="false">
@@ -106,7 +106,7 @@ import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 
 export default {
-  name: 'totalNum',
+  name: 'businessNum',
   components: {
     rollScreen,
     digitalRolling
@@ -310,7 +310,7 @@ export default {
 </script>
 
 <style scoped>
-  #totalNum {
+  #businessNum {
     min-height: 1080px;
     min-width: 1920px;
     overflow-y: auto;
@@ -320,7 +320,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center;
   }
-  .totalNum_header{
+  .businessNum_header{
     width: 100%;
     min-width: 1920px;
     height: 87px;
@@ -330,7 +330,7 @@ export default {
     z-index: 99;
     position:relative;
   }
-  .totalNum_back{
+  .businessNum_back{
     background:url('/static/renmintj/btn_back.png');
     position:absolute;
     left:22px;
@@ -340,24 +340,24 @@ export default {
     top: 28px;
     cursor:pointer;
   }
-  .totalNum_nav{
+  .businessNum_nav{
     height: 24px;
     margin:6px 0 20px 0;
     padding-left: 34px;
     width: 100%;
     box-sizing: border-box;
   }
-  .totalNum_nav_span{
+  .businessNum_nav_span{
     font-size:18px;
     font-family:HiraginoSansGB-W3;
     color:rgba(94,126,203,1);
   }
-  .totalNum_nav2{
+  .businessNum_nav2{
     margin-left: 34px;
     border-bottom: 1px solid rgba(15,59,186,1);
     display: inline-block;
   }
-  .totalNum_nav2_span{
+  .businessNum_nav2_span{
     font-size:20px;
     font-family:HiraginoSansGB-W3;
     padding-bottom: 10px;
@@ -367,17 +367,17 @@ export default {
     cursor:pointer;
     color:rgba(94,126,203,1);
   }
-  .totalNum_nav2_span_active{
+  .businessNum_nav2_span_active{
     color:rgba(255,198,0,1);
     border-bottom: 3px solid rgba(255,198,0,1);
   }
-  .totalNum_content{
+  .businessNum_content{
     width: 100%;
     height: 903px;
     box-sizing: border-box;
     padding: 13px 20px 20px 20px;
   }
-  .totalNum_content_top{
+  .businessNum_content_top{
     width: 974px;
     height: 483px;
     float: left;
@@ -385,22 +385,22 @@ export default {
     margin-right: 14px;
     background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
   }
-  .totalNum_content_top:nth-of-type(1){
+  .businessNum_content_top:nth-of-type(1){
     width: 266px;
     margin-right: 0px;
   }
-  .totalNum_content_top:nth-of-type(3){
+  .businessNum_content_top:nth-of-type(3){
     width: 622px;
     margin-right: 0px;
   }
-  .totalNum_content_bottom{
+  .businessNum_content_bottom{
     width: 614px;
     height: 371px;
     float: left;
     background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
     margin-right: 14px;
   }
-  .totalNum_content_bottom:nth-of-type(6){
+  .businessNum_content_bottom:nth-of-type(6){
     width: 622px;
     margin-right: 0px;
   }
@@ -418,16 +418,16 @@ export default {
     height: 320px;
     padding: 0 10px;
   }
-  .totalNum_content_title{
+  .businessNum_content_title{
     width: 100%;
     color: white;
   }
-  .totalNum_content_title_left{
+  .businessNum_content_title_left{
     width: 50%;
     float: left;
     margin-top: 21px;
   }
-  .totalNum_content_span1{
+  .businessNum_content_span1{
     font-size:22px;
     font-family:MicrosoftYaHei;
     color:rgba(125,165,254,1);
@@ -436,24 +436,24 @@ export default {
     border-left: 3px solid rgba(125,165,254,1);
     display:block;
   }
-  .totalNum_content_span2{
+  .businessNum_content_span2{
     display:block;
     font-size:18px;
     font-family:MicrosoftYaHei;
     color:rgba(125,165,254,1);
     padding-left: 42px;
   }
-  .totalNum_content_title_right{
+  .businessNum_content_title_right{
     width: 50%;
     float: right;
     margin-top: 26px;
   }
-  .totalNum_content_span_container{
+  .businessNum_content_span_container{
     float:right;
     padding-left:79px;
   }
 
-  .totalNum_content_span3{
+  .businessNum_content_span3{
     font-size:38px;
     font-family:HiraginoSansGB-W3;
     color:rgba(255,198,0,1);
@@ -461,7 +461,7 @@ export default {
     text-align:center;
     padding-right:40px;
   }
-  .totalNum_content_span4{
+  .businessNum_content_span4{
     font-size:16px;
     font-family:HiraginoSansGB-W3;
     color:rgba(77,132,254,1);
@@ -469,7 +469,7 @@ export default {
     text-align:center;
     padding-right:40px;
   }
-  .totalNum_content_span5{
+  .businessNum_content_span5{
     font-size:16px;
     font-family:MicrosoftYaHei;
     padding:2px 12px;
@@ -479,17 +479,17 @@ export default {
     color:rgba(153,153,153,1);
     cursor:pointer;
   }
-  .totalNum_content_active{
+  .businessNum_content_active{
     color:rgba(255,255,255,1);
     background:rgba(77,132,254,1);
   }
-  .totalNum_content_span5:first-child{
+  .businessNum_content_span5:first-child{
     margin-right:38px;
   }
   .right2{
     margin-top:25px;
   }
-  .totalNum_detail{
+  .businessNum_detail{
     width:420px;
     height:389px;
     float:left;
@@ -497,7 +497,7 @@ export default {
     background-repeat:no-repeat;
     background-position:left center;
   }
-  .totalNum_detail_main{
+  .businessNum_detail_main{
     width:307px;
     height:264px;
     background:url('/static/renmintjOther/pic_frame.png');
@@ -506,15 +506,15 @@ export default {
     max-height: 264px;
     overflow-y: auto;
   }
-  .totalNum_detail_main::-webkit-scrollbar{
+  .businessNum_detail_main::-webkit-scrollbar{
     width: 4px;
     background-color: #ffffff;
   }
-  .totalNum_detail_main::-webkit-scrollbar-thumb{
+  .businessNum_detail_main::-webkit-scrollbar-thumb{
     background:#ebeaee;
     border-radius:4px;
   }
-  .totalNum_detail_title{
+  .businessNum_detail_title{
     height:34px;
     display:block;
     color:rgba(174,195,255,1);
@@ -523,16 +523,16 @@ export default {
     padding-left:8px;
     margin-bottom:2px;
   }
-  .totalNum_detail_content{
+  .businessNum_detail_content{
     height:38px;
     display:block;
     line-height:38px;
     margin:0 1px;
   }
-  .totalNum_detail_content:nth-of-type(2n){
+  .businessNum_detail_content:nth-of-type(2n){
     background:rgba(19,38,101,1);
   }
-  .totalNum_detail_span1{
+  .businessNum_detail_span1{
     font-size:18px;
     font-family:HiraginoSansGB-W3;
     color:rgba(184,206,255,1);
@@ -541,7 +541,7 @@ export default {
     width:70%;
     box-sizing:border-box;
   }
-  .totalNum_detail_span2{
+  .businessNum_detail_span2{
     font-size:18px;
     font-family:HiraginoSansGB-W3;
     color:rgba(255,198,0,1);

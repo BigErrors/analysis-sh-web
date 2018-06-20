@@ -1600,8 +1600,6 @@ let setMap = (pointData) => {
     return item.riqi
   }))).reverse()
 
-  console.log(pointData)
-
   let option = {
     baseOption: {
       timeline: {

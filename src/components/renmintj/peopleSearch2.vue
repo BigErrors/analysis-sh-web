@@ -1,17 +1,17 @@
 <template>
   <div id='peopleSearch' class='shade'>
-    <div class="totalNum_header">
-      <div class="totalNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+    <div class="businessNum_header">
+      <div class="businessNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
     </div>
-    <div class="totalNum_nav">
-      <span class="totalNum_nav_span">首页 > 调解员画像分析</span>
+    <div class="businessNum_nav">
+      <span class="businessNum_nav_span">首页 > 调解员画像分析</span>
     </div>
-    <div class="totalNum_nav2">
-      <span class="totalNum_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
-      <span class="totalNum_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
-      <span class="totalNum_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
+    <div class="businessNum_nav2">
+      <span class="businessNum_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
+      <span class="businessNum_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
+      <span class="businessNum_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
     </div>
-    <div class="totalNum_content mediators-info">
+    <div class="businessNum_content mediators-info">
       <div class="mediators_container">
         <div class = "mediators_filter">
           <div class="sortLeft">
@@ -442,7 +442,7 @@ export default {
     background-color: #0b1740;
   }
 
-  .totalNum_header {
+  .businessNum_header {
     width: 100%;
     min-width: 1920px;
     height: 87px;
@@ -453,7 +453,7 @@ export default {
     position: relative;
   }
 
-  .totalNum_back {
+  .businessNum_back {
     background: url('/static/renmintj/btn_back.png');
     position: absolute;
     left: 22px;
@@ -464,7 +464,7 @@ export default {
     cursor: pointer;
   }
 
-  .totalNum_nav {
+  .businessNum_nav {
     height: 24px;
     margin: 6px 0 20px 0;
     padding-left: 34px;
@@ -472,19 +472,19 @@ export default {
     box-sizing: border-box;
   }
 
-  .totalNum_nav_span {
+  .businessNum_nav_span {
     font-size: 18px;
     font-family: HiraginoSansGB-W3;
     color: rgba(94, 126, 203, 1);
   }
 
-  .totalNum_nav2 {
+  .businessNum_nav2 {
     margin-left: 34px;
     border-bottom: 1px solid rgba(15, 59, 186, 1);
     display: inline-block;
   }
 
-  .totalNum_nav2_span {
+  .businessNum_nav2_span {
     font-size: 20px;
     font-family: HiraginoSansGB-W3;
     padding-bottom: 10px;
@@ -495,12 +495,12 @@ export default {
     color: rgba(94, 126, 203, 1);
   }
 
-  .totalNum_nav2 .active {
+  .businessNum_nav2 .active {
     color: rgba(255, 198, 0, 1);
     border-bottom: 3px solid rgba(255, 198, 0, 1);
   }
 
-  .totalNum_content {
+  .businessNum_content {
     width: 100%;
     height: 903px;
     box-sizing: border-box;

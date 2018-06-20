@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-13 15:46:15
+ * @Last Modified time: 2018-06-20 16:16:21
  * @content: echarts 二维地理坐标系 动态散点 时间轴
  */
 <template>
@@ -13,27 +13,27 @@
   <div class='renmintj_container'>
     <div class="renmintj_left">
       <div class="renmintj_left_once">
-        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('totalNum')">业务数量</span>
+        <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('businessNum')">业务数量</span>
         <div class="renmintj_main">
           <div class="renmintj_main_once">
             <div class="pie yewusl1"></div>
             <div class="yewusl_title">人民调解</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.mbm_case_count_day"></span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.MBM_CASE"></span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl2"></div>
             <div class="yewusl_title">110联动</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.mms_alarm110info_count_day">364</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.MMS_ALARM110INFO"></span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl3"></div>
             <div class="yewusl_title">公共法律服务</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.wws_consult_count_day">41</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.WWS_CONSULT"></span><br/><span>今日</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl4"></div>
             <div class="yewusl_title">纠纷排查</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.cds_invest_count_day">301</span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.CDS_INVESTIGATIONFEEDBAC"></span><br/><span>今日</span></div>
           </div>
         </div>
       </div>
@@ -49,7 +49,12 @@
       </div>
       <div class="renmintj_left_once">
         <span class="renmintj_title_span renmintj_title_span_center" @click="changeRouter('trendAnalysis')">趋势分析</span>
-        <nav class="renmintj_nav"><a class="nav_a renmintj_nav_active" @click="changeType('data_110',$event)">110</a>|<a class="nav_a" @click="changeType('data_jc',$event)">基层公共法律</a>|<a class="nav_a" @click="changeType('data_tj',$event)">调解案件</a>|<a class="nav_a" @click="changeType('data_pc',$event)">纠纷排查</a></nav>
+            <span class="renmintj_nav">
+              <span class="nav_a" :class="{'renmintj_nav_active':target1==='data_tj'?true:false}" @click="target1='data_tj'">人民调解</span>|
+              <span class="nav_a" :class="{'renmintj_nav_active':target1==='data_110'?true:false}" @click="target1='data_110'">110联动</span>|
+              <span class="nav_a" :class="{'renmintj_nav_active':target1==='data_jc'?true:false}" @click="target1='data_jc'">公共法律服务</span>|
+              <span class="nav_a" :class="{'renmintj_nav_active':target1==='data_pc'?true:false}" @click="target1='data_pc'">纠纷排查</span>
+            </span>
         <div class='line'></div>
       </div>
     </div>
@@ -61,6 +66,15 @@
         </div>
         <div class="map_subtitle">
           <span>同比今年</span><span><digitalRolling :height='14' :width='10' :number='yewutb' :fontSize='14' :fontColor='"#FFFFFF"' :numberDigits='3'></digitalRolling>%</span>
+        </div>
+        <div class="map_cityList">
+          <el-cascader
+            class="cascader"
+            style="z-index: 1;"
+            :options="area"
+            placeholder="区域"
+            v-model="areaDefault"
+          ></el-cascader>
         </div>
         <div class='map'></div>
       </div>
@@ -76,11 +90,11 @@
             </div>
             <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
               <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index">
-               <span class='td'>{{item.xuhao}}</span>
-               <span class='td'>{{item.shijianlx}}</span>
-               <span class='td'>{{item.riqi}}</span>
-               <span class='td'>{{item.diqu}}</span>
-               <span class='td'>{{item.jianshu}}</span>
+               <span class='td'>{{item.xuHao}}</span>
+               <span class='td'>{{item.shiJianLX}}</span>
+               <span class='td'>{{item.riQi}}</span>
+               <span class='td'>{{item.diQu}}</span>
+               <span class='td'>{{item.jianShu}}</span>
               </div>
             </rollScreen>
           </div>
@@ -119,8 +133,8 @@
         <div class="renmintj_right_gongzuo">
           <div class="renmintj_right_fl">
             <div class="renmintj_right_fl_content">
-              <div class="renmintj_right_fl_content_line"><span class="numColor" v-text="workQuality.xys"></span><span class="typeColor">协议书</span></div>
-              <div class="renmintj_right_fl_content_line"><span class="numColor" v-text="workQuality.tjcg"></span><span class="typeColor">调解成功</span></div>
+              <div class="renmintj_right_fl_content_line"><span class="numColor" v-text="workQuality.xieYiS_number"></span><span class="typeColor">协议书</span></div>
+              <div class="renmintj_right_fl_content_line"><span class="numColor" v-text="workQuality.tiaoJieCG"></span><span class="typeColor">调解成功</span></div>
             </div>
             <div class="renmintj_right_fl_content">
               <div class="pie2"></div>
@@ -143,6 +157,7 @@ import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import genJson4shanghai from '@/../static/json/genJson4shanghai'
 import http from '@/util/httpUtil'
+import json from '@/util/json'
 
 export default {
   name: 'renmintj',
@@ -159,22 +174,33 @@ export default {
         lineNum: 0
       },
       casestatistics: {
-        mbm_case_count_day: 0,
-        mms_alarm110info_count_day: 0,
-        wws_consult_count_day: 0,
-        cds_invest_count_day: 0
+        MBM_CASE: 0,
+        MMS_ALARM110INFO: 0,
+        WWS_CONSULT: 0,
+        CDS_INVESTIGATIONFEEDBAC: 0
       },
       qushifx: {},
       MechanismNumber: [],
       peopleCount: [],
       workQuality: {
-        xys: 0,
-        tjcg: 0
+        xieYiS_number: 0,
+        tiaoJieCG: 0
       },
       yewusl: 0,
       yewutb: 0,
       yewuslList: [],
-      timer: ''
+      timer: '',
+      target1: 'data_tj',
+      area: json.area,
+      areaDefault: ['SHJCK01000']
+    }
+  },
+  watch: {
+    target1: function (newValue, oldValue) {
+      this.draw('line', eos.setLine2(this.qushifx[newValue], true))
+    },
+    areaDefault: function (newValue, oldValue) {
+      this.getData()
     }
   },
   methods: {
@@ -189,23 +215,10 @@ export default {
         this.$echarts.registerMap('shanghai', genJson4shanghai)
         this.myChart[domName].on('timelineChanged', function (params) {
           vue.yewusl = vue.yewuslList[params.currentIndex].yewuzongliang
-          vue.yewutb = (vue.yewuslList[params.currentIndex].tongbi * 100).toFixed(0)
+          vue.yewutb = vue.yewuslList[params.currentIndex].tongbi.split('.')[0]
         })
       }
       this.myChart[domName].setOption(option)
-    },
-    // 趋势分析
-    changeType (type, enent) {
-      if (type) {
-        document.getElementsByClassName('nav_a')[0].className = 'nav_a'
-        document.getElementsByClassName('nav_a')[1].className = 'nav_a'
-        document.getElementsByClassName('nav_a')[2].className = 'nav_a'
-        document.getElementsByClassName('nav_a')[3].className = 'nav_a'
-        event.target.className = 'nav_a renmintj_nav_active'
-        this.draw('line', eos.setLine2(this.qushifx[type].map((item) => { return {name: item.time, value: item.value} }), true))
-      } else {
-        this.$message.warning({message: '暂无数据'})
-      }
     },
     // 路由跳转
     changeRouter (name) {
@@ -213,70 +226,63 @@ export default {
     },
     getData () {
       let vue = this
-      let reqParam = {}
+      let reqParam = { area: this.areaDefault[0] }
+      let baseUrl = '/peopleMediate/V1.0.0.2'
       let url = ''
-      url = '/peopleMediate/ywsj_casestatistics_count'
-      http.get(url, reqParam, (data) => {
-        let obj = {}
-        data.map((item) => { obj[item['name']] = item['value'] })
-        vue.casestatistics['mbm_case_count_day'] = obj['mbm_case_count_day']
-        vue.casestatistics['mms_alarm110info_count_day'] = obj['mms_alarm110info_count_day']
-        vue.casestatistics['wws_consult_count_day'] = obj['wws_consult_count_day']
-        vue.casestatistics['cds_invest_count_day'] = obj['cds_invest_count_day']
+      url = '/mainPage_Dist_Count'
+      http.get(baseUrl + url, reqParam, (data) => {
+        let colorList = [[44, 204, 250], [240, 104, 127], [109, 239, 39], [255, 231, 62]]
+        data.yewusl.map((item, index) => {
+          vue.casestatistics[item['biao']] = item['benyue']
+          vue.$nextTick(function () {
+            vue.draw(`yewusl${index + 1}`, eos.setPie5(item['quannian'], colorList[index]))
+          })
+        })
+        vue.yewuslList = data.yewufb.yewuzs.reverse()
+        vue.yewusl = vue.yewuslList[0].yewuzongliang
+        vue.yewytb = vue.yewuslList[0].tongbi.split('.')[0]
+        vue.draw('map', eos.setMap(data.yewufb.fenbu))
+      })
+      url = '/category'
+      http.get(baseUrl + url, reqParam, (data) => {
         vue.$nextTick(function () {
-          vue.draw('yewusl1', eos.setPie5(obj.mbm_case_count, [44, 204, 250]))
-          vue.draw('yewusl2', eos.setPie5(obj.mms_alarm110info_count, [240, 104, 127]))
-          vue.draw('yewusl3', eos.setPie5(obj.wws_consult_count, [109, 239, 39]))
-          vue.draw('yewusl4', eos.setPie5(obj.cds_invest_count, [255, 231, 62]))
+          vue.draw('pie1', eos.setPie4([(data.hangZhuanBL * 100).toFixed(1), ((1 - data.hangZhuanBL) * 100).toFixed(1)], '行专占比'))
+          vue.draw('chart', eos.setBar4(data.yeWuLXHSL, ['#FF9C00', '#F8E228'], 'vertical', 'integer', 1))
         })
       })
-      url = '/peopleMediate/yewulx'
-      http.get(url, reqParam, (data) => {
-        vue.$nextTick(function () {
-          vue.draw('pie1', eos.setPie4([data.hz_percentage * 100, (1 - data.hz_percentage) * 100], '行专占比'))
-          vue.draw('chart', eos.setBar4(data.data.slice(0, 9), ['#FF9C00', '#F8E228'], 'vertical', 'integer', 1))
-        })
-      })
-      url = '/peopleMediate/qushi'
-      http.get(url, reqParam, (data) => {
+      url = '/trend'
+      http.get(baseUrl + url, reqParam, (data) => {
         vue.$nextTick(function () {
           this.qushifx = data
-          vue.draw('line', eos.setLine2(this.qushifx['data_110'].map((item) => { return {name: item.time, value: item.value} }), true))
+          vue.draw('line', eos.setLine2(this.qushifx['data_110'], true))
         })
       })
-      url = '/peopleMediate/ywsj_casestatistics_dist'
-      http.get(url, reqParam, (data) => {
-        vue.yewuslList = data.total
-        vue.yewusl = data.total[0].yewuzongliang
-        vue.yewytb = (data.total[0].tongbi * 100).toFixed(0)
-        vue.draw('map', eos.setMap(data.number))
-      })
-      url = '/peopleMediate/zdsj'
-      http.get(url, reqParam, (data) => {
+      url = '/keyEvents'
+      http.get(baseUrl + url, reqParam, (data) => {
         [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.length, 6, data]
       })
-      url = '/peopleMediate/MechanismNumber'
-      http.get(url, reqParam, (data) => {
-        vue.MechanismNumber = [{mingcheng: '司法所', shuliang: data['sifas']}, {mingcheng: '调委会', shuliang: data['tiaoweih']}, {mingcheng: '公共法律服务站', shuliang: data['ggflfwz']}, {mingcheng: '公共法律服务室', shuliang: data['ggflfws']}]
+      url = '/mechanismNumber'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.MechanismNumber = [{mingcheng: '司法所', shuliang: data['siFaS']}, {mingcheng: '调委会', shuliang: data['tiaoWeiH']}, {mingcheng: '公共法律服务站', shuliang: data['gongGongFLFWZ']}, {mingcheng: '公共法律服务室', shuliang: data['gongGongFLFWS']}]
         vue.$nextTick(function () {
-          vue.draw('fill1', eos.setFill(data['bzlsl'].toFixed(3), '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [data['bzlsl'].toFixed(3)], '17', '#7BA6ED'))
+          vue.draw('fill1', eos.setFill(data['siFaSZXBZLSL'].toFixed(3), '#FDBF5E', '司法所专项编制\n\r\r\r\r\r\r-落实率-', [data['siFaSZXBZLSL'].toFixed(3)], '17', '#7BA6ED'))
         })
       })
-      url = '/peopleMediate/peopleCount'
-      http.get(url, reqParam, (data) => {
-        vue.peopleCount = [{mingcheng: '调解员', shuliang: data['tjy']}, {mingcheng: '公务员', shuliang: data['gwy']}, {mingcheng: '文员', shuliang: data['wy']}, {mingcheng: '社工', shuliang: data['sg']}, {mingcheng: '志愿者', shuliang: data['zyz']}, {mingcheng: '法律顾问', shuliang: data['flgw']}]
+      url = '/staffNumber'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.peopleCount = [{mingcheng: '调解员', shuliang: data['tiaoJieY']}, {mingcheng: '公务员', shuliang: data['gongWuY']}, {mingcheng: '文员', shuliang: data['wenYuan']}, {mingcheng: '社工', shuliang: data['sheGong']}, {mingcheng: '志愿者', shuliang: data['zhiYuanZ']}, {mingcheng: '法律顾问', shuliang: data['juCunFLGW']}]
         vue.$nextTick(function () {
-          vue.draw('fill2', eos.setFill(data['flgw_cover'], '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [data['flgw_cover']], '17', '#7BA6ED'))
+          vue.draw('fill2', eos.setFill(parseFloat(data['juCunFLGW_cover']).toFixed(3), '#FF7279', '村居法律顾问\n\r\r\r\r-覆盖率-', [parseFloat(data['juCunFLGW_cover']).toFixed(3)], '17', '#7BA6ED'))
         })
       })
-      url = '/peopleMediate/workQuality'
-      http.get(url, reqParam, (data) => {
-        vue.workQuality.xys = data.xys
-        vue.workQuality.tjcg = data.tjcg
+      url = '/workQuality'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.workQuality.xieYiS_number = data.xieYiS_number
+        vue.workQuality.tiaoJieCG = data.tiaoJieCG
         vue.$nextTick(function () {
-          vue.draw('pie2', eos.setPie4([data.xys_cover * 100, (1 - data.xys_cover) * 100], '协议书占比'))
-          vue.draw('fill3', eos.setFill(data.wsscore, '#FDBF5E', '\r\r\r\r文书质量\n', [0.3], '17', '#7BA6ED'))
-          vue.draw('fill4', eos.setFill(data.ajsb_cover, '#FDBF5E', '\r\r\r\r案例上报率\n', [0.3], '17', '#7BA6ED'))
+          vue.draw('pie2', eos.setPie4([(data.xieYiS_cover * 100).toFixed(1), ((1 - data.xieYiS_cover) * 100).toFixed(1)], '协议书占比'))
+          vue.draw('fill3', eos.setFill(parseFloat(data.wenShuZL).toFixed(1), '#FDBF5E', '\r\r\r\r文书质量\n', [0.3], '17', '#7BA6ED'))
+          vue.draw('fill4', eos.setFill(parseFloat(data.anJianSB).toFixed(1), '#FDBF5E', '\r\r\r\r案例上报率\n', [0.3], '17', '#7BA6ED'))
         })
       })
     },
@@ -400,18 +406,19 @@ export default {
   }
   .renmintj_nav{
     display:inline-block;
+    width: 100%;
     height:20px;
     line-height:20px;
     font-size:13px;
     color:rgba(17,148,248,1);
     box-sizing:border-box;
-    margin-left: 140px;
+    text-align: center;
   }
-  .renmintj_nav>a{
+  .renmintj_nav>span{
     padding: 0 10px;
     cursor: pointer;
   }
-  .renmintj_nav>a:hover{
+  .renmintj_nav>span:hover{
     color: rgba(255,242,37,1);
   }
   .renmintj_nav_active {
@@ -509,6 +516,13 @@ export default {
     padding-right: 20px;
     padding-top: 10px;
     /* line-height: 36px; */
+  }
+  .map_cityList{
+    width: 110px;
+    height: 30px;
+    position:absolute;
+    top: 00px;
+    right:10px;
   }
   .renmintj_center_once{
     width:100%;

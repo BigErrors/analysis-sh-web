@@ -16,11 +16,10 @@ import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
 import peopleSearch from '@/components/renmintj/peopleSearch2'
 import peoplePortrait from '@/components/renmintj/peoplePortrait'
-import totalNum from '@/components/renmintj/totalNum2'
-import totalType from '@/components/renmintj/totalType'
+import businessNum from '@/components/renmintj/businessNum'
+import businessTypes from '@/components/renmintj/businessTypes'
 import importantEvent from '@/components/renmintj/importantEvent'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
-import businessTypes from '@/components/renmintj/businessTypes'
 import institutionRanking from '@/components/renmintj/institutionRanking'
 
 Vue.use(Router)
@@ -104,13 +103,9 @@ const router = new Router({
       name: 'peoplePortrait',
       component: peoplePortrait
     }, {
-      path: '/totalNum',
-      name: 'totalNum',
-      component: totalNum
-    }, {
-      path: '/totalType',
-      name: 'totalType',
-      component: totalType
+      path: '/businessNum',
+      name: 'businessNum',
+      component: businessNum
     }, {
       path: '/importantEvent',
       name: 'importantEvent',

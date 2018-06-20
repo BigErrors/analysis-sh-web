@@ -12,7 +12,7 @@
   </div>
   <div class='renmintj_container'>
     <div class="renmintj_left">
-      <div class="renmintj_left_once" @click="changeRouter('totalNum')" style="cursor: pointer;">
+      <div class="renmintj_left_once" @click="changeRouter('businessNum')" style="cursor: pointer;">
         <span class="renmintj_title_span">业务数量</span>
         <div class="renmintj_main">
           <div class="renmintj_main_once">

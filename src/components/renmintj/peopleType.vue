@@ -42,15 +42,15 @@
           <span class="peopleType_content_span1">本科及以上学历占比排名（区局）</span>
         </div>
       </div>
-      <table class='totalNum_table' cellspacing='0'>
-        <thead class="totalNum_table_thead">
+      <table class='businessNum_table' cellspacing='0'>
+        <thead class="businessNum_table_thead">
         <tr>
           <td width="15%" class='td'>排名</td>
           <td width="60%" class='td'>名称</td>
           <td width="25%" class='td'>占比</td>
         </tr>
         </thead>
-        <tbody class="totalNum_table_tbody">
+        <tbody class="businessNum_table_tbody">
         <tr v-for="(item,index) in benkejysxlzbpm" :key="index" v-if="index<=4">
           <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
           <td class='td'>{{item.mingcheng}}</td>
@@ -65,15 +65,15 @@
           <span class="peopleType_content_span1">各区调解员人数</span>
         </div>
       </div>
-      <table class='totalNum_table' cellspacing='0'>
-        <thead class="totalNum_table_thead">
+      <table class='businessNum_table' cellspacing='0'>
+        <thead class="businessNum_table_thead">
         <tr>
           <td width="15%" class='td'>排名</td>
           <td width="60%" class='td'>名称</td>
           <td width="25%" class='td'>占比</td>
         </tr>
         </thead>
-        <tbody class="totalNum_table_tbody">
+        <tbody class="businessNum_table_tbody">
         <tr v-for="(item,index) in dangyuanzbpm" :key="index" v-if="index<=4">
           <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
           <td class='td'>{{item.mingcheng}}</td>
@@ -88,15 +88,15 @@
           <span class="peopleType_content_span1">各区新增调解员</span>
         </div>
       </div>
-      <table class='totalNum_table' cellspacing='0'>
-        <thead class="totalNum_table_thead">
+      <table class='businessNum_table' cellspacing='0'>
+        <thead class="businessNum_table_thead">
         <tr>
           <td width="15%" class='td'>排名</td>
           <td width="60%" class='td'>名称</td>
           <td width="25%" class='td'>占比</td>
         </tr>
         </thead>
-        <tbody class="totalNum_table_tbody">
+        <tbody class="businessNum_table_tbody">
         <tr v-for="(item,index) in suiyxzbpm" :key="index" v-if="index<=4">
           <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
           <td class='td'>{{item.mingcheng}}</td>
@@ -345,13 +345,13 @@ export default {
   .right2{
     margin-top:25px;
   }
-  .totalNum_table{
+  .businessNum_table{
     width: 100%;
     padding:28px 38px 0 38px;
     box-sizing:border-box;
     color:white;
   }
-  .totalNum_table_thead td{
+  .businessNum_table_thead td{
     font-size:18px;
     font-family:MicrosoftYaHei;
     color:rgba(77,132,254,1);
@@ -359,16 +359,16 @@ export default {
     text-align:center;
      border-bottom:2px dashed rgba(16,54,165,1);
   }
-  .totalNum_table_tbody{
+  .businessNum_table_tbody{
     font-size:16px;
     font-family:MicrosoftYaHei;
     color:rgba(225,234,255,1);
     text-align:center;
   }
-  .totalNum_table_tbody td{
+  .businessNum_table_tbody td{
     padding:15px 0;
   }
-  .totalNum_table_tbody tr:nth-of-type(2n){
+  .businessNum_table_tbody tr:nth-of-type(2n){
     background:rgba(19,38,101,1);
   }
   .circle{
