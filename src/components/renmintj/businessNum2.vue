@@ -22,14 +22,19 @@
           ></el-cascader>
         </div>
         <div class="statistics">
-          <digitalRolling class="num" :height='41' :width='25' :number='statistics.day' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+          <span class="title">全年累计</span>
           <br>
-          <span class="title">本月新增</span>
+          <digitalRolling class="num" :height='30' :width='20' :number='statistics.year' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling>
         </div>
         <div class="statistics">
-          <digitalRolling class="num" :height='41' :width='25' :number='statistics.year' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+          <span class="title">本月新增</span>
           <br>
-          <span class="title">全年累计</span>
+          <digitalRolling class="num" :height='30' :width='20' :number='statistics.month' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling>
+        </div>
+        <div class="statistics" v-if="type==='110联动'">
+          <span class="title">本日新增</span>
+          <br>
+          <digitalRolling class="num" :height='30' :width='20' :number='statistics.day' :fontSize='30' :fontColor='"#FFFFFF"'></digitalRolling>
         </div>
       </div>
       <div class="businessNum_content_top">
@@ -47,7 +52,7 @@
         <div class="businessNum_detail">
           <div class="businessNum_detail_main">
             <div class="businessNum_detail_title">{{type2Title}}</div>
-            <div class="businessNum_detail_content" v-for="(item,index) in type2" :key="index">
+            <div class="businessNum_detail_content" v-for="(item,index) in type2" :key="index" @click="setType3Data(item.name)">
               <span class="businessNum_detail_span1">{{item.name}}</span>
               <span class="businessNum_detail_span2">{{item.value}}</span>
             </div>
@@ -55,13 +60,14 @@
         </div>
         <div class="businessNum_detail">
           <div class="businessNum_detail_main2">
+            <div class="target3"></div>
           </div>
         </div>
       </div>
       <div class="businessNum_content_bottom">
         <div class="businessNum_content_title clearfix">
           <div class="businessNum_content_title_left">
-            <span class="businessNum_content_span1">各区案件数量(TOP10)</span>
+            <span class="businessNum_content_span1">案件数量(TOP10)</span>
           </div>
         </div>
         <div class="target4"></div>
@@ -69,7 +75,7 @@
       <div class="businessNum_content_bottom">
         <div class="businessNum_content_title clearfix">
           <div class="businessNum_content_title_left">
-            <span class="businessNum_content_span1">案件来源分布</span>
+            <span class="businessNum_content_span1">来源分布</span>
           </div>
         </div>
         <div class="target5"></div>
@@ -77,25 +83,10 @@
       <div class="businessNum_content_bottom">
         <div class="businessNum_content_title clearfix">
           <div class="businessNum_content_title_left">
-            <span class="businessNum_content_span1">待办申请案件</span>
+            <span class="businessNum_content_span1">处理状态</span>
           </div>
         </div>
-        <div class='renmintj_center_table' v-if="false">
-          <div class="renmintj_table_thead">
-            <span class='td'>类型</span>
-            <span class='td'>行政区</span>
-            <span class='td'>申请日期</span>
-            <span class='td'>简述</span>
-          </div>
-          <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
-            <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index">
-              <span class='td'>{{item.shijianlx}}</span>
-              <span class='td'>{{item.diqu}}</span>
-              <span class='td'>{{item.riqi}}</span>
-              <span class='td'>{{item.jianshu}}</span>
-            </div>
-          </rollScreen>
-        </div>
+        <div class="target6"></div>
       </div>
     </div>
 
@@ -189,6 +180,9 @@ export default {
       this.type2Title = type
       this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
     },
+    setType3Data (type) {
+      this.$notify.success(`时间:${this.timeType},类别:${this.type},一级分类:${this.type2Title},二级分类:${type}`)
+    },
     dataFormatter (data) {
       // 声明空对象
       let tempObj = {}
@@ -266,10 +260,11 @@ export default {
     },
     getData () {
       let vue = this
-      let reqParam = {}
+      let reqParam = {area: this.areaDefault[0]}
+      let baseUrl = '/peopleMediate/V1.0.0.2'
       let url = ''
       url = '/peopleMediate/ywsj_casestatistics_count'
-      http.get(url, reqParam, (data) => {
+      http.get(baseUrl + url, reqParam, (data) => {
         let newData = vue.dataFormatter(data)
         vue.numData.arenmintj = newData.mbm_case_count
         vue.numData.a110 = newData.mms_alarm110info_count
@@ -279,18 +274,20 @@ export default {
         vue.statistics = vue.numData.arenmintj
       })
       url = '/peopleMediate/ywsj_casecount_down_detial_2'
-      http.get(url, reqParam, (data) => {
+      http.get(baseUrl + url, reqParam, (data) => {
         vue.barData.arenmintj = vue.dataFormatter2(data.mbm_case_count_sql)
         vue.barData.a110 = vue.dataFormatter2(data.mms_alarm110info_count_sql)
         vue.barData.afalvfw = vue.dataFormatter2(data.wws_consult_count_sql)
         vue.barData.ajiufenpc = vue.dataFormatter2(data.cds_invest_count_sql)
         // 初始化渲染
         vue.$nextTick(function () {
+          vue.draw('target3', eos.setLine6(vue.barData.arenmintj, 'integer'))
           vue.draw('target4', eos.setBar3(vue.barData.arenmintj, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+          vue.draw('target6', eos.setBar3(vue.barData.arenmintj, ['#F8E228', '#FF9C00'], 'vertical', 'integer'))
         })
       })
       url = '/peopleMediate/ywsj_casecount_down_detial_1'
-      http.get(url, reqParam, (data) => {
+      http.get(baseUrl + url, reqParam, (data) => {
         vue.typeData = data
         // 初始化渲染
         vue.$nextTick(function () {
@@ -298,7 +295,7 @@ export default {
         })
       })
       url = '/peopleMediate/YewuslSource'
-      http.get(url, reqParam, (data) => {
+      http.get(baseUrl + url, reqParam, (data) => {
         vue.sourceData = vue.dataFormatter5(data)
         // 初始化渲染
         vue.$nextTick(function () {
@@ -416,7 +413,7 @@ export default {
   }
   .target3{
     width: 100%;
-    height: 401px;
+    height: 100%;
   }
   .target4,.target5,.target6{
     width: calc(100% - 20px);
@@ -524,7 +521,6 @@ export default {
     height:264px;
     margin-top:67px;
     margin-left:77px;
-    border: #ebeaee solid 1px;
   }
   .businessNum_detail_title{
     height:34px;
@@ -572,47 +568,25 @@ export default {
     width: 260px;
     height: 60px;
     padding-left: 40px;
-    padding-top: 40px;
+    padding-top: 45px;
   }
   .statistics::before{
-    width: 44px;
-    height: 51px;
-    content: url('/static/renmintj/icon_document.png');
+    float: left;
+    width: 69px;
+    height: 80px;
+    content: url('/static/renmintj/icon_document2.png');
     padding-right: 10px;
   }
   .statistics .num {
     display: inline-block;
+    color: #FFFFFF;
+    font-size: 30px;
+    vertical-align: middle;
   }
   .statistics .title {
     display: inline-block;
-    color: #AAADB6;
-    font-size: 16px;
-    line-height: 16px;
-    padding-left: 54px;
-  }
-  .renmintj_center_table {
-    width: 100%;
-    padding:0 24px;
-    box-sizing:border-box;
-    font-size:14px;
-  }
-  .renmintj_center_table div{
-    width: 100%;
-    height: 33px;
-  }
-  .renmintj_center_table div span {
-    float: left;
-    display: block;
-    width: 25%;
-    line-height:33px;
-    text-align: center;
-    color:rgba(118,187,239,1);
-  }
-  .renmintj_table_thead{
-    color:rgba(17,148,248,1);
-    line-height:42px;
-  }
-  .renmintj_table_tr:nth-of-type(2n-1){
-    background: rgba(7,30,74,0.8)
+    color: #79BEF2;
+    font-size: 14px;
+    vertical-align: middle;
   }
 </style>

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-14 11:08:08
+ * @Last Modified time: 2018-06-21 17:10:42
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -28,11 +28,9 @@ http.put = (url, param, callback, contentType) => {
   let headers = {}
   if (contentType && contentType === 'application/json') {
     headers = {'Content-Type': 'application/json'}
-    console.log('json')
   } else {
     param = qs.stringify(param)
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-    console.log('not json')
   }
   axios({method: 'put', url: url, data: param, headers: headers}).then((res) => {
     if (res.data.code === 1) {

@@ -939,8 +939,8 @@ let setLine4 = (data, dataType, legend, color) => {
 let setLine5 = (data, callback) => {
   let date = []
   data.map((item) => {
-    date.push(item.time)
-    return {name: item.time, value: item.value}
+    date.push(item.name)
+    return {name: item.name, value: item.value}
   })
   callback(date)
   let option = {
@@ -1059,6 +1059,68 @@ let setLine5 = (data, callback) => {
         data: data
       }
     ]
+  }
+  return option
+}
+
+// 折线图
+let setLine6 = (data, dataType) => {
+  let option = {
+    grid: {
+      containLabel: false
+    },
+    color: ['#30FF8D'],
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: '#4D84FE'
+      },
+      splitLine: {
+        show: false
+      },
+      boundaryGap: true,
+      data: data.map(item => {
+        return item['name']
+      })
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: false,
+        color: '#4D84FE',
+        formatter: dataType === 'integer' ? '{value}' : '{value} %'
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#295086'
+        }
+      }
+    },
+    series: [{
+      name: 'seriesname',
+      type: 'line',
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: {
+        width: 1
+      },
+      data: data.map(item => {
+        return item['value']
+      })
+    }]
   }
   return option
 }
@@ -1228,7 +1290,7 @@ let setPie2 = (data) => {
 }
 
 // 圆环图
-let setPie3 = (data) => {
+let setPie3 = (data, showRose) => {
   let option = {
     legend: {
       orient: 'vertical',
@@ -1245,10 +1307,12 @@ let setPie3 = (data) => {
     color: ['#4D84FE', '#F4A869', '#9979CC', '#854DB5', '#EF5665', '#EF5665', '#F77C88'],
     series: [
       {
-        name: '',
+        name: 'seriesName',
         type: 'pie',
         center: ['35%', '50%'],
-        radius: ['25%', '40%'],
+        radius: ['40%', '55%'],
+        roseType: showRose || false,
+        avoidLabelOverlap: true,
         label: {
           normal: {
             formatter: '{d|{d}%}\n {hr|}\n',
@@ -1287,13 +1351,13 @@ let setPie3 = (data) => {
 }
 
 // 圆环图
-let setPie4 = (data, title, color) => {
-  color = color || ['#00ECF6', '#0A4179']
+let setPie4 = (data, title, bgColorOpacity, titlePosition) => {
+  let color = ['#00ECF6', '#0A4179']
   let option = {
     title: {
       x: 'center',
-      // y: 'bottom',
-      bottom: 6,
+      y: titlePosition || 'bottom',
+      // bottom: 6,
       text: title || '标题',
       textStyle: {
         color: '#1194F8',
@@ -1303,7 +1367,7 @@ let setPie4 = (data, title, color) => {
     color: color,
     series: [{
       type: 'pie',
-      center: ['50%', '38%'],
+      center: ['50%', '50%'],
       radius: ['65%', '75%'],
       label: {
         show: false
@@ -1311,7 +1375,7 @@ let setPie4 = (data, title, color) => {
       data: data
     }, {
       type: 'pie',
-      center: ['50%', '38%'],
+      center: ['50%', '50%'],
       radius: ['0%', '65%'],
       data: [{
         value: 0,
@@ -1323,7 +1387,8 @@ let setPie4 = (data, title, color) => {
           color: color[0]
         },
         itemStyle: {
-          color: color[1]
+          color: color[1],
+          opacity: bgColorOpacity === 0 ? 0 : 1
         }
       }]
     }]
@@ -1828,4 +1893,4 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setLine6, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}

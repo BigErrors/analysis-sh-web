@@ -107,7 +107,10 @@
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">案件处理结果</div>
           </div>
-          <div class="businessTypes_content_main target6">
+          <div class="businessTypes_content_main">
+            <div class="businessTypes_content_main_small target61"></div>
+            <div class="businessTypes_content_main_small target62"></div>
+            <div class="businessTypes_content_main_small target63"></div>
           </div>
         </div>
       </div>
@@ -208,8 +211,7 @@ export default {
         data: []
       },
       area: json.area,
-      areaDefault: ['全市'],
-      // areaDefault: ['SHJCK01000'],
+      areaDefault: ['SHJCK01000'],
       type: json.caseType,
       typeDefault: ['交通'],
       xingZhuanTJS: 0,
@@ -322,8 +324,11 @@ export default {
           vue.draw('target2', eos.setLine2(vue.anjianslbh.year_casenumber))
           vue.draw('target4', eos.setPie3(data.anjianlx.map(item => {
             return {name: item.name, value: parseInt(item.number)}
-          })))
+          }), 'radius'))
           vue.draw('target5', eos.setBar3([{name: '状态1', value: 246}, {name: '状态2', value: 123}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32, false, false))
+          vue.draw('target61', eos.setPie4([vue.formatData(data.anjiancljg.cg_bili), vue.formatData(1 - data.anjiancljg.cg_bili)], '调解成功', 0, 'top'))
+          vue.draw('target62', eos.setPie4([vue.formatData(data.anjiancljg.xys_bili), vue.formatData(1 - data.anjiancljg.xys_bili)], '协议书', 0, 'top'))
+          vue.draw('target63', eos.setPie4([vue.formatData(data.anjiancljg.sfjd_bili), vue.formatData(1 - data.anjiancljg.sfjd_bili)], '司法确认', 0, 'top'))
           vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_bendi)}, {name: '外地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_waidi)}, {name: '未知', value: vue.formatData(data.dangshirfx.sqr_data.huji_weizhi)}], false, true))
           vue.draw('target82', eos.setBar3(data.dangshirfx.sqr_data.nlfb.map(item => {
             return {name: item.age, value: parseInt(item.number)}
@@ -488,6 +493,20 @@ export default {
     box-sizing: border-box;
     position:relative;
     float:left;
+  }
+
+  .businessTypes_content_main_small{
+    width: calc(33.33% - 60px);
+    height: calc(242px - 60px);
+    padding: 30px;
+    /* box-sizing: border-box; */
+    position:relative;
+    float:left;
+  }
+  .businessTypes_content_main_small:nth-of-type(2),.businessTypes_content_main_small:nth-of-type(3){
+    background:url("/static/renmintjOther/icon_directing.png");
+    background-repeat:no-repeat;
+    background-position:left center;
   }
   .businessTypes_content_1{
     position:absolute;

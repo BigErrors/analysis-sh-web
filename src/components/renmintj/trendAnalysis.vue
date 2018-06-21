@@ -56,7 +56,7 @@
       <div class="trendAnalysis_content_right_once">
         <div class="trendAnalysis_content_title clearfix">
           <div class="trendAnalysis_content_title_left">
-            <span class="trendAnalysis_content_span1">纠纷类型</span>
+            <span class="trendAnalysis_content_span1">纠纷类型(TOP10)</span>
           </div>
         </div>
         <div class="target3"></div>
@@ -104,8 +104,8 @@ export default {
       average: 0,
       maxMonth: '0000-00',
       area: json.area,
-      areaDefault: ['全市'],
-      // areaDefault: ['SHJCK01000'],
+      // areaDefault: ['全市'],
+      areaDefault: ['SHJCK01000'],
       type: json.businessType,
       typeDefault: ['人民调解'],
       date: [],
@@ -114,16 +114,21 @@ export default {
       dateRange: {
         start: '',
         end: ''
-      }
+      },
+      loading: ''
     }
   },
   watch: {
     typeDefault: function (newValue, oldValue) {
       this.limit = 0
+      this.dateRange.start = ''
+      this.dateRange.end = ''
       this.getData()
     },
     areaDefault: function (newValue, oldValue) {
       this.limit = 0
+      this.dateRange.start = ''
+      this.dateRange.end = ''
       this.getData()
     },
     dateRange: {
@@ -157,7 +162,7 @@ export default {
     },
     drawWordcloud2 (domName, data) {
       let option = wos.setOption(data.map((item) => {
-        return [item.keyword, item.number]
+        return [item.name, item.value]
       }))
       let vue = this
       let ctx = document.getElementsByClassName(domName + '_canvas')[0].getContext('2d')
@@ -175,25 +180,40 @@ export default {
     },
     getData () {
       let vue = this
+      vue.loading = vue.$loading({
+        lock: true,
+        text: '数据加载中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.5)'
+      })
       let reqParam = {area: this.areaDefault[0], source: this.typeDefault[0], startDate: this.dateRange.start, endDate: this.dateRange.end}
+      let baseUrl = '/peopleMediate/V1.0.0.2'
       let url = ''
-      url = '/peopleMediate/QushiUnder'
-      http.get(url, reqParam, (data) => {
+      url = '/trendAnalysis'
+      http.get(baseUrl + url, reqParam, (data) => {
         vue.$nextTick(function () {
           vue.limit++
-          vue.count = data.jiufensl
-          vue.importantNum = data.zhongdiansjs
-          vue.max = data.danyuezg
-          vue.maxMonth = data.danyuezgsj
-          vue.average = data.yuejun
+          vue.count = data.jiuFenSL
+          vue.importantNum = data.zhongDianSJS
+          vue.max = data.danYueZG
+          vue.maxMonth = data.danYueZGSJ
+          vue.average = data.yueJun
           if (vue.limit === 1) {
-            vue.draw('target2', eos.setLine5(data.meirisl, (date) => {
+            vue.draw('target2', eos.setLine5(data.meiYueAJSL, (date) => {
               vue.date = date
               vue.dateLength = date.length
             }))
           }
-          vue.draw('target3', eos.setBar3(data.jiufenlx.reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
-          vue.drawWordcloud2('target4', data.ciyun)
+          data.jiuFenLX = data.jiuFenLX.sort(function (a, b) {
+            if (a.value >= b.value) {
+              return 1
+            } else {
+              return -1
+            }
+          }).slice(0, 10)
+          vue.draw('target3', eos.setBar3(data.jiuFenLX, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+          vue.drawWordcloud2('target4', data.jiuFenCY)
+          vue.loading.close()
         })
       })
     }

@@ -14,9 +14,9 @@
       </div>
     </div>
     <div class="institutionRanking_nav3">
-      <div class="institutionRanking_nav3_left active">区局</div>
-      <div class="institutionRanking_nav3_left">司法所</div>
-      <div class="institutionRanking_nav3_left">调委会</div>
+      <div class="institutionRanking_nav3_left" :class="{'active':label==='JUSTICEBUREAU'}" @click="label='JUSTICEBUREAU'">区局</div>
+      <div class="institutionRanking_nav3_left" :class="{'active':label==='JUSTICEOFFICE'}" @click="label='JUSTICEOFFICE'">司法所</div>
+      <div class="institutionRanking_nav3_left" :class="{'active':label==='MEDIATIONCOMMITTEE'}" @click="label='MEDIATIONCOMMITTEE'">调委会</div>
       <div class="institutionRanking_nav3_right" @click="getData(1)">导出Excel</div>
       <div class="institutionRanking_nav3_date">
         <el-date-picker
@@ -37,15 +37,15 @@
           <tr>
             <th><span class="institutionRanking_content_span">排名</span></th>
             <th><span class="institutionRanking_content_span" >名称</span></th>
-            <th><span @click="sort('people_number')"  class="institutionRanking_content_span" :class="{'yellow':obj==='people_number'}">人员数量</span><i @click="sort('people_number')" class="bg1" :class="{bg2:obj==='people_number'&&reorder==='DESC',bg3:obj==='people_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('yw_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='yw_number'}">业务总量</span><i @click="sort('yw_number')" class="bg1" :class="{bg2:obj==='yw_number'&&reorder==='DESC',bg3:obj==='yw_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('aj_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='aj_number'}">调解案件数</span><i @click="sort('aj_number')" class="bg1" :class="{bg2:obj==='aj_number'&&reorder==='DESC',bg3:obj==='aj_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('pc_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='pc_number'}">排查反馈数</span><i @click="sort('pc_number')" class="bg1" :class="{bg2:obj==='pc_number'&&reorder==='DESC',bg3:obj==='pc_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('sb_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='sb_number'}">调节案例上报数</span><i @click="sort('sb_number')" class="bg1" :class="{bg2:obj==='sb_number'&&reorder==='DESC',bg3:obj==='sb_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('rz_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='rz_number'}">咨询管理日志数</span><i @click="sort('rz_number')" class="bg1" :class="{bg2:obj==='rz_number'&&reorder==='DESC',bg3:obj==='rz_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('cj_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='cj_number'}">村居服务数</span><i @click="sort('cj_number')" class="bg1" :class="{bg2:obj==='cj_number'&&reorder==='DESC',bg3:obj==='cj_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('fx_number')" class="institutionRanking_content_span" :class="{'yellow':obj==='fx_number'}">法宣活动数</span><i @click="sort('fx_number')" class="bg1" :class="{bg2:obj==='fx_number'&&reorder==='DESC',bg3:obj==='fx_number'&&reorder==='ASC'}"></i></th>
-            <th><span @click="sort('rate')" class="institutionRanking_content_span" :class="{'yellow':obj==='rate'}">业务系统使用率</span><i @click="sort('rate')" class="bg1" :class="{bg2:obj==='rate'&&reorder==='DESC',bg3:obj==='rate'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('renyuansl')"  class="institutionRanking_content_span" :class="{'yellow':obj==='renyuansl'}">人员数量</span><i @click="sort('renyuansl')" class="bg1" :class="{bg2:obj==='renyuansl'&&reorder==='DESC',bg3:obj==='renyuansl'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('yewusl')" class="institutionRanking_content_span" :class="{'yellow':obj==='yewusl'}">业务总量</span><i @click="sort('yewusl')" class="bg1" :class="{bg2:obj==='yewusl'&&reorder==='DESC',bg3:obj==='yewusl'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('tiaojieaj')" class="institutionRanking_content_span" :class="{'yellow':obj==='tiaojieaj'}">调解案件数</span><i @click="sort('tiaojieaj')" class="bg1" :class="{bg2:obj==='tiaojieaj'&&reorder==='DESC',bg3:obj==='tiaojieaj'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('paichafk')" class="institutionRanking_content_span" :class="{'yellow':obj==='paichafk'}">排查反馈数</span><i @click="sort('paichafk')" class="bg1" :class="{bg2:obj==='paichafk'&&reorder==='DESC',bg3:obj==='paichafk'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('shangbaosl')" class="institutionRanking_content_span" :class="{'yellow':obj==='shangbaosl'}">调节案例上报数</span><i @click="sort('shangbaosl')" class="bg1" :class="{bg2:obj==='shangbaosl'&&reorder==='DESC',bg3:obj==='shangbaosl'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('zixunrz')" class="institutionRanking_content_span" :class="{'yellow':obj==='zixunrz'}">咨询管理日志数</span><i @click="sort('zixunrz')" class="bg1" :class="{bg2:obj==='zixunrz'&&reorder==='DESC',bg3:obj==='zixunrz'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('chunjufw')" class="institutionRanking_content_span" :class="{'yellow':obj==='chunjufw'}">村居服务数</span><i @click="sort('chunjufw')" class="bg1" :class="{bg2:obj==='chunjufw'&&reorder==='DESC',bg3:obj==='chunjufw'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('faxuanhd')" class="institutionRanking_content_span" :class="{'yellow':obj==='faxuanhd'}">法宣活动数</span><i @click="sort('faxuanhd')" class="bg1" :class="{bg2:obj==='faxuanhd'&&reorder==='DESC',bg3:obj==='faxuanhd'&&reorder==='ASC'}"></i></th>
+            <th><span @click="sort('yewusyl')" class="institutionRanking_content_span" :class="{'yellow':obj==='yewusyl'}">业务系统使用率</span><i @click="sort('yewusyl')" class="bg1" :class="{bg2:obj==='yewusyl'&&reorder==='DESC',bg3:obj==='yewusyl'&&reorder==='ASC'}"></i></th>
           </tr>
         </thead>
         <tbody class="institutionRanking_content_tbody">
@@ -57,16 +57,16 @@
               <img v-if="index===1&&currentpage===1&&reorder==='DESC'" class="institutionRanking_content_jp" src='/static/renmintj/yinpai.png' />
               <img v-if="index===2&&currentpage===1&&reorder==='DESC'" class="institutionRanking_content_jp" src='/static/renmintj/tongpai.png' />
             </td>
-            <td ><div class="institutionRanking_content_jg">{{item.sifaju}}</div></td>
-            <td><span class="institutionRanking_content_rysl">{{item.people_number}}</span></td>
-            <td><span class="institutionRanking_content_span2">{{item.yw_number}}</span></td>
-            <td><span class="institutionRanking_content_span2">{{item.aj_number}}</span></td>
-            <td><span class="institutionRanking_content_span2">{{item.pc_number}}</span></td>
-            <td><span class="institutionRanking_content_span2">{{item.sb_number}}</span></td>
-            <td><span class="institutionRanking_content_span3">{{item.rz_number}}</span></td>
-            <td><span class="institutionRanking_content_span3">{{item.cj_number}}</span></td>
-            <td><span class="institutionRanking_content_span3">{{item.fx_number}}</span></td>
-            <td><span class="institutionRanking_content_span4">{{item.rate*100+"%"}}</span></td>
+            <td ><div class="institutionRanking_content_jg" :title="item.name">{{item.name}}</div></td>
+            <td><span class="institutionRanking_content_rysl">{{item.renyuansl}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.yewusl}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.tiaojieaj}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.paichafk}}</span></td>
+            <td><span class="institutionRanking_content_span2">{{item.shangbaosl}}</span></td>
+            <td><span class="institutionRanking_content_span3">{{item.zixunrz}}</span></td>
+            <td><span class="institutionRanking_content_span3">{{item.chunjufw}}</span></td>
+            <td><span class="institutionRanking_content_span3">{{item.faxuanhd}}</span></td>
+            <td><span class="institutionRanking_content_span4">{{"--%"}}</span></td>
           </tr>
         </tbody>
       </table>
@@ -82,11 +82,12 @@
 
 <script>
 import http from '@/util/httpUtil'
+import jsonUtil from '@/util/jsonUtil'
 
 export default {
   data: function () {
     return {
-      date: '',
+      date: [(new Date()).getTime() - 3600 * 1000 * 24 * 7, new Date()],
       pickerOptions: {
         shortcuts: [{
           text: '最近一周',
@@ -118,7 +119,17 @@ export default {
       pageTotal: 1,
       currentpage: 1,
       reorder: 'DESC',
-      obj: ''
+      obj: 'renyuansl',
+      label: 'JUSTICEBUREAU',
+      loading: ''
+    }
+  },
+  watch: {
+    label: function (newValue, oldValue) {
+      this.getData()
+    },
+    date: function (newValue, oldValue) {
+      this.getData()
     }
   },
   created: function () {
@@ -127,9 +138,19 @@ export default {
   methods: {
     getData (excl) {
       let _this = this
+      _this.loading = _this.$loading({
+        lock: true,
+        text: '数据加载中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.5)'
+      })
       let excel = excl || 0
-      let url = '/peopleMediate/institutionalRankings'
+      let baseUrl = '/peopleMediate/V1.0.0.2'
+      let url = '/institutionalRankings'
       let param = {
+        'startdate': jsonUtil.dateTimeFormat(_this.date[0]),
+        'enddate': jsonUtil.dateTimeFormat(_this.date[1]),
+        'lable': _this.label,
         'obj': _this.obj,
         'reorder': _this.reorder,
         'excl': excel,
@@ -137,12 +158,13 @@ export default {
         'currentpage': _this.currentpage
       }
       if (excel === 0) {
-        http.post(url, param, (data) => {
+        http.post(baseUrl + url, param, (data) => {
           _this.list = data.pageData
           _this.pageTotal = data.pageinfo.total
+          _this.loading.close()
         }, 'application/json')
       } else {
-        http.post(url, param, (data) => {
+        http.post(baseUrl + url, param, (data) => {
           let date = new Date()
           let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
           let blob = new Blob([data]) // 创建一个blob对象
@@ -153,6 +175,7 @@ export default {
           document.body.appendChild(a)
           a.click()
           a.remove()
+          _this.loading.close()
         }, 'application/json', 'arraybuffer')
       }
     },
@@ -269,6 +292,7 @@ export default {
   float: left;
   border-radius:2px;
   margin:2px 32px 2px 0;
+  cursor: pointer;
 }
 .institutionRanking_nav3 .active{
   color:rgba(255,198,0,1);
@@ -373,6 +397,10 @@ export default {
   font-family:HiraginoSansGB-W3;
   color:rgba(204,233,255,1);
   line-height: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 120px;
 }
 .institutionRanking_content_rysl{
   background: linear-gradient(left, #4481EB,#04BEFE);

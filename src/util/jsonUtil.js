@@ -8,4 +8,9 @@ let merge = (list, type) => {
   return newList
 }
 
-export default { merge }
+let dateTimeFormat = (date) => {
+  let dateObj = new Date(date)
+  return (dateObj.getFullYear()) + '-' + (dateObj.getMonth() + 1) + '-' + (dateObj.getDate()) + ' 00:00:00'
+}
+
+export default { merge, dateTimeFormat }
