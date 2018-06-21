@@ -1,33 +1,33 @@
 <template>
 <div id='peoplePortrait' class='shade'>
-  <div class="businessNum_header">
-    <div class="businessNum_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+  <div class="peoplePortrait_header">
+    <div class="peoplePortrait_back"  @click="changeRouter('index4renmintj')"></div>
   </div>
-  <div class="businessNum_nav">
-    <span class="businessNum_nav_span">首页 > 调解员画像分析 >详情</span>
+  <div class="peoplePortrait_nav">
+    <span class="peoplePortrait_nav_span">首页 > 调解员画像分析 >详情</span>
   </div>
-  <div class="businessNum_nav2">
-    <span class="businessNum_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>
-    <span class="businessNum_nav2_span"  @click="changeRouter('peopleType')">属性分析</span>
-    <span class="businessNum_nav2_span active"  @click="changeRouter('peopleSearch')">画像分析</span>
+  <div class="peoplePortrait_nav2">
+    <span class="peoplePortrait_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>
+    <span class="peoplePortrait_nav2_span"  @click="changeRouter('peopleType')">属性分析</span>
+    <span class="peoplePortrait_nav2_span active"  @click="changeRouter('peopleSearch')">画像分析</span>
   </div>
-  <div class="businessNum_content">
-   <div class="businessNum_content_left">
-     <div class="businessNum_content_leftTitle1">
-       <div class="businessNum_content_leftTitle1_name">{{detail.name}}</div>
-       <div class="businessNum_content_leftTitle1_year">{{detail.year + '年'}}</div>
-       <div class="businessNum_content_leftTitle1_phone">{{detail.phone}}</div>
+  <div class="peoplePortrait_content">
+   <div class="peoplePortrait_content_left">
+     <div class="peoplePortrait_content_leftTitle1">
+       <div class="peoplePortrait_content_leftTitle1_name">{{detail.name}}</div>
+       <div class="peoplePortrait_content_leftTitle1_year">{{detail.year + '年'}}</div>
+       <div class="peoplePortrait_content_leftTitle1_phone">{{detail.phone}}</div>
      </div>
-     <div class="businessNum_content_leftTitle2">
-       <div class="businessNum_content_leftTitle2_address" :title='detail.address'>{{detail.address}}</div>
+     <div class="peoplePortrait_content_leftTitle2">
+       <div class="peoplePortrait_content_leftTitle2_address" :title='detail.address'>{{detail.address}}</div>
      </div>
-     <div class="businessNum_content_leftContent" :style="{background:background}">
-       <canvas  class="businessNum_content_leftContent_canvas" width="184px" height="647px"></canvas>
+     <div class="peoplePortrait_content_leftContent" :style="{background:background}">
+       <canvas  class="peoplePortrait_content_leftContent_canvas" width="184px" height="647px"></canvas>
      </div>
    </div>
-   <div class="businessNum_content_right1">
+   <div class="peoplePortrait_content_right1">
      <div class="module">
-       <div class="businessNum_content_rightTitle">整体概览</div>
+       <div class="peoplePortrait_content_rightTitle">整体概览</div>
        <div class="moduleContent">
          <div class="module1">
            <div class="module1Item" v-for="(item,index) in detail.info" :key="index"><span class="module1Num">{{item.value}}</span><br><span class="module1Title">{{item.name}}</span></div>
@@ -35,16 +35,16 @@
        </div>
      </div>
      <div class="module">
-       <div class="businessNum_content_rightTitle">类型对比</div>
+       <div class="peoplePortrait_content_rightTitle">类型对比</div>
        <div class="moduleContent module2"></div>
      </div>
      <div class="module">
-       <div class="businessNum_content_rightTitle">综合能力</div>
+       <div class="peoplePortrait_content_rightTitle">综合能力</div>
        <div class="moduleContent module3"></div>
      </div>
    </div>
-   <div class="businessNum_content_right2">
-     <div class="businessNum_content_rightTitle">案件列表</div>
+   <div class="peoplePortrait_content_right2">
+     <div class="peoplePortrait_content_rightTitle">案件列表</div>
       <div class="moduleContent module4">
           <div class='renmintj_center_table'>
             <div class="renmintj_table_thead">
@@ -105,7 +105,7 @@ export default {
     // 绘制echarts
     draw (domName, option) {
       let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
-      if (domName === 'businessNum_content_leftContent') {
+      if (domName === 'peoplePortrait_content_leftContent') {
         option.maskImage.onload = function () {
           myChart.setOption(option.option)
         }
@@ -122,13 +122,13 @@ export default {
       })
       let option = wos.setOption(data)
       let vue = this
-      let ctx = document.getElementsByClassName('businessNum_content_leftContent_canvas')[0].getContext('2d')
+      let ctx = document.getElementsByClassName('peoplePortrait_content_leftContent_canvas')[0].getContext('2d')
       vue.background = type === '女' ? 'url(/static/renmintjOther/pic_girl1.png) no-repeat' : 'url(/static/renmintjOther/pic_boy1.png) no-repeat'
       let img = new Image()
       img.src = type === '女' ? '/static/renmintjOther/pic_girl2.png' : '/static/renmintjOther/pic_boy2.png'
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
-        vue.$wordcloud(document.getElementsByClassName('businessNum_content_leftContent_canvas')[0], option)
+        vue.$wordcloud(document.getElementsByClassName('peoplePortrait_content_leftContent_canvas')[0], option)
       }
     },
     getData () {
@@ -166,7 +166,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center;
   }
-  .businessNum_header{
+  .peoplePortrait_header{
     width: 100%;
     min-width: 1920px;
     height: 87px;
@@ -176,7 +176,7 @@ export default {
     z-index: 99;
     position:relative;
   }
-  .businessNum_back{
+  .peoplePortrait_back{
     background:url('/static/renmintj/btn_back.png');
     position:absolute;
     left:22px;
@@ -186,24 +186,24 @@ export default {
     top: 28px;
     cursor:pointer;
   }
-  .businessNum_nav{
+  .peoplePortrait_nav{
     height: 24px;
     margin:6px 0 20px 0;
     padding-left: 34px;
     width: 100%;
     box-sizing: border-box;
   }
-  .businessNum_nav_span{
+  .peoplePortrait_nav_span{
     font-size:18px;
     font-family:HiraginoSansGB-W3;
     color:rgba(94,126,203,1);
   }
-  .businessNum_nav2{
+  .peoplePortrait_nav2{
     margin-left: 34px;
     border-bottom: 1px solid rgba(15,59,186,1);
     display: inline-block;
   }
-  .businessNum_nav2_span{
+  .peoplePortrait_nav2_span{
     font-size:20px;
     font-family:HiraginoSansGB-W3;
     padding-bottom: 10px;
@@ -217,25 +217,25 @@ export default {
     color:rgba(255,198,0,1);
     border-bottom: 3px solid rgba(255,198,0,1);
   }
-  .businessNum_content{
+  .peoplePortrait_content{
     width: 100%;
     height: 903px;
     box-sizing: border-box;
     padding: 13px 24px 24px 24px;
   }
-  .businessNum_content_left{
+  .peoplePortrait_content_left{
     float: left;
     width: 489px;
     height: 868px;
     margin-right: 13px;
     background: rgba(0,33,129,0.3);
   }
-  .businessNum_content_leftTitle1{
+  .peoplePortrait_content_leftTitle1{
     height: 66px;
     margin-top: 32px;
     margin-left: 23px;
   }
-  .businessNum_content_leftTitle1_name{
+  .peoplePortrait_content_leftTitle1_name{
     float: left;
     background: url('/static/renmintjOther/pic_title_3.png') no-repeat;
     height: 66px;
@@ -247,7 +247,7 @@ export default {
     box-sizing:border-box;
     padding-left: 26px;
   }
-  .businessNum_content_leftTitle1_year{
+  .peoplePortrait_content_leftTitle1_year{
     float: left;
     background: url('/static/renmintjOther/pic_title_2.png') no-repeat;
     height: 23px;
@@ -260,7 +260,7 @@ export default {
     box-sizing:border-box;
     padding-left: 26px;
   }
-  .businessNum_content_leftTitle1_phone{
+  .peoplePortrait_content_leftTitle1_phone{
     float: left;
     background: url('/static/renmintjOther/pic_title_4.png') no-repeat;
     height: 23px;
@@ -272,13 +272,13 @@ export default {
     box-sizing:border-box;
     padding-left: 26px;
   }
-  .businessNum_content_leftTitle2{
+  .peoplePortrait_content_leftTitle2{
     height: 23px;
     margin-top: 15px;
     margin-left: 23px;
     line-height: 23px;
   }
-  .businessNum_content_leftTitle2_address{
+  .peoplePortrait_content_leftTitle2_address{
     background: url('/static/renmintjOther/pic_title_5.png') no-repeat;
     height: 23px;
     width: 452px;
@@ -290,7 +290,7 @@ export default {
     overflow: hidden;
     white-space: nowrap;
   }
-  .businessNum_content_leftContent{
+  .peoplePortrait_content_leftContent{
     width: 184px;
     height: 647px;
     margin-top: 15px;
@@ -298,7 +298,7 @@ export default {
     margin-right: auto;
   }
 
-  .businessNum_content_right1{
+  .peoplePortrait_content_right1{
     float: left;
     width: 1360px;
     height: 430px;
@@ -317,14 +317,14 @@ export default {
   .moduleContent{
     height: 340px;
   }
-  .businessNum_content_right2{
+  .peoplePortrait_content_right2{
     float: left;
     width: 1360px;
     height: 430px;
     background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
     margin-bottom: 10px;
   }
-  .businessNum_content_rightTitle{
+  .peoplePortrait_content_rightTitle{
     background: url('/static/renmintjOther/pic_title_1.png') no-repeat;
     height: 42px;
     width: 156px;

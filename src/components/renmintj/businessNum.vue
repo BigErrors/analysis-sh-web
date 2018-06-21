@@ -1,7 +1,7 @@
 <template>
   <div id='businessNum' class='shade'>
     <div class="businessNum_header">
-      <div class="businessNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+      <div class="businessNum_back" @click="changeRouter('index4renmintj')"></div>
     </div>
     <div class="businessNum_nav">
       <span class="businessNum_nav_span">首页 > 业务数量</span>

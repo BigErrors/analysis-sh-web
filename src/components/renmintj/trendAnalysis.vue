@@ -1,7 +1,7 @@
 <template>
 <div id='trendAnalysis' class='shade'>
   <div class="trendAnalysis_header">
-    <div class="trendAnalysis_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+    <div class="trendAnalysis_back"  @click="changeRouter('index4renmintj')"></div>
   </div>
   <div class="trendAnalysis_nav">
     <span class="trendAnalysis_nav_span">首页 > 趋势分析</span>

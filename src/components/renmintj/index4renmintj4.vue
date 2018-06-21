@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-20 16:16:21
+ * @Last Modified time: 2018-06-21 09:31:09
  * @content: echarts 二维地理坐标系 动态散点 时间轴
  */
 <template>
@@ -89,7 +89,7 @@
               <span class='td'>简述</span>
             </div>
             <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
-              <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index">
+              <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index" @click="changeRouter('importantEventDetail',item.id)">
                <span class='td'>{{item.xuHao}}</span>
                <span class='td'>{{item.shiJianLX}}</span>
                <span class='td'>{{item.riQi}}</span>
@@ -221,8 +221,12 @@ export default {
       this.myChart[domName].setOption(option)
     },
     // 路由跳转
-    changeRouter (name) {
-      this.$router.push({name: name})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'importantEventDetail') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
     },
     getData () {
       let vue = this
@@ -551,6 +555,9 @@ export default {
   .renmintj_table_thead{
     color:rgba(17,148,248,1);
     line-height:42px;
+  }
+  .renmintj_table_tr {
+    cursor: pointer;
   }
   .renmintj_table_tr:nth-of-type(2n-1){
     background: rgba(7,30,74,0.8)

@@ -1,7 +1,7 @@
 <template>
   <div id='businessTypes' class='shade'>
     <div class="businessTypes_header">
-      <div class="businessTypes_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+      <div class="businessTypes_back" @click="changeRouter('index4renmintj')"></div>
     </div>
     <div class="businessTypes_nav">
       <span class="businessTypes_nav_span">首页 > 业务类型</span>

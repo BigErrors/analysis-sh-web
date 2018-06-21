@@ -1,17 +1,17 @@
 <template>
   <div id='peopleSearch' class='shade'>
-    <div class="businessNum_header">
-      <div class="businessNum_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+    <div class="peopleSearch_header">
+      <div class="peopleSearch_back" @click="changeRouter('index4renmintj')"></div>
     </div>
-    <div class="businessNum_nav">
-      <span class="businessNum_nav_span">首页 > 调解员画像分析</span>
+    <div class="peopleSearch_nav">
+      <span class="peopleSearch_nav_span">首页 > 调解员画像分析</span>
     </div>
-    <div class="businessNum_nav2">
-      <span class="businessNum_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
-      <span class="businessNum_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
-      <span class="businessNum_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
+    <div class="peopleSearch_nav2">
+      <span class="peopleSearch_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
+      <span class="peopleSearch_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
+      <span class="peopleSearch_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
     </div>
-    <div class="businessNum_content mediators-info">
+    <div class="peopleSearch_content mediators-info">
       <div class="mediators_container">
         <div class = "mediators_filter">
           <div class="sortLeft">
@@ -442,7 +442,7 @@ export default {
     background-color: #0b1740;
   }
 
-  .businessNum_header {
+  .peopleSearch_header {
     width: 100%;
     min-width: 1920px;
     height: 87px;
@@ -453,7 +453,7 @@ export default {
     position: relative;
   }
 
-  .businessNum_back {
+  .peopleSearch_back {
     background: url('/static/renmintj/btn_back.png');
     position: absolute;
     left: 22px;
@@ -464,7 +464,7 @@ export default {
     cursor: pointer;
   }
 
-  .businessNum_nav {
+  .peopleSearch_nav {
     height: 24px;
     margin: 6px 0 20px 0;
     padding-left: 34px;
@@ -472,19 +472,19 @@ export default {
     box-sizing: border-box;
   }
 
-  .businessNum_nav_span {
+  .peopleSearch_nav_span {
     font-size: 18px;
     font-family: HiraginoSansGB-W3;
     color: rgba(94, 126, 203, 1);
   }
 
-  .businessNum_nav2 {
+  .peopleSearch_nav2 {
     margin-left: 34px;
     border-bottom: 1px solid rgba(15, 59, 186, 1);
     display: inline-block;
   }
 
-  .businessNum_nav2_span {
+  .peopleSearch_nav2_span {
     font-size: 20px;
     font-family: HiraginoSansGB-W3;
     padding-bottom: 10px;
@@ -495,12 +495,12 @@ export default {
     color: rgba(94, 126, 203, 1);
   }
 
-  .businessNum_nav2 .active {
+  .peopleSearch_nav2 .active {
     color: rgba(255, 198, 0, 1);
     border-bottom: 3px solid rgba(255, 198, 0, 1);
   }
 
-  .businessNum_content {
+  .peopleSearch_content {
     width: 100%;
     height: 903px;
     box-sizing: border-box;

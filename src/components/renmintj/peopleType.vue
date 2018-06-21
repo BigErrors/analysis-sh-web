@@ -1,7 +1,7 @@
 <template>
 <div id='peopleType' class='shade'>
   <div class="peopleType_header">
-    <div class="peopleType_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+    <div class="peopleType_back"  @click="changeRouter('index4renmintj')"></div>
   </div>
   <div class="peopleType_nav">
     <span class="peopleType_nav_span">首页 > 调解员类型分析</span>

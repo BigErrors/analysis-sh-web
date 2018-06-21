@@ -1,7 +1,7 @@
 <template>
 <div id='importantEvent' class='shade'>
   <div class="importantEvent_header">
-    <div class="importantEvent_back"  @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+    <div class="importantEvent_back"  @click="changeRouter('index4renmintj')"></div>
   </div>
   <div class="importantEvent_nav">
     <span class="importantEvent_nav_span">首页 > 重点事件</span>
@@ -84,7 +84,7 @@
             <span class='td'>{{item.riqi}}</span>
             <span class='td'>{{item.jianshu}}</span>
             <span class='td'>{{item.zhuangtai}}</span>
-            <span class='td detail'><span>详情</span></span>
+            <span class='td detail'><span @click="changeRouter('importantEventDetail',item.id)">详情</span></span>
           </div>
         </rollScreen>
       </div>
@@ -134,8 +134,12 @@ export default {
       }, 5000)
     },
     // 路由跳转
-    changeRouter (name) {
-      this.$router.push({name: name})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'importantEventDetail') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
     },
     getData () {
       let vue = this

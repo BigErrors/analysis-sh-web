@@ -1,7 +1,7 @@
 <template>
   <div id='institutionRanking' class='shade'>
     <div class="institutionRanking_header">
-      <div class="institutionRanking_back" @click="changeRouter('index4renmintj')" style="cursor: pointer;"></div>
+      <div class="institutionRanking_back" @click="changeRouter('index4renmintj')"></div>
     </div>
     <div class="institutionRanking_nav">
       <span class="institutionRanking_nav_span">首页 > 机构排名</span>
