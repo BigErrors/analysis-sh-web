@@ -106,7 +106,7 @@ export default {
   data () {
     return {
       myChart: {},
-      type: '人民调解',
+      type: '公共法律服务',
       statistics: {
         year: 0,
         month: 0,
@@ -223,7 +223,9 @@ export default {
       })
       url = '/caseCount_Down_CaseDist'
       http.get(baseUrl + url, reqParam, (data) => {
-        vue.$nextTick(function () {
+        if (data.length === 0) {
+          data = [{name: '暂无数据', value: 0}]
+        } else {
           data = data.sort((a, b) => {
             if (parseInt(a.value) >= parseInt(b.value)) {
               return 1
@@ -231,19 +233,46 @@ export default {
               return -1
             }
           }).splice(0, 10)
+        }
+        vue.$nextTick(function () {
           vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
         })
       })
       url = '/caseCount_Down_3'
       http.get(baseUrl + url, reqParam, (data) => {
+        if (vue.type === '公共法律服务') {
+          data = data.value
+        }
+        if (data.length === 0) {
+          data = [{name: '暂无数据', value: 0}]
+        }
         vue.$nextTick(function () {
-          vue.draw('target5', eos.setPie3(data))
+          if (vue.type === '人民调解') {
+            vue.draw('target5', eos.setPie3(data))
+          } else if (vue.type === '110联动') {
+            vue.draw('target5', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false))
+          } else if (vue.type === '公共法律服务') {
+            vue.draw('target5', eos.setLine6(data, 'integer'))
+          } else if (vue.type === '纠纷排查') {
+            vue.draw('target5', eos.setPie3(data))
+          }
         })
       })
       url = '/caseCount_Down_4'
       http.get(baseUrl + url, reqParam, (data) => {
+        if (data.length === 0) {
+          data = [{name: '暂无数据', value: 0}]
+        }
         vue.$nextTick(function () {
-          vue.draw('target6', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer'))
+          if (vue.type === '人民调解') {
+            vue.draw('target6', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false, 30))
+          } else if (vue.type === '110联动') {
+            vue.draw('target6', eos.setPie3(data))
+          } else if (vue.type === '公共法律服务') {
+            vue.draw('target2', eos.setPie2(data))
+          } else if (vue.type === '纠纷排查') {
+            vue.draw('target6', eos.setPie3(data))
+          }
         })
       })
     }

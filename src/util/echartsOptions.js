@@ -223,7 +223,7 @@ let setBar2 = (data) => {
 }
 
 // 柱图
-let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis) => {
+let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
   barMaxWidth = barMaxWidth || 43
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
@@ -276,6 +276,8 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     },
     axisLabel: {
       color: '#4D84FE',
+      interval: 0,
+      rotate: rotate || 0,
       fontSize: 15,
       formatter: function (value) {
         if (value.length <= 6) {
@@ -296,7 +298,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     grid: {
-      containLabel: true
+      containLabel: axisType === 'horizon'
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -372,7 +374,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
 }
 
 // 柱图
-let setBar4 = (data, color) => {
+let setBar4 = (data) => {
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
   let valueAxis = [{
@@ -1071,13 +1073,20 @@ let setLine6 = (data, dataType, title) => {
     },
     color: ['#30FF8D'],
     title: {
-      show: true,
+      show: function () { if (title !== undefined) { return true } else { return false } },
       left: '10%',
-      text: title || '标题',
+      text: title,
       textStyle: {
         color: '#FFC600',
         fontSize: 18
       }
+    },
+    tooltip: {
+      show: true,
+      trigger: 'item',
+      position: 'right',
+      formatter: '{c}',
+      backgroundColor: '#FFB20C'
     },
     xAxis: {
       type: 'category',
@@ -1121,6 +1130,7 @@ let setLine6 = (data, dataType, title) => {
     series: [{
       name: 'seriesname',
       type: 'line',
+      smooth: true,
       symbol: 'circle',
       symbolSize: 8,
       lineStyle: {
