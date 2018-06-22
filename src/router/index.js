@@ -2,21 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import mapApp from '@/components/mapApp'
 import login from '@/components/login'
-import m110 from '@/components/mockpages/110'
-import mfalvzx from '@/components/mockpages/falvzx'
-import mrenmintj from '@/components/mockpages/renmintj'
-import mzhongdianjg from '@/components/mockpages/zhongdianjg'
-import mzhongdianry from '@/components/mockpages/zhongdianry'
-import mzhongdiansj from '@/components/mockpages/zhongdiansj'
 import moduleChoose from '@/components/moduleChoose'
 import modelSupermarket from '@/components/modelSupermarket'
 import modelDataApp from '@/components/modelDataApp'
 import index4renmintj from '@/components/renmintj/index4renmintj4'
 import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
-import peopleSearch from '@/components/renmintj/peopleSearch2'
+import peopleSearch from '@/components/renmintj/peopleSearch'
 import peoplePortrait from '@/components/renmintj/peoplePortrait'
-import businessNum from '@/components/renmintj/businessNum2'
+import businessNum from '@/components/renmintj/businessNum'
 import businessTypes from '@/components/renmintj/businessTypes'
 import importantEvent from '@/components/renmintj/importantEvent'
 import importantEventDetail from '@/components/renmintj/importantEventDetail'
@@ -41,36 +35,6 @@ const router = new Router({
       path: '/mapApp',
       name: 'mapApp',
       component: mapApp
-    },
-    {
-      path: '/110',
-      name: '110',
-      component: m110
-    },
-    {
-      path: '/falvzx',
-      name: 'falvzx',
-      component: mfalvzx
-    },
-    {
-      path: '/renmintj',
-      name: 'renmintj',
-      component: mrenmintj
-    },
-    {
-      path: '/zhongdianjg',
-      name: 'zhongdianjg',
-      component: mzhongdianjg
-    },
-    {
-      path: '/zhongdianry',
-      name: 'zhongdianry',
-      component: mzhongdianry
-    },
-    {
-      path: '/zhongdiansj',
-      name: 'zhongdiansj',
-      component: mzhongdiansj
     }, {
       path: '/moduleChoose',
       name: 'moduleChoose',
