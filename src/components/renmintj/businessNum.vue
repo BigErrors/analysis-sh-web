@@ -254,7 +254,7 @@ export default {
           } else if (vue.type === '公共法律服务') {
             vue.draw('target5', eos.setLine6(data, 'integer'))
           } else if (vue.type === '纠纷排查') {
-            vue.draw('target5', eos.setPie3(data))
+            vue.draw('target5', eos.setPie2(data))
           }
         })
       })
