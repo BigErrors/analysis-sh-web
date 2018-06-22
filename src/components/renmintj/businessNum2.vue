@@ -43,17 +43,16 @@
             <span class="businessNum_content_span1">类型</span>
           </div>
           <div class=" businessNum_content_title_right">
-          <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='本周'?true:false}" @click="timeType='本周'">本周</span>
-          <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='本月'?true:false}" @click="timeType='本月'">本月</span>
-          <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='今年'?true:false}" @click="timeType='今年'">今年</span>
+            <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='month'?true:false}" @click="timeType='month'">本月</span>
+            <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='year'?true:false}" @click="timeType='year'">今年</span>
           </div>
         </div>
         <div class='target2'></div>
         <div class="businessNum_detail">
           <div class="businessNum_detail_main">
             <div class="businessNum_detail_title">{{type2Title}}</div>
-            <div class="businessNum_detail_content" v-for="(item,index) in type2" :key="index" @click="setType3Data(item.name)">
-              <span class="businessNum_detail_span1">{{item.name}}</span>
+            <div class="businessNum_detail_content" v-for="(item,index) in table" :key="index" @click="setType3Data(item.type2)">
+              <span class="businessNum_detail_span1">{{item.type2}}</span>
               <span class="businessNum_detail_span2">{{item.value}}</span>
             </div>
           </div>
@@ -96,14 +95,12 @@
 <script>
 import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
-import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import json from '@/util/json'
 
 export default {
   name: 'businessNum',
   components: {
-    rollScreen,
     digitalRolling
   },
   data () {
@@ -112,42 +109,26 @@ export default {
       type: '人民调解',
       statistics: {
         year: 0,
+        month: 0,
         day: 0
       },
-      numData: {
-        arenmintj: {},
-        a110: {},
-        afalvfw: {},
-        ajiufenpc: {}
-      },
-      timeType: '今年',
-      typeData: {},
+      timeType: 'year',
+      pieData: [],
+      tableData: [],
+      lineData: [],
       type2Title: '',
-      type2: [],
-      barData: {
-        arenmintj: [],
-        a110: [],
-        afalvfw: [],
-        ajiufenpc: []
-      },
-      table: {
-        zhongdiansj: [],
-        dLength: 0,
-        lineNum: 0
-      },
-      sourceData: [],
-      keyMap: {'人民调解': 'arenmintj', '110联动': 'a110', '公共法律服务': 'afalvfw', '纠纷排查': 'ajiufenpc'},
-      keyMap2: {'人民调解': 'source_rmtj', '110联动': 'source_110', '公共法律服务': 'source_jc', '纠纷排查': 'source_pc'},
+      table: [],
+      keyMap: {'人民调解': 'MBM_CASE', '110联动': 'MMS_ALARM110INFO', '公共法律服务': 'WWS_CONSULT', '纠纷排查': 'CDS_INVESTIGATIONFEEDBAC'},
       area: json.area,
       areaDefault: ['SHJCK01000']
     }
   },
   watch: {
     type: function (newValue, oldValue) {
-      this.statistics = this.numData[this.keyMap[newValue]]
-      this.setTypeData()
-      this.draw('target4', eos.setBar3(this.barData[this.keyMap[newValue]], ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
-      this.draw('target5', eos.setPie3(this.sourceData[this.keyMap2[newValue]]))
+      this.getData()
+    },
+    areaDefault: function (newValue, oldValue) {
+      this.getData()
     },
     timeType: function (newValue, oldValue) {
       this.setTypeData()
@@ -172,134 +153,97 @@ export default {
       this.$router.push({name: name})
     },
     setTypeData () {
-      this.draw('target2', eos.setPie2(this.dataFormatter3(this.typeData[this.type][this.timeType])))
-      this.type2Title = '民事纠纷'
-      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
+      let vue = this
+      let data = []
+      vue.pieData.map(item => {
+        if (vue.timeType === item.timetype) {
+          data.push({name: item.type1, value: parseInt(item.value)})
+        }
+      })
+      if (data.length > 0) {
+        data = data.sort((a, b) => {
+          if (a.value >= b.value) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+        vue.draw('target2', eos.setPie2(data))
+        vue.setType2Data(data[0].name)
+      } else {
+        vue.draw('target2', eos.setPie2([{name: '暂无数据', value: 0}]))
+        vue.type2Title = '暂无数据'
+        vue.table = [{type2: '暂无数据', value: 0}]
+        vue.draw('target3', eos.setLine6([{name: '暂无数据', value: 0}], 'integer'))
+      }
     },
     setType2Data (type) {
-      this.type2Title = type
-      this.type2 = this.dataFormatter4(this.typeData[this.type][this.timeType][this.type2Title])
+      let vue = this
+      vue.type2Title = type
+      vue.table = vue.tableData.filter(item => {
+        if (vue.timeType === item.timetype && vue.type2Title === item.type1) {
+          return item
+        }
+      })
+      vue.setType3Data(vue.table[0].type2)
     },
     setType3Data (type) {
-      this.$notify.success(`时间:${this.timeType},类别:${this.type},一级分类:${this.type2Title},二级分类:${type}`)
-    },
-    dataFormatter (data) {
-      // 声明空对象
-      let tempObj = {}
-      // 声明空数组，用于存储类别
-      let typeList = []
-      data.map(item => {
-        tempObj[item.name] = item.value
-        // 存储筛选类别
-        if (item.name.split('_day').length > 1) {
-          typeList.push(item.name.split('_day')[0])
-        }
-      })
-      let typeObj = {}
-      // 对临时对象中的数据按照类别分类, 存储在新的对象中
-      typeList.map(item => {
-        typeObj[item] = {year: tempObj[item], day: tempObj[item + '_day']}
-      })
-      return typeObj
-    },
-    dataFormatter2 (data) {
-      //  声明空数组
-      let tempList = []
-      // 将对象{'闸北': '123','徐汇':'456'}转成数组[{name: '闸北',value: 123},{name: '徐汇',value: 123}]
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          tempList.push({name: key, value: parseInt(data[key])})
-        }
-      }
-      // 对数组进行排序
-      tempList.sort((item1, item2) => {
-        if (item1.value < item2.value) {
-          return 1
-        }
-        if (item1.value > item2.value) {
-          return -1
-        }
-        return 0
-      })
-      // 返回处理好的数据(top10)
-      return tempList.splice(0, 10).reverse()
-    },
-    dataFormatter3 (data) {
-      //  声明空数组
-      let tmpList = []
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          tmpList.push({name: key, value: parseInt(data[key]['总数'])})
-        }
-      }
-      return tmpList
-    },
-    dataFormatter4 (data) {
-      //  声明空数组
-      let tmpList = []
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          if (key !== '总数') {
-            tmpList.push({name: key, value: parseInt(data[key])})
-          }
-        }
-      }
-      return tmpList
-    },
-    dataFormatter5 (data) {
-      // 声明空对象
-      let tmpObj = {}
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          tmpObj[key] = data[key].map((item) => {
-            return {name: item.source, value: item.number}
+      let vue = this
+      let data = []
+      vue.lineData.map(item => {
+        if (vue.timeType === item.timetype && vue.type2Title === item.type1 && type === item.type2) {
+          data = item.value.sort((a, b) => {
+            if (parseInt(a.name) >= parseInt(b.name)) {
+              return 1
+            } else {
+              return -1
+            }
           })
         }
-      }
-      return tmpObj
+      })
+      vue.draw('target3', eos.setLine6(data, 'integer', type))
+      // this.$notify.success(`时间:${this.timeType},类别:${this.type},一级分类:${this.type2Title},二级分类:${type}`)
     },
     getData () {
       let vue = this
-      let reqParam = {area: this.areaDefault[0]}
+      let reqParam = {area: this.areaDefault[0], biaoming: this.keyMap[this.type]}
       let baseUrl = '/peopleMediate/V1.0.0.2'
       let url = ''
-      url = '/peopleMediate/ywsj_casestatistics_count'
+      url = '/caseCount_Down_CaseType'
       http.get(baseUrl + url, reqParam, (data) => {
-        let newData = vue.dataFormatter(data)
-        vue.numData.arenmintj = newData.mbm_case_count
-        vue.numData.a110 = newData.mms_alarm110info_count
-        vue.numData.afalvfw = newData.wws_consult_count
-        vue.numData.ajiufenpc = newData.cds_invest_count
-        // 初始化渲染
-        vue.statistics = vue.numData.arenmintj
-      })
-      url = '/peopleMediate/ywsj_casecount_down_detial_2'
-      http.get(baseUrl + url, reqParam, (data) => {
-        vue.barData.arenmintj = vue.dataFormatter2(data.mbm_case_count_sql)
-        vue.barData.a110 = vue.dataFormatter2(data.mms_alarm110info_count_sql)
-        vue.barData.afalvfw = vue.dataFormatter2(data.wws_consult_count_sql)
-        vue.barData.ajiufenpc = vue.dataFormatter2(data.cds_invest_count_sql)
-        // 初始化渲染
-        vue.$nextTick(function () {
-          vue.draw('target3', eos.setLine6(vue.barData.arenmintj, 'integer'))
-          vue.draw('target4', eos.setBar3(vue.barData.arenmintj, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
-          vue.draw('target6', eos.setBar3(vue.barData.arenmintj, ['#F8E228', '#FF9C00'], 'vertical', 'integer'))
-        })
-      })
-      url = '/peopleMediate/ywsj_casecount_down_detial_1'
-      http.get(baseUrl + url, reqParam, (data) => {
-        vue.typeData = data
-        // 初始化渲染
+        vue.statistics.year = data.year
+        vue.statistics.month = data.month
+        vue.statistics.day = data.day
+        vue.pieData = data.pie
+        vue.tableData = data.table
+        vue.lineData = data.line
         vue.$nextTick(function () {
           vue.setTypeData()
         })
       })
-      url = '/peopleMediate/YewuslSource'
+      url = '/caseCount_Down_CaseDist'
       http.get(baseUrl + url, reqParam, (data) => {
-        vue.sourceData = vue.dataFormatter5(data)
-        // 初始化渲染
         vue.$nextTick(function () {
-          vue.draw('target5', eos.setPie3(vue.sourceData[vue.keyMap2[vue.type]]))
+          data = data.sort((a, b) => {
+            if (parseInt(a.value) >= parseInt(b.value)) {
+              return 1
+            } else {
+              return -1
+            }
+          }).splice(0, 10)
+          vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+        })
+      })
+      url = '/caseCount_Down_3'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.$nextTick(function () {
+          vue.draw('target5', eos.setPie3(data))
+        })
+      })
+      url = '/caseCount_Down_4'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.$nextTick(function () {
+          vue.draw('target6', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer'))
         })
       })
     }

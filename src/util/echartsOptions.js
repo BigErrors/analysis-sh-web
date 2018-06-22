@@ -1064,12 +1064,21 @@ let setLine5 = (data, callback) => {
 }
 
 // 折线图
-let setLine6 = (data, dataType) => {
+let setLine6 = (data, dataType, title) => {
   let option = {
     grid: {
       containLabel: false
     },
     color: ['#30FF8D'],
+    title: {
+      show: true,
+      left: '10%',
+      text: title || '标题',
+      textStyle: {
+        color: '#FFC600',
+        fontSize: 18
+      }
+    },
     xAxis: {
       type: 'category',
       axisLine: {
