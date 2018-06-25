@@ -47,39 +47,6 @@ export default {
     height: 100%;
   }
 
-  /* 分页相关 */
-
-  .ej-pagination .el-pager li.number,
-  .ej-pagination .btn-prev,
-  .ej-pagination .btn-next {
-    border-radius: 50% !important;
-  }
-
-  .ej-pagination .el-pager li.number:not(.active),
-  .ej-pagination .btn-prev,
-  .ej-pagination .btn-next,
-  .ej-pagination .el-icon-more {
-    background-color: rgba(255, 255, 255, 0) !important;
-    color: rgba(190, 222, 251, 1);
-  }
-
-  .ej-pagination .el-pager li.number.active {
-    background: rgba(21, 123, 211, 1);
-    color: rgba(254, 254, 254, 1);
-  }
-
-  .ej-pagination .el-icon-more:before {
-    font-size: 12px;
-  }
-
-  .ej-pagination .el-pagination {
-    bottom: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 12px !important;
-    font-weight: 400;
-  }
-
   /* 去除百度地图左下角内容 */
 
   .BMap_cpyCtrl {
@@ -98,17 +65,17 @@ export default {
   }
 
   .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(94, 126, 203, 1);
+    color: rgba(94, 126, 203, 1) !important;
   }
 
   .el-input--suffix .el-input__inner {
-    background: rgba(8, 79, 211, 0.2);
-    font-size: 16px;
-    border: rgba(123, 149, 246, 0.98);
+    background: rgba(8, 79, 211, 0.2) !important;
+    font-size: 16px !important;
+    border: rgba(123, 149, 246, 0.98) !important;
   }
 
   .el-cascader-menu {
-    background: rgba(1, 24, 84, 0.98);
+    background: rgba(1, 24, 84, 0.98) !important;
   }
 
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
@@ -155,13 +122,13 @@ export default {
   }
 
   .el-table::before {
-    height: 0;
+    height: 0 !important;
   }
   .el-table th{
-    color: #7EBCFD;
+    color: #7EBCFD !important;
   }
   .el-table tr{
-    color: #DFF1FF;
+    color: #DFF1FF !important;
   }
   .el-table th, .el-table tr {
     background: rgba(0, 0, 0, 0) !important;
