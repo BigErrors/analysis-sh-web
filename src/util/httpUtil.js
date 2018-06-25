@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-21 17:10:42
+ * @Last Modified time: 2018-06-25 11:54:34
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
