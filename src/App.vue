@@ -176,58 +176,58 @@ export default {
   }
 
   .el-table td {
-    text-align: center;
-    border-bottom: 1px;
+    text-align: center !important;
+    border-bottom: 1px !important;
   }
    .el-table th.is-leaf {
-    text-align: center;
-    border-bottom: 1px dashed #D5D1D1;
+    text-align: center !important;
+    border-bottom: 1px dashed #D5D1D1 !important;
   }
 
   .el-table td .cell {
     text-overflow: ellipsis !important;
-    overflow: hidden;
-    white-space: nowrap;
+    overflow: hidden !important;
+    white-space: nowrap !important;
   }
 
   ::-webkit-scrollbar{
-    width: 6px;
-    background-color: rgba(1, 24, 84, 0)
+    width: 6px !important;
+    background-color: rgba(1, 24, 84, 0) !important;
   }
   ::-webkit-scrollbar-thumb {
-    height: 20px;
-    border-radius: 2px;
-    background-color: #dedfe0;
+    height: 20px !important;
+    border-radius: 2px !important;
+    background-color: #dedfe0 !important;
   }
 
   .el-pagination {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
   }
   .el-pager li {
-    background: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0) !important;
   }
   .el-pagination .btn-next, .el-pagination .btn-prev{
-    background: center center no-repeat rgba(255, 255, 255, 0);
-    border: 1px solid #BDBDBD;
-    border-radius: 28px;
+    background: center center no-repeat rgba(255, 255, 255, 0) !important;
+    border: 1px solid #BDBDBD !important;
+    border-radius: 28px !important;
   }
   .el-pager li.active {
-    color: #FEFEFE;
-    cursor: default;
-    border-radius: 28px;
-    background: #409EFF;
+    color: #FEFEFE !important;
+    cursor: default !important;
+    border-radius: 28px !important;
+    background: #409EFF !important;
   }
   .el-pagination .btn-next, .el-pagination .btn-prev {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
   }
   .el-pagination button:disabled {
-    color: #FFFFFF;
-    background-color: rgba(255, 255, 255, 0);
-    cursor: not-allowed;
+    color: #FFFFFF !important;
+    background-color: rgba(255, 255, 255, 0) !important;
+    cursor: not-allowed !important;
   }
   .el-pagination__total {
-    margin: 0 20px;
-    font-weight: 400;
-    color: #FFFFFF;
+    margin: 0 20px !important;
+    font-weight: 400 !important;
+    color: #FFFFFF !important;
   }
 </style>
