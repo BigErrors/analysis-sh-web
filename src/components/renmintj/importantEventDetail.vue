@@ -396,7 +396,6 @@ export default {
   created: function () {
     let _this = this
     http.get('/peopleMediate/ZdsjUnderDetails', {id: _this.$route.params.id}, (res) => {
-      console.log(res)
       _this.eventDetail = res
       _this.anJanCLRY = res.anJanCLRY
       for (let i = 0; i < 3; i++) {
