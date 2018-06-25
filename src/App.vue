@@ -30,39 +30,48 @@ export default {
     overflow-y: auto;
     overflow-x: hidden;
   }
+
   html,
-  body::-webkit-scrollbar{
+  body::-webkit-scrollbar {
     width: 4px;
     background-color: #ffffff;
   }
+
   html,
-  body::-webkit-scrollbar-thumb{
-    background:#ebeaee;
-    border-radius:4px;
+  body::-webkit-scrollbar-thumb {
+    background: #ebeaee;
+    border-radius: 4px;
   }
+
   #App {
     height: 100%;
   }
+
   /* 分页相关 */
+
   .ej-pagination .el-pager li.number,
   .ej-pagination .btn-prev,
   .ej-pagination .btn-next {
     border-radius: 50% !important;
   }
+
   .ej-pagination .el-pager li.number:not(.active),
   .ej-pagination .btn-prev,
   .ej-pagination .btn-next,
   .ej-pagination .el-icon-more {
-    background-color: rgba(255,255,255,0) !important;
-    color:rgba(190,222,251,1);
+    background-color: rgba(255, 255, 255, 0) !important;
+    color: rgba(190, 222, 251, 1);
   }
-  .ej-pagination .el-pager li.number.active{
-    background:rgba(21,123,211,1);
-    color:rgba(254,254,254,1);
+
+  .ej-pagination .el-pager li.number.active {
+    background: rgba(21, 123, 211, 1);
+    color: rgba(254, 254, 254, 1);
   }
+
   .ej-pagination .el-icon-more:before {
     font-size: 12px;
   }
+
   .ej-pagination .el-pagination {
     bottom: 40px;
     text-align: center;
@@ -70,64 +79,155 @@ export default {
     font-size: 12px !important;
     font-weight: 400;
   }
+
   /* 去除百度地图左下角内容 */
+
   .BMap_cpyCtrl {
     display: none;
   }
-  .anchorBL{
-    display:none;
+
+  .anchorBL {
+    display: none;
   }
-.el-cascader__label{
-font-size:16px;
-font-family:HiraginoSansGB-W3;
-color:rgba(94,126,203,1);
-border-radius: 2px;
-}
-.el-input--suffix .el-input__inner::-webkit-input-placeholder{
-color:rgba(94,126,203,1);
-}
-.el-input--suffix .el-input__inner{
-background:rgba(8,79,211,0.2);
-font-size:16px;
-border: rgba(123,149,246,0.98);
-}
-.el-cascader-menu{
-background:rgba(1,24,84,0.98);
-}
-/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-::-webkit-scrollbar
-{
-width: 4px;
-background-color: rgba(1,24,84,1);
-}
-/*定义滚动条轨道 内阴影+圆角*/
-::-webkit-scrollbar-track
-{
-border-radius: 2px;
-background-color: transparent;
-}
 
-/*定义滑块 内阴影+圆角*/
-::-webkit-scrollbar-thumb
-{
-height: 4px;
-border-radius: 2px;
-background-color: #dedfe0;
-}
+  .el-cascader__label {
+    font-size: 16px;
+    font-family: HiraginoSansGB-W3;
+    color: rgba(94, 126, 203, 1);
+    border-radius: 2px;
+  }
 
-.clearfix:after{
-    content:'';
-    display:block;
-    width:0;
-    clear:both
-}
+  .el-input--suffix .el-input__inner::-webkit-input-placeholder {
+    color: rgba(94, 126, 203, 1);
+  }
+
+  .el-input--suffix .el-input__inner {
+    background: rgba(8, 79, 211, 0.2);
+    font-size: 16px;
+    border: rgba(123, 149, 246, 0.98);
+  }
+
+  .el-cascader-menu {
+    background: rgba(1, 24, 84, 0.98);
+  }
+
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    background-color: rgba(1, 24, 84, 1);
+  }
+
+  /*定义滚动条轨道 内阴影+圆角*/
+
+  ::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background-color: transparent;
+  }
+
+  /*定义滑块 内阴影+圆角*/
+
+  ::-webkit-scrollbar-thumb {
+    height: 4px;
+    border-radius: 2px;
+    background-color: #dedfe0;
+  }
+
+  .clearfix:after {
+    content: '';
+    display: block;
+    width: 0;
+    clear: both
+  }
 
   .businessNumCityList .el-input--suffix .el-input__inner {
-    background: rgba(8,79,211,0) !important;
+    background: rgba(8, 79, 211, 0) !important;
     border: 0 !important;
   }
+
   .businessNumCityList .el-cascader__label {
     font-size: 35px !important;
     color: #FDC91C !important;
+  }
+
+  .el-table {
+    background: rgba(0, 0, 0, 0) !important;
+  }
+
+  .el-table::before {
+    height: 0;
+  }
+  .el-table th{
+    color: #7EBCFD;
+  }
+  .el-table tr{
+    color: #DFF1FF;
+  }
+  .el-table th, .el-table tr {
+    background: rgba(0, 0, 0, 0) !important;
+  }
+
+  .el-table tr:nth-of-type(2n){
+    background: rgba(7,30,74,0.8) !important;
+  }
+
+  .el-table--enable-row-hover .el-table__body tr:hover>td {
+    background: rgba(0, 0, 0, 0) !important;
+  }
+
+  .el-table td {
+    text-align: center;
+    border-bottom: 1px;
+  }
+   .el-table th.is-leaf {
+    text-align: center;
+    border-bottom: 1px dashed #D5D1D1;
+  }
+
+  .el-table td .cell {
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  ::-webkit-scrollbar{
+    width: 6px;
+    background-color: rgba(1, 24, 84, 0)
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 20px;
+    border-radius: 2px;
+    background-color: #dedfe0;
+  }
+
+  .el-pagination {
+    color: #FFFFFF;
+  }
+  .el-pager li {
+    background: rgba(255, 255, 255, 0);
+  }
+  .el-pagination .btn-next, .el-pagination .btn-prev{
+    background: center center no-repeat rgba(255, 255, 255, 0);
+    border: 1px solid #BDBDBD;
+    border-radius: 28px;
+  }
+  .el-pager li.active {
+    color: #FEFEFE;
+    cursor: default;
+    border-radius: 28px;
+    background: #409EFF;
+  }
+  .el-pagination .btn-next, .el-pagination .btn-prev {
+    color: #FFFFFF;
+  }
+  .el-pagination button:disabled {
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: not-allowed;
+  }
+  .el-pagination__total {
+    margin: 0 20px;
+    font-weight: 400;
+    color: #FFFFFF;
   }
 </style>

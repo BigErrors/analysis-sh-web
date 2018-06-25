@@ -1,52 +1,56 @@
 <template>
-<div id='peoplePortrait' class='shade'>
-  <div class="peoplePortrait_header">
-    <div class="peoplePortrait_back"  @click="changeRouter('index4renmintj')"></div>
-  </div>
-  <div class="peoplePortrait_nav">
-    <span class="peoplePortrait_nav_span">首页 > 调解员画像分析 >详情</span>
-  </div>
-  <div class="peoplePortrait_nav2">
-    <span class="peoplePortrait_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>
-    <span class="peoplePortrait_nav2_span"  @click="changeRouter('peopleType')">属性分析</span>
-    <span class="peoplePortrait_nav2_span active"  @click="changeRouter('peopleSearch')">画像分析</span>
-  </div>
-  <div class="peoplePortrait_content">
-   <div class="peoplePortrait_content_left">
-     <div class="peoplePortrait_content_leftTitle1">
-       <div class="peoplePortrait_content_leftTitle1_name">{{detail.name}}</div>
-       <div class="peoplePortrait_content_leftTitle1_year">{{detail.year + '年'}}</div>
-       <div class="peoplePortrait_content_leftTitle1_phone">{{detail.phone}}</div>
-     </div>
-     <div class="peoplePortrait_content_leftTitle2">
-       <div class="peoplePortrait_content_leftTitle2_address" :title='detail.address'>{{detail.address}}</div>
-     </div>
-     <div class="peoplePortrait_content_leftContent" :style="{background:background}">
-       <canvas  class="peoplePortrait_content_leftContent_canvas" width="184px" height="647px"></canvas>
-     </div>
-   </div>
-   <div class="peoplePortrait_content_right1">
-     <div class="module">
-       <div class="peoplePortrait_content_rightTitle">整体概览</div>
-       <div class="moduleContent">
-         <div class="module1">
-           <div class="module1Item" v-for="(item,index) in detail.info" :key="index"><span class="module1Num">{{item.value}}</span><br><span class="module1Title">{{item.name}}</span></div>
-         </div>
-       </div>
-     </div>
-     <div class="module">
-       <div class="peoplePortrait_content_rightTitle">类型对比</div>
-       <div class="moduleContent module2"></div>
-     </div>
-     <div class="module">
-       <div class="peoplePortrait_content_rightTitle">综合能力</div>
-       <div class="moduleContent module3"></div>
-     </div>
-   </div>
-   <div class="peoplePortrait_content_right2">
-     <div class="peoplePortrait_content_rightTitle">案件列表</div>
-      <div class="moduleContent module4">
-          <div class='renmintj_center_table'>
+  <div id='peoplePortrait' class='shade'>
+    <div class="peoplePortrait_header">
+      <div class="peoplePortrait_back" @click="changeRouter('index4renmintj')"></div>
+    </div>
+    <div class="peoplePortrait_nav">
+      <span class="peoplePortrait_nav_span">首页 > 调解员画像分析 >详情</span>
+    </div>
+    <div class="peoplePortrait_nav2">
+      <span class="peoplePortrait_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
+      <span class="peoplePortrait_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
+      <span class="peoplePortrait_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
+    </div>
+    <div class="peoplePortrait_content">
+      <div class="peoplePortrait_content_left">
+        <div class="peoplePortrait_content_leftTitle1">
+          <div class="peoplePortrait_content_leftTitle1_name">{{detail.name}}</div>
+          <div class="peoplePortrait_content_leftTitle1_year">{{detail.year + '年'}}</div>
+          <div class="peoplePortrait_content_leftTitle1_phone">{{detail.phone}}</div>
+        </div>
+        <div class="peoplePortrait_content_leftTitle2">
+          <div class="peoplePortrait_content_leftTitle2_address" :title='detail.address'>{{detail.address}}</div>
+        </div>
+        <div class="peoplePortrait_content_leftContent" :style="{background:background}">
+          <canvas class="peoplePortrait_content_leftContent_canvas" width="184px" height="647px"></canvas>
+        </div>
+      </div>
+      <div class="peoplePortrait_content_right1">
+        <div class="module">
+          <div class="peoplePortrait_content_rightTitle">整体概览</div>
+          <div class="moduleContent">
+            <div class="module1">
+              <div class="module1Item" v-for="(item,index) in detail.info" :key="index">
+                <span class="module1Num">{{item.value}}</span>
+                <br>
+                <span class="module1Title">{{item.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="module">
+          <div class="peoplePortrait_content_rightTitle">类型对比</div>
+          <div class="moduleContent module2"></div>
+        </div>
+        <div class="module">
+          <div class="peoplePortrait_content_rightTitle">综合能力</div>
+          <div class="moduleContent module3"></div>
+        </div>
+      </div>
+      <div class="peoplePortrait_content_right2">
+        <div class="peoplePortrait_content_rightTitle">案件列表</div>
+        <div class="moduleContent module4">
+          <!-- <div class='renmintj_center_table'>
             <div class="renmintj_table_thead">
               <span class='td'>序号</span>
               <span class='td'>案例名称</span>
@@ -67,11 +71,30 @@
                <span class='td'>{{item.zhonghepf}}</span>
               </div>
             </rollScreen>
-          </div>
+          </div> -->
+          <el-table :data="table.currentList" class="renmintj_center_table" :height="'string'">
+            <el-table-column prop="xuhao" label="序号">
+            </el-table-column>
+            <el-table-column prop="mingcheng" label="案例名称">
+            </el-table-column>
+            <el-table-column prop="shoulisj" label="受理时间">
+            </el-table-column>
+            <el-table-column prop="jieansj" label="结案时间">
+            </el-table-column>
+            <el-table-column prop="tiaojielx" label="调解效率">
+            </el-table-column>
+            <el-table-column prop="wenshuzl" label="文书质量">
+            </el-table-column>
+            <el-table-column prop="zhonghepf" label="综合评分">
+            </el-table-column>
+          </el-table>
+          <el-pagination  class="renmintj_center_pagination" @current-change="handleCurrentChange" :current-page.sync="table.currentPage" :page-size="5"
+            layout="prev, pager, next, total" :total="table.total">
+          </el-pagination>
+        </div>
       </div>
-   </div>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -96,7 +119,11 @@ export default {
       table: {
         dLength: 0,
         lineNum: 0,
-        list: []
+        list: [],
+        currentList: [],
+        total: 0,
+        pageSize: 5,
+        currentPage: 1
       },
       background: ''
     }
@@ -139,12 +166,21 @@ export default {
       http.get(url, reqParam, (data) => {
         [vue.detail.name, vue.detail.year, vue.detail.phone, vue.detail.address, vue.detail.gender, vue.detail.info, vue.table.dLength, vue.table.list, vue.table.lineNum] =
          [data.name, data.gongzuonx, data.dianhauhm, data.tiaojiewyh, data.gender, data.zhengti, data.anjianlb.length, data.anjianlb, 7]
+        vue.table.currentList = vue.table.list.slice(0, 5)
+        vue.table.total = vue.table.list.length
         vue.$nextTick(function () {
           vue.draw('module2', eos.setBar3(data.leixingdb.reverse(), ['#1194F8', '#97D2FF'], 'horizon', 'integer', 21, 'portrait'))
           vue.draw('module3', eos.setRadar2(data.data_polt, data.indicator))
           vue.drawWordcloud2(data.ciyun, data.gender)
         })
       }, 'application/json')
+    },
+    handleCurrentChange (val) {
+      let startIndex = (val - 1) * this.table.pageSize
+      let endIndex = val * this.table.pageSize
+      // console.log('currenrPage:', val)
+      // console.log('startIndex-endIndex:', startIndex + '-' + endIndex)
+      this.table.currentList = this.table.list.slice(startIndex, endIndex)
     }
   },
   created () {
@@ -368,6 +404,7 @@ export default {
   }
   .renmintj_center_table {
     width: 100%;
+    height: 284px;
     padding:0 24px;
     box-sizing:border-box;
     font-size:16px;
@@ -376,7 +413,7 @@ export default {
     width: 100%;
     height: 42px;
   }
-  .renmintj_center_table div span {
+  .renmintj_center_table .td{
     float: left;
     display: block;
     width: 14.2%;
@@ -395,5 +432,9 @@ export default {
   }
   .renmintj_table_tr:nth-of-type(2n-1){
     background: rgba(7,30,74,0.8)
+  }
+  .renmintj_center_pagination{
+    margin-top: 10px;
+    text-align: center;
   }
 </style>
