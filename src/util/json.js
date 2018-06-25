@@ -1,5 +1,5 @@
 let area = [{
-  'label': '全市',
+  'label': '上海市',
   'value': 'SHJCK01000'
 }, {
   'label': '崇明区',

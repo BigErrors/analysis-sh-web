@@ -156,7 +156,11 @@ export default {
         let vue = this
         this.myChart[domName].on('datazoom', function (params) {
           vue.dateRange.start = vue.date[Math.round(params.start / 100 * vue.dateLength)]
-          vue.dateRange.end = vue.date[Math.round(params.end / 100 * vue.dateLength)]
+          let endIndex = Math.round(params.end / 100 * vue.dateLength)
+          // console.log('endIndex', endIndex)
+          // console.log('length', vue.dateLength)
+          endIndex = (endIndex >= vue.dateLength) ? (vue.dateLength - 1) : endIndex
+          vue.dateRange.end = vue.date[endIndex]
         })
       }
     },

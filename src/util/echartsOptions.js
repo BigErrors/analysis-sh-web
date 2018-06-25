@@ -298,7 +298,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     grid: {
-      containLabel: axisType === 'horizon'
+      containLabel: function () { if (axisType === 'horizon') { return true } else { return false } }
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -1343,6 +1343,7 @@ let setPie2 = (data) => {
         name: '调解',
         type: 'pie',
         radius: ['40%', '55%'],
+        avoidLabelOverlap: true,
         label: {
           normal: {
             formatter: '{c|{c}}\n {hr|}\n {b|{b}}',
