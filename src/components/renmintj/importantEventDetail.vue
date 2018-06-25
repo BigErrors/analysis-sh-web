@@ -6,31 +6,32 @@
     <div class="pointDetail_nav">
       <span class="pointDetail_nav_span">首页 > 重点事件 > 详情</span>
     </div>
+    <!-- 处理异步加载数据undefined问题用v-if解决 -->
      <div class="pointDetail_content">
        <div class="pointDetail_content_top">
          <div class="pointDetail_content_topLeft">
             <div class="pointDetail_content_title">
               <div class="pointDetail_content_title_left">重点事件信息</div>
             </div>
-            <div class="pointDetail_content_img">
+            <div v-if="eventDetail.zhongDianSJXX" class="pointDetail_content_img">
               <img class="pointDetail_content_i" src="/static/renmintj/icon_documents.png" />
-              <span class="pointDetail_content_span1">群体性事件</span>
+              <span class="pointDetail_content_span1">{{eventDetail.zhongDianSJXX.zhongDiansjlx}}</span>
             </div>
             <div class="pointDetail_content_line1">
               <label class="pointDetail_content_label">时间：</label>
-              <span class="pointDetail_content_detail1">2018/03/05</span>
+              <span v-if="eventDetail.zhongDianSJXX" class="pointDetail_content_detail1">{{eventDetail.zhongDianSJXX.shiJian}}</span>
               <label class="pointDetail_content_label">地点：</label>
-              <span class="pointDetail_content_detail1">崇明区城桥镇人民路68号</span>
+              <span v-if="eventDetail.zhongDianSJXX" class="pointDetail_content_detail1">{{eventDetail.zhongDianSJXX.diDian}}</span>
             </div>
             <div class="pointDetail_content_line1">
               <label class="pointDetail_content_label">状态：</label>
-              <span class="pointDetail_content_detail1"><span class='pointDetail_content_button'>处理中</span></span>
+              <span v-if="eventDetail.zhongDianSJXX" class="pointDetail_content_detail1"><span class='pointDetail_content_button'>{{eventDetail.zhongDianSJXX.zhuangTai}}</span></span>
               <label class="pointDetail_content_label">类型：</label>
-              <span class="pointDetail_content_detail1">非法占地</span>
+              <span v-if="eventDetail.zhongDianSJXX" class="pointDetail_content_detail1">{{eventDetail.zhongDianSJXX.leiXing}}</span>
             </div>
             <div class="pointDetail_content_line1 clearfix">
               <label class="pointDetail_content_label" style="height:66px;float:left">描述：</label>
-              <div class="pointDetail_content_detail2">乡政府为修建厂房，以建农贸市场的名义，向甲村下发通知，强行占用甲村一块闲置地进行开发建设。甲村村民多次向村委会反映，要求村委会代表村集体，到法院起诉乡政府这一非法占地行为，但村委会拒绝出面起诉乡政府。双方矛盾越来越大，有矛盾加重进行上访的可能性。</div>
+              <div v-if="eventDetail.zhongDianSJXX" class="pointDetail_content_detail2">{{eventDetail.zhongDianSJXX.miaoShu}}</div>
             </div>
             <img class="pointDetail_content_back" src="/static/renmintj/pic_success.png"/>
         </div>
@@ -38,48 +39,24 @@
           <div class="pointDetail_content_title">
             <div class="pointDetail_content_title_left">案件处理人员</div>
             <div class="pointDetail_content_title_right">
-              <img style="margin-right:10px;cursor:pointer" src="/static/renmintj/btn_left.png" />
-              <img style="cursor:pointer" src="/static/renmintj/btn_right.png" />
+              <img @click="changeNum('decrease')" style="margin-right:10px;cursor:pointer" src="/static/renmintj/btn_left.png" />
+              <img @click="changeNum('add')" style="cursor:pointer" src="/static/renmintj/btn_right.png" />
             </div>
           </div>
-          <div class="pointDetail_content_pics" :class="{noNum:true}">
-            <div v-if='false' class="pointDetail_content_pic">
+          <div class="pointDetail_content_pics" :class="{noNum:eventDetail.anJanCLRY&&eventDetail.anJanCLRY.length==0}">
+            <div v-for='(item,index) in anJanCLRYShow' :key='index' class="pointDetail_content_pic">
               <div class="pointDetail_content_head">
                 <img class="pointDetail_content_pic_1" onerror="src='/static/renmintj/mrtx.png'" src=""/>
                 <img class="pointDetail_content_pic_2" src="/static/renmintj/pic_head portrait.png"/>
-                <span class="pointDetail_content_pic_span">调解员</span>
+                <span class="pointDetail_content_pic_span">{{item.anJianCLRYLB}}</span>
               </div>
               <div class="pointDetail_content_body">
-                <span class="pointDetail_content_pic_span2">王芳</span>
-                <span class="pointDetail_content_pic_span3">12578884444</span>
-                <span class="pointDetail_content_pic_span3">光明律师事务所</span>
+                <span class="pointDetail_content_pic_span2">{{item.mingZi}}</span>
+                <span class="pointDetail_content_pic_span3">{{item.dianHua}}</span>
+                <span class="pointDetail_content_pic_span3">{{item.tiaoWeiHMC}}</span>
               </div>
             </div>
-            <div v-if='false' class="pointDetail_content_pic">
-              <div class="pointDetail_content_head">
-                <img class="pointDetail_content_pic_1" onerror="src='/static/renmintj/mrtx.png'" src=""/>
-                <img class="pointDetail_content_pic_2" src="/static/renmintj/pic_head portrait.png"/>
-                <span class="pointDetail_content_pic_span">调解员</span>
-              </div>
-              <div class="pointDetail_content_body">
-                <span class="pointDetail_content_pic_span2">王芳</span>
-                <span class="pointDetail_content_pic_span3">12578884444</span>
-                <span class="pointDetail_content_pic_span3">光明律师事务所</span>
-              </div>
-            </div>
-            <div v-if='false' class="pointDetail_content_pic">
-              <div class="pointDetail_content_head">
-                <img class="pointDetail_content_pic_1" onerror="src='/static/renmintj/mrtx.png'" src=""/>
-                <img class="pointDetail_content_pic_2" src="/static/renmintj/pic_head portrait.png"/>
-                <span class="pointDetail_content_pic_span">调解员</span>
-              </div>
-              <div class="pointDetail_content_body">
-                <span class="pointDetail_content_pic_span2">王芳</span>
-                <span class="pointDetail_content_pic_span3">12578884444</span>
-                <span class="pointDetail_content_pic_span3">光明律师事务所</span>
-              </div>
-            </div>
-            <span v-if='true' class="noNum_span">暂无处理人员</span>
+            <span v-if='eventDetail.anJanCLRY&&eventDetail.anJanCLRY.length==0' class="noNum_span">暂无处理人员</span>
           </div>
         </div>
        </div>
@@ -87,97 +64,37 @@
          <div class="pointDetail_content_bottomLeft">
            <div class="pointDetail_content_title">
               <div class="pointDetail_content_title_left">当事人信息</div>
-              <div style="font-size:14px;color:rgba(125,165,254,1);float:right;line-height:29px">（共7人）</div>
+              <div v-if='eventDetail.dangShiRXX' style="font-size:14px;color:rgba(125,165,254,1);float:right;line-height:29px">（共{{eventDetail.dangShiRXX.length}}人）</div>
             </div>
             <div class="pointDetail_content_ul">
-              <div class="pointDetail_content_li" :class="{height_active:showWhich.indexOf(1)!==-1}">
-                <div class="pointDetail_content_yj">被申请人</div>
+              <div v-for="(item,index) in eventDetail.dangShiRXX" :key='index' class="pointDetail_content_li" :class="{height_active:showWhich.indexOf(index)!==-1}">
+                <div :class="{pointDetail_content_yj:item.dangShiRLB==='被申请人',pointDetail_content_yj2:item.dangShiRLB!=='被申请人'}">{{item.dangShiRLB}}</div>
                 <div class="pointDetail_content_l1">
                   <label class="pointDetail_content_la1">姓名：</label>
-                  <span class="pointDetail_content_s1">王大强</span>
+                  <span class="pointDetail_content_s1">{{item.mingZi}}</span>
                   <label class="pointDetail_content_la1">性别：</label>
-                  <span class="pointDetail_content_s1">男</span>
+                  <span class="pointDetail_content_s1">{{item.xingBie}}</span>
                   <label class="pointDetail_content_la1">户籍：</label>
-                  <span class="pointDetail_content_s1">上海</span>
+                  <span class="pointDetail_content_s1">{{item.huJi}}</span>
                 </div>
                 <div class="pointDetail_content_l1">
                   <label class="pointDetail_content_la1">住址：</label>
-                  <span class="pointDetail_content_s2">上海市闵行区古龙路3号楼2D18-19号</span>
+                  <span class="pointDetail_content_s2">{{item.zhuZhi}}</span>
                 </div>
                 <div class="pointDetail_content_l1">
                   <label class="pointDetail_content_la1">电话：</label>
-                  <span class="pointDetail_content_s2">15555555555</span>
-                  <span v-if='showWhich.indexOf(1)===-1' class="pointDetail_content_ifshow" @click="show(1)">展开</span>
+                  <span class="pointDetail_content_s2">{{item.dianHua}}</span>
+                  <span v-if='showWhich.indexOf(index)===-1' class="pointDetail_content_ifshow" @click="show(index)">展开</span>
                 </div>
                 <div class="pointDetail_content_l1">
                   <label class="pointDetail_content_la1">代理人：</label>
-                  <span class="pointDetail_content_s4">王二强</span>
+                  <span class="pointDetail_content_s4">{{item.daiLiR}}</span>
                    <label class="pointDetail_content_la2">与代理人关系：</label>
-                  <span class="pointDetail_content_s2">兄弟</span>
+                  <span class="pointDetail_content_s2">{{item.yuDangSRGX}}</span>
                 </div>
                 <div class="pointDetail_content_l1">
                   <label class="pointDetail_content_la1">电话：</label>
-                  <span class="pointDetail_content_s2">15555555555</span>
-                </div>
-              </div>
-              <div class="pointDetail_content_li" :class="{height_active:showWhich.indexOf(2)!==-1}">
-                <div class="pointDetail_content_yj2">申请人</div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">姓名：</label>
-                  <span class="pointDetail_content_s1">王大强</span>
-                  <label class="pointDetail_content_la1">性别：</label>
-                  <span class="pointDetail_content_s1">男</span>
-                  <label class="pointDetail_content_la1">户籍：</label>
-                  <span class="pointDetail_content_s1">上海</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">住址：</label>
-                  <span class="pointDetail_content_s2">上海市闵行区古龙路3号楼2D18-19号</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">电话：</label>
-                  <span class="pointDetail_content_s2">15555555555</span>
-                  <span v-if='showWhich.indexOf(2)===-1' class="pointDetail_content_ifshow" @click="show(2)">展开</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">代理人：</label>
-                  <span class="pointDetail_content_s4">王二强</span>
-                   <label class="pointDetail_content_la2">与代理人关系：</label>
-                  <span class="pointDetail_content_s2">兄弟</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">电话：</label>
-                  <span class="pointDetail_content_s2">15555555555</span>
-                </div>
-              </div>
-              <div class="pointDetail_content_li" :class="{height_active:showWhich.indexOf(3)!==-1}">
-                <div class="pointDetail_content_yj2">申请人</div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">姓名：</label>
-                  <span class="pointDetail_content_s1">王大强</span>
-                  <label class="pointDetail_content_la1">性别：</label>
-                  <span class="pointDetail_content_s1">男</span>
-                  <label class="pointDetail_content_la1">户籍：</label>
-                  <span class="pointDetail_content_s1">上海</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">住址：</label>
-                  <span class="pointDetail_content_s2">上海市闵行区古龙路3号楼2D18-19号</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">电话：</label>
-                  <span class="pointDetail_content_s2">15555555555</span>
-                  <span v-if='showWhich.indexOf(3)===-1' class="pointDetail_content_ifshow" @click="show(3)">展开</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">代理人：</label>
-                  <span class="pointDetail_content_s4">王二强</span>
-                   <label class="pointDetail_content_la2">与代理人关系：</label>
-                  <span class="pointDetail_content_s2">兄弟</span>
-                </div>
-                <div class="pointDetail_content_l1">
-                  <label class="pointDetail_content_la1">电话：</label>
-                  <span class="pointDetail_content_s2">15555555555</span>
+                  <span class="pointDetail_content_s2">{{item.daiLiRDH}}</span>
                 </div>
               </div>
             </div>
@@ -186,124 +103,105 @@
             <div class="pointDetail_content_title">
               <div class="pointDetail_content_title_left">案件处理过程</div>
             </div>
-            <div v-if="showNum===7" class="pointDetail_content_stepContainer" >
+            <!-- 人民调解七个步骤 -->
+            <div v-if="eventDetail.anJianCLGC&&eventDetail.anJianCLGC.shuJuY==='人民调解'&&eventDetail.anJianCLGC.buZhouS===7" class="pointDetail_content_stepContainer" >
               <div class="pointDetail_content_imgMain">
                 <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:62px"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:45px"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:110px"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:40px"/>
                 <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:42px"/>
                 <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:43px"/>
                 <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:31px"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:44px"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:35px"/>
               </div>
               <div class="pointDetail_content_stepLeft">
                 <div class="pointDetail_content_stepLeft1">
-                  <span class="pointDetail_content_stepSpan1">待办申请</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
+                  <span class="pointDetail_content_stepSpan2">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,10)}}</span>
                 </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:25px">
-                  <span class="pointDetail_content_stepSpan1">案件受理</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:75px">
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
+                  <span class="pointDetail_content_stepSpan2">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,10)}}</span>
                 </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:25px">
-                  <span class="pointDetail_content_stepSpan1">正在调解</span>
-                </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:0px">
-                  <span class="pointDetail_content_stepSpan1">调解成功</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
-                </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:25px">
-                  <span class="pointDetail_content_stepSpan1">调解协议</span>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:20px">
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
                 </div>
                 <div class="pointDetail_content_stepLeft1" style="margin-top:0px">
-                  <span class="pointDetail_content_stepSpan1">协议归档</span>
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
+                  <span class="pointDetail_content_stepSpan2">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,10)}}</span>
+                </div>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:25px">
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou5.mingCheng}}</span>
                 </div>
                 <div class="pointDetail_content_stepLeft1" style="margin-top:0px">
-                  <span class="pointDetail_content_stepSpan1">协议回访</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou6.mingCheng}}</span>
+                  <span class="pointDetail_content_stepSpan2">{{eventDetail.anJianCLGC.buZhou6.shiJian.slice(0,10)}}</span>
+                </div>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:10px">
+                  <span class="pointDetail_content_stepSpan1">{{eventDetail.anJianCLGC.buZhou7.mingCheng}}</span>
                 </div>
               </div>
               <div class="pointDetail_content_stepRight">
-                <div class="pointDetail_content_stepRight1">
+                <div class="pointDetail_content_stepRight1" style="margin-top:0px">
                   <div class="pointDetail_content_stepSpanC clearfix">
-                    <span class="pointDetail_content_stepSpan3">申请事项：</span>
-                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                    <span class="pointDetail_content_stepSpan3">申请事项1：</span>
+                    <span class="pointDetail_content_stepSpan4" >{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
+                  </div>
+                    <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项2：</span>
+                    <span class="pointDetail_content_stepSpan4" >{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
+                  </div>
+                    <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项3：</span>
+                    <span class="pointDetail_content_stepSpan4" >{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
+                  </div>
+                    <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项4：</span>
+                    <span class="pointDetail_content_stepSpan4" >{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
+                  </div>
+                    <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">其他事项：</span>
+                    <span class="pointDetail_content_stepSpan4" >{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
                   </div>
                 </div>
                 <div class="pointDetail_content_stepRight2">
                   <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">受理结果：</span>
-                    <span class="pointDetail_content_stepSpan4">予以受理</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou2.shouLiJG}}</span>
                   </div>
                    <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">司法所：</span>
-                    <span class="pointDetail_content_stepSpan4">杨浦区司法局江浦路司法局</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou2.siFaS}}</span>
                   </div>
                    <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">调解委员会：</span>
-                    <span class="pointDetail_content_stepSpan4">上海市杨浦区江浦路街道宝钢村居民委员会</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou2.tiaoJieWYH}}</span>
                   </div>
                 </div>
                 <div class="pointDetail_content_stepRight3">
                    <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">调解结果：</span>
-                    <span class="pointDetail_content_stepSpan4">成功</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou4.tiaoJieJG}}</span>
                   </div>
                    <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">旅行方式：</span>
-                    <span class="pointDetail_content_stepSpan4">回复原装，赔礼道歉</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou4.lvXingFS}}</span>
                   </div>
                    <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">是否进行司法确认：</span>
-                    <span class="pointDetail_content_stepSpan4">否</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou4.shiFouJXSFQR}}</span>
                   </div>
                 </div>
                 <div class="pointDetail_content_stepRight4">
                   <div class="pointDetail_content_stepSpanC clearfix">
                     <span class="pointDetail_content_stepSpan3">回访记录：</span>
-                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾由市场建设引发的矛盾由市场建设引发的矛盾由市场建设引发的矛盾</span>
+                    <span class="pointDetail_content_stepSpan4">{{eventDetail.anJianCLGC.buZhou6.huiFangJL}}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div v-if="showNum===5" class="pointDetail_content_stepContainer" >
-              <div class="pointDetail_content_imgMain">
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:100px"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:87px"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:70px"/>
-                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:82px"/>
-              </div>
-              <div class="pointDetail_content_stepLeft">
-                <div class="pointDetail_content_stepLeft1">
-                  <span class="pointDetail_content_stepSpan1">待办申请</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
-                </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:65px">
-                  <span class="pointDetail_content_stepSpan1">案件受理</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
-                </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:65px">
-                  <span class="pointDetail_content_stepSpan1">正在调解</span>
-                </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:40px">
-                  <span class="pointDetail_content_stepSpan1">调节终止</span>
-                </div>
-                <div class="pointDetail_content_stepLeft1" style="margin-top:40px">
-                  <span class="pointDetail_content_stepSpan1">终止归档</span>
-                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
-                </div>
-              </div>
-              <div class="pointDetail_content_stepRight">
-                <div class="pointDetail_content_stepRight1">
-                  <div class="pointDetail_content_stepSpanC clearfix">
-                    <span class="pointDetail_content_stepSpan3">申请事项：</span>
-                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div v-if="showNum===3" class="pointDetail_content_stepContainer" >
+            <!-- 人民调解三个步骤 -->
+            <div v-if="eventDetail.anJianCLGC&&eventDetail.anJianCLGC.shuJuY==='人民调解'&&eventDetail.anJianCLGC.buZhouS===3" class="pointDetail_content_stepContainer" >
                <div class="pointDetail_content_imgMain">
                 <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga"/>
                 <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:190px"/>
@@ -316,6 +214,7 @@
                 </div>
                 <div class="pointDetail_content_stepLeft1" style="margin-top:165px">
                   <span class="pointDetail_content_stepSpan1">不予受理</span>
+                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
                 </div>
                 <div class="pointDetail_content_stepLeft1" style="margin-top:165px">
                   <span class="pointDetail_content_stepSpan1">不予受理归档</span>
@@ -323,9 +222,125 @@
                 </div>
               </div>
               <div class="pointDetail_content_stepRight">
+                <div class="pointDetail_content_stepRight1" style="margin-top:0">
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项1：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项2：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项3：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">申请事项4：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">其他事项：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                </div>
+                <div class="pointDetail_content_stepRight1" style="margin-top:94px">
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">受理结果：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">司法所：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">调解委员会：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 110联动三个步骤 -->
+            <div v-if="false" class="pointDetail_content_stepContainer" >
+               <div class="pointDetail_content_imgMain">
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:190px"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:209px"/>
+              </div>
+              <div class="pointDetail_content_stepLeft">
+                <div class="pointDetail_content_stepLeft1">
+                  <span class="pointDetail_content_stepSpan1">步骤1</span>
+                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                </div>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:165px">
+                  <span class="pointDetail_content_stepSpan1">步骤2</span>
+                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                </div>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:180px">
+                  <span class="pointDetail_content_stepSpan1">步骤3</span>
+                </div>
+              </div>
+              <div class="pointDetail_content_stepRight">
                 <div class="pointDetail_content_stepRight1">
                   <div class="pointDetail_content_stepSpanC clearfix">
-                    <span class="pointDetail_content_stepSpan3">申请事项：</span>
+                    <span class="pointDetail_content_stepSpan3">办案地点：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">类型：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                </div>
+                <div class="pointDetail_content_stepRight1" style="margin-top:171px">
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">报案地点：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">报案派出所：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 110联动四个步骤 -->
+            <div v-if="false" class="pointDetail_content_stepContainer" >
+               <div class="pointDetail_content_imgMain">
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:190px"/>
+                <img src="/static/renmintj/redPoint.png" class="pointDetail_content_imga" style="margin-top:209px"/>
+              </div>
+              <div class="pointDetail_content_stepLeft">
+                <div class="pointDetail_content_stepLeft1">
+                  <span class="pointDetail_content_stepSpan1">步骤1</span>
+                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                </div>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:165px">
+                  <span class="pointDetail_content_stepSpan1">步骤2</span>
+                  <span class="pointDetail_content_stepSpan2">2017/10/23 08:30</span>
+                </div>
+                <div class="pointDetail_content_stepLeft1" style="margin-top:180px">
+                  <span class="pointDetail_content_stepSpan1">步骤3</span>
+                </div>
+              </div>
+              <div class="pointDetail_content_stepRight">
+                <div class="pointDetail_content_stepRight1">
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">办案地点：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">类型：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                </div>
+                <div class="pointDetail_content_stepRight1" style="margin-top:171px">
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">报案地点：</span>
+                    <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
+                  </div>
+                  <div class="pointDetail_content_stepSpanC clearfix">
+                    <span class="pointDetail_content_stepSpan3">报案派出所：</span>
                     <span class="pointDetail_content_stepSpan4">由市场建设引发的矛盾</span>
                   </div>
                 </div>
@@ -339,23 +354,55 @@
 </template>
 
 <script>
+import http from '@/util/httpUtil'
 export default {
   data: function () {
     return {
       showWhich: [''],
-      showNum: 7
-
+      eventDetail: {},
+      anJanCLRY: [],
+      anJanCLRYShow: [],
+      page: 0
     }
   },
   methods: {
     show: function (which) {
       this.showWhich.push(which)
-      console.log(this.showWhich.indexOf(1))
     },
     // 路由跳转
     changeRouter (name) {
       this.$router.push({name: name})
+    },
+    // 案件处理人员分页
+    changeNum (method) {
+      let _this = this
+      if (method === 'add') {
+        if (_this.anJanCLRY[(_this.page + 1) * 3] !== undefined) {
+          _this.page++
+        }
+      } else {
+        if (_this.anJanCLRY[(_this.page - 1) * 3] !== undefined) {
+          _this.page--
+        }
+      }
+      _this.anJanCLRYShow = []
+      for (let i = 0; i < 3; i++) {
+        if (_this.anJanCLRY[i + _this.page * 3] !== undefined) {
+          _this.anJanCLRYShow[i] = _this.anJanCLRY[i + _this.page * 3]
+        }
+      }
     }
+  },
+  created: function () {
+    let _this = this
+    http.get('/peopleMediate/ZdsjUnderDetails', {id: _this.$route.params.id}, (res) => {
+      console.log(res)
+      _this.eventDetail = res
+      _this.anJanCLRY = res.anJanCLRY
+      for (let i = 0; i < 3; i++) {
+        if (res.anJanCLRY[i] !== undefined) { _this.anJanCLRYShow.push(res.anJanCLRY[i]) }
+      }
+    })
   }
 }
 </script>
@@ -776,7 +823,7 @@ export default {
   }
   .pointDetail_content_stepRight{
     position: absolute;
-    width: 600px;
+    width: 800px;
     height: 100%;
     left: 510px;
   }
@@ -787,15 +834,15 @@ export default {
   }
   .pointDetail_content_stepRight2{
     text-align: left;
-    margin-top:53px;
+    margin-top:32px;
   }
   .pointDetail_content_stepRight3{
     text-align: left;
-    margin-top:64px;
+    margin-top:45px;
   }
   .pointDetail_content_stepRight4{
     text-align: left;
-    margin-top:153px;
+    margin-top:80px;
   }
   .pointDetail_content_stepSpanC{
     display: block;
@@ -814,7 +861,7 @@ export default {
     font-size:14px;
     font-family:HiraginoSansGB-W3;
     color:rgba(197,215,255,1);
-    max-width: 300px;
+    width: 600px;
   }
   .noNum{
     background: url('/static/renmintj/noNum.png') no-repeat center center;

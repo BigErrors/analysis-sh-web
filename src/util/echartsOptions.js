@@ -330,7 +330,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
         color: color[1],
-        fontSize: 20
+        fontSize: 13
       },
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
@@ -1144,6 +1144,76 @@ let setLine6 = (data, dataType, title) => {
   return option
 }
 
+// 折线图
+let setLine7 = (data, dataType) => {
+  let option = {
+    grid: {
+      containLabel: false
+    },
+    color: ['#30FF8D'],
+    tooltip: {
+      show: true,
+      trigger: 'item',
+      position: 'right',
+      formatter: '{d}',
+      backgroundColor: '#FFB20C'
+    },
+    xAxis: {
+      type: 'category',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: '#4D84FE'
+      },
+      splitLine: {
+        show: false
+      },
+      boundaryGap: true,
+      data: data.map(item => {
+        return item['name']
+      })
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        show: false
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: true,
+        color: '#4D84FE',
+        formatter: dataType === 'integer' ? '{value}' : '{value} %'
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#295086'
+        }
+      }
+    },
+    series: [{
+      name: 'seriesname',
+      type: 'line',
+      smooth: true,
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: {
+        width: 1
+      },
+      data: data.map(item => {
+        return item['value']
+      })
+    }]
+  }
+  return option
+}
+
 // 液体填充配置项
 let fillOption = (center, data, color, fillData, fillFontSize, borderColor) => {
   color = color || '#3699F1'
@@ -1912,4 +1982,4 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setLine6, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setLine6, setLine7, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}

@@ -40,7 +40,7 @@
       <div class="businessNum_content_top">
         <div class="businessNum_content_title">
           <div class=" businessNum_content_title_left">
-            <span class="businessNum_content_span1">类型</span>
+            <span class="businessNum_content_span1">案件类型</span>
           </div>
           <div class=" businessNum_content_title_right">
             <span class="businessNum_content_span5" :class="{'businessNum_content_active':timeType==='month'?true:false}" @click="timeType='month'">本月</span>
@@ -66,7 +66,7 @@
       <div class="businessNum_content_bottom">
         <div class="businessNum_content_title clearfix">
           <div class="businessNum_content_title_left">
-            <span class="businessNum_content_span1">案件数量(TOP10)</span>
+            <span class="businessNum_content_span1" v-text="title4"></span>
           </div>
         </div>
         <div class="target4"></div>
@@ -74,7 +74,7 @@
       <div class="businessNum_content_bottom">
         <div class="businessNum_content_title clearfix">
           <div class="businessNum_content_title_left">
-            <span class="businessNum_content_span1">来源分布</span>
+            <span class="businessNum_content_span1" v-text="title5"></span>
           </div>
         </div>
         <div class="target5"></div>
@@ -82,7 +82,7 @@
       <div class="businessNum_content_bottom">
         <div class="businessNum_content_title clearfix">
           <div class="businessNum_content_title_left">
-            <span class="businessNum_content_span1">处理状态</span>
+            <span class="businessNum_content_span1" v-text="title6"></span>
           </div>
         </div>
         <div class="target6"></div>
@@ -106,7 +106,7 @@ export default {
   data () {
     return {
       myChart: {},
-      type: '公共法律服务',
+      type: '人民调解',
       statistics: {
         year: 0,
         month: 0,
@@ -120,7 +120,10 @@ export default {
       table: [],
       keyMap: {'人民调解': 'MBM_CASE', '110联动': 'MMS_ALARM110INFO', '公共法律服务': 'WWS_CONSULT', '纠纷排查': 'CDS_INVESTIGATIONFEEDBAC'},
       area: json.area,
-      areaDefault: ['SHJCK01000']
+      areaDefault: ['SHJCK01000'],
+      title4: '各区案件数量(TOP10)',
+      title5: '来源分布',
+      title6: '处理状态'
     }
   },
   watch: {
@@ -235,6 +238,15 @@ export default {
           }).splice(0, 10)
         }
         vue.$nextTick(function () {
+          if (vue.type === '人民调解') {
+            vue.title4 = '各区案件数量(TOP10)'
+          } else if (vue.type === '110联动') {
+            vue.title4 = '各区受理排名(TOP10)'
+          } else if (vue.type === '公共法律服务') {
+            vue.title4 = '各区服务数量(TOP10)'
+          } else if (vue.type === '纠纷排查') {
+            vue.title4 = '各机构排查排名(TOP10)'
+          }
           vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
         })
       })
@@ -248,12 +260,16 @@ export default {
         }
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
+            vue.title5 = '案件来源分布'
             vue.draw('target5', eos.setPie3(data))
           } else if (vue.type === '110联动') {
-            vue.draw('target5', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false))
+            vue.title5 = '处置情况'
+            vue.draw('target5', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false, 30))
           } else if (vue.type === '公共法律服务') {
-            vue.draw('target5', eos.setLine6(data, 'integer'))
+            vue.title5 = '服务热点'
+            vue.draw('target5', eos.setLine7(data, 'integer', undefined, true))
           } else if (vue.type === '纠纷排查') {
+            vue.title5 = '处理结果'
             vue.draw('target5', eos.setPie2(data))
           }
         })
@@ -265,12 +281,16 @@ export default {
         }
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
+            vue.title6 = '案件处理状态'
             vue.draw('target6', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false, 30))
           } else if (vue.type === '110联动') {
+            vue.title6 = '服务热点'
             vue.draw('target6', eos.setPie3(data))
           } else if (vue.type === '公共法律服务') {
-            vue.draw('target2', eos.setPie2(data))
+            vue.title6 = '调解占比'
+            vue.draw('target6', eos.setPie2(data))
           } else if (vue.type === '纠纷排查') {
+            vue.title6 = '所在人群'
             vue.draw('target6', eos.setPie3(data))
           }
         })
