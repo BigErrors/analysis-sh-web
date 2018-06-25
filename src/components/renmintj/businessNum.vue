@@ -253,7 +253,9 @@ export default {
       url = '/caseCount_Down_3'
       http.get(baseUrl + url, reqParam, (data) => {
         if (vue.type === '公共法律服务') {
-          data = data.value
+          data = data.map(item => {
+            return {name: item.time, type: item.type, value: item.value}
+          })
         }
         if (data.length === 0) {
           data = [{name: '暂无数据', value: 0}]

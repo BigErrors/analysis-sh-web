@@ -1155,7 +1155,9 @@ let setLine7 = (data, dataType) => {
       show: true,
       trigger: 'item',
       position: 'right',
-      formatter: '{d}',
+      formatter: function (t) {
+        return data[t.dataIndex].type
+      },
       backgroundColor: '#FFB20C'
     },
     xAxis: {
