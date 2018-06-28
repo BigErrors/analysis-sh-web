@@ -273,7 +273,7 @@ export default {
       }
       this.man = this.formatData(this.dangshirfx[newValue + '_data'].gender_man)
       this.woman = this.formatData(this.dangshirfx[newValue + '_data'].gender_woman)
-      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_bendi)}, {name: '外地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_waidi)}, {name: '未知', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_weizhi)}], false, true))
+      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_bendi)}, {name: '外地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_waidi)}, {name: '未知', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_weizhi)}], 'percent', false, true))
       this.draw('target82', eos.setBar3(this.dangshirfx[newValue + '_data'].nlfb.map(item => {
         return {name: item.age, value: parseInt(item.number)}
       }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
@@ -329,7 +329,7 @@ export default {
           vue.draw('target61', eos.setPie4([vue.formatData(data.anjiancljg.cg_bili), vue.formatData(1 - data.anjiancljg.cg_bili)], '调解成功', 0, 'top'))
           vue.draw('target62', eos.setPie4([vue.formatData(data.anjiancljg.xys_bili), vue.formatData(1 - data.anjiancljg.xys_bili)], '协议书', 0, 'top'))
           vue.draw('target63', eos.setPie4([vue.formatData(data.anjiancljg.sfjd_bili), vue.formatData(1 - data.anjiancljg.sfjd_bili)], '司法确认', 0, 'top'))
-          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_bendi)}, {name: '外地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_waidi)}, {name: '未知', value: vue.formatData(data.dangshirfx.sqr_data.huji_weizhi)}], false, true))
+          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_bendi)}, {name: '外地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_waidi)}, {name: '未知', value: vue.formatData(data.dangshirfx.sqr_data.huji_weizhi)}], 'percent', false, true))
           vue.draw('target82', eos.setBar3(data.dangshirfx.sqr_data.nlfb.map(item => {
             return {name: item.age, value: parseInt(item.number)}
           }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))

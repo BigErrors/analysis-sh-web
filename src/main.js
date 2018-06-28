@@ -6,23 +6,22 @@ import router from './router'
 import echarts from 'echarts'
 import 'echarts-gl'
 import echartsLiquidfill from 'echarts-liquidfill'
-import echartsWordcloud from 'echarts-wordcloud'
 import wordcloud from 'wordcloud'
-import BaiduMap from 'vue-baidu-map'
+// import BaiduMap from 'vue-baidu-map'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.prototype.$echarts.liquidfill = echartsLiquidfill
-Vue.prototype.$echarts.wordcloud = echartsWordcloud
 Vue.prototype.$wordcloud = wordcloud
 
 Vue.use(ElementUI)
 
-Vue.use(BaiduMap, {
-  ak: 'ADGWqzwMFscPinh5G8sxGIS4609KHzsV'
-})
+// Vue.use(BaiduMap, {
+//   ak: 'ADGWqzwMFscPinh5G8sxGIS4609KHzsV'
+// })
 
 /* eslint-disable no-new */
 new Vue({

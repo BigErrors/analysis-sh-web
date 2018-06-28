@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-21 09:31:09
+ * @Last Modified time: 2018-06-28 14:21:04
  * @content: echarts 二维地理坐标系 动态散点 时间轴
  */
 <template>
@@ -18,22 +18,22 @@
           <div class="renmintj_main_once">
             <div class="pie yewusl1"></div>
             <div class="yewusl_title">人民调解</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.MBM_CASE"></span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.MBM_CASE"></span><br/><span>本月</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl2"></div>
             <div class="yewusl_title">110联动</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.MMS_ALARM110INFO"></span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.MMS_ALARM110INFO"></span><br/><span>本月</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl3"></div>
             <div class="yewusl_title">公共法律服务</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.WWS_CONSULT"></span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.WWS_CONSULT"></span><br/><span>本月</span></div>
           </div>
           <div class="renmintj_main_once">
             <div class="pie yewusl4"></div>
             <div class="yewusl_title">纠纷排查</div>
-            <div class="yewusl_subtitle"><span v-text="casestatistics.CDS_INVESTIGATIONFEEDBAC"></span><br/><span>今日</span></div>
+            <div class="yewusl_subtitle"><span v-text="casestatistics.CDS_INVESTIGATIONFEEDBAC"></span><br/><span>本月</span></div>
           </div>
         </div>
       </div>

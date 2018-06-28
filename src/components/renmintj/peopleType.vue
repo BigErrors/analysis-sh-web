@@ -9,7 +9,7 @@
   <div class="peopleType_nav2">
     <span class="peopleType_nav2_span"  @click="changeRouter('peopleNum')">数量分析</span>
     <span class="peopleType_nav2_span active"  @click="changeRouter('peopleType')">属性分析</span>
-    <span class="peopleType_nav2_span"  @click="changeRouter('peopleSearch')">画像分析</span>
+    <span class="peopleType_nav2_span"  @click="changeRouter('peopleSearch')">排名分析</span>
   </div>
   <div class="peopleType_content">
     <div class="peopleType_content_top">
@@ -62,7 +62,7 @@
     <div class="peopleType_content_bottom">
       <div class="peopleType_content_title clearfix">
         <div class="peopleType_content_title_left">
-          <span class="peopleType_content_span1">各区调解员人数</span>
+          <span class="peopleType_content_span1">党员占比排名（区局）</span>
         </div>
       </div>
       <table class='businessNum_table' cellspacing='0'>
@@ -85,7 +85,7 @@
     <div class="peopleType_content_bottom">
       <div class="peopleType_content_title clearfix">
         <div class="peopleType_content_title_left">
-          <span class="peopleType_content_span1">各区新增调解员</span>
+          <span class="peopleType_content_span1">40岁以下占比排名</span>
         </div>
       </div>
       <table class='businessNum_table' cellspacing='0'>

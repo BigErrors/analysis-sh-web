@@ -9,7 +9,7 @@
     <div class="peopleSearch_nav2">
       <span class="peopleSearch_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
       <span class="peopleSearch_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
-      <span class="peopleSearch_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
+      <span class="peopleSearch_nav2_span active" @click="changeRouter('peopleSearch')">排名分析</span>
     </div>
     <div class="peopleSearch_content mediators-info">
       <div class="mediators_container">

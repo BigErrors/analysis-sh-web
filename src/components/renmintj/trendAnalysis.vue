@@ -215,7 +215,7 @@ export default {
               return -1
             }
           }).slice(0, 10)
-          vue.draw('target3', eos.setBar3(data.jiuFenLX, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+          vue.draw('target3', eos.setBar3(data.jiuFenLX, ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
           vue.drawWordcloud2('target4', data.jiuFenCY)
           vue.loading.close()
         })

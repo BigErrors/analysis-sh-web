@@ -9,7 +9,7 @@
     <div class="peoplePortrait_nav2">
       <span class="peoplePortrait_nav2_span" @click="changeRouter('peopleNum')">数量分析</span>
       <span class="peoplePortrait_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
-      <span class="peoplePortrait_nav2_span active" @click="changeRouter('peopleSearch')">画像分析</span>
+      <span class="peoplePortrait_nav2_span active" @click="changeRouter('peopleSearch')">排名分析</span>
     </div>
     <div class="peoplePortrait_content">
       <div class="peoplePortrait_content_left">
@@ -75,7 +75,7 @@
           <el-table :data="table.currentList" class="renmintj_center_table" :height="'string'">
             <el-table-column prop="xuhao" label="序号">
             </el-table-column>
-            <el-table-column prop="mingcheng" label="案例名称">
+            <el-table-column prop="mingcheng" show-overflow-tooltip label="案例名称">
             </el-table-column>
             <el-table-column prop="shoulisj" label="受理时间">
             </el-table-column>

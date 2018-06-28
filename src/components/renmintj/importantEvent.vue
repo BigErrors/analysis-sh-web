@@ -23,7 +23,7 @@
     <div class="importantEvent_content_top">
       <div class="importantEvent_content_title clearfix">
         <div class="importantEvent_content_title_left">
-          <span class="importantEvent_content_span1">重点事件变化来源</span>
+          <span class="importantEvent_content_span1">重点事件来源</span>
         </div>
       </div>
       <div class="target3"></div>
@@ -39,7 +39,7 @@
     <div class="importantEvent_content_middle">
       <div class="importantEvent_content_title clearfix">
         <div class="importantEvent_content_title_left">
-          <span class="importantEvent_content_span1">新增重点事件变化</span>
+          <span class="importantEvent_content_span1">新增重点事件变化趋势</span>
         </div>
       </div>
       <div class="target5"></div>
@@ -154,11 +154,11 @@ export default {
         data['KeyEvents_AddCounts'] = data['KeyEvents_AddCounts'].map(item => { return {name: item.time, value: item.value} })
         vue.$nextTick(function () {
           vue.draw('target2', eos.setBar3(data['KeyEvents_Number'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
-          vue.draw('target3', eos.setPie6(data['KeyEvents_Source'].reverse()))
+          vue.draw('target3', eos.setPie6(data['KeyEvents_Source'].reverse(), 'integer'))
           vue.draw('target4', eos.setBar3(data['KeyEvents_Status'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
           vue.draw('target5', eos.setLine4([data['KeyEvents_AddCounts']].reverse(), 'integer'))
-          vue.draw('target6', eos.setPie6(data['KeyEvents_Type'], true))
-          vue.draw('target7', eos.setBar3(data['KeyEvents_EachArea'].reverse(), ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer', 11))
+          vue.draw('target6', eos.setPie6(data['KeyEvents_Type'], 'integer', true))
+          vue.draw('target7', eos.setBar3(data['KeyEvents_EachArea'].reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer', 11))
         })
       })
     }

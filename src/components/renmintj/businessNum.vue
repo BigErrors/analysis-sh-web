@@ -247,7 +247,7 @@ export default {
           } else if (vue.type === '纠纷排查') {
             vue.title4 = '各机构排查排名(TOP10)'
           }
-          vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'hortizon', 'integer'))
+          vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
         })
       })
       url = '/caseCount_Down_3'
@@ -286,7 +286,7 @@ export default {
             vue.title6 = '案件处理状态'
             vue.draw('target6', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false, 30))
           } else if (vue.type === '110联动') {
-            vue.title6 = '服务热点'
+            vue.title6 = '所在人群'
             vue.draw('target6', eos.setPie3(data))
           } else if (vue.type === '公共法律服务') {
             vue.title6 = '调解占比'

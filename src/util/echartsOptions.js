@@ -280,10 +280,15 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       rotate: rotate || 0,
       fontSize: 15,
       formatter: function (value) {
-        if (value.length <= 6) {
+        if (axisType === 'horizon') {
           return value
+        } else {
+          if (value.length <= 6) {
+            return value
+          } else {
+            return value.substring(0, 5) + '..'
+          }
         }
-        return value.substring(0, 5) + '..'
       }
     },
     data: data.map(function (obj) {
@@ -975,7 +980,7 @@ let setLine5 = (data, callback) => {
         show: false
       },
       axisLabel: {
-        interval: 0,
+        // interval: 0,
         color: '#4D84FE'
       }
     },
@@ -1000,8 +1005,8 @@ let setLine5 = (data, callback) => {
       }
     },
     dataZoom: [{
-      start: 0,
-      end: 15,
+      start: 85,
+      end: 100,
       handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
       handleSize: '80%',
       handleStyle: {
@@ -1541,7 +1546,7 @@ let setPie5 = (data, color) => {
 }
 
 // 圆环图
-let setPie6 = (data, isPie, removePaddingRight, color) => {
+let setPie6 = (data, dataType, isPie, removePaddingRight, color) => {
   isPie = isPie || false
   removePaddingRight = removePaddingRight || false
   color = color || data.length > 4 ? ['#95B6FF', '#4D84FE', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
@@ -1559,12 +1564,19 @@ let setPie6 = (data, isPie, removePaddingRight, color) => {
       })
     },
     tooltip: {
-      show: true
+      show: true,
+      formatter: function (params) {
+        if (dataType === 'percent') {
+          return params.name + ': ' + params.percent + '%'
+        } else {
+          return params.name + ': ' + params.value + '件'
+        }
+      }
     },
     color: color,
     series: [
       {
-        name: '',
+        name: '饼图',
         type: 'pie',
         center: ['35%', '50%'],
         radius: isPie ? ['0', '80%'] : ['65%', '80%'],
@@ -1985,4 +1997,20 @@ let setMap2 = (data) => {
   return option
 }
 
-export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setLine6, setLine7, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2}
+let setMap3 = (mapbox) => {
+  let option = {
+    mapbox: mapbox,
+    series: [{
+      type: 'bar3D',
+      coordinateSystem: 'mapbox',
+      shading: 'lambert',
+      minHeight: 0.1,
+      barSize: 0.3,
+      data: [],
+      silent: true
+    }]
+  }
+  return option
+}
+
+export default {setBar, setBar2, setBar3, setBar4, setRadar, setRadar2, setLine, setLine2, setLine3, setLine4, setLine5, setLine6, setLine7, setFill, setPie, setPie2, setPie3, setPie4, setPie5, setPie6, setFunnel, setWordcloud, setMap, setMap2, setMap3}
