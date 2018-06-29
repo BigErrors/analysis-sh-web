@@ -144,9 +144,10 @@ export default {
     getData () {
       let vue = this
       let reqParam = {}
+      let baseUrl = '/peopleMediate/V1.0.0.2'
       let url = ''
-      url = '/peopleMediate/ZdsjUnder'
-      http.get(url, reqParam, (data) => {
+      url = '/keyEventsAnalysis'
+      http.get(baseUrl + url, reqParam, (data) => {
         [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.KeyEvents.length, 7, data.KeyEvents]
         vue.jinrixz = data['DigitalDisplay']['jinrixz']
         vue.quannianlj = data['DigitalDisplay']['jinnianzs']

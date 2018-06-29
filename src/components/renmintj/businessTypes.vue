@@ -9,8 +9,8 @@
     <div class="businessTypes_nav2_container">
       <div class="businessTypes_nav2">
         <!--  @click="changeRouter('')" -->
-        <span class="businessTypes_nav2_span active">行专调解</span>
-        <span class="businessTypes_nav2_span">一般调解</span>
+        <span class="businessTypes_nav2_span" :class="{'active':tjtype==='行专调解'?true:false}" @click="tjtype='行专调解'">行专调解</span>
+        <span class="businessTypes_nav2_span" :class="{'active':tjtype==='一般调解'?true:false}" @click="tjtype='一般调解'">一般调解</span>
       </div>
       <div class="cas_container">
         <span class="cas_container_span">类型：</span>
@@ -210,6 +210,7 @@ export default {
         lineNum: 0,
         data: []
       },
+      tjtype: '行专调解',
       area: json.area,
       areaDefault: ['SHJCK01000'],
       type: json.caseType,
@@ -278,6 +279,9 @@ export default {
         return {name: item.age, value: parseInt(item.number)}
       }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
     },
+    tjtype: function (newValue, oldValue) {
+      this.getData()
+    },
     areaDefault: function (newValue, oldValue) {
       this.getData()
     },
@@ -302,9 +306,10 @@ export default {
     },
     getData () {
       let vue = this
-      let url = '/peopleMediate/YewulxUnder'
-      let param = { area: this.areaDefault[0], type: this.typeDefault[0], tjtype: '行专调解' }
-      http.get(url, param, (data) => {
+      let baseUrl = '/peopleMediate/V1.0.0.3'
+      let url = '/categoryAnalysis'
+      let param = { area: this.areaDefault[0], type: this.typeDefault[0], tjtype: this.tjtype }
+      http.get(baseUrl + url, param, (data) => {
         vue.tiaojiezlzb = data.tiaojiezlzb
         vue.xingZhuanTJS = vue.tiaojiezlzb.year_number1
         vue.tiaoJieAJS = vue.tiaojiezlzb.year_number2

@@ -25,11 +25,19 @@ export default {
     margin: 0px;
     height: 100%;
     width: 100%;
-    /* min-height: 1080px; */
     min-width: 1920px;
     overflow-y: auto;
     overflow-x: hidden;
   }
+
+  /* html,
+  body {
+    margin: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 1366px;
+    min-height: 766px;
+  } */
 
   html,
   body::-webkit-scrollbar {
@@ -124,18 +132,22 @@ export default {
   .el-table::before {
     height: 0 !important;
   }
-  .el-table th{
+
+  .el-table th {
     color: #7EBCFD !important;
   }
-  .el-table tr{
+
+  .el-table tr {
     color: #DFF1FF !important;
   }
-  .el-table th, .el-table tr {
+
+  .el-table th,
+  .el-table tr {
     background: rgba(0, 0, 0, 0) !important;
   }
 
-  .el-table tr:nth-of-type(2n){
-    background: rgba(7,30,74,0.8) !important;
+  .el-table tr:nth-of-type(2n) {
+    background: rgba(7, 30, 74, 0.8) !important;
   }
 
   .el-table--enable-row-hover .el-table__body tr:hover>td {
@@ -146,7 +158,8 @@ export default {
     text-align: center !important;
     border-bottom: 1px !important;
   }
-   .el-table th.is-leaf {
+
+  .el-table th.is-leaf {
     text-align: center !important;
     border-bottom: 1px dashed #D5D1D1 !important;
   }
@@ -157,10 +170,11 @@ export default {
     white-space: nowrap !important;
   }
 
-  ::-webkit-scrollbar{
+  ::-webkit-scrollbar {
     width: 6px !important;
     background-color: rgba(1, 24, 84, 0) !important;
   }
+
   ::-webkit-scrollbar-thumb {
     height: 20px !important;
     border-radius: 2px !important;
@@ -170,28 +184,36 @@ export default {
   .el-pagination {
     color: #FFFFFF !important;
   }
+
   .el-pager li {
     background: rgba(255, 255, 255, 0) !important;
   }
-  .el-pagination .btn-next, .el-pagination .btn-prev{
+
+  .el-pagination .btn-next,
+  .el-pagination .btn-prev {
     background: center center no-repeat rgba(255, 255, 255, 0) !important;
     border: 1px solid #BDBDBD !important;
     border-radius: 28px !important;
   }
+
   .el-pager li.active {
     color: #FEFEFE !important;
     cursor: default !important;
     border-radius: 28px !important;
     background: #409EFF !important;
   }
-  .el-pagination .btn-next, .el-pagination .btn-prev {
+
+  .el-pagination .btn-next,
+  .el-pagination .btn-prev {
     color: #FFFFFF !important;
   }
+
   .el-pagination button:disabled {
     color: #FFFFFF !important;
     background-color: rgba(255, 255, 255, 0) !important;
     cursor: not-allowed !important;
   }
+
   .el-pagination__total {
     margin: 0 20px !important;
     font-weight: 400 !important;
