@@ -68,8 +68,13 @@ export default {
   .el-cascader__label {
     font-size: 16px;
     font-family: HiraginoSansGB-W3;
-    color: rgba(94, 126, 203, 1);
+    color: rgba(94, 126, 203, 1) !important;
     border-radius: 2px;
+  }
+
+  .el-cascader-menu__item.is-disabled{
+    background: rgba(0, 0, 0, 0) !important;
+    color: #38383a !important;
   }
 
   .el-input--suffix .el-input__inner::-webkit-input-placeholder {

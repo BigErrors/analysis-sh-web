@@ -8,7 +8,7 @@
   </div>
   <div class="importantEvent_content">
     <div class="importantEvent_content_top clearfix">
-      <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='jinrixz' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">今日新增</span></div>
+      <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='jinrixz' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">本月新增</span></div>
       <div class="cutLine"></div>
       <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='quannianlj' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">全年累计</span></div>
     </div>

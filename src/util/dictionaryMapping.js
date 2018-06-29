@@ -106,8 +106,9 @@ let tiaoWeiHLX = [{
   label: '村调委会',
   value: '村调委会'
 }, {
-  label: '行业性、 专业性调委会',
-  value: '行业性、 专业性调委会',
+  label: '行业性、专业性调委会',
+  value: '行业性、专业性调委会',
+  disabled: true,
   children: [{
     label: '医患纠纷',
     value: '6'
