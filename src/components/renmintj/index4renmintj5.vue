@@ -1,3 +1,11 @@
+/*
+ * @Author: wupeiwen javapeiwen2010@gmail.com
+ * @Date: 2018-06-29 13:11:45
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-06-29 13:30:02
+ * @content: echarts 三位地理坐标系 mapbox
+ */
+
 <template>
   <div class="index_container">
     <div class="head clearfix">
@@ -241,7 +249,7 @@
 </template>
 
 <script>
-import json from '@/util/json'
+import json from '@/util/dictionaryMapping'
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'

@@ -74,7 +74,7 @@
       layout="total, prev, pager, next"
       :total="pageTotal"
       :page-size="10"
-      @current-change="handleCurrentChange"
+      @current-change="currentChange"
       class="ej-pagination"></el-pagination>
     </div>
   </div>
@@ -87,7 +87,7 @@ import jsonUtil from '@/util/jsonUtil'
 export default {
   data: function () {
     return {
-      date: [(new Date()).getTime() - 3600 * 1000 * 24 * 7, new Date()],
+      date: [(new Date()).getTime() - 3600 * 1000 * 24 * 90, new Date()],
       pickerOptions: {
         shortcuts: [{
           text: '最近一周',
@@ -103,6 +103,22 @@ export default {
             const end = new Date()
             const start = new Date()
             start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近三个月',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近半年',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 180)
             picker.$emit('pick', [start, end])
           }
         }, {
@@ -166,11 +182,11 @@ export default {
       } else {
         http.post(baseUrl + url, param, (data) => {
           let date = new Date()
-          let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+          let filefix = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + '：' + date.getMinutes() + '：' + date.getSeconds()
           let blob = new Blob([data]) // 创建一个blob对象
           let a = document.createElement('a') // 创建一个<a></a>标签
           a.href = URL.createObjectURL(blob) // response is a blob
-          a.download = filefix + '表格.xls' // 文件名称
+          a.download = `${filefix}表格.xls` // 文件名称
           a.style.display = 'none'
           document.body.appendChild(a)
           a.click()
@@ -180,7 +196,7 @@ export default {
       }
     },
     // 分页
-    handleCurrentChange (val) {
+    currentChange (val) {
       this.currentpage = val
       this.getData()
     },

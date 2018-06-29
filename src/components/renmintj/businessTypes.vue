@@ -192,7 +192,7 @@
 import eos from '@/util/echartsOptions'
 import rollScreen from '../rollScreen.vue'
 import http from '@/util/httpUtil'
-import json from '@/util/json'
+import json from '@/util/dictionaryMapping'
 
 export default {
   components: {

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-05-30 09:31:53
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-28 14:21:04
+ * @Last Modified time: 2018-06-29 13:29:53
  * @content: echarts 二维地理坐标系 动态散点 时间轴
  */
 <template>
@@ -157,7 +157,7 @@ import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import genJson4shanghai from '@/../static/json/genJson4shanghai'
 import http from '@/util/httpUtil'
-import json from '@/util/json'
+import json from '@/util/dictionaryMapping'
 
 export default {
   name: 'renmintj',

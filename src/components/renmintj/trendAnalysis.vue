@@ -82,7 +82,7 @@ import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import json from '@/util/json'
+import json from '@/util/dictionaryMapping'
 
 export default {
   name: 'trendAnalysis',
@@ -104,7 +104,6 @@ export default {
       average: 0,
       maxMonth: '0000-00',
       area: json.area,
-      // areaDefault: ['全市'],
       areaDefault: ['SHJCK01000'],
       type: json.businessType,
       typeDefault: ['人民调解'],

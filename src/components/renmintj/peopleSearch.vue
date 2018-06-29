@@ -17,11 +17,10 @@
           <div class="sortLeft">
             <el-cascader
               class="cascader"
-              :options="areaOverview"
+              :options="area"
               :filterable = true
               placeholder="请输入要选择的区域"
-              v-model="areaOverviewDefault"
-              @change="areaChange"
+              v-model="areaDefault"
             ></el-cascader>
           </div>
           <div class="sortLeft">
@@ -31,7 +30,6 @@
               :filterable = true
               placeholder="调委会类型"
               v-model="optionDefault"
-              @change="optionChange"
             ></el-cascader>
           </div>
           <div class="sortLeft">
@@ -66,129 +64,37 @@
 
 <script>
 import http from '@/util/httpUtil'
+import json from '@/util/dictionaryMapping'
+
 export default {
   name: 'peopleSearch',
   data () {
     return {
-      areaOverview: [
-        {
-          'label': '全部区域',
-          'value': 0
-        }, {
-          'label': '闵行区',
-          'value': '闵行'
-        }, {
-          'label': '徐汇区',
-          'value': '徐汇'
-        }, {
-          'label': '宝山区',
-          'value': '宝山'
-        }, {
-          'label': '崇明区',
-          'value': '崇明'
-        }, {
-          'label': '浦东区',
-          'value': '浦东'
-        }, {
-          'label': '松江区',
-          'value': '松江'
-        }, {
-          'label': '奉贤区',
-          'value': '奉贤'
-        }, {
-          'label': '嘉定区',
-          'value': '嘉定'
-        }, {
-          'label': '青浦区',
-          'value': '青浦'
-        }, {
-          'label': '杨浦区',
-          'value': '杨浦'
-        }, {
-          'label': '黄浦区',
-          'value': '黄浦'
-        }, {
-          'label': '金山区',
-          'value': '金山'
-        }, {
-          'label': '普陀区',
-          'value': '普陀'
-        }, {
-          'label': '静安区',
-          'value': '静安'
-        }, {
-          'label': '长宁区',
-          'value': '长宁'
-        }, {
-          'label': '虹口区',
-          'value': '虹口'
-        }
-      ],
       mediators: [],
-      areaActive: 0,
       pageInfo: {
         currentPage: 1,
         pageSize: 18,
         total: 0
       },
-      option: [{
-        label: '全部',
-        value: 0
-      }, {
-        label: '居（社区）调委会',
-        value: '居（社区）调委会'
-      }, {
-        label: '村调委会',
-        value: '村调委会'
-      }, {
-        label: '行业性、专业性调委会',
-        value: '4',
-        children: [{
-          label: '医患纠纷',
-          value: '6'
-        }, {
-          label: '专业事故',
-          value: '7'
-        }, {
-          label: '劳动争议',
-          value: '8'
-        }, {
-          label: '物业纠纷',
-          value: '9'
-        }, {
-          label: '消费纠纷',
-          value: '10'
-        }, {
-          label: '旅游纠纷',
-          value: '11'
-        }, {
-          label: '电子商务',
-          value: '12'
-        }, {
-          label: '社校纠纷',
-          value: '13'
-        }, {
-          label: '知识产权',
-          value: '14'
-        }]
-      }, {
-        label: '街道调委会',
-        value: '街道调委会'
-      }, {
-        label: '乡镇调委会',
-        value: '乡镇调委会'
-      }, {
-        label: '企事业单位调委会',
-        value: '企事业单位调委会'
-      }, {
-        label: '其它调委会',
-        value: '其它调委会'
-      }],
+      area: json.area,
+      areaDefault: ['SHJCK01000'],
+      option: json.tiaoWeiHLX,
+      optionDefault: [0],
       searchName: '',
       sortValue: 'tjnumber',
-      sortType: true,
-      areaOverviewDefault: [0],
-      optionDefault: [0]
+      sortType: true
+    }
+  },
+  watch: {
+    areaDefault: function (newValue, oldValue) {
+      this.getData()
+    },
+    optionDefault: function (newValue, oldValue) {
+      this.getData()
+    },
+    searchName: function (newValue, oldValue) {
+      this.pageInfo.currentPage = 1
+      this.getData()
     }
   },
   methods: {
@@ -213,26 +119,14 @@ export default {
       }
       this.getData()
     },
-    areaChange (val) {
-      this.areaOverviewDefault = val
-      this.getData()
-    },
-    optionChange (val) {
-      this.optionDefault = val
-      this.getData()
-    },
     currentChange (currentPage) {
       this.pageInfo.currentPage = currentPage
-      this.getData()
-    },
-    search () {
-      this.pageInfo.currentPage = 1
       this.getData()
     },
     getData () {
       let vue = this
       let reqParam = {
-        location: this.areaOverviewDefault[0],
+        location: this.areaDefault[0],
         mediationtype: this.optionDefault[0],
         professiontype: this.optionDefault[1] ? this.optionDefault[1] : '',
         type: this.sortValue,
@@ -241,9 +135,10 @@ export default {
         currentpage: this.pageInfo.currentPage,
         sort: this.sortType ? 1 : 0
       }
+      let baseUrl = ''
       let url = ''
       url = '/peopleMediate/portrayaList'
-      http.post(url, reqParam, (data) => {
+      http.post(baseUrl + url, reqParam, (data) => {
         vue.mediators = data.pageData
         vue.pageInfo.total = data.pageinfo.total
       }, 'application/json')

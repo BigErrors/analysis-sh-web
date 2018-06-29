@@ -96,7 +96,7 @@
 import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import digitalRolling from '../digitalRolling.vue'
-import json from '@/util/json'
+import json from '@/util/dictionaryMapping'
 
 export default {
   name: 'businessNum',
