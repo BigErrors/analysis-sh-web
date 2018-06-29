@@ -36,8 +36,7 @@
             <el-input
               placeholder="请输入人名搜索"
               suffix-icon="el-icon-search"
-              v-model="searchName"
-               @change="search">
+              v-model="searchName">
             </el-input>
           </div>
           <div class="sortRight" :class="{activeshang:sortValue === 'wsscore'&&sortType,activexia:sortValue === 'wsscore' &&!sortType}"><span @click="changeSort('wsscore')" style="cursor:pointer">文书质量</span></div>
