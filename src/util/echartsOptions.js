@@ -1343,6 +1343,9 @@ let setPie = (data1, data2) => {
 let setPie2 = (data) => {
   let option = {
     color: ['#7DA5FE', '#F24848', '#FFC400', '#0E57FC', '#3674FF'],
+    tooltip: {
+      show: true
+    },
     series: [
       {
         name: '调解',
@@ -1351,7 +1354,8 @@ let setPie2 = (data) => {
         avoidLabelOverlap: true,
         label: {
           normal: {
-            formatter: '{c|{c}}\n {hr|}\n {b|{b}}',
+            // formatter: '{c|{c}}\n {hr|}\n {b|{b}}',
+            formatter: '{b|{b}}',
             rich: {
               c: {
                 color: '#FFC600',
