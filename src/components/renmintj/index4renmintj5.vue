@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-29 15:25:34
+ * @Last Modified time: 2018-07-02 09:50:15
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -309,7 +309,7 @@ export default {
     }
   },
   created () {
-    // this.getData()
+    this.getData()
   },
   mounted () {
     this.init()
@@ -328,7 +328,6 @@ export default {
       }
     },
     init () {
-      // test
       const option = {
         visualMap: [{
           type: 'continuous',

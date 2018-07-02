@@ -65,30 +65,33 @@ export default {
     display: none;
   }
 
-  .el-cascader__label {
-    font-size: 16px;
+  .index_container .el-cascader__label {
+    font-size: 32px;
     font-family: HiraginoSansGB-W3;
-    color: rgba(94, 126, 203, 1) !important;
-    border-radius: 2px;
+    color: #FFF225 !important;
   }
 
-  .el-cascader-menu__item.is-disabled{
+  .index_container .el-input--suffix .el-input__inner {
     background: rgba(0, 0, 0, 0) !important;
-    color: #38383a !important;
-  }
-
-  .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(94, 126, 203, 1) !important;
-  }
-
-  .el-input--suffix .el-input__inner {
-    background: rgba(8, 79, 211, 0.2) !important;
-    font-size: 16px !important;
-    border: rgba(123, 149, 246, 0.98) !important;
+    border: 0 !important;
   }
 
   .el-cascader-menu {
-    background: rgba(1, 24, 84, 0.98) !important;
+    background: rgba(0, 0, 0, 0.98) !important;
+  }
+
+  .el-cascader-menu__item.is-active {
+    color: #FFF225 !important;
+  }
+
+  .el-cascader-menu__item {
+    color: #ffffff !important;
+  }
+
+  .el-cascader-menu__item:focus:not(:active),
+  .el-cascader-menu__item:hover {
+    background: #FFF225 !important;
+    color: #ffffff !important;
   }
 
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
