@@ -23,8 +23,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index4renmintj',
-      component: index4renmintj
+      name: 'index4renmintj5',
+      component: index4renmintj5
     },
     {
       path: '/login',

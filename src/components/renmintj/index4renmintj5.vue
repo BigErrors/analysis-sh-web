@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-02 09:50:15
+ * @Last Modified time: 2018-07-02 20:59:53
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -10,6 +10,7 @@
   <div class="index_container">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
+      <!-- <img src="" class="background"> -->
       <div class="left">
         <el-cascader
           class="cascader"
@@ -31,7 +32,7 @@
         </div>
         <div class="left1">
           <div class="line">
-            <label>行专调解</label>
+            <label>行专</label>
             <img v-for="item in parseInt(pro1/10)" :key="item+'a'" src="/static/renmintjNew/docAll.png" />
             <img v-if="parseInt(pro1%10)-5>=0" src="/static/renmintjNew/docHalf.png" />
             <img v-if="parseInt(pro1%10)-5<0" src="/static/renmintjNew/docNull.png" />
@@ -39,7 +40,7 @@
             <span>{{pro1+'%'}}</span>
           </div>
           <div class="line">
-            <label>一般调解</label>
+            <label>一般</label>
             <img v-for="item in parseInt(pro2/10)" :key="item+'c'" src="/static/renmintjNew/docAll.png" />
             <img v-if="parseInt(pro2%10)-5>=0" src="/static/renmintjNew/docHalf.png" />
             <img v-if="parseInt(pro2%10)-5<0" src="/static/renmintjNew/docNull.png" />
@@ -55,10 +56,10 @@
         </div>
         <div class="left3">
           <div class="nav clearfix">
-            <span @click="target1='data_tj'" :class="{active:target1==='data_tj'}">人民调解</span>
-            <span @click="target1='data_110'" :class="{active:target1==='data_110'}">110联动</span>
-            <span @click="target1='data_jc'" :class="{active:target1==='data_jc'}">公共法律服务</span>
             <span @click="target1='data_pc'" :class="{active:target1==='data_pc'}">纠纷排查</span>
+            <span @click="target1='data_jc'" :class="{active:target1==='data_jc'}">公共法律服务</span>
+            <span @click="target1='data_110'" :class="{active:target1==='data_110'}">110联动</span>
+            <span @click="target1='data_tj'" :class="{active:target1==='data_tj'}">人民调解</span>
           </div>
           <!-- 趋势分析图dom容器 -->
           <div class="qsfx"></div>
@@ -252,6 +253,7 @@
 import json from '@/util/dictionaryMapping'
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
+import url from '@/util/url'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 import mapData from '@/../static/json/data'
@@ -321,6 +323,11 @@ export default {
       }
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
+      let vue = this
+      this.myChart[domName].on('restore', function (params) {
+        console.log(params)
+        vue.$echarts.init(document.getElementsByClassName(domName)[0])
+      })
       if (domName === 'map') {
         this.myChart[domName].on('click', function (params) {
           console.log(params)
@@ -336,7 +343,7 @@ export default {
           calculable: true,
           realtime: false,
           inRange: {
-            color: ['#2830aa', '#2b3fed', '#3a6aff', '#46aaff', '#a5ffff ', '#ceffff', '#ffffff']
+            color: ['#1122a5', '#2939f8', '#2737ff', '#2c3dfd', '#408bff', '#3180ff', '#89ffff', '#e6ffff']
           },
           outOfRange: {
             colorAlpha: 0
@@ -347,12 +354,12 @@ export default {
           // style: 'mapbox://styles/mapbox/dark-v9',
           style: {
             'version': 8,
-            'glyphs': 'http://127.0.0.1:8010/fonts/{fontstack}/{range}.pbf',
+            'glyphs': `${url.osmUrl}/fonts/{fontstack}/{range}.pbf`,
             'sources': {
               'osm-tiles': {
                 'type': 'raster',
                 'tiles': [
-                  'http://127.0.0.1:8010/styles/dark-matter/{z}/{x}/{y}.png'
+                  `${url.osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
                 ],
                 'tileSize': 256
               }
@@ -366,14 +373,14 @@ export default {
             }]
           },
           // 地图中心经纬度。经纬度用数组
-          center: [121.5693, 31.123070],
+          center: [121.5193, 31.163070],
           // 地图的缩放等级
           zoom: 9.5,
           // 视角俯视的倾斜角度
           pitch: 50,
           // 地图的旋转角度
           bearing: -10,
-          boxHeight: 20,
+          boxHeight: 6,
           // 后处理特效的相关配置
           postEffect: {
             enable: true,
@@ -381,7 +388,7 @@ export default {
             SSAO: {
               enable: true,
               // 质量，支持'low', 'medium', 'high', 'ultra'
-              quality: 'low',
+              quality: 'medium',
               // 采样半径。半径越大效果越自然，但是需要设置较高的'quality'。
               radius: 2,
               // 强度。值越大颜色越深。
@@ -402,7 +409,12 @@ export default {
             // 全局的环境光设置。
             ambient: {
               // 环境光的强度。
-              intensity: 0.5
+              intensity: 0
+            },
+            ambientCubemap: {
+              texture: './static/data-1491896094618-H1DmP-5px.hdr',
+              exposure: 1,
+              diffuseIntensity: 0.5
             }
           }
         },
@@ -411,7 +423,7 @@ export default {
           type: 'bar3D',
           coordinateSystem: 'mapbox',
           shading: 'realistic',
-          barSize: 0.5,
+          barSize: 0.32,
           data: mapData,
           silent: false
         },
@@ -433,6 +445,7 @@ export default {
           silent: false
         }]
       }
+      console.log(mapData.length)
       this.draw('map', option)
     },
     getData () {
@@ -552,7 +565,8 @@ export default {
 
 <style lang="less" scoped>
 .index_container{
-  // background: #171415;
+  background: url('/static/renmintj/pic_background2.png') no-repeat;
+  background-size: 100% 100%;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -560,7 +574,7 @@ export default {
   min-height: 766px;
   .head{
     display: block;
-    background-image: url('/static/renmintjNew/headback.png') no-repeat;
+    background: url('/static/renmintjNew/headback.png') no-repeat;
     background-size: 100% 100%;
     background-position: center center;
     position: relative;
@@ -611,6 +625,7 @@ export default {
           display: block;
           align-items:center;
           display:flex;
+          margin-left: 10px;
           label{
             font-size:12px;
             font-family:MicrosoftYaHei;
@@ -644,7 +659,7 @@ export default {
         position: relative;
         .nav{
           display: block;
-          padding-right: 8px;
+          padding-right: 25px;
           span{
             font-size:12px;
             font-family:HiraginoSansGB-W3;
@@ -663,10 +678,11 @@ export default {
         }
         .qsfx{
           position: absolute;
-          width: 100%;
-          height: calc(100% - 16px);
+          width: calc(100% - 10px);
+          height: calc(100% - 26px);
           box-sizing: border-box;
           top:16px;
+          padding: 10px;
         }
       }
     }

@@ -46,7 +46,8 @@ let setLine = (data, showYAxis, containLabel) => {
       },
       splitLine: {
         show: false
-      }
+      },
+      splitNumber: 3
     },
     series: [{
       name: '数据',
@@ -139,11 +140,18 @@ let setPie = (data, title, bgColorOpacity, titlePosition, color) => {
 }
 // 柱状图_首页业务类型
 let setBar = (data) => {
+  data = data.sort(function (v1, v2) {
+    if (v1.value >= v2.value) {
+      return 1
+    } else {
+      return -1
+    }
+  })
   let option = {
     grid: {
       containLabel: true,
-      left: 10,
-      right: 20,
+      left: 30,
+      right: 40,
       top: '10%',
       bottom: '5%'
     },
@@ -169,9 +177,15 @@ let setBar = (data) => {
     },
     series: [{
       type: 'bar',
-      data: data.map(item => item['value']),
-      barMinHeight: 20,
+      stack: 'test',
+      data: data.map(item => {
+        return item['value']
+      }),
+      z: 3,
+      barMaxWidth: 6,
+      barMinHeight: 10,
       itemStyle: {
+        barBorderRadius: 10,
         color: {
           type: 'linear',
           x: 0,
@@ -190,9 +204,9 @@ let setBar = (data) => {
         show: true,
         position: 'right',
         color: '#ffffff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 12
       }
-
     }]
   }
   return option
