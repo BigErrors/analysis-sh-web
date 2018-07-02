@@ -6,10 +6,10 @@ let setLine = (data, showYAxis, containLabel) => {
     },
     grid: {
       containLabel: containLabel || false,
-      left: 10,
-      right: 0,
-      top: '15%',
-      bottom: '10%'
+      left: 30,
+      right: 40,
+      top: '10%',
+      bottom: '5%'
     },
     color: ['#00FFFF'],
     toolbox: {},
