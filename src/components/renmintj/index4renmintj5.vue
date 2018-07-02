@@ -309,7 +309,7 @@ export default {
     }
   },
   created () {
-    this.getData()
+    // this.getData()
   },
   mounted () {
     this.init()
@@ -345,11 +345,31 @@ export default {
           seriesIndex: [0]
         }],
         mapbox: {
-          style: 'mapbox://styles/mapbox/dark-v9',
+          // style: 'mapbox://styles/mapbox/dark-v9',
+          style: {
+            'version': 8,
+            'glyphs': 'http://127.0.0.1:8010/fonts/{fontstack}/{range}.pbf',
+            'sources': {
+              'osm-tiles': {
+                'type': 'raster',
+                'tiles': [
+                  'http://127.0.0.1:8010/styles/dark-matter/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256
+              }
+            },
+            'layers': [{
+              'id': 'dark-matter',
+              'type': 'raster',
+              'source': 'osm-tiles',
+              'minzoom': 0,
+              'maxzoom': 22
+            }]
+          },
           // 地图中心经纬度。经纬度用数组
           center: [121.5693, 31.123070],
           // 地图的缩放等级
-          zoom: 10,
+          zoom: 9.5,
           // 视角俯视的倾斜角度
           pitch: 50,
           // 地图的旋转角度
