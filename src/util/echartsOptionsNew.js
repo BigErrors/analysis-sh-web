@@ -6,8 +6,8 @@ let setLine = (data, showYAxis, containLabel) => {
     },
     grid: {
       containLabel: containLabel || false,
-      left: 30,
-      right: 40,
+      left: 20,
+      right: 10,
       top: '10%',
       bottom: '5%'
     },
@@ -150,7 +150,7 @@ let setBar = (data) => {
   let option = {
     grid: {
       containLabel: true,
-      left: 30,
+      left: 20,
       right: 40,
       top: '10%',
       bottom: '5%'
@@ -177,12 +177,23 @@ let setBar = (data) => {
     },
     series: [{
       type: 'bar',
-      stack: 'test',
+      itemStyle: {
+        barBorderRadius: 10,
+        normal: {
+          color: '#201f20'
+        }
+      },
+      silent: true,
+      barWidth: 6,
+      barGap: '-100%', // Make series be overlap
+      data: function () { return new Array(10).fill(4000) }
+    }, {
+      type: 'bar',
       data: data.map(item => {
         return item['value']
       }),
       z: 3,
-      barMaxWidth: 6,
+      barWidth: 6,
       barMinHeight: 10,
       itemStyle: {
         barBorderRadius: 10,

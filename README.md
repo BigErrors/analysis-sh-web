@@ -1,4 +1,4 @@
-# Analysis Project 4 Justice
+# Visualization Analysis Project 4 Justice
 
 ![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)
 

@@ -7,7 +7,6 @@ import echarts from 'echarts'
 import 'echarts-gl'
 import echartsLiquidfill from 'echarts-liquidfill'
 import wordcloud from 'wordcloud'
-// import BaiduMap from 'vue-baidu-map'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -18,10 +17,6 @@ Vue.prototype.$echarts.liquidfill = echartsLiquidfill
 Vue.prototype.$wordcloud = wordcloud
 
 Vue.use(ElementUI)
-
-// Vue.use(BaiduMap, {
-//   ak: 'ADGWqzwMFscPinh5G8sxGIS4609KHzsV'
-// })
 
 /* eslint-disable no-new */
 new Vue({
