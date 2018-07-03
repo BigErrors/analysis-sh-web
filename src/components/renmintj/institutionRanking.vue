@@ -101,6 +101,7 @@
 
 <script>
 import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 export default {
   data: function () {
@@ -199,7 +200,7 @@ export default {
         style: 'width: 100%,height:100%'
       })
       let excel = excl || 0
-      let baseUrl = '/peopleMediate/V1.0.0.2'
+      let baseUrl = urlConfig.baseUrl
       let url = '/institutionalRankings'
       let param = {
         'startdate': jsonUtil.dateTimeFormat(_this.date[0]),

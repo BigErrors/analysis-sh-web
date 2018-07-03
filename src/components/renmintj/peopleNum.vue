@@ -62,6 +62,7 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import urlConfig from '@/util/urlConfig'
 import http from '@/util/httpUtil'
 
 export default {
@@ -88,9 +89,10 @@ export default {
     getData () {
       let vue = this
       let reqParam = {}
+      let baseUrl = urlConfig.baseUrl
       let url = ''
-      url = '/peopleMediate/quantityAnalysis'
-      http.get(url, reqParam, (data) => {
+      url = '/quantityAnalysis'
+      http.get(baseUrl + url, reqParam, (data) => {
         data['n_tjy'] = data['n_tjy'].map(item => { return { name: item['shijian'], value: item['shuzhi'] } })
         data['nnew_tjy'] = data['nnew_tjy'].map(item => { return { name: item['shijian'], value: item['shuzhi'] } })
         data['n_locationtjy'] = data['n_locationtjy'].map(item => { return { name: item['mingcheng'], value: item['shuzhi'] } })

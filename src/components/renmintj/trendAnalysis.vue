@@ -80,9 +80,10 @@
 import eos from '@/util/echartsOptions'
 import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
+import json from '@/util/dictionaryMapping'
+import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import json from '@/util/dictionaryMapping'
 
 export default {
   name: 'trendAnalysis',
@@ -156,8 +157,6 @@ export default {
         this.myChart[domName].on('datazoom', function (params) {
           vue.dateRange.start = vue.date[Math.round(params.start / 100 * vue.dateLength)]
           let endIndex = Math.round(params.end / 100 * vue.dateLength)
-          // console.log('endIndex', endIndex)
-          // console.log('length', vue.dateLength)
           endIndex = (endIndex >= vue.dateLength) ? (vue.dateLength - 1) : endIndex
           vue.dateRange.end = vue.date[endIndex]
         })
@@ -190,7 +189,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.5)'
       })
       let reqParam = {area: this.areaDefault[0], source: this.typeDefault[0], startDate: this.dateRange.start, endDate: this.dateRange.end}
-      let baseUrl = '/peopleMediate/V1.0.0.2'
+      let baseUrl = urlConfig.baseUrl
       let url = ''
       url = '/trendAnalysis'
       http.get(baseUrl + url, reqParam, (data) => {
@@ -242,15 +241,7 @@ export default {
     background-repeat:no-repeat;
     background-position:center;
   }
-  /* .target1,.target2,.target3,.target4,.target5,.target6,.target7,.target8 {
-    float: left;
-    width: calc(100% - 20px);
-    height: calc(100% - 52px);
-    padding: 0 10px;
-  } */
-  /* .target1 {
-    height: 100%;
-  } */
+
   .trendAnalysis_header{
     width: 100%;
     min-width: 1920px;

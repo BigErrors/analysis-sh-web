@@ -190,6 +190,7 @@
 
 <script>
 import eos from '@/util/echartsOptions'
+import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
@@ -306,7 +307,7 @@ export default {
     },
     getData () {
       let vue = this
-      let baseUrl = '/peopleMediate/V1.0.0.3'
+      let baseUrl = urlConfig.baseUrl
       let url = '/categoryAnalysis'
       let param = { area: this.areaDefault[0], type: this.typeDefault[0], tjtype: this.tjtype }
       http.get(baseUrl + url, param, (data) => {

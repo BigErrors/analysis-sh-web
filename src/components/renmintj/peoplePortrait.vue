@@ -101,6 +101,7 @@
 import eos from '@/util/echartsOptions'
 import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 
 export default {
@@ -161,9 +162,10 @@ export default {
     getData () {
       let vue = this
       let reqParam = {id: this.$route.params.id}
+      let baseUrl = urlConfig.baseUrl
       let url = ''
-      url = '/peopleMediate/portrait/detail'
-      http.get(url, reqParam, (data) => {
+      url = '/portraitDetail'
+      http.get(baseUrl + url, reqParam, (data) => {
         [vue.detail.name, vue.detail.year, vue.detail.phone, vue.detail.address, vue.detail.gender, vue.detail.info, vue.table.dLength, vue.table.list, vue.table.lineNum] =
          [data.name, data.gongzuonx, data.dianhauhm, data.tiaojiewyh, data.gender, data.zhengti, data.anjianlb.length, data.anjianlb, 7]
         vue.table.currentList = vue.table.list.slice(0, 5)

@@ -95,6 +95,7 @@
 <script>
 import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
 import json from '@/util/dictionaryMapping'
 
@@ -210,9 +211,9 @@ export default {
     getData () {
       let vue = this
       let reqParam = {area: this.areaDefault[0], biaoming: this.keyMap[this.type]}
-      let baseUrl = '/peopleMediate/V1.0.0.2'
+      let baseUrl = urlConfig.baseUrl
       let url = ''
-      url = '/caseCount_Down_CaseType'
+      url = '/caseTypeDown'
       http.get(baseUrl + url, reqParam, (data) => {
         vue.statistics.year = data.year
         vue.statistics.month = data.month
@@ -224,7 +225,7 @@ export default {
           vue.setTypeData()
         })
       })
-      url = '/caseCount_Down_CaseDist'
+      url = '/caseDistDown'
       http.get(baseUrl + url, reqParam, (data) => {
         if (data.length === 0) {
           data = [{name: '暂无数据', value: 0}]
@@ -250,7 +251,7 @@ export default {
           vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
         })
       })
-      url = '/caseCount_Down_3'
+      url = '/caseCountDown1'
       http.get(baseUrl + url, reqParam, (data) => {
         if (vue.type === '公共法律服务') {
           data = data.map(item => {
@@ -276,7 +277,7 @@ export default {
           }
         })
       })
-      url = '/caseCount_Down_4'
+      url = '/caseCountDown2'
       http.get(baseUrl + url, reqParam, (data) => {
         if (data.length === 0) {
           data = [{name: '暂无数据', value: 0}]
