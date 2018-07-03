@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import echarts from 'echarts'
 import 'echarts-gl'
-import echartsLiquidfill from 'echarts-liquidfill'
 import wordcloud from 'wordcloud'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -13,7 +12,6 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
-Vue.prototype.$echarts.liquidfill = echartsLiquidfill
 Vue.prototype.$wordcloud = wordcloud
 
 Vue.use(ElementUI)
