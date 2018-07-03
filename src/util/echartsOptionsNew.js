@@ -6,7 +6,7 @@ let setLine = (data, showYAxis, containLabel) => {
     },
     grid: {
       containLabel: containLabel || false,
-      left: 20,
+      left: 10,
       right: 10,
       top: '10%',
       bottom: '5%'
@@ -150,7 +150,7 @@ let setBar = (data) => {
   let option = {
     grid: {
       containLabel: true,
-      left: 20,
+      left: 10,
       right: 40,
       top: '10%',
       bottom: '5%'

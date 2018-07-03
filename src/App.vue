@@ -227,4 +227,81 @@ export default {
     font-weight: 400 !important;
     color: #FFFFFF !important;
   }
+
+  /* 业务类型页面新 */
+
+  .busiTypes_container .el-input--suffix .el-input__inner {
+    font-size: 11px;
+    font-family: HiraginoSansGB-W3;
+    color: rgba(219, 228, 255, 1);
+    height: 28px;
+    line-height: 26px;
+    border: 1px solid #157BD3;
+  }
+
+  /* 机构排名新 */
+
+  .institutionRanking_container .el-range-editor.el-input__inner {
+    height: 30px;
+    background: rgba(8, 79, 211, 1);
+    border-color: #7B95F6;
+  }
+
+  .institutionRanking_container .el-date-editor .el-range__icon {
+    line-height: 23px;
+  }
+
+  .institutionRanking_container .el-date-editor .el-range-separator {
+    line-height: 22px;
+  }
+
+  .institutionRanking_container .el-date-editor .el-range-input {
+    background: rgba(8, 79, 211, 1);
+    color: #5E7ECB;
+  }
+
+  .institutionRanking_container .el-input--suffix .el-input__inner {
+    height: 30px;
+    background: rgba(8, 79, 211, 1);
+    color: #5E7ECB;
+  }
+
+  .institutionRanking_container .el-input__icon {
+    line-height: 30px;
+  }
+
+  /* 人员排名新 */
+
+  .pepleRanking_container .el-range-editor.el-input__inner {
+    height: 30px;
+    background: rgba(8, 79, 211, 1);
+    border-color: #7B95F6;
+  }
+
+  .pepleRanking_container .el-date-editor .el-range__icon {
+    line-height: 23px;
+  }
+
+  .pepleRanking_container .el-date-editor .el-range-separator {
+    line-height: 22px;
+  }
+
+  .pepleRanking_container .el-date-editor .el-range-input {
+    background: rgba(8, 79, 211, 1);
+    color: #5E7ECB;
+  }
+
+  .pepleRanking_container .el-input--suffix .el-input__inner {
+    height: 30px;
+    background: rgba(8, 79, 211, 1);
+    color: #5E7ECB;
+  }
+
+  .pepleRanking_container .el-input__icon {
+    line-height: 30px;
+  }
+
+  .el-date-editor .el-range__close-icon {
+    display: none !important
+  }
 </style>

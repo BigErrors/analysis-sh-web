@@ -7,9 +7,9 @@
     <span class="peopleNum_nav_span">首页 > 调解员数量分析</span>
   </div>
   <div class="peopleNum_nav2">
-    <span class="peopleNum_nav2_span active"  @click="changeRouter('peopleNum')">数量分析</span>
-    <span class="peopleNum_nav2_span"  @click="changeRouter('peopleType')">属性分析</span>
-    <span class="peopleNum_nav2_span"  @click="changeRouter('peopleSearch')">排名分析</span>
+    <span class="peopleNum_nav2_span active" @click="changeRouter('peopleNum')">数量分析</span>
+    <span class="peopleNum_nav2_span" @click="changeRouter('peopleType')">属性分析</span>
+    <span class="peopleNum_nav2_span" @click="changeRouter('pepleRanking')">排名分析</span>
   </div>
   <div class="peopleNum_content">
     <div class="peopleNum_content_top">

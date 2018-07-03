@@ -1,5 +1,5 @@
 <template>
-  <div class="institutionRanking_container">
+  <div class="pepleRanking_container">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
@@ -11,14 +11,42 @@
     </div>
     <div class="body">
       <div class="nav">
-        <span>首页 > 机构排名</span>
+        <span>首页 > 人员列表</span>
       </div>
       <div class="nav2 clearfix">
         <div class="navLeft">
-          <span class="navspan active">机构排名</span>
+          <span class="navspan" @click="changeRouter('peopleNum')">数量分析</span>
+          <span class="navspan" @click="changeRouter('peopleType')">属性分析</span>
+          <span class="navspan active" @click="changeRouter('pepleRanking')">排名分析</span>
         </div>
         <div class="navRight">
           <div class="excel_btn" @click="getData(1)">导出Excel</div>
+          <div class="date_container">
+            <el-input
+              size="mini"
+              placeholder="请输入人名"
+              suffix-icon="el-icon-search"
+              v-model="nameSearch">
+            </el-input>
+          </div>
+          <div class="date_container">
+            <el-cascader
+              class="cascader"
+              style="z-index:1;height:30px;line-height:30px;font-size:12px;width:120px"
+              :options="area"
+              placeholder="区域"
+              v-model="areaDefault"
+            ></el-cascader>
+          </div>
+          <div class="date_container">
+            <el-cascader
+              class="cascader"
+              style="z-index:1;height:30px;line-height:30px;font-size:12px;width:120px"
+              :options="coordinationType"
+              placeholder="调委会类型"
+              v-model="coordinationTypeDefault"
+            ></el-cascader>
+          </div>
           <div class="date_container">
             <el-date-picker
               v-model="date"
@@ -28,68 +56,59 @@
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
-              clearable=false
               :picker-options="pickerOptions">
             </el-date-picker>
-          </div>
-          <div class="date_container">
-            <el-cascader
-              class="cascader"
-              style="z-index:1;height:30px;line-height:30px;font-size:12px;"
-              :options="chooseArr"
-              placeholder="选择"
-              v-model="chooseDefault"
-            ></el-cascader>
           </div>
         </div>
       </div>
       <div class="table_container">
         <div class="t_head">
           <div class="row row1">排名</div>
-          <div class="row row2">名称</div>
-          <div class="row row3"><span @click="sort('renyuansl')">人员数量</span><i @click="sort('renyuansl')" class="init" :class="{'bottom':obj==='renyuansl'&&reorder==='DESC','top':obj==='renyuansl'&&reorder==='ASC'}"></i></div>
-          <div class="row row4"><span @click="sort('yewusl')">业务数量</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
-          <div class="row row5"><span @click="sort('tiaojieaj')">调解案件数</span><i @click="sort('tiaojieaj')" class="init" :class="{bottom:obj==='tiaojieaj'&&reorder==='DESC',top:obj==='tiaojieaj'&&reorder==='ASC'}"></i></div>
-          <div class="row row6"><span @click="sort('paichafk')">排查反馈数</span><i @click="sort('paichafk')" class="init" :class="{bottom:obj==='paichafk'&&reorder==='DESC',top:obj==='paichafk'&&reorder==='ASC'}"></i></div>
-          <div class="row row7"><span @click="sort('shangbaosl')">调解案例上报数</span><i @click="sort('shangbaosl')" class="init" :class="{bottom:obj==='shangbaosl'&&reorder==='DESC',top:obj==='shangbaosl'&&reorder==='ASC'}"></i></div>
-          <div class="row row8"><span @click="sort('zixunrz')">咨询管理日志数</span><i @click="sort('zixunrz')" class="init" :class="{bottom:obj==='zixunrz'&&reorder==='DESC',top:obj==='zixunrz'&&reorder==='ASC'}"></i></div>
-          <div class="row row9"><span @click="sort('chunjufw')">村居服务数</span><i @click="sort('chunjufw')" class="init" :class="{bottom:obj==='chunjufw'&&reorder==='DESC',top:obj==='chunjufw'&&reorder==='ASC'}"></i></div>
-          <div class="row row10"><span @click="sort('faxuanhd')">法宣活动数</span><i @click="sort('faxuanhd')" class="init" :class="{bottom:obj==='faxuanhd'&&reorder==='DESC',top:obj==='faxuanhd'&&reorder==='ASC'}"></i></div>
-          <div class="row row11"><span @click="sort('yewusyl')">业务系统使用率</span><i @click="sort('yewusyl')" class="init" :class="{bottom:obj==='yewusyl'&&reorder==='DESC',top:obj==='yewusyl'&&reorder==='ASC'}"></i></div>
+          <div class="row row2">姓名</div>
+          <div class="row row3"><span>所属机构</span></div>
+          <div class="row row4"><span :class="{yellow:obj==='yewusl'}" @click="sort('yewusl')">业务量</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
+          <div class="row row5"><span :class="{yellow:obj==='tiaojiecgl'}" @click="sort('tiaojiecgl')">成功率</span><i @click="sort('tiaojiecgl')" class="init" :class="{bottom:obj==='tiaojiecgl'&&reorder==='DESC',top:obj==='tiaojiecgl'&&reorder==='ASC'}"></i></div>
+          <div class="row row6"><span>缓解率</span></div>
+          <div class="row row7"><span :class="{yellow:obj==='pingjuntjzq'}" @click="sort('pingjuntjzq')">平均调解周期</span><i @click="sort('pingjuntjzq')" class="init" :class="{bottom:obj==='pingjuntjzq'&&reorder==='DESC',top:obj==='pingjuntjzq'&&reorder==='ASC'}"></i></div>
+          <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">成交金额</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
+          <div class="row row9"><span>经典案例数</span></div>
+          <div class="row row10"><span>表彰数</span></div>
+          <div class="row row11"><span>投诉数</span></div>
         </div>
         <div class="t_body">
-          <div class="line" v-for="(item,index) in list" :key = index>
+          <div v-for="(item,index) in mediators" :key='index' class="line" @click="changeRouter('peoplePortrait', item.id_)">
             <div class="row row1">
-              <span v-if="(index>2||currentpage>1)&&reorder==='DESC'" class="institutionRanking_content_span2">{{index+1+(currentpage-1)*10}}</span>
-              <span v-if="reorder==='ASC'" class="institutionRanking_content_span2">{{pageTotal-(index)-(currentpage-1)*10}}</span>
-              <img v-if="index===0&&currentpage===1&&reorder==='DESC'" class="img" src='/static/renmintj/jingpai.png' />
-              <img v-if="index===1&&currentpage===1&&reorder==='DESC'" class="img" src='/static/renmintj/yinpai.png' />
-              <img v-if="index===2&&currentpage===1&&reorder==='DESC'" class="img" src='/static/renmintj/tongpai.png' />
+              <span v-if="(index>2||pageInfo.currentPage>1)&&reorder==='DESC'" class="institutionRanking_content_span2">{{index+1+(pageInfo.currentPage-1)*10}}</span>
+              <span v-if="reorder==='ASC'" class="institutionRanking_content_span2">{{pageInfo.total-(index)-(pageInfo.currentPage-1)*10}}</span>
+              <img class="img"  v-if ="index===0&&pageInfo.currentPage===1&&reorder==='DESC'" src='/static/renmintj/jingpai.png' />
+              <img class="img"  v-if ="index===1&&pageInfo.currentPage===1&&reorder==='DESC'" src='/static/renmintj/yinpai.png' />
+              <img class="img"  v-if ="index===2&&pageInfo.currentPage===1&&reorder==='DESC'" src='/static/renmintj/tongpai.png' />
             </div>
             <div class="row row2">
-              <el-tooltip v-if="item.name.length>12" :content='item.name' placement="top">
-                <span class="spanhid">{{item.name}}</span>
-              </el-tooltip>
-              <span v-if="item.name.length<=12">{{item.name}}</span>
-            </div>
-            <div class="row row3"><span>{{item.renyuansl}}</span></div>
-            <div class="row row4"><span>{{item.yewusl}}</span></div>
-            <div class="row row5"><span>{{item.tiaojieaj}}</span></div>
-            <div class="row row6"><span>{{item.paichafk}}</span></div>
-            <div class="row row7"><span>{{item.shangbaosl}}</span></div>
-            <div class="row row8"><span>{{item.zixunrz}}</span></div>
-            <div class="row row9"><span>{{item.chunjufw}}</span></div>
-            <div class="row row10"><span>{{item.faxuanhd}}</span></div>
-            <!-- 暂时还没有业务系统使用率 -->
-            <!-- <div class="row row11"><i class="icon_rate red"></i><span>47%</span></div> -->
-            <div class="row row11"><span>{{"--%"}}</span></div>
+               <img v-if="item.gender==='Male'" class="img_photo" src="/static/renmintjNew/photo_boy.png"/>
+               <img v-else-if="item.gender==='Female'" class="img_photo" src="/static/renmintjNew/photo_girl.png"/>
+               <img v-else class="img_photo" src="/static/renmintjNew/photo_null.png"/>
+               <span>{{item.name}}</span>
+             </div>
+             <div class="row row3"><span>{{item.shortname}}</span></div>
+             <div class="row row4"><span>{{item.yewusl}}</span></div>
+             <div class="row row5">
+               <i class="icon_rate red"></i>
+               <span>{{item.tiaojiecgl}}</span>
+              </div>
+             <div class="row row6"><i class="icon_rate red"></i><span>0%</span></div>
+             <div class="row row7"><span>{{item.pingjuntjzq}}</span></div>
+             <div class="row row8"><span>{{item.chengjiaoje}}</span></div>
+             <div class="row row9"><span>0</span></div>
+             <div class="row row10"><span>0</span></div>
+             <div class="row row11"><span>0</span></div>
           </div>
         </div>
       </div>
       <div class="page_container">
         <el-pagination
           layout="total, prev, pager, next"
-          :total="pageTotal"
+          :total="pageInfo.total"
           :page-size="10"
           @current-change="handleCurrentChange"
           class="ej-pagination">
@@ -100,75 +119,54 @@
 </template>
 
 <script>
+import json from '@/util/dictionaryMapping'
 import http from '@/util/httpUtil'
 import jsonUtil from '@/util/jsonUtil'
 export default {
-  data: function () {
-    return {
-      date: [(new Date()).getTime() - 3600 * 1000 * 24 * 90, new Date()],
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近半年',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 180)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一年',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      },
-      list: [],
-      pageTotal: 1,
-      currentpage: 1,
-      reorder: 'DESC',
-      obj: 'renyuansl',
-      loading: '',
-      time: new Date(),
-      chooseArr: [{
-        label: '区局',
-        value: 'JUSTICEBUREAU'
+  data: () => ({
+    time: new Date(),
+    date: [(new Date()).getTime() - 3600 * 1000 * 24 * 4800, new Date()],
+    pickerOptions: {
+      shortcuts: [{
+        text: '最近一周',
+        onClick (picker) {
+          const end = new Date()
+          const start = new Date()
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+          picker.$emit('pick', [start, end])
+        }
       }, {
-        label: '司法所',
-        value: 'JUSTICEOFFICE'
+        text: '最近一个月',
+        onClick (picker) {
+          const end = new Date()
+          const start = new Date()
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+          picker.$emit('pick', [start, end])
+        }
       }, {
-        label: '调委会',
-        value: 'MEDIATIONCOMMITTEE'
-      }],
-      chooseDefault: ['JUSTICEBUREAU']
-    }
-  },
+        text: '最近一年',
+        onClick (picker) {
+          const end = new Date()
+          const start = new Date()
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
+          picker.$emit('pick', [start, end])
+        }
+      }]
+    },
+    obj: 'yewusl',
+    reorder: 'DESC',
+    area: json.area,
+    areaDefault: ['SHJCK01000'],
+    coordinationType: json.coordinationType,
+    coordinationTypeDefault: ['allinformation'],
+    nameSearch: '',
+    pageInfo: {
+      currentPage: 1,
+      pageSize: 10,
+      total: 0
+    },
+    mediators: []
+  }),
   computed: {
     timeCom () {
       let now = this.time
@@ -178,47 +176,43 @@ export default {
     }
   },
   watch: {
-    chooseDefault: function (newValue, oldValue) {
+    areaDefault: function (newValue, oldValue) {
       this.getData()
     },
     date: function (newValue, oldValue) {
       this.getData()
+    },
+    nameSearch: function (newValue, oldValue) {
+      this.getData()
+    },
+    coordinationTypeDefault: function (newValue, oldValue) {
+      this.getData()
     }
-  },
-  created: function () {
-    this.getData()
   },
   methods: {
     getData (excl) {
-      let _this = this
-      _this.loading = _this.$loading({
-        lock: true,
-        text: '数据加载中',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.5)',
-        style: 'width: 100%,height:100%'
-      })
-      let excel = excl || 0
-      let baseUrl = '/peopleMediate/V1.0.0.2'
-      let url = '/institutionalRankings'
-      let param = {
-        'startdate': jsonUtil.dateTimeFormat(_this.date[0]),
-        'enddate': jsonUtil.dateTimeFormat(_this.date[1]),
-        'lable': _this.chooseDefault[0],
-        'obj': _this.obj,
-        'reorder': _this.reorder,
-        'excl': excel,
-        'pagesize': 10,
-        'currentpage': _this.currentpage
+      let exclV = excl || 0
+      let vue = this
+      let reqParam = {
+        location: this.areaDefault[0],
+        mediationtype: this.coordinationTypeDefault[0],
+        obj: this.obj, // 排序字段
+        reorder: this.reorder, // 排序方式
+        excl: exclV,
+        keyword: this.nameSearch,
+        pagesize: this.pageInfo.pageSize,
+        currentpage: this.pageInfo.currentPage,
+        startdate: jsonUtil.dateTimeFormat(vue.date[0]),
+        enddate: jsonUtil.dateTimeFormat(vue.date[1])
       }
-      if (excel === 0) {
-        http.post(baseUrl + url, param, (data) => {
-          _this.list = data.pageData
-          _this.pageTotal = data.pageinfo.total
-          _this.loading.close()
+      let url = '/peopleMediate/V1.0.0.3/portraysList'
+      if (exclV === 0) {
+        http.post(url, reqParam, (data) => {
+          vue.mediators = data.pageData
+          vue.pageInfo.total = data.pageinfo.total
         }, 'application/json')
       } else {
-        http.post(baseUrl + url, param, (data) => {
+        http.post(url, reqParam, (data) => {
           let date = new Date()
           let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
           let blob = new Blob([data]) // 创建一个blob对象
@@ -229,13 +223,11 @@ export default {
           document.body.appendChild(a)
           a.click()
           a.remove()
-          _this.loading.close()
         }, 'application/json', 'arraybuffer')
       }
     },
-    // 分页
     handleCurrentChange (val) {
-      this.currentpage = val
+      this.pageInfo.currentPage = val
       this.getData()
     },
     // 排序
@@ -252,16 +244,22 @@ export default {
       this.obj = val
       this.getData()
     },
-    // 路由跳转
-    changeRouter (name) {
-      this.$router.push({name: name})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'peoplePortrait') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
     }
+  },
+  created () {
+    this.getData()
   }
 }
 </script>
 
-<style lang="less" scoped>
-.institutionRanking_container{
+<style lang="less">
+.pepleRanking_container{
   background: #171415;
   position: absolute;
   width: 100%;
@@ -351,10 +349,6 @@ export default {
       }
       .navRight{
         float: right;
-        .date_container{
-          float: right;
-          margin-right: 30px;
-        }
         .excel_btn{
           float: right;
           height:26px;
@@ -366,6 +360,10 @@ export default {
           font-size:12px;
           font-family:'HiraginoSansGB-W3';
           cursor: pointer;
+        }
+        .date_container{
+          float: right;
+          margin-right: 15px;
         }
       }
     }
@@ -417,6 +415,9 @@ export default {
         span{
           cursor: pointer;
         }
+        .yellow{
+          color:#FFF600
+        }
         .row{
           line-height: 18px;
           font-size:12px;
@@ -430,12 +431,12 @@ export default {
           width: 5%;
         }
         .row2{
-          width: 17%;
+          width: 13%;
           text-align: left;
           padding-left: 12px;
         }
         .row3{
-          width: 8%;
+          width: 16%;
         }
         .row4{
           width: 8%;
@@ -447,10 +448,10 @@ export default {
           width: 8%;
         }
         .row7{
-          width: 10%;
+          width: 8%;
         }
         .row8{
-          width: 10%;
+          width: 8%;
         }
         .row9{
           width: 8%;
@@ -499,9 +500,9 @@ export default {
             }
           }
           .row2{
-            width: 17%;
+            width: 13%;
             text-align: left;
-            background: url(/static/renmintj/jigoumc.png);
+            background: url('/static/renmintjNew/photo_back.png');
             display: inline-block;
             background-repeat: no-repeat;
             background-position: left 4px center;
@@ -524,8 +525,23 @@ export default {
               text-overflow:ellipsis;
               white-space: nowrap;
             }
+            .img_photo{
+              position: absolute;
+              left: 7px;
+              top: 50%;
+              transform: translateY(-50%);
+            }
           }
           .row3{
+            width:16%;
+            span{
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(204,233,255,1);
+              width: 18em;
+            }
+          }
+          .row4{
             width: 8%;
             span{
               background: linear-gradient(left, #4481EB,#04BEFE);
@@ -536,15 +552,6 @@ export default {
               color:rgba(255,255,255,1);
             }
           }
-          .row4{
-            width: 8%;
-            span{
-              font-size: 12px;
-              font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
-            }
-          }
           .row5{
             width: 8%;
             span{
@@ -552,63 +559,7 @@ export default {
               font-family: HiraginoSansGB-W3;
               color: rgba(255,255,255,1);
               opacity: 0.4;
-            }
-          }
-          .row6{
-            width: 8%;
-            span{
-              font-size: 12px;
-              font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
-            }
-          }
-          .row7{
-            width: 10%;
-            span{
-              font-size: 12px;
-              font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
-            }
-          }
-          .row8{
-            width: 10%;
-            span{
-              background: rgba(77,132,254,1);
-              opacity: 0.4;
-              border-radius: 2px;
-              padding: 4px 8px;
-              color: rgba(255,255,255,1);
-            }
-          }
-          .row9{
-            width: 8%;
-            span{
-              background: rgba(77,132,254,1);
-              opacity: 0.4;
-              border-radius: 2px;
-              padding: 4px 8px;
-              color: rgba(255,255,255,1);
-            }
-          }
-          .row10{
-            width: 8%;
-            span{
-              background: rgba(77,132,254,1);
-              opacity: 0.4;
-              border-radius: 2px;
-              padding: 4px 8px;
-              color: rgba(255,255,255,1);
-            }
-          }
-          .row11{
-            width: 10%;
-            span{
-              font-size: 12px;
-              font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              transform: translate(0,-50%);
             }
             .icon_rate{
               position: absolute;
@@ -619,15 +570,80 @@ export default {
               height: 4px;
               border-radius: 50%;
             }
-            .red{
-              background: #FF3942;
+          }
+          .row6{
+            width: 8%;
+            span{
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(255,255,255,1);
+              opacity: 0.4;
+              transform: translate(0,-50%);
             }
-            .yellow{
-              background: #FFF600;
+            .icon_rate{
+              position: absolute;
+              top:50%;
+              right: 55%;
+              transform: translateY(-50%);
+              width: 4px;
+              height: 4px;
+              border-radius: 50%;
             }
-            .green{
-              background: #17FF84
+          }
+          .row7{
+            width: 8%;
+            span{
+              background: rgba(77,132,254,1);
+              opacity: 0.4;
+              border-radius: 2px;
+              padding: 4px 8px;
+              color: rgba(255,255,255,1);
             }
+          }
+          .row8{
+            width: 8%;
+            span{
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(255,255,255,1);
+              opacity: 0.4;
+            }
+          }
+          .row9{
+            width: 8%;
+            span{
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(255,255,255,1);
+              opacity: 0.4;
+            }
+          }
+          .row10{
+            width: 8%;
+            span{
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(255,255,255,1);
+              opacity: 0.4;
+            }
+          }
+          .row11{
+            width: 10%;
+            span{
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(255,255,255,1);
+              opacity: 0.4;
+            }
+          }
+          .red{
+            background: #FF3942;
+          }
+          .yellow{
+            background: #FFF600;
+          }
+          .green{
+            background: #17FF84
           }
         }
       }

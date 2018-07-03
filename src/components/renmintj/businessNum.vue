@@ -235,7 +235,7 @@ export default {
             } else {
               return -1
             }
-          }).splice(0, 10)
+          }).slice(0, 10)
         }
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-03 10:51:10
+ * @Last Modified time: 2018-07-03 16:00:48
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -20,7 +20,7 @@
     </div>
     <div class="body clearfix">
       <div class="left">
-        <div class="title">
+        <div class="title" @click="changeRouter('businessTypes')">
           <span class="title_china">业务类型</span>
           <span class="title_english">Business type</span>
         </div>
@@ -43,8 +43,8 @@
           </div>
         </div>
         <!-- 业务类型柱状图 -->
-        <div class="left2 ywlx"></div>
-        <div class="title">
+        <div class="left2 businessTypes"></div>
+        <div class="title" @click="changeRouter('trendAnalysis')">
           <span class="title_china">趋势分析</span>
           <span class="title_english">Trend analysis</span>
         </div>
@@ -56,11 +56,11 @@
             <span @click="trendType='data_tj'" :class="{active:trendType==='data_tj'}">人民调解</span>
           </div>
           <!-- 趋势分析图dom容器 -->
-          <div class="trend"></div>
+          <div class="trendAnalysis"></div>
         </div>
       </div>
       <div class="right">
-        <div class="title">
+        <div class="title" @click="changeRouter('importantEvent')">
           <span class="title_china">重点关注</span>
           <span class="title_english">Priority order</span>
         </div>
@@ -72,9 +72,9 @@
               <span class="once th">日期</span>
             </div>
             <!-- 判断下重点事件是否>6，如果不是则不轮播，正常显示即可 -->
-            <div v-if="zhongdiangz.length>=6" class="table_body">
+            <div v-if="importantEvent.length>=6" class="table_body">
               <rollScreen :dLength='20' :height='25' :lineNum='6'>
-                <div v-for="(item,index) in zhongdiangz" :key="index" class="table_tr clearfix" @click="changeRouter('importantEventDetail',item.id)"
+                <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('importantEventDetail',item.id)"
                   slot="slide">
                   <span class="once">{{item.shiJianLX}}</span>
                   <span class="once">{{item.diQu}}</span>
@@ -82,8 +82,9 @@
                 </div>
               </rollScreen>
             </div>
-            <div v-if="zhongdiangz.length<6" class="table_body">
-              <div v-for="(item,index) in zhongdiangz" :key="index" class="table_tr clearfix" slot="slide">
+            <div v-if="importantEvent.length<6" class="table_body">
+              <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('importantEventDetail',item.id)"
+                slot="slide">
                 <span class="once">{{item.shiJianLX}}</span>
                 <span class="once">{{item.diQu}}</span>
                 <span class="once">{{item.riQi}}</span>
@@ -147,7 +148,7 @@
         </div>
       </div>
       <div class="bottom">
-        <div class="bottom1">
+        <div class="bottom1" @click="changeRouter('institutionRanking')">
           <div class="bTitle">机构总数</div>
           <div class="bContent">
             <img src="/static/renmintjNew/icon_sifas.png" />
@@ -178,7 +179,7 @@
             </div>
           </div>
         </div>
-        <div class="bottom2">
+        <div class="bottom2" @click="changeRouter('peopleNum')">
           <div class="bTitle">人员总数</div>
           <div class="bContent">
             <img src="/static/renmintjNew/icon_tiaojiey.png" />
@@ -198,19 +199,19 @@
             <img src="/static/renmintjNew/icon_guwenls.png" />
             <div class="bSpanC">
               <span class="bSpan1">顾问律师</span>
-              <span class="bSpan2">{{peopleCount.juCunFLGW}}</span>
+              <span class="bSpan2">{{peopleCount.guWenLS}}</span>
             </div>
           </div>
           <div class="bContent">
             <img src="/static/renmintjNew/icon_falvfwz.png" />
             <div class="bSpanC">
               <span class="bSpan1">法律服务者</span>
-              <span class="bSpan2">{{peopleCount.zhiYuanZ}}</span>
+              <span class="bSpan2">{{peopleCount.faLvFWZ}}</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="top clearfix">
+      <div class="top clearfix" @click="changeRouter('businessNum')">
         <div class="topY">
           <span class="h1"></span>
           <span class="h2 topYh">本月</span>
@@ -266,9 +267,9 @@ export default {
   data: () => ({
     area: json.area,
     areaDefault: ['SHJCK01000'],
-    pro1: 81.2,
-    pro2: 26.6,
-    trendType: 'data_110',
+    pro1: 0,
+    pro2: 0,
+    trendType: 'data_tj',
     trendData: {},
     myChart: {},
     workQuality: {
@@ -277,7 +278,7 @@ export default {
       wenShuZL: 0,
       anJianSB: 0
     },
-    zhongdiangz: [],
+    importantEvent: [],
     casestatistics: {
       MBM_CASE: 0,
       MMS_ALARM110INFO: 0,
@@ -291,7 +292,7 @@ export default {
       CDS_INVESTIGATIONFEEDBAC: 0
     },
     MechanismNumber: [],
-    peopleCount: [],
+    peopleCount: {},
     time: new Date()
   }),
   computed: {
@@ -304,7 +305,7 @@ export default {
   },
   watch: {
     trendType: function (to, from) {
-      this.draw('trend', eosNew.setLine(this.trendData[to], true, true))
+      this.draw('trendAnalysis', eosNew.setLine(this.trendData[to].reverse().slice(0, 6).reverse(), true, true))
     },
     areaDefault: function (newValue, oldValue) {
       this.getData()
@@ -320,7 +321,6 @@ export default {
       }
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
-      // let vue = this
       this.myChart[domName].on('restore', function (params) {
         console.log(params)
       })
@@ -340,7 +340,7 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.$nextTick(function () {
           vue.trendData = data
-          vue.draw('trend', eosNew.setLine(vue.trendData['data_110'], true, true))
+          vue.draw('trendAnalysis', eosNew.setLine(vue.trendData[vue.trendType].reverse().slice(0, 6).reverse(), true, true))
         })
       })
       // 工作质量
@@ -357,14 +357,14 @@ export default {
       // 重点事件
       url = '/keyEvents'
       http.get(baseUrl + url, reqParam, (data) => {
-        vue.zhongdiangz = data
+        vue.importantEvent = data
       })
       // 行专占比
       url = '/category'
       http.get(baseUrl + url, reqParam, (data) => {
         vue.pro1 = (data.hangZhuanBL * 100).toFixed(1)
         vue.pro2 = (100 - data.hangZhuanBL * 100).toFixed(1)
-        vue.draw('ywlx', eosNew.setBar(data.yeWuLXHSL))
+        vue.draw('businessTypes', eosNew.setBar(data.yeWuLXHSL))
       })
       // 业务数量
       url = '/businessCount'
@@ -387,18 +387,22 @@ export default {
       // 案件分布--地图数据
       url = '/caseDistribution'
       http.get(baseUrl + url, reqParam, (data) => {
-        data = data.map((item, index) => {
-          return {name: item.diQu, value: [item.jinDu, item.weiDu, item.jianShu]}
-        })
+        if (data.length > 0) {
+          data = data.map((item, index) => {
+            return {name: item.diQu, value: [item.jinDu, item.weiDu, item.jianShu]}
+          })
+        }
         vue.$nextTick(function () {
           vue.draw('map', eos.setMapbox(data))
         })
       })
     },
-    changeRouter (url, val) {
-      if (url === 'importantEventDetail') {
-        this.$router.push({name: 'importantEventDetail', params: {id: val}})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'importantEventDetail') {
+        target = {name: name, params: { id: id }}
       }
+      this.$router.push(target)
     }
   }
 }
@@ -411,8 +415,8 @@ export default {
     height: 100%;
     min-width: 1366px;
     min-height: 766px;
-    // background: url('/static/renmintj/pic_background2.png') no-repeat;
-    // background-size: 100% 100%;
+    background: #171415;
+    background-size: 100% 100%;
     .head {
       z-index: 1;
       display: block;
@@ -519,7 +523,7 @@ export default {
               color: #FFF225
             }
           }
-          .trend {
+          .trendAnalysis {
             position: absolute;
             width: calc(100% - 10px);
             height: calc(100% - 26px);
@@ -800,6 +804,7 @@ export default {
       }
       .top {
         z-index: 1;
+        cursor: pointer;
         position: absolute;
         width: 36%;
         height: 104px;

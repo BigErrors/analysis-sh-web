@@ -4,11 +4,10 @@ import login from '@/components/login'
 import moduleChoose from '@/components/moduleChoose'
 import modelSupermarket from '@/components/modelSupermarket'
 import modelDataApp from '@/components/modelDataApp'
-import index4renmintj from '@/components/renmintj/index4renmintj4'
-import index4renmintj5 from '@/components/renmintj/index4renmintj5'
+import index4renmintj from '@/components/renmintj/index4renmintj5'
 import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
-import peopleSearch from '@/components/renmintj/peopleSearch'
+import pepleRanking from '@/components/renmintj/pepleRanking'
 import peoplePortrait from '@/components/renmintj/peoplePortrait'
 import businessNum from '@/components/renmintj/businessNum'
 import businessTypes from '@/components/renmintj/businessTypes'
@@ -23,8 +22,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index4renmintj5',
-      component: index4renmintj5
+      name: 'index4renmintj',
+      component: index4renmintj
     },
     {
       path: '/login',
@@ -47,10 +46,6 @@ const router = new Router({
       name: 'index4renmintj',
       component: index4renmintj
     }, {
-      path: '/index4renmintj5',
-      name: 'index4renmintj5',
-      component: index4renmintj5
-    }, {
       path: '/peopleNum',
       name: 'peopleNum',
       component: peopleNum
@@ -59,9 +54,9 @@ const router = new Router({
       name: 'peopleType',
       component: peopleType
     }, {
-      path: '/peopleSearch',
-      name: 'peopleSearch',
-      component: peopleSearch
+      path: '/pepleRanking',
+      name: 'pepleRanking',
+      component: pepleRanking
     }, {
       path: '/peoplePortrait/:id',
       name: 'peoplePortrait',

@@ -2008,7 +2008,7 @@ let setMapbox = (mapData) => {
     visualMap: [{
       type: 'continuous',
       show: false,
-      max: 600,
+      max: 30,
       calculable: true,
       realtime: false,
       inRange: {
@@ -2094,13 +2094,13 @@ let setMapbox = (mapData) => {
       coordinateSystem: 'mapbox',
       // 三维柱状图中三维图形的着色效果：'color' 只显示颜色，不受光照等其它因素的影响。'lambert' 通过经典的 lambert 着色表现光照带来的明暗。'realistic' 真实感渲染，配合 light.ambientCubemap 和 postEffect 使用可以让展示的画面效果和质感有质的提升。
       shading: 'realistic',
-      barSize: 0.4,
+      barSize: 0.3,
       minHeight: 2,
       data: mapData,
-      silent: false,
+      silent: true,
       emphasis: {
         label: {
-          show: false,
+          show: true,
           zIndex: 10,
           formatter: function (component) {
             return `名称: ${component.name}\n数量: ${component.value[2]}件`

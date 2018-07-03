@@ -44,9 +44,6 @@ let area = [{
   'label': '徐汇区',
   'value': 'SHJCK01005'
 }, {
-  'label': '闸北区',
-  'value': 'SHJCK01004'
-}, {
   'label': '杨浦区',
   'value': 'SHJCK01003'
 }, {
@@ -96,58 +93,14 @@ let businessType = [{
   'value': '纠纷排查'
 }]
 
-let tiaoWeiHLX = [{
-  label: '全部',
-  value: 0
-}, {
-  label: '居（社区）调委会',
-  value: '居（社区）调委会'
-}, {
-  label: '村调委会',
-  value: '村调委会'
-}, {
-  label: '行业性、专业性调委会',
-  value: '行业性、专业性调委会',
-  disabled: true,
-  children: [{
-    label: '医患纠纷',
-    value: '6'
-  }, {
-    label: '专业事故',
-    value: '7'
-  }, {
-    label: '劳动争议',
-    value: '8'
-  }, {
-    label: '物业纠纷',
-    value: '9'
-  }, {
-    label: '消费纠纷',
-    value: '10'
-  }, {
-    label: '旅游纠纷',
-    value: '11'
-  }, {
-    label: '电子商务',
-    value: '12'
-  }, {
-    label: '社校纠纷',
-    value: '13'
-  }, {
-    label: '知识产权',
-    value: '14'
-  }]
-}, {
-  label: '街道调委会',
-  value: '街道调委会'
-}, {
-  label: '乡镇调委会',
-  value: '乡镇调委会'
-}, {
-  label: '企事业单位调委会',
-  value: '企事业单位调委会'
-}, {
-  label: '其它调委会',
-  value: '其它调委会'
-}]
-export default {area, caseType, businessType, tiaoWeiHLX}
+let coordinationType = [
+  {label: '全部', value: 'allinformation'},
+  {label: '村调委会', value: '6584014fd89249a1a750e9eb16f775e2'},
+  {label: '居（社区）调委会', value: 'c0d8d4a282854854ad71826e0bea2c57'},
+  {label: '乡镇调委会', value: 'c542c1a3863c47e798144d311e4371c8'},
+  {label: '街道调委会', value: 'af970ed75443429fa302fdf5914de11a'},
+  {label: '企事业单位调委会', value: '962855d460a149c0baf2e8f86a64cdf1'},
+  {label: '行业性、专业性调委会', value: '29652b300bb2482ea1b30be2310cf451'},
+  {label: '其它调委会', value: '14d05df3ee184a22aeb0d78a81874050'}
+]
+export default {area, caseType, businessType, coordinationType}
