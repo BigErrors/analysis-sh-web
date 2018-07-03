@@ -667,6 +667,7 @@
 
 <script>
 import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 export default {
   data: () => ({
     time: new Date(),
@@ -708,7 +709,9 @@ export default {
     // let id = 'f09f6e4161054b72bf9a84335c369864'// 110联动步骤4 重复报警
     // let id = 'fa16024ec4e943caa886c708bad0ee88' // 公共法律服务步骤2
     // let id = '2590b28f83f34d7ab1ae6b2c12a7ea67'// 纠纷排查步骤2
-    http.get('/peopleMediate/V1.0.0.3/keyEventsDetails', {id: id}, (res) => {
+    let baseUrl = urlConfig.baseUrl
+    let url = '/keyEventsDetails'
+    http.get(baseUrl + url, {id: id}, (res) => {
       _this.eventDetail = res
       _this.anJanCLRY = res.anJanCLRY
       for (let i = 0; i < 2; i++) {

@@ -8,9 +8,9 @@
   </div>
   <div class="importantEvent_content">
     <div class="importantEvent_content_top clearfix">
-      <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='jinrixz' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">本月新增</span></div>
+      <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='benYueXZ' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">本月新增</span></div>
       <div class="cutLine"></div>
-      <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='quannianlj' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">全年累计</span></div>
+      <div class="statistics"><digitalRolling class="num" :height='41' :width='25' :number='jinNianZS' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling><br><span class="title">全年累计</span></div>
     </div>
     <div class="importantEvent_content_top">
       <div class="importantEvent_content_title clearfix">
@@ -77,13 +77,13 @@
           <span class='td detail'>操作</span>
         </div>
         <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
-          <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongdiansj" :key="index">
-            <span class='td num'>{{item.xuhao}}</span>
-            <span class='td'>{{item.shijianlx}}</span>
-            <span class='td'>{{item.diqu}}</span>
-            <span class='td'>{{item.riqi}}</span>
-            <span class='td'>{{item.jianshu}}</span>
-            <span class='td'>{{item.zhuangtai}}</span>
+          <div class="renmintj_table_tr" slot="slide" v-for="(item, index) in table.zhongDianSJ" :key="index">
+            <span class='td num'>{{item.xuHao}}</span>
+            <span class='td'>{{item.shiJianLX}}</span>
+            <span class='td'>{{item.diQu}}</span>
+            <span class='td'>{{item.riQi}}</span>
+            <span class='td'>{{item.jianShu}}</span>
+            <span class='td'>{{item.zhuangTai}}</span>
             <span class='td detail'><span @click="changeRouter('importantEventDetail',item.id)">详情</span></span>
           </div>
         </rollScreen>
@@ -96,6 +96,7 @@
 <script>
 import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 export default {
@@ -108,13 +109,13 @@ export default {
     return {
       myChart: {},
       table: {
-        zhongdiansj: [],
+        zhongDianSJ: [],
         dLength: 0,
         lineNum: 0
       },
       timer: '',
-      jinrixz: 0,
-      quannianlj: 0
+      benYueXZ: 0,
+      jinNianZS: 0
     }
   },
   methods: {
@@ -144,22 +145,20 @@ export default {
     getData () {
       let vue = this
       let reqParam = {}
-      let baseUrl = '/peopleMediate/V1.0.0.2'
+      let baseUrl = urlConfig.baseUrl
       let url = ''
       url = '/keyEventsAnalysis'
       http.get(baseUrl + url, reqParam, (data) => {
-        [vue.table.dLength, vue.table.lineNum, vue.table.zhongdiansj] = [data.KeyEvents.length, 7, data.KeyEvents]
-        vue.jinrixz = data['DigitalDisplay']['jinrixz']
-        vue.quannianlj = data['DigitalDisplay']['jinnianzs']
-        data['KeyEvents_Number'] = data['KeyEvents_Number'].map(item => { return {name: item.time, value: item.number} })
-        data['KeyEvents_AddCounts'] = data['KeyEvents_AddCounts'].map(item => { return {name: item.time, value: item.value} })
+        [vue.table.dLength, vue.table.lineNum, vue.table.zhongDianSJ] = [data.zhongDianSJ.length, 7, data.zhongDianSJ]
+        vue.benYueXZ = data['shuZhiTJ']['benYueXZ']
+        vue.jinNianZS = data['shuZhiTJ']['jinNianZS']
         vue.$nextTick(function () {
-          vue.draw('target2', eos.setBar3(data['KeyEvents_Number'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
-          vue.draw('target3', eos.setPie6(data['KeyEvents_Source'].reverse(), 'integer'))
-          vue.draw('target4', eos.setBar3(data['KeyEvents_Status'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
-          vue.draw('target5', eos.setLine4([data['KeyEvents_AddCounts']].reverse(), 'integer'))
-          vue.draw('target6', eos.setPie6(data['KeyEvents_Type'], 'integer', true))
-          vue.draw('target7', eos.setBar3(data['KeyEvents_EachArea'].reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer', 11))
+          vue.draw('target2', eos.setBar4(data['zhongDianSJBHQS']))
+          vue.draw('target3', eos.setPie6(data['zhongDianSJLY'], 'integer'))
+          // vue.draw('target4', eos.setBar3(data['KeyEvents_Status'], ['#1194F8', '#86CBFF'], 'vertical', 'integer', 32))
+          // vue.draw('target5', eos.setLine4([data['KeyEvents_AddCounts']].reverse(), 'integer'))
+          vue.draw('target6', eos.setPie6(data['zhongDianSJLX'], 'integer', true))
+          vue.draw('target7', eos.setBar3(data['geQuZDSJ'].reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer', 11))
         })
       })
     }
