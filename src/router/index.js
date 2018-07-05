@@ -22,8 +22,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index4renmintj',
-      component: index4renmintj
+      name: 'moduleChoose',
+      component: moduleChoose
     },
     {
       path: '/login',

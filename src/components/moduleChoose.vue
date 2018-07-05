@@ -1,56 +1,60 @@
 <template>
-  <div class="module_container">
-    <div class="module_header">
-      <div class="module_userInfo" @click="changeRouter('login')"></div>
+  <div class="moduleChoose_container">
+    <div class="head">
+      <div class="title"></div>
+      <div class="time">{{timeCom}}</div>
+      <div class="close"></div>
     </div>
-    <div class="module_center"></div>
-    <div class="module_content">
-      <div class="enjoy_carousel_container">
-        <div class="enjoy_carousel_once_6 bg1" @click='changeRouter("modelSupermarket")' :class="{once_6_first:mark===1,once_6_second:mark===2,once_6_third:mark===3,once_6_fourth:mark===4,once_6_fifth:mark===5,once_6_sixth:mark===6}">
-          <div v-if="mark===2" class="righttop"></div>
-          <div v-if="mark===2" class="lefttop"></div>
-          <div v-if="mark===2" class="rightbottom"></div>
-          <div v-if="mark===2" class="leftbottom"></div>
-          <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型超市</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+    <div class="body">
+      <div class="container">
+        <div class="top"></div>
+        <div class="middle">
+          <div class="six bg1" :class="{six_1:mark===1,six_2:mark===2,six_3:mark===3,six_4:mark===4,six_5:mark===5,six_6:mark===6}" @click="changeRouter('')">
+            <div v-if="mark===2" class="border righttop"></div>
+            <div v-if="mark===2" class="border lefttop"></div>
+            <div v-if="mark===2" class="border rightbottom"></div>
+            <div v-if="mark===2" class="border leftbottom"></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型工具</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+          </div>
+          <div class="six bg2" :class="{six_2:mark===1,six_3:mark===2,six_4:mark===3,six_5:mark===4,six_6:mark===5,six_1:mark===6}" @click="changeRouter('')">
+            <div v-if="mark===1" class="border righttop"></div>
+            <div v-if="mark===1" class="border lefttop"></div>
+            <div v-if="mark===1" class="border rightbottom"></div>
+            <div v-if="mark===1" class="border leftbottom"></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">业务应用</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+          </div>
+          <div class="six bg3" :class="{six_3:mark===1,six_4:mark===2,six_5:mark===3,six_6:mark===4,six_1:mark===5,six_2:mark===6}" @click="changeRouter('index4renmintj')">
+            <div v-if="mark===6" class="border righttop"></div>
+            <div v-if="mark===6" class="border lefttop"></div>
+            <div v-if="mark===6" class="border rightbottom"></div>
+            <div v-if="mark===6" class="border leftbottom"></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据洞察</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+          </div>
+          <div class="six bg1" :class="{six_4:mark===1,six_5:mark===2,six_6:mark===3,six_1:mark===4,six_2:mark===5,six_3:mark===6}" @click="changeRouter('')">
+            <div v-if="mark===5" class="border righttop"></div>
+            <div v-if="mark===5" class="border lefttop"></div>
+            <div v-if="mark===5" class="border rightbottom"></div>
+            <div v-if="mark===5" class="border leftbottom"></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型工具</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+          </div>
+          <div class="six bg2" :class="{six_5:mark===1,six_6:mark===2,six_1:mark===3,six_2:mark===4,six_3:mark===5,six_4:mark===6}" @click="changeRouter('')">
+            <div v-if="mark===4" class="border righttop"></div>
+            <div v-if="mark===4" class="border lefttop"></div>
+            <div v-if="mark===4" class="border rightbottom"></div>
+            <div v-if="mark===4" class="border leftbottom"></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">业务应用</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+          </div>
+          <div class="six bg3" :class="{six_6:mark===1,six_1:mark===2,six_2:mark===3,six_3:mark===4,six_4:mark===5,six_5:mark===6}" @click="changeRouter('index4renmintj')">
+            <div v-if="mark===3" class="border righttop"></div>
+            <div v-if="mark===3" class="border lefttop"></div>
+            <div v-if="mark===3" class="border rightbottom"></div>
+            <div v-if="mark===3" class="border leftbottom"></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据洞察</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+          </div>
+          <div class="left" @click="changemark('last')"></div>
+          <div class="right" @click="changemark('next')"></div>
         </div>
-        <div class="enjoy_carousel_once_6 bg2" @click='changeRouter("modelDataApp")' :class="{once_6_first:mark===6,once_6_second:mark===1,once_6_third:mark===2,once_6_fourth:mark===3,once_6_fifth:mark===4,once_6_sixth:mark===5}">
-          <div v-if="mark===1" class="righttop"></div>
-          <div v-if="mark===1" class="lefttop"></div>
-          <div v-if="mark===1" class="rightbottom"></div>
-          <div v-if="mark===1" class="leftbottom"></div>
-          <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据应用</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
-        </div>
-        <div class="enjoy_carousel_once_6 bg3" @click='changeRouter("mapApp")' :class="{once_6_first:mark===5,once_6_second:mark===6,once_6_third:mark===1,once_6_fourth:mark===2,once_6_fifth:mark===3,once_6_sixth:mark===4}">
-          <div v-if="mark===6" class="righttop"></div>
-          <div v-if="mark===6" class="lefttop"></div>
-          <div v-if="mark===6" class="rightbottom"></div>
-          <div v-if="mark===6" class="leftbottom"></div>
-          <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据展示</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
-        </div>
-        <div class="enjoy_carousel_once_6 bg4" @click='changeRouter("modelSupermarket")' :class="{once_6_first:mark===4,once_6_second:mark===5,once_6_third:mark===6,once_6_fourth:mark===1,once_6_fifth:mark===2,once_6_sixth:mark===3}">
-          <div v-if="mark===5" class="righttop"></div>
-          <div v-if="mark===5" class="lefttop"></div>
-          <div v-if="mark===5" class="rightbottom"></div>
-          <div v-if="mark===5" class="leftbottom"></div>
-          <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型超市</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
-        </div>
-        <div class="enjoy_carousel_once_6 bg5" @click='changeRouter("modelDataApp")' :class="{once_6_first:mark===3,once_6_second:mark===4,once_6_third:mark===5,once_6_fourth:mark===6,once_6_fifth:mark===1,once_6_sixth:mark===2}">
-          <div v-if="mark===4" class="righttop"></div>
-          <div v-if="mark===4" class="lefttop"></div>
-          <div v-if="mark===4" class="rightbottom"></div>
-          <div v-if="mark===4" class="leftbottom"></div>
-          <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据应用</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
-        </div>
-        <div class="enjoy_carousel_once_6 bg6" @click='changeRouter("mapApp")' :class="{once_6_first:mark===2,once_6_second:mark===3,once_6_third:mark===4,once_6_fourth:mark===5,once_6_fifth:mark===6,once_6_sixth:mark===1}">
-          <div v-if="mark===3" class="righttop"></div>
-          <div v-if="mark===3" class="lefttop"></div>
-          <div v-if="mark===3" class="rightbottom"></div>
-          <div v-if="mark===3" class="leftbottom"></div>
-          <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据展示</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
-        </div>
-        <div class="module_footer"></div>
-        <div class="module_last"  @click="changemark('last')"></div>
-        <div class="module_next"  @click="changemark('next')"></div>
+        <div class="bottom"></div>
       </div>
     </div>
   </div>
@@ -63,10 +67,19 @@ export default {
       mark: 1,
       timer: '',
       timerOut: '', // 这个timer给鼠标移动事件，鼠标移动就给循环上锁
-      lockClick: false // 给点击上锁，防止连续点击
+      lockClick: false, // 给点击上锁，防止连续点击
+      time: new Date()
+    }
+  },
+  computed: {
+    timeCom () {
+      let now = this.time
+      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
+      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute
     }
   },
   methods: {
+    // 路由跳转
     changeRouter (name) {
       if (name !== '') {
         this.$router.push({name: name})
@@ -127,228 +140,228 @@ export default {
 }
 </script>
 
-<style scoped>
-.module_container{
-  height: 100%;
-  width: 100%;
-  background: url('/static/moduleImages/back.png');
-  padding:0;
-  margin:0;
-  overflow: hidden
-}
-.module_header{
-  height: 94px;
-  width: 100%;
-  background: url('/static/moduleImages/上海市司法局.png');
-  background-position: center;
-  background-repeat:no-repeat;
-}
-.module_userInfo{
-  position: fixed;
-  left: 1920px;
-  top: 0px;
-  width: 70px;
-  height: 70px;
-  background: url('/static/moduleImages/logout.png');
-  transform: translate(-80px,10px);
-  cursor: pointer;
-}
-.module_userInfo:hover{
-  background: url('/static/moduleImages/logout2.png');
-}
-.module_center{
-  width: 100%;
-  margin:95px 0 45px 0;
-  height: 47px;
-  background:url('/static/moduleImages/社会矛盾风险感控大数据平台.png');
-  background-position: center;
-  background-repeat:no-repeat;
-}
-.module_content{
-  width: 100%;
-  box-sizing: border-box;
-  height:578px;
-  margin:auto;
-  z-index: 2;
-}
-.module_footer{
-  width: 100%;
-  background:url('/static/moduleImages/footer.png');
-  background-position: center;
-  background-repeat:no-repeat;
+<style lang="less" scoped>
+.moduleChoose_container{
+  background-image:url('/static/renmintjNew/module_back.png');
+  background-position: center center;
+  background-size: 100% 100%;
   position: absolute;
-  height: 289px;
-  bottom: 0;
-  transform: translate3d(0,250px,-600px)
-}
-.enjoy_carousel_container {
   width: 100%;
   height: 100%;
-  position: relative;
-  left: 0;
-  top: 0;
-  transform-style: preserve-3d;
-  transform: rotatex(0deg);
-  perspective: 5000;
+  min-width:1366px;
+  min-height: 766px;
+  .head{
+    background-image: url('/static/renmintjNew/module_title.png');
+    background-repeat: no-repeat;
+    background-position: top 12px center;
+    display: block;
+    height: 108px;
+    position: relative;
+    .title{
+      background-image: url('/static/renmintjNew/module_content.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 200px;
+      height: 80px;
+      position: absolute;
+      left: 50%;
+      top:50%;
+      transform: translate(-50%,-50%)
+    }
+    .time{
+      position: absolute;
+      left: 50%;
+      bottom:4px;
+      transform: scale(0.9) translate(-50%,-50%);
+      font-size:12px;
+      font-family:'DigifaceWide';
+      color:rgba(114,195,255,1);
+    }
+    .close{
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 23px;
+      height: 23px;
+      background-image: url('/static/renmintjNew/module_close.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      &:hover{
+        background-image: url('/static/renmintjNew/module_open.png');
+      }
+    }
+  }
+  .body{
+    width: 100%;
+    height: calc(100% - 108px);
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    .container{
+      width: 100%;
+      height: 555px;
+      position: absolute;
+      top:50%;
+      transform: translateY(-50%);
+      .top{
+        position: absolute;
+        width: 100%;
+        height: 33px;
+        top:0;
+        background-image: url('/static/renmintjNew/font.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+      .middle{
+        height: 330px;
+        width: 100%;
+        top:88px;
+        position: absolute;
+        transform-style: preserve-3d;
+        transform: rotatex(0);
+        perspective: 5000;
+        z-index: 1;
+        .six{
+          width: 550px;
+          height: 330px;
+          position: absolute;
+          transition: all 1s linear,border 0.1s;
+          background-position:center;
+          background-repeat:no-repeat;
+          background-size:100% 100%;
+          border:2px solid #5cb4ff;
+          left: 50%;
+          &:hover{
+            box-shadow:0 0 25px #3298fe
+          }
+          .border{
+            width: 34px;
+            height: 34px;
+            border: 3px solid #5cb4ff;
+            position: absolute;
+            transition: 0.4s;
+          }
+          .righttop{
+            right: -6px;
+            top: -6px;
+            border-left: 0;
+            border-bottom: 0;
+          }
+          .lefttop{
+            left:-6px;
+            top:-6px;
+            border-right: 0;
+            border-bottom: 0;
+          }
+          .rightbottom{
+            right: -6px;
+            bottom: -6px;
+            border-left: 0;
+            border-top: 0;
+          }
+          .leftbottom{
+            left: -6px;
+            bottom: -6px;
+            border-right: 0;
+            border-top: 0;
+          }
+        }
+        .cover{
+          position: absolute;
+          bottom:0;
+          height: 60px;
+          background: rgba(1,26,81,0.58);
+          display: flex;
+          align-items: center;/*垂直居中*/
+          justify-content: center;/*水平居中*/
+          text-align: center;
+          width: 100%;
+          .cover_span{
+            line-height: 60px;
+            font-size: 19px;
+            color:#ffffff;
+            font-family: 'FZLTZHK--GBK1-0';
+            display: inline-block;
+            margin:0 10px;
+          }
+        }
+        .bg1{
+          background-image: url('/static/moduleImages/1.png')
+        }
+        .bg2{
+          background-image: url('/static/moduleImages/2.png')
+        }
+        .bg3{
+          background-image: url('/static/moduleImages/3.png')
+        }
+        .six_1{
+          transform: translateX(-150% - 5px) rotateY(-60deg);
+          transform-origin: right center;
+        }
+        .six_2{
+          transform: translateX(-50%)
+        }
+        .six_3{
+          transform: translateX(50% + 5px) rotateY(60deg);
+          transform-origin: left center;
+        }
+        .six_4{
+          transform: translate3d(493px,0px,-576px) rotateY(120deg);
+          transform-origin: left center;
+          opacity: 0;
+        }
+        .six_5{
+          transform: translate(-50%) translateZ(-972px);
+          opacity: 0;
+        }
+        .six_6{
+          transform: translate3d(-1131px,0,-493px) rotateY(-120deg);
+          transform-origin: right center;
+          opacity: 0;
+        }
+        .left{
+          position: absolute;
+          right: calc(50% + 613px);
+          top:50%;
+          transform: translate(0,-50%);
+          cursor: pointer;
+          width: 80px;
+          height: 86px;
+          background: url('/static/moduleImages/last.png');
+          background-position:center center;
+          background-repeat: no-repeat;
+          &:hover{
+            background: url('/static/moduleImages/last发光.png')
+          }
+        }
+        .right{
+          position: absolute;
+          left: calc(50% + 613px);
+          top:50%;
+          transform: translate(0,-50%);
+          cursor: pointer;
+          width: 80px;
+          height: 86px;
+          background: url('/static/moduleImages/next.png');
+          background-position:center center;
+          background-repeat: no-repeat;
+          &:hover{
+            background: url('/static/moduleImages/next发光.png')
+          }
+        }
+      }
+      .bottom{
+        position: absolute;
+        width: 100%;
+        height: 180px;
+        bottom: 0;
+        background-image: url('/static/renmintjNew/module_role.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
+  }
 }
-.enjoy_carousel_container .enjoy_carousel_once_6 {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  transition: all 1s linear,border 0.4s;
-  background-position:center;
-  background-repeat:no-repeat;
-  border:3px solid #5cb4ff;
-}
-.enjoy_carousel_once_6:hover{
-  box-shadow:0 0 25px #3298fe
-}
-.bg1{
-  background: url('/static/moduleImages/1.png')
-}
-.bg2{
-  background: url('/static/moduleImages/2.png')
-}
-.bg3{
-  background: url('/static/moduleImages/3.png')
-}
-.bg4{
-  background: url('/static/moduleImages/1.png')
-}
-.bg5{
-  background: url('/static/moduleImages/2.png')
-}
-.bg6{
-  background: url('/static/moduleImages/3.png')
-}
-.righttop{
-  width: 46px;
-  height: 46px;
-  border: 3px solid #5cb4ff;
-  position: absolute;
-  right: -6px;
-  top: -6px;
-  border-left: 0;
-  border-bottom: 0;
-  transition: 0.4s;
-}
-.lefttop{
-  width: 46px;
-  height: 46px;
-  border: 3px solid #5cb4ff;
-  position: absolute;
-  left:-6px;
-  top:-6px;
-  border-right: 0;
-  border-bottom: 0;
-  transition: 0.4s;
-}
-.rightbottom{
-  width: 46px;
-  height: 46px;
-  border: 3px solid #5cb4ff;
-  position: absolute;
-  right: -6px;
-  bottom: -6px;
-  border-left: 0;
-  border-top: 0;
-  transition: 0.4s;
-}
-.leftbottom{
-  width: 46px;
-  height: 46px;
-  border: 3px solid #5cb4ff;
-  position: absolute;
-  left: -6px;
-  bottom: -6px;
-  border-right: 0;
-  border-top: 0;
-  transition: 0.4s;
-}
-.enjoy_carousel_container .once_6_first {
-  width: 650px;
-  transform: translate3d(-205px, 0, 0) rotatey(-60deg);
-  transform-origin: right center;
-}
-.enjoy_carousel_container .once_6_second {
-  width:954px;
-  transform: translate3d(483px, 0, 0);
-}
-.enjoy_carousel_container .once_6_third {
-  width: 650px;
-  transform: translate3d(1476px, 0, 0) rotatey(60deg);
-  transform-origin: left center;
-}
-.enjoy_carousel_container .once_6_fourth {
-  width: 650px;
-  transform: translate3d(1917px, 0, -1218px) rotatey(120deg);
-  transform-origin: left center;
-  opacity: 0;
-}
-.enjoy_carousel_container .once_6_fifth {
-  width: 953px;
-  transform: translate3d(483px, 0, -867px);
-  opacity: 0;
-}
-.enjoy_carousel_container .once_6_sixth {
-  width: 650px;
-  transform: translate3d(-579px, 0, -915px) rotatey(-120deg);
-  transform-origin: right center;
-  opacity: 0;
-}
-
-.cover{
-  position: absolute;
-  bottom:0;
-  height: 106px;
-  background: rgba(1,26,81,0.58);
-  display: flex;
-  align-items: center;/*垂直居中*/
-  justify-content: center;/*水平居中*/
-  text-align: center;
-  width: 100%
-}
-.cover_span{
-  text-align: center;
-  height: 106px;
-  line-height: 106px;
-  font-size: 33px;
-  color:#ffffff;
-  font-family: 'FZLTZHK--GBK1-0';
-  display: inline-block;
-  margin:0 10px;
-}
-.module_last{
-  position: absolute;
-  left: 65px;
-  top:50%;
-  transform: translate(0,-50%);
-  cursor: pointer;
-  width: 80px;
-  height: 86px;
-  background: url('/static/moduleImages/last.png');
-  background-position:center center;
-  background-repeat: no-repeat;
-}
-.module_last:hover{
-  background: url('/static/moduleImages/last发光.png')
-}
-.module_next{
-  position: absolute;
-  right: 65px;
-  top:50%;
-  transform: translate(0,-50%);
-  cursor: pointer;
-  width: 80px;
-  height: 86px;
-  background: url('/static/moduleImages/next.png');
-  background-position:center center;
-  background-repeat: no-repeat;
-}
-.module_next:hover{
-   background: url('/static/moduleImages/next发光.png')
-}
-
 </style>

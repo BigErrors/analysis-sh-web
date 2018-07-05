@@ -152,7 +152,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright a1">
+            <div class="cright a1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">申请事项1：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
@@ -174,7 +174,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
               </div>
             </div>
-            <div class="cright a2">
+            <div class="cright a2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">受理结果：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shouLiJG}}</span>
@@ -188,13 +188,13 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.tiaoJieWYH}}</span>
               </div>
             </div>
-            <div class="cright a4">
+            <div class="cright a4" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">
               <div class="cline">
                 <span class="clable">调解结果：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou4.tiaoJieJG}}</span>
               </div>
               <div class="cline">
-                <span class="clable">旅行方式：</span>
+                <span class="clable">履行方式：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou4.lvXingFS}}</span>
               </div>
               <div class="cline">
@@ -202,7 +202,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou4.shiFouJXSFQR}}</span>
               </div>
             </div>
-            <div class="cright a6">
+            <div class="cright a6" v-if="eventDetail.anJianCLGC.buZhou6.zhuangTai===1">
               <div class="cline">
                 <span class="clable">回访记录：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou6.huiFangJL}}</span>
@@ -233,7 +233,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright b1">
+            <div class="cright b1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">申请事项1：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
@@ -255,7 +255,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
               </div>
             </div>
-            <div class="cright b2">
+            <div class="cright b2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">受理结果：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shouLiJG}}</span>
@@ -299,7 +299,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright c1">
+            <div class="cright c1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">申请事项1：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
@@ -321,7 +321,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
               </div>
             </div>
-            <div class="cright c2">
+            <div class="cright c2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">受理结果：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shouLiJG}}</span>
@@ -359,7 +359,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright b1">
+            <div class="cright b1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.diDian}}</span>
@@ -369,7 +369,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.leiXing}}</span>
               </div>
             </div>
-            <div class="cright b2">
+            <div class="cright b2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.diDian}}</span>
@@ -411,7 +411,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright b1">
+            <div class="cright b1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.diDian}}</span>
@@ -421,7 +421,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.leiXing}}</span>
               </div>
             </div>
-            <div class="cright b2">
+            <div class="cright b2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.diDian}}</span>
@@ -460,7 +460,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright c1">
+            <div class="cright c1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.diDian}}</span>
@@ -470,7 +470,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.leiXing}}</span>
               </div>
             </div>
-             <div class="cright c2">
+             <div class="cright c2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.diDian}}</span>
@@ -488,7 +488,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shiJian}}</span>
               </div>
             </div>
-            <div class="cright c3">
+            <div class="cright c3" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">
               <div class="cline">
                 <span class="clable">分派状态：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou3.fenPeiZT}}</span>
@@ -539,7 +539,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright c1">
+            <div class="cright c1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.diDian}}</span>
@@ -549,7 +549,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.leiXing}}</span>
               </div>
             </div>
-             <div class="cright c2">
+             <div class="cright c2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">地点：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.diDian}}</span>
@@ -559,7 +559,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.baoAnPCS}}</span>
               </div>
             </div>
-            <div class="cright c3">
+            <div class="cright c3" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">
               <div class="cline">
                 <span class="clable">分派状态：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou3.fenPeiZT}}</span>
@@ -600,7 +600,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright d1">
+            <div class="cright d1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">来源：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.laiYuan}}</span>
@@ -614,7 +614,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.tiaoWeiH}}</span>
               </div>
             </div>
-            <div class="cright d2">
+            <div class="cright d2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">是否转调解：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shiFouZTJ}}</span>
@@ -638,7 +638,7 @@
             </div>
           </div>
           <div class="rightContainer">
-            <div class="cright d1">
+            <div class="cright d1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
               <div class="cline">
                 <span class="clable">所属任务：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.suoShuRW}}</span>
@@ -648,7 +648,7 @@
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.tiaoWeiH}}</span>
               </div>
             </div>
-            <div class="cright d2">
+            <div class="cright d2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
               <div class="cline">
                 <span class="clable">处理方式：</span>
                 <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.chuLiFS}}</span>

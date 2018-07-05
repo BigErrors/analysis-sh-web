@@ -195,7 +195,11 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     grid: {
-      containLabel: function () { if (axisType === 'horizon') { return true } else { return false } }
+      containLabel: function () { if (axisType === 'horizon') { return true } else { return false } },
+      top: 20,
+      left: 20,
+      right: 50,
+      bottom: 20
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -272,7 +276,6 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
 
 // 柱图
 let setBar4 = (data) => {
-  // 找出value中的最大值
   let valueAxis = [{
     type: 'value',
     axisLine: {
@@ -313,19 +316,38 @@ let setBar4 = (data) => {
       }
     },
     data: data.map(function (obj) {
-      return obj.name
+      return obj.name.slice(2, 4) + obj.name.slice(4, 6)
     }),
     splitLine: {
       show: false
     }
   }]
   let option = {
+    legend: {
+      type: 'plain',
+      orient: 'horizontal',
+      top: 'top',
+      right: '5%',
+      textStyle: {
+        color: '#7DA5FE',
+        fontSize: 16
+      },
+      data: [{name: '新增'}, {name: '未完成'}]
+    },
+    grid: {
+      containLabel: true,
+      top: 20,
+      left: 20,
+      right: 20,
+      bottom: 20
+    },
     // x轴配置项
     xAxis: categoryAxis,
     // y轴配置项
     yAxis: valueAxis,
     // bar配置项
     series: [{
+      name: '未完成',
       type: 'bar',
       stack: 'bar',
       z: 3,
@@ -336,10 +358,11 @@ let setBar4 = (data) => {
         show: false
       },
       data: data.map(function (obj) {
-        return obj.value1
+        return obj.value2
       })
     },
     {
+      name: '新增',
       type: 'bar',
       stack: 'bar',
       z: 3,
@@ -350,7 +373,7 @@ let setBar4 = (data) => {
         show: false
       },
       data: data.map(function (obj) {
-        return obj.value2
+        return obj.value1
       })
     }]
   }
@@ -1195,15 +1218,14 @@ let setPie4 = (data, title, bgColorOpacity, titlePosition) => {
 }
 
 // 圆环图
-let setPie6 = (data, dataType, isPie, removePaddingRight, color) => {
+let setPie6 = (data, dataType, isPie, color) => {
   isPie = isPie || false
-  removePaddingRight = removePaddingRight || false
   color = color || data.length > 4 ? ['#95B6FF', '#4D84FE', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
   let option = {
     legend: {
       orient: 'center',
       top: 'middle',
-      right: removePaddingRight === true ? 0 : '25%',
+      right: '5%',
       textStyle: {
         color: '#7DA5FE',
         fontSize: 16
@@ -1337,7 +1359,7 @@ let setMapbox = (mapData) => {
       barSize: 0.3,
       minHeight: 2,
       data: mapData,
-      silent: true,
+      silent: false,
       emphasis: {
         label: {
           show: true,
