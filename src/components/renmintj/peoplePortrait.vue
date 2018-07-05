@@ -76,7 +76,7 @@
               </thead>
               <tbody class="tbody">
               <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=4">
-                <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
+                <td class='td'><span class="circle" :class="'circle'+(item.xuhao)">{{item.xuhao}}</span></td>
                 <td class='td'>{{item.mingcheng}}</td>
                 <td class='td'>{{item.shoulisj}}</td>
                 <td class='td'>{{item.jieansj}}</td>
@@ -476,7 +476,7 @@ export default {
               }
               tr{
                 &:nth-of-type(2n){
-                  background:rgba(19,38,101,1);
+                  background:rgba(19,38,101,0.3);
                 }
               }
             }

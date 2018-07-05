@@ -330,7 +330,7 @@ let setBar4 = (data) => {
       right: '5%',
       textStyle: {
         color: '#7DA5FE',
-        fontSize: 16
+        fontSize: 12
       },
       data: [{name: '新增'}, {name: '未完成'}]
     },
@@ -1228,7 +1228,7 @@ let setPie6 = (data, dataType, isPie, color) => {
       right: '5%',
       textStyle: {
         color: '#7DA5FE',
-        fontSize: 16
+        fontSize: 12
       },
       data: data.map(item => {
         return item.name

@@ -155,7 +155,7 @@ export default {
   }
 
   .el-table tr:nth-of-type(2n) {
-    background: rgba(7, 30, 74, 0.8) !important;
+    background: rgba(19, 24, 33, 1) !important;
   }
 
   .el-table--enable-row-hover .el-table__body tr:hover>td {

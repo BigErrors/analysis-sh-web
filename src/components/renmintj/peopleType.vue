@@ -356,7 +356,7 @@ export default {
       .table{
         width: 100%;
         height: calc(100% - 15px);
-        margin-top:15px;
+        padding-top:15px;
         .thead{
           .td{
             font-size:12px;
@@ -376,7 +376,7 @@ export default {
           }
           tr{
             &:nth-of-type(2n){
-              background:rgba(19,38,101,1);
+              background:rgba(19,38,101,0.3);
             }
           }
         }

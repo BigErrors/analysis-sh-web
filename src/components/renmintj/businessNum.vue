@@ -528,7 +528,7 @@ export default {
     margin:0 1px;
   }
   .businessNum_detail_content:nth-of-type(2n){
-    background:rgba(19,38,101,1);
+    background:rgba(19,38,101,0.3);
   }
   .businessNum_detail_span1{
     font-size:18px;
