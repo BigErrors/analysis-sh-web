@@ -237,9 +237,7 @@ export default {
     overflow-y: hidden;
   }
   .shade {
-    background: url('/static/renmintj/pic_bg.png');
-    background-repeat:no-repeat;
-    background-position:center;
+    background: rgba(25, 21, 21, 1);
   }
 
   .trendAnalysis_header{
@@ -276,7 +274,6 @@ export default {
   }
   .trendAnalysis_nav2{
     margin-left: 34px;
-    /* border-bottom: 1px solid rgba(15,59,186,1); */
     border-bottom: 0px solid rgba(15,59,186,1);
     display: inline-block;
   }
@@ -311,7 +308,7 @@ export default {
     height: 140px;
     float: left;
     margin-bottom: 17px;
-    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
+    background: linear-gradient( rgba(0, 0, 0, 1),rgba(0, 0, 0, 1));
   }
   .trendAnalysis_content_left_once:nth-of-type(2){
     height: 720px;
@@ -353,7 +350,7 @@ export default {
     height: 483px;
     float: left;
     margin-bottom: 23px;
-    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
+    background: linear-gradient( rgba(0, 0, 0, 1),rgba(0, 0, 0, 1));
   }
   .trendAnalysis_content_right_once:nth-of-type(2){
     height: 371px;

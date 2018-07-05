@@ -230,13 +230,7 @@ export default {
         if (data.length === 0) {
           data = [{name: '暂无数据', value: 0}]
         } else {
-          data = data.sort((a, b) => {
-            if (parseInt(a.value) >= parseInt(b.value)) {
-              return 1
-            } else {
-              return -1
-            }
-          }).slice(0, 10)
+          data = data.slice(0, 10).reverse()
         }
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
