@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 16:38:42
+ * @Last Modified time: 2018-07-05 17:21:34
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -262,7 +262,6 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-// import mapData from '@/../static/json/data'
 
 export default {
   components: {
@@ -320,6 +319,7 @@ export default {
       this.draw('trendAnalysis', eosNew.setLine(this.trendData[to].reverse().slice(0, 6).reverse(), true, true))
     },
     areaDefault: function (newValue, oldValue) {
+      this.showDialog = false
       this.getData()
     }
   },
