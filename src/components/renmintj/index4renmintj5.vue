@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 10:32:22
+ * @Last Modified time: 2018-07-05 10:45:43
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -321,9 +321,6 @@ export default {
       }
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
-      this.myChart[domName].on('restore', function (params) {
-        console.log(params)
-      })
       if (domName === 'map') {
         this.myChart[domName].on('click', function (params) {
           console.log(params)
@@ -359,12 +356,12 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.importantEvent = data
       })
-      // 行专占比
+      // 业务类型
       url = '/category'
       http.get(baseUrl + url, reqParam, (data) => {
         vue.pro1 = (data.hangZhuanBL * 100).toFixed(1)
         vue.pro2 = (100 - data.hangZhuanBL * 100).toFixed(1)
-        vue.draw('businessTypes', eosNew.setBar(data.yeWuLXHSL))
+        vue.draw('businessTypes', eosNew.setBar(data.yeWuLXHSL.reverse()))
       })
       // 业务数量
       url = '/businessCount'
@@ -397,6 +394,7 @@ export default {
         })
       })
     },
+    // 路由跳转
     changeRouter (name, id) {
       let target = {name: name}
       if (name === 'importantEventDetail') {
