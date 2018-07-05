@@ -127,25 +127,25 @@
           <div class="leftContainer">
             <div class="cleft a1">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft a2">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft a3">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
             </div>
             <div class="cleft a4">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft a5">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou5.mingCheng}}</span>
             </div>
             <div class="cleft a6">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou6.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou6.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou5.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou6.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft a7">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou7.mingCheng}}</span>
@@ -221,15 +221,15 @@
           <div class="leftContainer">
             <div class="cleft b1">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft b2">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft b3">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou3.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou3.shiJian.slice(0,16)}}</span>
             </div>
           </div>
           <div class="rightContainer">
@@ -283,19 +283,19 @@
           <div class="leftContainer">
             <div class="cleft c1">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft c2">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft c3">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou3.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou3.shiJian.slice(0,16)}}</span>
             </div>
             <div class="cleft c4">
               <span class="ctitle">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
-              <span class="ctime">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
+              <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
             </div>
           </div>
           <div class="rightContainer">
