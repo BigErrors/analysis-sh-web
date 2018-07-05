@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 17:21:34
+ * @Last Modified time: 2018-07-05 20:54:36
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -248,8 +248,11 @@
       <div class="other"></div>
     </div>
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
-      <span>{{dialogData.name}}</span><br>
-      <span>{{'案件数量: '+dialogData.value + '件'}}</span>
+      <div style="cursor: pointer;text-align:right;" @click="showDialog=false">x</div>
+      <div style="text-align:left;">
+        <span>{{dialogData.name}}</span><br>
+        <span>{{'案件数量: '+dialogData.value + '件'}}</span>
+     </div>
     </div>
   </div>
 </template>
@@ -928,7 +931,6 @@ export default {
       background: rgba(0,0,0,0.8);
       font-size: 12px;
       color: #ffffff;
-      text-align:left;
     }
   }
 </style>

@@ -139,11 +139,18 @@ let setPie = (data, title, bgColorOpacity, titlePosition, color) => {
 }
 // 柱状图_首页业务类型
 let setBar = (data) => {
+  data = data.sort(function (v1, v2) {
+    if (v1.value >= v2.value) {
+      return 1
+    } else {
+      return -1
+    }
+  })
   let option = {
     grid: {
       containLabel: true,
       left: 10,
-      right: 20,
+      right: 40,
       top: '10%',
       bottom: '5%'
     },
@@ -169,9 +176,26 @@ let setBar = (data) => {
     },
     series: [{
       type: 'bar',
-      data: data.map(item => item['value']),
-      barMinHeight: 20,
       itemStyle: {
+        barBorderRadius: 10,
+        normal: {
+          color: '#201f20'
+        }
+      },
+      silent: true,
+      barWidth: 6,
+      barGap: '-100%', // Make series be overlap
+      data: function () { return new Array(10).fill(4000) }
+    }, {
+      type: 'bar',
+      data: data.map(item => {
+        return item['value']
+      }),
+      z: 3,
+      barWidth: 6,
+      barMinHeight: 10,
+      itemStyle: {
+        barBorderRadius: 10,
         color: {
           type: 'linear',
           x: 0,
@@ -190,9 +214,9 @@ let setBar = (data) => {
         show: true,
         position: 'right',
         color: '#ffffff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 12
       }
-
     }]
   }
   return option

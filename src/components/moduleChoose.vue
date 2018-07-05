@@ -236,7 +236,7 @@ export default {
           border:2px solid #5cb4ff;
           left: 50%;
           &:hover{
-            box-shadow:0 0 25px #3298fe
+            box-shadow:0 0 50px #3298fe
           }
           .border{
             width: 34px;
