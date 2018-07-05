@@ -1264,7 +1264,7 @@ let setPie6 = (data, dataType, isPie, color) => {
   return option
 }
 
-let setMapbox = (mapData) => {
+let setMapbox = (caseData, importantEventData) => {
   const osmUrl = urlConfig.osmUrl
   const option = {
     visualMap: [{
@@ -1350,57 +1350,48 @@ let setMapbox = (mapData) => {
         }
       }
     },
-    series: [{
-      name: '分布',
-      type: 'bar3D',
-      coordinateSystem: 'mapbox',
-      // 三维柱状图中三维图形的着色效果：'color' 只显示颜色，不受光照等其它因素的影响。'lambert' 通过经典的 lambert 着色表现光照带来的明暗。'realistic' 真实感渲染，配合 light.ambientCubemap 和 postEffect 使用可以让展示的画面效果和质感有质的提升。
-      shading: 'realistic',
-      barSize: 0.3,
-      minHeight: 2,
-      data: mapData,
-      silent: true,
-      emphasis: {
-        label: {
-          show: true,
-          zIndex: 10,
-          formatter: function (component) {
-            return `名称: ${component.name}\n数量: ${component.value[2]}件`
-          },
-          textStyle: {
-            color: '#000000',
-            borderWidth: 0,
-            fontSize: 20,
-            fontWeight: 'bold'
+    series: [
+      {
+        name: '分布',
+        type: 'bar3D',
+        coordinateSystem: 'mapbox',
+        // 三维柱状图中三维图形的着色效果：'color' 只显示颜色，不受光照等其它因素的影响。'lambert' 通过经典的 lambert 着色表现光照带来的明暗。'realistic' 真实感渲染，配合 light.ambientCubemap 和 postEffect 使用可以让展示的画面效果和质感有质的提升。
+        shading: 'realistic',
+        barSize: 0.3,
+        minHeight: 2,
+        data: caseData,
+        silent: false,
+        emphasis: {
+          label: {
+            show: false,
+            formatter: function (component) {
+              return `名称: ${component.name}\n数量: ${component.value[2]}件`
+            },
+            textStyle: {
+              color: '#000000',
+              borderWidth: 0,
+              fontSize: 20,
+              fontWeight: 'bold'
+            }
           }
         }
+      },
+      {
+        name: '重点事件',
+        type: 'scatter3D',
+        coordinateSystem: 'mapbox',
+        symbol: 'pin',
+        symbolSize: 20,
+        opacity: 0.8,
+        itemStyle: {
+          color: 'red',
+          borderWidth: 0.2,
+          borderColor: '#ffffff'
+        },
+        data: importantEventData,
+        silent: false
       }
-    },
-    {
-      name: '重点事件',
-      type: 'scatter3D',
-      coordinateSystem: 'mapbox',
-      symbol: 'pin',
-      symbolSize: 30,
-      opacity: 1,
-      itemStyle: {
-        borderWidth: 0.5,
-        borderColor: '#fff'
-      },
-      emphasis: {
-        label: {
-          show: true
-        }
-      },
-      data: [
-        {name: '重点事件1', value: [121.642938, 30.880678, 100000], type: '类别', date: '日期', address: '地址'},
-        {name: '重点事件2', value: [121.542938, 30.880678, 100000], type: '类别', date: '日期', address: '地址'},
-        {name: '重点事件3', value: [121.442938, 30.880678, 100000], type: '类别', date: '日期', address: '地址'},
-        {name: '重点事件4', value: [121.342938, 30.880678, 100000], type: '类别', date: '日期', address: '地址'},
-        {name: '重点事件5', value: [121.242938, 30.880678, 100000], type: '类别', date: '日期', address: '地址'}
-      ],
-      silent: false
-    }]
+    ]
   }
   return option
 }

@@ -2,13 +2,13 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-06-25 11:54:34
+ * @Last Modified time: 2018-07-05 11:51:47
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
 let qs = require('qs')
 
-let http = {get: () => {}, put: () => {}, delete: () => {}, post: () => {}, error: () => {}}
+let http = {get: () => {}, all: () => {}, put: () => {}, delete: () => {}, post: () => {}, error: () => {}}
 
 // get
 http.get = (url, param, callback) => {
@@ -21,6 +21,28 @@ http.get = (url, param, callback) => {
   }).catch((err) => {
     http.error(err)
   })
+}
+
+// all
+http.all = (queryList, callback) => {
+  let query = queryList.map((item) => {
+    return axios.get(item.url, { params: item.param })
+  })
+  axios.all(query)
+    .then((iterable) => {
+      let flag = true
+      iterable.map(res => {
+        if (res.data.code === 0) {
+          flag = false
+          http.warn(res)
+        }
+      })
+      if (flag) {
+        callback(iterable)
+      }
+    }).catch((err) => {
+      http.error(err)
+    })
 }
 
 // put

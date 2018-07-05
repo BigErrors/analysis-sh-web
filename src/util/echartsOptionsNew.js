@@ -733,4 +733,202 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
   }
   return option
 }
-export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3}
+// 柱状图_人员详情 类型对比
+let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis) => {
+  barMaxWidth = barMaxWidth || 43
+  // 找出value中的最大值
+  let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
+  if (portrait) {
+    maxValue = data.reduce(function (total, item) {
+      return total + item.value
+    }, 0)
+  }
+  let displayValueAxis = function () {
+    let result = false
+    if (axisType === 'vertical') {
+      if (showValueAxis === false) {
+        result = false
+      } else {
+        result = true
+      }
+    }
+    return result
+  }
+  let valueAxis = [{
+    type: 'value',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      interval: 0,
+      show: displayValueAxis(),
+      color: '#4D84FE',
+      fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
+      formatter: dataType === 'percent' ? '{value} %' : '{value}'
+    },
+    // value最大值的类型：percent，integer
+    // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
+    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    splitNumber: 4,
+    splitLine: {
+      show: false
+    }
+  }]
+  let categoryAxis = [{
+    type: 'category',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: '#4D84FE',
+      fontSize: 12,
+      interval: 0,
+      formatter: function (value) {
+        if (value.length <= 6) {
+          return value
+        }
+        return value.substring(0, 5) + '..'
+      }
+    },
+    data: data.map(function (obj) {
+      return obj.name
+    }),
+    splitLine: {
+      show: false
+    }
+  }]
+  let option = {
+    tooltip: {
+      show: false
+    },
+    grid: {
+      containLabel: true,
+      top: 20,
+      bottom: 20,
+      left: 30,
+      right: 20
+    },
+    // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
+    // x轴配置项
+    xAxis: axisType === 'vertical' ? categoryAxis : valueAxis,
+    // y轴配置项
+    yAxis: axisType === 'vertical' ? valueAxis : categoryAxis,
+    // bar配置项
+    series: [{
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      z: 3,
+      itemStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: axisType === 'vertical' ? 0 : 1,
+          y2: axisType === 'vertical' ? 1 : 0,
+          colorStops: [{
+            offset: 0, color: color[0] // 0% 处的颜色
+          }, {
+            offset: 1, color: color[1] // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
+      },
+      label: {
+        show: true,
+        position: axisType === 'vertical' ? 'top' : 'right',
+        color: color[1],
+        fontSize: 12
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
+      })
+    }]
+  }
+  if (axisType === 'vertical') {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#132665'
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  if (barMaxWidth) {
+    option.series[0].barMaxWidth = barMaxWidth
+    if (axisType === 'vertical') {
+      option.series[1].barMaxWidth = barMaxWidth
+    }
+  }
+  if (portrait) {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#132665'
+      },
+      barMaxWidth: barMaxWidth,
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  return option
+}
+// 雷达图_人员详情 综合能力
+let setRadar = (data, indicator) => {
+  let option = {
+    title: {},
+    tooltip: {
+      show: false
+    },
+    radar: {
+      radius: '65%',
+      name: {
+        textStyle: {
+          color: '#1194F8',
+          fontSize: 14
+        }
+      },
+      axisLine: {
+        show: true
+      },
+      splitNumber: 2,
+      splitLine: {
+        show: true
+      },
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: 'rgba(255,255,255,0)'
+        }
+      },
+      indicator: indicator
+    },
+    series: [{
+      name: 'radar',
+      type: 'radar',
+      itemStyle: {
+        color: '#FDCD0F',
+        opacity: 0
+      },
+      areaStyle: {
+        color: '#FDCD0F'
+      },
+      data: data
+    }]
+  }
+  return option
+}
+export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar}

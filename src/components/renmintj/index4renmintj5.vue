@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 10:45:43
+ * @Last Modified time: 2018-07-05 15:36:05
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -246,6 +246,10 @@
       <!-- 重点事件遮罩层 -->
       <div class="other"></div>
     </div>
+    <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
+      <span>{{dialogData.name}}</span><br>
+      <span>{{'案件数量: '+dialogData.value + '件'}}</span>
+    </div>
   </div>
 </template>
 
@@ -293,7 +297,14 @@ export default {
     },
     MechanismNumber: [],
     peopleCount: {},
-    time: new Date()
+    time: new Date(),
+    offsetX: '0',
+    offsetY: '0',
+    showDialog: false,
+    dialogData: {
+      name: '',
+      value: ''
+    }
   }),
   computed: {
     timeCom () {
@@ -321,9 +332,17 @@ export default {
       }
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
+      let vue = this
       if (domName === 'map') {
         this.myChart[domName].on('click', function (params) {
           console.log(params)
+          if (params.seriesName === '分布') {
+            vue.dialogData.name = params.name
+            vue.dialogData.value = params.value[2]
+            vue.offsetX = event.offsetX + 'px'
+            vue.offsetY = event.offsetY + 'px'
+            vue.showDialog = true
+          }
         })
       }
     },
@@ -351,11 +370,6 @@ export default {
           vue.draw('xieyis', eosNew.setPie([(data.xieYiS_cover * 100).toFixed(1), ((1 - data.xieYiS_cover) * 100).toFixed(1)], '协议书占比', 0, 0))
         })
       })
-      // 重点事件
-      url = '/keyEvents'
-      http.get(baseUrl + url, reqParam, (data) => {
-        vue.importantEvent = data
-      })
       // 业务类型
       url = '/category'
       http.get(baseUrl + url, reqParam, (data) => {
@@ -381,16 +395,24 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.peopleCount = data
       })
-      // 案件分布--地图数据
-      url = '/caseDistribution'
-      http.get(baseUrl + url, reqParam, (data) => {
-        if (data.length > 0) {
-          data = data.map((item, index) => {
+      // 案件分布、重点关注
+      let querylist = [{url: baseUrl + '/caseDistribution', param: reqParam}, {url: baseUrl + '/keyEvents', param: reqParam}]
+      http.all(querylist, (dataList) => {
+        // 重点关注
+        vue.importantEvent = dataList[1].data.data
+        // 案件分布
+        let caseDistributionData = dataList[0].data.data
+        if (caseDistributionData.length > 0) {
+          caseDistributionData = caseDistributionData.map((item, index) => {
             return {name: item.diQu, value: [item.jinDu, item.weiDu, item.jianShu]}
           })
         }
+        let keyEventsData = dataList[1].data.data
+        keyEventsData = keyEventsData.map(item => {
+          return {name: item.jianShu, value: [item.jinDu, item.weiDu, 200], type: item.shiJianLX, detail: item.xiangQing, area: item.diQu, date: item.riQi}
+        })
         vue.$nextTick(function () {
-          vue.draw('map', eos.setMapbox(data))
+          vue.draw('map', eos.setMapbox(caseDistributionData, keyEventsData))
         })
       })
     },
@@ -896,6 +918,16 @@ export default {
         height: 100%;
         position: fixed;
       }
+    }
+    .dialog {
+      position: absolute;
+      width: 220px;
+      height: 60px;
+      padding: 15px 20px;
+      background: rgba(0,0,0,0.8);
+      font-size: 12px;
+      color: #ffffff;
+      text-align:left;
     }
   }
 </style>
