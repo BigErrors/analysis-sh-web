@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-03 16:00:48
+ * @Last Modified time: 2018-07-05 10:32:22
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -742,16 +742,16 @@ export default {
         box-sizing: border-box;
         .bottom1 {
           width: 49%;
-          height: 61px;
+          height: 66px;
           float: left;
-          background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+          background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
           padding-top: 5px;
         }
         .bottom2 {
           width: 49%;
           height: 66px;
           float: right;
-          background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+          background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
           padding-top: 5px;
         }
         .bTitle {
@@ -774,7 +774,7 @@ export default {
             width: 26px;
             height: 26px;
             position: absolute;
-            left: 25%;
+            left: 26%;
             top: 12px;
             transform: translate(-120%)
           }
@@ -811,7 +811,7 @@ export default {
         left: 50%;
         top: 32px;
         transform: translate(-50%);
-        background: rgba(0, 0, 0, 0.4);
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
         .topY {
           width: 8%;
           float: left;
