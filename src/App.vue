@@ -243,7 +243,7 @@ export default {
 
   .institutionRanking_container .el-range-editor.el-input__inner {
     height: 30px;
-    background: rgba(8, 79, 211, 1);
+    background: rgba(8, 79, 211, 0.3);
     border-color: #7B95F6;
   }
 
@@ -256,13 +256,13 @@ export default {
   }
 
   .institutionRanking_container .el-date-editor .el-range-input {
-    background: rgba(8, 79, 211, 1);
+    background: rgba(8, 79, 211, 0);
     color: #5E7ECB;
   }
 
   .institutionRanking_container .el-input--suffix .el-input__inner {
     height: 30px;
-    background: rgba(8, 79, 211, 1);
+    background: rgba(8, 79, 211, 0.3);
     color: #5E7ECB;
   }
 
@@ -274,7 +274,7 @@ export default {
 
   .pepleRanking_container .el-range-editor.el-input__inner {
     height: 30px;
-    background: rgba(8, 79, 211, 1);
+    background: rgba(8, 79, 211, 0.3);
     border-color: #7B95F6;
   }
 
@@ -287,13 +287,13 @@ export default {
   }
 
   .pepleRanking_container .el-date-editor .el-range-input {
-    background: rgba(8, 79, 211, 1);
+    background: rgba(8, 79, 211, 0);
     color: #5E7ECB;
   }
 
   .pepleRanking_container .el-input--suffix .el-input__inner {
     height: 30px;
-    background: rgba(8, 79, 211, 1);
+    background: rgba(8, 79, 211, 0.3);
     color: #5E7ECB;
   }
 
