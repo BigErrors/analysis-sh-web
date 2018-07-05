@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 15:36:05
+ * @Last Modified time: 2018-07-05 16:38:42
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -20,7 +20,8 @@
     </div>
     <div class="body clearfix">
       <div class="left">
-        <div class="title" @click="changeRouter('businessTypes')">
+        <!--  @click="changeRouter('businessTypes')" -->
+        <div class="title">
           <span class="title_china">业务类型</span>
           <span class="title_english">Business type</span>
         </div>

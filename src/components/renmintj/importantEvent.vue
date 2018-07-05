@@ -15,16 +15,18 @@
       </div>
       <div class="left">
         <div class="area clearfix">
-          <div class="statistics">
-            <digitalRolling class="num" :height='41' :width='25' :number='benYueXZ' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
-            <br>
-            <span class="title">本月新增</span>
+          <div class="statistics statistics1">
+            <div class="roll">
+              <digitalRolling class="num" :height='41' :width='25' :number='benYueXZ' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+            </div>
+            <div class="title">本月新增</div>
           </div>
           <div class="cutLine"></div>
-          <div class="statistics">
-            <digitalRolling class="num" :height='41' :width='25' :number='jinNianZS' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
-            <br>
-            <span class="title">全年累计</span>
+          <div class="statistics statistics2">
+            <div class="roll">
+              <digitalRolling class="num" :height='41' :width='25' :number='jinNianZS' :fontSize='41' :fontColor='"#1194F8"'></digitalRolling>
+            </div>
+            <div class="title">全年累计</div>
           </div>
         </div>
         <div class="area">
@@ -62,33 +64,40 @@
             <div class="border"></div>
             <span>重点事件</span>
           </div>
-          <div class='table'>
-            <div class="table_thead">
-              <span class='td num'>序号</span>
-              <span class='td'>分类</span>
-              <span class='td'>行政区</span>
-              <span class='td'>日期</span>
-              <span class='td'>描述</span>
-              <span class='td'>状态</span>
-              <span class='td detail'>操作</span>
-            </div>
-            <rollScreen :dLength='table.dLength' :height='33' :lineNum='table.lineNum' class="renminttj_table_body">
-              <div class="table_tr" slot="slide" v-for="(item, index) in table.zhongDianSJ" :key="index">
-                <span class='td num'>{{item.xuHao}}</span>
-                <span class='td'>{{item.shiJianLX}}</span>
-                <span class='td'>{{item.diQu}}</span>
-                <span class='td'>{{item.riQi}}</span>
-                <span class='td'>{{item.jianShu}}</span>
-                <span class='td'>{{item.zhuangTai}}</span>
-                <span class='td detail'>
-                  <span @click="changeRouter('importantEventDetail',item.id)">详情</span>
-                </span>
-              </div>
-            </rollScreen>
+          <table class='table' cellspacing='0'>
+            <thead class="thead">
+            <tr>
+              <td width="10%" class='td'>序号</td>
+              <td width="15%" class='td'>分类</td>
+              <td width="15%" class='td'>行政区</td>
+              <td width="15%" class='td'>日期</td>
+              <td width="15%" class='td'>描述</td>
+              <td width="15%" class='td'>状态</td>
+              <td width="15%" class='td'>操作</td>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+            <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=9">
+              <td class='td'>
+                <span v-if="item.xuHao<=2" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
+                <span v-if="item.xuHao>2" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+              </td>
+              <td class='td'>{{item.shiJianLX}}</td>
+              <td class='td'>{{item.diQu}}</td>
+              <td class='td'>{{item.riQi}}</td>
+              <td class='td'>{{item.jianShu}}</td>
+              <td class='td'>{{item.zhuangTai}}</td>
+              <td class='td'><span class="detail" @click="changeRouter('importantEventDetail',item.id)">详情</span></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="page">
+            <el-pagination class="ej-pagination" @current-change="handleCurrentChange" :current-page.sync="table.currentPage" :page-size="10"
+              layout="prev, pager, next, total" :total="table.total">
+            </el-pagination>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -97,21 +106,23 @@
 import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
-import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 export default {
   name: 'importantEvent',
   components: {
-    rollScreen,
     digitalRolling
   },
   data () {
     return {
       myChart: {},
       table: {
-        zhongDianSJ: [],
         dLength: 0,
-        lineNum: 0
+        lineNum: 0,
+        list: [],
+        currentList: [],
+        total: 0,
+        pageSize: 10,
+        currentPage: 1
       },
       benYueXZ: 0,
       jinNianZS: 0,
@@ -150,7 +161,9 @@ export default {
       let url = ''
       url = '/keyEventsAnalysis'
       http.get(baseUrl + url, reqParam, (data) => {
-        [vue.table.dLength, vue.table.lineNum, vue.table.zhongDianSJ] = [data.zhongDianSJ.length, 7, data.zhongDianSJ]
+        vue.table.list = data.zhongDianSJ
+        vue.table.currentList = vue.table.list.slice(0, 10)
+        vue.table.total = vue.table.list.length
         vue.benYueXZ = data['shuZhiTJ']['benYueXZ']
         vue.jinNianZS = data['shuZhiTJ']['jinNianZS']
         vue.$nextTick(function () {
@@ -160,6 +173,13 @@ export default {
           vue.draw('target5', eos.setPie6(data['zhongDianSJLY'], 'integer'))
         })
       })
+    },
+    handleCurrentChange (val) {
+      let startIndex = (val - 1) * this.table.pageSize
+      let endIndex = val * this.table.pageSize
+      // console.log('currenrPage:', val)
+      // console.log('startIndex-endIndex:', startIndex + '-' + endIndex)
+      this.table.currentList = this.table.list.slice(startIndex, endIndex)
     }
   },
   created () {
@@ -267,6 +287,7 @@ export default {
           height: calc(33.33% - 10px);
           margin-bottom: 10px;
           background: linear-gradient( rgba(0,0,0,1),rgba(0,0,0,1));
+          position: relative;
         }
         .area:nth-of-type(3){
           height: 33.33%;
@@ -302,12 +323,31 @@ export default {
         width: 100%;
         height: calc(100% - 16px);
       }
-      .statistics {
-        float: left;
-        width: calc(50% - 41px);
+      .statistics{
+        width: 45%;
         height: 60px;
-        margin-top: calc((285px - 60px)/2);
-        padding-left: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        .roll{
+          height: 41px;
+          position: absolute;
+          top: -13px;
+          left: 60px;
+        }
+        .title{
+          height: 19px;
+          position: absolute;
+          bottom: 2px;
+          left: 62px;
+          color:rgba(170,173,182,1);
+        }
+      }
+      .statistics1 {
+        transform: translate(-100%,-50%)
+      }
+      .statistics2{
+        transform: translate(10%,-50%)
       }
       .statistics::before {
         width: 44px;
@@ -318,56 +358,81 @@ export default {
       .statistics .num {
         display: inline-block;
       }
-      .statistics .title {
-        display: inline-block;
-        color: #AAADB6;
-        font-size: 16px;
-        line-height: 16px;
-        padding-left: 54px;
-      }
       .cutLine {
-        float: left;
         width: 1px;
         height: 28px;
-        margin-top: calc((285px - 28px)/2);
         background: #AAADB6;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-5px,-50%)
       }
-      .table {
+      .table{
         width: 100%;
-        padding: 0 24px;
-        box-sizing: border-box;
-        font-size: 14px;
+        height: calc(100% - 85px);
+        padding-top:15px;
+        .thead{
+          .td{
+            font-size:12px;
+            font-family:MicrosoftYaHei;
+            color:rgba(77,132,254,1);
+            height:22px;
+            text-align:center;
+          }
+        }
+        .tbody{
+          .td{
+            font-size:12px;
+            font-family:MicrosoftYaHei;
+            color:#4D84FE;
+            text-align:center;
+            .detail{
+              font-size:12px;
+              font-family:MicrosoftYaHei;
+              color:rgba(255,255,255,1);
+              padding:4px 8px;
+              border-radius: 4px;
+              background:rgba(17,148,248,1);
+              cursor: pointer;
+            }
+          }
+          tr{
+            &:nth-of-type(2n-1){
+              background:rgba(19,38,101,0.3);
+            }
+          }
+        }
+        .circle{
+          color:rgba(225,234,255,1);
+          border-radius:100%;
+          width:23px;
+          height:23px;
+          display:inline-block;
+          line-height: 23px;
+        }
+        .circle1{
+          color:rgba(225,234,255,1);
+          background:rgba(255,105,126,1);
+        }
+        .circle2{
+          color:rgba(225,234,255,1);
+          background:rgba(251,178,74,1);
+        }
+        .circle3{
+          color:rgba(225,234,255,1);
+          background:rgba(111,155,253,1);
+        }
+        .circle4{
+          color:rgba(225,234,255,1);
+          background:rgba(205,205,205,0.5);
+        }
       }
-      .table div {
-        width: 100%;
-        height: 33px;
-      }
-      .table div span {
-        float: left;
+      .page{
         display: block;
-        width: calc((100% - 160px)/5);
-        line-height: 33px;
+        height: 45px;
         text-align: center;
-        color: #4D84FE;
-      }
-      .table div .num {
-        width: 60px;
-      }
-      .table div .detail {
-        width: 80px;
-      }
-      .table_thead {
-        color: rgba(17, 148, 248, 1);
-        line-height: 42px;
-      }
-      .table_tr .detail>span {
-        color: #FFFFFF;
-        background: #1194F8;
-        width: 50px;
-        line-height: 22px;
-        margin: 5px 15px;
-        border-radius: 5px;
-        cursor: pointer;
+        box-sizing: border-box;
+        padding-top:5px;
       }
     }
   }
