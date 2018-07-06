@@ -117,6 +117,17 @@ export default {
   },
   created () {
     this.getData()
+  },
+  mounted () {
+    let vue = this
+    window.addEventListener('resize', function () {
+      vue.$nextTick(function () {
+        vue.myChart['target1'].resize()
+        vue.myChart['target2'].resize()
+        vue.myChart['target3'].resize()
+        vue.myChart['target4'].resize()
+      })
+    })
   }
 }
 </script>

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-06-29 13:11:45
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 20:54:36
+ * @Last Modified time: 2018-07-06 10:28:49
  * @content: echarts 三位地理坐标系 mapbox
  */
 
@@ -328,6 +328,14 @@ export default {
   },
   created () {
     this.getData()
+  },
+  mounted () {
+    let vue = this
+    window.addEventListener('resize', function () {
+      vue.$nextTick(function () {
+        vue.myChart['map'].resize()
+      })
+    })
   },
   methods: {
     draw (domName, option) {

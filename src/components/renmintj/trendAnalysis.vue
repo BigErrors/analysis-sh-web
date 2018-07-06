@@ -1,79 +1,111 @@
 <template>
-<div id='trendAnalysis' class='shade'>
-  <div class="trendAnalysis_header">
-    <div class="trendAnalysis_back"  @click="changeRouter('index4renmintj')"></div>
-  </div>
-  <div class="trendAnalysis_nav">
-    <span class="trendAnalysis_nav_span">首页 > 趋势分析</span>
-  </div>
-  <div class="trendAnalysis_nav2">
-    <span class="trendAnalysis_nav2_span trendAnalysis_nav2_span_active">{{typeDefault[0]}}</span>
-  </div>
-  <div class="cas_container">
-    <el-cascader
-      class="cascader"
-      :options="type"
-      placeholder="类型"
-      v-model="typeDefault"
-    ></el-cascader>
-    <el-cascader
-      class="cascader"
-      :options="area"
-      placeholder="区域"
-      v-model="areaDefault"
-    ></el-cascader>
-  </div>
-  <div class="trendAnalysis_content">
-    <div class="trendAnalysis_content_left">
-      <div class="trendAnalysis_content_left_once">
-        <div class="trendAnalysis_content_left_once_children">
-          <span class="span1">纠纷数量</span><br>
-          <span class="span2">{{ count | numFormat }}</span>
-          <span class="span1">件</span>
-        </div>
-        <div class="trendAnalysis_content_left_once_children">
-          <span class="span1">重点事件</span><br>
-          <span class="span2">{{ importantNum | numFormat }}</span>
-          <span class="span1">件</span>
-        </div>
-        <div class="trendAnalysis_content_left_once_children">
-          <span class="span1">单月最高</span><br>
-          <span class="span2">{{max | numFormat }}</span>
-          <span class="span1">件</span><br>
-          <span class="span3">{{ '（出现在' + maxMonth + '）' }}</span>
-        </div>
-        <div class="trendAnalysis_content_left_once_children">
-          <span class="span1">月均</span><br>
-          <span class="span2">{{ average | numFormat }}</span>
-          <span class="span1">件</span>
-        </div>
+  <div class='trendAnalysis_container'>
+    <div class="head clearfix">
+      <div class="title">基层司法大数据子平台</div>
+      <div class="left">
+        <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
-      <div class="trendAnalysis_content_left_once">
-        <div class="target2"></div>
+      <div class="right">
+        <span>{{timeCom}}</span>
       </div>
     </div>
-    <div class="trendAnalysis_content_right">
-      <div class="trendAnalysis_content_right_once">
-        <div class="trendAnalysis_content_title clearfix">
-          <div class="trendAnalysis_content_title_left">
-            <span class="trendAnalysis_content_span1">纠纷类型(TOP10)</span>
-          </div>
-        </div>
-        <div class="target3"></div>
+    <div class="body">
+      <div class="nav">
+        <span>首页 > 趋势分析</span>
       </div>
-      <div class="trendAnalysis_content_right_once">
-        <div class="trendAnalysis_content_title clearfix">
-          <div class="trendAnalysis_content_title_left">
-            <span class="trendAnalysis_content_span1">纠纷热词</span>
+      <div class="nav2 clearfix">
+        <div class="navLeft">
+          <span class="navspan active">人民调解</span>
+        </div>
+        <div class="navRight">
+          <div class="date_container">
+            <el-cascader
+              class="cascader"
+              style="z-index:1;height:30px;line-height:30px;font-size:12px;width:120px"
+              :options="type"
+              placeholder="类型"
+              v-model="typeDefault"
+            ></el-cascader>
+          </div>
+          <div class="date_container">
+            <el-cascader
+              class="cascader"
+              style="z-index:1;height:30px;line-height:30px;font-size:12px;width:120px"
+              :options="area"
+              placeholder="区域"
+              v-model="areaDefault"
+            ></el-cascader>
           </div>
         </div>
-        <div class="target4">
-          <canvas class="target4_canvas" width="530px" height="300px"></canvas>
+      </div>
+      <div class="content_container">
+        <div class="left">
+          <div class="top">
+            <div class="box">
+              <div class="l_container clearfix">
+                <span class="span_title">纠纷数量</span>
+                <div class="span_content clearfix">
+                  <span class="span1">{{ count | numFormat }}</span>
+                  <span class="span2">件</span>
+                </div>
+              </div>
+              <div class="border"></div>
+            </div>
+            <div class="box">
+              <div class="l_container clearfix">
+                <span class="span_title">重点事件数</span>
+                <div class="span_content clearfix">
+                  <span class="span1">{{ importantNum | numFormat }}</span>
+                  <span class="span2">件</span>
+                </div>
+              </div>
+              <div class="border"></div>
+            </div>
+            <div class="box">
+              <div class="l_container clearfix">
+                <span class="span_title">单月最高</span>
+                <div class="span_content clearfix">
+                  <span class="span1">{{max | numFormat }}</span>
+                  <span class="span2">件</span>
+                </div>
+                <span class="span3">{{'(出现在' + maxMonth + ')' }}</span>
+              </div>
+              <div class="border"></div>
+            </div>
+            <div class="box">
+              <div class="l_container clearfix">
+                <span class="span_title">月均</span>
+                <div class="span_content clearfix">
+                  <span class="span1">{{ average | numFormat }}</span>
+                  <span class="span2">件</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom target2">
+          </div>
+        </div>
+        <div class="right">
+          <div class="top">
+            <div class="title">
+              <div class="border"></div>
+              <span>纠纷类型（TOP10）</span>
+            </div>
+            <div class="echarts_container target3"></div>
+          </div>
+          <div class="bottom">
+            <div class="title">
+              <div class="border"></div>
+              <span>纠纷热词</span>
+            </div>
+            <div class="echarts_container target4">
+              <canvas class="target4_canvas" width="360" height="204"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -82,13 +114,11 @@ import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 import urlConfig from '@/util/urlConfig'
-import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
 
 export default {
   name: 'trendAnalysis',
   components: {
-    rollScreen,
     digitalRolling
   },
   data () {
@@ -115,7 +145,16 @@ export default {
         start: '',
         end: ''
       },
-      loading: ''
+      loading: '',
+      time: new Date()
+    }
+  },
+  computed: {
+    timeCom () {
+      let now = this.time
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
+      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
   },
   watch: {
@@ -168,9 +207,9 @@ export default {
       }))
       let vue = this
       let ctx = document.getElementsByClassName(domName + '_canvas')[0].getContext('2d')
-      ctx.clearRect(0, 0, 530, 300)
+      ctx.clearRect(0, 0, 360, 204)
       let img = new Image()
-      img.src = '/static/renmintj/cloud1.png'
+      img.src = '/static/renmintjNew/ciyun2.png'
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
         vue.$wordcloud(document.getElementsByClassName(domName + '_canvas')[0], option)
@@ -223,176 +262,258 @@ export default {
   created () {
     this.getData()
   },
-  mounted () {},
+  mounted () {
+    let vue = this
+    window.addEventListener('resize', function () {
+      vue.$nextTick(function () {
+        vue.myChart['target2'].resize()
+        vue.myChart['target3'].resize()
+        vue.myChart['target4'].resize()
+      })
+    })
+  },
   beforeDestroy () {
     clearInterval(this.timer)
   }
 }
 </script>
 
-<style scoped>
-  #trendAnalysis {
-    min-height: 1080px;
-    min-width: 1920px;
-    overflow-y: hidden;
-  }
-  .shade {
-    background: rgba(25, 21, 21, 1);
-  }
-
-  .trendAnalysis_header{
-    width: 100%;
-    min-width: 1920px;
-    height: 87px;
-    background: url('/static/renmintj/pic_title.png');
-    background-repeat:no-repeat;
-    background-position:center;
-    z-index: 99;
-    position:relative;
-  }
-  .trendAnalysis_back{
-    background:url('/static/renmintj/btn_back.png');
-    position:absolute;
-    left:22px;
-    width:137px;
-    height: 35px;
-    background-position: center;
-    top: 28px;
-    cursor:pointer;
-  }
-  .trendAnalysis_nav{
-    height: 24px;
-    margin:6px 0 20px 0;
-    padding-left: 34px;
-    width: 100%;
+<style lang="less" scoped>
+@blockBack:#000000;
+.trendAnalysis_container {
+  background: #171415;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-width: 1366px;
+  min-height: 766px;
+  .head {
+    display: block;
+    background: url('/static/renmintjNew/headback.png') no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    position: relative;
     box-sizing: border-box;
+    margin: 0 28px;
+    border-top: 14px solid rgba(0, 0, 0, 0);
+    .title {
+      position: absolute;
+      top: 17px;
+      font-size: 20px;
+      font-family: RTWSYueGoTrial-Regular;
+      color: rgba(254, 254, 254, 1);
+      left: 50%;
+      transform: translate(-50%)
+    }
+    .left {
+      padding: 25px 0 10px 0px;
+      float: left;
+      .back {
+        background: url('/static/renmintj/btn_back.png');
+        width: 137px;
+        height: 35px;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+    }
+    .right {
+      float: right;
+      padding: 30px 0 0 0;
+      span {
+        font-size: 12px;
+        font-family: HiraginoSansGB-W3;
+        color: rgba(237, 237, 237, 1);
+      }
+    }
   }
-  .trendAnalysis_nav_span{
-    font-size:18px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(94,126,203,1);
-  }
-  .trendAnalysis_nav2{
-    margin-left: 34px;
-    border-bottom: 0px solid rgba(15,59,186,1);
-    display: inline-block;
-  }
-  .trendAnalysis_nav2_span{
-    font-size:20px;
-    font-family:HiraginoSansGB-W3;
-    padding-bottom: 10px;
-    display: inline-block;
-    width: 6em;
-    text-align: center;
-    cursor:pointer;
-    color:rgba(94,126,203,1);
-  }
-  .trendAnalysis_nav2_span_active{
-    color:rgba(255,198,0,1);
-    /* border-bottom: 3px solid rgba(255,198,0,1);     */
-    border-bottom: 0px solid rgba(255,198,0,1);
-  }
-  .trendAnalysis_content{
+  .body{
+    height: calc(100% - 84px);
     width: 100%;
-    height: 903px;
-    box-sizing: border-box;
-    padding: 12px 20px 18px 20px;
+    display: block;
+    position: relative;
+    .nav{
+      height: 24px;
+      margin: 0px 0 20px 0;
+      padding-left: 34px;
+      padding-top:6px;
+      width: 100%;
+      box-sizing: border-box;
+      line-height: 24px;
+      span{
+        font-size: 12px;
+        font-family: HiraginoSansGB-W3;
+        color:rgba(94,126,203,1);
+      }
+    }
+    .nav2{
+      display: block;
+      padding: 0 34px;
+      box-sizing: border-box;
+      .navLeft{
+        float: left;
+        border-bottom:1px solid #0F3BBA;
+        .navspan{
+          font-size:14px;
+          font-family:HiraginoSansGB-W3;
+          color:rgba(94,126,203,1);
+          display: inline-block;
+          padding:0 2px 4px 2px;
+          width: 5em;
+          text-align: center;
+          cursor: pointer;
+        }
+        .active{
+          color:rgba(255,198,0,1);
+          border-bottom: 3px solid #FFC600;
+        }
+      }
+      .navRight{
+        float: right;
+        .date_container{
+          float: right;
+          margin-right: 15px;
+        }
+      }
+    }
+    .content_container{
+      height: calc(100% - 89px);
+      margin-top:15px;
+      width: 100%;
+      box-sizing: border-box;
+      padding:0 24px;
+      position: relative;
+      .left{
+        width: 64%;
+        height: 100%;
+        position: relative;
+        margin-right: 8px;
+        float: left;
+        .top{
+          width: 100%;
+          height: 20%;
+          background: @blockBack;
+          display: flex;
+          .box{
+            flex: 1;
+            position: relative;
+            .l_container{
+              position: absolute;
+              height: 56px;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%,-50%);
+              .span_title{
+                display: block;
+                height: 24px;
+                line-height: 24px;
+                font-size:12px;
+                color:rgba(94,126,203,1);
+              }
+              .span_content{
+                display: block;
+                height: 32px;
+                .span1{
+                  height: 32px;
+                  float: left;
+                  font-size:27px;
+                  font-family:'Impact';
+                  color:rgba(246,251,255,1);
+                }
+                .span2{
+                  height: 16px;
+                  float: left;
+                  margin:16px 0 0 12px;
+                  font-size:12px;
+                  font-family:HiraginoSansGB-W3;
+                  color:rgba(94,126,203,1);
+                }
+              }
+              .span3{
+                position: absolute;
+                bottom:-18px;
+                left: 0;
+                font-size:12px;
+                font-family:HiraginoSansGB-W3;
+                color:rgba(0,198,255,1);
+                width: 200px;
+                transform-origin: left;
+                transform:scale(0.9);
+              }
+            }
+            .border{
+              width: 1px;
+              height: 33%;
+              background:rgba(31,52,144,1);
+              position: absolute;
+              top: 50%;
+              right: 1px;
+              transform: translate(0,-50%);
+            }
+          }
+        }
+        .bottom{
+          width: 100%;
+          height: calc(80% - 16px);
+          margin:8px 0;
+          background: @blockBack;
+          .time{
+            font-size:12px;
+            font-family:HiraginoSansGB-W3;
+            color:rgba(0,198,255,1);
+            padding-left: 20px;
+          }
+        }
+      }
+      .right{
+        width: 34%;
+        height: 100%;
+        float: left;
+        position: relative;
+        .top{
+          width: 100%;
+          height: 54%;
+          background: @blockBack;
+        }
+        .bottom{
+          width: 100%;
+          height: calc(46% - 16px);
+          margin:8px 0;
+          background: @blockBack;
+          position: relative;
+          .target4_canvas{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: url('/static/renmintjNew/ciyun.png');
+            transform: translate(-50%,-50%);
+          }
+        }
+      }
+      .echarts_container{
+        height: calc(100% - 26px);
+        width: 100%;
+      }
+      .title{
+        display: block;
+        box-sizing: border-box;
+        padding-top:5px;
+        position: relative;
+        .border{
+          width: 2px;
+          height: 12px;
+          background: #1194F8;
+          display: inline-block;
+          margin-left:10px;
+          margin-right: 5px;
+        }
+        span{
+          font-size:16px;
+          font-family:HiraginoSansGB-W3;
+          color:#7DA5FE;
+        }
+      }
+    }
   }
-  .trendAnalysis_content_left{
-    width: 1241px;
-    float: left;
-    margin-right: 16px;
-  }
-  .trendAnalysis_content_left_once{
-    width: 1241px;
-    height: 140px;
-    float: left;
-    margin-bottom: 17px;
-    background: linear-gradient( rgba(0, 0, 0, 1),rgba(0, 0, 0, 1));
-  }
-  .trendAnalysis_content_left_once:nth-of-type(2){
-    height: 720px;
-    margin-bottom: 0;
-  }
-  .trendAnalysis_content_left_once_children {
-    float: left;
-    width: calc(305px - 90px);
-    height: 60px;
-    margin-top: calc((140px - 60px) / 2);
-    margin-left: 90px;
-    border-right: 1px solid  #1F3490;
-  }
-  .trendAnalysis_content_left_once_children .span1{
-    color: #5E7ECB;
-    font-size: 14px;
-  }
-  .trendAnalysis_content_left_once_children .span2{
-    color: #F6FBFF;
-    font-size: 38px;
-  }
-  .trendAnalysis_content_left_once_children .span3{
-    color: #00C6FF;
-    font-size: 12px;
-  }
-  .trendAnalysis_content_left_once_children:last-of-type {
-    border-right: 0px;
-  }
-  .target2 {
-    width: 1241px;
-    height: 720px;
-  }
-  .trendAnalysis_content_right{
-    width: 622px;
-    float: left;
-  }
-  .trendAnalysis_content_right_once{
-    width: 622px;
-    height: 483px;
-    float: left;
-    margin-bottom: 23px;
-    background: linear-gradient( rgba(0, 0, 0, 1),rgba(0, 0, 0, 1));
-  }
-  .trendAnalysis_content_right_once:nth-of-type(2){
-    height: 371px;
-    margin-bottom: 0;
-  }
-  .target3 {
-    width: 622px;
-    height: 443px;
-  }
-  .target4 {
-    width: 532px;
-    height: 301px;
-    margin: 15px 45px;
-    background: url('/static/renmintj/cloud2.png') no-repeat;
-  }
-  .trendAnalysis_content_title{
-    width: 100%;
-    color: white;
-  }
-  .trendAnalysis_content_title_left{
-    width: 50%;
-    float: left;
-    margin-top: 15px;
-  }
-  .trendAnalysis_content_span1{
-    font-size:22px;
-    font-family:MicrosoftYaHei;
-    color:rgba(125,165,254,1);
-    padding-left: 8px;
-    margin-left: 28px;
-    border-left: 3px solid rgba(125,165,254,1);
-    display:block;
-    height: 22px;
-    line-height: 22px;
-  }
-  .cas_container{
-    float: right;
-    margin-right: 25px;
-  }
-  .cas_container_span{
-    font-size:16px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(94,126,203,1);
-  }
+}
 </style>

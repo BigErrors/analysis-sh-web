@@ -147,7 +147,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: displayValueAxis(),
       interval: 'auto',
       color: '#4D84FE',
-      fontSize: barMaxWidth < 16 ? barMaxWidth : 16,
+      fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
     // value最大值的类型：percent，integer
@@ -231,7 +231,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
         color: color[1],
-        fontSize: 13
+        fontSize: 12
       },
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
@@ -1391,6 +1391,22 @@ let setMapbox = (caseData, importantEventData) => {
         data: importantEventData,
         silent: false
       }
+      // {
+      //   name: '多边形',
+      //   type: 'polygons3D',
+      //   coordinateSystem: 'mapbox',
+      //   data: [{
+      //     // A square
+      //     coords: [[0, 0], [100, 0], [100, 100], [0, 100]],
+      //     // Height
+      //     height: 3
+      //   }, {
+      //     // A triangle
+      //     coords: [[50, 0], [100, 100], [0, 100]],
+      //     // Height
+      //     height: 5
+      //   }]
+      // }
     ]
   }
   return option

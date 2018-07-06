@@ -23,21 +23,15 @@ export default {
   html,
   body {
     margin: 0px;
-    height: 100%;
-    width: 100%;
-    min-width: 1920px;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  /* html,
-  body {
-    margin: 0px;
     overflow-y: auto;
     overflow-x: hidden;
     min-width: 1366px;
     min-height: 766px;
-  } */
+  }
+
+  .el-loading-parent--relative{
+    position: static!important;
+  }
 
   html,
   body::-webkit-scrollbar {
@@ -303,5 +297,15 @@ export default {
 
   .el-date-editor .el-range__close-icon {
     display: none !important
+  }
+  /* 趋势分析新 */
+
+  .trendAnalysis_container .el-input--suffix .el-input__inner {
+    height: 30px;
+    background: rgba(8, 79, 211, 0.3);
+    color: #5E7ECB;
+  }
+  .trendAnalysis_container .el-input__icon{
+    line-height: 30px;
   }
 </style>

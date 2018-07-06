@@ -108,6 +108,7 @@ export default {
   name: 'peoplePortrait',
   data () {
     return {
+      myChart: {},
       detail: {
         name: '',
         year: '',
@@ -140,14 +141,11 @@ export default {
   methods: {
     // 绘制echarts
     draw (domName, option) {
-      let myChart = this.$echarts.init(document.getElementsByClassName(domName)[0])
-      if (domName === 'peoplePortrait_content_leftContent') {
-        option.maskImage.onload = function () {
-          myChart.setOption(option.option)
-        }
-      } else {
-        myChart.setOption(option)
+      if (this.myChart[domName]) {
+        this.$echarts.dispose(this.myChart[domName])
       }
+      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      this.myChart[domName].setOption(option)
     },
     changeRouter (name) {
       this.$router.push({name: name})
@@ -197,6 +195,13 @@ export default {
     this.getData()
   },
   mounted () {
+    let vue = this
+    window.addEventListener('resize', function () {
+      vue.$nextTick(function () {
+        vue.myChart['module2'].resize()
+        vue.myChart['module3'].resize()
+      })
+    })
   }
 }
 </script>

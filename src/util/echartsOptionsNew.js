@@ -661,10 +661,15 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       fontSize: 12,
       interval: 0,
       formatter: function (value) {
-        if (value.length <= 6) {
+        if (axisType === 'horizon') {
           return value
+        } else {
+          if (value.length <= 6) {
+            return value
+          } else {
+            return value.substring(0, 5) + '..'
+          }
         }
-        return value.substring(0, 5) + '..'
       }
     },
     data: data.map(function (obj) {
@@ -814,10 +819,15 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       fontSize: 12,
       interval: 0,
       formatter: function (value) {
-        if (value.length <= 6) {
+        if (axisType === 'horizon') {
           return value
+        } else {
+          if (value.length <= 6) {
+            return value
+          } else {
+            return value.substring(0, 5) + '..'
+          }
         }
-        return value.substring(0, 5) + '..'
       }
     },
     data: data.map(function (obj) {
@@ -836,7 +846,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       top: 20,
       bottom: 20,
       left: 30,
-      right: 20
+      right: 50
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
