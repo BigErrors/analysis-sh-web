@@ -30,7 +30,7 @@ export default {
   }
 
   .el-loading-parent--relative{
-    position: static!important;
+    position: static !important;
   }
 
   html,
