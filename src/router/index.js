@@ -7,7 +7,7 @@ import modelDataApp from '@/components/modelDataApp'
 import index4renmintj from '@/components/renmintj/index4renmintj5'
 import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
-import pepleRanking from '@/components/renmintj/pepleRanking'
+import peopleRanking from '@/components/renmintj/peopleRanking'
 import peoplePortrait from '@/components/renmintj/peoplePortrait'
 import businessNum from '@/components/renmintj/businessNum'
 import businessTypes from '@/components/renmintj/businessTypes'
@@ -19,74 +19,75 @@ import institutionRanking from '@/components/renmintj/institutionRanking'
 Vue.use(Router)
 
 const router = new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'moduleChoose',
-      component: moduleChoose
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: login
-    }, {
-      path: '/moduleChoose',
-      name: 'moduleChoose',
-      component: moduleChoose
-    }, {
-      path: '/modelSupermarket',
-      name: 'modelSupermarket',
-      component: modelSupermarket
-    }, {
-      path: '/modelDataApp',
-      name: 'modelDataApp',
-      component: modelDataApp
-    }, {
-      path: '/index4renmintj',
-      name: 'index4renmintj',
-      component: index4renmintj
-    }, {
-      path: '/peopleNum',
-      name: 'peopleNum',
-      component: peopleNum
-    }, {
-      path: '/peopleType',
-      name: 'peopleType',
-      component: peopleType
-    }, {
-      path: '/pepleRanking',
-      name: 'pepleRanking',
-      component: pepleRanking
-    }, {
-      path: '/peoplePortrait/:id',
-      name: 'peoplePortrait',
-      component: peoplePortrait
-    }, {
-      path: '/businessNum',
-      name: 'businessNum',
-      component: businessNum
-    }, {
-      path: '/importantEvent',
-      name: 'importantEvent',
-      component: importantEvent
-    }, {
-      path: '/importantEventDetail/:id',
-      name: 'importantEventDetail',
-      component: importantEventDetail
-    }, {
-      path: '/businessTypes',
-      name: 'businessTypes',
-      component: businessTypes
-    }, {
-      path: '/institutionRanking',
-      name: 'institutionRanking',
-      component: institutionRanking
-    }, {
-      path: '/trendAnalysis',
-      name: 'trendAnalysis',
-      component: trendAnalysis
-    }
-  ]
+  routes: [{
+    path: '/',
+    name: 'moduleChoose',
+    component: moduleChoose
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: login
+  }, {
+    path: '/moduleChoose',
+    name: 'moduleChoose',
+    component: moduleChoose
+  }, {
+    path: '/modelSupermarket',
+    name: 'modelSupermarket',
+    component: modelSupermarket
+  }, {
+    path: '/modelDataApp',
+    name: 'modelDataApp',
+    component: modelDataApp
+  }, {
+    path: '/index4renmintj',
+    name: 'index4renmintj',
+    component: index4renmintj
+  }, {
+    path: '/peopleNum',
+    name: 'peopleNum',
+    component: peopleNum
+  }, {
+    path: '/peopleType',
+    name: 'peopleType',
+    component: peopleType
+  }, {
+    path: '/peopleRanking',
+    name: 'peopleRanking',
+    component: peopleRanking
+  }, {
+    path: '/peoplePortrait/:id',
+    name: 'peoplePortrait',
+    component: peoplePortrait
+  }, {
+    path: '/businessNum',
+    name: 'businessNum',
+    component: businessNum
+  }, {
+    path: '/importantEvent',
+    name: 'importantEvent',
+    component: importantEvent
+  }, {
+    path: '/importantEventDetail/:id',
+    name: 'importantEventDetail',
+    component: importantEventDetail
+  }, {
+    path: '/businessTypes',
+    name: 'businessTypes',
+    component: businessTypes
+  }, {
+    path: '/institutionRanking',
+    name: 'institutionRanking',
+    component: institutionRanking
+  }, {
+    path: '/trendAnalysis',
+    name: 'trendAnalysis',
+    component: trendAnalysis
+  }, {
+    path: '*',
+    component: moduleChoose
+  }]
 })
 
 export default router

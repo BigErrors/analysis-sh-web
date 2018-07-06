@@ -8,7 +8,6 @@
     </div>
     <div class="businessTypes_nav2_container">
       <div class="businessTypes_nav2">
-        <!--  @click="changeRouter('')" -->
         <span class="businessTypes_nav2_span" :class="{'active':tjtype==='行专调解'?true:false}" @click="tjtype='行专调解'">行专调解</span>
         <span class="businessTypes_nav2_span" :class="{'active':tjtype==='一般调解'?true:false}" @click="tjtype='一般调解'">一般调解</span>
       </div>
@@ -18,7 +17,7 @@
           class="cascader"
           :options="type"
           placeholder="类型"
-          v-model="typeDefault"
+          v-model="selectDefault.typeDefault"
         ></el-cascader>
       </div>
       <div class="cas_container">
@@ -27,7 +26,7 @@
           class="cascader"
           :options="area"
           placeholder="区域"
-          v-model="areaDefault"
+          v-model="selectDefault.areaDefault"
         ></el-cascader>
       </div>
     </div>
@@ -80,10 +79,10 @@
               <span class="businessTypes_table_h2">名称</span>
               <span class="businessTypes_table_h3">受理数量</span>
             </div>
-            <div class="businessTypes_table_body" v-for="(item, index) in anJianSLS" :key="index">
-              <span class="businessTypes_table_b1">{{item.paiming}}</span>
+            <div class="businessTypes_table_body" v-for="(item, index) in anJianSLSBG" :key="index">
+              <span class="businessTypes_table_b1">{{index+1}}</span>
               <span class="businessTypes_table_b2">{{item.name}}</span>
-              <span class="businessTypes_table_b3">{{item.number}}</span>
+              <span class="businessTypes_table_b3">{{item.value}}</span>
             </div>
           </div>
         </div>
@@ -119,7 +118,7 @@
           <div class="businessTypes_content_title">
             <div class="businessTypes_content_title_left">今日上报案件</div>
           </div>
-          <div class="businessTypes_content_main" v-if="true">
+          <!-- <div class="businessTypes_content_main" v-if="true">
             <div class="businessTypes_table_header">
               <span class="businessTypes_table_h4">序号</span>
               <span class="businessTypes_table_h5">名称</span>
@@ -138,7 +137,7 @@
               </div>
             </rollScreen>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="businessTypes_line2">
           <div class="businessTypes_content_title">
@@ -213,20 +212,23 @@ export default {
       },
       tjtype: '行专调解',
       area: json.area,
-      areaDefault: ['SHJCK01000'],
       type: json.caseType,
-      typeDefault: ['交通'],
+      selectDefault: {
+        areaDefault: ['SHJCK01000'],
+        typeDefault: ['民事']
+      },
       xingZhuanTJS: 0,
       tiaoJieAJS: 0,
-      anjianslbh: {
+      anJianSLBH: {
         year_casenumber: [],
-        month_casenumber: []
+        yueAnJSLBH: []
       },
-      anjiansls: {
-        tjy_casenumber: [],
-        jg_casenumber: []
+      anJianSLS: {
+        tiaoJieYAJSLS: [],
+        jiGouAJSLS: []
       },
-      anJianSLS: [],
+      anJianSLSBG: [],
+      anJianLX: [],
       woman: 0,
       man: 0,
       total: 0,
@@ -238,56 +240,55 @@ export default {
     target1: function (newValue, oldValue) {
       switch (newValue) {
         case 'type1':
-          newValue = 'year'
+          newValue = 'nian'
           break
         case 'type2':
-          newValue = 'month'
+          newValue = 'yue'
           break
         case 'type3':
-          newValue = 'week'
+          newValue = 'zhou'
           break
       }
-      this.xingZhuanTJS = this.tiaojiezlzb[newValue + '_number1']
-      this.tiaoJieAJS = this.tiaojiezlzb[newValue + '_number2']
-      this.draw('target1', eos.setPie4([(this.tiaojiezlzb[newValue + '_zhanbi'] * 100).toFixed(1), ((1 - this.tiaojiezlzb[newValue + '_zhanbi']) * 100).toFixed(1)], '占比'))
+      this.xingZhuanTJS = this.shuZhiTJ[newValue + 'HangZTJS']
+      this.tiaoJieAJS = this.shuZhiTJ[newValue + 'TiaoJAJZS']
+      this.draw('target1', eos.setPie4([(this.shuZhiTJ[newValue + 'ZhanB'] * 100).toFixed(1), ((1 - this.shuZhiTJ[newValue + 'ZhanB']) * 100).toFixed(1)], '占比'))
     },
     target2: function (newValue, oldValue) {
       if (newValue === 'type1') {
-        newValue = 'year'
+        newValue = 'nian'
       } else {
-        newValue = 'month'
+        newValue = 'yue'
       }
-      this.draw('target2', eos.setLine2(this.anjianslbh[newValue + '_casenumber']))
+      this.draw('target2', eos.setLine2(this.anJianSLBH[newValue + 'AnJSLBH']))
     },
     target3: function (newValue, oldValue) {
       if (newValue === 'type1') {
-        newValue = 'jg'
+        newValue = 'jiGou'
       } else {
-        newValue = 'tjy'
+        newValue = 'tiaoJieY'
       }
-      this.anJianSLS = this.anjiansls[newValue + '_casenumber']
+      this.anJianSLSBG = this.anJianSLS[newValue + 'AJSLS']
     },
     target8: function (newValue, oldValue) {
       if (newValue === 'type1') {
-        newValue = 'sqr'
+        newValue = 'shenQingRFX'
       } else {
-        newValue = 'bsqr'
+        newValue = 'beiShenQRFX'
       }
-      this.man = this.formatData(this.dangshirfx[newValue + '_data'].gender_man)
-      this.woman = this.formatData(this.dangshirfx[newValue + '_data'].gender_woman)
-      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_bendi)}, {name: '外地户口', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_waidi)}, {name: '未知', value: this.formatData(this.dangshirfx[newValue + '_data'].huji_weizhi)}], 'percent', false, true))
-      this.draw('target82', eos.setBar3(this.dangshirfx[newValue + '_data'].nlfb.map(item => {
-        return {name: item.age, value: parseInt(item.number)}
-      }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+      this.man = this.formatData(this.dangShiRFX[newValue].nanXingZB)
+      this.woman = this.formatData(this.dangShiRFX[newValue].nvXingZB)
+      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangShiRFX[newValue].benDiHJ)}, {name: '外地户口', value: this.formatData(this.dangShiRFX[newValue].waiDiHJ)}, {name: '未知', value: this.formatData(this.dangShiRFX[newValue].weiZhiHJ)}], 'percent', false, true))
+      this.draw('target82', eos.setBar3(this.dangShiRFX[newValue].nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
     },
     tjtype: function (newValue, oldValue) {
-      this.getData()
+      this.selectDefault.areaDefault = ['SHJCK01000']
+      this.selectDefault.typeDefault = ['民事']
     },
-    areaDefault: function (newValue, oldValue) {
-      this.getData()
-    },
-    typeDefault: function (newValue, oldValue) {
-      this.getData()
+    selectDefault: {
+      handler: function (newValue, oldValue) {
+        this.getData()
+      },
+      deep: true
     }
   },
   methods: {
@@ -309,39 +310,37 @@ export default {
       let vue = this
       let baseUrl = urlConfig.baseUrl
       let url = '/categoryAnalysis'
-      let param = { area: this.areaDefault[0], type: this.typeDefault[0], tjtype: this.tjtype }
+      let param = { area: this.selectDefault.areaDefault[0], type: this.selectDefault.typeDefault[0], tjtype: this.tjtype }
       http.get(baseUrl + url, param, (data) => {
-        vue.tiaojiezlzb = data.tiaojiezlzb
-        vue.xingZhuanTJS = vue.tiaojiezlzb.year_number1
-        vue.tiaoJieAJS = vue.tiaojiezlzb.year_number2
-        vue.anjianslbh.year_casenumber = data.anjianslbh.year_casenumber.reverse()
-        vue.anjianslbh.month_casenumber = data.anjianslbh.month_casenumber.reverse()
-        vue.anjiansls.jg_casenumber = data.anjiansls.jg_casenumber
-        vue.anjiansls.tjy_casenumber = data.anjiansls.tjy_casenumber
-        vue.anJianSLS = vue.anjiansls.jg_casenumber
-        vue.dangshirfx = data.dangshirfx
-        vue.man = vue.formatData(data.dangshirfx.sqr_data.gender_man)
-        vue.woman = vue.formatData(data.dangshirfx.sqr_data.gender_woman)
-        vue.total = data.peichangje.benniandlj
-        vue.max = data.peichangje.danbizd
-        vue.avg = data.peichangje.pingjunmb
+        vue.shuZhiTJ = data.shuZhiTJ
+        vue.xingZhuanTJS = vue.shuZhiTJ.nianHangZTJS
+        vue.tiaoJieAJS = vue.shuZhiTJ.nianTiaoJAJZS
+        vue.anJianSLBH.nianAnJSLBH = data.anJianSLBH.nianAnJSLBH.reverse()
+        vue.anJianSLBH.yueAnJSLBH = data.anJianSLBH.yueAnJSLBH.reverse()
+        vue.anJianSLS.jiGouAJSLS = data.anJianSLS.jiGouAJSLS
+        vue.anJianSLS.tiaoJieYAJSLS = data.anJianSLS.tiaoJieYAJSLS
+        vue.anJianSLSBG = vue.anJianSLS.jiGouAJSLS
+        vue.dangShiRFX = data.dangShiRFX
+        vue.man = vue.formatData(data.dangShiRFX.shenQingRFX.nanXingZB)
+        vue.woman = vue.formatData(data.dangShiRFX.shenQingRFX.nvXingZB)
+        vue.total = data.peiChangJE.benNianDLJ
+        vue.max = data.peiChangJE.danBiZD
+        vue.avg = data.peiChangJE.pingJunMB
         vue.$nextTick(function () {
-          vue.draw('target1', eos.setPie4([vue.formatData(vue.tiaojiezlzb.year_zhanbi), vue.formatData(1 - vue.tiaojiezlzb.year_zhanbi)], '占比'))
-          vue.draw('target2', eos.setLine2(vue.anjianslbh.year_casenumber))
-          vue.draw('target4', eos.setPie3(data.anjianlx.map(item => {
-            return {name: item.name, value: parseInt(item.number)}
-          }), 'radius'))
-          vue.draw('target5', eos.setBar3([{name: '状态1', value: 246}, {name: '状态2', value: 123}], ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32, false, false))
-          vue.draw('target61', eos.setPie4([vue.formatData(data.anjiancljg.cg_bili), vue.formatData(1 - data.anjiancljg.cg_bili)], '调解成功', 0, 'top'))
-          vue.draw('target62', eos.setPie4([vue.formatData(data.anjiancljg.xys_bili), vue.formatData(1 - data.anjiancljg.xys_bili)], '协议书', 0, 'top'))
-          vue.draw('target63', eos.setPie4([vue.formatData(data.anjiancljg.sfjd_bili), vue.formatData(1 - data.anjiancljg.sfjd_bili)], '司法确认', 0, 'top'))
-          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_bendi)}, {name: '外地户口', value: vue.formatData(data.dangshirfx.sqr_data.huji_waidi)}, {name: '未知', value: vue.formatData(data.dangshirfx.sqr_data.huji_weizhi)}], 'percent', false, true))
-          vue.draw('target82', eos.setBar3(data.dangshirfx.sqr_data.nlfb.map(item => {
-            return {name: item.age, value: parseInt(item.number)}
-          }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
-          vue.draw('target9', eos.setBar3(data.peichangje.peichangjebh.reverse().map(item => {
-            return {name: item.time, value: item.value}
-          }), ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+          vue.target1 = 'type1'
+          vue.target2 = 'type1'
+          vue.target3 = 'type1'
+          vue.target8 = 'type1'
+          vue.draw('target1', eos.setPie4([vue.formatData(vue.shuZhiTJ.nianZhanB), vue.formatData(1 - vue.shuZhiTJ.nianZhanB)], '占比'))
+          vue.draw('target2', eos.setLine2(vue.anJianSLBH.nianAnJSLBH))
+          vue.draw('target4', eos.setPie3(data.anJianLX, 'radius'))
+          // vue.draw('target5', eos.setBar3(data.anJianCLZT, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32, false, false))
+          // vue.draw('target61', eos.setPie4([vue.formatData(data.anJianCLJG.tiaoJieCGL), vue.formatData(1 - data.anJianCLJG.tiaoJieCGL)], '调解成功', 0, 'top'))
+          // vue.draw('target62', eos.setPie4([vue.formatData(data.anJianCLJG.xieYiSL), vue.formatData(1 - data.anJianCLJG.xieYiSL)], '协议书', 0, 'top'))
+          // vue.draw('target63', eos.setPie4([vue.formatData(data.anJianCLJG.siFaQRL), vue.formatData(1 - data.anJianCLJG.siFaQRL)], '司法确认', 0, 'top'))
+          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.benDiHJ)}, {name: '外地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.waiDiHJ)}, {name: '未知', value: vue.formatData(data.dangShiRFX.shenQingRFX.weiZhiHJ)}], 'percent', false, true))
+          vue.draw('target82', eos.setBar3(data.dangShiRFX.shenQingRFX.nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+          vue.draw('target9', eos.setBar3(data.peiChangJE.peiChangJEBH, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
         })
       })
     }
@@ -358,6 +357,11 @@ export default {
     background: url(/static/renmintj/pic_bg.png);
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  #businessTypes {
+    min-width: 1920px;
+    min-height: 1080px;
   }
 
   .businessTypes_header {

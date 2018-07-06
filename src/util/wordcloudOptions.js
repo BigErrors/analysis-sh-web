@@ -12,7 +12,7 @@ let setOption = (data, shape) => {
     return min < current ? min : current
   })
   // 转换系数
-  let k = (maxValue - minValue) === 0 ? 1 : (40 - 10) / (maxValue - minValue)
+  let k = (maxValue - minValue) === 0 ? 1 : (20 - 10) / (maxValue - minValue)
   let option = {
     list: data,
     fontFamily: '微软雅黑',

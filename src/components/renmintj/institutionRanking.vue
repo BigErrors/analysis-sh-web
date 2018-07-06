@@ -63,11 +63,11 @@
         <div class="t_body">
           <div class="line" v-for="(item,index) in list" :key = index>
             <div class="row row1">
-              <span v-if="(index>2||currentpage>1)&&reorder==='DESC'" class="institutionRanking_content_span2">{{index+1+(currentpage-1)*10}}</span>
-              <span v-if="reorder==='ASC'" class="institutionRanking_content_span2">{{pageTotal-(index)-(currentpage-1)*10}}</span>
-              <img v-if="index===0&&currentpage===1&&reorder==='DESC'" class="img" src='/static/renmintj/jingpai.png' />
-              <img v-if="index===1&&currentpage===1&&reorder==='DESC'" class="img" src='/static/renmintj/yinpai.png' />
-              <img v-if="index===2&&currentpage===1&&reorder==='DESC'" class="img" src='/static/renmintj/tongpai.png' />
+              <span v-if="(index>2||pageInfo.currentPage>1)&&reorder==='DESC'" class="institutionRanking_content_span2">{{index+1+(pageInfo.currentPage-1)*10}}</span>
+              <span v-if="reorder==='ASC'" class="institutionRanking_content_span2">{{pageInfo.total-(index)-(pageInfo.currentPage-1)*10}}</span>
+              <img v-if="index===0&&pageInfo.currentPage===1&&reorder==='DESC'" class="img" src='/static/renmintj/jingpai.png' />
+              <img v-if="index===1&&pageInfo.currentPage===1&&reorder==='DESC'" class="img" src='/static/renmintj/yinpai.png' />
+              <img v-if="index===2&&pageInfo.currentPage===1&&reorder==='DESC'" class="img" src='/static/renmintj/tongpai.png' />
             </div>
             <div class="row row2">
               <el-tooltip v-if="item.name.length>12" :content='item.name' placement="top">
@@ -92,8 +92,9 @@
       <div class="page_container">
         <el-pagination
           layout="total, prev, pager, next"
-          :total="pageTotal"
+          :total="pageInfo.total"
           :page-size="10"
+          :current-page.sync="pageInfo.currentPage"
           @current-change="handleCurrentChange"
           class="ej-pagination">
         </el-pagination>
@@ -154,8 +155,11 @@ export default {
         }]
       },
       list: [],
-      pageTotal: 1,
-      currentpage: 1,
+      pageInfo: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 0
+      },
       reorder: 'DESC',
       obj: 'renyuansl',
       loading: '',
@@ -183,9 +187,11 @@ export default {
   },
   watch: {
     chooseDefault: function (newValue, oldValue) {
+      this.pageInfo.currentPage = 1
       this.getData()
     },
     date: function (newValue, oldValue) {
+      this.pageInfo.currentPage = 1
       this.getData()
     }
   },
@@ -207,12 +213,12 @@ export default {
         'reorder': _this.reorder,
         'excl': excel,
         'pagesize': 10,
-        'currentpage': _this.currentpage
+        'currentpage': _this.pageInfo.currentPage
       }
       if (excel === 0) {
         http.post(baseUrl + url, param, (data) => {
           _this.list = data.pageData
-          _this.pageTotal = data.pageinfo.total
+          _this.pageInfo.total = data.pageinfo.total
           _this.loading = false
         }, 'application/json')
       } else {
@@ -233,7 +239,7 @@ export default {
     },
     // 分页
     handleCurrentChange (val) {
-      this.currentpage = val
+      this.pageInfo.currentPage = val
       this.getData()
     },
     // 排序

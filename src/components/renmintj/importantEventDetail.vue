@@ -1172,7 +1172,7 @@ export default {
               position: absolute;
               bottom: -10px;
               left: 0;
-              transform: translateX(-5px)
+              transform: translateX(-5px);
             }
             .imgPoint {
               width: 18px;

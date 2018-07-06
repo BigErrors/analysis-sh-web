@@ -30,14 +30,14 @@
             <div v-if="mark===6" class="border leftbottom"></div>
             <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据洞察</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
           </div>
-          <div class="six bg1" :class="{six_4:mark===1,six_5:mark===2,six_6:mark===3,six_1:mark===4,six_2:mark===5,six_3:mark===6}" @click="changeRouter('http://rmtj.justice.gov.cn/')">
+          <div class="six bg1" :class="{six_4:mark===1,six_5:mark===2,six_6:mark===3,six_1:mark===4,six_2:mark===5,six_3:mark===6}" @click="changeRouter('http://192.168.91.34:8880/tatt/pages/index.html')">
             <div v-if="mark===5" class="border righttop"></div>
             <div v-if="mark===5" class="border lefttop"></div>
             <div v-if="mark===5" class="border rightbottom"></div>
             <div v-if="mark===5" class="border leftbottom"></div>
             <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">同案同调</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
           </div>
-          <div class="six bg2" :class="{six_5:mark===1,six_6:mark===2,six_1:mark===3,six_2:mark===4,six_3:mark===5,six_4:mark===6}" @click="changeRouter('http://192.168.91.34:8880/tatt/pages/index.html')">
+          <div class="six bg2" :class="{six_5:mark===1,six_6:mark===2,six_1:mark===3,six_2:mark===4,six_3:mark===5,six_4:mark===6}" @click="changeRouter('http://rmtj.justice.gov.cn/')">
             <div v-if="mark===4" class="border righttop"></div>
             <div v-if="mark===4" class="border lefttop"></div>
             <div v-if="mark===4" class="border rightbottom"></div>

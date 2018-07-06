@@ -170,7 +170,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       color: '#4D84FE',
       interval: 0,
       rotate: rotate || 0,
-      fontSize: 15,
+      fontSize: 12,
       formatter: function (value) {
         if (axisType === 'horizon') {
           return value
@@ -1389,7 +1389,7 @@ let setMapbox = (caseData, importantEventData) => {
           borderColor: '#ffffff'
         },
         data: importantEventData,
-        silent: false
+        silent: true
       }
       // {
       //   name: '多边形',
