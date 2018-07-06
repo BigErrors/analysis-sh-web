@@ -224,6 +224,7 @@ export default {
         transform-style: preserve-3d;
         transform: rotatex(0);
         perspective: 5000;
+        -webkit-perspective: 5000;
         z-index: 1;
         .six{
           width: 550px;

@@ -159,9 +159,9 @@ export default {
       let option = wos.setOption(data)
       let vue = this
       let ctx = document.getElementsByClassName('canv')[0].getContext('2d')
-      vue.background = type === '女' ? 'url(/static/renmintjOther/pic_girl1.png) no-repeat' : 'url(/static/renmintjOther/pic_boy1.png) no-repeat'
+      vue.background = type === '女' ? 'url(/static/renmintjNew/nv.png) no-repeat' : 'url(/static/renmintjNew/nan.png) no-repeat'
       let img = new Image()
-      img.src = type === '女' ? '/static/renmintjOther/pic_girl2.png' : '/static/renmintjOther/pic_boy2.png'
+      img.src = type === '女' ? '/static/renmintjNew/nv2.png' : '/static/renmintjNew/nan2.png'
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
         vue.$wordcloud(document.getElementsByClassName('canv')[0], option)
