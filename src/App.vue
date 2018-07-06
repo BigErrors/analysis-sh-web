@@ -29,10 +29,6 @@ export default {
     min-height: 766px;
   }
 
-  .el-loading-parent--relative{
-    position: static !important;
-  }
-
   html,
   body::-webkit-scrollbar {
     width: 4px;

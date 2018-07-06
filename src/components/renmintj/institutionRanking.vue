@@ -1,5 +1,8 @@
 <template>
-  <div class="institutionRanking_container">
+  <div class="institutionRanking_container" v-loading="loading"
+    element-loading-text="数据加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.5)">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
@@ -192,13 +195,7 @@ export default {
   methods: {
     getData (excl) {
       let _this = this
-      _this.loading = _this.$loading({
-        lock: true,
-        text: '数据加载中',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.5)',
-        style: 'width: 100%,height:100%'
-      })
+      _this.loading = true
       let excel = excl || 0
       let baseUrl = urlConfig.baseUrl
       let url = '/institutionalRankings'
@@ -216,7 +213,7 @@ export default {
         http.post(baseUrl + url, param, (data) => {
           _this.list = data.pageData
           _this.pageTotal = data.pageinfo.total
-          _this.loading.close()
+          _this.loading = false
         }, 'application/json')
       } else {
         http.post(baseUrl + url, param, (data) => {
@@ -230,7 +227,7 @@ export default {
           document.body.appendChild(a)
           a.click()
           a.remove()
-          _this.loading.close()
+          _this.loading = false
         }, 'application/json', 'arraybuffer')
       }
     },

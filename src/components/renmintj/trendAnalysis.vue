@@ -1,5 +1,8 @@
 <template>
-  <div class='trendAnalysis_container'>
+  <div class='trendAnalysis_container' v-loading="loading"
+    element-loading-text="数据加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.5)">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
@@ -145,7 +148,7 @@ export default {
         start: '',
         end: ''
       },
-      loading: '',
+      loading: false,
       time: new Date()
     }
   },
@@ -221,12 +224,7 @@ export default {
     },
     getData () {
       let vue = this
-      vue.loading = vue.$loading({
-        lock: true,
-        text: '数据加载中',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.5)'
-      })
+      vue.loading = true
       let reqParam = {area: this.areaDefault[0], source: this.typeDefault[0], startDate: this.dateRange.start, endDate: this.dateRange.end}
       let baseUrl = urlConfig.baseUrl
       let url = ''
@@ -254,7 +252,7 @@ export default {
           }).slice(0, 10)
           vue.draw('target3', eos.setBar3(data.jiuFenLX, ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
           vue.drawWordcloud2('target4', data.jiuFenCY)
-          vue.loading.close()
+          vue.loading = false
         })
       })
     }
