@@ -1,5 +1,5 @@
 <template>
-  <div class="pepleRanking_container">
+  <div class="peopleRanking_container">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
@@ -17,7 +17,7 @@
         <div class="navLeft">
           <span class="navspan" @click="changeRouter('peopleNum')">数量分析</span>
           <span class="navspan" @click="changeRouter('peopleType')">属性分析</span>
-          <span class="navspan active" @click="changeRouter('pepleRanking')">排名分析</span>
+          <span class="navspan active" @click="changeRouter('peopleRanking')">排名分析</span>
         </div>
         <div class="navRight">
           <div class="excel_btn" @click="getData(1)">导出Excel</div>
@@ -280,7 +280,7 @@ export default {
 </script>
 
 <style lang="less">
-.pepleRanking_container{
+.peopleRanking_container{
   background: #171415;
   position: absolute;
   width: 100%;

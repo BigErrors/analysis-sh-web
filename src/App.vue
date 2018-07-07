@@ -17,6 +17,7 @@ export default {
   created () {},
   mounted () {}
 }
+
 </script>
 
 <style>
@@ -262,38 +263,39 @@ export default {
 
   /* 人员排名新 */
 
-  .pepleRanking_container .el-range-editor.el-input__inner {
+  .peopleRanking_container .el-range-editor.el-input__inner {
     height: 30px;
     background: rgba(8, 79, 211, 0.3);
     border-color: #7B95F6;
   }
 
-  .pepleRanking_container .el-date-editor .el-range__icon {
+  .peopleRanking_container .el-date-editor .el-range__icon {
     line-height: 23px;
   }
 
-  .pepleRanking_container .el-date-editor .el-range-separator {
+  .peopleRanking_container .el-date-editor .el-range-separator {
     line-height: 22px;
   }
 
-  .pepleRanking_container .el-date-editor .el-range-input {
+  .peopleRanking_container .el-date-editor .el-range-input {
     background: rgba(8, 79, 211, 0);
     color: #5E7ECB;
   }
 
-  .pepleRanking_container .el-input--suffix .el-input__inner {
+  .peopleRanking_container .el-input--suffix .el-input__inner {
     height: 30px;
     background: rgba(8, 79, 211, 0.3);
     color: #5E7ECB;
   }
 
-  .pepleRanking_container .el-input__icon {
+  .peopleRanking_container .el-input__icon {
     line-height: 30px;
   }
 
   .el-date-editor .el-range__close-icon {
     display: none !important
   }
+
   /* 趋势分析新 */
 
   .trendAnalysis_container .el-input--suffix .el-input__inner {
@@ -301,7 +303,32 @@ export default {
     background: rgba(8, 79, 211, 0.3);
     color: #5E7ECB;
   }
-  .trendAnalysis_container .el-input__icon{
+
+  .trendAnalysis_container .el-input__icon {
     line-height: 30px;
   }
+
+  /* 业务数量新 */
+
+  .busiNum_container .el-input--suffix .el-input__inner {
+    background: rgba(0, 0, 0, 0) !important;
+    border: 0 !important;
+  }
+
+  .busiNum_container .el-cascader-menu__item {
+    color: #ffffff !important;
+  }
+
+  .busiNum_container .el-cascader-menu__item:focus:not(:active),
+  .el-cascader-menu__item:hover {
+    background: #FFF225 !important;
+    color: #ffffff !important;
+  }
+
+  .busiNum_container .el-cascader__label {
+    font-size: 32px;
+    font-family: HiraginoSansGB-W3;
+    color: #FFF225 !important;
+  }
+
 </style>

@@ -1070,6 +1070,7 @@ let setPie2 = (data) => {
       {
         name: '调解',
         type: 'pie',
+        center: ['55%', '55%'],
         radius: ['40%', '55%'],
         avoidLabelOverlap: true,
         label: {
@@ -1079,8 +1080,8 @@ let setPie2 = (data) => {
             rich: {
               c: {
                 color: '#FFC600',
-                fontSize: 20,
-                lineHeight: 21,
+                fontSize: 12,
+                lineHeight: 16,
                 align: 'center'
               },
 
@@ -1092,8 +1093,8 @@ let setPie2 = (data) => {
               },
               b: {
                 color: '#B8CEFF',
-                fontSize: 16,
-                lineHeight: 20
+                fontSize: 12,
+                lineHeight: 16
               }
             }
           }
@@ -1115,11 +1116,11 @@ let setPie3 = (data, showRose) => {
   let option = {
     legend: {
       orient: 'vertical',
-      bottom: '35%',
-      right: 30,
+      top: '15%',
+      right: 10,
       textStyle: {
         color: '#7DA5FE',
-        fontSize: 16
+        fontSize: 12
       },
       data: data.map(item => {
         return item.name
@@ -1130,7 +1131,7 @@ let setPie3 = (data, showRose) => {
       {
         name: 'seriesName',
         type: 'pie',
-        center: ['35%', '50%'],
+        center: ['35%', '60%'],
         radius: ['40%', '55%'],
         roseType: showRose || false,
         avoidLabelOverlap: true,
@@ -1140,13 +1141,13 @@ let setPie3 = (data, showRose) => {
             rich: {
               c: {
                 color: '#FFC600',
-                fontSize: 17,
+                fontSize: 12,
                 lineHeight: 12,
                 align: 'center'
               },
               d: {
                 color: '#FFC600',
-                fontSize: 17,
+                fontSize: 12,
                 lineHeight: 12,
                 align: 'center'
               },

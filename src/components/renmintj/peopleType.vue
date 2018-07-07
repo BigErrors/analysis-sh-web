@@ -17,7 +17,7 @@
         <div class="navLeft">
           <span class="navspan" @click="changeRouter('peopleNum')">数量分析</span>
           <span class="navspan active" @click="changeRouter('peopleType')">属性分析</span>
-          <span class="navspan" @click="changeRouter('pepleRanking')">排名分析</span>
+          <span class="navspan" @click="changeRouter('peopleRanking')">排名分析</span>
         </div>
       </div>
       <div class="content_container">
@@ -87,8 +87,8 @@
                 <tbody class="tbody">
                 <tr v-for="(item,index) in dangyuanzbpm" :key="index" v-if="index<=4">
                   <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
-                  <td class='td'>{{item.mingcheng}}</td>
-                  <td class='td'>{{item.zhanbi|numFormat}}</td>
+                  <td class='td'>{{item.name}}</td>
+                  <td class='td'>{{item.values|numFormat}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -112,8 +112,8 @@
                 <tbody class="tbody">
                 <tr v-for="(item,index) in suiyxzbpm" :key="index" v-if="index<=4">
                   <td class='td'><span class="circle" :class="'circle'+(index+1)">{{index+1}}</span></td>
-                  <td class='td'>{{item.mingcheng}}</td>
-                  <td class='td'>{{item.zhanbi|numFormat}}</td>
+                  <td class='td'>{{item.name}}</td>
+                  <td class='td'>{{item.values|numFormat}}</td>
                 </tr>
                 </tbody>
               </table>

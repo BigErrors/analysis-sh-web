@@ -17,7 +17,7 @@
         <div class="navLeft">
           <span class="navspan" @click="changeRouter('peopleNum')">数量分析</span>
           <span class="navspan" @click="changeRouter('peopleType')">属性分析</span>
-          <span class="navspan active" @click="changeRouter('pepleRanking')">排名分析</span>
+          <span class="navspan active" @click="changeRouter('peopleRanking')">排名分析</span>
         </div>
       </div>
       <div class="content_container">
