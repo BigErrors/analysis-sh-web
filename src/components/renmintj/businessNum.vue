@@ -215,7 +215,7 @@ export default {
   },
   watch: {
     type: function (newValue, oldValue) {
-      this.getData()
+      this.areaDefault = ['SHJCK01000']
     },
     areaDefault: function (newValue, oldValue) {
       this.getData()

@@ -1,185 +1,155 @@
 <template>
-  <div id='businessTypes' class='shade'>
-    <div class="businessTypes_header">
-      <div class="businessTypes_back" @click="changeRouter('index4renmintj')"></div>
-    </div>
-    <div class="businessTypes_nav">
-      <span class="businessTypes_nav_span">首页 > 业务类型</span>
-    </div>
-    <div class="businessTypes_nav2_container">
-      <div class="businessTypes_nav2">
-        <span class="businessTypes_nav2_span" :class="{'active':tjtype==='行专调解'?true:false}" @click="tjtype='行专调解'">行专调解</span>
-        <span class="businessTypes_nav2_span" :class="{'active':tjtype==='一般调解'?true:false}" @click="tjtype='一般调解'">一般调解</span>
+  <div class="busiTypes_container">
+    <div class="head clearfix">
+      <div class="title">基层司法大数据子平台</div>
+      <div class="left">
+        <div class="back" @click="$router.back(-1)"></div>
       </div>
-      <div class="cas_container">
-        <span class="cas_container_span">类型：</span>
-        <el-cascader
-          class="cascader"
-          :options="type"
-          placeholder="类型"
-          v-model="selectDefault.typeDefault"
-        ></el-cascader>
-      </div>
-      <div class="cas_container">
-        <span class="cas_container_span">区域：</span>
-        <el-cascader
-          class="cascader"
-          :options="area"
-          placeholder="区域"
-          v-model="selectDefault.areaDefault"
-        ></el-cascader>
+      <div class="right">
+        <span>{{timeCom}}</span>
       </div>
     </div>
-    <div class="businessTypes_content">
-      <div class="businessTypes_column1">
-        <div class="businessTypes_line1">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span" :class="{'active':target1==='type3'?true:false}" @click="target1='type3'">本周</span>
-              <span class="businessTypes_content_title_span" :class="{'active':target1==='type2'?true:false}" @click="target1='type2'">本月</span>
-              <span class="businessTypes_content_title_span" :class="{'active':target1==='type1'?true:false}" @click="target1='type1'">今年</span>
-            </div>
+    <div class="body">
+      <div class="nav">
+        <span>首页 > 业务类型</span>
+      </div>
+      <div class="nav2 clearfix">
+        <div class="navLeft">
+          <span class="navspan" :class="{'active':tjtype==='行专调解'?true:false}" @click="tjtype='行专调解'">行专调解</span>
+          <span class="navspan" :class="{'active':tjtype==='一般调解'?true:false}" @click="tjtype='一般调解'">一般调解</span>
+        </div>
+        <div class="navRight">
+          <div class="cas_container">
+            <span class="cas_container_span">类型：</span>
+            <el-cascader
+              class="cascader"
+              :options="type"
+              placeholder="类型"
+              v-model="selectDefault['typeDefault']"
+            ></el-cascader>
           </div>
-          <div class="businessTypes_content_main">
-            <div class="businessTypes_content_1">
-              <span class="businessTypes_content_span1">{{xingZhuanTJS}}</span>
-              <span class="businessTypes_content_span2">行专调解数</span>
+          <div class="cas_container" style="margin-right: 25px;">
+            <span class="cas_container_span">区域：</span>
+            <el-cascader
+              class="cascader"
+              :options="area"
+              placeholder="区域"
+              v-model="selectDefault['areaDefault']"
+            ></el-cascader>
+          </div>
+        </div>
+      </div>
+      <div class="content_container">
+        <div class="left">
+          <div class="top">
+            <div class="title clearfix" style="z-index:2">
+              <div class="right_btn" :class="{'active':target1==='type3'?true:false}" @click="target1='type3'">本周</div>
+              <div class="right_btn" :class="{'active':target1==='type2'?true:false}" @click="target1='type2'">本月</div>
+              <div class="right_btn" :class="{'active':target1==='type1'?true:false}" @click="target1='type1'">今年</div>
+            </div>
+            <div class="contentLT">
+              <span class="span1">{{xingZhuanTJS}}</span>
+              <span class="span2">行专调解数</span>
             </div>
             <div class="border"></div>
-            <div class="businessTypes_content_2">
-              <span class="businessTypes_content_span3">{{tiaoJieAJS}}</span>
-              <span class="businessTypes_content_span4">调解案件总数</span>
+            <div class="contentLB">
+              <span class="span1">{{tiaoJieAJS}}</span>
+              <span class="span2">调解案件总数</span>
             </div>
-            <div class="businessTypes_content_3 target1">
+            <div class="contentR target1"></div>
+          </div>
+          <div class="bottom">
+            <div class="title">
+              <div class="border"></div>
+              <span>案件受理数(TOP5)</span>
+              <div class="right_btn" :class="{'active':target3==='type2'?true:false}" @click="target3='type2'">调解员</div>
+              <div class="right_btn" :class="{'active':target3==='type1'?true:false}" @click="target3='type1'">机构</div>
             </div>
-          </div>
-        </div>
-        <div class="businessTypes_line2">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">案件数量变化</div>
-            <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span" :class="{'active':target2==='type2'?true:false}" @click="target2='type2'">按月</span>
-              <span class="businessTypes_content_title_span" :class="{'active':target2==='type1'?true:false}" @click="target2='type1'">按年</span>
-            </div>
-          </div>
-          <div class="businessTypes_content_main target2">
-          </div>
-        </div>
-        <div class="businessTypes_line3">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">案件受理数(TOP5)</div>
-            <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span" :class="{'active':target3==='type2'?true:false}" @click="target3='type2'">调解员</span>
-              <span class="businessTypes_content_title_span" :class="{'active':target3==='type1'?true:false}" @click="target3='type1'">机构</span>
-            </div>
-          </div>
-          <div class="businessTypes_content_main">
-            <div class="businessTypes_table_header">
-              <span class="businessTypes_table_h1">排名</span>
-              <span class="businessTypes_table_h2">名称</span>
-              <span class="businessTypes_table_h3">受理数量</span>
-            </div>
-            <div class="businessTypes_table_body" v-for="(item, index) in anJianSLSBG" :key="index">
-              <span class="businessTypes_table_b1">{{index+1}}</span>
-              <span class="businessTypes_table_b2">{{item.name}}</span>
-              <span class="businessTypes_table_b3">{{item.value}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="businessTypes_column2">
-        <div class="businessTypes_line1">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">案件类型</div>
-          </div>
-          <div class="businessTypes_content_main target4">
-          </div>
-        </div>
-        <div class="businessTypes_line2">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">案件处理状态</div>
-          </div>
-          <div class="businessTypes_content_main target5">
-          </div>
-        </div>
-        <div class="businessTypes_line3">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">案件处理结果</div>
-          </div>
-          <div class="businessTypes_content_main">
-            <div class="businessTypes_content_main_small target61"></div>
-            <div class="businessTypes_content_main_small target62"></div>
-            <div class="businessTypes_content_main_small target63"></div>
-          </div>
-        </div>
-      </div>
-      <div class="businessTypes_column3">
-        <div class="businessTypes_line1">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">今日上报案件</div>
-          </div>
-          <!-- <div class="businessTypes_content_main" v-if="true">
-            <div class="businessTypes_table_header">
-              <span class="businessTypes_table_h4">序号</span>
-              <span class="businessTypes_table_h5">名称</span>
-              <span class="businessTypes_table_h5">类型</span>
-              <span class="businessTypes_table_h5">地区</span>
-              <span class="businessTypes_table_h5">状态</span>
-            </div>
-            <div class="businessTypes_table_body_container">
-             <rollScreen :dLength='15' :height='35' :lineNum='5' class="left">
-              <div class="businessTypes_table_body2" slot="slide" v-for="(item, index) in 15" :key="index">
-                <span class="businessTypes_table_b4">{{index+1}}</span>
-                <span class="businessTypes_table_b5">上报事件名称</span>
-                <span class="businessTypes_table_b5">上报事件类型</span>
-                <span class="businessTypes_table_b5">上报事件地区</span>
-                <span class="businessTypes_table_b5">上报事件状态</span>
+            <div class="table_container">
+              <div class="t_head">
+                <div class="row row1">排名</div>
+                <div class="row row2">名称</div>
+                <div class="row row3">受理数量</div>
               </div>
-            </rollScreen>
+              <div class="t_body">
+                <div class="line" v-for="(item, index) in anJianSLSBG" :key="index">
+                  <div class="row row1">
+                    <span v-if="index>2">{{index+1}}</span>
+                    <img class="img"  v-if ="index===0" src='/static/renmintj/jingpai.png' />
+                    <img class="img"  v-if ="index===1" src='/static/renmintj/yinpai.png' />
+                    <img class="img"  v-if ="index===2" src='/static/renmintj/tongpai.png' />
+                  </div>
+                  <div class="row row2"><span>{{item.name}}</span></div>
+                  <div class="row row3"><span>{{item.value}}</span></div>
+                </div>
+              </div>
             </div>
-          </div> -->
-        </div>
-        <div class="businessTypes_line2">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">当事人分析</div>
-            <div class="businessTypes_content_title_right">
-              <span class="businessTypes_content_title_span" :class="{'active':target8==='type2'?true:false}" @click="target8='type2'">被申请人</span>
-              <span class="businessTypes_content_title_span" :class="{'active':target8==='type1'?true:false}" @click="target8='type1'">申请人</span>
-            </div>
-          </div>
-          <div class="businessTypes_content_main">
-            <div class="businessTypes_content_4">
-              <span class="businessTypes_content_4_span1">性别占比</span>
-              <img class="businessTypes_content_4_img1" src="/static/renmintj/bunan.png">
-              <span class="businessTypes_content_4_span2">{{man + '%'}}</span>
-              <img class="businessTypes_content_4_img2" src="/static/renmintj/bunv.png">
-              <span class="businessTypes_content_4_span3">{{woman + '%'}}</span>
-            </div>
-            <div class="businessTypes_content_5 target81">
-              <span class="businessTypes_content_5_span1">户籍占比</span>
-            </div>
-            <div class="businessTypes_content_6 target82"></div>
           </div>
         </div>
-        <div class="businessTypes_line3">
-          <div class="businessTypes_content_title">
-            <div class="businessTypes_content_title_left">赔偿金额</div>
+        <div class="right">
+          <div class="top">
+            <div class="title">
+              <div class="border"></div>
+              <span>当事人分析</span>
+              <div class="right_btn" :class="{'active':target8==='type2'?true:false}" @click="target8='type2'">被申请人</div>
+              <div class="right_btn" :class="{'active':target8==='type1'?true:false}" @click="target8='type1'">申请人</div>
+            </div>
+            <div class="contentT">
+              <div class="contentTL">
+                <div class="boy">{{man + '%'}}</div>
+                <div class="cBorder"></div>
+                <div class="girl">{{woman + '%'}}</div>
+              </div>
+              <div class="contentTR target81"></div>
+            </div>
+            <div class="contentTitle">年龄分布</div>
+            <div class="echarts_container target82"></div>
           </div>
-          <div class="businessTypes_content_main">
-            <div class="businessTypes_content_4">
-              <span class="businessTypes_content_4_span4">本年度累计</span>
-              <span class="businessTypes_content_4_span5">{{total}}</span>
-              <span class="businessTypes_content_4_span6">万元</span>
+          <div class="bottom">
+            <div class="title">
+              <div class="border"></div>
+              <span>案件数量变化</span>
+              <div class="right_btn" :class="{'active':target2==='type2'?true:false}" @click="target2='type2'">按月</div>
+              <div class="right_btn" :class="{'active':target2==='type1'?true:false}" @click="target2='type1'">按年</div>
             </div>
-            <div class="businessTypes_content_5">
-              <span class="businessTypes_content_5_span2">单笔最大</span>
-              <span class="businessTypes_content_5_span3">{{max}}</span>
-              <span class="businessTypes_content_5_span4">万元</span>
-              <span class="businessTypes_content_5_span5">平均每笔</span>
-              <span class="businessTypes_content_5_span6">{{avg}}</span>
-              <span class="businessTypes_content_5_span7">万元</span>
+            <div class="con target2"></div>
+          </div>
+        </div>
+        <div class="right right2">
+          <div class="top">
+            <div class="title">
+              <div class="border"></div>
+              <span>赔偿金额</span>
             </div>
-            <div class="businessTypes_content_6 target9"></div>
+            <div class="contentT">
+              <div class="sLeft">
+                <span class="span1">本年度累计</span>
+                <span class="span2">{{total}}</span>
+                <span class="span3">万元</span>
+              </div>
+              <div class="sBorder"></div>
+              <div class="sRight">
+                <div class="once">
+                  <span class="span1">单笔最大</span>
+                  <span class="span2">{{max}}</span>
+                  <span class="span3">万元</span>
+                </div>
+                <div class="once">
+                  <span class="span1">平均每笔</span>
+                  <span class="span2">{{avg}}</span>
+                  <span class="span3">万元</span>
+                </div>
+              </div>
+            </div>
+            <div class="contentTitle">赔偿金额变化</div>
+            <div class="echarts_container target9"></div>
+          </div>
+          <div class="bottom">
+            <div class="title">
+              <div class="border"></div>
+              <span>案件类型</span>
+            </div>
+            <div class="con target4"></div>
           </div>
         </div>
       </div>
@@ -190,14 +160,10 @@
 <script>
 import eos from '@/util/echartsOptions'
 import urlConfig from '@/util/urlConfig'
-import rollScreen from '../rollScreen.vue'
 import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 
 export default {
-  components: {
-    rollScreen
-  },
   data: function () {
     return {
       myChart: {},
@@ -233,7 +199,16 @@ export default {
       man: 0,
       total: 0,
       max: 0,
-      avg: 0
+      avg: 0,
+      time: new Date()
+    }
+  },
+  computed: {
+    timeCom () {
+      let now = this.time
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
+      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
   },
   watch: {
@@ -349,480 +324,465 @@ export default {
     this.getData()
   }
 }
-
 </script>
 
-<style scoped>
-  .shade {
-    background: url(/static/renmintj/pic_bg.png);
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  #businessTypes {
-    min-width: 1920px;
-    min-height: 1080px;
-  }
-
-  .businessTypes_header {
-    width: 100%;
-    min-width: 1920px;
-    height: 87px;
-    background: url('/static/renmintj/pic_title.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 99;
-    position: relative;
-  }
-
-  .businessTypes_back {
-    background: url('/static/renmintj/btn_back.png');
-    position: absolute;
-    left: 22px;
-    width: 137px;
-    height: 35px;
-    background-position: center;
-    top: 28px;
-    cursor: pointer;
-  }
-
-  .businessTypes_nav {
-    height: 24px;
-    margin: 6px 0 20px 0;
-    padding-left: 34px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .businessTypes_nav_span {
-    font-size: 18px;
-    font-family: HiraginoSansGB-W3;
-    color: rgba(94, 126, 203, 1);
-  }
-
-  .businessTypes_nav2 {
-    border-bottom: 1px solid rgba(15, 59, 186, 1);
-    display: inline-block;
-  }
-
-  .businessTypes_nav2_span {
-    font-size: 20px;
-    font-family: HiraginoSansGB-W3;
-    padding-bottom: 10px;
-    display: inline-block;
-    width: 5em;
-    text-align: center;
-    cursor: pointer;
-    color: rgba(94, 126, 203, 1);
-  }
-
-  .businessTypes_nav2 .active {
-    color: rgba(255, 198, 0, 1);
-    border-bottom: 3px solid rgba(255, 198, 0, 1);
-  }
-
-  .businessTypes_content {
-    width: 100%;
-    height: 903px;
-    box-sizing: border-box;
-    padding: 13px 24px 24px 24px;
-  }
-  .businessTypes_column1{
-    width: 462px;
-    display: inline-block;
-    height: 866px;
-  }
-  .businessTypes_column2{
-    width: 675px;
-    height: 866px;
-    display: inline-block;
-    margin:0 20px;
-  }
-  .businessTypes_column3{
-    width: 675px;
-    height: 866px;
-    display: inline-block;
-  }
-  .businessTypes_line1{
-    width:100%;
-    height: 281px;
-    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
-  }
-  .businessTypes_line2{
-    width:100%;
-    height: 281px;
-    margin:16px 0;
-    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
-  }
-  .businessTypes_line3{
-    width:100%;
-    height: 281px;
-    background: linear-gradient( rgba(0,33,129,0.5),rgba(0,33,129,0));
-  }
-  .businessTypes_content_title{
+<style lang="less" scoped>
+@blockBack:#000000;
+.busiTypes_container{
+  background: #171415;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-width:1366px;
+  min-height: 766px;
+  .head{
     display: block;
-    width: 100%;
-    height: 39px;
-    padding:0 14px;
-    padding-top: 10px;
+    background: url('/static/renmintjNew/headback.png') no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
     position: relative;
     box-sizing: border-box;
+    margin:0 28px;
+    border-top:14px solid rgba(0,0,0,0);
+    .title{
+      position: absolute;
+      top: 17px;
+      font-size:20px;
+      font-family:RTWSYueGoTrial-Regular;
+      color:rgba(254,254,254,1);
+      left: 50%;
+      transform: translate(-50%)
+    }
+    .left{
+      padding:25px 0 10px 0px;
+      float: left;
+      .back{
+        background: url('/static/renmintj/btn_back.png');
+        width: 137px;
+        height: 35px;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+    }
+    .right{
+      float: right;
+      padding:30px 0 0 0;
+      span{
+        font-size:12px;
+        font-family:HiraginoSansGB-W3;
+        color:rgba(237,237,237,1);
+      }
+    }
   }
-  .businessTypes_content_title_left{
-    font-size: 22px;
-    font-family: MicrosoftYaHei;
-    color: rgba(125,165,254,1);
-    padding-left: 8px;
-    border-left: 3px solid rgba(125,165,254,1);
+  .body{
+    height: calc(100% - 84px);
+    width: 100%;
     display: block;
-    float: left;
+    position: relative;
+    .nav{
+      height: 24px;
+      margin: 0px 0 20px 0;
+      padding-left: 34px;
+      padding-top:6px;
+      width: 100%;
+      box-sizing: border-box;
+      line-height: 24px;
+      span{
+        font-size: 12px;
+        font-family: HiraginoSansGB-W3;
+        color:rgba(94,126,203,1);
+      }
+    }
+    .nav2{
+      display: block;
+      padding: 0 34px;
+      box-sizing: border-box;
+      .navLeft{
+        float: left;
+        border-bottom:1px solid #0F3BBA;
+        .navspan{
+          font-size:14px;
+          font-family:HiraginoSansGB-W3;
+          color:rgba(94,126,203,1);
+          display: inline-block;
+          padding:0 2px 4px 2px;
+          width: 5em;
+          text-align: center;
+          cursor: pointer;
+        }
+        .active{
+          color:rgba(255,198,0,1);
+          border-bottom: 3px solid #FFC600;
+        }
+      }
+      .navRight{
+        float: right;
+        .cas_container{
+          float: right;
+          .cas_container_span{
+            font-size:11px;
+            font-family:HiraginoSansGB-W3;
+            color:rgba(94,126,203,1);
+          }
+        }
+      }
+    }
+    .content_container{
+      height: calc(100% - 104px);
+      margin-top: 16px;
+      padding: 0 24px;
+      display: flex;
+      .left{
+        flex:0.26;
+        .top{
+          height: 31%;
+          display: block;
+          background: @blockBack;
+          position: relative;
+          .contentLT{
+            position: absolute;
+            width: 60%;
+            height: 50%;
+            top: 0;
+            left: 0;
+            .span1{
+              position: absolute;
+              left: 25px;
+              top: 100%;
+              -webkit-transform: translate(0,-120%);
+              transform: translate(0,-120%);
+              font-size: 20px;
+              font-family: 'FZLTZHK--GBK1-0';
+              color: rgba(0,246,255,1);
+            }
+            .span2{
+              position: absolute;
+              left: 50%;
+              top: 100%;
+              -webkit-transform: translate(0,-130%);
+              transform: translate(0,-130%);
+              font-size: 17px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(17,148,248,1);
+            }
+          }
+          .border{
+            position: absolute;
+            width: 20%;
+            height: 1px;
+            background: rgba(15,117,201,1);
+            left: 25px;
+            top: 50%;
+          }
+          .contentLB{
+            position: absolute;
+            width: 60%;
+            height: 50%;
+            bottom: 0;
+            left: 0;
+            .span1{
+              position: absolute;
+              left: 25px;
+              top: 0%;
+              -webkit-transform: translate(0,20%);
+              transform: translate(0,20%);
+              font-size: 20px;
+              font-family: 'FZLTZHK--GBK1-0';
+              color: rgba(0,246,255,1);
+              opacity: 0.3;
+            }
+            .span2{
+              position: absolute;
+              left: 50%;
+              top: 0%;
+              -webkit-transform: translate(0,20%);
+              transform: translate(0,20%);
+              font-size: 17px;
+              font-family: 'FZLTZHK--GBK1-0';
+              color: rgba(17,148,248,1);
+              opacity: 0.3;
+            }
+          }
+          .contentR{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 40%;
+            height: 100%;
+          }
+        }
+        .bottom{
+          height: calc(69% - 16px);
+          margin:8px 0;
+          display: block;
+          position: relative;
+          background: @blockBack;
+          .table_container{
+            height: calc(100% - 52px);
+            margin-top:26px;
+            width: 100%;
+            box-sizing: border-box;
+            padding:0 24px;
+            .t_head{
+              height: 24px;
+              width: 100%;
+            }
+            .row{
+              line-height: 24px;
+              font-size:12px;
+              font-family:HiraginoSansGB-W3;
+              color:rgba(17,148,248,1);
+              float: left;
+              text-align: center;
+              box-sizing: border-box;
+              position: relative;
+            }
+            .row1{
+              width: 10%;
+            }
+            .row2{
+              width: 70%;
+              span{
+                width: 100%;
+                transform: translate(0,-50%)!important;
+                left: 10%!important;
+                text-align: left;
+              }
+            }
+            .row3{
+              width: 20%;
+            }
+            .t_body{
+              height: calc(100% - 24px);
+              position: relative;
+              display: block;
+              .line{
+                height: 20%;
+                display: block;
+                position:relative;
+                .row{
+                  float: left;
+                  height: 100%;
+                  box-sizing: border-box;
+                  text-align: center;
+                  position: relative;
+                  span{
+                    position: absolute;
+                    left: 50%;
+                    top:50%;
+                    transform: translate(-50%,-50%);
+                    font-size: 12px;
+                  }
+                }
+                .img{
+                  position: absolute;
+                  left: 50%;
+                  top:50%;
+                  transform: translate(-50%,-50%);
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .right{
+        flex: 0.37;
+        margin:0 8px;
+        .top{
+          height: 58%;
+          display: block;
+          background: @blockBack;
+          .contentT{
+            margin-top: 20px;
+            height: 99px;
+            display: block;
+            background: #132665;
+            position: relative;
+            .contentTL{
+              width: 55%;
+              height: 100%;
+              float: left;
+              position: relative;
+              .boy{
+                position: absolute;
+                width: 50%;
+                height: 100%;
+                left: 0;
+                background-image: url('/static/renmintj/bunan.png');
+                background-repeat: no-repeat;
+                background-position: right 80px center;
+                font-size:14px;
+                font-family:HiraginoSansGB-W3;
+                color:rgba(241,241,241,1);
+                text-align: right;
+                padding-right: 20px;
+                box-sizing: border-box;
+                line-height: 99px;
+              }
+              .cBorder{
+                width: 1px;
+                height: 30%;
+                position: absolute;
+                background: transparent;
+                border-left: 1px dashed #FFC600;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+              }
+              .girl{
+                position: absolute;
+                width: 50%;
+                height: 100%;
+                right: 0;
+                background-image: url('/static/renmintj/bunv.png');
+                background-repeat: no-repeat;
+                background-position: left 20px center;
+                font-size:14px;
+                font-family:HiraginoSansGB-W3;
+                color:rgba(241,241,241,1);
+                padding-left: 65px;
+                box-sizing: border-box;
+                line-height: 99px;
+              }
+            }
+            .contentTR{
+              width: 45%;
+              height: 100%;
+              float: right;
+            }
+          }
+          .contentTitle{
+            font-size:12px;
+            height: 24px;
+            display: block;
+            margin-left: 20px;
+            color:rgba(241,241,241,1);
+            line-height:29px;
+            line-height: 24px;
+          }
+          .echarts_container{
+            height: calc(100% - 169px);
+            display: block;
+          }
+        }
+        .bottom{
+          height: calc(42% - 16px);
+          margin:8px 0;
+          display: block;
+          background: @blockBack;
+          .con{
+            height: calc(100% - 26px);
+            display: block;
+          }
+        }
+      }
+      .right2{
+        margin: 0;
+        .sLeft{
+          width: 40%;
+          height: 100%;
+          position: absolute;
+          left:0;
+          top:0;
+          .span1{
+            font-size:12px;
+            font-family:HiraginoSansGB-W3;
+            color:rgba(241,241,241,0.3);
+            display: block;
+            margin:18px 0 10px 22px;
+          }
+          .span2{
+            font-size:33px;
+            font-family:HiraginoSansGB-W3;
+            color:rgba(241,241,241,1);
+            display: inline-block;
+            margin-left: 22px;
+          }
+          .span3{
+            font-size:12px;
+            font-family:HiraginoSansGB-W3;
+            color:rgba(241,241,241,0.3);
+          }
+        }
+        .sBorder{
+          width: 1px;
+          height: 30%;
+          position: absolute;
+          background: transparent;
+          border-left: 1px dashed #FFC600;
+          left: 40%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+        }
+        .sRight{
+          height: 100%;
+          width:60%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          .once{
+            width: 50%;
+            height: 100%;
+            float: left;
+            .span1{
+              font-size:12px;
+              font-family:HiraginoSansGB-W3;
+              color:rgba(241,241,241,0.3);
+              display: block;
+              margin:30px 0 14px 35px;
+            }
+            .span2{
+              font-size:18px;
+              font-family:HiraginoSansGB-W3;
+              color:rgba(241,241,241,1);
+              display: inline-block;
+              margin-left:35px;
+            }
+            .span3{
+              font-size:12px;
+              font-family:HiraginoSansGB-W3;
+              color:rgba(241,241,241,0.3);
+            }
+          }
+        }
+      }
+      .title{
+        display: block;
+        box-sizing: border-box;
+        padding-top:5px;
+        position: relative;
+        .border{
+          width: 2px;
+          height: 12px;
+          background: #1194F8;
+          display: inline-block;
+          margin-left:10px;
+          margin-right: 5px;
+        }
+        span{
+          font-size:16px;
+          font-family:HiraginoSansGB-W3;
+          color:#7DA5FE;
+        }
+        .right_btn{
+          padding:0 8px;
+          height:21px;
+          float: right;
+          border-radius: 10px;
+          font-size: 12px;
+          color: white;
+          text-align: center;
+          line-height: 21px;
+          margin-right: 20px;
+          cursor: pointer;
+        }
+        .active{
+          background:rgba(77,132,254,1);
+        }
+      }
+    }
   }
-  .businessTypes_content_title_right{
-    width:50%;
-    float: right;
-    height: 29px;
-  }
-  .businessTypes_content_title_span{
-    font-size: 16px;
-    font-family: MicrosoftYaHei;
-    padding: 2px 12px;
-    float: right;
-    border-radius: 15px;
-    margin-right: 16px;
-    color: rgba(153,153,153,1);
-    cursor: pointer;
-  }
-  .businessTypes_content_title_right .active{
-    color: rgba(255,255,255,1);
-    background: rgba(77,132,254,1);
-  }
-  .businessTypes_content_main{
-    width: 100%;
-    height: 242px;
-    /* background: red; */
-    box-sizing: border-box;
-    position:relative;
-    float:left;
-  }
-
-  .businessTypes_content_main_small{
-    width: calc(33.33% - 60px);
-    height: calc(242px - 60px);
-    padding: 30px;
-    /* box-sizing: border-box; */
-    position:relative;
-    float:left;
-  }
-  .businessTypes_content_main_small:nth-of-type(2),.businessTypes_content_main_small:nth-of-type(3){
-    background:url("/static/renmintjOther/icon_directing.png");
-    background-repeat:no-repeat;
-    background-position:left center;
-  }
-  .businessTypes_content_1{
-    position:absolute;
-    width:60%;
-    height: 50%;
-    top:0;
-    left: 0;
-  }
-  .businessTypes_content_2{
-    position:absolute;
-    width:60%;
-    height: 50%;
-    bottom:0;
-    left: 0;
-  }
-  .businessTypes_content_3{
-    position:absolute;
-    width:40%;
-    height: 100%;
-    right:0;
-    top: 0;
-  }
-  .businessTypes_content_span1{
-    position: absolute;
-    left:25px;
-  }
-  .businessTypes_content_span1{
-    position: absolute;
-    left:25px;
-    top:100%;
-    transform: translate(0,-120%);
-    font-size:20px;
-    font-family:'FZLTZHK--GBK1-0';
-    color:rgba(0,246,255,1);
-  }
-  .businessTypes_content_span2{
-    position: absolute;
-    left:122px;
-    top:100%;
-    transform: translate(0,-130%);
-    font-size:17px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-  }
-  .businessTypes_content_span3{
-    position: absolute;
-    left:25px;
-    top:0%;
-    transform: translate(0,20%);
-    font-size:20px;
-    font-family:'FZLTZHK--GBK1-0';
-    color:rgba(0,246,255,1);
-    opacity: 0.3;
-  }
-  .businessTypes_content_span4{
-    position: absolute;
-    left:122px;
-    top:0%;
-    transform: translate(0,20%);
-    font-size:17px;
-    font-family:'FZLTZHK--GBK1-0';
-    color:rgba(17,148,248,1);
-    opacity: 0.3;
-  }
-  .border{
-    position: absolute;
-    width:73px;
-    height:1px;
-    background:rgba(15,117,201,1);
-    left: 25px;
-    top:50%;
-  }
-  .businessTypes_table_header{
-    width: 100%;
-    height: 36px;
-    line-height: 36px;
-    font-family:'HiraginoSansGB-W3';
-    color:rgba(17,148,248,1);
-    text-align: center;
-    padding-top:16px;
-  }
-  .businessTypes_table_h1{
-    float: left;
-    width: 25%
-  }
-  .businessTypes_table_h2{
-    float: left;
-    width: 45%
-  }
-  .businessTypes_table_h3{
-    float: left;
-    width: 30%
-  }
-  .businessTypes_table_body_container{
-    width: 100%;
-    height: 175px;
-  }
-  .businessTypes_table_body{
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(118,187,239,1);
-    text-align: center;
-  }
-  .businessTypes_table_body span {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .businessTypes_table_b1{
-    float: left;
-    width: 25%
-  }
-  .businessTypes_table_b2{
-    float: left;
-    width: 45%
-  }
-  .businessTypes_table_b3{
-    float: left;
-    width: 30%
-  }
-  .businessTypes_table_body:nth-of-type(2n){
-    background: rgba(7,30,74,0.3);
-  }
-  .businessTypes_table_h4{
-    float: left;
-    width: 12%;
-  }
-  .businessTypes_table_h5{
-    float: left;
-    width: 22%;
-  }
-  .businessTypes_table_b4{
-    float: left;
-    width: 12%;
-  }
-  .businessTypes_table_b5{
-    float: left;
-    width: 22%;
-  }
-  .left{
-    float: left;
-  }
-  .businessTypes_table_body2{
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(118,187,239,1);
-    text-align: center;
-  }
-  .businessTypes_table_body2:nth-of-type(2n-1){
-    background: rgba(7,30,74,0.3);
-  }
-  .businessTypes_content_4{
-    position:absolute;
-    width:35%;
-    height: 45%;
-    left:0;
-    top: 0;
-  }
-  .businessTypes_content_5{
-    position:absolute;
-    width:35%;
-    height: 55%;
-    left:0;
-    bottom: 0;
-  }
-  .businessTypes_content_6{
-    position:absolute;
-    width:65%;
-    height: 100%;
-    right:0;
-    top: 0;
-  }
-  .businessTypes_content_4_span1{
-    position: absolute;
-    top: 17px;
-    left: 37px;
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-  }
-  .businessTypes_content_4_img1{
-    position: absolute;
-    left:44px;
-    top:62px;
-  }
-  .businessTypes_content_4_span2{
-    position: absolute;
-    font-size:18px;
-    font-family:Impact;
-    color:rgba(237,247,255,1);
-    left: 82px;
-    top:68px;
-  }
-  .businessTypes_content_4_img2{
-    position: absolute;
-    left:136px;
-    top:62px;
-  }
-  .businessTypes_content_4_span3{
-    position: absolute;
-    font-size:18px;
-    font-family:Impact;
-    color:rgba(237,247,255,1);
-    left: 172px;
-    top:68px;
-  }
-  .businessTypes_content_5_span1{
-    position: absolute;
-    top: 5px;
-    left: 37px;
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-  }
-  .businessTypes_content_4_span4{
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-    position: absolute;
-    top:17px;
-    left: 37px;
-  }
-  .businessTypes_content_4_span5{
-    font-size:47px;
-    font-family:Impact;
-    color:rgba(237,247,255,1);
-    position: absolute;
-    top:38px;
-    left:37px;
-  }
-  .businessTypes_content_4_span6{
-    font-size:12px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-    position: absolute;
-    top:72px;
-    left:192px;
-  }
-  .businessTypes_content_5_span2{
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-    position: absolute;
-    top:12px;
-    left:37px;
-  }
-  .businessTypes_content_5_span3{
-    font-size:25px;
-    font-family:Impact;
-    color:rgba(237,247,255,1);
-    position: absolute;
-    top:44px;
-    left:37px;
-  }
-  .businessTypes_content_5_span4{
-    font-size:12px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-    position: absolute;
-    top:55px;
-    left:95px;
-  }
-  .businessTypes_content_5_span5{
-    font-size:14px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-    position: absolute;
-    top:12px;
-    left:154px;
-  }
-  .businessTypes_content_5_span6{
-    font-size:25px;
-    font-family:Impact;
-    color:rgba(237,247,255,1);
-    position: absolute;
-    top:44px;
-    left:154px;
-  }
-  .businessTypes_content_5_span7{
-    font-size:12px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(17,148,248,1);
-    position: absolute;
-    top:55px;
-    left:199px;
-  }
-  .businessTypes_nav2_container{
-    display: block;
-    box-sizing: border-box;
-    margin:0 34px;
-  }
-  .cas_container{
-    float: right;
-  }
-  .cas_container:nth-last-child(2){
-    margin-left:48px;
-  }
-  .cas_container_span{
-    font-size:16px;
-    font-family:HiraginoSansGB-W3;
-    color:rgba(94,126,203,1);
-  }
+}
 </style>

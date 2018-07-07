@@ -331,4 +331,12 @@ export default {
     color: #FFF225 !important;
   }
 
+  /* 业务类型页面新 */
+
+  .busiTypes_container .el-input--suffix .el-input__inner {
+    height: 30px;
+    background: rgba(8, 79, 211, 0.3);
+    color: #5E7ECB;
+  }
+
 </style>
