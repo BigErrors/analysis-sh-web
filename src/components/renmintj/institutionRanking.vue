@@ -50,15 +50,15 @@
         <div class="t_head">
           <div class="row row1">排名</div>
           <div class="row row2">名称</div>
-          <div class="row row3"><span @click="sort('renyuansl')">人员数量</span><i @click="sort('renyuansl')" class="init" :class="{'bottom':obj==='renyuansl'&&reorder==='DESC','top':obj==='renyuansl'&&reorder==='ASC'}"></i></div>
-          <div class="row row4"><span @click="sort('yewusl')">业务数量</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
-          <div class="row row5"><span @click="sort('tiaojieaj')">调解案件数</span><i @click="sort('tiaojieaj')" class="init" :class="{bottom:obj==='tiaojieaj'&&reorder==='DESC',top:obj==='tiaojieaj'&&reorder==='ASC'}"></i></div>
-          <div class="row row6"><span @click="sort('paichafk')">排查反馈数</span><i @click="sort('paichafk')" class="init" :class="{bottom:obj==='paichafk'&&reorder==='DESC',top:obj==='paichafk'&&reorder==='ASC'}"></i></div>
-          <div class="row row7"><span @click="sort('shangbaosl')">调解案例上报数</span><i @click="sort('shangbaosl')" class="init" :class="{bottom:obj==='shangbaosl'&&reorder==='DESC',top:obj==='shangbaosl'&&reorder==='ASC'}"></i></div>
-          <div class="row row8"><span @click="sort('zixunrz')">咨询管理日志数</span><i @click="sort('zixunrz')" class="init" :class="{bottom:obj==='zixunrz'&&reorder==='DESC',top:obj==='zixunrz'&&reorder==='ASC'}"></i></div>
-          <div class="row row9"><span @click="sort('chunjufw')">村居服务数</span><i @click="sort('chunjufw')" class="init" :class="{bottom:obj==='chunjufw'&&reorder==='DESC',top:obj==='chunjufw'&&reorder==='ASC'}"></i></div>
-          <div class="row row10"><span @click="sort('faxuanhd')">法宣活动数</span><i @click="sort('faxuanhd')" class="init" :class="{bottom:obj==='faxuanhd'&&reorder==='DESC',top:obj==='faxuanhd'&&reorder==='ASC'}"></i></div>
-          <div class="row row11"><span @click="sort('yewusyl')">业务系统使用率</span><i @click="sort('yewusyl')" class="init" :class="{bottom:obj==='yewusyl'&&reorder==='DESC',top:obj==='yewusyl'&&reorder==='ASC'}"></i></div>
+          <div class="row row3"><span :class="{yellowf:obj==='renyuansl'}" @click="sort('renyuansl')">人员数量</span><i @click="sort('renyuansl')" class="init" :class="{'bottom':obj==='renyuansl'&&reorder==='DESC','top':obj==='renyuansl'&&reorder==='ASC'}"></i></div>
+          <div class="row row4"><span :class="{yellowf:obj==='yewusl'}" @click="sort('yewusl')">业务数量</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
+          <div class="row row5"><span :class="{yellowf:obj==='tiaojieaj'}" @click="sort('tiaojieaj')">调解案件数</span><i @click="sort('tiaojieaj')" class="init" :class="{bottom:obj==='tiaojieaj'&&reorder==='DESC',top:obj==='tiaojieaj'&&reorder==='ASC'}"></i></div>
+          <div class="row row6"><span :class="{yellowf:obj==='paichafk'}" @click="sort('paichafk')">排查反馈数</span><i @click="sort('paichafk')" class="init" :class="{bottom:obj==='paichafk'&&reorder==='DESC',top:obj==='paichafk'&&reorder==='ASC'}"></i></div>
+          <div class="row row7"><span :class="{yellowf:obj==='shangbaosl'}" @click="sort('shangbaosl')">调解案例上报数</span><i @click="sort('shangbaosl')" class="init" :class="{bottom:obj==='shangbaosl'&&reorder==='DESC',top:obj==='shangbaosl'&&reorder==='ASC'}"></i></div>
+          <div class="row row8"><span :class="{yellowf:obj==='zixunrz'}" @click="sort('zixunrz')">咨询管理日志数</span><i @click="sort('zixunrz')" class="init" :class="{bottom:obj==='zixunrz'&&reorder==='DESC',top:obj==='zixunrz'&&reorder==='ASC'}"></i></div>
+          <div class="row row9"><span :class="{yellowf:obj==='chunjufw'}" @click="sort('chunjufw')">村居服务数</span><i @click="sort('chunjufw')" class="init" :class="{bottom:obj==='chunjufw'&&reorder==='DESC',top:obj==='chunjufw'&&reorder==='ASC'}"></i></div>
+          <div class="row row10"><span :class="{yellowf:obj==='faxuanhd'}" @click="sort('faxuanhd')">法宣活动数</span><i @click="sort('faxuanhd')" class="init" :class="{bottom:obj==='faxuanhd'&&reorder==='DESC',top:obj==='faxuanhd'&&reorder==='ASC'}"></i></div>
+          <div class="row row11"><span :class="{yellowf:obj==='yewusyl'}" @click="sort('yewusyl')">业务系统使用率</span><i @click="sort('yewusyl')" class="init" :class="{bottom:obj==='yewusyl'&&reorder==='DESC',top:obj==='yewusyl'&&reorder==='ASC'}"></i></div>
         </div>
         <div class="t_body">
           <div class="line" v-for="(item,index) in list" :key = index>
@@ -429,6 +429,9 @@ export default {
           float: left;
           text-align: center;
           box-sizing: border-box;
+          .yellowf{
+            color:#FFC600;
+          }
         }
         .row1{
           width: 5%;
