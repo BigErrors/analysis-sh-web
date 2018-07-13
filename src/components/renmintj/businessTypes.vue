@@ -49,7 +49,7 @@
             </div>
             <div class="contentLT">
               <span class="span1">{{xingZhuanTJS}}</span>
-              <span class="span2">行专调解数</span>
+              <span class="span2">{{tjtype+'数'}}</span>
             </div>
             <div class="border"></div>
             <div class="contentLB">
@@ -162,6 +162,7 @@ import eos from '@/util/echartsOptions'
 import urlConfig from '@/util/urlConfig'
 import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
+import eosNew from '@/util/echartsOptionsNew'
 
 export default {
   data: function () {
@@ -226,7 +227,7 @@ export default {
       }
       this.xingZhuanTJS = this.shuZhiTJ[newValue + 'HangZTJS']
       this.tiaoJieAJS = this.shuZhiTJ[newValue + 'TiaoJAJZS']
-      this.draw('target1', eos.setPie4([(this.shuZhiTJ[newValue + 'ZhanB'] * 100).toFixed(1), ((1 - this.shuZhiTJ[newValue + 'ZhanB']) * 100).toFixed(1)], '占比'))
+      this.draw('target1', eosNew.setPie3([(this.shuZhiTJ[newValue + 'ZhanB'] * 100).toFixed(1), ((1 - this.shuZhiTJ[newValue + 'ZhanB']) * 100).toFixed(1)], '占比'))
     },
     target2: function (newValue, oldValue) {
       if (newValue === 'type1') {
@@ -253,7 +254,7 @@ export default {
       this.man = this.formatData(this.dangShiRFX[newValue].nanXingZB)
       this.woman = this.formatData(this.dangShiRFX[newValue].nvXingZB)
       this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangShiRFX[newValue].benDiHJ)}, {name: '外地户口', value: this.formatData(this.dangShiRFX[newValue].waiDiHJ)}, {name: '未知', value: this.formatData(this.dangShiRFX[newValue].weiZhiHJ)}], 'percent', false, true))
-      this.draw('target82', eos.setBar3(this.dangShiRFX[newValue].nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+      this.draw('target82', eosNew.setBar5(this.dangShiRFX[newValue].nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
     },
     tjtype: function (newValue, oldValue) {
       this.selectDefault.areaDefault = ['SHJCK01000']
@@ -292,8 +293,8 @@ export default {
         vue.tiaoJieAJS = vue.shuZhiTJ.nianTiaoJAJZS
         vue.anJianSLBH.nianAnJSLBH = data.anJianSLBH.nianAnJSLBH.reverse()
         vue.anJianSLBH.yueAnJSLBH = data.anJianSLBH.yueAnJSLBH.reverse()
-        vue.anJianSLS.jiGouAJSLS = data.anJianSLS.jiGouAJSLS
-        vue.anJianSLS.tiaoJieYAJSLS = data.anJianSLS.tiaoJieYAJSLS
+        vue.anJianSLS.jiGouAJSLS = data.anJianSLS.jiGouAJSLS || []
+        vue.anJianSLS.tiaoJieYAJSLS = data.anJianSLS.tiaoJieYAJSLS || []
         vue.anJianSLSBG = vue.anJianSLS.jiGouAJSLS
         vue.dangShiRFX = data.dangShiRFX
         vue.man = vue.formatData(data.dangShiRFX.shenQingRFX.nanXingZB)
@@ -306,7 +307,7 @@ export default {
           vue.target2 = 'type1'
           vue.target3 = 'type1'
           vue.target8 = 'type1'
-          vue.draw('target1', eos.setPie4([vue.formatData(vue.shuZhiTJ.nianZhanB), vue.formatData(1 - vue.shuZhiTJ.nianZhanB)], '占比'))
+          vue.draw('target1', eosNew.setPie3([vue.formatData(vue.shuZhiTJ.nianZhanB), vue.formatData(1 - vue.shuZhiTJ.nianZhanB)], '占比'))
           vue.draw('target2', eos.setLine2(vue.anJianSLBH.nianAnJSLBH))
           vue.draw('target4', eos.setPie3(data.anJianLX, 'radius'))
           // vue.draw('target5', eos.setBar3(data.anJianCLZT, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32, false, false))
@@ -314,8 +315,8 @@ export default {
           // vue.draw('target62', eos.setPie4([vue.formatData(data.anJianCLJG.xieYiSL), vue.formatData(1 - data.anJianCLJG.xieYiSL)], '协议书', 0, 'top'))
           // vue.draw('target63', eos.setPie4([vue.formatData(data.anJianCLJG.siFaQRL), vue.formatData(1 - data.anJianCLJG.siFaQRL)], '司法确认', 0, 'top'))
           vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.benDiHJ)}, {name: '外地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.waiDiHJ)}, {name: '未知', value: vue.formatData(data.dangShiRFX.shenQingRFX.weiZhiHJ)}], 'percent', false, true))
-          vue.draw('target82', eos.setBar3(data.dangShiRFX.shenQingRFX.nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
-          vue.draw('target9', eos.setBar3(data.peiChangJE.peiChangJEBH, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+          vue.draw('target82', eosNew.setBar5(data.dangShiRFX.shenQingRFX.nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+          vue.draw('target9', eosNew.setBar5(data.peiChangJE.peiChangJEBH, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
         })
       })
     }
@@ -327,9 +328,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@blockBack:#000000;
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
 .busiTypes_container{
-  background: #171415;
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -371,7 +376,7 @@ export default {
       span{
         font-size:12px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(237,237,237,1);
+        color:@fontGray;
       }
     }
   }
@@ -391,7 +396,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -400,11 +405,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 5em;
@@ -412,8 +417,8 @@ export default {
           cursor: pointer;
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
       .navRight{
@@ -423,7 +428,7 @@ export default {
           .cas_container_span{
             font-size:11px;
             font-family:HiraginoSansGB-W3;
-            color:rgba(94,126,203,1);
+            color:@fontGray;
           }
         }
       }
@@ -454,7 +459,7 @@ export default {
               transform: translate(0,-120%);
               font-size: 20px;
               font-family: 'FZLTZHK--GBK1-0';
-              color: rgba(0,246,255,1);
+              color: rgba(241,241,241,1);
             }
             .span2{
               position: absolute;
@@ -464,14 +469,14 @@ export default {
               transform: translate(0,-130%);
               font-size: 17px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(17,148,248,1);
+              color: rgba(241,241,241,0.8);
             }
           }
           .border{
             position: absolute;
             width: 20%;
             height: 1px;
-            background: rgba(15,117,201,1);
+            background: @fontGray;
             left: 25px;
             top: 50%;
           }
@@ -489,7 +494,7 @@ export default {
               transform: translate(0,20%);
               font-size: 20px;
               font-family: 'FZLTZHK--GBK1-0';
-              color: rgba(0,246,255,1);
+              color:rgba(241,241,241,0.6);
               opacity: 0.3;
             }
             .span2{
@@ -500,7 +505,7 @@ export default {
               transform: translate(0,20%);
               font-size: 17px;
               font-family: 'FZLTZHK--GBK1-0';
-              color: rgba(17,148,248,1);
+              color:rgba(241,241,241,0.4);
               opacity: 0.3;
             }
           }
@@ -527,12 +532,16 @@ export default {
             .t_head{
               height: 24px;
               width: 100%;
+              background: @table;
+              .row{
+                color: @fontGray;
+              }
             }
             .row{
               line-height: 24px;
               font-size:12px;
               font-family:HiraginoSansGB-W3;
-              color:rgba(17,148,248,1);
+              color:@fontWhite;
               float: left;
               text-align: center;
               box-sizing: border-box;
@@ -545,9 +554,8 @@ export default {
               width: 70%;
               span{
                 width: 100%;
-                transform: translate(0,-50%)!important;
-                left: 10%!important;
-                text-align: left;
+                transform: translate(-50%,-50%)!important;
+                left: 50%!important;
               }
             }
             .row3{
@@ -561,6 +569,9 @@ export default {
                 height: 20%;
                 display: block;
                 position:relative;
+                &:nth-of-type(2n){
+                  background: @table;
+                }
                 .row{
                   float: left;
                   height: 100%;
@@ -598,7 +609,7 @@ export default {
             margin-top: 20px;
             height: 99px;
             display: block;
-            background: #132665;
+            background: #1B212D;
             position: relative;
             .contentTL{
               width: 55%;
@@ -626,7 +637,7 @@ export default {
                 height: 30%;
                 position: absolute;
                 background: transparent;
-                border-left: 1px dashed #FFC600;
+                border-left: 1px dashed #2a2f3d;
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%,-50%);
@@ -711,7 +722,7 @@ export default {
           height: 30%;
           position: absolute;
           background: transparent;
-          border-left: 1px dashed #FFC600;
+          border-left: 1px dashed #2a2f3d;
           left: 40%;
           top: 50%;
           transform: translate(-50%,-50%);
@@ -756,7 +767,7 @@ export default {
         .border{
           width: 2px;
           height: 12px;
-          background: #1194F8;
+          background: @fontWhite;
           display: inline-block;
           margin-left:10px;
           margin-right: 5px;
@@ -764,7 +775,7 @@ export default {
         span{
           font-size:16px;
           font-family:HiraginoSansGB-W3;
-          color:#7DA5FE;
+          color:@fontWhite;
         }
         .right_btn{
           padding:0 8px;

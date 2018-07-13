@@ -1,10 +1,5 @@
-/*
- * @Author: wupeiwen javapeiwen2010@gmail.com
- * @Date: 2018-06-29 13:11:45
- * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-07 13:37:31
- * @content: echarts 三位地理坐标系 mapbox
- */
+/* * @Author: wupeiwen javapeiwen2010@gmail.com * @Date: 2018-06-29 13:11:45 * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+* @Last Modified time: 2018-07-11 15:39:59 * @content: echarts 三位地理坐标系 mapbox */
 
 <template>
   <div class="index_container">
@@ -249,9 +244,10 @@
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
       <div style="cursor: pointer;text-align:right;" @click="showDialog=false">x</div>
       <div style="text-align:left;">
-        <span>{{dialogData.name}}</span><br>
+        <span>{{dialogData.name}}</span>
+        <br>
         <span>{{'案件数量: '+dialogData.value + '件'}}</span>
-     </div>
+      </div>
     </div>
   </div>
 </template>
@@ -264,8 +260,10 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
+import mapboxgl from 'mapbox-gl'
 
 export default {
+  name: '123',
   components: {
     rollScreen,
     digitalRolling
@@ -313,7 +311,8 @@ export default {
       let now = this.time
       let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
-      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
+          ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
   },
   watch: {
@@ -327,6 +326,9 @@ export default {
   },
   created () {
     this.getData()
+  },
+  beforeMount () {
+    console.log(this.$el)
   },
   mounted () {
     let vue = this
@@ -344,9 +346,35 @@ export default {
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
       let vue = this
+      let map
+      let coordinates
+      let description
+      let popup = new mapboxgl.Popup()
       if (domName === 'map') {
+        map = this.myChart[domName]._model._componentsMap.mapbox3D[0]._mapbox
+        map.on('load', function () {
+          map.on('click', 'points', function (e) {
+            vue.showDialog = false
+            coordinates = e.features[0].geometry.coordinates.slice()
+            description = e.features[0].properties.description
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+            }
+            popup.setLngLat(coordinates)
+              .setHTML(description)
+              .addTo(map)
+          })
+          // Change the cursor to a pointer when the mouse is over the points layer.
+          map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer'
+          })
+
+          // Change it back to a pointer when it leaves.
+          map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = ''
+          })
+        })
         this.myChart[domName].on('click', function (params) {
-          console.log(params)
           if (params.seriesName === '分布') {
             vue.dialogData.name = params.name
             vue.dialogData.value = params.value[2]
@@ -360,14 +388,17 @@ export default {
     getData () {
       let vue = this
       let baseUrl = urlConfig.baseUrl
-      let reqParam = { area: this.areaDefault[0] }
+      let reqParam = {
+        area: this.areaDefault[0]
+      }
       let url = ''
       // 趋势分析
       url = '/trend'
       http.get(baseUrl + url, reqParam, (data) => {
         vue.$nextTick(function () {
           vue.trendData = data
-          vue.draw('trendAnalysis', eosNew.setLine(vue.trendData[vue.trendType].reverse().slice(0, 6).reverse(), true, true))
+          vue.draw('trendAnalysis', eosNew.setLine(vue.trendData[vue.trendType].reverse().slice(0, 6).reverse(),
+            true, true))
         })
       })
       // 工作质量
@@ -378,7 +409,8 @@ export default {
         vue.workQuality.wenShuZL = data.wenShuZL
         vue.workQuality.anJianSB = data.anJianSB
         vue.$nextTick(function () {
-          vue.draw('xieyis', eosNew.setPie([(data.xieYiS_cover * 100).toFixed(1), ((1 - data.xieYiS_cover) * 100).toFixed(1)], '协议书占比', 0, 0))
+          vue.draw('xieyis', eosNew.setPie([(data.xieYiS_cover * 100).toFixed(1), ((1 - data.xieYiS_cover) *
+              100).toFixed(1)], '协议书占比', 0, 0))
         })
       })
       // 业务类型
@@ -407,7 +439,13 @@ export default {
         vue.peopleCount = data
       })
       // 案件分布、重点关注
-      let querylist = [{url: baseUrl + '/caseDistribution', param: reqParam}, {url: baseUrl + '/keyEvents', param: reqParam}]
+      let querylist = [{
+        url: baseUrl + '/caseDistribution',
+        param: reqParam
+      }, {
+        url: baseUrl + '/keyEvents',
+        param: reqParam
+      }]
       http.all(querylist, (dataList) => {
         // 重点关注
         vue.importantEvent = dataList[1].data.data
@@ -415,12 +453,22 @@ export default {
         let caseDistributionData = dataList[0].data.data
         if (caseDistributionData.length > 0) {
           caseDistributionData = caseDistributionData.map((item, index) => {
-            return {name: item.diQu, value: [item.jinDu, item.weiDu, item.jianShu]}
+            return {
+              name: item.diQu,
+              value: [item.jinDu, item.weiDu, item.jianShu]
+            }
           })
         }
         let keyEventsData = dataList[1].data.data
         keyEventsData = keyEventsData.map(item => {
-          return {name: item.jianShu, value: [item.jinDu, item.weiDu, 200], type: item.shiJianLX, detail: item.xiangQing, area: item.diQu, date: item.riQi}
+          return {
+            name: item.jianShu,
+            value: [item.jinDu, item.weiDu, 200],
+            type: item.shiJianLX,
+            detail: item.xiangQing,
+            area: item.diQu,
+            date: item.riQi
+          }
         })
         vue.$nextTick(function () {
           vue.draw('map', eos.setMapbox(caseDistributionData, keyEventsData))
@@ -429,14 +477,22 @@ export default {
     },
     // 路由跳转
     changeRouter (name, id) {
-      let target = {name: name}
+      let target = {
+        name: name
+      }
       if (name === 'importantEventDetail') {
-        target = {name: name, params: { id: id }}
+        target = {
+          name: name,
+          params: {
+            id: id
+          }
+        }
       }
       this.$router.push(target)
     }
   }
 }
+
 </script>
 
 <style lang="less" scoped>
@@ -731,18 +787,19 @@ export default {
               padding-left: 65px;
               position: relative;
               .spanT {
-                font-size: 20px;
+                font-size: 14px;
                 font-family: FZLTZHK--GBK1-0;
-                color: rgba(255, 255, 255, 1);
+                color: rgba(186, 186, 186, 1);
                 position: absolute;
                 bottom: 0px;
               }
               .spanB {
-                font-size: 14px;
-                font-family: HiraginoSansGB-W3;
-                color: rgba(186, 186, 186, 1);
+                font-size: 20px;
+                font-family: 'HiraginoSansGB-W3';
+                color:#ffffff;
                 position: absolute;
                 top: 6px;
+                font-weight: bold;
               }
               div {
                 height: 50%;
@@ -935,9 +992,10 @@ export default {
       width: 220px;
       height: 60px;
       padding: 15px 20px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       font-size: 12px;
       color: #ffffff;
     }
   }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="peopleRanking_container">
+  <div class="pepleRanking_container">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
@@ -93,8 +93,8 @@
              <div class="row row3"><span>{{item.shortname}}</span></div>
              <div class="row row4"><span>{{item.yewusl}}</span></div>
              <div class="row row5">
-               <i class="icon_rate red"></i>
-               <span>{{item.tiaojiecgl}}</span>
+               <i class="icon_rate" :class="{red:item.tiaojiecgl<0.6,yellow:item.tiaojiecgl<0.8&&item.tiaojiecgl>=0.6,green:item.tiaojiecgl>=0.8}"></i>
+               <span>{{item.tiaojiecgl|changeToRate}}</span>
               </div>
              <div class="row row6"><i class="icon_rate red"></i><span>0%</span></div>
              <div class="row row7"><span>{{item.pingjuntjzq}}</span></div>
@@ -192,6 +192,11 @@ export default {
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
   },
+  filters: {
+    changeToRate: (value) => {
+      return value * 100 + '%'
+    }
+  },
   watch: {
     areaDefault: function (newValue, oldValue) {
       this.pageInfo.currentPage = 1
@@ -278,10 +283,14 @@ export default {
   }
 }
 </script>
-
 <style lang="less">
-.peopleRanking_container{
-  background: #171415;
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
+.pepleRanking_container{
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -323,7 +332,7 @@ export default {
       span{
         font-size:12px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(237,237,237,1);
+        color:@fontGray;
       }
     }
   }
@@ -343,7 +352,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -352,11 +361,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 5em;
@@ -364,8 +373,8 @@ export default {
           cursor: pointer;
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
       .navRight{
@@ -373,7 +382,7 @@ export default {
         .excel_btn{
           float: right;
           height:26px;
-          background: #F89200;
+          background:rgba(245,182,30,1);
           padding:2px 12px;
           color:white;
           border-radius: 4px;
@@ -389,13 +398,13 @@ export default {
       }
     }
     .table_container{
-      height: calc(100% - 146px);
-      margin-top:16px;
-      width: 100%;
+      height: calc(100% - 152px);
+      margin:16px 24px 0 24px;
       box-sizing: border-box;
-      padding:0 24px;
+      background-color: @blockBack;
       .t_head{
-        height: 18px;
+        line-height: 34px;
+        height: 34px;
         width: 100%;
         .bottom{
           width: 9px;
@@ -437,13 +446,13 @@ export default {
           cursor: pointer;
         }
         .yellow{
-          color:#FFF600
+          color:@fontWhite;
         }
         .row{
-          line-height: 18px;
+          line-height: 34px;
           font-size:12px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(17,148,248,1);
+          color:@fontGray;
           float: left;
           text-align: center;
           box-sizing: border-box;
@@ -485,11 +494,14 @@ export default {
         }
       }
       .t_body{
-        height: calc(100% - 26px);
+        height: calc(100% - 34px);
         .line{
           height: 10%;
           position: relative;
           display: block;
+          &:nth-of-type(2n-1){
+            background: @table;
+          }
           .row{
             float: left;
             height: 100%;
@@ -509,8 +521,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: #CCE9FF;
             }
             .img{
               position: absolute;
@@ -531,7 +542,7 @@ export default {
             padding-left: 52px;
             font-size: 12px;
             font-family: HiraginoSansGB-W3;
-            color: rgba(204,233,255,1);
+            color: @fontWhite;
             line-height: 60px;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -558,7 +569,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(204,233,255,1);
+              color: @fontWhite;
               width: 18em;
             }
           }
@@ -578,8 +589,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
               transform: translate(0,-50%);
             }
             .icon_rate{
@@ -597,8 +607,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
               transform: translate(0,-50%);
             }
             .icon_rate{
@@ -615,10 +624,9 @@ export default {
             width: 8%;
             span{
               background: rgba(77,132,254,1);
-              opacity: 0.4;
               border-radius: 2px;
               padding: 4px 8px;
-              color: rgba(255,255,255,1);
+              color: @fontWhite;
             }
           }
           .row8{
@@ -626,8 +634,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row9{
@@ -635,8 +642,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row10{
@@ -644,8 +650,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row11{
@@ -653,8 +658,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .red{
@@ -671,7 +675,8 @@ export default {
     }
     .page_container{
       text-align: center;
-      margin:12px 0;
+      margin:0 24px;
+      padding:12px 0;
     }
   }
 }

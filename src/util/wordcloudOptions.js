@@ -29,11 +29,11 @@ let setOption = (data, shape) => {
       ].join(',') + ')'
     },
     weightFactor: function (weight) {
-      return 15 + k * (weight - minValue)
+      return 12 + k * (weight - minValue)
     },
     clearCanvas: false,
     backgroundColor: 'rgba(255,255,255,0)',
-    gridSize: 10,
+    gridSize: 5,
     rotationSteps: 30,
     rotateRatio: [-60, 60]
   }

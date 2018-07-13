@@ -207,9 +207,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@blockBack:#000000;
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
 .peoplePortrait_container{
-  background: #171415;
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -251,7 +255,7 @@ export default {
       span{
         font-size:12px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(237,237,237,1);
+        color:@fontGray;
       }
     }
   }
@@ -271,7 +275,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -280,11 +284,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 5em;
@@ -292,8 +296,8 @@ export default {
           cursor: pointer;
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
     }
@@ -466,22 +470,24 @@ export default {
               .td{
                 font-size:12px;
                 font-family:MicrosoftYaHei;
-                color:rgba(77,132,254,1);
+                color:@fontGray;
                 line-height:42px;
                 text-align:center;
-                border-bottom:2px dashed rgba(16,54,165,1);
               }
             }
             .tbody{
               .td{
                 font-size:12px;
                 font-family:MicrosoftYaHei;
-                color:rgba(225,234,255,1);
+                color:@fontWhite;
                 text-align:center;
               }
               tr{
                 &:nth-of-type(2n){
-                  background:rgba(19,38,101,0.3);
+                  background:@table;
+                }
+                &:nth-of-type(2n-1){
+                  background:@table2;
                 }
               }
             }
@@ -526,7 +532,7 @@ export default {
         background-size:110px 30px;
         font-size:16px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(126,188,253,1);
+        color:@fontWhite;
         line-height: 30px;
         text-align: center;
         margin:5px;

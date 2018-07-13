@@ -139,18 +139,11 @@ let setPie = (data, title, bgColorOpacity, titlePosition, color) => {
 }
 // 柱状图_首页业务类型
 let setBar = (data) => {
-  data = data.sort(function (v1, v2) {
-    if (v1.value >= v2.value) {
-      return 1
-    } else {
-      return -1
-    }
-  })
   let option = {
     grid: {
       containLabel: true,
       left: 10,
-      right: 40,
+      right: 20,
       top: '10%',
       bottom: '5%'
     },
@@ -176,26 +169,10 @@ let setBar = (data) => {
     },
     series: [{
       type: 'bar',
+      data: data.map(item => item['value']),
+      barMinHeight: 20,
+      barMaxWidth: 6,
       itemStyle: {
-        barBorderRadius: 10,
-        normal: {
-          color: '#201f20'
-        }
-      },
-      silent: true,
-      barWidth: 6,
-      barGap: '-100%', // Make series be overlap
-      data: function () { return new Array(10).fill(4000) }
-    }, {
-      type: 'bar',
-      data: data.map(item => {
-        return item['value']
-      }),
-      z: 3,
-      barWidth: 6,
-      barMinHeight: 10,
-      itemStyle: {
-        barBorderRadius: 10,
         color: {
           type: 'linear',
           x: 0,
@@ -208,15 +185,16 @@ let setBar = (data) => {
             offset: 1, color: '#12BFFE' // 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
-        }
+        },
+        barBorderRadius: 3
       },
       label: {
         show: true,
         position: 'right',
         color: '#ffffff',
-        fontWeight: 'bold',
-        fontSize: 12
+        fontWeight: 'bold'
       }
+
     }]
   }
   return option
@@ -229,14 +207,14 @@ let setPie2 = (data) => {
       bottom: '25%',
       right: '6%',
       textStyle: {
-        color: '#7DA5FE',
+        color: 'rgba(241,241,241,0.4)',
         fontSize: 12
       },
       data: data.map(item => {
         return item.name
       })
     },
-    color: ['#4D84FE', '#F4A869', '#9979CC', '#854DB5', '#EF5665', '#EF5665', '#F77C88'],
+    color: ['#4D84FE', '#F4A869', '#9979CC', '#854DB5', '#EF5665', '#F77C88'],
     series: [
       {
         name: 'seriesName',
@@ -256,8 +234,8 @@ let setPie2 = (data) => {
                 align: 'center'
               },
               d: {
-                color: '#FFC600',
-                fontSize: 13,
+                color: '#f1f1f1',
+                fontSize: 12,
                 lineHeight: 12,
                 align: 'center'
               },
@@ -313,7 +291,7 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       show: displayValueAxis(),
       interval: 0,
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: barMaxWidth < 16 ? barMaxWidth : 12,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
@@ -322,7 +300,10 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
     splitNumber: 5,
     splitLine: {
-      show: false
+      show: true,
+      lineStyle: {
+        color: '#2a2f3d'
+      }
     }
   }]
   let categoryAxis = [{
@@ -334,7 +315,7 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: 12,
       interval: 0,
       formatter: function (value) {
@@ -388,7 +369,7 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       label: {
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
-        color: color[1],
+        color: '#f1f1f1',
         fontSize: 12
       },
       data: data.map(function (obj) {
@@ -402,7 +383,7 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       name: name,
       stack: 'bar',
       itemStyle: {
-        color: '#132665'
+        color: 'rgba(56,62,78,0.5)'
       },
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
@@ -435,9 +416,16 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
 let setLine2 = (data, dataType, legend, color) => {
   let option = {
     grid: {
-      containLabel: false
+      containLabel: true,
+      left: '5%',
+      top: '15%',
+      bottom: '10%',
+      right: '5%'
     },
-    color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
+    tooltip: {
+      trigger: 'axis'
+    },
+    color: color || ['#2989f7', '#50f79d', '#A3A3A3'],
     xAxis: {
       type: 'category',
       axisLine: {
@@ -447,7 +435,7 @@ let setLine2 = (data, dataType, legend, color) => {
         show: false
       },
       axisLabel: {
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -465,13 +453,13 @@ let setLine2 = (data, dataType, legend, color) => {
       },
       axisLabel: {
         show: true,
-        color: '#4D84FE',
+        color: 'rgba(241,241,241,0.4)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
         show: true,
         lineStyle: {
-          color: 'rgba(16,54,165,0.4)'
+          color: '#2a2f3d'
         }
       }
     },
@@ -489,12 +477,42 @@ let setLine2 = (data, dataType, legend, color) => {
       symbol: 'circle',
       symbolSize: 8,
       lineStyle: {
-        width: 1
+        width: 1,
+        color: index === 0 ? '#2987f7' : '#50f79d'
       },
       label: {
-        show: true,
+        show: false,
         fontSize: 12,
         formatter: dataType === 'integer' ? '{c}' : '{c} %'
+      },
+      areaStyle: index === 1 ? {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: 'rgba(80,247,157,0.4)' // 0% 处的颜色
+          }, {
+            offset: 1, color: 'rgba(80,247,157,0.6)' // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
+      } : {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: 'rgba(41,137,247,0.4)' // 0% 处的颜色
+          }, {
+            offset: 1, color: 'rgba(41,137,247,0.6)' // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
       },
       data: data[index].map(item => {
         return item['value']
@@ -523,7 +541,11 @@ let setLine2 = (data, dataType, legend, color) => {
 let setLine3 = (data, dataType, legend, color) => {
   let option = {
     grid: {
-      containLabel: false
+      containLabel: true,
+      left: '5%',
+      right: '5%',
+      bottom: '10%',
+      top: '10%'
     },
     color: color || ['#6F9BFD', '#FDCB35', '#A3A3A3'],
     xAxis: {
@@ -535,7 +557,7 @@ let setLine3 = (data, dataType, legend, color) => {
         show: false
       },
       axisLabel: {
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -553,11 +575,14 @@ let setLine3 = (data, dataType, legend, color) => {
       },
       axisLabel: {
         show: true,
-        color: '#4D84FE',
+        color: 'rgba(241,241,241,0.4)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
-        show: false
+        show: true,
+        lineStyle: {
+          color: '#2a2f3d'
+        }
       }
     },
     series: []
@@ -600,7 +625,7 @@ let setLine3 = (data, dataType, legend, color) => {
     }
   }
   if (data.length === 1) {
-    option.series[0].label.color = '#FFC400'
+    option.series[0].label.color = '#f1f1f1'
   }
   return option
 }
@@ -657,19 +682,14 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: 12,
       interval: 0,
       formatter: function (value) {
-        if (axisType === 'horizon') {
+        if (value.length <= 6) {
           return value
-        } else {
-          if (value.length <= 6) {
-            return value
-          } else {
-            return value.substring(0, 5) + '..'
-          }
         }
+        return value.substring(0, 5) + '..'
       }
     },
     data: data.map(function (obj) {
@@ -685,10 +705,10 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     },
     grid: {
       containLabel: true,
-      top: 20,
-      bottom: 20,
-      left: 15,
-      right: 60
+      left: '5%',
+      right: '10%',
+      bottom: '10%',
+      top: '10%'
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -794,7 +814,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       interval: 0,
       show: displayValueAxis(),
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
@@ -815,19 +835,14 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: 12,
       interval: 0,
       formatter: function (value) {
-        if (axisType === 'horizon') {
+        if (value.length <= 6) {
           return value
-        } else {
-          if (value.length <= 6) {
-            return value
-          } else {
-            return value.substring(0, 5) + '..'
-          }
         }
+        return value.substring(0, 5) + '..'
       }
     },
     data: data.map(function (obj) {
@@ -846,7 +861,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       top: 20,
       bottom: 20,
       left: 30,
-      right: 50
+      right: 40
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
     // x轴配置项
@@ -877,7 +892,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       label: {
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
-        color: color[1],
+        color: '#f1f1f1',
         fontSize: 12
       },
       data: data.map(function (obj) {
@@ -910,7 +925,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       name: name,
       stack: 'bar',
       itemStyle: {
-        color: '#132665'
+        color: '#2E3441'
       },
       barMaxWidth: barMaxWidth,
       data: data.map(function (obj) {
@@ -931,7 +946,7 @@ let setRadar = (data, indicator) => {
       radius: '65%',
       name: {
         textStyle: {
-          color: '#1194F8',
+          color: 'rgba(241,241,241,0.4)',
           fontSize: 14
         }
       },
@@ -965,4 +980,371 @@ let setRadar = (data, indicator) => {
   }
   return option
 }
-export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar}
+// 柱状图_业务类型 年龄分析 和 赔偿金额变化
+let setBar5 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
+  barMaxWidth = barMaxWidth || 43
+  // 找出value中的最大值
+  let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
+  if (portrait) {
+    maxValue = data.reduce(function (total, item) {
+      return total + item.value
+    }, 0)
+  }
+  let displayValueAxis = function () {
+    let result = false
+    if (axisType === 'vertical') {
+      if (showValueAxis === false) {
+        result = false
+      } else {
+        result = true
+      }
+    }
+    return result
+  }
+  let valueAxis = [{
+    type: 'value',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: displayValueAxis(),
+      interval: 'auto',
+      color: 'rgba(241,241,241,0.4)',
+      fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
+      formatter: dataType === 'percent' ? '{value} %' : '{value}'
+    },
+    // value最大值的类型：percent，integer
+    // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
+    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    splitNumber: 4,
+    splitLine: {
+      show: false,
+      lineStyle: {
+        color: '#4D84FE'
+      }
+    }
+  }]
+  let categoryAxis = [{
+    type: 'category',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: 'rgba(241,241,241,0.4)',
+      interval: 0,
+      rotate: rotate || 0,
+      fontSize: 12,
+      formatter: function (value) {
+        if (axisType === 'horizon') {
+          return value
+        } else {
+          if (value.length <= 6) {
+            return value
+          } else {
+            return value.substring(0, 5) + '..'
+          }
+        }
+      }
+    },
+    data: data.map(function (obj) {
+      return obj.name
+    }),
+    splitLine: {
+      show: false
+    }
+  }]
+  let option = {
+    tooltip: {
+      show: true
+    },
+    grid: {
+      containLabel: function () { if (axisType === 'horizon') { return true } else { return false } },
+      top: '15%',
+      left: '10%',
+      right: '10%',
+      bottom: '10%'
+    },
+    // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
+    // x轴配置项
+    xAxis: axisType === 'vertical' ? categoryAxis : valueAxis,
+    // y轴配置项
+    yAxis: axisType === 'vertical' ? valueAxis : categoryAxis,
+    // bar配置项
+    series: [{
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      z: 3,
+      itemStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: axisType === 'vertical' ? 0 : 1,
+          y2: axisType === 'vertical' ? 1 : 0,
+          colorStops: [{
+            offset: 0, color: color[0] // 0% 处的颜色
+          }, {
+            offset: 1, color: color[1] // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
+      },
+      label: {
+        show: false,
+        position: axisType === 'vertical' ? 'top' : 'right',
+        color: color[1],
+        fontSize: 12
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
+      })
+    }]
+  }
+  if (axisType === 'vertical') {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#383E4E'
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  if (barMaxWidth) {
+    option.series[0].barMaxWidth = barMaxWidth
+    if (axisType === 'vertical') {
+      option.series[1].barMaxWidth = barMaxWidth
+    }
+  }
+  if (portrait) {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#132665'
+      },
+      barMaxWidth: barMaxWidth,
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  return option
+}
+// 圆环图_业务类型 占比
+let setPie3 = (data, title, bgColorOpacity, titlePosition) => {
+  let option = {
+    title: {
+      show: false,
+      x: 'center',
+      y: titlePosition || 'bottom',
+      // bottom: 6,
+      text: title || '标题',
+      textStyle: {
+        color: '#1194F8',
+        fontSize: 12
+      }
+    },
+    color: ['rgba(0, 236, 246, 1)', '#383E4E'],
+    series: [{
+      type: 'pie',
+      center: ['50%', '50%'],
+      radius: ['45%', '60%'],
+      label: {
+        show: false
+      },
+      data: data
+    }, {
+      type: 'pie',
+      center: ['50%', '50%'],
+      radius: ['0%', '45%'],
+      data: [{
+        value: 0,
+        name: data[0] + '%',
+        label: {
+          show: true,
+          position: 'center',
+          fontSize: 14,
+          color: '#f1f1f1',
+          fontWeight: 'bold'
+        },
+        itemStyle: {
+          color: '#171c26',
+          opacity: bgColorOpacity === 0 ? 0 : 1
+        }
+      }]
+    }]
+  }
+  return option
+}
+// 柱状图_业务类型 案件处理状态 和 处置情况
+let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
+  barMaxWidth = 25
+  // 找出value中的最大值
+  let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
+  if (portrait) {
+    maxValue = data.reduce(function (total, item) {
+      return total + item.value
+    }, 0)
+  }
+  let displayValueAxis = function () {
+    let result = false
+    if (axisType === 'vertical') {
+      if (showValueAxis === false) {
+        result = false
+      } else {
+        result = true
+      }
+    }
+    return result
+  }
+  let valueAxis = [{
+    type: 'value',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      show: displayValueAxis(),
+      interval: 'auto',
+      color: 'rgba(241,241,241,0.4)',
+      fontSize: barMaxWidth < 12 ? barMaxWidth : 2,
+      formatter: dataType === 'percent' ? '{value} %' : '{value}'
+    },
+    // value最大值的类型：percent，integer
+    // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
+    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    splitNumber: 4,
+    splitLine: {
+      show: false
+    }
+  }]
+  let categoryAxis = [{
+    type: 'category',
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: 'rgba(241,241,241,0.4)',
+      interval: 0,
+      rotate: 0,
+      fontSize: 9,
+      formatter: function (value) {
+        if (axisType === 'horizon') {
+          return value
+        } else {
+          if (value.length <= 6) {
+            return value
+          } else {
+            return value.substring(0, 5) + '..'
+          }
+        }
+      }
+    },
+    data: data.map(function (obj) {
+      return obj.name
+    }),
+    splitLine: {
+      show: false
+    }
+  }]
+  let option = {
+    tooltip: {
+      show: false
+    },
+    grid: {
+      containLabel: function () { if (axisType === 'horizon') { return true } else { return false } },
+      top: 20,
+      left: 20,
+      right: 50,
+      bottom: 20
+    },
+    // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
+    // x轴配置项
+    xAxis: axisType === 'vertical' ? categoryAxis : valueAxis,
+    // y轴配置项
+    yAxis: axisType === 'vertical' ? valueAxis : categoryAxis,
+    // bar配置项
+    series: [{
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      z: 3,
+      itemStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: axisType === 'vertical' ? 0 : 1,
+          y2: axisType === 'vertical' ? 1 : 0,
+          colorStops: [{
+            offset: 0, color: color[0] // 0% 处的颜色
+          }, {
+            offset: 1, color: color[1] // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
+      },
+      label: {
+        show: true,
+        position: axisType === 'vertical' ? 'top' : 'right',
+        color: '#f1f1f1',
+        fontSize: 12
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
+      })
+    }]
+  }
+  if (axisType === 'vertical') {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#383E4E'
+      },
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  if (barMaxWidth) {
+    option.series[0].barMaxWidth = barMaxWidth
+    if (axisType === 'vertical') {
+      option.series[1].barMaxWidth = barMaxWidth
+    }
+  }
+  if (portrait) {
+    option.series.push({
+      type: 'bar',
+      name: name,
+      stack: 'bar',
+      itemStyle: {
+        color: '#132665'
+      },
+      barMaxWidth: barMaxWidth,
+      data: data.map(function (obj) {
+        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+      })
+    })
+  }
+  return option
+}
+export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6}

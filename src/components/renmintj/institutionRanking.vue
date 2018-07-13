@@ -38,7 +38,7 @@
           <div class="date_container">
             <el-cascader
               class="cascader"
-              style="z-index:1;height:30px;line-height:30px;font-size:12px;"
+              style="z-index:1;height:28px;line-height:28px;font-size:12px;width:140px;"
               :options="chooseArr"
               placeholder="选择"
               v-model="chooseDefault"
@@ -265,8 +265,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
 .institutionRanking_container{
-  background: #171415;
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -280,7 +285,7 @@ export default {
     position: relative;
     box-sizing: border-box;
     margin:0 28px;
-    border-top:14px solid rgba(0,0,0,0);
+    border-top:14px solid #0B131C;
     .title{
       position: absolute;
       top: 17px;
@@ -308,7 +313,7 @@ export default {
       span{
         font-size:12px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(237,237,237,1);
+        color:@fontGray;
       }
     }
   }
@@ -328,7 +333,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -337,11 +342,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 5em;
@@ -349,8 +354,8 @@ export default {
           cursor: pointer;
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
       .navRight{
@@ -362,7 +367,7 @@ export default {
         .excel_btn{
           float: right;
           height:26px;
-          background: #F89200;
+          background: rgba(245,182,30,1);
           padding:2px 12px;
           color:white;
           border-radius: 4px;
@@ -374,13 +379,12 @@ export default {
       }
     }
     .table_container{
-      height: calc(100% - 146px);
-      margin-top:16px;
-      width: 100%;
-      box-sizing: border-box;
-      padding:0 24px;
+      height: calc(100% - 152px);
+      margin:16px 24px 0 24px;
+      background: @blockBack;
       .t_head{
-        height: 18px;
+        line-height: 34px;
+        height: 34px;
         width: 100%;
         .bottom{
           width: 9px;
@@ -422,16 +426,13 @@ export default {
           cursor: pointer;
         }
         .row{
-          line-height: 18px;
+          line-height: 34px;
           font-size:12px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(17,148,248,1);
+          color:@fontGray;
           float: left;
           text-align: center;
           box-sizing: border-box;
-          .yellowf{
-            color:#FFC600;
-          }
         }
         .row1{
           width: 5%;
@@ -475,6 +476,9 @@ export default {
           height: 10%;
           position: relative;
           display: block;
+          &:nth-of-type(2n-1){
+            background: @table;
+          }
           .row{
             float: left;
             height: 100%;
@@ -494,8 +498,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
             .img{
               position: absolute;
@@ -516,7 +519,7 @@ export default {
             padding-left: 52px;
             font-size: 12px;
             font-family: HiraginoSansGB-W3;
-            color: rgba(204,233,255,1);
+            color: @fontWhite;
             line-height: 60px;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -540,7 +543,7 @@ export default {
               border-radius: 6px;
               font-size:12px;
               font-family:HiraginoSansGB-W3;
-              color:rgba(255,255,255,1);
+              color:@fontWhite;
             }
           }
           .row4{
@@ -548,8 +551,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row5{
@@ -557,8 +559,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row6{
@@ -566,8 +567,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row7{
@@ -575,35 +575,31 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
           }
           .row8{
             width: 10%;
             span{
               background: rgba(77,132,254,1);
-              opacity: 0.4;
               border-radius: 2px;
               padding: 4px 8px;
-              color: rgba(255,255,255,1);
+              color: @fontWhite;
             }
           }
           .row9{
             width: 8%;
             span{
               background: rgba(77,132,254,1);
-              opacity: 0.4;
               border-radius: 2px;
               padding: 4px 8px;
-              color: rgba(255,255,255,1);
+              color: @fontWhite;
             }
           }
           .row10{
             width: 8%;
             span{
               background: rgba(77,132,254,1);
-              opacity: 0.4;
               border-radius: 2px;
               padding: 4px 8px;
               color: rgba(255,255,255,1);
@@ -614,8 +610,7 @@ export default {
             span{
               font-size: 12px;
               font-family: HiraginoSansGB-W3;
-              color: rgba(255,255,255,1);
-              opacity: 0.4;
+              color: @fontWhite;
             }
             .icon_rate{
               position: absolute;
@@ -641,7 +636,7 @@ export default {
     }
     .page_container{
       text-align: center;
-      margin:12px 0;
+      margin:27px 24px 0 24px;
     }
   }
 }

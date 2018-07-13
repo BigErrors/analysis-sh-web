@@ -116,7 +116,7 @@ let setBar = (data) => {
 
 // 柱图
 let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
-  barMaxWidth = barMaxWidth || 43
+  barMaxWidth = 10
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
   if (portrait) {
@@ -146,7 +146,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       show: displayValueAxis(),
       interval: 'auto',
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
@@ -167,7 +167,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: '#4D84FE',
+      color: 'rgba(241,241,241,0.4)',
       interval: 0,
       rotate: rotate || 0,
       fontSize: 12,
@@ -230,7 +230,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       label: {
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
-        color: color[1],
+        color: '#f1f1f1',
         fontSize: 12
       },
       data: data.map(function (obj) {
@@ -244,7 +244,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       name: name,
       stack: 'bar',
       itemStyle: {
-        color: '#132665'
+        color: '#383E4E'
       },
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
@@ -286,20 +286,23 @@ let setBar4 = (data) => {
     },
     axisLabel: {
       show: true,
-      color: '#1194F8',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: 12
     },
     splitLine: {
-      show: false
+      show: true,
+      lineStyle: {
+        color: '#2A2F3D'
+      }
     }
   }]
   let categoryAxis = [{
     type: 'category',
     boundaryGap: true,
     axisLine: {
-      show: true,
+      show: false,
       lineStyle: {
-        color: '#1F3490'
+        color: 'rgba(241,241,241,0.4)'
       }
     },
     axisTick: {
@@ -307,12 +310,12 @@ let setBar4 = (data) => {
     },
     axisLabel: {
       show: true,
-      color: '#1194F8',
+      color: 'rgba(241,241,241,0.4)',
       fontSize: 12,
       interval: 0,
       rotate: 0,
       formatter: function (value) {
-        return value
+        return value.slice(0, 2) + '年' + value.slice(2, 4) + '月'
       }
     },
     data: data.map(function (obj) {
@@ -323,17 +326,6 @@ let setBar4 = (data) => {
     }
   }]
   let option = {
-    legend: {
-      type: 'plain',
-      orient: 'horizontal',
-      top: 'top',
-      right: '5%',
-      textStyle: {
-        color: '#7DA5FE',
-        fontSize: 12
-      },
-      data: [{name: '新增'}, {name: '未完成'}]
-    },
     grid: {
       containLabel: true,
       top: 20,
@@ -347,27 +339,27 @@ let setBar4 = (data) => {
     yAxis: valueAxis,
     // bar配置项
     series: [{
-      name: '未完成',
-      type: 'bar',
-      stack: 'bar',
-      z: 3,
-      itemStyle: {
-        color: '#1194F8'
-      },
-      label: {
-        show: false
-      },
-      data: data.map(function (obj) {
-        return obj.value2
-      })
-    },
-    {
       name: '新增',
       type: 'bar',
       stack: 'bar',
       z: 3,
+      barMaxWidth: 25,
       itemStyle: {
-        color: '#7CF7E7'
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0,
+            color: '#B2CAFF'
+          }, {
+            offset: 1,
+            color: '#4E84FE'
+          }],
+          globalCoord: false
+        }
       },
       label: {
         show: false
@@ -529,7 +521,7 @@ let setLine2 = (data, showYAxis) => {
         show: false
       },
       axisLabel: {
-        color: '#1194F8'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -547,7 +539,7 @@ let setLine2 = (data, showYAxis) => {
       },
       axisLabel: {
         show: showYAxis || false,
-        color: '#1194F8'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -605,7 +597,19 @@ let setLine2 = (data, showYAxis) => {
         width: 1
       },
       areaStyle: {
-        opacity: 0.4
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: 'rgba(80,247,157,0.4)' // 0% 处的颜色
+          }, {
+            offset: 1, color: 'rgba(80,247,157,0.6)' // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
       },
       data: data.map(item => {
         return item['value']
@@ -652,7 +656,7 @@ let setLine4 = (data, dataType, legend, color) => {
         show: false
       },
       axisLabel: {
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -670,7 +674,7 @@ let setLine4 = (data, dataType, legend, color) => {
       },
       axisLabel: {
         show: true,
-        color: '#4D84FE',
+        color: 'rgba(241,241,241,0.4)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
@@ -753,7 +757,7 @@ let setLine5 = (data, callback) => {
       data: date,
       axisLine: {
         lineStyle: {
-          color: '#4D84FE'
+          color: 'rgba(241,241,241,0.4)'
         }
       },
       axisTick: {
@@ -761,7 +765,7 @@ let setLine5 = (data, callback) => {
       },
       axisLabel: {
         // interval: 0,
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       }
     },
     yAxis: {
@@ -769,23 +773,23 @@ let setLine5 = (data, callback) => {
       boundaryGap: [0, '100%'],
       splitLine: {
         lineStyle: {
-          color: '#4D84FE'
+          color: 'rgba(241,241,241,0.4)'
         }
       },
       axisLine: {
         lineStyle: {
-          color: '#4D84FE'
+          color: 'rgba(241,241,241,0.4)'
         }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       }
     },
     dataZoom: [{
-      start: 85,
+      start: 0,
       end: 100,
       handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
       handleSize: '80%',
@@ -800,7 +804,7 @@ let setLine5 = (data, callback) => {
       showDetail: false,
       // 拖动时，是否实时更新系列的视图。如果设置为 false，则只在拖拽结束的时候更新。
       realtime: false,
-      fillerColor: '#1F3490',
+      fillerColor: 'rgba(51, 51, 51, 0.6)',
       dataBackground: {
         lineStyle: {
           color: '#7D7D7D',
@@ -810,7 +814,7 @@ let setLine5 = (data, callback) => {
           color: '#EEEEEE'
         }
       },
-      borderColor: '#1F3490'
+      borderColor: '#2A2F3D'
     }],
     series: [
       {
@@ -859,11 +863,12 @@ let setLine6 = (data, dataType, title) => {
     color: ['#30FF8D'],
     title: {
       show: function () { if (title !== undefined) { return true } else { return false } },
-      left: '10%',
+      left: 'center',
+      top: '20',
       text: title,
       textStyle: {
-        color: '#FFC600',
-        fontSize: 18
+        color: '#f1f1f1',
+        fontSize: 14
       }
     },
     tooltip: {
@@ -882,7 +887,7 @@ let setLine6 = (data, dataType, title) => {
         show: false
       },
       axisLabel: {
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -901,14 +906,14 @@ let setLine6 = (data, dataType, title) => {
         show: false
       },
       axisLabel: {
-        show: false,
-        color: '#4D84FE',
+        show: true,
+        color: 'rgba(241,241,241,0.4)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
         show: true,
         lineStyle: {
-          color: '#295086'
+          color: '#2a2f3d'
         }
       }
     },
@@ -920,6 +925,9 @@ let setLine6 = (data, dataType, title) => {
       symbolSize: 8,
       lineStyle: {
         width: 1
+      },
+      areaStyle: {
+        color: 'rgba(76, 241, 157, 0.2)'
       },
       data: data.map(item => {
         return item['value']
@@ -954,7 +962,7 @@ let setLine7 = (data, dataType) => {
         show: false
       },
       axisLabel: {
-        color: '#4D84FE'
+        color: 'rgba(241,241,241,0.4)'
       },
       splitLine: {
         show: false
@@ -974,13 +982,13 @@ let setLine7 = (data, dataType) => {
       },
       axisLabel: {
         show: true,
-        color: '#4D84FE',
+        color: 'rgba(241,241,241,0.4)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
         show: true,
         lineStyle: {
-          color: '#295086'
+          color: 'rgba(241,241,241,0.4)'
         }
       }
     },
@@ -1086,13 +1094,13 @@ let setPie2 = (data) => {
               },
 
               hr: {
-                borderColor: '#4D84FE',
+                borderColor: 'rgba(241,241,241,0.4)',
                 width: '100%',
                 borderWidth: 1,
                 height: 0
               },
               b: {
-                color: '#B8CEFF',
+                color: '#f1f1f1',
                 fontSize: 12,
                 lineHeight: 16
               }
@@ -1101,7 +1109,7 @@ let setPie2 = (data) => {
         },
         labelLine: {
           lineStyle: {
-            color: '#4D84FE'
+            color: 'rgba(241,241,241,0.4)'
           }
         },
         data: data
@@ -1119,19 +1127,19 @@ let setPie3 = (data, showRose) => {
       top: '15%',
       right: 10,
       textStyle: {
-        color: '#7DA5FE',
+        color: 'rgba(241,241,241,0.4)',
         fontSize: 12
       },
       data: data.map(item => {
         return item.name
       })
     },
-    color: ['#4D84FE', '#F4A869', '#9979CC', '#854DB5', '#EF5665', '#EF5665', '#F77C88'],
+    color: ['#F77C88', '#854DB5', '#9979CC', '#FED481', '#D9A701', '#D9A701', '#FBD939'],
     series: [
       {
         name: 'seriesName',
         type: 'pie',
-        center: ['35%', '60%'],
+        center: ['42%', '60%'],
         radius: ['40%', '55%'],
         roseType: showRose || false,
         avoidLabelOverlap: true,
@@ -1140,19 +1148,19 @@ let setPie3 = (data, showRose) => {
             formatter: '{d|{d}%}\n {hr|}\n',
             rich: {
               c: {
-                color: '#FFC600',
+                color: '#f1f1f1',
                 fontSize: 12,
                 lineHeight: 12,
                 align: 'center'
               },
               d: {
-                color: '#FFC600',
+                color: '#f1f1f1',
                 fontSize: 12,
                 lineHeight: 12,
                 align: 'center'
               },
               hr: {
-                borderColor: '#4D84FE',
+                borderColor: 'rgba(241,241,241,0.4)',
                 width: '100%',
                 borderWidth: 1,
                 height: 0
@@ -1162,7 +1170,7 @@ let setPie3 = (data, showRose) => {
         },
         labelLine: {
           lineStyle: {
-            color: '#4D84FE'
+            color: 'rgba(241,241,241,0.4)'
           }
         },
         data: data
@@ -1221,14 +1229,14 @@ let setPie4 = (data, title, bgColorOpacity, titlePosition) => {
 // 圆环图
 let setPie6 = (data, dataType, isPie, color) => {
   isPie = isPie || false
-  color = color || data.length > 4 ? ['#95B6FF', '#4D84FE', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
+  color = color || data.length > 4 ? ['#95B6FF', 'rgba(241,241,241,0.4)', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
   let option = {
     legend: {
       orient: 'center',
       top: 'middle',
       right: '5%',
       textStyle: {
-        color: '#7DA5FE',
+        color: 'rgba(241,241,241,0.4)',
         fontSize: 12
       },
       data: data.map(item => {
@@ -1282,12 +1290,12 @@ let setMapbox = (caseData, importantEventData) => {
       },
       seriesIndex: [0]
     }],
-
     mapbox: {
       // style: 'mapbox://styles/mapbox/dark-v9',
       style: {
         'version': 8,
         'glyphs': `${osmUrl}/fonts/{fontstack}/{range}.pbf`,
+        'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite1',
         'sources': {
           'osm-tiles': {
             'type': 'raster',
@@ -1295,25 +1303,57 @@ let setMapbox = (caseData, importantEventData) => {
               `${osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
             ],
             'tileSize': 256
+          },
+          'points': {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': importantEventData.map((item, index) => {
+                return {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [item.value[0], item.value[1]]
+                  },
+                  'properties': {
+                    'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
+                                    <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
+                                    <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
+                                    <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
+                    'icon': 'importantEvent'
+                  }
+                }
+              })
+            }
           }
         },
         'layers': [{
-          'id': 'dark-matter',
+          'id': 'background',
           'type': 'raster',
           'source': 'osm-tiles',
           'minzoom': 0,
           'maxzoom': 22
-        }]
+        },
+        {
+          'id': 'points',
+          'type': 'symbol',
+          'source': 'points',
+          'layout': {
+            'icon-image': '{icon}',
+            'icon-size': 1
+          }
+        }
+        ]
       },
       // 地图中心经纬度。经纬度用数组
       center: [121.5193, 31.163070],
       // 地图的缩放等级
       zoom: 9.5,
       // 视角俯视的倾斜角度
-      pitch: 50,
+      pitch: 60,
       // 地图的旋转角度
       bearing: -10,
-      boxHeight: 6,
+      boxHeight: 7,
       // 后处理特效的相关配置
       postEffect: {
         enable: true,
@@ -1352,6 +1392,21 @@ let setMapbox = (caseData, importantEventData) => {
       }
     },
     series: [
+      // {
+      //   name: '重点事件',
+      //   type: 'scatter3D',
+      //   coordinateSystem: 'mapbox',
+      //   symbol: 'path://<?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <svg width="4cm" height="4cm" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" version="1.1"> <title>Example triangle01- simple example of a path</title> <desc>A path that draws a triangle</desc> <rect x="1" y="1" width="398" height="398" fill="none" stroke="blue" /> <path d="M 100 100 L 300 100 L 200 300 z" fill="red" stroke="blue" stroke-width="3" /> </svg>',
+      //   symbolSize: 20,
+      //   opacity: 0.8,
+      //   itemStyle: {
+      //     color: 'red',
+      //     borderWidth: 0.2,
+      //     borderColor: '#ffffff'
+      //   },
+      //   data: importantEventData,
+      //   silent: false
+      // },
       {
         name: '分布',
         type: 'bar3D',
@@ -1362,6 +1417,7 @@ let setMapbox = (caseData, importantEventData) => {
         minHeight: 2,
         data: caseData,
         silent: false,
+        zlevel: -10,
         emphasis: {
           label: {
             show: false,
@@ -1376,38 +1432,7 @@ let setMapbox = (caseData, importantEventData) => {
             }
           }
         }
-      },
-      {
-        name: '重点事件',
-        type: 'scatter3D',
-        coordinateSystem: 'mapbox',
-        symbol: 'pin',
-        symbolSize: 20,
-        opacity: 0.8,
-        itemStyle: {
-          color: 'red',
-          borderWidth: 0.2,
-          borderColor: '#ffffff'
-        },
-        data: importantEventData,
-        silent: true
       }
-      // {
-      //   name: '多边形',
-      //   type: 'polygons3D',
-      //   coordinateSystem: 'mapbox',
-      //   data: [{
-      //     // A square
-      //     coords: [[0, 0], [100, 0], [100, 100], [0, 100]],
-      //     // Height
-      //     height: 3
-      //   }, {
-      //     // A triangle
-      //     coords: [[50, 0], [100, 100], [0, 100]],
-      //     // Height
-      //     height: 5
-      //   }]
-      // }
     ]
   }
   return option

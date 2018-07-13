@@ -32,13 +32,6 @@
         <div class="area">
           <div class="title">
             <div class="border"></div>
-            <span>重点事件变化趋势</span>
-          </div>
-          <div class="target2"></div>
-        </div>
-        <div class="area">
-          <div class="title">
-            <div class="border"></div>
             <span>各区重点事件(TOP10)</span>
           </div>
           <div class="target3"></div>
@@ -55,7 +48,7 @@
         <div class="area">
           <div class="title">
             <div class="border"></div>
-            <span>重点事件来源</span>
+            <span>重点事件变化趋势</span>
           </div>
           <div class="target5"></div>
         </div>
@@ -70,8 +63,8 @@
               <td width="10%" class='td'>序号</td>
               <td width="15%" class='td'>分类</td>
               <td width="15%" class='td'>行政区</td>
-              <td width="15%" class='td'>日期</td>
               <td width="15%" class='td'>描述</td>
+              <td width="15%" class='td'>日期</td>
               <td width="15%" class='td'>状态</td>
               <td width="15%" class='td'>操作</td>
             </tr>
@@ -79,13 +72,13 @@
             <tbody class="tbody">
             <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=9">
               <td class='td'>
-                <span v-if="item.xuHao<=2" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
-                <span v-if="item.xuHao>2" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+                <span v-if="item.xuHao<=3" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
+                <span v-if="item.xuHao>3" class="circle" :class="'circle4'">{{item.xuHao}}</span>
               </td>
               <td class='td'>{{item.shiJianLX}}</td>
               <td class='td'>{{item.diQu}}</td>
-              <td class='td'>{{item.riQi}}</td>
               <td class='td'>{{item.jianShu}}</td>
+              <td class='td'>{{item.riQi}}</td>
               <td class='td'>{{item.zhuangTai}}</td>
               <td class='td'><span class="detail" @click="changeRouter('importantEventDetail',item.id)">详情</span></td>
             </tr>
@@ -167,10 +160,9 @@ export default {
         vue.benYueXZ = data['shuZhiTJ']['benYueXZ']
         vue.jinNianZS = data['shuZhiTJ']['jinNianZS']
         vue.$nextTick(function () {
-          vue.draw('target2', eos.setBar4(data['zhongDianSJBHQS']))
           vue.draw('target3', eos.setBar3(data['geQuZDSJ'].reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer', 11))
           vue.draw('target4', eos.setPie6(data['zhongDianSJLX'], 'integer', true))
-          vue.draw('target5', eos.setPie6(data['zhongDianSJLY'], 'integer'))
+          vue.draw('target5', eos.setBar4(data['zhongDianSJBHQS']))
         })
       })
     },
@@ -189,7 +181,6 @@ export default {
     let vue = this
     window.addEventListener('resize', function () {
       vue.$nextTick(function () {
-        vue.myChart['target2'].resize()
         vue.myChart['target3'].resize()
         vue.myChart['target4'].resize()
         vue.myChart['target5'].resize()
@@ -201,8 +192,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  @blockBack:#171c26;
+  @table:#131821;
+  @table2:rgba(40,45,58,0.3);
+  @fontWhite:#f1f1f1;
+  @fontGray:rgba(241,241,241,0.4);
   .importantEvent_container {
-    background: #171415;
+    background: #0B131C;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -216,7 +212,7 @@ export default {
       position: relative;
       box-sizing: border-box;
       margin: 0 28px;
-      border-top: 14px solid rgba(0, 0, 0, 0);
+      border-top: 14px solid #0B131C;
       .title {
         position: absolute;
         top: 17px;
@@ -244,7 +240,7 @@ export default {
         span {
           font-size: 12px;
           font-family: HiraginoSansGB-W3;
-          color: rgba(237, 237, 237, 1);
+          color: @fontGray;
         }
       }
     }
@@ -264,7 +260,7 @@ export default {
         span {
           font-size: 12px;
           font-family: HiraginoSansGB-W3;
-          color: rgba(94, 126, 203, 1);
+          color: @fontGray;
         }
       }
       .title {
@@ -275,7 +271,7 @@ export default {
         .border {
           width: 2px;
           height: 12px;
-          background: #1194F8;
+          background: @fontWhite;
           display: inline-block;
           margin-left: 10px;
           margin-right: 5px;
@@ -283,24 +279,24 @@ export default {
         span {
           font-size: 16px;
           font-family: HiraginoSansGB-W3;
-          color: #7DA5FE;
+          color: @fontWhite;
         }
       }
       .left {
         float: left;
-        width: calc(26% - 25px);
+        width: calc(26% - 49px);
         height: calc(100% - 54px);
-        margin: 0 15px 10px 10px;
+        margin: 0 15px 10px 34px;
         .area {
           float: left;
           width: 100%;
           height: calc(33.33% - 10px);
           margin-bottom: 10px;
-          background: linear-gradient( rgba(0,0,0,1),rgba(0,0,0,1));
+          background: @blockBack;
           position: relative;
         }
-        .area:nth-of-type(3){
-          height: 33.33%;
+        .area:nth-of-type(2){
+          height: 66.66%;
           margin-bottom: 0;
         }
       }
@@ -314,7 +310,7 @@ export default {
           width: 50%;
           height: calc(33.33% - 10px);
           margin-bottom: 10px;
-          background: linear-gradient( rgba(0,0,0,1),rgba(0,0,0,1));
+          background: @blockBack;
         }
         .area:nth-of-type(1) {
           width: calc(50% - 10px);
@@ -326,7 +322,6 @@ export default {
           margin-bottom: 0;
         }
       }
-      .target2,
       .target3,
       .target4,
       .target5 {
@@ -343,14 +338,14 @@ export default {
           height: 41px;
           position: absolute;
           top: -13px;
-          left: 60px;
+          left: 62px;
         }
         .title{
           height: 19px;
           position: absolute;
           bottom: 2px;
-          left: 62px;
-          color:rgba(170,173,182,1);
+          left: 68px;
+          color:@fontGray;
         }
       }
       .statistics1 {
@@ -360,10 +355,15 @@ export default {
         transform: translate(10%,-50%)
       }
       .statistics::before {
+        content: '';
         width: 44px;
-        height: 51px;
-        content: url('/static/renmintj/icon_document.png');
-        padding-right: 10px;
+        height: 59px;
+        background-image:url('/static/renmintj/icon_document2.png');
+        background-size: 100% 100%;
+        position: absolute;
+        left: 0px;
+        top:0;
+        padding-right: 5px;
       }
       .statistics .num {
         display: inline-block;
@@ -385,7 +385,7 @@ export default {
           .td{
             font-size:12px;
             font-family:MicrosoftYaHei;
-            color:rgba(77,132,254,1);
+            color:@fontGray;
             height:22px;
             text-align:center;
           }
@@ -394,7 +394,7 @@ export default {
           .td{
             font-size:12px;
             font-family:MicrosoftYaHei;
-            color:#4D84FE;
+            color:@fontWhite;
             text-align:center;
             .detail{
               font-size:12px;
@@ -402,13 +402,16 @@ export default {
               color:rgba(255,255,255,1);
               padding:4px 8px;
               border-radius: 4px;
-              background:rgba(17,148,248,1);
+              background:#F59B5B;
               cursor: pointer;
             }
           }
           tr{
             &:nth-of-type(2n-1){
-              background:rgba(19,38,101,0.3);
+              background:@table2;
+            }
+            &:nth-of-type(2n){
+              background:@table;
             }
           }
         }
@@ -433,8 +436,8 @@ export default {
           background:rgba(111,155,253,1);
         }
         .circle4{
-          color:rgba(225,234,255,1);
-          background:rgba(205,205,205,0.5);
+          color:#030F46;
+          background:rgba(209,209,209,1);
         }
       }
       .page{
@@ -442,7 +445,7 @@ export default {
         height: 45px;
         text-align: center;
         box-sizing: border-box;
-        padding-top:5px;
+        padding-top:16px;
       }
     }
   }

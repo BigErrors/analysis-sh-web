@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-05 11:51:47
+ * @Last Modified time: 2018-07-13 14:16:27
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -87,14 +87,15 @@ http.post = (url, param, callback, contentType, responseType) => {
     param = qs.stringify(param)
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
   }
-  axios({method: 'post', url: url, data: param, headers: headers, responseType: responseType || 'json'}).then((res) => {
-    if (res.data.code || res.data.code === 1) {
-      callback(res.data.data)
-    } else {
-      if (responseType === 'arraybuffer') {
-        callback(res.data)
-      } else {
+  responseType = responseType || 'json'
+  axios({method: 'post', url: url, data: param, headers: headers, responseType: responseType}).then((res) => {
+    if (responseType === 'arraybuffer') {
+      callback(res.data)
+    } else if (responseType === 'json') {
+      if (res.data.code && res.data.code === 0) {
         http.warn(res)
+      } else {
+        callback(res.data.data)
       }
     }
   }).catch((err) => {
@@ -117,27 +118,31 @@ axios.interceptors.response.use(data => {
 })
 
 http.error = (err) => {
-  // console.log(JSON.stringify(err))
   if (err.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
-    // console.log('Error Response', err.response.data)
+    console.log('Error Response', err.response.data)
     Notification.error({message: err.response.data.error})
   } else if (err.request) {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
-    // console.log('Error Request', err.request)
+    console.log('Error Request', err.request)
     Notification.error({message: err.request})
   } else {
     // Something happened in setting up the request that triggered an Error
-    // console.log('Error', err.message)
-    // Notification.error({message: err.message})
-    Notification.error({message: '数据接口请求失败，请检查网络连接'})
+    console.log('Error', err)
+    if (err === {}) {
+      Notification.error({message: '缺少字段'})
+    } else {
+      Notification.error({message: err.message})
+    }
+    // Notification.error({message: '数据接口请求失败，请检查网络连接'})
   }
 }
 
 http.warn = (res) => {
+  console.log(res)
   // 异常处理,接口response的code非200时统一抛出message
   Notification.warning({message: res.data.message})
 }

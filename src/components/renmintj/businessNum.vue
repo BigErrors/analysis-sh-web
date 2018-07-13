@@ -17,7 +17,7 @@
         <div class="navLeft">
           <span class="navspan" :class="{'active':type==='人民调解'?true:false}" @click="type='人民调解'">人民调解</span>
           <span class="navspan" :class="{'active':type==='110联动'?true:false}" @click="type='110联动'">110联动</span>
-          <span class="navspan" :class="{'active':type==='公共法律服务'?true:false}" @click="type='公共法律服务'">公共法律服务</span>
+          <span class="navspan" :class="{'active':type==='公共法律服务'||type==='村居服务'}" @click="type='公共法律服务'">公共法律服务</span>
           <span class="navspan" :class="{'active':type==='纠纷排查'?true:false}" @click="type='纠纷排查'">纠纷排查</span>
         </div>
       </div>
@@ -33,14 +33,14 @@
             </div>
             <div class="others">
               <div class="rm rm_1">
-                <span class="span1">今日新增</span>
                 <span class="span2">{{statistics.day}}</span>
-                <span class="span3">件</span>
+                <span class="span1">今日新增</span>
+                <!-- <span class="span3">件</span> -->
               </div>
               <div class="rm rm_2">
-                <span class="span1">全年累计</span>
                 <span class="span2">{{statistics.year}}</span>
-                <span class="span3">件</span>
+                <span class="span1">全年累计</span>
+                <!-- <span class="span3">件</span> -->
               </div>
             </div>
           </div>
@@ -54,23 +54,23 @@
             </div>
             <div class="others">
               <div class="ld ld1">
-                <span class="span1">全年累计</span>
                 <span class="span4">{{statistics.year}}</span>
-                <span class="span3 span5">件</span>
+                <span class="span1">全年累计</span>
+                <!-- <span class="span3 span5">件</span> -->
               </div>
               <div class="ld ld2">
-                <span class="span1">本月新增</span>
                 <span class="span2">{{statistics.month}}</span>
-                <span class="span3">件</span>
+                <span class="span1">本月新增</span>
+                <!-- <span class="span3">件</span> -->
               </div>
               <div class="ld ld3">
-                <span class="span1">今日新增</span>
                 <span class="span2">{{statistics.day}}</span>
-                <span class="span3">件</span>
+                <span class="span1">今日新增</span>
+                <!-- <span class="span3">件</span> -->
               </div>
             </div>
           </div>
-           <div class="left" v-if="type==='公共法律服务'">
+           <div class="left" v-if="type==='公共法律服务'||type==='村居服务'">
             <div class="el_cont">
               <el-cascader
                 :options="area"
@@ -79,19 +79,19 @@
               ></el-cascader>
             </div>
             <div class="btn_cont">
-              <div class="btn btn1 active">法律咨询</div>
-              <div class="btn btn2">村居服务</div>
+              <div class="btn btn1" :class="{'active':type==='公共法律服务'}" @click="type='公共法律服务'">法律咨询</div>
+              <div class="btn btn2" :class="{'active':type==='村居服务'}" @click="type='村居服务'">村居服务</div>
             </div>
             <div class="others others2">
               <div class="rm rm_1">
+                <span class="span2">{{statistics.day}}</span>
                 <span class="span1">今日新增</span>
-                <span class="span2">364</span>
-                <span class="span3">件</span>
+                <!-- <span class="span3">件</span> -->
               </div>
               <div class="rm rm_2">
+                <span class="span2">{{statistics.year}}</span>
                 <span class="span1">全年累计</span>
-                <span class="span2">36224</span>
-                <span class="span3">件</span>
+                <!-- <span class="span3">件</span> -->
               </div>
             </div>
           </div>
@@ -105,14 +105,14 @@
             </div>
             <div class="others">
               <div class="rm rm_1">
-                <span class="span1">本月排查</span>
                 <span class="span2">{{statistics.month}}</span>
-                <span class="span3">件</span>
+                <span class="span1">本月排查</span>
+                <!-- <span class="span3">件</span> -->
               </div>
               <div class="rm rm_2">
-                <span class="span1">全年累计</span>
                 <span class="span2">{{statistics.year}}</span>
-                <span class="span3">件</span>
+                <span class="span1">全年累计</span>
+                <!-- <span class="span3">件</span> -->
               </div>
             </div>
           </div>
@@ -129,10 +129,21 @@
                 <div class="table">
                   <div class="t_title">{{type2Title}}</div>
                   <div class="t_ul">
+                    <div class="t_li">
+                      <span class="span1">名称</span>
+                      <span class="span2">占比</span>
+                    </div>
                     <div class="t_li" v-for="(item,index) in table" :key="index" @click="setType3Data(item.type2)">
-                      <span class="span1"></span>
-                      <span class="span2">{{item.type2}}</span>
-                      <span class="span3">{{item.value}}</span>
+                      <el-tooltip v-if="item.type2.length>6" :content='item.type2' placement="top">
+                        <span class="span1">{{item.type2}}</span>
+                      </el-tooltip>
+                      <span class="span1" v-if="item.type2.length<=6">{{item.type2}}</span>
+                      <span class="span2">
+                        <i class="i_container">
+                          <i class="i_rate" :style="{width:changeToRate(item.value)}"></i>
+                        </i>
+                      </span>
+                      <span class="span3">{{changeToRate(item.value)}}</span>
                     </div>
                   </div>
                 </div>
@@ -175,7 +186,7 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
 import json from '@/util/dictionaryMapping'
-
+import eosNew from '@/util/echartsOptionsNew'
 export default {
   name: 'businessNum',
   components: {
@@ -196,7 +207,7 @@ export default {
       lineData: [],
       type2Title: '',
       table: [],
-      keyMap: {'人民调解': 'MBM_CASE', '110联动': 'MMS_ALARM110INFO', '公共法律服务': 'WWS_CONSULT', '纠纷排查': 'CDS_INVESTIGATIONFEEDBAC'},
+      keyMap: {'人民调解': 'MBM_CASE', '110联动': 'MMS_ALARM110INFO', '公共法律服务': 'WWS_CONSULT', '纠纷排查': 'CDS_INVESTIGATIONFEEDBAC', '村居服务': 'AMS_VILLAGESERVICELOG'},
       area: json.area,
       areaDefault: ['SHJCK01000'],
       title4: '各区案件数量(TOP10)',
@@ -225,6 +236,13 @@ export default {
     }
   },
   methods: {
+    changeToRate (value) {
+      let sum = 0
+      for (let i = 0; i < this.table.length; i++) {
+        sum += parseInt(this.table[i].value)
+      }
+      return (value / sum * 100).toFixed(2) + '%'
+    },
     // 绘制echarts
     draw (domName, option) {
       if (this.myChart[domName]) {
@@ -347,14 +365,14 @@ export default {
             vue.title5 = '案件来源分布'
             vue.draw('target5', eos.setPie3(data))
           } else if (vue.type === '110联动') {
-            vue.title5 = '处置情况'
-            vue.draw('target5', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false, 30))
+            vue.title6 = '处置情况'
+            vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer', 36, undefined, false, 30))
           } else if (vue.type === '公共法律服务') {
             vue.title5 = '服务热点'
             vue.draw('target5', eos.setLine7(data, 'integer', undefined, true))
           } else if (vue.type === '纠纷排查') {
-            vue.title5 = '处理结果'
-            vue.draw('target5', eos.setPie2(data))
+            vue.title6 = '处理结果'
+            vue.draw('target6', eos.setPie2(data))
           }
         })
       })
@@ -366,16 +384,16 @@ export default {
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
             vue.title6 = '案件处理状态'
-            vue.draw('target6', eos.setBar3(data, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 36, undefined, false, 30))
+            vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer', 36, undefined, false, 30))
           } else if (vue.type === '110联动') {
-            vue.title6 = '所在人群'
-            vue.draw('target6', eos.setPie3(data))
+            vue.title5 = '所在人群'
+            vue.draw('target5', eos.setPie3(data))
           } else if (vue.type === '公共法律服务') {
             vue.title6 = '调解占比'
             vue.draw('target6', eos.setPie2(data))
           } else if (vue.type === '纠纷排查') {
-            vue.title6 = '所在人群'
-            vue.draw('target6', eos.setPie3(data))
+            vue.title5 = '所在人群'
+            vue.draw('target5', eos.setPie3(data))
           }
         })
       })
@@ -400,9 +418,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@blockBack:#000000;
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
 .busiNum_container{
-  background: #171415;
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -444,7 +466,7 @@ export default {
       span{
         font-size:12px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(237,237,237,1);
+        color:@fontGray;
       }
     }
   }
@@ -464,7 +486,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -473,11 +495,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 5em;
@@ -488,8 +510,8 @@ export default {
           }
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
       .navRight{
@@ -542,23 +564,24 @@ export default {
                 height:22px;
                 font-size:12px;
                 font-family:HiraginoSansGB-W3;
-                color:rgba(121,190,242,1);
+                color:@fontGray;
                 display: block;
                 line-height: 22px;
               }
               .span2{
                 font-size:20px;
                 font-family:Impact;
-                color:rgba(255,255,255,1);
+                color:@fontWhite;
                 width: 80%;
                 display: inline-block;
                 height: 35px;
                 line-height: 35px;
+                position: relative;
               }
               .span3{
                 font-size:12px;
                 font-family:HiraginoSansGB-W3;
-                color:rgba(121,190,242,1);
+                color:@fontGray;
                 width: 15%;
                 display: inline-block;
                 height: 35px;
@@ -587,14 +610,14 @@ export default {
                 height:22px;
                 font-size:12px;
                 font-family:HiraginoSansGB-W3;
-                color:rgba(121,190,242,1);
+                color:@fontGray;
                 display: block;
                 line-height: 22px;
               }
               .span2{
                 font-size:20px;
                 font-family:Impact;
-                color:rgba(255,255,255,1);
+                color:@fontWhite;
                 width: 68%;
                 display: inline-block;
                 height: 35px;
@@ -603,7 +626,7 @@ export default {
               .span3{
                 font-size:12px;
                 font-family:HiraginoSansGB-W3;
-                color:rgba(121,190,242,1);
+                color:@fontGray;
                 width: 25%;
                 display: inline-block;
                 height: 35px;
@@ -625,6 +648,7 @@ export default {
               left: 50%;
               width: 90%;
               transform: translate(-50%,-150%);
+              height: 78px;
             }
             .ld2{
               left: 5%;
@@ -692,23 +716,19 @@ export default {
               .table{
                 position: absolute;
                 width: 69%;
-                height: 80%;
+                height: 93%;
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%,-50%);
-                border:1px solid #123697;
                 .t_title{
                   height: 34px;
                   font-size:14px;
                   font-family:HiraginoSansGB-W3;
-                  color:rgba(174,195,255,1);
+                  color:@fontWhite;
                   display: block;
                   line-height: 34px;
                   padding-left: 6px;
-                  background-image: url(/static/renmintjOther/pic_frame.png);
-                  background-repeat: no-repeat;
-                  // background-position: 0 0;
-                  // background-size:74px 26px;
+                  text-align: center;
                 }
                 .t_ul{
                   height: calc(100% - 44px);
@@ -718,30 +738,54 @@ export default {
                   .t_li{
                     height: 28px;
                     position: relative;
-                    color:rgba(184,206,255,1);
+                    color:@fontGray;
                     cursor: pointer;
+                    &:nth-of-type(2n-1){
+                      background: @table;
+                    }
                     &:hover{
-                      color:#FFC600
+                      color:@fontWhite
                     }
                     .span1{
-                      position: absolute;
-                      width: 8px;
-                      height: 8px;
-                      border-radius: 4px;
-                      background: rgba(184,206,255,1);
-                      left: 22px;
-                      top:50%;
-                      transform: translateY(-4px)
-                    }
-                    .span2{
                       float: left;
-                      width: 76%;
+                      width: 36%;
                       font-size:12px;
                       font-family:HiraginoSansGB-W3;
                       height: 28px;
                       line-height: 28px;
                       box-sizing: border-box;
-                      padding-left: 46px;
+                      padding-left: 22px;
+                      overflow: hidden;
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
+                    }
+                    .span2{
+                      width: 40%;
+                      float: left;
+                      height: 28px;
+                      font-size:12px;
+                      font-family:HiraginoSansGB-W3;
+                      line-height: 28px;
+                      position: relative;
+                      padding-left: 10%;
+                      box-sizing: border-box;
+                      .i_container{
+                        width: 80%;
+                        height: 8px;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%,-50%);
+                        background: rgba(16,21,30,1);
+                        border-radius: 4px;
+                        .i_rate{
+                          min-width:5px;
+                          height:8px;
+                          background: rgba(46,116,255,1);
+                          display: block;
+                          border-radius: 4px;
+                        }
+                      }
                     }
                     .span3{
                       float: left;
@@ -795,7 +839,7 @@ export default {
       .border{
         width: 2px;
         height: 12px;
-        background: #1194F8;
+        background: @fontWhite;
         display: inline-block;
         margin-left:10px;
         margin-right: 5px;
@@ -803,7 +847,7 @@ export default {
       span{
         font-size:16px;
         font-family:HiraginoSansGB-W3;
-        color:#7DA5FE;
+        color:@fontWhite;
       }
       .right_btn{
         padding:0 4px;

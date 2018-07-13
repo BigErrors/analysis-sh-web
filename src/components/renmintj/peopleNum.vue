@@ -109,8 +109,8 @@ export default {
         vue.$nextTick(function () {
           vue.draw('target1', eosNew.setLine3([data['n_tjy']], 'integer'))
           vue.draw('target2', eosNew.setLine3([data['nnew_tjy']], 'integer'))
-          vue.draw('target3', eosNew.setBar3(data['n_locationtjy'].reverse(), ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
-          vue.draw('target4', eosNew.setBar3(data['new_locationtiy'].reverse(), ['#FF9C00', '#F8E228'], 'horizon', 'integer'))
+          vue.draw('target3', eosNew.setBar3(data['n_locationtjy'].reverse(), ['#2E89FD', '#B6CDFF'], 'horizon', 'integer'))
+          vue.draw('target4', eosNew.setBar3(data['new_locationtiy'].reverse(), ['#00CDAC', '#8DDAD5'], 'horizon', 'integer'))
         })
       })
     }
@@ -133,9 +133,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@blockBack:#000000;
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
 .peopleNum_container{
-  background: #171415;
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -149,7 +153,7 @@ export default {
     position: relative;
     box-sizing: border-box;
     margin:0 28px;
-    border-top:14px solid rgba(0,0,0,0);
+    border-top:14px solid #0B131C;
     .title{
       position: absolute;
       top: 17px;
@@ -177,7 +181,7 @@ export default {
       span{
         font-size:12px;
         font-family:HiraginoSansGB-W3;
-        color:rgba(237,237,237,1);
+        color:@fontGray;
       }
     }
   }
@@ -197,7 +201,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -206,11 +210,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 5em;
@@ -218,8 +222,8 @@ export default {
           cursor: pointer;
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
     }
@@ -259,7 +263,7 @@ export default {
         .border{
           width: 2px;
           height: 12px;
-          background: #1194F8;
+          background: @fontWhite;
           display: inline-block;
           margin-left:10px;
           margin-right: 5px;
@@ -267,7 +271,7 @@ export default {
         span{
           font-size:16px;
           font-family:HiraginoSansGB-W3;
-          color:#7DA5FE;
+          color:@fontWhite;
         }
         .sort{
           font-size:12px;

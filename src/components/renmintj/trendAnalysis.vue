@@ -230,6 +230,7 @@ export default {
       let url = ''
       url = '/trendAnalysis'
       http.get(baseUrl + url, reqParam, (data) => {
+        vue.loading = false
         vue.$nextTick(function () {
           vue.limit++
           vue.count = data.jiuFenSL
@@ -251,8 +252,11 @@ export default {
             }
           }).slice(0, 10)
           vue.draw('target3', eos.setBar3(data.jiuFenLX, ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
-          vue.drawWordcloud2('target4', data.jiuFenCY)
-          vue.loading = false
+          if (data.jiuFenCY.length > 0) {
+            vue.drawWordcloud2('target4', data.jiuFenCY)
+          } else {
+            vue.drawWordcloud2('target4', [{name: '无数据', value: 1}])
+          }
         })
       })
     }
@@ -277,9 +281,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@blockBack:#000000;
+@blockBack:#171c26;
+@table:#131821;
+@table2:rgba(40,45,58,0.3);
+@fontWhite:#f1f1f1;
+@fontGray:rgba(241,241,241,0.4);
 .trendAnalysis_container {
-  background: #171415;
+  background: #0B131C;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -321,12 +329,12 @@ export default {
       span {
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color: rgba(237, 237, 237, 1);
+        color: @fontGray;
       }
     }
   }
   .body{
-    height: calc(100% - 84px);
+    height: calc(100% - 85px);
     width: 100%;
     display: block;
     position: relative;
@@ -341,7 +349,7 @@ export default {
       span{
         font-size: 12px;
         font-family: HiraginoSansGB-W3;
-        color:rgba(94,126,203,1);
+        color:@fontGray;
       }
     }
     .nav2{
@@ -350,7 +358,7 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid #0F3BBA;
+        border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
@@ -362,8 +370,8 @@ export default {
           cursor: pointer;
         }
         .active{
-          color:rgba(255,198,0,1);
-          border-bottom: 3px solid #FFC600;
+          color:@fontWhite;
+          border-bottom: 3px solid #2E89FD;
         }
       }
       .navRight{
@@ -376,17 +384,17 @@ export default {
     }
     .content_container{
       height: calc(100% - 89px);
-      margin-top:15px;
+      margin-top:16px;
       width: 100%;
       box-sizing: border-box;
       padding:0 24px;
       position: relative;
+      display: flex;
       .left{
-        width: 64%;
+        flex: 0.65;
         height: 100%;
         position: relative;
         margin-right: 8px;
-        float: left;
         .top{
           width: 100%;
           height: 20%;
@@ -406,7 +414,7 @@ export default {
                 height: 24px;
                 line-height: 24px;
                 font-size:12px;
-                color:rgba(94,126,203,1);
+                color:@fontGray;
               }
               .span_content{
                 display: block;
@@ -416,7 +424,7 @@ export default {
                   float: left;
                   font-size:27px;
                   font-family:'Impact';
-                  color:rgba(246,251,255,1);
+                  color:@fontWhite;
                 }
                 .span2{
                   height: 16px;
@@ -424,7 +432,7 @@ export default {
                   margin:16px 0 0 12px;
                   font-size:12px;
                   font-family:HiraginoSansGB-W3;
-                  color:rgba(94,126,203,1);
+                  color:@fontGray;
                 }
               }
               .span3{
@@ -433,7 +441,7 @@ export default {
                 left: 0;
                 font-size:12px;
                 font-family:HiraginoSansGB-W3;
-                color:rgba(0,198,255,1);
+                color:@fontGray;
                 width: 200px;
                 transform-origin: left;
                 transform:scale(0.9);
@@ -442,7 +450,7 @@ export default {
             .border{
               width: 1px;
               height: 33%;
-              background:rgba(31,52,144,1);
+              background: rgba(241, 241, 241, 0.5);
               position: absolute;
               top: 50%;
               right: 1px;
@@ -464,9 +472,8 @@ export default {
         }
       }
       .right{
-        width: 34%;
+        flex: 0.35;
         height: 100%;
-        float: left;
         position: relative;
         .top{
           width: 100%;
@@ -500,7 +507,7 @@ export default {
         .border{
           width: 2px;
           height: 12px;
-          background: #1194F8;
+          background: @fontWhite;
           display: inline-block;
           margin-left:10px;
           margin-right: 5px;
@@ -508,7 +515,7 @@ export default {
         span{
           font-size:16px;
           font-family:HiraginoSansGB-W3;
-          color:#7DA5FE;
+          color:@fontWhite
         }
       }
     }

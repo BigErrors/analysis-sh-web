@@ -82,7 +82,7 @@ export default {
     // 路由跳转
     changeRouter (name) {
       if (name === 'index4renmintj') {
-        this.$router.push({name: name})
+        window.open('http://192.168.22.88:8090/#/index4renmintj')
       } else {
         window.open(name)
       }
