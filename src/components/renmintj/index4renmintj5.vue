@@ -4,8 +4,7 @@
 <template>
   <div class="index_container">
     <div class="head clearfix">
-      <div class="title">基层司法大数据子平台</div>
-      <!-- <img src="" class="background"> -->
+      <div class="title" @click="changeRouter('moduleChoose')">基层司法大数据子平台</div>
       <div class="left">
         <el-cascader class="cascader" style="z-index: 1;" :options="area" placeholder="区域" v-model="areaDefault"></el-cascader>
       </div>
@@ -317,7 +316,7 @@ export default {
   },
   watch: {
     trendType: function (to, from) {
-      this.draw('trendAnalysis', eosNew.setLine(this.trendData[to].reverse().slice(0, 6).reverse(), true, true))
+      this.draw('trendAnalysis', eosNew.setLine(this.trendData[to].slice(6, 12), true, true))
     },
     areaDefault: function (newValue, oldValue) {
       this.showDialog = false
@@ -326,9 +325,6 @@ export default {
   },
   created () {
     this.getData()
-  },
-  beforeMount () {
-    console.log(this.$el)
   },
   mounted () {
     let vue = this
@@ -397,8 +393,7 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.$nextTick(function () {
           vue.trendData = data
-          vue.draw('trendAnalysis', eosNew.setLine(vue.trendData[vue.trendType].reverse().slice(0, 6).reverse(),
-            true, true))
+          vue.draw('trendAnalysis', eosNew.setLine(vue.trendData[vue.trendType].slice(6, 12), true, true))
         })
       })
       // 工作质量
@@ -516,6 +511,7 @@ export default {
       border-top: 14px solid rgba(0, 0, 0, 0);
       .title {
         position: absolute;
+        cursor: pointer;
         top: 17px;
         font-size: 20px;
         font-family: RTWSYueGoTrial-Regular;

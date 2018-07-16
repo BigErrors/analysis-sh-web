@@ -215,7 +215,7 @@ export default {
 
   .el-input.is-active .el-input__inner,
   .el-input__inner:focus {
-    border-color: #30373e
+    border-color: #30373e !important;
   }
 
   /* 业务类型页面新 */
@@ -410,7 +410,8 @@ export default {
   }
 
   .index_container .mapboxgl-popup {
-    width: 220px;
+    min-width: 210px;
+    max-width: 15.5%;
     font-size: 12px;
     color: #FFFFFF;
     z-index: 999;
@@ -431,9 +432,6 @@ export default {
     background-color: rgba(255, 0, 222, 0);
     border: 0;
     padding: 5;
-  }
-  .el-input__inner{
-    border-color:#30373e
   }
 
 </style>

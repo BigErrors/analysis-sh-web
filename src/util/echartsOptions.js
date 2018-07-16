@@ -1318,7 +1318,7 @@ let setMapbox = (caseData, importantEventData) => {
                   'properties': {
                     'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
                                     <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
-                                    <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
+                                    <span style="line-height:28px;float:right;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
                                     <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
                     'icon': 'importantEvent'
                   }

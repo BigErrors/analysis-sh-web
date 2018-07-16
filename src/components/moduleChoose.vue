@@ -9,12 +9,12 @@
       <div class="container">
         <div class="top"></div>
         <div class="middle">
-          <div class="six bg1" :class="{six_1:mark===1,six_2:mark===2,six_3:mark===3,six_4:mark===4,six_5:mark===5,six_6:mark===6}" @click="changeRouter('http://192.168.91.34:8880/tatt/pages/index.html')">
+          <div class="six bg1" :class="{six_1:mark===1,six_2:mark===2,six_3:mark===3,six_4:mark===4,six_5:mark===5,six_6:mark===6}" @click="changeRouter('modelTools')">
             <div v-if="mark===2" class="border righttop"></div>
             <div v-if="mark===2" class="border lefttop"></div>
             <div v-if="mark===2" class="border rightbottom"></div>
             <div v-if="mark===2" class="border leftbottom"></div>
-            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">同案同调</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型工具</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
           </div>
           <div class="six bg2" :class="{six_2:mark===1,six_3:mark===2,six_4:mark===3,six_5:mark===4,six_6:mark===5,six_1:mark===6}" @click="changeRouter('http://rmtj.justice.gov.cn/')">
             <div v-if="mark===1" class="border righttop"></div>
@@ -30,12 +30,12 @@
             <div v-if="mark===6" class="border leftbottom"></div>
             <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">数据洞察</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
           </div>
-          <div class="six bg1" :class="{six_4:mark===1,six_5:mark===2,six_6:mark===3,six_1:mark===4,six_2:mark===5,six_3:mark===6}" @click="changeRouter('http://192.168.91.34:8880/tatt/pages/index.html')">
+          <div class="six bg1" :class="{six_4:mark===1,six_5:mark===2,six_6:mark===3,six_1:mark===4,six_2:mark===5,six_3:mark===6}" @click="changeRouter('modelTools')">
             <div v-if="mark===5" class="border righttop"></div>
             <div v-if="mark===5" class="border lefttop"></div>
             <div v-if="mark===5" class="border rightbottom"></div>
             <div v-if="mark===5" class="border leftbottom"></div>
-            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">同案同调</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
+            <div class="cover"><img class="cover_img_left" src="/static/moduleImages/right.png" /><span class="cover_span">模型工具</span><img class="cover_img_right" src="/static/moduleImages/left.png"/></div>
           </div>
           <div class="six bg2" :class="{six_5:mark===1,six_6:mark===2,six_1:mark===3,six_2:mark===4,six_3:mark===5,six_4:mark===6}" @click="changeRouter('http://rmtj.justice.gov.cn/')">
             <div v-if="mark===4" class="border righttop"></div>
@@ -81,10 +81,10 @@ export default {
   methods: {
     // 路由跳转
     changeRouter (name) {
-      if (name === 'index4renmintj') {
-        window.open('http://192.168.22.88:8090/#/index4renmintj')
+      if (name === 'http://rmtj.justice.gov.cn/') {
+        window.open('http://rmtj.justice.gov.cn/')
       } else {
-        window.open(name)
+        this.$router.push(name)
       }
     },
     changemark: function (fn) {

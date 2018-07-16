@@ -4,6 +4,7 @@ import login from '@/components/login'
 import moduleChoose from '@/components/moduleChoose'
 import modelSupermarket from '@/components/modelSupermarket'
 import modelDataApp from '@/components/modelDataApp'
+import modelTools from '@/components/modelTools'
 import index4renmintj from '@/components/renmintj/index4renmintj5'
 import peopleNum from '@/components/renmintj/peopleNum'
 import peopleType from '@/components/renmintj/peopleType'
@@ -40,6 +41,10 @@ const router = new Router({
     path: '/modelDataApp',
     name: 'modelDataApp',
     component: modelDataApp
+  }, {
+    path: '/modelTools',
+    name: 'modelTools',
+    component: modelTools
   }, {
     path: '/index4renmintj',
     name: 'index4renmintj',
