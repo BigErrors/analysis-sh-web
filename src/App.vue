@@ -46,19 +46,8 @@ export default {
     height: 100%;
   }
 
-  /* 去除百度地图左下角内容 */
-
-  .BMap_cpyCtrl {
-    display: none;
-  }
-
-  .anchorBL {
-    display: none;
-  }
-
   .index_container .el-cascader__label {
-    font-size: 32px;
-    font-family: HiraginoSansGB-W3;
+    font-size: 32px !important;
     color: #FFF225 !important;
   }
 
@@ -176,17 +165,17 @@ export default {
   .el-pagination .btn-next,
   .el-pagination .btn-prev {
     color: #FFFFFF !important;
-    padding:0 6px;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
+    padding:0 6px !important;
+    border-radius: 50% !important;
+    width: 28px !important;
+    height: 28px !important;
   }
 
   .el-pagination button:disabled {
     color: #FFFFFF !important;
     background-color: rgba(255, 255, 255, 0) !important;
     cursor: not-allowed !important;
-    margin:0 15px;
+    margin:0 15px !important;
   }
 
   .el-pagination__total {
@@ -198,7 +187,7 @@ export default {
   /* 下拉框样式 */
   .el-cascader-menus {
     background: rgba(255,255,255,0) !important;
-    border: 1px solid #30373e;
+    border: 1px solid #30373e !important;
   }
   .el-cascader-menu {
     background: rgba(11,19,28,0.9) !important;
@@ -209,8 +198,8 @@ export default {
   }
 
   .el-cascader-menu__item:hover {
-    background: #2e89fd;
-    color: #f1f1f1;
+    background: #2e89fd !important;
+    color: #f1f1f1 !important;
   }
 
   .el-input.is-active .el-input__inner,
@@ -221,173 +210,172 @@ export default {
   /* 业务类型页面新 */
 
   .busiTypes_container .el-input--suffix .el-input__inner {
-    font-size: 11px;
-    font-family: HiraginoSansGB-W3;
-    background: #0B131C;
-    height: 28px;
-    line-height: 26px;
-    border: 1px solid #30373e;
+    font-size: 11px !important;
+    background: #0B131C !important;
+    height: 28px !important;
+    line-height: 26px !important;
+    border: 1px solid #30373e !important;
   }
 
   .busiTypes_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   /* 机构排名新 */
 
   .institutionRanking_container .el-range-editor.el-input__inner {
-    height: 30px;
-    background: #0B131C;
-    border-color: #30373e;
+    height: 30px !important;
+    background: #0B131C !important;
+    border-color: #30373e !important;
   }
 
   .institutionRanking_container .el-date-editor .el-range__icon {
-    line-height: 23px;
+    line-height: 23px !important;
   }
 
   .institutionRanking_container .el-date-editor .el-range-separator {
-    line-height: 22px;
+    line-height: 22px !important;
   }
 
   .institutionRanking_container .el-date-editor .el-range-input {
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .institutionRanking_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4);
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .institutionRanking_container .el-input--suffix .el-input__inner {
-    height: 28px;
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    height: 28px !important;
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .institutionRanking_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   .institutionRanking_container .el-cascader {
-    height: 28px;
+    height: 28px !important;
   }
 
   .institutionRanking_container .el-input__icon {
-    line-height: 30px;
+    line-height: 30px !important;
   }
 
   .institutionRanking_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   /* 人员排名新 */
 
   .pepleRanking_container .el-range-editor.el-input__inner {
-    height: 30px;
-    background: #0B131C;
-    border-color: #30373e;
+    height: 30px !important;
+    background: #0B131C !important;
+    border-color: #30373e !important;
   }
 
   .pepleRanking_container .el-date-editor .el-range__icon {
-    line-height: 23px;
+    line-height: 23px !important;
   }
 
   .pepleRanking_container .el-date-editor .el-range-separator {
-    line-height: 22px;
+    line-height: 22px !important;
   }
 
   .pepleRanking_container .el-date-editor .el-range-input {
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .pepleRanking_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4);
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .pepleRanking_container .el-input--suffix .el-input__inner {
-    height: 28px;
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    height: 28px !important;
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .pepleRanking_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   .pepleRanking_container .el-cascader {
-    height: 28px;
+    height: 28px !important;
   }
 
   .pepleRanking_container .el-input__icon {
-    line-height: 30px;
+    line-height: 30px !important;
   }
 
   .pepleRanking_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   .el-date-editor .el-range__close-icon {
-    display: none !important
+    display: none !important;
   }
 
   /* 趋势分析新 */
 
   .trendAnalysis_container .el-range-editor.el-input__inner {
-    height: 30px;
-    background: #0B131C;
-    border-color: #30373e;
+    height: 30px !important;
+    background: #0B131C !important;
+    border-color: #30373e !important;
   }
 
   .trendAnalysis_container .el-date-editor .el-range__icon {
-    line-height: 23px;
+    line-height: 23px !important;
   }
 
   .trendAnalysis_container .el-date-editor .el-range-separator {
-    line-height: 22px;
+    line-height: 22px !important;
   }
 
   .trendAnalysis_container .el-date-editor .el-range-input {
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .trendAnalysis_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4);
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .trendAnalysis_container .el-input--suffix .el-input__inner {
-    height: 28px;
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    height: 28px !important;
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .trendAnalysis_container .el-input--mini {
-    border: 1px solid #C5C5C5;
-    border-radius: 2px;
+    border: 1px solid #C5C5C5 !important;
+    border-radius: 2px !important;
   }
 
   .trendAnalysis_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   .trendAnalysis_container .el-cascader {
-    height: 28px;
+    height: 28px !important;
   }
 
   .trendAnalysis_container .el-input__icon {
-    line-height: 30px;
+    line-height: 30px !important;
   }
 
   .trendAnalysis_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   /* 业务数量新 */
