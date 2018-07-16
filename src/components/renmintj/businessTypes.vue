@@ -3,7 +3,7 @@
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
-        <div class="back" @click="$router.back(-1)"></div>
+        <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
         <span>{{timeCom}}</span>
@@ -254,7 +254,11 @@ export default {
       this.man = this.formatData(this.dangShiRFX[newValue].nanXingZB)
       this.woman = this.formatData(this.dangShiRFX[newValue].nvXingZB)
       this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangShiRFX[newValue].benDiHJ)}, {name: '外地户口', value: this.formatData(this.dangShiRFX[newValue].waiDiHJ)}, {name: '未知', value: this.formatData(this.dangShiRFX[newValue].weiZhiHJ)}], 'percent', false, true))
-      this.draw('target82', eosNew.setBar5(this.dangShiRFX[newValue].nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+      let nianLingFB = this.dangShiRFX[newValue].nianLingFB
+      if (nianLingFB.length === 0) {
+        nianLingFB = [{name: '暂无数据', value: 0}]
+      }
+      this.draw('target82', eosNew.setBar5(nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
     },
     tjtype: function (newValue, oldValue) {
       this.selectDefault.areaDefault = ['SHJCK01000']
@@ -315,7 +319,11 @@ export default {
           // vue.draw('target62', eos.setPie4([vue.formatData(data.anJianCLJG.xieYiSL), vue.formatData(1 - data.anJianCLJG.xieYiSL)], '协议书', 0, 'top'))
           // vue.draw('target63', eos.setPie4([vue.formatData(data.anJianCLJG.siFaQRL), vue.formatData(1 - data.anJianCLJG.siFaQRL)], '司法确认', 0, 'top'))
           vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.benDiHJ)}, {name: '外地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.waiDiHJ)}, {name: '未知', value: vue.formatData(data.dangShiRFX.shenQingRFX.weiZhiHJ)}], 'percent', false, true))
-          vue.draw('target82', eosNew.setBar5(data.dangShiRFX.shenQingRFX.nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
+          let nianLingFB = data.dangShiRFX.shenQingRFX.nianLingFB
+          if (nianLingFB.length === 0) {
+            nianLingFB = [{name: '暂无数据', value: 0}]
+          }
+          vue.draw('target82', eosNew.setBar5(nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
           vue.draw('target9', eosNew.setBar5(data.peiChangJE.peiChangJEBH, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
         })
       })

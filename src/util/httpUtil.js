@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-13 14:16:27
+ * @Last Modified time: 2018-07-16 11:43:27
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -133,11 +133,10 @@ http.error = (err) => {
     // Something happened in setting up the request that triggered an Error
     console.log('Error', err)
     if (err === {}) {
-      Notification.error({message: '缺少字段'})
+      Notification.error({message: '数据异常'})
     } else {
       Notification.error({message: err.message})
     }
-    // Notification.error({message: '数据接口请求失败，请检查网络连接'})
   }
 }
 
