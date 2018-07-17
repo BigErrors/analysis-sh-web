@@ -461,8 +461,8 @@ export default {
             value: [item.jinDu, item.weiDu, 200],
             type: item.shiJianLX,
             detail: item.xiangQing,
-            area: item.diQu,
-            date: item.riQi
+            area: item.xiangXiDZ,
+            date: item.riQi2
           }
         })
         vue.$nextTick(function () {
