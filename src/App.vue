@@ -386,40 +386,38 @@ export default {
   }
 
   .busiNum_container .el-cascader-menu__item {
-    color: #ffffff !important;
+    color: #FFFFFF !important;
   }
 
   .busiNum_container .el-cascader-menu__item:focus:not(:active),
-
   .busiNum_container .el-cascader__label {
-    font-size: 32px;
-    font-family: HiraginoSansGB-W3;
-    color: #f1f1f1 !important;
+    font-size: 32px !important;
+    color: #F1F1F1 !important;
   }
 
   .index_container .mapboxgl-popup {
-    min-width: 210px;
-    max-width: 15.5%;
-    font-size: 12px;
-    color: #FFFFFF;
-    z-index: 999;
+    min-width: 210px !important;
+    max-width: 15.5% !important;
+    font-size: 12px !important;
+    color: #FFFFFF !important;
+    z-index: 999 !important;
   }
 
   .index_container .mapboxgl-popup-content {
-    padding: 15px 20px;
-    background: rgba(0, 0, 0, 0.4);
+    padding: 15px 20px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
   }
 
   .index_container .mapboxgl-popup-tip {
-    border-top-color: rgba(0, 0, 0, 0.4);
+    border-top-color: rgba(0, 0, 0, 0.4) !important;
   }
 
   .index_container .mapboxgl-popup-close-button {
-    color: #FFFFFF;
-    font-size: 16px;
-    background-color: rgba(255, 0, 222, 0);
-    border: 0;
-    padding: 5;
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    background-color: rgba(255, 0, 222, 0) !important;
+    border: 0 !important;
+    padding: 5px !important;
   }
 
 </style>
