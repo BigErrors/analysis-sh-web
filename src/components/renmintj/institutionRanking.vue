@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="body">
+      <sidenav></sidenav>
       <div class="nav">
         <span>首页 > 机构排名</span>
       </div>

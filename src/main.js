@@ -9,12 +9,14 @@ import wordcloud from 'wordcloud'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import mycomponent from './components/index'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.prototype.$wordcloud = wordcloud
 
 Vue.use(ElementUI)
+Vue.use(mycomponent)
 
 /* eslint-disable no-new */
 new Vue({

@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="body">
+      <sidenav></sidenav>
       <div class="nav">
         <span>首页 > 趋势分析</span>
       </div>

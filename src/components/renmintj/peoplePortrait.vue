@@ -10,6 +10,7 @@
       </div>
     </div>
     <div class="body">
+      <sidenav></sidenav>
       <div class="nav">
         <span>首页 > 人员列表 > 详情</span>
       </div>

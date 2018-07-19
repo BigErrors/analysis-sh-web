@@ -16,6 +16,9 @@ import importantEvent from '@/components/renmintj/importantEvent'
 import importantEventDetail from '@/components/renmintj/importantEventDetail'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
 import institutionRanking from '@/components/renmintj/institutionRanking'
+import compensation from '@/components/renmintj/compensation'
+import documentQuality from '@/components/renmintj/documentQuality'
+import regionalAnalysis from '@/components/renmintj/regionalAnalysis'
 
 Vue.use(Router)
 
@@ -89,6 +92,18 @@ const router = new Router({
     path: '/trendAnalysis',
     name: 'trendAnalysis',
     component: trendAnalysis
+  }, {
+    path: '/compensation',
+    name: 'compensation',
+    component: compensation
+  }, {
+    path: '/documentQuality',
+    name: 'documentQuality',
+    component: documentQuality
+  }, {
+    path: '/regionalAnalysis',
+    name: 'regionalAnalysis',
+    component: regionalAnalysis
   }, {
     path: '*',
     component: moduleChoose

@@ -10,6 +10,7 @@
       </div>
     </div>
     <div class="body">
+      <sidenav></sidenav>
       <div class="nav">
         <span>首页 > 重点事件 > 详情</span>
       </div>

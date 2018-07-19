@@ -935,51 +935,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
   }
   return option
 }
-// 雷达图_人员详情 综合能力
-let setRadar = (data, indicator) => {
-  let option = {
-    title: {},
-    tooltip: {
-      show: false
-    },
-    radar: {
-      radius: '65%',
-      name: {
-        textStyle: {
-          color: 'rgba(241,241,241,0.4)',
-          fontSize: 14
-        }
-      },
-      axisLine: {
-        show: true
-      },
-      splitNumber: 2,
-      splitLine: {
-        show: true
-      },
-      splitArea: {
-        show: true,
-        areaStyle: {
-          color: 'rgba(255,255,255,0)'
-        }
-      },
-      indicator: indicator
-    },
-    series: [{
-      name: 'radar',
-      type: 'radar',
-      itemStyle: {
-        color: '#FDCD0F',
-        opacity: 0
-      },
-      areaStyle: {
-        color: '#FDCD0F'
-      },
-      data: data
-    }]
-  }
-  return option
-}
+
 // 柱状图_业务类型 年龄分析 和 赔偿金额变化
 let setBar5 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
   barMaxWidth = barMaxWidth || 43
@@ -1347,4 +1303,224 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
   }
   return option
 }
-export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6}
+// 雷达图_人员详情 综合能力
+let setRadar = (data, indicator, page) => {
+  let option = {
+    title: {},
+    tooltip: {
+      show: false
+    },
+    radar: {
+      radius: '65%',
+      name: {
+        textStyle: {
+          color: 'rgba(241,241,241,0.4)',
+          fontSize: 14
+        }
+      },
+      axisLine: {
+        show: true
+      },
+      splitNumber: 2,
+      splitLine: {
+        show: true
+      },
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: 'rgba(255,255,255,0)'
+        }
+      },
+      indicator: indicator
+    },
+    series: [{
+      name: 'radar',
+      type: 'radar',
+      itemStyle: {
+        color: '#FDCD0F',
+        opacity: 0
+      },
+      areaStyle: {
+        color: '#FDCD0F'
+      },
+      data: data
+    }]
+  }
+  // 雷达图_文书质量
+  if (page === 'documqua') {
+    option.title = {
+      left: 'center',
+      text: '协议书质量维度',
+      textStyle: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: '#f1f1f1'
+      }
+    }
+    option.radar.center = ['50%', '60%']
+  }
+  return option
+}
+// 热力图_文书质量
+let setheatmap = (data) => {
+  var ydata = data.dengji
+  var xdata = data.location
+  var values = data.values
+  xdata = xdata.map((item) => {
+    return {
+      value: item,
+      textStyle: {
+        color: '#rgba(241,241,241,0.4)'
+      }
+    }
+  })
+  ydata = ydata.map((item) => {
+    return {
+      value: item,
+      textStyle: {
+        color: '#rgba(241,241,241,0.4)'
+      }
+    }
+  })
+  let option = {
+    tooltip: {
+      position: 'top'
+    },
+    animation: false,
+    grid: {
+      containLabel: true,
+      left: '24',
+      right: '10%',
+      top: '10%',
+      bottom: '10%'
+    },
+    xAxis: {
+      type: 'category',
+      data: xdata,
+      splitArea: {
+        show: true
+      }
+    },
+    yAxis: {
+      type: 'category',
+      data: ydata,
+      splitArea: {
+        show: true
+      }
+    },
+    visualMap: {
+      min: 0,
+      max: 200,
+      show: false,
+      color: ['#0F62B2', '#137BE1', '#51A1F0']
+    },
+    series: [{
+      name: '协议书数量',
+      type: 'heatmap',
+      data: values,
+      label: {
+        normal: {
+          show: true
+        }
+      },
+      itemStyle: {
+        emphasis: {
+          shadowBlur: 10,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      },
+      tooltip: {}
+    }]
+  }
+  return option
+}
+// 树图_赔偿金额
+let setTreemap = (_this, data) => {
+  return {
+    tooltip: {
+      formatter: function (info) {
+        var value = info.value
+        var treePathInfo = info.treePathInfo
+        var treePath = []
+        for (var i = 1; i < treePathInfo.length; i++) {
+          treePath.push(treePathInfo[i].name)
+        }
+        return [
+          '<div class="tooltip-title">' + _this.$echarts.format.encodeHTML(treePath.join('/')) + '</div>',
+          '赔偿金额: ' + _this.$echarts.format.addCommas(value) + ' 元'
+        ].join('')
+      }
+    },
+    series: [
+      {
+        name: '赔偿金额',
+        type: 'treemap',
+        width: '90%',
+        height: '90%',
+        visibleMin: 300,
+        label: {
+          show: true,
+          formatter: function (params) {
+            return '￥' + _this.$echarts.format.addCommas(params.data.value) + '\n\n' + params.data.name
+          },
+          fontSize: 14
+        },
+        upperLabel: {
+          normal: {
+            show: true,
+            height: 40,
+            formatter: function (params) {
+              return params.data.name + ':￥' + _this.$echarts.format.addCommas(params.data.value)
+            },
+            fontSize: 14
+          }
+        },
+        itemStyle: {
+          normal: {
+            borderColor: '#fff'
+          }
+        },
+        levels: [
+          {
+            itemStyle: {
+              normal: {
+                borderColor: '#777',
+                borderWidth: 0,
+                gapWidth: 1
+              }
+            },
+            upperLabel: {
+              normal: {
+                show: false
+              }
+            }
+          },
+          {
+            itemStyle: {
+              normal: {
+                borderColor: '#555',
+                borderWidth: 5,
+                gapWidth: 1
+              },
+              emphasis: {
+                borderColor: '#ddd'
+              }
+            }
+          },
+          {
+            colorSaturation: [0.35, 0.5],
+            itemStyle: {
+              normal: {
+                borderWidth: 5,
+                gapWidth: 1,
+                borderColorSaturation: 0.6
+              }
+            }
+          }
+        ],
+        data: data
+      }
+    ]
+  }
+}
+export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6, setheatmap, setTreemap}

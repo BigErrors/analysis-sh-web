@@ -165,7 +165,7 @@ export default {
   .el-pagination .btn-next,
   .el-pagination .btn-prev {
     color: #FFFFFF !important;
-    padding:0 6px !important;
+    padding: 0 6px !important;
     border-radius: 50% !important;
     width: 28px !important;
     height: 28px !important;
@@ -175,7 +175,7 @@ export default {
     color: #FFFFFF !important;
     background-color: rgba(255, 255, 255, 0) !important;
     cursor: not-allowed !important;
-    margin:0 15px !important;
+    margin: 0 15px !important;
   }
 
   .el-pagination__total {
@@ -185,12 +185,14 @@ export default {
   }
 
   /* 下拉框样式 */
+
   .el-cascader-menus {
-    background: rgba(255,255,255,0) !important;
+    background: rgba(255, 255, 255, 0) !important;
     border: 1px solid #30373e !important;
   }
+
   .el-cascader-menu {
-    background: rgba(11,19,28,0.9) !important;
+    background: rgba(11, 19, 28, 0.9) !important;
   }
 
   .el-cascader-menu__item.is-active {
@@ -418,6 +420,120 @@ export default {
     background-color: rgba(255, 0, 222, 0) !important;
     border: 0 !important;
     padding: 5px !important;
+  }
+
+  /* 区域分析新 */
+
+  .regional_container .el-range-editor.el-input__inner {
+    height: 30px;
+    background: #0B131C;
+    border-color: #C5C5C5;
+  }
+
+  .regional_container .el-date-editor .el-range__icon {
+    line-height: 23px;
+  }
+
+  .regional_container .el-date-editor .el-range-separator {
+    line-height: 22px;
+  }
+
+  .regional_container .el-date-editor .el-range-input {
+    background: #0B131C;
+    color: rgba(241, 241, 241, 0.4);
+  }
+
+  .regional_container .el-date-editor .el-range-separator {
+    color: rgba(241, 241, 241, 0.4);
+  }
+
+  .regional_container .el-input--suffix .el-input__inner {
+    height: 28px;
+    background: #0B131C;
+    color: rgba(241, 241, 241, 0.4);
+  }
+
+  .regional_container .el-input--mini {
+    border: 1px solid #C5C5C5;
+    border-radius: 2px;
+  }
+
+  .regional_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
+    color: rgba(241, 241, 241, 0.4);
+    font-size: 12px;
+  }
+
+  .regional_container .el-cascader {
+    height: 28px;
+  }
+
+  .regional_container .el-input__icon {
+    line-height: 30px;
+  }
+
+  .regional_container .el-cascader__label {
+    color: rgba(241, 241, 241, 0.4);
+    font-size: 12px;
+  }
+
+  /* 赔偿金额 */
+
+  .compensation_container .el-range-editor.el-input__inner {
+    height: 30px;
+    background: #0B131C;
+    border-color: #C5C5C5;
+  }
+
+  .compensation_container .el-date-editor .el-range__icon {
+    line-height: 23px;
+  }
+
+  .compensation_container .el-date-editor .el-range-separator {
+    line-height: 22px;
+  }
+
+  .compensation_container .el-date-editor .el-range-input {
+    background: #0B131C;
+    color: rgba(241, 241, 241, 0.4);
+  }
+
+  .compensation_container .el-date-editor .el-range-separator {
+    color: rgba(241, 241, 241, 0.4);
+  }
+
+  .compensation_container .el-input--suffix .el-input__inner {
+    height: 28px;
+    background: #0B131C;
+    color: rgba(241, 241, 241, 0.4);
+  }
+
+  .compensation_container .el-input--mini {
+    border: 1px solid #C5C5C5;
+    border-radius: 2px;
+  }
+
+  .compensation_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
+    color: rgba(241, 241, 241, 0.4);
+    font-size: 12px;
+  }
+
+  .compensation_container .el-cascader {
+    height: 28px;
+  }
+
+  .compensation_container .el-input__icon {
+    line-height: 30px;
+  }
+
+  .compensation_container .el-cascader__label {
+    color: rgba(241, 241, 241, 0.4);
+    font-size: 12px;
+  }
+
+  /* 模型工具 */
+
+  .el-carousel__arrow {
+    border: 2px solid #f1f1f1;
   }
 
 </style>

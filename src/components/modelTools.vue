@@ -11,7 +11,14 @@
         <img class="cover_img" src="/static/renmintjNew/model_title.png"/>
       </div>
       <div class="flex_main">
-        <flex-box :options="foptions" @getClick="changeRouter"></flex-box>
+        <el-carousel indicator-position="outside" :autoplay="autoplay" :height="elHeight">
+          <el-carousel-item>
+            <flex-box :options="foptions" @getClick="changeRouter"></flex-box>
+          </el-carousel-item>
+          <el-carousel-item>
+            <flex-box :options="foptions2" @getClick="changeRouter"></flex-box>
+          </el-carousel-item>
+        </el-carousel>
       </div>
     </div>
   </div>
@@ -42,16 +49,22 @@ export default {
             url: 'http://192.168.91.223:8088',
             type: 'website'
           }, {
-            flex: 2,
+            flex: 1,
             bgColor: '',
             description: '同案同调',
             fontColor: '',
             bgImg: '/static/renmintjNew/icon_search.png',
             url: 'http://192.168.91.34:8880/tatt/pages/index.html',
             type: 'website'
-
-          }],
-          [{
+          }, {
+            flex: 1,
+            bgColor: '',
+            description: '赔偿金额',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_compensation.png',
+            url: 'compensation',
+            type: 'module'
+          }, {
             flex: 1,
             bgColor: '',
             description: '重点事件',
@@ -59,25 +72,100 @@ export default {
             bgImg: '/static/renmintjNew/icon_event.png',
             url: 'importantEvent',
             type: 'module'
+          }],
+          [{
+            flex: 1,
+            bgColor: '',
+            description: '重点人员',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_zhongdry.png',
+            url: ''
           }, {
             flex: 1,
             bgColor: '',
-            description: '文书质量',
+            description: '重点机构',
             fontColor: '',
-            bgImg: '/static/renmintjNew/icon_quality.png',
+            bgImg: '/static/renmintjNew/icon_zhongdianjg.png',
+            url: ''
+          }, {
+            flex: 1,
+            bgColor: '',
+            description: '难解纠纷',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_nanjjf.png',
             url: '',
             type: 'module'
           }, {
             flex: 1,
-            bgColor: '',
-            description: '赔偿金额',
+            bgColor: 'rgb(84, 179, 253)',
+            description: '纠纷情绪',
             fontColor: '',
-            bgImg: '/static/renmintjNew/icon_compensation.png',
+            bgImg: '/static/renmintjNew/icon_jiufenqx.png',
             url: '',
             type: 'module'
           }]
         ]
-      }
+      },
+      foptions2: {
+        height: '220',
+        fontPosition: 'leftBottom',
+        fontColor: 'white',
+        fontSize: '20px',
+        margin: '5px',
+        matrix: [
+          [{
+            flex: 1,
+            bgColor: '',
+            description: '多维分析',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_duoweifx.png',
+            url: '',
+            type: 'module'
+          }, {
+            flex: 1,
+            bgColor: '',
+            description: '热词态势',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_recits.png',
+            url: '',
+            type: 'module'
+          }, {
+            flex: 1,
+            bgColor: '',
+            description: '事件密度',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_shijianmd.png',
+            url: '',
+            type: 'module'
+          }, {
+            flex: 1,
+            bgColor: '',
+            description: '家暴态势',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_jiabaots.png',
+            url: '',
+            type: 'module'
+          }],
+          [{
+            flex: 1,
+            bgColor: '',
+            description: '正在研发...',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_zhengzaiyf.png',
+            url: '',
+            type: 'module'
+          }, {
+            flex: 1,
+            bgColor: '',
+            description: '正在研发...',
+            fontColor: '',
+            bgImg: '/static/renmintjNew/icon_zhengzaiyf.png',
+            url: '',
+            type: 'module'
+          }]
+        ]
+      },
+      autoplay: false
     }
   },
   computed: {
@@ -86,6 +174,9 @@ export default {
       let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+    },
+    elHeight () {
+      return parseInt(this.foptions.height) * 2 + parseInt(this.foptions.margin) + 'px'
     }
   },
   methods: {
@@ -141,8 +232,11 @@ export default {
     }
   }
   .body{
-    display: block;
-    height: calc(100% - 108px);
+    position: absolute;
+    top: calc(50%);
+    left: 0;
+    width: 100%;
+    transform: translate(0,-50%);
     .cover{
       display: block;
       height: 120px;
@@ -157,9 +251,13 @@ export default {
       }
     }
     .flex_main{
-      width: 50%;
+      width: 70%;
       display: block;
       margin: auto;
+      margin-top:25px;
+    }
+    .flex_container{
+      padding:0 100px;
     }
   }
 }

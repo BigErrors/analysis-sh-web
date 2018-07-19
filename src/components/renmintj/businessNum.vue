@@ -10,6 +10,7 @@
       </div>
     </div>
     <div class="body">
+      <sidenav></sidenav>
       <div class="nav">
         <span>首页 > 业务数量</span>
       </div>

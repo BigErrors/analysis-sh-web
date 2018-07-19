@@ -72,7 +72,7 @@
                   slot="slide">
                   <span class="once">{{item.shiJianLX}}</span>
                   <span class="once">{{item.diQu}}</span>
-                  <span class="once">{{item.riQi}}</span>
+                  <span class="once">{{item.riQi.split(' ')[0]}}</span>
                 </div>
               </rollScreen>
             </div>
@@ -81,13 +81,13 @@
                 slot="slide">
                 <span class="once">{{item.shiJianLX}}</span>
                 <span class="once">{{item.diQu}}</span>
-                <span class="once">{{item.riQi}}</span>
+                <span class="once">{{item.riQi.split(' ')[0]}}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="title">
-          <span class="title_china" @click="changeRouter('importantEvent')">工作质量</span>
+          <span class="title_china" @click="changeRouter('documentQuality')">工作质量</span>
           <span class="title_english">Work quality</span>
         </div>
         <div class="right2">
@@ -134,7 +134,7 @@
                 <span class="spanT">在线人数</span>
               </div>
               <div>
-                <span class="spanB">--</span>
+                <span class="spanB">----</span>
               </div>
             </div>
           </div>
@@ -239,12 +239,12 @@
       <!-- 重点事件遮罩层 -->
       <div class="other"></div>
     </div>
+    <!-- 案件分布弹框 -->
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
-      <div style="cursor: pointer;text-align:right;" @click="showDialog=false">x</div>
-      <div style="text-align:left;">
-        <span>{{dialogData.name}}</span>
-        <br>
-        <span>{{'案件数量: '+dialogData.value + '件'}}</span>
+      <div class="close" @click="showDialog=false">X</div>
+      <div class="content">
+        <span class="address">{{dialogData.name}}</span>
+        <br><span class="number">{{dialogData.value + '件'}}</span>
       </div>
     </div>
   </div>
@@ -328,7 +328,7 @@ export default {
     let vue = this
     let list = ['data_tj', 'data_110', 'data_jc', 'data_pc']
     let i = 0
-    vue.setInterval(function () {
+    vue.interval = setInterval(function () {
       if (i < 3) {
         i++
       } else {
@@ -1011,12 +1011,27 @@ export default {
     }
     .dialog {
       position: absolute;
-      width: 220px;
-      height: 60px;
-      padding: 15px 20px;
+      min-width: 210px;
+      max-width: 15.5%;
+      z-index: 999;
+      padding: 5px 15px 20px 15px;
       background: rgba(0, 0, 0, 0.8);
       font-size: 12px;
       color: #ffffff;
+      .close {
+        cursor: pointer;
+        text-align:right;
+      }
+      .address {
+        line-height:28px;
+        padding-left:18px;
+        background: url('/static/renmintjNew/didian.png') no-repeat left center;
+      }
+      .number {
+        line-height:18px;
+        padding-left:18px;
+        background:url('/static/renmintjNew/miaoshu.png') no-repeat left center;
+      }
     }
   }
 
