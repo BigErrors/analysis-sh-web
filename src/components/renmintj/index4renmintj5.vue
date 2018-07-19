@@ -213,22 +213,22 @@
         </div>
         <div class="topX" @click="changeRouter('businessNum','人民调解')">
           <span class="h1">人民调解</span>
-          <span class="h2">{{casestatistics.MBM_CASE}}</span>
+          <span class="h2"><digitalRolling :nothing='nothing' :height='32' :width='18' :number='casestatistics.MBM_CASE' :fontSize='24' :fontColor='"rgba(73, 234, 238, 1)"'></digitalRolling></span>
           <span class="h3">{{casestatisticsAll.MBM_CASE}}</span>
         </div>
         <div class="topX" @click="changeRouter('businessNum','110联动')">
           <span class="h1">110联动</span>
-          <span class="h2">{{casestatistics.MMS_ALARM110INFO}}</span>
+          <span class="h2"><digitalRolling :nothing='nothing' :height='32' :width='18' :number='casestatistics.MMS_ALARM110INFO' :fontSize='24' :fontColor='"rgba(73, 234, 238, 1)"'></digitalRolling></span>
           <span class="h3">{{casestatisticsAll.MMS_ALARM110INFO}}</span>
         </div>
         <div class="topX" @click="changeRouter('businessNum','公共法律服务')">
           <span class="h1">公共法律服务</span>
-          <span class="h2">{{casestatistics.WWS_CONSULT}}</span>
+          <span class="h2"><digitalRolling :nothing='nothing' :height='32' :width='18' :number='casestatistics.WWS_CONSULT' :fontSize='24' :fontColor='"rgba(73, 234, 238, 1)"'></digitalRolling></span>
           <span class="h3">{{casestatisticsAll.WWS_CONSULT}}</span>
         </div>
         <div class="topX" @click="changeRouter('businessNum','纠纷排查')">
           <span class="h1">纠纷排查</span>
-          <span class="h2">{{casestatistics.CDS_INVESTIGATIONFEEDBAC}}</span>
+          <span class="h2"><digitalRolling :nothing='nothing' :height='32' :width='18' :number='casestatistics.CDS_INVESTIGATIONFEEDBAC' :fontSize='24' :fontColor='"rgba(73, 234, 238, 1)"'></digitalRolling></span>
           <span class="h3">{{casestatisticsAll.CDS_INVESTIGATIONFEEDBAC}}</span>
         </div>
       </div>
@@ -303,6 +303,7 @@ export default {
       name: '',
       value: ''
     },
+    nothing: 0.1,
     interval: ''
   }),
   computed: {
@@ -329,13 +330,14 @@ export default {
     let list = ['data_tj', 'data_110', 'data_jc', 'data_pc']
     let i = 0
     vue.interval = setInterval(function () {
+      vue.nothing = 0.01 * Math.random()
       if (i < 3) {
         i++
       } else {
         i = 0
       }
       vue.trendType = list[i]
-    }, 10000)
+    }, 6000)
   },
   mounted () {
     let vue = this
@@ -410,7 +412,7 @@ export default {
         vue.workQuality.anJianSB = data.anJianSB
         vue.$nextTick(function () {
           vue.draw('xieyis', eosNew.setPie([(data.xieYiS_cover * 100).toFixed(1), ((1 - data.xieYiS_cover) *
-              100).toFixed(1)], '协议书占比', 0, 0))
+              100).toFixed(1)], '协议书占比', 0))
         })
       })
       // 业务类型

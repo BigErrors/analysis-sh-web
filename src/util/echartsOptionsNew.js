@@ -79,12 +79,12 @@ let setLine = (data, showYAxis, containLabel) => {
   return option
 }
 // 圆环图_首页协议书占比
-let setPie = (data, title, bgColorOpacity, titlePosition, color) => {
+let setPie = (data, title, bgColorOpacity, color) => {
   color = color || ['#495BFF', '#12BFFE']
   let option = {
     title: {
       x: 'center',
-      bottom: titlePosition || 0,
+      bottom: 'center',
       text: title || '标题',
       textStyle: {
         color: '#BABABA',
@@ -108,8 +108,8 @@ let setPie = (data, title, bgColorOpacity, titlePosition, color) => {
     }, 'none'],
     series: [{
       type: 'pie',
-      center: ['50%', '38%'],
-      radius: ['55%', '65%'],
+      center: ['50%', '42%'],
+      radius: ['70%', '80%'],
       label: {
         show: false
       },

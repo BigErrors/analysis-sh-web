@@ -15,6 +15,7 @@
     <div v-for="(item,index) in numberArr" :key='index' :style="{width:width+'px',height:height+'px'}" class="digitalRolling_eyes">
       <ul :style="{width:width+'px',height:height+'px',top:-(item*height) + 'px'}" class="digitalRolling_ul" v-if="types === 'font'" >
         <li :style="{lineHeight:height+'px',fontSize:fontSize+'px',color:fontColor}" class="digitalRolling_li" v-for="item in 10" :key ='item'>{{item-1}}</li>
+        <li :style="{lineHeight:height+'px',fontSize:fontSize+'px',color:fontColor}" class="digitalRolling_li" v-for="item in 10" :key ='item+10'>{{item-1}}</li>
       </ul>
     </div>
   </div>
@@ -46,16 +47,37 @@ export default {
     }, // 字体颜色
     numberDigits: {
       type: Number
-    } // 数值默认位数，可补0
+    }, // 数值默认位数，可补0
+    nothing: {
+      type: Number
+    }
   },
   watch: {
   },
   computed: {
     numberArr: function () {
-      if (this.numberDigits) {
-        return this.number.toString().padStart(this.numberDigits, '0').split('')
-      } else {
-        return this.number.toString().split('')
+      if (this.nothing < 1) {
+        if (this.numberDigits) {
+          let arr = this.number.toString().padStart(this.numberDigits, '0').split('')
+          arr = arr.map(function (item) {
+            if (parseInt(Math.random() * 2 + 1) === 2) {
+              return parseInt(item) + 10
+            } else {
+              return parseInt(item)
+            }
+          })
+          return arr
+        } else {
+          let arr = this.number.toString().split('')
+          arr = arr.map(function (item) {
+            if (parseInt(Math.random() * 2 + 1) === 2) {
+              return parseInt(item) + 10
+            } else {
+              return parseInt(item)
+            }
+          })
+          return arr
+        }
       }
     }
   },
@@ -85,7 +107,7 @@ export default {
     background-position: 0 0;
     background-size: 100% 1214%;
     display: inline-block;
-    transition: 2s linear;
+    transition: 3s linear;
   }
   .digitalRolling_num0{
     background-position: 0 0px;
@@ -130,6 +152,7 @@ export default {
     margin:0;
     transition: all 2s ease-in-out;
     top:0px;
+    left: 0px;
   }
   .digitalRolling_li{
     display: block;
