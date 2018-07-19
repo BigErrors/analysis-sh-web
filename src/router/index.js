@@ -66,7 +66,7 @@ const router = new Router({
     name: 'peoplePortrait',
     component: peoplePortrait
   }, {
-    path: '/businessNum',
+    path: '/businessNum/:type',
     name: 'businessNum',
     component: businessNum
   }, {

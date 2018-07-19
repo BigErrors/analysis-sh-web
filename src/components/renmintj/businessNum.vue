@@ -400,6 +400,7 @@ export default {
     }
   },
   created () {
+    this.type = this.$route.params.type
     this.getData()
   },
   mounted () {

@@ -87,7 +87,7 @@
           </div>
         </div>
         <div class="title">
-          <span class="title_china">工作质量</span>
+          <span class="title_china" @click="changeRouter('importantEvent')">工作质量</span>
           <span class="title_english">Work quality</span>
         </div>
         <div class="right2">
@@ -134,7 +134,7 @@
                 <span class="spanT">在线人数</span>
               </div>
               <div>
-                <span class="spanB">7312</span>
+                <span class="spanB">--</span>
               </div>
             </div>
           </div>
@@ -205,35 +205,34 @@
           </div>
         </div>
       </div>
-      <div class="top clearfix" @click="changeRouter('businessNum')">
+      <div class="top clearfix">
         <div class="topY">
           <span class="h1"></span>
           <span class="h2 topYh">本月</span>
           <span class="h3 topYh">全年</span>
         </div>
-        <div class="topX">
+        <div class="topX" @click="changeRouter('businessNum','人民调解')">
           <span class="h1">人民调解</span>
           <span class="h2">{{casestatistics.MBM_CASE}}</span>
           <span class="h3">{{casestatisticsAll.MBM_CASE}}</span>
         </div>
-        <div class="topX">
+        <div class="topX" @click="changeRouter('businessNum','110联动')">
           <span class="h1">110联动</span>
           <span class="h2">{{casestatistics.MMS_ALARM110INFO}}</span>
           <span class="h3">{{casestatisticsAll.MMS_ALARM110INFO}}</span>
         </div>
-        <div class="topX">
+        <div class="topX" @click="changeRouter('businessNum','公共法律服务')">
           <span class="h1">公共法律服务</span>
           <span class="h2">{{casestatistics.WWS_CONSULT}}</span>
           <span class="h3">{{casestatisticsAll.WWS_CONSULT}}</span>
         </div>
-        <div class="topX">
+        <div class="topX" @click="changeRouter('businessNum','纠纷排查')">
           <span class="h1">纠纷排查</span>
           <span class="h2">{{casestatistics.CDS_INVESTIGATIONFEEDBAC}}</span>
           <span class="h3">{{casestatisticsAll.CDS_INVESTIGATIONFEEDBAC}}</span>
         </div>
       </div>
     </div>
-    <!-- 中间地图留个空 -->
     <div class="middle">
       <!-- 地图容器 -->
       <div class="map"></div>
@@ -262,7 +261,7 @@ import digitalRolling from '../digitalRolling.vue'
 import mapboxgl from 'mapbox-gl'
 
 export default {
-  name: '123',
+  name: 'index',
   components: {
     rollScreen,
     digitalRolling
@@ -303,7 +302,8 @@ export default {
     dialogData: {
       name: '',
       value: ''
-    }
+    },
+    interval: ''
   }),
   computed: {
     timeCom () {
@@ -325,6 +325,17 @@ export default {
   },
   created () {
     this.getData()
+    let vue = this
+    let list = ['data_tj', 'data_110', 'data_jc', 'data_pc']
+    let i = 0
+    vue.setInterval(function () {
+      if (i < 3) {
+        i++
+      } else {
+        i = 0
+      }
+      vue.trendType = list[i]
+    }, 10000)
   },
   mounted () {
     let vue = this
@@ -333,6 +344,9 @@ export default {
         vue.myChart['map'].resize()
       })
     })
+  },
+  beforeDestroy () {
+    clearInterval(this.interval)
   },
   methods: {
     draw (domName, option) {
@@ -359,15 +373,6 @@ export default {
             popup.setLngLat(coordinates)
               .setHTML(description)
               .addTo(map)
-          })
-          // Change the cursor to a pointer when the mouse is over the points layer.
-          map.on('mouseenter', 'points', function () {
-            map.getCanvas().style.cursor = 'pointer'
-          })
-
-          // Change it back to a pointer when it leaves.
-          map.on('mouseleave', 'points', function () {
-            map.getCanvas().style.cursor = ''
           })
         })
         this.myChart[domName].on('click', function (params) {
@@ -471,7 +476,7 @@ export default {
       })
     },
     // 路由跳转
-    changeRouter (name, id) {
+    changeRouter (name, param) {
       let target = {
         name: name
       }
@@ -479,7 +484,14 @@ export default {
         target = {
           name: name,
           params: {
-            id: id
+            id: param
+          }
+        }
+      } else if (name === 'businessNum') {
+        target = {
+          name: name,
+          params: {
+            type: param
           }
         }
       }
@@ -652,6 +664,12 @@ export default {
             .table_body {
               height: 150px;
               overflow: hidden;
+              .table_tr:hover {
+                .once{
+                  cursor: pointer;
+                  color: #149CFA;
+                }
+              }
             }
           }
         }
@@ -846,7 +864,10 @@ export default {
           background: url('/static/renmintj/icon_open.png');
           background-repeat: no-repeat;
           background-position: left 5px center;
+        }
+        .bTitle:hover {
           cursor: pointer;
+          color: #149CFA;
         }
         .bContent {
           width: 25%;
@@ -916,6 +937,9 @@ export default {
           box-sizing: border-box;
           padding: 0 18px;
         }
+        .topX:hover {
+          background: rgba(114,105,105,0.1);
+        }
         .h1 {
           display: block;
           height: 24px;
@@ -958,19 +982,21 @@ export default {
         background-repeat: no-repeat;
         background-position: left 11px center;
         box-sizing: border-box;
-        cursor: pointer;
+        color: rgba(237, 237, 237, 1);
         .title_china {
           display: block;
           font-size: 16px;
           font-family: HiraginoSansGB-W3;
-          color: rgba(237, 237, 237, 1);
         }
         .title_english {
           display: block;
           font-size: 10px;
           font-family: ArialMT;
-          color: rgba(237, 237, 237, 1);
         }
+      }
+      .title:hover {
+        cursor: pointer;
+        color: #149CFA;
       }
     }
     .middle {

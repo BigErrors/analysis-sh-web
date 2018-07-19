@@ -18,7 +18,7 @@
       </div>
       <div class="nav2 clearfix">
         <div class="navLeft">
-          <span class="navspan active">人民调解</span>
+          <span class="navspan active">{{typeDefault[0]}}</span>
         </div>
         <div class="navRight">
           <div class="date_container">
@@ -365,7 +365,7 @@ export default {
           color:rgba(94,126,203,1);
           display: inline-block;
           padding:0 2px 4px 2px;
-          width: 5em;
+          width: 6em;
           text-align: center;
           cursor: pointer;
         }
