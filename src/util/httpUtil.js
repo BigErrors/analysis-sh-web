@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-16 11:43:27
+ * @Last Modified time: 2018-07-19 16:38:10
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -92,10 +92,10 @@ http.post = (url, param, callback, contentType, responseType) => {
     if (responseType === 'arraybuffer') {
       callback(res.data)
     } else if (responseType === 'json') {
-      if (res.data.code && res.data.code === 0) {
-        http.warn(res)
-      } else {
+      if (res.data.code === 1) {
         callback(res.data.data)
+      } else {
+        http.warn(res)
       }
     }
   }).catch((err) => {
@@ -141,7 +141,6 @@ http.error = (err) => {
 }
 
 http.warn = (res) => {
-  console.log(res)
   // 异常处理,接口response的code非200时统一抛出message
   Notification.warning({message: res.data.message})
 }

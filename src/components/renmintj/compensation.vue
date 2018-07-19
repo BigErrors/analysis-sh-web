@@ -51,8 +51,6 @@
                 </div>
                 <div class="right">
                   <el-cascader
-                    class="cascader"
-                    style="z-index:1;height:28px;line-height:28px;font-size:12px;width:120px;border:1px solid #C5C5C5;border-radius:2px"
                     :options="area"
                     placeholder="区域"
                     v-model="areaDefault"
@@ -138,7 +136,7 @@ export default {
         this.allcase = data.allcase
         this.top5 = data.top5
         this.$echarts.init(document.getElementsByClassName('target1')[0]).setOption(eosNew.setTreemap(_this, data.tree))
-      }, 'application/json')
+      }, 'application/json', 'json')
     }
   },
   mounted () {

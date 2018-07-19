@@ -425,115 +425,119 @@ export default {
   /* 区域分析新 */
 
   .regional_container .el-range-editor.el-input__inner {
-    height: 30px;
-    background: #0B131C;
-    border-color: #C5C5C5;
+    height: 30px !important;
+    background: #0B131C !important;
+    border-color: #C5C5C5 !important;
   }
 
   .regional_container .el-date-editor .el-range__icon {
-    line-height: 23px;
+    line-height: 23px !important;
   }
 
   .regional_container .el-date-editor .el-range-separator {
-    line-height: 22px;
+    line-height: 22px !important;
   }
 
   .regional_container .el-date-editor .el-range-input {
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .regional_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4);
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .regional_container .el-input--suffix .el-input__inner {
-    height: 28px;
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    height: 28px !important;
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .regional_container .el-input--mini {
-    border: 1px solid #C5C5C5;
-    border-radius: 2px;
+    border: 1px solid #C5C5C5 !important;
+    border-radius: 2px !important;
   }
 
   .regional_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   .regional_container .el-cascader {
-    height: 28px;
+    height: 28px !important;
   }
 
   .regional_container .el-input__icon {
-    line-height: 30px;
+    line-height: 30px !important;
   }
 
   .regional_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   /* 赔偿金额 */
 
   .compensation_container .el-range-editor.el-input__inner {
-    height: 30px;
-    background: #0B131C;
-    border-color: #C5C5C5;
+    height: 30px !important;
+    background: #0B131C !important;
+    border-color: #C5C5C5 !important;
   }
 
   .compensation_container .el-date-editor .el-range__icon {
-    line-height: 23px;
+    line-height: 23px !important;
   }
 
   .compensation_container .el-date-editor .el-range-separator {
-    line-height: 22px;
+    line-height: 22px !important;
   }
 
   .compensation_container .el-date-editor .el-range-input {
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .compensation_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4);
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .compensation_container .el-input--suffix .el-input__inner {
-    height: 28px;
-    background: #0B131C;
-    color: rgba(241, 241, 241, 0.4);
+    height: 28px !important;
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.4) !important;
   }
 
   .compensation_container .el-input--mini {
-    border: 1px solid #C5C5C5;
-    border-radius: 2px;
+    border: 1px solid #C5C5C5 !important;
+    border-radius: 2px !important;
   }
 
   .compensation_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   .compensation_container .el-cascader {
-    height: 28px;
+    z-index:1 !important;
+    height:28px !important;
+    line-height:28px !important;
+    font-size:12px !important;
+    width:120px !important;
   }
 
   .compensation_container .el-input__icon {
-    line-height: 30px;
+    line-height: 30px !important;
   }
 
   .compensation_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4);
-    font-size: 12px;
+    color: rgba(241, 241, 241, 0.4) !important;
+    font-size: 12px !important;
   }
 
   /* 模型工具 */
 
   .el-carousel__arrow {
-    border: 2px solid #f1f1f1;
+    border: 2px solid #f1f1f1 !important;
   }
 
 </style>

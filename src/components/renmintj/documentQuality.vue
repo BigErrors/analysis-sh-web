@@ -103,7 +103,7 @@
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import eosNew from '@/util/echartsOptionsNew'
-import json from '@/util/jsonUtil'
+import dictionaryMapping from '@/util/dictionaryMapping'
 export default {
   data () {
     return {
@@ -133,11 +133,12 @@ export default {
   },
   methods: {
     getRader (params) {
-      let area = json.area
+      let area = dictionaryMapping.area
       // location 字典查询
       let location = area.map((item) => {
         return item.label === params.name ? item['value'] : ''
       }).filter(item => item)
+
       let dengji = ['E', 'D', 'C', 'B', 'A'][[0, 1, 2, 3, 4].indexOf(params.value[1])]
       let baseUrl = urlConfig.baseUrl
       let url = '/documentsAQuality'
