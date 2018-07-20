@@ -277,7 +277,7 @@ export default {
             return 1
           }
         })
-        vue.draw('target2', eos.setPie2(data))
+        vue.draw('target2', eosNew.setPie4(data))
         vue.setType2Data(data[0].name)
       } else {
         vue.draw('target2', eos.setPie2([{name: '暂无数据', value: 0}]))
@@ -364,7 +364,7 @@ export default {
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
             vue.title5 = '案件来源分布'
-            vue.draw('target5', eos.setPie3(data))
+            vue.draw('target5', eosNew.setPie4(data))
           } else if (vue.type === '110联动') {
             vue.title6 = '处置情况'
             vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer', 36, undefined, false, 30))
@@ -388,13 +388,13 @@ export default {
             vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer', 36, undefined, false, 30))
           } else if (vue.type === '110联动') {
             vue.title5 = '所在人群'
-            vue.draw('target5', eos.setPie3(data))
+            vue.draw('target5', eosNew.setPie4(data))
           } else if (vue.type === '公共法律服务') {
             vue.title6 = '调解占比'
             vue.draw('target6', eos.setPie2(data))
           } else if (vue.type === '纠纷排查') {
             vue.title5 = '所在人群'
-            vue.draw('target5', eos.setPie3(data))
+            vue.draw('target5', eosNew.setPie4(data))
           }
         })
       })
@@ -507,13 +507,23 @@ export default {
           width: 5em;
           text-align: center;
           cursor: pointer;
+          position: relative;
           &:nth-child(3){
             width: 6em;
           }
         }
         .active{
           color:@fontWhite;
-          border-bottom: 3px solid #2E89FD;
+          // border-bottom: 3px solid #2E89FD;
+          &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2E89FD;
+            left: 0;
+            bottom:-1px;
+          }
         }
       }
       .navRight{
@@ -701,14 +711,14 @@ export default {
           flex: 0.79;
           background: @blockBack;
           .r_container{
-            height: calc(100% - 26px);
+            height: calc(100% - 36px);
             display: flex;
             .r_left{
               height: 100%;
               flex: 1.1;
             }
             .r_middle{
-              height: 100%;
+              height: 90%;
               flex: 1.1;
               background: url(/static/renmintjOther/icon_directing.png);
               background-repeat: no-repeat;
@@ -824,11 +834,17 @@ export default {
         margin:8px 0;
         display: flex;
         .box{
-          flex: 1;
+          flex: 1.1;
           margin-right: 8px;
           background: @blockBack;
           &:nth-last-of-type(1){
-            margin: 0
+            margin: 1.1
+          }
+          &:nth-of-type(2){
+            flex:1
+          }
+          &:nth-of-type(3){
+            flex:1.6
           }
         }
       }
@@ -836,14 +852,14 @@ export default {
     .title{
       display: block;
       box-sizing: border-box;
-      padding-top:5px;
+      padding-top:15px;
       position: relative;
       .border{
         width: 2px;
         height: 12px;
         background: @fontWhite;
         display: inline-block;
-        margin-left:10px;
+        margin-left:18px;
         margin-right: 5px;
       }
       span{
@@ -869,7 +885,7 @@ export default {
       }
     }
     .echarts_container{
-      height: calc(100% - 26px);
+      height: calc(100% - 36px);
       display: block;
     }
   }

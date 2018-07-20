@@ -935,7 +935,6 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
   }
   return option
 }
-
 // 柱状图_业务类型 年龄分析 和 赔偿金额变化
 let setBar5 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
   barMaxWidth = barMaxWidth || 43
@@ -1185,7 +1184,10 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
     splitNumber: 4,
     splitLine: {
-      show: false
+      show: true,
+      lineStyle: {
+        color: '#2a2f3d'
+      }
     }
   }]
   let categoryAxis = [{
@@ -1200,7 +1202,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       color: 'rgba(241,241,241,0.4)',
       interval: 0,
       rotate: 0,
-      fontSize: 9,
+      fontSize: 11,
       formatter: function (value) {
         if (axisType === 'horizon') {
           return value
@@ -1218,6 +1220,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     }),
     splitLine: {
       show: false
+
     }
   }]
   let option = {
@@ -1228,7 +1231,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       containLabel: function () { if (axisType === 'horizon') { return true } else { return false } },
       top: 20,
       left: 20,
-      right: 50,
+      right: 20,
       bottom: 20
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目
@@ -1523,4 +1526,87 @@ let setTreemap = (_this, data) => {
     ]
   }
 }
-export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6, setheatmap, setTreemap}
+// 圆环图_业务数量案件来源分布
+let setPie4 = (data) => {
+  let newdata = data
+  let maxValIndex = 0
+  let maxVal = parseInt(newdata[0].value)
+  for (let i = 0; i < newdata.length; i++) {
+    if (parseInt(newdata[i].value) > maxVal) {
+      maxVal = parseInt(newdata[i].value)
+      maxValIndex = i
+    }
+  }
+  console.log(data)
+  console.log(maxVal)
+  newdata[maxValIndex]['labelLine'] = {
+    show: true,
+    lineStyle: {
+      color: 'rgba(241,241,241,0.4)'
+    }
+  }
+  newdata[maxValIndex]['label'] = {
+    normal: {
+      show: true,
+      formatter: '{d|{b}}\n{d|{d}%}\n',
+      rich: {
+        c: {
+          color: '#f1f1f1',
+          fontSize: 12,
+          lineHeight: 16,
+          align: 'center'
+        },
+        d: {
+          color: '#f1f1f1',
+          fontSize: 12,
+          lineHeight: 16,
+          align: 'center'
+        }
+      }
+    }
+  }
+  let option = {
+    legend: {
+      orient: 'horizontal',
+      top: '5%',
+      left: '5%',
+      right: '5%',
+      textStyle: {
+        color: 'rgba(241,241,241,0.4)',
+        fontSize: 12
+      },
+      data: data.map(item => {
+        return item.name
+      })
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: '{b}: {c} ({d}%)'
+    },
+    color: ['#F77C88', '#854DB5', '#9979CC', '#FED481', '#D9A701', '#D9A701', '#FBD939'],
+    series: [
+      {
+        name: 'seriesName',
+        type: 'pie',
+        center: ['50%', '65%'],
+        radius: ['35%', '55%'],
+        roseType: false,
+        avoidLabelOverlap: true,
+        labelLine: {
+          show: false,
+          lineStyle: {
+            color: 'rgba(241,241,241,0.4)'
+          }
+        },
+        label: {
+          normal: {
+            show: false
+          }
+        },
+        data: newdata
+      }
+    ]
+  }
+  return option
+}
+export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6, setheatmap, setTreemap, setPie4}
