@@ -116,7 +116,7 @@
             </div>
           </div>
           <!-- 协议书占比留空 -->
-          <div class="rContainer xieyis" style="padding:10px"></div>
+          <div class="rContainer xieyis" style="padding-top:10px"></div>
           <div class="rContainer">
             <img class="rIcon" src="/static/renmintjNew/icon_anjiansbs.png" />
             <div class="rRight">
@@ -240,7 +240,13 @@
       <!-- 地图容器 -->
       <div class="map"></div>
       <!-- 选择框 -->
-      <div class="other"></div>
+      <div class="other">
+        <div class="once once1">纠纷态势</div>
+        <div class="once once2">重点关注</div>
+        <div class="once once3">机构分布</div>
+      </div>
+      <!-- 区域选择 -->
+      <div class="leftChoose"></div>
     </div>
     <!-- 案件分布弹框 -->
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
@@ -312,7 +318,7 @@ export default {
   computed: {
     timeCom () {
       let now = this.time
-      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay() - 1]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
           ' ' + now.getHours().toString() + ':' + minute + ' ' + day
@@ -546,7 +552,7 @@ export default {
       float: right;
       padding: 30px 0 0 0;
       span {
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color: rgba(237, 237, 237, 1);
       }
@@ -559,7 +565,7 @@ export default {
     display: block;
     .left {
       z-index: 1; // width: 22%;
-      width: 301px;
+      width: 289px;
       height: 100%;
       float: left;
       background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
@@ -576,7 +582,7 @@ export default {
           display: flex;
           margin-left: 10px;
           label {
-            font-size: 12px;
+            font-size: @fontSamll;
             font-family: MicrosoftYaHei;
             color: rgba(186, 186, 186, 1);
             line-height: calc(50%)
@@ -592,7 +598,7 @@ export default {
             }
           }
           span {
-            font-size: 12px;
+            font-size: @fontSamll;
             font-family: FZLTZHK--GBK1-0;
             color: rgba(254, 254, 254, 1);
           }
@@ -643,7 +649,7 @@ export default {
     }
     .right {
       z-index: 1; // width: 22%;
-      width: 301px;
+      width: 289px;
       height: 100%;
       float: right;
       background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
@@ -701,11 +707,11 @@ export default {
             display: block;
             height: 50%;
             box-sizing: border-box;
-            margin: 0 20px;
+            margin: 0 12px;
             border-bottom: 1px solid rgba(186, 186, 186, 1);
             position: relative;
             .span1 {
-              font-size: 14px;
+              font-size: @fontMiddle;
               font-family: FZLTZHK--GBK1-0;
               color: rgba(255, 255, 255, 0.3);
               width: 50%;
@@ -716,7 +722,7 @@ export default {
               bottom: 6px;
             }
             .span2 {
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: rgba(186, 186, 186, 0.3);
               width: 50%;
@@ -732,7 +738,7 @@ export default {
             height: 50%;
             position: relative;
             .span3 {
-              font-size: 14px;
+              font-size: @fontMiddle;
               font-family: FZLTZHK--GBK1-0;
               color: rgba(255, 255, 255, 1);
               width: 50%;
@@ -743,7 +749,7 @@ export default {
               top: 6px;
             }
             .span4 {
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: FZLTZHK--GBK1-0;
               color: rgba(186, 186, 186, 1);
               width: 50%;
@@ -761,7 +767,7 @@ export default {
             box-sizing: border-box;
             padding-left: 58px;
             .span5 {
-              font-size: 10px;
+              font-size: @fontSamll;
               font-family: 'HiraginoSansGB-W3';
               color: rgba(186, 186, 186, 1);
               text-align: left;
@@ -771,7 +777,7 @@ export default {
               bottom: 6px;
             }
             .span6 {
-              font-size: 14px;
+              font-size: @fontMiddle;
               font-family: 'FZLTZHK--GBK1-0';
               color: rgba(255, 255, 255, 1);
               text-align: left;
@@ -848,7 +854,7 @@ export default {
     .bottom {
       z-index: 1;
       position: absolute;
-      width: calc(100% - 632px);
+      width: calc(100% - 580px);
       height: 66px;
       bottom: 5px;
       left: 50%;
@@ -870,7 +876,7 @@ export default {
         padding-top: 5px;
       }
       .bTitle {
-        font-size: 12px;
+        font-size: @fontMiddle;
         font-family: HiraginoSansGB-W3;
         color: rgba(186, 186, 186, 1);
         padding: 0 0 0 20px;
@@ -889,22 +895,21 @@ export default {
         margin: 0;
         position: relative;
         img {
-          width: 26px;
-          height: 26px;
+          width: 24px;
+          height: 24px;
           position: absolute;
-          left: 26%;
-          top: 12px;
-          transform: translate(-120%)
+          left:2px;
+          top: 14px;
         }
         .bSpanC {
           height: 100%;
           position: absolute;
           top: 0;
-          left: 25%;
+          left: 28px;
           .bSpan1 {
             height: 25px;
             display: block;
-            font-size: 10px;
+            font-size: 12px;
             font-family: 'HiraginoSansGB-W3';
             color: rgba(186, 186, 186, 1);
             line-height: 34px;
@@ -912,7 +917,7 @@ export default {
           .bSpan2 {
             height: 25px;
             display: block;
-            font-size: 12px;
+            font-size: @fontSamll;
             font-family: 'FZLTZHK--GBK1-0';
             color: rgba(255, 255, 255, 1);
             line-height: 21px;
@@ -981,7 +986,7 @@ export default {
         display: block;
         height: 33px;
         border: 0;
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: FZLTZHK--GBK1-0;
         color: rgba(255, 255, 255, 1);
         text-align: center;
@@ -1023,11 +1028,53 @@ export default {
     }
     .other{
       position: absolute;
-      right: 331px;
-      bottom:14%;
+      right: 311px;
+      bottom:11%;
       width:123px;
-      height:96px;
-      background: red;
+      height:108px;
+      background: rgba(0, 0, 0, 0.8);
+      .once{
+        display: block;
+        height: 36px;
+        color:rgba(241,241,241,0.4);
+        box-sizing: border-box;
+        padding-left: 42px;
+        font-size: @fontSamll;
+        line-height: 36px;
+        cursor: pointer;
+        background-position: left 12px center;
+        background-repeat: no-repeat;
+        &:hover{
+          color:#FFF225
+        }
+      }
+      .once1{
+        background-image: url('/static/renmintjNew/icon_disputes.png');
+        &:hover{
+          background-image: url('/static/renmintjNew/icon_disputes_y.png');
+        }
+      }
+      .once2{
+        background-image: url('/static/renmintjNew/icon_import.png');
+        &:hover{
+          background-image: url('/static/renmintjNew/icon_import_y.png');
+        }
+      }
+      .once3{
+        background-image: url('/static/renmintjNew/icon_institutions.png');
+        &:hover{
+          background-image: url('/static/renmintjNew/icon_institutions_y.png');
+        }
+      }
+    }
+    .leftChoose{
+      position: absolute;
+      left: 311px;
+      bottom:11%;
+      width:100px;
+      height:100px;
+      background: url('/static/renmintjNew/区域分析.png') no-repeat center center;
+      cursor: pointer;
     }
   }
   .dialog {

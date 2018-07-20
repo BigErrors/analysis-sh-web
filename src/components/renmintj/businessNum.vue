@@ -202,7 +202,7 @@ export default {
         month: 0,
         day: 0
       },
-      timeType: 'year',
+      timeType: 'month',
       pieData: [],
       tableData: [],
       lineData: [],
@@ -327,7 +327,7 @@ export default {
         vue.tableData = data.table
         vue.lineData = data.line
         vue.$nextTick(function () {
-          vue.timeType = 'year'
+          vue.timeType = 'month'
           vue.setTypeData()
         })
       })

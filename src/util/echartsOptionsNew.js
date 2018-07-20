@@ -42,7 +42,8 @@ let setLine = (data, showYAxis, containLabel) => {
       },
       axisLabel: {
         show: showYAxis || false,
-        color: '#BABABA'
+        color: '#BABABA',
+        fontSize: 12
       },
       splitLine: {
         show: false
@@ -88,7 +89,7 @@ let setPie = (data, title, bgColorOpacity, color) => {
       text: title || '标题',
       textStyle: {
         color: '#BABABA',
-        fontSize: 9
+        fontSize: 10
       }
     },
     'color': [{
@@ -108,7 +109,7 @@ let setPie = (data, title, bgColorOpacity, color) => {
     }, 'none'],
     series: [{
       type: 'pie',
-      center: ['50%', '42%'],
+      center: ['50%', '40%'],
       radius: ['70%', '80%'],
       label: {
         show: false
@@ -117,15 +118,15 @@ let setPie = (data, title, bgColorOpacity, color) => {
       hoverAnimation: false
     }, {
       type: 'pie',
-      center: ['50%', '38%'],
-      radius: ['0%', '55%'],
+      center: ['50%', '40%'],
+      radius: ['0%', '70%'],
       data: [{
         value: 0,
         name: data[0] + '%',
         label: {
           show: true,
           position: 'center',
-          fontSize: 12,
+          fontSize: 14,
           color: '#FEFEFE'
         },
         itemStyle: {
@@ -160,7 +161,8 @@ let setBar = (data) => {
         show: false
       },
       axisLabel: {
-        color: '#BABABA'
+        color: '#BABABA',
+        fontSize: 14
       },
       splitLine: {
         show: false
@@ -171,7 +173,7 @@ let setBar = (data) => {
       type: 'bar',
       data: data.map(item => item['value']),
       barMinHeight: 20,
-      barMaxWidth: 6,
+      barMaxWidth: 8,
       itemStyle: {
         color: {
           type: 'linear',
@@ -192,7 +194,8 @@ let setBar = (data) => {
         show: true,
         position: 'right',
         color: '#ffffff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 14
       }
 
     }]
@@ -1130,7 +1133,7 @@ let setPie3 = (data, title, bgColorOpacity, titlePosition) => {
         label: {
           show: true,
           position: 'center',
-          fontSize: 14,
+          fontSize: 22,
           color: '#f1f1f1',
           fontWeight: 'bold'
         },
