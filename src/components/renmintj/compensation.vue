@@ -150,7 +150,7 @@ export default {
 @table:#131821;
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
-@fontGray:rgba(241,241,241,0.4);
+@fontGray:rgba(241,241,241,0.8);
 .compensation_container{
   background: #0B131C;
   position: absolute;

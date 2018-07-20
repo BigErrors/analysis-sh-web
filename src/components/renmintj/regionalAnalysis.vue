@@ -241,7 +241,7 @@ export default {
 @blockBack:#171c26;
 @table:#131821;
 @fontWhite:#f1f1f1;
-@fontGray:rgba(241,241,241,0.4);
+@fontGray:rgba(241,241,241,0.8);
 .regional_container{
   background: #0B131C;
   position: absolute;
