@@ -686,7 +686,7 @@ export default {
             .table_tr:hover {
               .once{
                 cursor: pointer;
-                color: #149CFA;
+                color: #FFF225;
               }
             }
           }
@@ -713,7 +713,7 @@ export default {
             .span1 {
               font-size: @fontMiddle;
               font-family: FZLTZHK--GBK1-0;
-              color: rgba(255, 255, 255, 0.3);
+              color: rgba(255, 255, 255, 0.8);
               width: 50%;
               text-align: right;
               padding-right: 5px;
@@ -724,7 +724,7 @@ export default {
             .span2 {
               font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
-              color: rgba(186, 186, 186, 0.3);
+              color: rgba(186, 186, 186, 0.8);
               width: 50%;
               text-align: left;
               box-sizing: border-box;
@@ -956,7 +956,7 @@ export default {
         padding: 0 18px;
       }
       .topX:hover {
-        background: rgba(114,105,105,0.1);
+        background: rgba(114,105,105,0.2);
       }
       .h1 {
         display: block;
@@ -1014,7 +1014,7 @@ export default {
     }
     .title:hover {
       cursor: pointer;
-      color: #149CFA;
+      color: #FFF225;
     }
   }
   .middle {
@@ -1036,7 +1036,7 @@ export default {
       .once{
         display: block;
         height: 36px;
-        color:rgba(241,241,241,0.4);
+        color:rgba(241,241,241,0.8);
         box-sizing: border-box;
         padding-left: 42px;
         font-size: @fontSamll;
