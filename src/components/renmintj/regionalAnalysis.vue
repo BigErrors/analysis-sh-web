@@ -128,9 +128,12 @@
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
+import eos from '@/util/echartsOptions'
+
 export default {
   data () {
     return {
+      myChart: {},
       time: new Date(),
       date: [(new Date()).getTime() - 3600 * 1000 * 24 * 4800, new Date()],
       pickerOptions: {
@@ -179,6 +182,24 @@ export default {
     }
   },
   methods: {
+    // 绘制echarts
+    draw (domName, option) {
+      if (this.myChart[domName]) {
+        this.$echarts.dispose(this.myChart[domName])
+      }
+      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      this.myChart[domName].setOption(option)
+      if (domName === 'midlle') {
+        // let vue = this
+        this.myChart[domName].on('click', function (params) {
+          if (params.dataType === 'node') {
+            console.log(params.data.name)
+          } else if (params.dataType === 'edge') {
+            console.log(params.data.source, params.data.target)
+          }
+        })
+      }
+    },
     getData () {
       let _this = this
       let baseUrl = urlConfig.baseUrl
@@ -206,9 +227,13 @@ export default {
       this.getData()
     }
   },
-  mounted () {
+  created () {
     this.getData()
+  },
+  mounted () {
+    this.draw('midlle', eos.setGraph())
   }
+
 }
 </script>
 
