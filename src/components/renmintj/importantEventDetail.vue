@@ -863,7 +863,7 @@ export default {
       padding: 0 34px;
       box-sizing: border-box;
       display: flex;
-      height: calc(100% - 241px);
+      height: calc(100% - 251px);
     }
     .left1{
       flex: 0.56;

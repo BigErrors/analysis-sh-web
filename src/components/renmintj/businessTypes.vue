@@ -469,6 +469,8 @@ export default {
               font-size: 20px;
               font-family: 'FZLTZHK--GBK1-0';
               color: rgba(241,241,241,1);
+              width: 33%;
+              text-align: center;
             }
             .span2{
               position: absolute;
@@ -479,6 +481,8 @@ export default {
               font-size: 17px;
               font-family: HiraginoSansGB-W3;
               color: rgba(241,241,241,0.8);
+              width: 51%;
+              text-align: center;
             }
           }
           .border{
@@ -488,6 +492,7 @@ export default {
             background: @fontGray;
             left: 25px;
             top: 50%;
+            opacity: 0.3;
           }
           .contentLB{
             position: absolute;
@@ -505,6 +510,8 @@ export default {
               font-family: 'FZLTZHK--GBK1-0';
               color:rgba(241,241,241,0.6);
               opacity: 0.3;
+              width: 33%;
+              text-align: center;
             }
             .span2{
               position: absolute;
@@ -516,6 +523,8 @@ export default {
               font-family: 'FZLTZHK--GBK1-0';
               color:rgba(241,241,241,0.4);
               opacity: 0.3;
+              width: 51%;
+              text-align: center;
             }
           }
           .contentR{
