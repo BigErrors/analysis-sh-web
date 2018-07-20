@@ -45,8 +45,11 @@
         <div class="left3">
           <div class="nav clearfix">
             <span @click="trendType='data_pc'" :class="{active:trendType==='data_pc'}">纠纷排查</span>
+            <div class="border"></div>
             <span @click="trendType='data_jc'" :class="{active:trendType==='data_jc'}">公共法律服务</span>
+            <div class="border"></div>
             <span @click="trendType='data_110'" :class="{active:trendType==='data_110'}">110联动</span>
+            <div class="border"></div>
             <span @click="trendType='data_tj'" :class="{active:trendType==='data_tj'}">人民调解</span>
           </div>
           <!-- 趋势分析图dom容器 -->
@@ -236,7 +239,7 @@
     <div class="middle">
       <!-- 地图容器 -->
       <div class="map"></div>
-      <!-- 重点事件遮罩层 -->
+      <!-- 选择框 -->
       <div class="other"></div>
     </div>
     <!-- 案件分布弹框 -->
@@ -505,536 +508,552 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .index_container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    min-width: 1366px;
-    min-height: 766px;
-    background: #171415;
+@fontSamll:14px;
+@fontMiddle:16px;
+.index_container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-width: 1366px;
+  min-height: 766px;
+  background: #171415;
+  background-size: 100% 100%;
+  .head {
+    z-index: 1;
+    display: block;
+    background: url('/static/renmintjNew/headback.png') no-repeat;
     background-size: 100% 100%;
-    .head {
-      z-index: 1;
-      display: block;
-      background: url('/static/renmintjNew/headback.png') no-repeat;
-      background-size: 100% 100%;
-      background-position: center center;
-      position: relative;
-      box-sizing: border-box;
-      margin: 0 28px;
-      border-top: 14px solid rgba(0, 0, 0, 0);
-      .title {
-        position: absolute;
-        cursor: pointer;
-        top: 17px;
-        font-size: 20px;
-        font-family: RTWSYueGoTrial-Regular;
-        color: rgba(254, 254, 254, 1);
-        left: 50%;
-        transform: translate(-50%)
-      }
-      .left {
-        padding: 25px 0 10px 0px;
-        float: left;
-      }
-      .right {
-        float: right;
-        padding: 30px 0 0 0;
-        span {
-          font-size: 12px;
-          font-family: HiraginoSansGB-W3;
-          color: rgba(237, 237, 237, 1);
-        }
-      }
-    }
-    .body {
-      height: calc(100% - 100px);
-      margin-top: 5px;
-      position: relative;
-      display: block;
-      .left {
-        z-index: 1; // width: 22%;
-        width: 301px;
-        height: 100%;
-        float: left;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
-        position: relative;
-        .left1 {
-          height: calc((100% - 150px) * 0.15);
-          position: relative;
-          box-sizing: border-box;
-          padding: 8px 0 8px 12px;
-          .line {
-            height: 50%;
-            display: block;
-            align-items: center;
-            display: flex;
-            margin-left: 10px;
-            label {
-              font-size: 12px;
-              font-family: MicrosoftYaHei;
-              color: rgba(186, 186, 186, 1);
-              line-height: calc(50%)
-            }
-            img {
-              float: left;
-              margin-left: 4px;
-              &:nth-child(2) {
-                margin-left: 6px;
-              }
-              &:nth-last-child(2) {
-                margin-right: 6px;
-              }
-            }
-            span {
-              font-size: 12px;
-              font-family: FZLTZHK--GBK1-0;
-              color: rgba(254, 254, 254, 1);
-            }
-          }
-        }
-        .left2 {
-          height: calc((100% - 150px) * 0.50);
-          position: relative;
-          padding-left: 12px;
-        }
-        .left3 {
-          height: calc((100% - 150px) * 0.35);
-          position: relative;
-          .nav {
-            display: block;
-            padding-right: 25px;
-            span {
-              font-size: 12px;
-              font-family: HiraginoSansGB-W3;
-              color: rgba(186, 186, 186, 1);
-              float: right;
-              border-left: 1px solid rgba(186, 186, 186, 1);
-              padding: 0 4px;
-              cursor: pointer;
-              &:last-child {
-                border: 0
-              }
-            }
-            .active {
-              color: #FFF225
-            }
-          }
-          .trendAnalysis {
-            position: absolute;
-            width: calc(100% - 10px);
-            height: calc(100% - 26px);
-            box-sizing: border-box;
-            top: 16px;
-            padding: 10px;
-          }
-        }
-      }
-      .right {
-        z-index: 1; // width: 22%;
-        width: 301px;
-        height: 100%;
-        float: right;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
-        position: relative;
-        .right1 {
-          height: calc((100% - 150px) * 0.4);
-          position: relative;
-          box-sizing: border-box;
-          padding: 8px 20px;
-          .table {
-            position: relative;
-            width: 100%;
-            box-sizing: border-box;
-            .table_tr {
-              width: 100%;
-              height: 25px;
-              .once {
-                height: 25px;
-                width: 33.3%;
-                line-height: 25px;
-                text-align: center;
-                float: left;
-                font-size: 12px;
-                font-family: HiraginoSansGB-W3;
-                color: rgba(255, 255, 255, 1);
-              }
-              .th {
-                color: rgba(186, 186, 186, 1);
-              }
-            }
-            .table_body {
-              height: 150px;
-              overflow: hidden;
-              .table_tr:hover {
-                .once{
-                  cursor: pointer;
-                  color: #149CFA;
-                }
-              }
-            }
-          }
-        }
-        .right2 {
-          height: calc((100% - 150px) * 0.38);
-          position: relative;
-          box-sizing: border-box;
-          padding: 8px 20px;
-          .rContainer {
-            width: 50%;
-            height: 50%;
-            float: left;
-            position: relative;
-            box-sizing: border-box;
-            .rTop {
-              display: block;
-              height: 50%;
-              box-sizing: border-box;
-              margin: 0 20px;
-              border-bottom: 1px solid rgba(186, 186, 186, 1);
-              position: relative;
-              .span1 {
-                font-size: 14px;
-                font-family: FZLTZHK--GBK1-0;
-                color: rgba(255, 255, 255, 0.3);
-                width: 50%;
-                text-align: right;
-                padding-right: 5px;
-                box-sizing: border-box;
-                position: absolute;
-                bottom: 6px;
-              }
-              .span2 {
-                font-size: 12px;
-                font-family: HiraginoSansGB-W3;
-                color: rgba(186, 186, 186, 0.3);
-                width: 50%;
-                text-align: left;
-                box-sizing: border-box;
-                position: absolute;
-                bottom: 7px;
-                left: 50%;
-              }
-            }
-            .rBottom {
-              display: block;
-              height: 50%;
-              position: relative;
-              .span3 {
-                font-size: 14px;
-                font-family: FZLTZHK--GBK1-0;
-                color: rgba(255, 255, 255, 1);
-                width: 50%;
-                text-align: right;
-                padding-right: 5px;
-                box-sizing: border-box;
-                position: absolute;
-                top: 6px;
-              }
-              .span4 {
-                font-size: 12px;
-                font-family: FZLTZHK--GBK1-0;
-                color: rgba(186, 186, 186, 1);
-                width: 50%;
-                text-align: left;
-                padding-right: 5px;
-                box-sizing: border-box;
-                position: absolute;
-                top: 6px;
-                left: 50%;
-              }
-            }
-            .rRight {
-              width: 100%;
-              height: 100%;
-              box-sizing: border-box;
-              padding-left: 58px;
-              .span5 {
-                font-size: 10px;
-                font-family: 'HiraginoSansGB-W3';
-                color: rgba(186, 186, 186, 1);
-                text-align: left;
-                display: inline-block;
-                width: 100%;
-                position: absolute;
-                bottom: 6px;
-              }
-              .span6 {
-                font-size: 14px;
-                font-family: 'FZLTZHK--GBK1-0';
-                color: rgba(255, 255, 255, 1);
-                text-align: left;
-                display: inline-block;
-                width: 100%;
-                position: absolute;
-                top: 6px;
-              }
-            }
-            .rIcon {
-              position: absolute;
-              top: 50%;
-              left: 8px;
-              transform: translateY(-50%);
-              z-index: 5;
-            }
-          }
-        }
-        .right3 {
-          height: calc((100% - 150px) * 0.22);
-          position: relative;
-          box-sizing: border-box;
-          padding: 8px 20px;
-          .rLeft {
-            width: 60%;
-            height: 100%;
-            float: left;
-            position: relative;
-            .rImg {
-              position: absolute;
-              left: 16px;
-              top: 50%;
-              transform: translateY(-50%);
-              z-index: 5;
-            }
-            .rSpanC {
-              width: 100%;
-              height: 100%;
-              box-sizing: border-box;
-              padding-left: 65px;
-              position: relative;
-              .spanT {
-                font-size: 14px;
-                font-family: FZLTZHK--GBK1-0;
-                color: rgba(186, 186, 186, 1);
-                position: absolute;
-                bottom: 0px;
-              }
-              .spanB {
-                font-size: 20px;
-                font-family: 'HiraginoSansGB-W3';
-                color:#ffffff;
-                position: absolute;
-                top: 6px;
-                font-weight: bold;
-              }
-              div {
-                height: 50%;
-                display: block;
-                position: relative;
-              }
-            }
-          }
-          .rRight {
-            width: 40%;
-            height: 100%;
-            float: right;
-            background: url('/static/renmintjNew/动画.gif');
-            background-position: center center;
-            background-repeat: no-repeat;
-          }
-        }
-      }
-      .bottom {
-        z-index: 1;
-        position: absolute;
-        width: calc(100% - 632px);
-        height: 66px;
-        bottom: 5px;
-        left: 50%;
-        transform: translate(-50%);
-        padding: 0 16px;
-        box-sizing: border-box;
-        .bottom1 {
-          width: 49%;
-          height: 66px;
-          float: left;
-          background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-          padding-top: 5px;
-        }
-        .bottom2 {
-          width: 49%;
-          height: 66px;
-          float: right;
-          background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-          padding-top: 5px;
-        }
-        .bTitle {
-          font-size: 12px;
-          font-family: HiraginoSansGB-W3;
-          color: rgba(186, 186, 186, 1);
-          padding: 0 0 0 20px;
-          background: url('/static/renmintj/icon_open.png');
-          background-repeat: no-repeat;
-          background-position: left 5px center;
-        }
-        .bTitle:hover {
-          cursor: pointer;
-          color: #149CFA;
-        }
-        .bContent {
-          width: 25%;
-          float: left;
-          height: 50px;
-          margin: 0;
-          position: relative;
-          img {
-            width: 26px;
-            height: 26px;
-            position: absolute;
-            left: 26%;
-            top: 12px;
-            transform: translate(-120%)
-          }
-          .bSpanC {
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 25%;
-            .bSpan1 {
-              height: 25px;
-              display: block;
-              font-size: 10px;
-              font-family: 'HiraginoSansGB-W3';
-              color: rgba(186, 186, 186, 1);
-              line-height: 34px;
-            }
-            .bSpan2 {
-              height: 25px;
-              display: block;
-              font-size: 12px;
-              font-family: 'FZLTZHK--GBK1-0';
-              color: rgba(255, 255, 255, 1);
-              line-height: 21px;
-            }
-          }
-        }
-      }
-      .top {
-        z-index: 1;
-        cursor: pointer;
-        position: absolute;
-        width: 36%;
-        height: 104px;
-        left: 50%;
-        top: 32px;
-        transform: translate(-50%);
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-        .topY {
-          width: 8%;
-          float: left;
-          height: 104px;
-          box-sizing: border-box;
-          text-align: center;
-          .topYh {
-            border: 0;
-            font-size: 12px;
-            font-family: HiraginoSansGB-W3;
-            color: rgba(186, 186, 186, 1);
-          }
-        }
-        .topX {
-          width: 22%;
-          float: left;
-          height: 104px;
-          box-sizing: border-box;
-          padding: 0 18px;
-        }
-        .topX:hover {
-          background: rgba(114,105,105,0.1);
-        }
-        .h1 {
-          display: block;
-          height: 24px;
-          border: 0;
-          font-size: 10px;
-          font-family: HiraginoSansGB-W3;
-          color: rgba(186, 186, 186, 1);
-          text-align: center;
-          line-height: 24px;
-        }
-        .h2 {
-          display: block;
-          height: 47px;
-          border: 0;
-          box-sizing: border-box;
-          border-bottom: 1px dashed rgba(186, 186, 186, 0.5);
-          ;
-          line-height: 46px;
-          font-size: 24px;
-          font-family: FZLTZHK--GBK1-0;
-          color: rgba(73, 234, 238, 1);
-          text-align: center;
-          font-weight: bold;
-        }
-        .h3 {
-          display: block;
-          height: 33px;
-          border: 0;
-          font-size: 12px;
-          font-family: FZLTZHK--GBK1-0;
-          color: rgba(255, 255, 255, 1);
-          text-align: center;
-          line-height: 33px;
-        }
-      }
-      .title {
-        width: 100%;
-        padding: 18px 0 20px 29px;
-        background: url('/static/renmintj/icon_open.png');
-        background-repeat: no-repeat;
-        background-position: left 11px center;
-        box-sizing: border-box;
-        color: rgba(237, 237, 237, 1);
-        .title_china {
-          display: block;
-          font-size: 16px;
-          font-family: HiraginoSansGB-W3;
-        }
-        .title_english {
-          display: block;
-          font-size: 10px;
-          font-family: ArialMT;
-        }
-      }
-      .title:hover {
-        cursor: pointer;
-        color: #149CFA;
-      }
-    }
-    .middle {
-      z-index: -1;
-      .map {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-      }
-    }
-    .dialog {
+    background-position: center center;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 28px;
+    border-top: 14px solid rgba(0, 0, 0, 0);
+    .title {
       position: absolute;
-      min-width: 210px;
-      max-width: 15.5%;
-      z-index: 999;
-      padding: 5px 15px 20px 15px;
-      background: rgba(0, 0, 0, 0.8);
-      font-size: 12px;
-      color: #ffffff;
-      .close {
-        cursor: pointer;
-        text-align:right;
-      }
-      .address {
-        line-height:28px;
-        padding-left:18px;
-        background: url('/static/renmintjNew/didian.png') no-repeat left center;
-      }
-      .number {
-        line-height:18px;
-        padding-left:18px;
-        background:url('/static/renmintjNew/miaoshu.png') no-repeat left center;
+      cursor: pointer;
+      top: 17px;
+      font-size: 20px;
+      font-family: RTWSYueGoTrial-Regular;
+      color: rgba(254, 254, 254, 1);
+      left: 50%;
+      transform: translate(-50%)
+    }
+    .left {
+      padding: 25px 0 10px 0px;
+      float: left;
+    }
+    .right {
+      float: right;
+      padding: 30px 0 0 0;
+      span {
+        font-size: 12px;
+        font-family: HiraginoSansGB-W3;
+        color: rgba(237, 237, 237, 1);
       }
     }
   }
+  .body {
+    height: calc(100% - 100px);
+    margin-top: 5px;
+    position: relative;
+    display: block;
+    .left {
+      z-index: 1; // width: 22%;
+      width: 301px;
+      height: 100%;
+      float: left;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
+      position: relative;
+      .left1 {
+        height: calc((100% - 150px) * 0.15);
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px 0 8px 12px;
+        .line {
+          height: 50%;
+          display: block;
+          align-items: center;
+          display: flex;
+          margin-left: 10px;
+          label {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(186, 186, 186, 1);
+            line-height: calc(50%)
+          }
+          img {
+            float: left;
+            margin-left: 4px;
+            &:nth-child(2) {
+              margin-left: 6px;
+            }
+            &:nth-last-child(2) {
+              margin-right: 6px;
+            }
+          }
+          span {
+            font-size: 12px;
+            font-family: FZLTZHK--GBK1-0;
+            color: rgba(254, 254, 254, 1);
+          }
+        }
+      }
+      .left2 {
+        height: calc((100% - 150px) * 0.50);
+        position: relative;
+        padding-left: 12px;
+      }
+      .left3 {
+        height: calc((100% - 150px) * 0.35);
+        position: relative;
+        .nav {
+          display: block;
+          padding-right: 25px;
+          span {
+            font-size: 12px;
+            font-family: HiraginoSansGB-W3;
+            color: rgba(186, 186, 186, 1);
+            float: right;
+            padding: 0 4px;
+            cursor: pointer;
+            &:last-child {
+              border: 0
+            }
+          }
+          .border{
+            width: 1px;
+            background: rgba(186, 186, 186, 1);
+            height: 10px;
+            float: right;
+            margin-top: 3px;
+          }
+          .active {
+            color: #FFF225
+          }
+        }
+        .trendAnalysis {
+          position: absolute;
+          width: calc(100% - 10px);
+          height: calc(100% - 26px);
+          box-sizing: border-box;
+          top: 16px;
+          padding: 10px;
+        }
+      }
+    }
+    .right {
+      z-index: 1; // width: 22%;
+      width: 301px;
+      height: 100%;
+      float: right;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
+      position: relative;
+      .right1 {
+        height: calc((100% - 150px) * 0.4);
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px 20px;
+        .table {
+          position: relative;
+          width: 100%;
+          box-sizing: border-box;
+          .table_tr {
+            width: 100%;
+            height: 25px;
+            .once {
+              height: 25px;
+              width: 33.3%;
+              line-height: 25px;
+              text-align: center;
+              float: left;
+              font-size: @fontSamll;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(255, 255, 255, 1);
+            }
+            .th {
+              color: rgba(186, 186, 186, 1);
+            }
+          }
+          .table_body {
+            height: 150px;
+            overflow: hidden;
+            .table_tr:hover {
+              .once{
+                cursor: pointer;
+                color: #149CFA;
+              }
+            }
+          }
+        }
+      }
+      .right2 {
+        height: calc((100% - 150px) * 0.38);
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px 20px;
+        .rContainer {
+          width: 50%;
+          height: 50%;
+          float: left;
+          position: relative;
+          box-sizing: border-box;
+          .rTop {
+            display: block;
+            height: 50%;
+            box-sizing: border-box;
+            margin: 0 20px;
+            border-bottom: 1px solid rgba(186, 186, 186, 1);
+            position: relative;
+            .span1 {
+              font-size: 14px;
+              font-family: FZLTZHK--GBK1-0;
+              color: rgba(255, 255, 255, 0.3);
+              width: 50%;
+              text-align: right;
+              padding-right: 5px;
+              box-sizing: border-box;
+              position: absolute;
+              bottom: 6px;
+            }
+            .span2 {
+              font-size: 12px;
+              font-family: HiraginoSansGB-W3;
+              color: rgba(186, 186, 186, 0.3);
+              width: 50%;
+              text-align: left;
+              box-sizing: border-box;
+              position: absolute;
+              bottom: 7px;
+              left: 50%;
+            }
+          }
+          .rBottom {
+            display: block;
+            height: 50%;
+            position: relative;
+            .span3 {
+              font-size: 14px;
+              font-family: FZLTZHK--GBK1-0;
+              color: rgba(255, 255, 255, 1);
+              width: 50%;
+              text-align: right;
+              padding-right: 5px;
+              box-sizing: border-box;
+              position: absolute;
+              top: 6px;
+            }
+            .span4 {
+              font-size: 12px;
+              font-family: FZLTZHK--GBK1-0;
+              color: rgba(186, 186, 186, 1);
+              width: 50%;
+              text-align: left;
+              padding-right: 5px;
+              box-sizing: border-box;
+              position: absolute;
+              top: 6px;
+              left: 50%;
+            }
+          }
+          .rRight {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-left: 58px;
+            .span5 {
+              font-size: 10px;
+              font-family: 'HiraginoSansGB-W3';
+              color: rgba(186, 186, 186, 1);
+              text-align: left;
+              display: inline-block;
+              width: 100%;
+              position: absolute;
+              bottom: 6px;
+            }
+            .span6 {
+              font-size: 14px;
+              font-family: 'FZLTZHK--GBK1-0';
+              color: rgba(255, 255, 255, 1);
+              text-align: left;
+              display: inline-block;
+              width: 100%;
+              position: absolute;
+              top: 6px;
+            }
+          }
+          .rIcon {
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            transform: translateY(-50%);
+            z-index: 5;
+          }
+        }
+      }
+      .right3 {
+        height: calc((100% - 150px) * 0.22);
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px 20px;
+        .rLeft {
+          width: 60%;
+          height: 100%;
+          float: left;
+          position: relative;
+          .rImg {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+          }
+          .rSpanC {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-left: 65px;
+            position: relative;
+            .spanT {
+              font-size: 14px;
+              font-family: FZLTZHK--GBK1-0;
+              color: rgba(186, 186, 186, 1);
+              position: absolute;
+              bottom: 0px;
+            }
+            .spanB {
+              font-size: 20px;
+              font-family: 'HiraginoSansGB-W3';
+              color:#ffffff;
+              position: absolute;
+              top: 6px;
+              font-weight: bold;
+            }
+            div {
+              height: 50%;
+              display: block;
+              position: relative;
+            }
+          }
+        }
+        .rRight {
+          width: 40%;
+          height: 100%;
+          float: right;
+          background: url('/static/renmintjNew/动画.gif');
+          background-position: center center;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+    .bottom {
+      z-index: 1;
+      position: absolute;
+      width: calc(100% - 632px);
+      height: 66px;
+      bottom: 5px;
+      left: 50%;
+      transform: translate(-50%);
+      padding: 0 16px;
+      box-sizing: border-box;
+      .bottom1 {
+        width: 49%;
+        height: 66px;
+        float: left;
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        padding-top: 5px;
+      }
+      .bottom2 {
+        width: 49%;
+        height: 66px;
+        float: right;
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        padding-top: 5px;
+      }
+      .bTitle {
+        font-size: 12px;
+        font-family: HiraginoSansGB-W3;
+        color: rgba(186, 186, 186, 1);
+        padding: 0 0 0 20px;
+        background: url('/static/renmintj/icon_open.png');
+        background-repeat: no-repeat;
+        background-position: left 5px center;
+      }
+      .bTitle:hover {
+        cursor: pointer;
+        color: #149CFA;
+      }
+      .bContent {
+        width: 25%;
+        float: left;
+        height: 50px;
+        margin: 0;
+        position: relative;
+        img {
+          width: 26px;
+          height: 26px;
+          position: absolute;
+          left: 26%;
+          top: 12px;
+          transform: translate(-120%)
+        }
+        .bSpanC {
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 25%;
+          .bSpan1 {
+            height: 25px;
+            display: block;
+            font-size: 10px;
+            font-family: 'HiraginoSansGB-W3';
+            color: rgba(186, 186, 186, 1);
+            line-height: 34px;
+          }
+          .bSpan2 {
+            height: 25px;
+            display: block;
+            font-size: 12px;
+            font-family: 'FZLTZHK--GBK1-0';
+            color: rgba(255, 255, 255, 1);
+            line-height: 21px;
+          }
+        }
+      }
+    }
+    .top {
+      z-index: 1;
+      cursor: pointer;
+      position: absolute;
+      width: 36%;
+      height: 104px;
+      left: 50%;
+      top: 32px;
+      transform: translate(-50%);
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+      .topY {
+        width: 8%;
+        float: left;
+        height: 104px;
+        box-sizing: border-box;
+        text-align: center;
+        .topYh {
+          border: 0;
+          font-size: 12px;
+          font-family: HiraginoSansGB-W3;
+          color: rgba(186, 186, 186, 1);
+        }
+      }
+      .topX {
+        width: 22%;
+        float: left;
+        height: 104px;
+        box-sizing: border-box;
+        padding: 0 18px;
+      }
+      .topX:hover {
+        background: rgba(114,105,105,0.1);
+      }
+      .h1 {
+        display: block;
+        height: 24px;
+        border: 0;
+        font-size: 10px;
+        font-family: HiraginoSansGB-W3;
+        color: rgba(186, 186, 186, 1);
+        text-align: center;
+        line-height: 24px;
+      }
+      .h2 {
+        display: block;
+        height: 47px;
+        border: 0;
+        box-sizing: border-box;
+        border-bottom: 1px dashed rgba(186, 186, 186, 0.5);
+        ;
+        line-height: 46px;
+        font-size: 24px;
+        font-family: FZLTZHK--GBK1-0;
+        color: rgba(73, 234, 238, 1);
+        text-align: center;
+        font-weight: bold;
+      }
+      .h3 {
+        display: block;
+        height: 33px;
+        border: 0;
+        font-size: 12px;
+        font-family: FZLTZHK--GBK1-0;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        line-height: 33px;
+      }
+    }
+    .title {
+      width: 100%;
+      padding: 18px 0 20px 29px;
+      background: url('/static/renmintj/icon_open.png');
+      background-repeat: no-repeat;
+      background-position: left 11px center;
+      box-sizing: border-box;
+      color: rgba(237, 237, 237, 1);
+      .title_china {
+        display: block;
+        font-size: 16px;
+        font-family: HiraginoSansGB-W3;
+      }
+      .title_english {
+        display: block;
+        font-size: 10px;
+        font-family: ArialMT;
+      }
+    }
+    .title:hover {
+      cursor: pointer;
+      color: #149CFA;
+    }
+  }
+  .middle {
+    z-index: -1;
+    .map {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+    }
+    .other{
+      position: absolute;
+      right: 331px;
+      bottom:14%;
+      width:123px;
+      height:96px;
+      background: red;
+    }
+  }
+  .dialog {
+    position: absolute;
+    min-width: 210px;
+    max-width: 15.5%;
+    z-index: 999;
+    padding: 5px 15px 20px 15px;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 12px;
+    color: #ffffff;
+    .close {
+      cursor: pointer;
+      text-align:right;
+    }
+    .address {
+      line-height:28px;
+      padding-left:18px;
+      background: url('/static/renmintjNew/didian.png') no-repeat left center;
+    }
+    .number {
+      line-height:18px;
+      padding-left:18px;
+      background:url('/static/renmintjNew/miaoshu.png') no-repeat left center;
+    }
+  }
+}
 
 </style>
