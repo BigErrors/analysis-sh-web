@@ -1295,7 +1295,7 @@ let setMapbox = (caseData, importantEventData) => {
       style: {
         'version': 8,
         'glyphs': `${osmUrl}/fonts/{fontstack}/{range}.pbf`,
-        'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite1',
+        'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite2',
         'sources': {
           'osm-tiles': {
             'type': 'raster',
