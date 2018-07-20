@@ -177,6 +177,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .documentQuality_container{
   background: #0B131C;
   position: absolute;
@@ -218,7 +220,7 @@ export default {
       float: right;
       padding:30px 0 0 0;
       span{
-        font-size:12px;
+        font-size:@fontSamll;
         font-family:HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -293,7 +295,7 @@ export default {
             display: block;
             .span1{
               display: block;
-              font-size: 12px;
+              font-size: @fontSamll;
               color:@fontGray;
               height: 45%;
               position: relative;
@@ -306,7 +308,7 @@ export default {
             }
             .span3{
               display: inline-block;
-              font-size: 12px;
+              font-size: @fontSamll;
               color:@fontGray;
               padding-left: 5px;
             }
@@ -367,7 +369,7 @@ export default {
               width: 100%;
               height: calc(100% / 7 );
               position: relative;
-              font-size:12px;
+              font-size:@fontSamll;
               &:nth-of-type(2n-1){
                 background: @table;
               }
@@ -389,7 +391,7 @@ export default {
                 width:15%;
               }
               .row3{
-                width:45%;
+                width:40%;
                 span{
                   width: 100%;
                   text-align: center;
@@ -400,7 +402,7 @@ export default {
                 }
               }
               .row4{
-                width:30%;
+                width:35%;
               }
             }
           }
@@ -418,7 +420,7 @@ export default {
               width: 100%;
               height: calc(100% / 5 );
               position: relative;
-              font-size:12px;
+              font-size:@fontSamll;
               font-family:HiraginoSansGB-W3;
               color:@fontGray;
               .circle{
@@ -492,7 +494,7 @@ export default {
           color:@fontWhite;
         }
         .topn{
-          font-size:12px;
+          font-size:@fontSamll;
           font-family:HiraginoSansGB-W3;
           color:@fontGray;
         }

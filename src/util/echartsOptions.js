@@ -116,7 +116,7 @@ let setBar = (data) => {
 
 // 柱图
 let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
-  barMaxWidth = 10
+  barMaxWidth = 6
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
   if (portrait) {
@@ -146,8 +146,8 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       show: displayValueAxis(),
       interval: 'auto',
-      color: 'rgba(241,241,241,0.4)',
-      fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
+      color: 'rgba(241,241,241,0.8)',
+      fontSize: barMaxWidth < 6 ? barMaxWidth : 6,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
     // value最大值的类型：percent，integer
@@ -167,10 +167,10 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       interval: 0,
       rotate: rotate || 0,
-      fontSize: 12,
+      fontSize: 14,
       formatter: function (value) {
         if (axisType === 'horizon') {
           return value
@@ -225,13 +225,14 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
             offset: 1, color: color[1] // 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
-        }
+        },
+        barBorderRadius: 3
       },
       label: {
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
         color: '#f1f1f1',
-        fontSize: 12
+        fontSize: 14
       },
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
@@ -286,8 +287,8 @@ let setBar4 = (data) => {
     },
     axisLabel: {
       show: true,
-      color: 'rgba(241,241,241,0.4)',
-      fontSize: 12
+      color: 'rgba(241,241,241,0.8)',
+      fontSize: 14
     },
     splitLine: {
       show: true,
@@ -302,7 +303,7 @@ let setBar4 = (data) => {
     axisLine: {
       show: false,
       lineStyle: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)'
       }
     },
     axisTick: {
@@ -310,8 +311,8 @@ let setBar4 = (data) => {
     },
     axisLabel: {
       show: true,
-      color: 'rgba(241,241,241,0.4)',
-      fontSize: 12,
+      color: 'rgba(241,241,241,0.8)',
+      fontSize: 14,
       interval: 0,
       rotate: 0,
       formatter: function (value) {
@@ -521,7 +522,8 @@ let setLine2 = (data, showYAxis) => {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       },
       splitLine: {
         show: false
@@ -539,7 +541,7 @@ let setLine2 = (data, showYAxis) => {
       },
       axisLabel: {
         show: showYAxis || false,
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)'
       },
       splitLine: {
         show: false
@@ -592,7 +594,7 @@ let setLine2 = (data, showYAxis) => {
       name: '数据',
       type: 'line',
       smooth: true,
-      symbolSize: 1,
+      symbolSize: 4,
       lineStyle: {
         width: 1
       },
@@ -656,7 +658,7 @@ let setLine4 = (data, dataType, legend, color) => {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)'
       },
       splitLine: {
         show: false
@@ -674,7 +676,7 @@ let setLine4 = (data, dataType, legend, color) => {
       },
       axisLabel: {
         show: true,
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
@@ -757,7 +759,7 @@ let setLine5 = (data, callback) => {
       data: date,
       axisLine: {
         lineStyle: {
-          color: 'rgba(241,241,241,0.4)'
+          color: '#2A2F3D'
         }
       },
       axisTick: {
@@ -765,7 +767,8 @@ let setLine5 = (data, callback) => {
       },
       axisLabel: {
         // interval: 0,
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       }
     },
     yAxis: {
@@ -773,19 +776,20 @@ let setLine5 = (data, callback) => {
       boundaryGap: [0, '100%'],
       splitLine: {
         lineStyle: {
-          color: 'rgba(241,241,241,0.4)'
+          color: '#2A2F3D'
         }
       },
       axisLine: {
         lineStyle: {
-          color: 'rgba(241,241,241,0.4)'
+          color: '#2A2F3D'
         }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       }
     },
     dataZoom: [{
@@ -887,7 +891,7 @@ let setLine6 = (data, dataType, title) => {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)'
       },
       splitLine: {
         show: false
@@ -907,7 +911,7 @@ let setLine6 = (data, dataType, title) => {
       },
       axisLabel: {
         show: true,
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
@@ -962,7 +966,7 @@ let setLine7 = (data, dataType) => {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)'
       },
       splitLine: {
         show: false
@@ -982,13 +986,13 @@ let setLine7 = (data, dataType) => {
       },
       axisLabel: {
         show: true,
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
         show: true,
         lineStyle: {
-          color: 'rgba(241,241,241,0.4)'
+          color: 'rgba(241,241,241,0.8)'
         }
       }
     },
@@ -1094,7 +1098,7 @@ let setPie2 = (data) => {
               },
 
               hr: {
-                borderColor: 'rgba(241,241,241,0.4)',
+                borderColor: 'rgba(241,241,241,0.8)',
                 width: '100%',
                 borderWidth: 1,
                 height: 0
@@ -1109,7 +1113,7 @@ let setPie2 = (data) => {
         },
         labelLine: {
           lineStyle: {
-            color: 'rgba(241,241,241,0.4)'
+            color: 'rgba(241,241,241,0.8)'
           }
         },
         data: data
@@ -1127,7 +1131,7 @@ let setPie3 = (data, showRose) => {
       top: '15%',
       right: 10,
       textStyle: {
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         fontSize: 12
       },
       data: data.map(item => {
@@ -1160,7 +1164,7 @@ let setPie3 = (data, showRose) => {
                 align: 'center'
               },
               hr: {
-                borderColor: 'rgba(241,241,241,0.4)',
+                borderColor: 'rgba(241,241,241,0.8)',
                 width: '100%',
                 borderWidth: 1,
                 height: 0
@@ -1170,7 +1174,7 @@ let setPie3 = (data, showRose) => {
         },
         labelLine: {
           lineStyle: {
-            color: 'rgba(241,241,241,0.4)'
+            color: 'rgba(241,241,241,0.8)'
           }
         },
         data: data
@@ -1229,14 +1233,14 @@ let setPie4 = (data, title, bgColorOpacity, titlePosition) => {
 // 圆环图
 let setPie6 = (data, dataType, isPie, color) => {
   isPie = isPie || false
-  color = color || data.length > 4 ? ['#95B6FF', 'rgba(241,241,241,0.4)', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
+  color = color || data.length > 4 ? ['#95B6FF', 'rgba(241,241,241,0.8)', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
   let option = {
     legend: {
       orient: 'center',
       top: 'middle',
       right: '5%',
       textStyle: {
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         fontSize: 12
       },
       data: data.map(item => {

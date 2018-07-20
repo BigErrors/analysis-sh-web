@@ -34,7 +34,7 @@
           <div class="date_container">
             <el-cascader
               class="cascader"
-              style="z-index:1;height:30px;line-height:30px;font-size:12px;width:120px"
+              style="z-index:1;height:30px;line-height:30px;font-size:@fontSamll;width:120px"
               :options="area"
               placeholder="区域"
               v-model="areaDefault"
@@ -156,7 +156,7 @@ export default {
   computed: {
     timeCom () {
       let now = this.time
-      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay() - 1]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
@@ -287,6 +287,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .trendAnalysis_container {
   background: #0B131C;
   position: absolute;
@@ -328,7 +330,7 @@ export default {
       float: right;
       padding: 30px 0 0 0;
       span {
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color: @fontGray;
       }
@@ -348,7 +350,7 @@ export default {
       box-sizing: border-box;
       line-height: 24px;
       span{
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -369,10 +371,20 @@ export default {
           width: 6em;
           text-align: center;
           cursor: pointer;
+          position: relative;
         }
         .active{
           color:@fontWhite;
-          border-bottom: 3px solid #2E89FD;
+          // border-bottom: 3px solid #2E89FD;
+          &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2E89FD;
+            left: 0;
+            bottom:-1px;
+          }
         }
       }
       .navRight{
@@ -414,7 +426,7 @@ export default {
                 display: block;
                 height: 24px;
                 line-height: 24px;
-                font-size:12px;
+                font-size:@fontSamll;
                 color:@fontGray;
               }
               .span_content{
@@ -430,17 +442,17 @@ export default {
                 .span2{
                   height: 16px;
                   float: left;
-                  margin:16px 0 0 12px;
-                  font-size:12px;
+                  margin:12px 0 0 12px;
+                  font-size:@fontSamll;
                   font-family:HiraginoSansGB-W3;
                   color:@fontGray;
                 }
               }
               .span3{
                 position: absolute;
-                bottom:-18px;
+                bottom:-22px;
                 left: 0;
-                font-size:12px;
+                font-size:@fontSamll;
                 font-family:HiraginoSansGB-W3;
                 color:@fontGray;
                 width: 200px;
@@ -465,7 +477,7 @@ export default {
           margin:8px 0;
           background: @blockBack;
           .time{
-            font-size:12px;
+            font-size:@fontSamll;
             font-family:HiraginoSansGB-W3;
             color:rgba(0,198,255,1);
             padding-left: 20px;
