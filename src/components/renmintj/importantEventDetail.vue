@@ -699,7 +699,7 @@ export default {
   computed: {
     timeCom () {
       let now = this.time
-      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay() - 1]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
@@ -766,6 +766,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .impEventDet_container{
   background: #0B131C;
   position: absolute;
@@ -807,7 +809,7 @@ export default {
       float: right;
       padding:30px 0 0 0;
       span{
-        font-size:12px;
+        font-size:@fontSamll;
         font-family:HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -827,7 +829,7 @@ export default {
       box-sizing: border-box;
       line-height: 24px;
       span{
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -863,7 +865,7 @@ export default {
       padding: 0 34px;
       box-sizing: border-box;
       display: flex;
-      height: calc(100% - 241px);
+      height: calc(100% - 251px);
     }
     .left1{
       flex: 0.56;

@@ -208,7 +208,7 @@ export default {
   computed: {
     timeCom () {
       let now = this.time
-      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay() - 1]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
@@ -342,6 +342,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .busiTypes_container{
   background: #0B131C;
   position: absolute;
@@ -383,7 +385,7 @@ export default {
       float: right;
       padding:30px 0 0 0;
       span{
-        font-size:12px;
+        font-size:@fontSamll;
         font-family:HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -403,7 +405,7 @@ export default {
       box-sizing: border-box;
       line-height: 24px;
       span{
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -424,10 +426,20 @@ export default {
           width: 5em;
           text-align: center;
           cursor: pointer;
+          position: relative;
         }
         .active{
           color:@fontWhite;
-          border-bottom: 3px solid #2E89FD;
+          // border-bottom: 3px solid #2E89FD;
+          &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2E89FD;
+            left: 0;
+            bottom:-1px;
+          }
         }
       }
       .navRight{
@@ -435,7 +447,7 @@ export default {
         .cas_container{
           float: right;
           .cas_container_span{
-            font-size:11px;
+            font-size:@fontSamll;
             font-family:HiraginoSansGB-W3;
             color:@fontGray;
           }
@@ -469,6 +481,8 @@ export default {
               font-size: 20px;
               font-family: 'FZLTZHK--GBK1-0';
               color: rgba(241,241,241,1);
+              width: 33%;
+              text-align: center;
             }
             .span2{
               position: absolute;
@@ -479,6 +493,8 @@ export default {
               font-size: 17px;
               font-family: HiraginoSansGB-W3;
               color: rgba(241,241,241,0.8);
+              width: 51%;
+              text-align: center;
             }
           }
           .border{
@@ -488,6 +504,7 @@ export default {
             background: @fontGray;
             left: 25px;
             top: 50%;
+            opacity: 0.3;
           }
           .contentLB{
             position: absolute;
@@ -503,8 +520,10 @@ export default {
               transform: translate(0,20%);
               font-size: 20px;
               font-family: 'FZLTZHK--GBK1-0';
-              color:rgba(241,241,241,0.6);
+              color:@fontGray;
               opacity: 0.3;
+              width: 33%;
+              text-align: center;
             }
             .span2{
               position: absolute;
@@ -514,8 +533,10 @@ export default {
               transform: translate(0,20%);
               font-size: 17px;
               font-family: 'FZLTZHK--GBK1-0';
-              color:rgba(241,241,241,0.4);
+              color:@fontGray;
               opacity: 0.3;
+              width: 51%;
+              text-align: center;
             }
           }
           .contentR{
@@ -600,7 +621,7 @@ export default {
                   left: 50%;
                   top:50%;
                   transform: translate(-50%,-50%);
-                  font-size: 12px;
+                  font-size: @fontSamll;
                 }
               }
             }
@@ -633,7 +654,7 @@ export default {
                 background-image: url('/static/renmintj/bunan.png');
                 background-repeat: no-repeat;
                 background-position: right 80px center;
-                font-size:14px;
+                font-size:@fontMiddle;
                 font-family:HiraginoSansGB-W3;
                 color:rgba(241,241,241,1);
                 text-align: right;
@@ -659,7 +680,7 @@ export default {
                 background-image: url('/static/renmintj/bunv.png');
                 background-repeat: no-repeat;
                 background-position: left 20px center;
-                font-size:14px;
+                font-size:@fontMiddle;
                 font-family:HiraginoSansGB-W3;
                 color:rgba(241,241,241,1);
                 padding-left: 65px;
@@ -674,7 +695,7 @@ export default {
             }
           }
           .contentTitle{
-            font-size:12px;
+            font-size:@fontSamll;
             height: 24px;
             display: block;
             margin-left: 20px;
@@ -707,23 +728,23 @@ export default {
           left:0;
           top:0;
           .span1{
-            font-size:12px;
+            font-size:@fontSamll;
             font-family:HiraginoSansGB-W3;
-            color:rgba(241,241,241,0.3);
+            color:@fontGray;
             display: block;
             margin:18px 0 10px 22px;
           }
           .span2{
             font-size:33px;
             font-family:HiraginoSansGB-W3;
-            color:rgba(241,241,241,1);
+            color:@fontWhite;
             display: inline-block;
             margin-left: 22px;
           }
           .span3{
-            font-size:12px;
+            font-size:@fontSamll;
             font-family:HiraginoSansGB-W3;
-            color:rgba(241,241,241,0.3);
+            color:@fontGray;
           }
         }
         .sBorder{
@@ -747,23 +768,23 @@ export default {
             height: 100%;
             float: left;
             .span1{
-              font-size:12px;
+              font-size:@fontSamll;
               font-family:HiraginoSansGB-W3;
-              color:rgba(241,241,241,0.3);
+              color:@fontGray;
               display: block;
               margin:30px 0 14px 35px;
             }
             .span2{
               font-size:18px;
               font-family:HiraginoSansGB-W3;
-              color:rgba(241,241,241,1);
+              color:@fontWhite;
               display: inline-block;
               margin-left:35px;
             }
             .span3{
-              font-size:12px;
+              font-size:@fontSamll;
               font-family:HiraginoSansGB-W3;
-              color:rgba(241,241,241,0.3);
+              color:@fontGray;
             }
           }
         }
@@ -791,7 +812,7 @@ export default {
           height:21px;
           float: right;
           border-radius: 10px;
-          font-size: 12px;
+          font-size: @fontSamll;
           color: white;
           text-align: center;
           line-height: 21px;

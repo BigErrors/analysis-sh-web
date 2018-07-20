@@ -144,7 +144,7 @@ export default {
   computed: {
     timeCom () {
       let now = this.time
-      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay() - 1]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
@@ -216,6 +216,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .peopleType_container{
   background: #0B131C;
   position: absolute;
@@ -257,7 +259,7 @@ export default {
       float: right;
       padding:30px 0 0 0;
       span{
-        font-size:12px;
+        font-size:@fontSamll;
         font-family:HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -277,7 +279,7 @@ export default {
       box-sizing: border-box;
       line-height: 24px;
       span{
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -298,10 +300,20 @@ export default {
           width: 5em;
           text-align: center;
           cursor: pointer;
+          position: relative;
         }
         .active{
           color:@fontWhite;
-          border-bottom: 3px solid #2E89FD;
+          // border-bottom: 3px solid #2E89FD;
+          &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2E89FD;
+            left: 0;
+            bottom:-1px;
+          }
         }
       }
     }
@@ -352,7 +364,7 @@ export default {
           color:@fontWhite;
         }
         .sort{
-          font-size:12px;
+          font-size:@fontSamll;
           font-family:MicrosoftYaHei;
           color:rgba(153,153,153,1);
           height: 21px;
@@ -373,7 +385,7 @@ export default {
         padding-top:15px;
         .thead{
           .td{
-            font-size:12px;
+            font-size:@fontSamll;
             font-family:MicrosoftYaHei;
             color:@fontGray;
             line-height:42px;
@@ -382,7 +394,7 @@ export default {
         }
         .tbody{
           .td{
-            font-size:12px;
+            font-size:@fontSamll;
             font-family:MicrosoftYaHei;
             color:@fontWhite;
             text-align:center;

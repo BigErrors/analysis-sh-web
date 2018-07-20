@@ -139,6 +139,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .peopleNum_container{
   background: #0B131C;
   position: absolute;
@@ -180,7 +182,7 @@ export default {
       float: right;
       padding:30px 0 0 0;
       span{
-        font-size:12px;
+        font-size:@fontSamll;
         font-family:HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -200,7 +202,7 @@ export default {
       box-sizing: border-box;
       line-height: 24px;
       span{
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -221,10 +223,20 @@ export default {
           width: 5em;
           text-align: center;
           cursor: pointer;
+          position: relative;
         }
         .active{
           color:@fontWhite;
-          border-bottom: 3px solid #2E89FD;
+          // border-bottom: 3px solid #2E89FD;
+          &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2E89FD;
+            left: 0;
+            bottom:-1px;
+          }
         }
       }
     }

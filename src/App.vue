@@ -146,6 +146,8 @@ export default {
 
   .el-pager li {
     background: rgba(255, 255, 255, 0) !important;
+    width: 28px!important;
+    min-width: 28px!important;
   }
 
   .el-pagination .btn-next,
@@ -169,6 +171,8 @@ export default {
     border-radius: 50% !important;
     width: 28px !important;
     height: 28px !important;
+    min-width: 28px!important;
+    margin:0 15px!important;
   }
 
   .el-pagination button:disabled {
@@ -216,11 +220,11 @@ export default {
     background: #0B131C !important;
     height: 28px !important;
     line-height: 26px !important;
-    border: 1px solid #30373e !important;
+    border: 1px solid rgba(241,241,241,0.8) !important;
   }
 
   .busiTypes_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -229,7 +233,7 @@ export default {
   .institutionRanking_container .el-range-editor.el-input__inner {
     height: 30px !important;
     background: #0B131C !important;
-    border-color: #30373e !important;
+    border-color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .institutionRanking_container .el-date-editor .el-range__icon {
@@ -242,21 +246,21 @@ export default {
 
   .institutionRanking_container .el-date-editor .el-range-input {
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .institutionRanking_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .institutionRanking_container .el-input--suffix .el-input__inner {
     height: 28px !important;
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .institutionRanking_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -269,7 +273,7 @@ export default {
   }
 
   .institutionRanking_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -278,7 +282,7 @@ export default {
   .pepleRanking_container .el-range-editor.el-input__inner {
     height: 30px !important;
     background: #0B131C !important;
-    border-color: #30373e !important;
+    border-color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .pepleRanking_container .el-date-editor .el-range__icon {
@@ -291,21 +295,21 @@ export default {
 
   .pepleRanking_container .el-date-editor .el-range-input {
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .pepleRanking_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .pepleRanking_container .el-input--suffix .el-input__inner {
     height: 28px !important;
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .pepleRanking_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -318,7 +322,7 @@ export default {
   }
 
   .pepleRanking_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -344,17 +348,17 @@ export default {
 
   .trendAnalysis_container .el-date-editor .el-range-input {
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .trendAnalysis_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .trendAnalysis_container .el-input--suffix .el-input__inner {
     height: 28px !important;
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .trendAnalysis_container .el-input--mini {
@@ -363,7 +367,7 @@ export default {
   }
 
   .trendAnalysis_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -376,7 +380,7 @@ export default {
   }
 
   .trendAnalysis_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -440,17 +444,17 @@ export default {
 
   .regional_container .el-date-editor .el-range-input {
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .regional_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .regional_container .el-input--suffix .el-input__inner {
     height: 28px !important;
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .regional_container .el-input--mini {
@@ -459,7 +463,7 @@ export default {
   }
 
   .regional_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -472,7 +476,7 @@ export default {
   }
 
   .regional_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -494,17 +498,17 @@ export default {
 
   .compensation_container .el-date-editor .el-range-input {
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .compensation_container .el-date-editor .el-range-separator {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .compensation_container .el-input--suffix .el-input__inner {
     height: 28px !important;
     background: #0B131C !important;
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
   }
 
   .compensation_container .el-input--mini {
@@ -513,7 +517,7 @@ export default {
   }
 
   .compensation_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 
@@ -530,7 +534,7 @@ export default {
   }
 
   .compensation_container .el-cascader__label {
-    color: rgba(241, 241, 241, 0.4) !important;
+    color: rgba(241, 241, 241, 0.8) !important;
     font-size: 12px !important;
   }
 

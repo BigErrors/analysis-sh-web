@@ -204,18 +204,59 @@ let setBar = (data) => {
 }
 // 圆环图_人员属性页学历类型
 let setPie2 = (data) => {
+  let newdata = data
+  let maxValIndex = 0
+  let maxVal = (newdata[0].value)
+  for (let i = 0; i < newdata.length; i++) {
+    if ((newdata[i].value) > maxVal) {
+      maxVal = (newdata[i].value)
+      maxValIndex = i
+    }
+  }
+  newdata[maxValIndex]['labelLine'] = {
+    show: true,
+    lineStyle: {
+      color: 'rgba(241,241,241,0.8)'
+    }
+  }
+  newdata[maxValIndex]['label'] = {
+    normal: {
+      show: true,
+      formatter: '{d|{b}}\n{d|{d}%}\n',
+      rich: {
+        c: {
+          color: '#f1f1f1',
+          fontSize: 14,
+          lineHeight: 16,
+          align: 'center'
+        },
+        d: {
+          color: '#f1f1f1',
+          fontSize: 14,
+          lineHeight: 16,
+          align: 'center'
+        }
+      }
+    }
+  }
   let option = {
     legend: {
       orient: 'vertical',
       bottom: '25%',
       right: '6%',
       textStyle: {
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         fontSize: 12
       },
+      itemWidth: 12,
+      itemHeight: 6,
       data: data.map(item => {
         return item.name
       })
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: '{b}: {c} ({d}%)'
     },
     color: ['#4D84FE', '#F4A869', '#9979CC', '#854DB5', '#EF5665', '#F77C88'],
     series: [
@@ -227,36 +268,14 @@ let setPie2 = (data) => {
         roseType: false,
         avoidLabelOverlap: true,
         label: {
-          normal: {
-            formatter: '{d|{d}%}\n {hr|}\n',
-            rich: {
-              c: {
-                color: '#FFC600',
-                fontSize: 13,
-                lineHeight: 12,
-                align: 'center'
-              },
-              d: {
-                color: '#f1f1f1',
-                fontSize: 12,
-                lineHeight: 12,
-                align: 'center'
-              },
-              hr: {
-                borderColor: '#4D84FE',
-                width: '100%',
-                borderWidth: 1,
-                height: 0
-              }
-            }
-          }
+          show: false
         },
         labelLine: {
           lineStyle: {
             color: '#4D84FE'
           }
         },
-        data: data
+        data: newdata
       }
     ]
   }
@@ -294,13 +313,13 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       show: displayValueAxis(),
       interval: 0,
-      color: 'rgba(241,241,241,0.4)',
-      fontSize: barMaxWidth < 16 ? barMaxWidth : 12,
+      color: 'rgba(241,241,241,0.8)',
+      fontSize: barMaxWidth < 14 ? barMaxWidth : 14,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
     // value最大值的类型：percent，integer
     // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
-    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    // max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
     splitNumber: 5,
     splitLine: {
       show: true,
@@ -318,8 +337,8 @@ let setBar2 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: 'rgba(241,241,241,0.4)',
-      fontSize: 12,
+      color: 'rgba(241,241,241,0.8)',
+      fontSize: 14,
       interval: 0,
       formatter: function (value) {
         if (value.length <= 6) {
@@ -438,7 +457,8 @@ let setLine2 = (data, dataType, legend, color) => {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       },
       splitLine: {
         show: false
@@ -456,8 +476,9 @@ let setLine2 = (data, dataType, legend, color) => {
       },
       axisLabel: {
         show: true,
-        color: 'rgba(241,241,241,0.4)',
-        formatter: dataType === 'integer' ? '{value}' : '{value} %'
+        color: 'rgba(241,241,241,0.8)',
+        formatter: dataType === 'integer' ? '{value}' : '{value} %',
+        fontSize: 14
       },
       splitLine: {
         show: true,
@@ -485,7 +506,7 @@ let setLine2 = (data, dataType, legend, color) => {
       },
       label: {
         show: false,
-        fontSize: 12,
+        fontSize: 14,
         formatter: dataType === 'integer' ? '{c}' : '{c} %'
       },
       areaStyle: index === 1 ? {
@@ -528,7 +549,7 @@ let setLine2 = (data, dataType, legend, color) => {
       right: '20px',
       textStyle: {
         color: '#FFFFFF',
-        fontSize: 12
+        fontSize: 14
       },
       data: legend.map(item => {
         return item
@@ -560,7 +581,8 @@ let setLine3 = (data, dataType, legend, color) => {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       },
       splitLine: {
         show: false
@@ -578,7 +600,8 @@ let setLine3 = (data, dataType, legend, color) => {
       },
       axisLabel: {
         show: true,
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14,
         formatter: dataType === 'integer' ? '{value}' : '{value} %'
       },
       splitLine: {
@@ -606,7 +629,7 @@ let setLine3 = (data, dataType, legend, color) => {
       },
       label: {
         show: true,
-        fontSize: 12,
+        fontSize: 14,
         formatter: dataType === 'integer' ? '{c}' : '{c} %'
       },
       data: data[index].map(item => {
@@ -620,7 +643,7 @@ let setLine3 = (data, dataType, legend, color) => {
       left: 'center',
       textStyle: {
         color: '#FFFFFF',
-        fontSize: 12
+        fontSize: 14
       },
       data: legend.map(item => {
         return item
@@ -665,7 +688,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       interval: 0,
       show: displayValueAxis(),
       color: '#4D84FE',
-      fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
+      fontSize: barMaxWidth < 14 ? barMaxWidth : 14,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
     // value最大值的类型：percent，integer
@@ -685,8 +708,8 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: 'rgba(241,241,241,0.4)',
-      fontSize: 12,
+      color: 'rgba(241,241,241,0.8)',
+      fontSize: 14,
       interval: 0,
       formatter: function (value) {
         if (value.length <= 6) {
@@ -721,9 +744,8 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     // bar配置项
     series: [{
       type: 'bar',
-      name: name,
-      stack: 'bar',
-      z: 3,
+      barMinHeight: 20,
+      barMaxWidth: 6,
       itemStyle: {
         color: {
           type: 'linear',
@@ -737,13 +759,14 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
             offset: 1, color: color[1] // 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
-        }
+        },
+        barBorderRadius: 3
       },
       label: {
         show: true,
         position: axisType === 'vertical' ? 'top' : 'right',
         color: color[1],
-        fontSize: 12
+        fontSize: 14
       },
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt(obj.value * 100)) : (obj.value)
@@ -763,12 +786,6 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       })
     })
   }
-  if (barMaxWidth) {
-    option.series[0].barMaxWidth = barMaxWidth
-    if (axisType === 'vertical') {
-      option.series[1].barMaxWidth = barMaxWidth
-    }
-  }
   if (portrait) {
     option.series.push({
       type: 'bar',
@@ -777,7 +794,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       itemStyle: {
         color: '#132665'
       },
-      barMaxWidth: barMaxWidth,
+      barMaxWidth: 6,
       data: data.map(function (obj) {
         return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
       })
@@ -817,7 +834,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       interval: 0,
       show: displayValueAxis(),
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
@@ -838,7 +855,7 @@ let setBar4 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       fontSize: 12,
       interval: 0,
       formatter: function (value) {
@@ -970,18 +987,18 @@ let setBar5 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       show: displayValueAxis(),
       interval: 'auto',
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       fontSize: barMaxWidth < 12 ? barMaxWidth : 12,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
     // value最大值的类型：percent，integer
     // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
-    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
+    // max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
     splitNumber: 4,
     splitLine: {
-      show: false,
+      show: true,
       lineStyle: {
-        color: '#4D84FE'
+        color: '#2a2f3d'
       }
     }
   }]
@@ -994,10 +1011,10 @@ let setBar5 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       interval: 0,
       rotate: rotate || 0,
-      fontSize: 12,
+      fontSize: 14,
       formatter: function (value) {
         if (axisType === 'horizon') {
           return value
@@ -1133,7 +1150,7 @@ let setPie3 = (data, title, bgColorOpacity, titlePosition) => {
         label: {
           show: true,
           position: 'center',
-          fontSize: 22,
+          fontSize: 18,
           color: '#f1f1f1',
           fontWeight: 'bold'
         },
@@ -1178,7 +1195,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
     axisLabel: {
       show: displayValueAxis(),
       interval: 'auto',
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       fontSize: barMaxWidth < 12 ? barMaxWidth : 2,
       formatter: dataType === 'percent' ? '{value} %' : '{value}'
     },
@@ -1202,7 +1219,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      color: 'rgba(241,241,241,0.4)',
+      color: 'rgba(241,241,241,0.8)',
       interval: 0,
       rotate: 0,
       fontSize: 11,
@@ -1320,7 +1337,7 @@ let setRadar = (data, indicator, page) => {
       radius: '65%',
       name: {
         textStyle: {
-          color: 'rgba(241,241,241,0.4)',
+          color: 'rgba(241,241,241,0.8)',
           fontSize: 14
         }
       },
@@ -1376,7 +1393,8 @@ let setheatmap = (data) => {
     return {
       value: item,
       textStyle: {
-        color: '#rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       }
     }
   })
@@ -1384,7 +1402,8 @@ let setheatmap = (data) => {
     return {
       value: item,
       textStyle: {
-        color: '#rgba(241,241,241,0.4)'
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       }
     }
   })
@@ -1540,12 +1559,10 @@ let setPie4 = (data) => {
       maxValIndex = i
     }
   }
-  console.log(data)
-  console.log(maxVal)
   newdata[maxValIndex]['labelLine'] = {
     show: true,
     lineStyle: {
-      color: 'rgba(241,241,241,0.4)'
+      color: 'rgba(241,241,241,0.8)'
     }
   }
   newdata[maxValIndex]['label'] = {
@@ -1555,13 +1572,13 @@ let setPie4 = (data) => {
       rich: {
         c: {
           color: '#f1f1f1',
-          fontSize: 12,
+          fontSize: 14,
           lineHeight: 16,
           align: 'center'
         },
         d: {
           color: '#f1f1f1',
-          fontSize: 12,
+          fontSize: 14,
           lineHeight: 16,
           align: 'center'
         }
@@ -1571,11 +1588,13 @@ let setPie4 = (data) => {
   let option = {
     legend: {
       orient: 'horizontal',
+      itemWidth: 12,
+      itemHeight: 6,
       top: '5%',
       left: '5%',
       right: '5%',
       textStyle: {
-        color: 'rgba(241,241,241,0.4)',
+        color: 'rgba(241,241,241,0.8)',
         fontSize: 12
       },
       data: data.map(item => {
@@ -1598,7 +1617,7 @@ let setPie4 = (data) => {
         labelLine: {
           show: false,
           lineStyle: {
-            color: 'rgba(241,241,241,0.4)'
+            color: 'rgba(241,241,241,0.8)'
           }
         },
         label: {

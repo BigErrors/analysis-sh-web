@@ -39,7 +39,7 @@
           <div class="date_container">
             <el-cascader
               class="cascader"
-              style="z-index:1;height:28px;line-height:28px;font-size:12px;width:140px;"
+              style="z-index:1;height:28px;line-height:28px;font-size:@fontSamll;width:140px;"
               :options="chooseArr"
               placeholder="选择"
               v-model="chooseDefault"
@@ -181,7 +181,7 @@ export default {
   computed: {
     timeCom () {
       let now = this.time
-      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay()]
+      let day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][now.getDay() - 1]
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() + ' ' + now.getHours().toString() + ':' + minute + ' ' + day
     }
@@ -271,6 +271,8 @@ export default {
 @table2:rgba(40,45,58,0.3);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
+@fontSamll:14px;
+@fontMiddle:16px;
 .institutionRanking_container{
   background: #0B131C;
   position: absolute;
@@ -312,7 +314,7 @@ export default {
       float: right;
       padding:30px 0 0 0;
       span{
-        font-size:12px;
+        font-size:@fontSamll;
         font-family:HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -332,7 +334,7 @@ export default {
       box-sizing: border-box;
       line-height: 24px;
       span{
-        font-size: 12px;
+        font-size: @fontSamll;
         font-family: HiraginoSansGB-W3;
         color:@fontGray;
       }
@@ -353,10 +355,20 @@ export default {
           width: 5em;
           text-align: center;
           cursor: pointer;
+          position: relative;
         }
         .active{
           color:@fontWhite;
-          border-bottom: 3px solid #2E89FD;
+          // border-bottom: 3px solid #2E89FD;
+          &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2E89FD;
+            left: 0;
+            bottom:-1px;
+          }
         }
       }
       .navRight{
@@ -373,7 +385,7 @@ export default {
           color:white;
           border-radius: 4px;
           line-height: 26px;
-          font-size:12px;
+          font-size:@fontSamll;
           font-family:'HiraginoSansGB-W3';
           cursor: pointer;
         }
@@ -428,7 +440,7 @@ export default {
         }
         .row{
           line-height: 34px;
-          font-size:12px;
+          font-size:@fontSamll;
           font-family:HiraginoSansGB-W3;
           color:@fontGray;
           float: left;
@@ -470,6 +482,9 @@ export default {
         .row11{
           width: 10%;
         }
+        .yellowf{
+          color:#2E89FD;
+        }
       }
       .t_body{
         height: calc(100% - 26px);
@@ -491,13 +506,13 @@ export default {
               left: 50%;
               top:50%;
               transform: translate(-50%,-50%);
-              font-size: 12px;
+              font-size: @fontSamll;
             }
           }
           .row1{
             width: 5%;
             span{
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
             }
@@ -506,7 +521,7 @@ export default {
               left: 50%;
               top:50%;
               transform: translate(-50%,-50%);
-              font-size: 12px;
+              font-size: @fontSamll;
             }
           }
           .row2{
@@ -518,7 +533,7 @@ export default {
             background-position: left 4px center;
             background-size: 42px 42px;
             padding-left: 52px;
-            font-size: 12px;
+            font-size: @fontSamll;
             font-family: HiraginoSansGB-W3;
             color: @fontWhite;
             line-height: 60px;
@@ -542,7 +557,7 @@ export default {
               background: linear-gradient(left, #4481EB,#04BEFE);
               padding:4px 8px;
               border-radius: 6px;
-              font-size:12px;
+              font-size:@fontSamll;
               font-family:HiraginoSansGB-W3;
               color:@fontWhite;
             }
@@ -550,7 +565,7 @@ export default {
           .row4{
             width: 8%;
             span{
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
             }
@@ -558,7 +573,7 @@ export default {
           .row5{
             width: 8%;
             span{
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
             }
@@ -566,7 +581,7 @@ export default {
           .row6{
             width: 8%;
             span{
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
             }
@@ -574,7 +589,7 @@ export default {
           .row7{
             width: 10%;
             span{
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
             }
@@ -609,7 +624,7 @@ export default {
           .row11{
             width: 10%;
             span{
-              font-size: 12px;
+              font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
             }
