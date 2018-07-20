@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="body clearfix">
+      <sidenav></sidenav>
       <div class="left">
         <div class="title" @click="changeRouter('businessTypes')">
           <span class="title_china">业务类型</span>
@@ -243,7 +244,7 @@
       <div class="other">
         <div class="once once1" @click="layerType='disputesDistribution'" :class="{active1:layerType==='disputesDistribution'}">纠纷态势</div>
         <div class="once once2" @click="layerType='importantEvent'" :class="{active2:layerType==='importantEvent'}">重点关注</div>
-        <div class="once once3" @click="layerType='mechanismDistribution'" :class="{active3:layerType==='mechanismDistribution'}">机构分布</div>
+        <!-- <div class="once once3" @click="layerType='mechanismDistribution'" :class="{active3:layerType==='mechanismDistribution'}">机构分布</div> -->
       </div>
       <!-- 区域分析 -->
       <div class="leftChoose" @click="changeRouter('regionalAnalysis')"></div>
@@ -385,7 +386,7 @@ export default {
               'coordinates': [item.value[0], item.value[1]]
             },
             'properties': {
-              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
+              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;" @click="changeRouter('importantEventDetail',${item.id})">${item.type}</span>
                       <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
                       <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
                       <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
@@ -398,9 +399,9 @@ export default {
           container: 'map',
           style: vue.mapbox,
           // 地图中心经纬度。经纬度用数组
-          center: [121.5193, 31.163070],
+          center: [121.5193, 31.263070],
           // 地图的缩放等级
-          zoom: 12,
+          zoom: 11,
           // 视角俯视的倾斜角度
           pitch: 60,
           // 地图的旋转角度
@@ -560,6 +561,7 @@ export default {
     },
     // 路由跳转
     changeRouter (name, param) {
+      console.log(1)
       let target = {
         name: name
       }
@@ -1103,7 +1105,8 @@ export default {
       right: 311px;
       bottom:11%;
       width:123px;
-      height:108px;
+      // height:108px;
+      height:72px;
       background: rgba(0, 0, 0, 0.8);
       .once{
         display: block;
