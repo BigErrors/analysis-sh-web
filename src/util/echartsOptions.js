@@ -1273,7 +1273,7 @@ let setPie6 = (data, dataType, isPie, color) => {
   return option
 }
 
-let setMapbox = (caseData, importantEventData) => {
+let setMapbox = (caseData) => {
   const osmUrl = urlConfig.osmUrl
   const option = {
     visualMap: [{
@@ -1303,28 +1303,6 @@ let setMapbox = (caseData, importantEventData) => {
               `${osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
             ],
             'tileSize': 256
-          },
-          'points': {
-            'type': 'geojson',
-            'data': {
-              'type': 'FeatureCollection',
-              'features': importantEventData.map((item, index) => {
-                return {
-                  'type': 'Feature',
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [item.value[0], item.value[1]]
-                  },
-                  'properties': {
-                    'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
-                                    <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
-                                    <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
-                                    <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
-                    'icon': 'importantEvent'
-                  }
-                }
-              })
-            }
           }
         },
         'layers': [{
@@ -1333,22 +1311,12 @@ let setMapbox = (caseData, importantEventData) => {
           'source': 'osm-tiles',
           'minzoom': 0,
           'maxzoom': 22
-        },
-        {
-          'id': 'points',
-          'type': 'symbol',
-          'source': 'points',
-          'layout': {
-            'icon-image': '{icon}',
-            'icon-size': 1
-          }
-        }
-        ]
+        }]
       },
       // 地图中心经纬度。经纬度用数组
       center: [121.5193, 31.163070],
       // 地图的缩放等级
-      zoom: 9.5,
+      zoom: 9,
       // 视角俯视的倾斜角度
       pitch: 60,
       // 地图的旋转角度
@@ -1359,7 +1327,7 @@ let setMapbox = (caseData, importantEventData) => {
         enable: true,
         // 环境光遮蔽
         SSAO: {
-          enable: true,
+          enable: false,
           // 质量，支持'low', 'medium', 'high', 'ultra'
           quality: 'medium',
           // 采样半径。半径越大效果越自然，但是需要设置较高的'quality'。

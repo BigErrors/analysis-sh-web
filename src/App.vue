@@ -540,4 +540,11 @@ export default {
     border: 2px solid #f1f1f1 !important;
   }
 
+  .hide {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+
 </style>

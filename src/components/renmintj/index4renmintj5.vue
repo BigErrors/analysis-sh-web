@@ -121,7 +121,7 @@
             <img class="rIcon" src="/static/renmintjNew/icon_anjiansbs.png" />
             <div class="rRight">
               <div class="rTop" style="border:0;margin:0">
-                <span class="span5">案例上报数</span>
+                <span class="span5">案例上报</span>
               </div>
               <div class="rBottom">
                 <span class="span6">{{workQuality.anJianSB}}</span>
@@ -238,15 +238,15 @@
     </div>
     <div class="middle">
       <!-- 地图容器 -->
-      <div class="map"></div>
+      <div class="map" id="map"></div>
       <!-- 选择框 -->
       <div class="other">
-        <div class="once once1">纠纷态势</div>
-        <div class="once once2">重点关注</div>
-        <div class="once once3">机构分布</div>
+        <div class="once once1" @click="layerType='disputesDistribution'" :class="{active1:layerType==='disputesDistribution'}">纠纷态势</div>
+        <div class="once once2" @click="layerType='importantEvent'" :class="{active2:layerType==='importantEvent'}">重点关注</div>
+        <div class="once once3" @click="layerType='mechanismDistribution'" :class="{active3:layerType==='mechanismDistribution'}">机构分布</div>
       </div>
-      <!-- 区域选择 -->
-      <div class="leftChoose"></div>
+      <!-- 区域分析 -->
+      <div class="leftChoose" @click="changeRouter('regionalAnalysis')"></div>
     </div>
     <!-- 案件分布弹框 -->
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
@@ -313,7 +313,46 @@ export default {
       value: ''
     },
     nothing: 0.1,
-    interval: ''
+    interval: '',
+    layerType: 'disputesDistribution',
+    mapbox: {
+      'version': 8,
+      'glyphs': `${urlConfig.osmUrl}/fonts/{fontstack}/{range}.pbf`,
+      'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite5',
+      'sources': {
+        'osm-tiles': {
+          'type': 'raster',
+          'tiles': [
+            `${urlConfig.osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
+          ],
+          'tileSize': 256
+        },
+        'points': {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': ''
+          }
+        }
+      },
+      'layers': [{
+        'id': 'background',
+        'type': 'raster',
+        'source': 'osm-tiles',
+        'minzoom': 0,
+        'maxzoom': 22
+      },
+      {
+        'id': 'points',
+        'type': 'symbol',
+        'source': 'points',
+        'layout': {
+          'icon-image': '{icon}',
+          'icon-size': 1
+        }
+      }
+      ]
+    }
   }),
   computed: {
     timeCom () {
@@ -331,6 +370,58 @@ export default {
     areaDefault: function (newValue, oldValue) {
       this.showDialog = false
       this.getData()
+    },
+    layerType: function (newValue, oldValue) {
+      let vue = this
+      let coordinates
+      let description
+      let popup = new mapboxgl.Popup()
+      if (newValue === 'importantEvent') {
+        vue.mapbox.sources.points.data.features = vue.keyEventsData.map((item, index) => {
+          return {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [item.value[0], item.value[1]]
+            },
+            'properties': {
+              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
+                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
+                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
+                      <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
+              'icon': 'importantEvent'
+            }
+          }
+        })
+        document.getElementById('map').innerHTML = ''
+        let map = new mapboxgl.Map({
+          container: 'map',
+          style: vue.mapbox,
+          // 地图中心经纬度。经纬度用数组
+          center: [121.5193, 31.163070],
+          // 地图的缩放等级
+          zoom: 12,
+          // 视角俯视的倾斜角度
+          pitch: 60,
+          // 地图的旋转角度
+          bearing: -10
+        })
+        map.on('load', function () {
+          map.on('click', 'points', function (e) {
+            vue.showDialog = false
+            coordinates = e.features[0].geometry.coordinates.slice()
+            description = e.features[0].properties.description
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+            }
+            popup.setLngLat(coordinates)
+              .setHTML(description)
+              .addTo(map)
+          })
+        })
+      } else {
+        vue.draw('map', eos.setMapbox(vue.caseDistributionData))
+      }
     }
   },
   created () {
@@ -367,25 +458,7 @@ export default {
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
       let vue = this
-      let map
-      let coordinates
-      let description
-      let popup = new mapboxgl.Popup()
       if (domName === 'map') {
-        map = this.myChart[domName]._model._componentsMap.mapbox3D[0]._mapbox
-        map.on('load', function () {
-          map.on('click', 'points', function (e) {
-            vue.showDialog = false
-            coordinates = e.features[0].geometry.coordinates.slice()
-            description = e.features[0].properties.description
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-            }
-            popup.setLngLat(coordinates)
-              .setHTML(description)
-              .addTo(map)
-          })
-        })
         this.myChart[domName].on('click', function (params) {
           if (params.seriesName === '分布') {
             vue.dialogData.name = params.name
@@ -461,17 +534,16 @@ export default {
         // 重点关注
         vue.importantEvent = dataList[1].data.data
         // 案件分布
-        let caseDistributionData = dataList[0].data.data
-        if (caseDistributionData.length > 0) {
-          caseDistributionData = caseDistributionData.map((item, index) => {
+        vue.caseDistributionData = dataList[0].data.data
+        if (vue.caseDistributionData.length > 0) {
+          vue.caseDistributionData = vue.caseDistributionData.map((item, index) => {
             return {
               name: item.diQu,
               value: [item.jinDu, item.weiDu, item.jianShu]
             }
           })
         }
-        let keyEventsData = dataList[1].data.data
-        keyEventsData = keyEventsData.map(item => {
+        vue.keyEventsData = dataList[1].data.data.map(item => {
           return {
             name: item.jianShu,
             value: [item.jinDu, item.weiDu, 200],
@@ -482,7 +554,7 @@ export default {
           }
         })
         vue.$nextTick(function () {
-          vue.draw('map', eos.setMapbox(caseDistributionData, keyEventsData))
+          vue.draw('map', eos.setMapbox(vue.caseDistributionData))
         })
       })
     },
@@ -634,7 +706,7 @@ export default {
             margin-top: 3px;
           }
           .active {
-            color: #FFF225
+            color: #FFF225;
           }
         }
         .trendAnalysis {
@@ -1045,7 +1117,7 @@ export default {
         background-position: left 12px center;
         background-repeat: no-repeat;
         &:hover{
-          color:#FFF225
+          color:#FFF225;
         }
       }
       .once1{
@@ -1054,11 +1126,19 @@ export default {
           background-image: url('/static/renmintjNew/icon_disputes_y.png');
         }
       }
+      .active1{
+        color:#FFF225;
+        background-image: url('/static/renmintjNew/icon_disputes_y.png');
+      }
       .once2{
         background-image: url('/static/renmintjNew/icon_import.png');
         &:hover{
           background-image: url('/static/renmintjNew/icon_import_y.png');
         }
+      }
+      .active2{
+        color:#FFF225;
+        background-image: url('/static/renmintjNew/icon_import_y.png');
       }
       .once3{
         background-image: url('/static/renmintjNew/icon_institutions.png');
@@ -1066,15 +1146,23 @@ export default {
           background-image: url('/static/renmintjNew/icon_institutions_y.png');
         }
       }
+      .active3{
+        color:#FFF225;
+        background-image: url('/static/renmintjNew/icon_institutions_y.png');
+      }
     }
     .leftChoose{
       position: absolute;
       left: 311px;
       bottom:11%;
-      width:100px;
-      height:100px;
+      width:60px;
+      height:60px;
       background: url('/static/renmintjNew/区域分析.png') no-repeat center center;
       cursor: pointer;
+      &:hover{
+        box-shadow: 0px 0px 30px rgb(27, 128, 230,0.4);
+        border-radius: 50px;
+      }
     }
   }
   .dialog {
@@ -1088,17 +1176,17 @@ export default {
     color: #ffffff;
     .close {
       cursor: pointer;
-      text-align:right;
+      text-align: right;
     }
     .address {
-      line-height:28px;
-      padding-left:18px;
+      line-height: 28px;
+      padding-left: 18px;
       background: url('/static/renmintjNew/didian.png') no-repeat left center;
     }
     .number {
-      line-height:18px;
-      padding-left:18px;
-      background:url('/static/renmintjNew/miaoshu.png') no-repeat left center;
+      line-height: 18px;
+      padding-left: 18px;
+      background: url('/static/renmintjNew/miaoshu.png') no-repeat left center;
     }
   }
 }
