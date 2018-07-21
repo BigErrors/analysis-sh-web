@@ -392,7 +392,7 @@ export default {
         }
         .ciyun{
           width: 100%;
-          height:calc(100% - 86px);
+          height:calc(100% - 100px);
           position: relative;
           background-repeat:no-repeat;
           background-size: 150px 460px;
@@ -422,7 +422,7 @@ export default {
           .box{
             flex: 1;
             height: 100%;
-            margin:0 5px;
+            margin:0;
             background: @blockBack;
             position: relative;
             .bContent{
@@ -477,8 +477,9 @@ export default {
           margin-top:5px;
           background: @blockBack;
           .table{
-            width: 100%;
+            width: calc(100% - 40px);
             height: calc(100% - 90px);
+            margin: 0px 20px;
             .thead{
               .td{
                 font-size:@fontSamll;

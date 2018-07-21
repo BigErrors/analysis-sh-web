@@ -405,10 +405,13 @@ export default {
               font-size:@fontSamll;
               font-family:MicrosoftYaHei;
               color:rgba(255,255,255,1);
-              padding:4px 8px;
-              border-radius: 4px;
+              padding: 4px 15px;
+              border-radius: 15px;
               background:#F59B5B;
-              cursor: pointer;
+              &:hover{
+               cursor: pointer;
+                background:#de7326;
+              }
             }
           }
           tr{

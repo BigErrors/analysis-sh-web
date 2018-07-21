@@ -211,7 +211,7 @@ export default {
         position: absolute;
         width: 100%;
         height: 33px;
-        top:0;
+        top: 30px;
         background-image: url('/static/renmintjNew/font.png');
         background-position: center center;
         background-repeat: no-repeat;

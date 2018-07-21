@@ -480,6 +480,8 @@ export default {
         }
         .row3{
           width: 16%;
+          text-align: left;
+          padding-left: 25px;
         }
         .row4{
           width: 8%;
@@ -579,6 +581,7 @@ export default {
           }
           .row3{
             width:16%;
+            text-align: left;
             span{
               font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;

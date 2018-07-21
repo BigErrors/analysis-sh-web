@@ -170,7 +170,7 @@ export default {
     return {
       myChart: {},
       target1: 'type1',
-      target2: 'type1',
+      target2: 'type2',
       target3: 'type1',
       target8: 'type1',
       table: {
@@ -254,7 +254,7 @@ export default {
       }
       this.man = this.formatData(this.dangShiRFX[newValue].nanXingZB)
       this.woman = this.formatData(this.dangShiRFX[newValue].nvXingZB)
-      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangShiRFX[newValue].benDiHJ)}, {name: '外地户口', value: this.formatData(this.dangShiRFX[newValue].waiDiHJ)}, {name: '未知', value: this.formatData(this.dangShiRFX[newValue].weiZhiHJ)}], 'percent', false, true))
+      this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangShiRFX[newValue].benDiHJ)}, {name: '外地户口', value: this.formatData(this.dangShiRFX[newValue].waiDiHJ)}], 'percent', false, ['rgba(0, 236, 246, 1)', '#383E4E']))
       let nianLingFB = this.dangShiRFX[newValue].nianLingFB
       if (nianLingFB.length === 0) {
         nianLingFB = [{name: '暂无数据', value: 0}]
@@ -309,17 +309,13 @@ export default {
         vue.avg = data.peiChangJE.pingJunMB
         vue.$nextTick(function () {
           vue.target1 = 'type1'
-          vue.target2 = 'type1'
+          vue.target2 = 'type2'
           vue.target3 = 'type1'
           vue.target8 = 'type1'
           vue.draw('target1', eosNew.setPie3([vue.formatData(vue.shuZhiTJ.nianZhanB), vue.formatData(1 - vue.shuZhiTJ.nianZhanB)], '占比'))
-          vue.draw('target2', eos.setLine2(vue.anJianSLBH.nianAnJSLBH))
+          vue.draw('target2', eos.setLine2(vue.anJianSLBH.yueAnJSLBH))
           vue.draw('target4', eos.setPie3(data.anJianLX, 'radius'))
-          // vue.draw('target5', eos.setBar3(data.anJianCLZT, ['#F8E228', '#FF9C00'], 'vertical', 'integer', 32, false, false))
-          // vue.draw('target61', eos.setPie4([vue.formatData(data.anJianCLJG.tiaoJieCGL), vue.formatData(1 - data.anJianCLJG.tiaoJieCGL)], '调解成功', 0, 'top'))
-          // vue.draw('target62', eos.setPie4([vue.formatData(data.anJianCLJG.xieYiSL), vue.formatData(1 - data.anJianCLJG.xieYiSL)], '协议书', 0, 'top'))
-          // vue.draw('target63', eos.setPie4([vue.formatData(data.anJianCLJG.siFaQRL), vue.formatData(1 - data.anJianCLJG.siFaQRL)], '司法确认', 0, 'top'))
-          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.benDiHJ)}, {name: '外地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.waiDiHJ)}, {name: '未知', value: vue.formatData(data.dangShiRFX.shenQingRFX.weiZhiHJ)}], 'percent', false, true))
+          vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.benDiHJ)}, {name: '外地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.waiDiHJ)}], 'percent', false, ['rgba(0, 236, 246, 1)', '#383E4E']))
           let nianLingFB = data.dangShiRFX.shenQingRFX.nianLingFB
           if (nianLingFB.length === 0) {
             nianLingFB = [{name: '暂无数据', value: 0}]

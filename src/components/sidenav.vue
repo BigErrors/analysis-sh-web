@@ -1,5 +1,5 @@
 <template>
-  <div class="nav_container" :class="{show:show,unshow:!show}">
+  <div class="nav_container" @mouseleave="show=false" :class="{show:show,unshow:!show}">
     <div class="box box2" @click="$router.push('/')">
       <div class="img"></div>
       <span class="description">返回转盘</span>
@@ -40,7 +40,7 @@
       <div class="img"></div>
       <span class="description">工作质量</span>
     </div>
-    <div class="switch" @click="show=!show" :class="{open:!show,close:show}"></div>
+    <div class="switch" @mouseenter="show=true" :class="{open:!show,close:show}"></div>
   </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
     right: 0;
     top: 50%;
     width: 86px;
-    background: rgba(8, 9, 9, 0.7);
+    background: rgba(8, 9, 9, 0.9);
     transform: translate(0, -50%);
     transition: 0.3s linear;
     z-index: 99;
@@ -94,7 +94,7 @@ export default {
     }
     .switch {
       height: 38px;
-      border-right: 16px solid rgba(32, 141, 249, 0.7);
+      border-right: 16px solid rgba(32, 141, 249, 0);
       border-top: 14px solid transparent;
       border-bottom: 14px solid transparent;
       position: absolute;

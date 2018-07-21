@@ -39,8 +39,8 @@
             <label style="float:left">描述：</label>
             <div class="content">{{eventDetail.zhongDianSJXX.miaoShu}}</div>
           </div>
-          <img v-if="eventDetail.zhongDianSJXX.jieGuo==='成功'" class="ifsuccess" src="/static/renmintj/pic_success.png"/>
-          <img v-if="eventDetail.zhongDianSJXX.jieGuo==='失败'" class="ifsuccess" src="/static/renmintj/pic_fail.png"/>
+          <!-- <img v-if="eventDetail.zhongDianSJXX.jieGuo==='成功'" class="ifsuccess" src="/static/renmintj/pic_success.png"/>
+          <img v-if="eventDetail.zhongDianSJXX.jieGuo==='失败'" class="ifsuccess" src="/static/renmintj/pic_fail.png"/> -->
         </div>
         <div class="right1">
           <div class="title">
@@ -97,7 +97,7 @@
                 <label class="label">电话：</label>
                 <span>{{item.dianHua}}</span>
                 <span class="ifshow" v-if='showWhich.indexOf(index)===-1' @click="changed(index,'add')">展开</span>
-                <span class="show" v-if='showWhich.indexOf(index)!==-1' @click="changed(index,'delete')">收回</span>
+                <span class="show" v-if='showWhich.indexOf(index)!==-1' @click="changed(index,'delete')">收起</span>
               </div>
               <div class="line2">
                 <label class="label">代理：</label>
@@ -1007,11 +1007,11 @@ export default {
               width: 5em
             }
             .ifshow{
-              padding:4px 17px 4px 6px;
+              padding:2px 15px 2px 4px;
               font-size:12px;
               font-family:HiraginoSansGB-W3;
               color:rgba(255,255,255,1);
-              border-radius: 2px;
+              border-radius: 6px;
               background:rgba(45,91,245,1);
               background-image: url('/static/renmintj/icon_open.png');
               background-position: right 4px center;
@@ -1021,11 +1021,11 @@ export default {
               margin-right: 0;
             }
             .show{
-              padding:4px 17px 4px 6px;
+              padding:2px 15px 2px 4px;
               font-size:12px;
               font-family:HiraginoSansGB-W3;
               color:rgba(255,255,255,1);
-              border-radius: 2px;
+              border-radius: 6px;
               background:rgba(45,91,245,1);
               background-image: url('/static/renmintj/icon_retract.png');
               background-position: right 4px center;
@@ -1169,7 +1169,8 @@ export default {
       margin:5px;
       .container{
         display: block;
-        height: calc(100% - 26px);
+        margin-top: 15px;
+        height: calc(100% - 41px);
         position: relative;
         .imgContainer{
           position: absolute;

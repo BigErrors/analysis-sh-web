@@ -84,12 +84,13 @@ let setPie = (data, title, bgColorOpacity, color) => {
   color = color || ['#495BFF', '#12BFFE']
   let option = {
     title: {
+      show: true,
       x: 'center',
-      bottom: 'center',
+      top: '47%',
       text: title || '标题',
       textStyle: {
         color: '#BABABA',
-        fontSize: 10
+        fontSize: 9
       }
     },
     'color': [{
@@ -109,8 +110,8 @@ let setPie = (data, title, bgColorOpacity, color) => {
     }, 'none'],
     series: [{
       type: 'pie',
-      center: ['50%', '40%'],
-      radius: ['70%', '80%'],
+      center: ['50%', '43%'],
+      radius: ['75%', '80%'],
       label: {
         show: false
       },
@@ -118,8 +119,8 @@ let setPie = (data, title, bgColorOpacity, color) => {
       hoverAnimation: false
     }, {
       type: 'pie',
-      center: ['50%', '40%'],
-      radius: ['0%', '70%'],
+      center: ['50%', '43%'],
+      radius: ['0%', '75%'],
       data: [{
         value: 0,
         name: data[0] + '%',
@@ -144,7 +145,7 @@ let setBar = (data) => {
     grid: {
       containLabel: true,
       left: 10,
-      right: 20,
+      right: 40,
       top: '10%',
       bottom: '5%'
     },
@@ -242,7 +243,7 @@ let setPie2 = (data) => {
   let option = {
     legend: {
       orient: 'vertical',
-      bottom: '25%',
+      top: '28%',
       right: '6%',
       textStyle: {
         color: 'rgba(241,241,241,0.8)',

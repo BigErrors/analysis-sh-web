@@ -720,7 +720,7 @@ export default {
               flex: 1.1;
             }
             .r_middle{
-              height: 90%;
+              height: 100%;
               flex: 1.1;
               background: url(/static/renmintjOther/icon_directing.png);
               background-repeat: no-repeat;
@@ -854,7 +854,7 @@ export default {
     .title{
       display: block;
       box-sizing: border-box;
-      padding-top:15px;
+      padding-top: 20px;
       position: relative;
       .border{
         width: 2px;

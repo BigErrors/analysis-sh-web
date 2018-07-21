@@ -19,7 +19,7 @@
       </div>
       <div class="nav2 clearfix">
         <div class="navLeft">
-          <span class="navspan active">{{typeDefault[0]}}</span>
+          <span class="navspan">{{typeDefault[0]}}</span>
         </div>
         <div class="navRight">
           <div class="date_container">
@@ -361,11 +361,11 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid @fontGray;
+        // border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
-          color:rgba(94,126,203,1);
+          color:@fontGray;
           display: inline-block;
           padding:0 2px 4px 2px;
           width: 6em;
@@ -463,7 +463,7 @@ export default {
             .border{
               width: 1px;
               height: 33%;
-              background: rgba(241, 241, 241, 0.5);
+              background: #F1F1F1;
               position: absolute;
               top: 50%;
               right: 1px;

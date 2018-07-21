@@ -642,7 +642,7 @@ export default {
       width: 289px;
       height: 100%;
       float: left;
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
+      background: linear-gradient(to right, rgba(45,42,44,0.8), rgba(45,42,44,0.8));
       position: relative;
       .left1 {
         height: calc((100% - 150px) * 0.15);
@@ -726,7 +726,7 @@ export default {
       width: 289px;
       height: 100%;
       float: right;
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 2));
+      background: linear-gradient(to right, rgba(45,42,44,0.8), rgba(45,42,44,0.8));
       position: relative;
       .right1 {
         height: calc((100% - 150px) * 0.4);
@@ -760,7 +760,7 @@ export default {
             .table_tr:hover {
               .once{
                 cursor: pointer;
-                color: #FFF225;
+                color: #149CFA;
               }
             }
           }
@@ -939,14 +939,14 @@ export default {
         width: 49%;
         height: 66px;
         float: left;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        background: linear-gradient(to right, rgba(45,42,44,0.8), rgba(45,42,44,0.8));
         padding-top: 5px;
       }
       .bottom2 {
         width: 49%;
         height: 66px;
         float: right;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        background: linear-gradient(to right, rgba(45,42,44,0.8), rgba(45,42,44,0.8));
         padding-top: 5px;
       }
       .bTitle {
@@ -1008,7 +1008,7 @@ export default {
       left: 50%;
       top: 32px;
       transform: translate(-50%);
-      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+      background: linear-gradient(to right, rgba(45,42,44,0.8), rgba(45,42,44,0.8));
       .topY {
         width: 8%;
         float: left;
@@ -1088,7 +1088,7 @@ export default {
     }
     .title:hover {
       cursor: pointer;
-      color: #FFF225;
+      color: #149CFA;
     }
   }
   .middle {
@@ -1107,7 +1107,7 @@ export default {
       width:123px;
       // height:108px;
       height:72px;
-      background: rgba(0, 0, 0, 0.8);
+      background: linear-gradient(to right, rgba(45,42,44,0.8), rgba(45,42,44,0.8));
       .once{
         display: block;
         height: 36px;
@@ -1158,13 +1158,12 @@ export default {
       position: absolute;
       left: 311px;
       bottom:11%;
-      width:60px;
-      height:60px;
+      width: 100px;
+      height: 100px;
       background: url('/static/renmintjNew/区域分析.png') no-repeat center center;
-      cursor: pointer;
       &:hover{
-        box-shadow: 0px 0px 30px rgb(27, 128, 230,0.4);
-        border-radius: 50px;
+        cursor: pointer;
+        background: url('/static/renmintjNew/区域分析hover.png') no-repeat center center;
       }
     }
   }

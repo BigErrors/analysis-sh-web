@@ -504,7 +504,7 @@ let setLine = (data) => {
   return option
 }
 // 折线图
-let setLine2 = (data, showYAxis) => {
+let setLine2 = (data) => {
   let option = {
     tooltip: {
       trigger: 'axis'
@@ -540,11 +540,15 @@ let setLine2 = (data, showYAxis) => {
         show: false
       },
       axisLabel: {
-        show: showYAxis || false,
-        color: 'rgba(241,241,241,0.8)'
+        show: true,
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 14
       },
       splitLine: {
-        show: false
+        show: true,
+        lineStyle: {
+          color: '#2a2f3d'
+        }
       }
     },
     series: []
@@ -759,7 +763,7 @@ let setLine5 = (data, callback) => {
       data: date,
       axisLine: {
         lineStyle: {
-          color: '#2A2F3D'
+          color: '#2a2f3d'
         }
       },
       axisTick: {
@@ -767,7 +771,7 @@ let setLine5 = (data, callback) => {
       },
       axisLabel: {
         // interval: 0,
-        color: 'rgba(241,241,241,0.8)',
+        color: '#F1F1F1',
         fontSize: 14
       }
     },
@@ -776,19 +780,19 @@ let setLine5 = (data, callback) => {
       boundaryGap: [0, '100%'],
       splitLine: {
         lineStyle: {
-          color: '#2A2F3D'
+          color: '#2a2f3d'
         }
       },
       axisLine: {
         lineStyle: {
-          color: '#2A2F3D'
+          color: '#2a2f3d'
         }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
-        color: 'rgba(241,241,241,0.8)',
+        color: '#F1F1F1',
         fontSize: 14
       }
     },
@@ -1125,15 +1129,52 @@ let setPie2 = (data) => {
 
 // 圆环图
 let setPie3 = (data, showRose) => {
+  let newdata = data
+  let maxValIndex = 0
+  let maxVal = parseInt(newdata[0].value)
+  for (let i = 0; i < newdata.length; i++) {
+    if (parseInt(newdata[i].value) > maxVal) {
+      maxVal = parseInt(newdata[i].value)
+      maxValIndex = i
+    }
+  }
+  newdata[maxValIndex]['labelLine'] = {
+    show: true,
+    lineStyle: {
+      color: 'rgba(241,241,241,0.8)'
+    }
+  }
+  newdata[maxValIndex]['label'] = {
+    normal: {
+      show: true,
+      formatter: '{d|{b}}\n{d|{d}%}\n',
+      rich: {
+        c: {
+          color: '#f1f1f1',
+          fontSize: 14,
+          lineHeight: 16,
+          align: 'center'
+        },
+        d: {
+          color: '#f1f1f1',
+          fontSize: 14,
+          lineHeight: 16,
+          align: 'center'
+        }
+      }
+    }
+  }
   let option = {
     legend: {
       orient: 'vertical',
-      top: '15%',
+      top: '20%',
       right: 10,
       textStyle: {
         color: 'rgba(241,241,241,0.8)',
         fontSize: 12
       },
+      itemWidth: 12,
+      itemHeight: 6,
       data: data.map(item => {
         return item.name
       })
@@ -1143,41 +1184,17 @@ let setPie3 = (data, showRose) => {
       {
         name: 'seriesName',
         type: 'pie',
-        center: ['42%', '60%'],
+        center: ['42%', '50%'],
         radius: ['40%', '55%'],
         roseType: showRose || false,
         avoidLabelOverlap: true,
         label: {
-          normal: {
-            formatter: '{d|{d}%}\n {hr|}\n',
-            rich: {
-              c: {
-                color: '#f1f1f1',
-                fontSize: 12,
-                lineHeight: 12,
-                align: 'center'
-              },
-              d: {
-                color: '#f1f1f1',
-                fontSize: 12,
-                lineHeight: 12,
-                align: 'center'
-              },
-              hr: {
-                borderColor: 'rgba(241,241,241,0.8)',
-                width: '100%',
-                borderWidth: 1,
-                height: 0
-              }
-            }
-          }
+          show: false
         },
         labelLine: {
-          lineStyle: {
-            color: 'rgba(241,241,241,0.8)'
-          }
+          show: false
         },
-        data: data
+        data: newdata
       }
     ]
   }
@@ -1233,7 +1250,7 @@ let setPie4 = (data, title, bgColorOpacity, titlePosition) => {
 // 圆环图
 let setPie6 = (data, dataType, isPie, color) => {
   isPie = isPie || false
-  color = color || data.length > 4 ? ['#95B6FF', 'rgba(241,241,241,0.8)', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88'] : ['#FFBB50', '#00E767', '#35C4F9', '#FF4240']
+  color = color || ['#95B6FF', 'rgba(241,241,241,0.8)', '#EC4050', '#FEC596', '#F59B5B', '#F18D47', '#F77C88']
   let option = {
     legend: {
       orient: 'center',
@@ -1243,6 +1260,8 @@ let setPie6 = (data, dataType, isPie, color) => {
         color: 'rgba(241,241,241,0.8)',
         fontSize: 12
       },
+      itemWidth: 12,
+      itemHeight: 6,
       data: data.map(item => {
         return item.name
       })
@@ -1263,7 +1282,7 @@ let setPie6 = (data, dataType, isPie, color) => {
         name: '饼图',
         type: 'pie',
         center: ['35%', '50%'],
-        radius: isPie ? ['0', '80%'] : ['65%', '80%'],
+        radius: isPie ? ['0', '70%'] : ['65%', '80%'],
         label: {
           show: false
         },
