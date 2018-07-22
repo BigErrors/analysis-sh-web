@@ -302,17 +302,20 @@ export default {
       let data = []
       vue.lineData.map(item => {
         if (vue.timeType === item.timetype && vue.type2Title === item.type1 && type === item.type2) {
-          data = item.value.sort((a, b) => {
-            if (parseInt(a.name) >= parseInt(b.name)) {
-              return 1
-            } else {
-              return -1
-            }
-          })
+          data = item.value
+          // 处理年份数据倒序的问题
+          if (item.timetype === 'year') {
+            data = data.sort(function (a, b) {
+              if (a.name > b.name) {
+                return 1
+              } else {
+                return -1
+              }
+            })
+          }
         }
       })
       vue.draw('target3', eos.setLine6(data, 'integer', type))
-      // this.$notify.success(`时间:${this.timeType},类别:${this.type},一级分类:${this.type2Title},二级分类:${type}`)
     },
     getData () {
       let vue = this
@@ -721,7 +724,8 @@ export default {
               flex: 1.1;
             }
             .r_middle{
-              height: 100%;
+              height: calc(100% - 20px);
+              margin-bottom: 20px;
               flex: 1.1;
               background: url(/static/renmintjOther/icon_directing.png);
               background-repeat: no-repeat;
