@@ -1611,7 +1611,7 @@ let setPie4 = (data) => {
       {
         name: 'seriesName',
         type: 'pie',
-        center: ['50%', '65%'],
+        center: ['50%', '55%'],
         radius: ['35%', '55%'],
         roseType: false,
         avoidLabelOverlap: true,
