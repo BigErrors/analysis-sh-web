@@ -316,7 +316,7 @@ export default {
     nothing: 0.1,
     interval: '',
     layerType: 'disputesDistribution',
-    mapbox: {
+    mapboxStyle: {
       'version': 8,
       'glyphs': `${urlConfig.osmUrl}/fonts/{fontstack}/{range}.pbf`,
       'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite5',
@@ -375,11 +375,11 @@ export default {
     layerType: function (newValue, oldValue) {
       let vue = this
       let map
-      // let coordinates
-      // let description
-      // let popup = new mapboxgl.Popup()
+      let coordinates
+      let description
+      let popup = new mapboxgl.Popup()
       if (newValue === 'importantEvent') {
-        vue.mapbox.sources.points.data.features = vue.keyEventsData.map((item, index) => {
+        vue.mapboxStyle.sources.points.data.features = vue.keyEventsData.map((item, index) => {
           return {
             'type': 'Feature',
             'geometry': {
@@ -396,34 +396,31 @@ export default {
           }
         })
         document.getElementById('map').innerHTML = ''
-        vue.$nextTick(function () {
-          map = new mapboxgl.Map({
-            container: 'map',
-            style: vue.mapbox,
-            // 地图中心经纬度。经纬度用数组
-            center: [121.5193, 31.263070],
-            // 地图的缩放等级
-            zoom: 11,
-            // 视角俯视的倾斜角度
-            pitch: 60,
-            // 地图的旋转角度
-            bearing: -10
-          })
-          console.log(map)
+        map = new mapboxgl.Map({
+          container: 'map',
+          style: vue.mapboxStyle,
+          // 地图中心经纬度。经纬度用数组
+          center: [121.5193, 31.263070],
+          // 地图的缩放等级
+          zoom: 11,
+          // 视角俯视的倾斜角度
+          pitch: 60,
+          // 地图的旋转角度
+          bearing: -10
         })
-        // map.on('load', function (event) {
-        //   map.on('click', 'points', function (e) {
-        //     vue.showDialog = false
-        //     coordinates = e.features[0].geometry.coordinates.slice()
-        //     description = e.features[0].properties.description
-        //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        //       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-        //     }
-        //     popup.setLngLat(coordinates)
-        //       .setHTML(description)
-        //       .addTo(map)
-        //   })
-        // })
+        map.on('load', function (event) {
+          map.on('click', 'points', function (e) {
+            vue.showDialog = false
+            coordinates = e.features[0].geometry.coordinates.slice()
+            description = e.features[0].properties.description
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+            }
+            popup.setLngLat(coordinates)
+              .setHTML(description)
+              .addTo(map)
+          })
+        })
       } else {
         vue.draw('map', eos.setMapbox(vue.caseDistributionData))
       }
