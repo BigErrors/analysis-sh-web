@@ -332,7 +332,7 @@ export default {
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
-            'features': {}
+            'features': ''
           }
         }
       },
@@ -375,9 +375,9 @@ export default {
     layerType: function (newValue, oldValue) {
       let vue = this
       let map
-      // let coordinates
-      // let description
-      // let popup = new mapboxgl.Popup()
+      let coordinates
+      let description
+      let popup = new mapboxgl.Popup()
       if (newValue === 'importantEvent') {
         vue.mapboxStyle.sources.points.data.features = vue.keyEventsData.map((item, index) => {
           return {
@@ -387,10 +387,10 @@ export default {
               'coordinates': [item.value[0], item.value[1]]
             },
             'properties': {
-              // 'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
-              //         <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
-              //         <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
-              //         <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
+              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
+                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
+                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
+                      <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
               'icon': 'importantEvent'
             }
           }
@@ -408,20 +408,19 @@ export default {
           // 地图的旋转角度
           bearing: -10
         })
-        console.log(map)
-        // map.on('load', function (event) {
-        //   map.on('click', 'points', function (e) {
-        //     vue.showDialog = false
-        //     coordinates = e.features[0].geometry.coordinates.slice()
-        //     description = e.features[0].properties.description
-        //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        //       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-        //     }
-        //     popup.setLngLat(coordinates)
-        //       .setHTML(description)
-        //       .addTo(map)
-        //   })
-        // })
+        map.on('load', function (event) {
+          map.on('click', 'points', function (e) {
+            vue.showDialog = false
+            coordinates = e.features[0].geometry.coordinates.slice()
+            description = e.features[0].properties.description
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+            }
+            popup.setLngLat(coordinates)
+              .setHTML(description)
+              .addTo(map)
+          })
+        })
       } else {
         document.getElementById('map').innerHTML = ''
         vue.draw('map', eos.setMapbox(vue.caseDistributionData))
