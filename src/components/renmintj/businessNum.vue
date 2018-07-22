@@ -280,7 +280,7 @@ export default {
         vue.draw('target2', eosNew.setPie4(data))
         vue.setType2Data(data[0].name)
       } else {
-        vue.draw('target2', eos.setPie2([{name: '暂无数据', value: 0}]))
+        vue.draw('target2', eosNew.setPie4([{name: '暂无数据', value: 0}]))
         vue.type2Title = '暂无数据'
         vue.table = [{type2: '暂无数据', value: 0}]
         vue.draw('target3', eos.setLine6([{name: '暂无数据', value: 0}], 'integer'))
@@ -373,7 +373,7 @@ export default {
             vue.draw('target5', eos.setLine7(data, 'integer', undefined, true))
           } else if (vue.type === '纠纷排查') {
             vue.title6 = '处理结果'
-            vue.draw('target6', eos.setPie2(data))
+            vue.draw('target6', eosNew.setPie4(data))
           }
         })
       })
@@ -391,7 +391,7 @@ export default {
             vue.draw('target5', eosNew.setPie4(data))
           } else if (vue.type === '公共法律服务') {
             vue.title6 = '调解占比'
-            vue.draw('target6', eos.setPie2(data))
+            vue.draw('target6', eosNew.setPie4(data))
           } else if (vue.type === '纠纷排查') {
             vue.title5 = '所在人群'
             vue.draw('target5', eosNew.setPie4(data))
