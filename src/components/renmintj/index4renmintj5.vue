@@ -407,7 +407,7 @@ export default {
           // 地图的旋转角度
           bearing: -10
         })
-        map.on('load', function () {
+        map.on('load', function (event) {
           map.on('click', 'points', function (e) {
             vue.showDialog = false
             coordinates = e.features[0].geometry.coordinates.slice()
