@@ -159,24 +159,24 @@
             <div class="rightContainer">
               <div class="cright a1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
                 <div class="cline">
-                  <span class="clable">申请事项1：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0!=='未知'">申请事项1：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项2：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1!=='未知'">申请事项2：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项3：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2!=='未知'">申请事项3：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项4：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3!=='未知'">申请事项4：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">其他事项：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT!=='未知'">其他事项：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
                 </div>
               </div>
               <div class="cright a2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
@@ -240,24 +240,24 @@
             <div class="rightContainer">
               <div class="cright b1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
                 <div class="cline">
-                  <span class="clable">申请事项1：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0!=='未知'">申请事项1：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项2：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1!=='未知'">申请事项2：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项3：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2!=='未知'">申请事项3：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项4：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3!=='未知'">申请事项4：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">其他事项：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT!=='未知'">其他事项：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
                 </div>
               </div>
               <div class="cright b2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
@@ -306,24 +306,24 @@
             <div class="rightContainer">
               <div class="cright c1" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">
                 <div class="cline">
-                  <span class="clable">申请事项1：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0!=='未知'">申请事项1：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX0}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项2：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1!=='未知'">申请事项2：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX1}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项3：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2!=='未知'">申请事项3：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX2}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">申请事项4：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3!=='未知'">申请事项4：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSX3}}</span>
                 </div>
                 <div class="cline">
-                  <span class="clable">其他事项：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
+                  <span class="clable" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT!=='未知'">其他事项：</span>
+                  <span class="cspan" v-if="eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT!=='未知'">{{eventDetail.anJianCLGC.buZhou1.shenQingSX.shenQingSXQT}}</span>
                 </div>
               </div>
               <div class="cright c2" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">
