@@ -386,7 +386,7 @@ export default {
               'coordinates': [item.value[0], item.value[1]]
             },
             'properties': {
-              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;" @click="changeRouter('importantEventDetail',${item.id})">${item.type}</span>
+              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
                       <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
                       <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
                       <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
@@ -547,7 +547,7 @@ export default {
         vue.keyEventsData = dataList[1].data.data.map(item => {
           return {
             name: item.jianShu,
-            value: [item.jinDu, item.weiDu, 200],
+            value: [item.jinDu, item.weiDu],
             type: item.shiJianLX,
             detail: item.xiangQing,
             area: item.xiangXiDZ,
@@ -561,7 +561,6 @@ export default {
     },
     // 路由跳转
     changeRouter (name, param) {
-      console.log(1)
       let target = {
         name: name
       }
