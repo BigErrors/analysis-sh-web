@@ -374,6 +374,7 @@ export default {
     },
     layerType: function (newValue, oldValue) {
       let vue = this
+      let map
       // let coordinates
       // let description
       // let popup = new mapboxgl.Popup()
@@ -395,19 +396,21 @@ export default {
           }
         })
         document.getElementById('map').innerHTML = ''
-        let map = new mapboxgl.Map({
-          container: 'map',
-          style: vue.mapbox,
-          // 地图中心经纬度。经纬度用数组
-          center: [121.5193, 31.263070],
-          // 地图的缩放等级
-          zoom: 11,
-          // 视角俯视的倾斜角度
-          pitch: 60,
-          // 地图的旋转角度
-          bearing: -10
+        vue.$nextTick(function () {
+          map = new mapboxgl.Map({
+            container: 'map',
+            style: vue.mapbox,
+            // 地图中心经纬度。经纬度用数组
+            center: [121.5193, 31.263070],
+            // 地图的缩放等级
+            zoom: 11,
+            // 视角俯视的倾斜角度
+            pitch: 60,
+            // 地图的旋转角度
+            bearing: -10
+          })
+          console.log(map)
         })
-        console.log(map)
         // map.on('load', function (event) {
         //   map.on('click', 'points', function (e) {
         //     vue.showDialog = false
