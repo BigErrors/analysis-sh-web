@@ -37,7 +37,11 @@
           </div>
           <div class="line clearfix">
             <label style="float:left">描述：</label>
-            <div class="content">{{eventDetail.zhongDianSJXX.miaoShu}}</div>
+            <!-- 姓名超过六个字特殊处理 -->
+            <el-tooltip v-if="eventDetail.zhongDianSJXX.miaoShu.length>100" :content='eventDetail.zhongDianSJXX.miaoShu' placement="top">
+              <div class="content">{{eventDetail.zhongDianSJXX.miaoShu.slice(0,100)+'...'}}</div>
+            </el-tooltip>
+            <div class="content" v-if="eventDetail.zhongDianSJXX.miaoShu.length<=100" >{{eventDetail.zhongDianSJXX.miaoShu}}</div>
           </div>
           <!-- <img v-if="eventDetail.zhongDianSJXX.jieGuo==='成功'" class="ifsuccess" src="/static/renmintj/pic_success.png"/>
           <img v-if="eventDetail.zhongDianSJXX.jieGuo==='失败'" class="ifsuccess" src="/static/renmintj/pic_fail.png"/> -->
@@ -75,8 +79,8 @@
           </div>
           <div class="ul">
             <div class="li" v-for="(item,index) in eventDetail.dangShiRXX" :key='index' :class="{showAll:showWhich.indexOf(index)!==-1}">
-              <div class="people_type red">被申请人</div>
-              <div class="ifPoint" v-if="item.zhongDianRYBS==='1'">重点人员</div>
+              <div class="people_type" :class="item.dangShiRLB==='申请人'? 'blue':'red'" v-text="item.dangShiRLB"></div>
+              <div class="ifPoint" v-if="item.zhongDianRYBS==='1'" v-text="'曾犯' + item.zhongDianRYLX"></div>
               <div class="line">
                 <label class="label">姓名：</label>
                 <!-- 姓名超过六个字特殊处理 -->
@@ -96,8 +100,8 @@
               <div class="line">
                 <label class="label">电话：</label>
                 <span>{{item.dianHua}}</span>
-                <span class="ifshow" v-if='showWhich.indexOf(index)===-1' @click="changed(index,'add')">展开</span>
-                <span class="show" v-if='showWhich.indexOf(index)!==-1' @click="changed(index,'delete')">收起</span>
+                <span class="ifshow" v-if='showWhich.indexOf(index)===-1&&item.daiLiR!=="未知"' @click="changed(index,'add')">展开</span>
+                <span class="show" v-if='showWhich.indexOf(index)!==-1&&item.daiLiR!=="未知"' @click="changed(index,'delete')">收起</span>
               </div>
               <div class="line2">
                 <label class="label">代理：</label>
@@ -1002,7 +1006,7 @@ export default {
               height: 19px;
             }
             .span2{
-              width: 3em
+              width: 4em
             }
             .span3{
               width: 5em
@@ -1096,10 +1100,10 @@ export default {
         .once{
           float: left;
           .once_head{
-            width: 111px;
-            height: 106px;
+            width: 100px;
+            height: 95px;
             position: relative;
-            margin:25px 16px 0px 40px;
+            margin: 25px 22px 0px 45px;
             float: left;
             .pic1{
               position: absolute;
@@ -1113,6 +1117,7 @@ export default {
               bottom:0;
               left: 0;
               z-index: 3;
+              width: 100px;
             }
             .pic_span{
               position: absolute;
