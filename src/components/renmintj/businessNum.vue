@@ -34,8 +34,8 @@
             </div>
             <div class="others">
               <div class="rm rm_1">
-                <span class="span2">{{statistics.day}}</span>
-                <span class="span1">今日新增</span>
+                <span class="span2">{{statistics.month}}</span>
+                <span class="span1">本月新增</span>
                 <!-- <span class="span3">件</span> -->
               </div>
               <div class="rm rm_2">
@@ -85,8 +85,8 @@
             </div>
             <div class="others others2">
               <div class="rm rm_1">
-                <span class="span2">{{statistics.day}}</span>
-                <span class="span1">今日新增</span>
+                <span class="span2">{{statistics.month}}</span>
+                <span class="span1">本月新增</span>
                 <!-- <span class="span3">件</span> -->
               </div>
               <div class="rm rm_2">
