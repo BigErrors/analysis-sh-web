@@ -1157,7 +1157,6 @@ export default {
       }
     }
     .leftChoose{
-      display: none;
       position: absolute;
       left: 311px;
       bottom:11%;
