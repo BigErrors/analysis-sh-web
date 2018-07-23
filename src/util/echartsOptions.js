@@ -1351,7 +1351,7 @@ let setMapbox = (caseData) => {
   return option
 }
 
-// 区域分析桑吉图 graph echarts 3.8.5
+// 区域分析 graph echarts 3.8.5
 let setGraph = (data) => {
   let categories = []
   let graph = data || {
@@ -1429,4 +1429,41 @@ let setGraph = (data) => {
   return option
 }
 
-export default {setBar, setBar3, setBar4, setRadar2, setLine, setLine2, setLine4, setLine5, setLine6, setLine7, setPie, setPie2, setPie3, setPie4, setPie6, setMapbox, setGraph}
+// 区域分析 sankey
+let setSankey = (data) => {
+  let option = {
+    series: {
+      type: 'sankey',
+      draggable: false,
+      data: [{
+        name: 'a'
+      }, {
+        name: 'b'
+      }, {
+        name: 'a1'
+      }, {
+        name: 'a2'
+      }],
+      links: [{
+        source: 'a',
+        target: 'a1',
+        value: 5
+      }, {
+        source: 'a',
+        target: 'a2',
+        value: 3
+      }, {
+        source: 'b',
+        target: 'a1',
+        value: 5
+      }, {
+        source: 'b',
+        target: 'a2',
+        value: 3
+      }]
+    }
+  }
+  return option
+}
+
+export default {setBar, setBar3, setBar4, setRadar2, setLine, setLine2, setLine4, setLine5, setLine6, setLine7, setPie, setPie2, setPie3, setPie4, setPie6, setMapbox, setGraph, setSankey}

@@ -268,7 +268,7 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import mapboxgl from 'mapbox-gl'
+import * as mapboxgl from '../../../static/mapbox-gl'
 
 export default {
   name: 'index',
