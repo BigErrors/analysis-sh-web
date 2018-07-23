@@ -71,7 +71,7 @@
             </div>
             <!-- 判断下重点事件是否>6，如果不是则不轮播，正常显示即可 -->
             <div v-if="importantEvent.length>=6" class="table_body">
-              <rollScreen :dLength='20' :height='25' :lineNum='6'>
+              <rollScreen :dLength='importantEvent.length' :height='25' :lineNum='6'>
                 <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('importantEventDetail',item.id)"
                   slot="slide">
                   <span class="once">{{item.shiJianLX}}</span>
@@ -396,6 +396,7 @@ export default {
           }
         })
         document.getElementById('map').innerHTML = ''
+        console.log(vue.mapboxStyle)
         map = new mapboxgl.Map({
           container: 'map',
           style: vue.mapboxStyle,
