@@ -46,7 +46,7 @@ export default {
             description: 'insight++',
             fontColor: '',
             bgImg: '/static/renmintjNew/icon_insight.png',
-            url: 'http://192.168.91.223:8088',
+            url: 'http://60.190.226.163:8882',
             type: 'website'
           }, {
             flex: 1,
@@ -54,7 +54,7 @@ export default {
             description: '同案同调',
             fontColor: '',
             bgImg: '/static/renmintjNew/icon_search.png',
-            url: 'http://192.168.91.34:8880/tatt/pages/index.html',
+            url: 'http://60.190.226.163:8881/tatt/pages/index.html',
             type: 'website'
           }, {
             flex: 1,
