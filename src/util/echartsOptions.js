@@ -506,6 +506,7 @@ let setLine = (data) => {
 // 折线图
 let setLine2 = (data) => {
   let option = {
+    color: ['#00FFFF'],
     tooltip: {
       trigger: 'axis'
     },
@@ -529,7 +530,9 @@ let setLine2 = (data) => {
         show: false
       },
       boundaryGap: false,
-      data: []
+      data: data.map(item => {
+        return item['name']
+      })
     },
     yAxis: {
       type: 'value',
@@ -551,50 +554,7 @@ let setLine2 = (data) => {
         }
       }
     },
-    series: []
-  }
-  if (data[0] && data[0]['gankongzs_ls']) {
-    option.color = ['#1254C2', '#00FFFF']
-    option.xAxis.data = data.map(item => {
-      return item['time']
-    })
-    option.yAxis.splitNumber = 1
-    option.yAxis.max = 8
-    option.yAxis.min = 6
-    option.series[0] = {
-      name: '历史同期',
-      type: 'line',
-      smooth: true,
-      symbolSize: 1,
-      lineStyle: {
-        width: 1
-      },
-      data: data.map(item => {
-        return item['gankongzs_ls']
-      })
-    }
-    option.series[1] = {
-      name: '和谐指数',
-      type: 'line',
-      smooth: true,
-      symbolSize: 1,
-      lineStyle: {
-        width: 1
-      },
-      areaStyle: {
-        opacity: 0.4
-      },
-      data: data.map(item => {
-        return item['gankongzs']
-      })
-    }
-  }
-  if (data[0] && data[0]['value']) {
-    option.color = ['#00FFFF']
-    option.xAxis.data = data.map(item => {
-      return item['name']
-    })
-    option.series[0] = {
+    series: [{
       name: '数据',
       type: 'line',
       smooth: true,
@@ -620,28 +580,7 @@ let setLine2 = (data) => {
       data: data.map(item => {
         return item['value']
       })
-    }
-  }
-  if (data[0] && data[0]['number']) {
-    option.color = ['#00FFFF']
-    option.xAxis.data = data.map(item => {
-      return item['time']
-    })
-    option.series[0] = {
-      name: '数量',
-      type: 'line',
-      smooth: true,
-      symbolSize: 1,
-      lineStyle: {
-        width: 1
-      },
-      areaStyle: {
-        opacity: 0.4
-      },
-      data: data.map(item => {
-        return item['number']
-      })
-    }
+    }]
   }
   return option
 }

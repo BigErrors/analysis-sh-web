@@ -180,7 +180,6 @@ export default {
       },
       tjtype: '行专调解',
       area: json.area,
-      type: json.caseType,
       selectDefault: {
         areaDefault: ['SHJCK01000'],
         typeDefault: ['民事']
@@ -212,6 +211,13 @@ export default {
       let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
       return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
           ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+    },
+    type () {
+      if (this.tjtype === '行专调解') {
+        return json.caseType
+      } else {
+        return json.commonCaseType
+      }
     }
   },
   watch: {
@@ -257,9 +263,6 @@ export default {
       this.woman = this.formatData(this.dangShiRFX[newValue].nvXingZB)
       this.draw('target81', eos.setPie6([{name: '本地户口', value: this.formatData(this.dangShiRFX[newValue].benDiHJ)}, {name: '外地户口', value: this.formatData(this.dangShiRFX[newValue].waiDiHJ)}], 'percent', false, ['rgba(0, 236, 246, 1)', '#383E4E']))
       let nianLingFB = this.dangShiRFX[newValue].nianLingFB
-      if (nianLingFB.length === 0) {
-        nianLingFB = [{name: '暂无数据', value: 0}]
-      }
       this.draw('target82', eosNew.setBar5(nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
     },
     tjtype: function (newValue, oldValue) {
@@ -297,8 +300,8 @@ export default {
         vue.shuZhiTJ = data.shuZhiTJ
         vue.xingZhuanTJS = vue.shuZhiTJ.nianHangZTJS
         vue.tiaoJieAJS = vue.shuZhiTJ.nianTiaoJAJZS
-        vue.anJianSLBH.nianAnJSLBH = data.anJianSLBH.nianAnJSLBH.reverse()
-        vue.anJianSLBH.yueAnJSLBH = data.anJianSLBH.yueAnJSLBH.reverse()
+        vue.anJianSLBH.nianAnJSLBH = data.anJianSLBH.nianAnJSLBH
+        vue.anJianSLBH.yueAnJSLBH = data.anJianSLBH.yueAnJSLBH
         vue.anJianSLS.jiGouAJSLS = data.anJianSLS.jiGouAJSLS || []
         vue.anJianSLS.tiaoJieYAJSLS = data.anJianSLS.tiaoJieYAJSLS || []
         vue.anJianSLSBG = vue.anJianSLS.jiGouAJSLS
@@ -318,9 +321,6 @@ export default {
           vue.draw('target4', eos.setPie3(data.anJianLX, 'radius'))
           vue.draw('target81', eos.setPie6([{name: '本地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.benDiHJ)}, {name: '外地户口', value: vue.formatData(data.dangShiRFX.shenQingRFX.waiDiHJ)}], 'percent', false, ['rgba(0, 236, 246, 1)', '#383E4E']))
           let nianLingFB = data.dangShiRFX.shenQingRFX.nianLingFB
-          if (nianLingFB.length === 0) {
-            nianLingFB = [{name: '暂无数据', value: 0}]
-          }
           vue.draw('target82', eosNew.setBar5(nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
           vue.draw('target9', eosNew.setBar5(data.peiChangJE.peiChangJEBH, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
         })

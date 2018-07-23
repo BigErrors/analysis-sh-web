@@ -50,6 +50,7 @@ let area = [{
   'label': '黄埔区',
   'value': 'SHJCK01002'
 }]
+
 let caseType = [{
   'label': '民事',
   'value': '民事'
@@ -79,6 +80,29 @@ let caseType = [{
   'value': '知产'
 }]
 
+let commonCaseType = [{
+  'label': '民事',
+  'value': '民事'
+}, {
+  'label': '治安',
+  'value': '治安'
+}, {
+  'label': '房产',
+  'value': '房产'
+}, {
+  'label': '医患',
+  'value': '医患'
+}, {
+  'label': '交通',
+  'value': '交通'
+}, {
+  'label': '劳动',
+  'value': '劳动'
+}, {
+  'label': '知产',
+  'value': '知产'
+}]
+
 let businessType = [{
   'label': '人民调解',
   'value': '人民调解'
@@ -103,4 +127,4 @@ let coordinationType = [
   {label: '行业性、专业性调委会', value: '29652b300bb2482ea1b30be2310cf451'},
   {label: '其它调委会', value: '14d05df3ee184a22aeb0d78a81874050'}
 ]
-export default {area, caseType, businessType, coordinationType}
+export default {area, caseType, commonCaseType, businessType, coordinationType}
