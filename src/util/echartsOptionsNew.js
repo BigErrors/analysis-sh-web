@@ -7,8 +7,8 @@ let setLine = (data, showYAxis, containLabel) => {
     grid: {
       containLabel: containLabel || false,
       left: 10,
-      right: 0,
-      top: '15%',
+      right: 11,
+      top: '10%',
       bottom: '10%'
     },
     color: ['#00FFFF'],
