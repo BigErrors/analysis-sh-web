@@ -843,7 +843,7 @@ export default {
             padding-left: 58px;
             .span5 {
               font-size: @fontSamll;
-              font-family: 'HiraginoSansGB-W3';
+              font-family: HiraginoSansGB-W3;
               color: rgba(186, 186, 186, 1);
               text-align: left;
               display: inline-block;
@@ -853,7 +853,7 @@ export default {
             }
             .span6 {
               font-size: @fontMiddle;
-              font-family: 'FZLTZHK--GBK1-0';
+              font-family: FZLTZHK--GBK1-0;
               color: rgba(255, 255, 255, 1);
               text-align: left;
               display: inline-block;
@@ -903,7 +903,7 @@ export default {
             }
             .spanB {
               font-size: 20px;
-              font-family: 'HiraginoSansGB-W3';
+              font-family: HiraginoSansGB-W3;
               color:#ffffff;
               position: absolute;
               top: 6px;
@@ -920,7 +920,7 @@ export default {
           width: 40%;
           height: 100%;
           float: right;
-          background: url('/static/renmintjNew/动画.gif');
+          background: url('/static/renmintjNew/pic_animation.gif');
           background-position: center center;
           background-repeat: no-repeat;
         }
@@ -1161,10 +1161,10 @@ export default {
       bottom:11%;
       width: 100px;
       height: 100px;
-      background: url('/static/renmintjNew/区域分析.png') no-repeat center center;
+      background: url('/static/renmintjNew/pic_regionalAnalysis.png') no-repeat center center;
       &:hover{
         cursor: pointer;
-        background: url('/static/renmintjNew/区域分析hover.png') no-repeat center center;
+        background: url('/static/renmintjNew/pic_regionalAnalysisHover.png') no-repeat center center;
       }
     }
   }
