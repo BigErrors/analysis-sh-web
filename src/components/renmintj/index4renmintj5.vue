@@ -72,7 +72,7 @@
             <!-- 判断下重点事件是否>6，如果不是则不轮播，正常显示即可 -->
             <div v-if="importantEvent.length>=6" class="table_body">
               <rollScreen :dLength='importantEvent.length' :height='25' :lineNum='6'>
-                <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('importantEventDetail',item.id)"
+                <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('eventDetail',item.id)"
                   slot="slide">
                   <span class="once">{{item.shiJianLX}}</span>
                   <span class="once">{{item.diQu}}</span>
@@ -81,7 +81,7 @@
               </rollScreen>
             </div>
             <div v-if="importantEvent.length<6" class="table_body">
-              <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('importantEventDetail',item.id)"
+              <div v-for="(item,index) in importantEvent" :key="index" class="table_tr clearfix" @click="changeRouter('eventDetail',item.id)"
                 slot="slide">
                 <span class="once">{{item.shiJianLX}}</span>
                 <span class="once">{{item.diQu}}</span>
@@ -568,7 +568,7 @@ export default {
       let target = {
         name: name
       }
-      if (name === 'importantEventDetail') {
+      if (name === 'eventDetail') {
         target = {
           name: name,
           params: {

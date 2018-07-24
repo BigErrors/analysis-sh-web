@@ -11,7 +11,7 @@ import peoplePortrait from '@/components/renmintj/peoplePortrait'
 import businessNum from '@/components/renmintj/businessNum'
 import businessTypes from '@/components/renmintj/businessTypes'
 import importantEvent from '@/components/renmintj/importantEvent'
-import importantEventDetail from '@/components/renmintj/importantEventDetail'
+import eventDetail from '@/components/renmintj/eventDetail'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
 import institutionRanking from '@/components/renmintj/institutionRanking'
 import compensation from '@/components/renmintj/compensation'
@@ -67,9 +67,9 @@ const router = new Router({
     name: 'importantEvent',
     component: importantEvent
   }, {
-    path: '/importantEventDetail/:id',
-    name: 'importantEventDetail',
-    component: importantEventDetail
+    path: '/eventDetail/:id',
+    name: 'eventDetail',
+    component: eventDetail
   }, {
     path: '/businessTypes',
     name: 'businessTypes',

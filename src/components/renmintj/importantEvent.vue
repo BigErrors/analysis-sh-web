@@ -81,7 +81,7 @@
               <td class='td'>{{item.jianShu}}</td>
               <td class='td'>{{item.riQi.slice(0,11)}}</td>
               <td class='td'>{{item.zhuangTai}}</td>
-              <td class='td'><span class="detail" @click="changeRouter('importantEventDetail',item.id)">详情</span></td>
+              <td class='td'><span class="detail" @click="changeRouter('eventDetail',item.id)">详情</span></td>
             </tr>
             </tbody>
           </table>
@@ -144,7 +144,7 @@ export default {
     // 路由跳转
     changeRouter (name, id) {
       let target = {name: name}
-      if (name === 'importantEventDetail') {
+      if (name === 'eventDetail') {
         target = {name: name, params: { id: id }}
       }
       this.$router.push(target)
