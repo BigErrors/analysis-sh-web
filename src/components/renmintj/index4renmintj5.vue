@@ -397,7 +397,6 @@ export default {
           }
         })
         document.getElementById('map').innerHTML = ''
-        console.log(vue.mapboxStyle)
         map = new mapboxgl.Map({
           container: 'map',
           style: vue.mapboxStyle,

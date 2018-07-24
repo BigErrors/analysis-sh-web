@@ -394,6 +394,10 @@ export default {
                 color:@fontWhite;
                 .line{
                   height: 20%;
+                  &:hover{
+                    cursor: pointer;
+                    background: @tableHover;
+                  }
                 }
               }
               .row{
