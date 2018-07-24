@@ -197,6 +197,7 @@ export default {
   @blockBack:#171c26;
   @table:#131821;
   @table2:rgba(40,45,58,0.3);
+  @tableHover:rgba(113, 116, 120, 0.2);
   @fontWhite:#f1f1f1;
   @fontGray:rgba(241,241,241,0.8);
   @fontSamll:14px;
@@ -417,10 +418,11 @@ export default {
           }
           tr{
             &:nth-of-type(2n-1){
-              background:@table2;
-            }
-            &:nth-of-type(2n){
               background:@table;
+            }
+            &:hover{
+              cursor: pointer;
+              background: @tableHover;
             }
           }
         }

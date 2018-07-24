@@ -73,7 +73,7 @@
                 <div class="row row3">受理数量</div>
               </div>
               <div class="t_body">
-                <div class="line" v-for="(item, index) in anJianSLSBG" :key="index">
+                <div class="line" v-for="(item, index) in anJianSLSBG" :key="index" @click="changeRouter(target3==='type1'?'institutionPortrait':'peoplePortrait',item.id)">
                   <div class="row row1">
                     <span v-if="index>2">{{index+1}}</span>
                     <img class="img"  v-if ="index===0" src='/static/renmintj/jingpai.png' />
@@ -285,8 +285,12 @@ export default {
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
     },
-    changeRouter (name) {
-      this.$router.push({name: name})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'peoplePortrait' || name === 'institutionPortrait') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
     },
     formatData (data) {
       return (data * 100).toFixed(1)
@@ -337,6 +341,7 @@ export default {
 @blockBack:#171c26;
 @table:#131821;
 @table2:rgba(40,45,58,0.3);
+@tableHover:rgba(113, 116, 120, 0.2);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
 @fontSamll:14px;
@@ -598,6 +603,10 @@ export default {
                 position:relative;
                 &:nth-of-type(2n){
                   background: @table;
+                }
+                &:hover{
+                  cursor: pointer;
+                  background: @tableHover;
                 }
                 .row{
                   float: left;

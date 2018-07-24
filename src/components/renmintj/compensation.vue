@@ -64,7 +64,7 @@
                   <div class="row row3"><span>金额数量(万元)</span></div>
                 </div>
                 <div class="table_body">
-                  <div v-for="(item,index) in top5" :key="index" class="line">
+                  <div v-for="(item,index) in top5" :key="index" class="line" @click="changeRouter('institutionPortrait', item.id)">
                     <div class="row row1">
                       <span v-if="index>2">{{index+1}}</span>
                       <img class="img"  v-if ="index===0" src='/static/renmintj/jingpai.png' />
@@ -126,6 +126,13 @@ export default {
     }
   },
   methods: {
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'institutionPortrait') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
+    },
     getData () {
       let baseUrl = urlConfig.baseUrl
       let url = '/caseMoeny'
@@ -150,6 +157,7 @@ export default {
 @blockBack:#171c26;
 @table:#131821;
 @table2:rgba(40,45,58,0.3);
+@tableHover:rgba(113, 116, 120, 0.2);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
 .compensation_container{

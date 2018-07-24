@@ -76,7 +76,7 @@
               </tr>
               </thead>
               <tbody class="tbody">
-              <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=4">
+              <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=4" @click="changeRouter('eventDetail', item.caseid)">
                 <td class='td'><span class="circle" :class="'circle'+(item.xuhao)">{{item.xuhao}}</span></td>
                 <td class='td'>{{item.mingcheng}}</td>
                 <td class='td'>{{item.shoulisj}}</td>
@@ -149,8 +149,12 @@ export default {
       this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
     },
-    changeRouter (name) {
-      this.$router.push({name: name})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'eventDetail') {
+        target = {name: name, params: { id: id }}
+      }
+      this.$router.push(target)
     },
     drawWordcloud2 (data, type) {
       data = data.map((item, index) => {
@@ -212,6 +216,7 @@ export default {
 @blockBack:#171c26;
 @table:#131821;
 @table2:rgba(40,45,58,0.3);
+@tableHover:rgba(113, 116, 120, 0.2);
 @fontWhite:#f1f1f1;
 @fontGray:rgba(241,241,241,0.8);
 @fontSamll:14px;
@@ -498,11 +503,12 @@ export default {
                 text-align:center;
               }
               tr{
-                &:nth-of-type(2n){
-                  background:@table;
-                }
                 &:nth-of-type(2n-1){
                   background:@table2;
+                }
+                &:hover{
+                  cursor: pointer;
+                  background:@tableHover;
                 }
               }
             }
