@@ -370,91 +370,22 @@ export default {
     },
     layerType: function (newValue, oldValue) {
       let vue = this
-      let map
-      let coordinates
-      let description
-      let popup = new mapboxgl.Popup()
+      document.getElementById('map').innerHTML = ''
+      document.getElementById('map').style = ''
       if (newValue === 'importantEvent') {
-        vue.mapboxStyle.sources.points.data.features = vue.keyEventsData.map((item, index) => {
-          return {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [item.value[0], item.value[1]]
-            },
-            'properties': {
-              'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
-                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
-                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
-                      <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
-              'icon': 'importantEvent'
-            }
-          }
-        })
-        document.getElementById('map').innerHTML = ''
-        map = new mapboxgl.Map({
-          container: 'map',
-          style: vue.mapboxStyle,
-          // 地图中心经纬度。经纬度用数组
-          center: vue.findCoordinates(vue.areaDefault[0]),
-          // 地图的缩放等级
-          zoom: 10,
-          // 视角俯视的倾斜角度
-          pitch: 60,
-          // 地图的旋转角度
-          bearing: -10
-        })
-        map.on('load', function (event) {
-          map.on('click', 'points', function (e) {
-            vue.showDialog = false
-            coordinates = e.features[0].geometry.coordinates.slice()
-            description = e.features[0].properties.description
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-            }
-            popup.setLngLat(coordinates)
-              .setHTML(description)
-              .addTo(map)
-          })
-        })
+        vue.$echarts.dispose(vue.myChart['map'])
+        delete vue.myChart['map']
+        vue.drawMapbox()
       } else {
-        document.getElementById('map').innerHTML = ''
         vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(vue.areaDefault[0])))
       }
     }
   },
-  created () {
-    this.getData()
-    let vue = this
-    let list = ['data_tj', 'data_110', 'data_jc', 'data_pc']
-    let i = 0
-    vue.interval = setInterval(function () {
-      vue.nothing = 0.01 * Math.random()
-      if (i < 3) {
-        i++
-      } else {
-        i = 0
-      }
-      vue.trendType = list[i]
-    }, 6000)
-  },
-  mounted () {
-    let vue = this
-    window.addEventListener('resize', function () {
-      vue.$nextTick(function () {
-        vue.myChart['map'].resize()
-      })
-    })
-  },
-  beforeDestroy () {
-    clearInterval(this.interval)
-  },
   methods: {
     draw (domName, option) {
-      if (this.myChart[domName]) {
-        this.$echarts.dispose(this.myChart[domName])
+      if (!this.myChart[domName]) {
+        this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       }
-      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
       let vue = this
       if (domName === 'map') {
@@ -468,6 +399,50 @@ export default {
           }
         })
       }
+    },
+    drawMapbox () {
+      let vue = this
+      vue.mapboxStyle.sources.points.data.features = vue.keyEventsData.map((item, index) => {
+        return {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [item.value[0], item.value[1]]
+          },
+          'properties': {
+            'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
+                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
+                      <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
+                      <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
+            'icon': 'importantEvent'
+          }
+        }
+      })
+      let map = new mapboxgl.Map({
+        container: 'map',
+        style: vue.mapboxStyle,
+        // 地图中心经纬度。经纬度用数组
+        center: vue.findCoordinates(vue.areaDefault[0]),
+        // 地图的缩放等级
+        zoom: 10,
+        // 视角俯视的倾斜角度
+        pitch: 60,
+        // 地图的旋转角度
+        bearing: -10
+      })
+      map.on('load', function (event) {
+        map.on('click', 'points', function (e) {
+          vue.showDialog = false
+          let coordinates = e.features[0].geometry.coordinates.slice()
+          let description = e.features[0].properties.description
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+          }
+          new mapboxgl.Popup().setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map)
+        })
+      })
     },
     findCoordinates (target) {
       return this.area.filter(item => {
@@ -567,26 +542,40 @@ export default {
     },
     // 路由跳转
     changeRouter (name, param) {
-      let target = {
-        name: name
-      }
+      let target = {name: name}
       if (name === 'eventDetail') {
-        target = {
-          name: name,
-          params: {
-            id: param
-          }
-        }
+        target = {name: name, params: { id: param }}
       } else if (name === 'businessNum') {
-        target = {
-          name: name,
-          params: {
-            type: param
-          }
-        }
+        target = {name: name, params: { type: param }}
       }
       this.$router.push(target)
     }
+  },
+  created () {
+    this.getData()
+    let vue = this
+    let list = ['data_tj', 'data_110', 'data_jc', 'data_pc']
+    let i = 0
+    vue.interval = setInterval(function () {
+      // vue.nothing = 0.01 * Math.random()
+      if (i < 3) {
+        i++
+      } else {
+        i = 0
+      }
+      vue.trendType = list[i]
+    }, 6000)
+  },
+  mounted () {
+    let vue = this
+    window.addEventListener('resize', function () {
+      vue.$nextTick(function () {
+        vue.myChart['map'].resize()
+      })
+    })
+  },
+  beforeDestroy () {
+    clearInterval(this.interval)
   }
 }
 

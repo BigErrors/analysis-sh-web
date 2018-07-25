@@ -154,10 +154,9 @@ export default {
   methods: {
     // 绘制echarts
     draw (domName, option) {
-      if (this.myChart[domName]) {
-        this.$echarts.dispose(this.myChart[domName])
+      if (!this.myChart[domName]) {
+        this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       }
-      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
     },
     changeRouter (name) {

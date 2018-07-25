@@ -52,7 +52,7 @@
                 <div class="right">
                   <el-cascader
                     :options="area"
-                    placeholder="区域"
+                    placeholder="机构类型"
                     v-model="areaDefault"
                   ></el-cascader>
                 </div>
@@ -84,7 +84,7 @@
             <div class="border"></div>
             <span>本年度纠纷类型与赔偿金额</span>
           </div>
-          <div class="echarts_container target1"></div>
+          <div class="echarts_container"></div>
         </div>
       </div>
     </div>
@@ -100,6 +100,7 @@ import jsonUtil from '@/util/jsonUtil'
 export default {
   data () {
     return {
+      myChart: {},
       area: [{label: '区局', value: 'tiaojiej'}, {label: '调委会', value: 'tiaojiewyh'}, {label: '司法所', value: 'tiaojies'}],
       areaDefault: ['tiaojiej'],
       freq: 'year',
@@ -123,6 +124,12 @@ export default {
     }
   },
   methods: {
+    draw (domName, option) {
+      if (!this.myChart[domName]) {
+        this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      }
+      this.myChart[domName].setOption(option)
+    },
     changeRouter (name, id) {
       let target = {name: name}
       if (name === 'institutionPortrait') {
@@ -140,11 +147,13 @@ export default {
         this.thismouthmoeny = data.thismouthmoeny
         this.allcase = data.allcase
         this.top5 = data.top5
-        this.$echarts.init(document.getElementsByClassName('target1')[0]).setOption(eosNew.setTreemap(_this, data.tree))
+        this.$nextTick(() => {
+          this.draw('echarts_container', eosNew.setTreemap(_this, data.tree))
+        })
       }, 'application/json', 'json')
     }
   },
-  mounted () {
+  created () {
     this.getData()
   }
 }

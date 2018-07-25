@@ -109,6 +109,7 @@ import jsonUtil from '@/util/jsonUtil'
 export default {
   data () {
     return {
+      myChart: {},
       datas: {
         docLV: '',
         docnumber: 0,
@@ -130,6 +131,33 @@ export default {
     }
   },
   methods: {
+    draw (domName, option) {
+      if (!this.myChart[domName]) {
+        this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
+      }
+      this.myChart[domName].setOption(option)
+      let vue = this
+      if (domName === 'target1') {
+        this.myChart[domName].on('click', function (params) {
+          vue.getRader(params)
+        })
+      }
+    },
+    getData () {
+      let baseUrl = urlConfig.baseUrl
+      let url = '/documentsAQuality'
+      let param = {}
+      http.get(baseUrl + url, param, (data) => {
+        this.datas = data
+        this.datas.topdoc = data.topdoc.slice(0, 6)
+        this.$nextTick(() => {
+          // echarts 热力图
+          this.draw('target1', eosNew.setheatmap(data.heatmap))
+          // echarts 雷达图
+          this.draw('target2', eosNew.setRadar([{value: data.radar}], data.indicator, 'documqua'))
+        })
+      })
+    },
     getRader (params) {
       let area = dictionaryMapping.area
       // location 字典查询
@@ -142,29 +170,15 @@ export default {
       let url = '/documentsAQuality'
       let param = {location: location[0], dengji: dengji}
       http.get(baseUrl + url, param, (data) => {
-        this.$echarts.init(document.getElementsByClassName('target2')[0]).setOption(eosNew.setRadar([{value: data.radar}], data.indicator, 'documqua'))
+        this.draw('target2', eosNew.setRadar([{value: data.radar}], data.indicator, 'documqua'))
       })
     },
     changeRouter (name) {
       this.$router.push({name: name})
     }
   },
-  mounted () {
-    let baseUrl = urlConfig.baseUrl
-    let url = '/documentsAQuality'
-    let param = {}
-    let _this = this
-    http.get(baseUrl + url, param, (data) => {
-      this.datas = data
-      this.datas.topdoc = data.topdoc.slice(0, 6)
-      // echarts 热力图
-      this.$echarts.init(document.getElementsByClassName('target1')[0]).setOption(eosNew.setheatmap(data.heatmap))
-      this.$echarts.init(document.getElementsByClassName('target1')[0]).on('click', function (params) {
-        _this.getRader(params)
-      })
-      // echarts 雷达图
-      this.$echarts.init(document.getElementsByClassName('target2')[0]).setOption(eosNew.setRadar([{value: data.radar}], data.indicator, 'documqua'))
-    })
+  created () {
+    this.getData()
   }
 }
 </script>
