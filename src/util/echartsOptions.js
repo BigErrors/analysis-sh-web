@@ -1235,7 +1235,7 @@ let setPie6 = (data, dataType, isPie, color) => {
   return option
 }
 
-let setMapbox = (caseData) => {
+let setMapbox = (caseData, centerPoint) => {
   const osmUrl = urlConfig.osmUrl
   const option = {
     visualMap: [{
@@ -1276,7 +1276,8 @@ let setMapbox = (caseData) => {
         }]
       },
       // 地图中心经纬度。经纬度用数组
-      center: [121.5193, 31.163070],
+      // center: [121.5193, 31.163070],
+      center: centerPoint,
       // 地图的缩放等级
       zoom: 9,
       // 视角俯视的倾斜角度

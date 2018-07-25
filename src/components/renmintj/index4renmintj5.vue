@@ -396,9 +396,9 @@ export default {
           container: 'map',
           style: vue.mapboxStyle,
           // 地图中心经纬度。经纬度用数组
-          center: [121.5193, 31.263070],
+          center: vue.findCoordinates(vue.areaDefault[0]),
           // 地图的缩放等级
-          zoom: 11,
+          zoom: 10,
           // 视角俯视的倾斜角度
           pitch: 60,
           // 地图的旋转角度
@@ -419,7 +419,7 @@ export default {
         })
       } else {
         document.getElementById('map').innerHTML = ''
-        vue.draw('map', eos.setMapbox(vue.caseDistributionData))
+        vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(vue.areaDefault[0])))
       }
     }
   },
@@ -468,6 +468,13 @@ export default {
           }
         })
       }
+    },
+    findCoordinates (target) {
+      return this.area.filter(item => {
+        if (item.value === target) {
+          return true
+        }
+      })[0]['coordinates']
     },
     getData () {
       let vue = this
@@ -552,8 +559,9 @@ export default {
             date: item.riQi2
           }
         })
+        vue.layerType = 'disputesDistribution'
         vue.$nextTick(function () {
-          vue.draw('map', eos.setMapbox(vue.caseDistributionData))
+          vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(vue.areaDefault[0])))
         })
       })
     },
