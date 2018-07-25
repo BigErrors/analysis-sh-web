@@ -63,6 +63,7 @@
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
+import jsonUtil from '@/util/jsonUtil'
 
 export default {
   name: 'peopleNum',
@@ -70,17 +71,12 @@ export default {
     return {
       myChart: {},
       totalPeople: 0 + '人',
-      newPeople: 0 + '人',
-      time: new Date()
+      newPeople: 0 + '人'
     }
   },
   computed: {
     timeCom () {
-      let now = this.time
-      let day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][now.getDay()]
-      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
-      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
-          ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
     }
   },
   methods: {

@@ -33,6 +33,7 @@
               start-placeholder="开始日期"
               end-placeholder="结束日期"
               :clearable='false'
+              value-format="yyyy-MM-dd"
               :picker-options="pickerOptions">
             </el-date-picker>
           </div>
@@ -108,53 +109,12 @@
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
+
 export default {
   data: function () {
     return {
-      date: [(new Date()).getTime() - 3600 * 1000 * 24 * 90, new Date()],
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近半年',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 180)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一年',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      },
+      date: jsonUtil.defaultDataRage(),
+      pickerOptions: jsonUtil.pickerOptions,
       list: [],
       pageInfo: {
         currentPage: 1,
@@ -164,7 +124,6 @@ export default {
       reorder: 'DESC',
       obj: 'renyuansl',
       loading: '',
-      time: new Date(),
       chooseArr: [{
         label: '区局',
         value: 'JUSTICEBUREAU'
@@ -180,11 +139,7 @@ export default {
   },
   computed: {
     timeCom () {
-      let now = this.time
-      let day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][now.getDay()]
-      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
-      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
-          ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
     }
   },
   watch: {
@@ -208,8 +163,8 @@ export default {
       let baseUrl = urlConfig.baseUrl
       let url = '/institutionalRankings'
       let param = {
-        'startdate': jsonUtil.dateTimeFormat(_this.date[0]),
-        'enddate': jsonUtil.dateTimeFormat(_this.date[1]),
+        'startdate': _this.date[0],
+        'enddate': _this.date[1],
         'lable': _this.chooseDefault[0],
         'obj': _this.obj,
         'reorder': _this.reorder,

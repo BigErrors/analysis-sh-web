@@ -78,7 +78,7 @@
               <div v-for="(item,index) in tiaoJieSBLPM" :key="index" class="line">
                 <div class="line_span">
                   <span class="span_name">{{item.name}}</span>
-                  <span class="span_rate">{{parseInt(item.value*100)+'%'}}</span>
+                  <span class="span_rate">{{parseInt(item.labelValue*100)+'%'}}</span>
                 </div>
                 <div class="line_rate">
                   <div class="line_rating" :style="{width:100*item.value+'%'}"></div>
@@ -136,43 +136,8 @@ import * as viz from '../../../static/viz'
 export default {
   data () {
     return {
-      time: new Date(),
-      date: [jsonUtil.dateFormat((new Date()).getTime() - 3600 * 1000 * 24 * 365), jsonUtil.dateFormat(new Date())],
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一年',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      },
+      date: jsonUtil.defaultDataRage(),
+      pickerOptions: jsonUtil.pickerOptions,
       anJianSLWRBPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
       pingJunPCJEPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
       pingJunTJSCPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
@@ -185,11 +150,7 @@ export default {
   },
   computed: {
     timeCom () {
-      let now = this.time
-      let day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][now.getDay()]
-      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
-      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
-          ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
     }
   },
   watch: {

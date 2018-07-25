@@ -61,23 +61,20 @@
 </template>
 
 <script>
+import jsonUtil from '@/util/jsonUtil'
+
 export default {
   data: function () {
     return {
       mark: 1,
       timer: '',
       timerOut: '', // 这个timer给鼠标移动事件，鼠标移动就给循环上锁
-      lockClick: false, // 给点击上锁，防止连续点击
-      time: new Date()
+      lockClick: false // 给点击上锁，防止连续点击
     }
   },
   computed: {
     timeCom () {
-      let now = this.time
-      let day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][now.getDay()]
-      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
-      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
-          ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
     }
   },
   methods: {

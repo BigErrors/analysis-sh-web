@@ -104,10 +104,11 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import eosNew from '@/util/echartsOptionsNew'
 import dictionaryMapping from '@/util/dictionaryMapping'
+import jsonUtil from '@/util/jsonUtil'
+
 export default {
   data () {
     return {
-      time: new Date(),
       datas: {
         docLV: '',
         docnumber: 0,
@@ -120,11 +121,7 @@ export default {
   },
   computed: {
     timeCom () {
-      let now = this.time
-      let day = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][now.getDay()]
-      let minute = (now.getMinutes() >= 10) ? (now.getMinutes().toString()) : ('0' + now.getMinutes().toString())
-      return now.getFullYear().toString() + '/' + (now.getMonth() + 1).toString() + '/' + now.getDate().toString() +
-          ' ' + now.getHours().toString() + ':' + minute + ' ' + day
+      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
     }
   },
   filters: {
