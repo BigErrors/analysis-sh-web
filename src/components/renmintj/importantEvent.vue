@@ -230,14 +230,19 @@ export default {
       .left {
         padding: 25px 0 10px 0px;
         float: left;
-        .back {
-          background: url('/static/renmintj/btn_back.png');
-          width: 137px;
-          height: 35px;
+      .back{
+        background: url('/static/renmintj/btn_back.png');
+        width: 100px;
+        height: 48px;
+        background-position: center;
+        background-repeat: no-repeat;
+        &:hover{
+          cursor: pointer;
+          background: url('/static/renmintj/btn_backHover.png');
           background-position: center;
           background-repeat: no-repeat;
-          cursor: pointer;
         }
+      }
       }
       .right {
         float: right;
