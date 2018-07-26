@@ -335,7 +335,7 @@ export default {
     }
   }
   .body{
-    height: calc(100% - 85px);
+    height: calc(100% - 97px);
     width: 100%;
     display: block;
     position: relative;

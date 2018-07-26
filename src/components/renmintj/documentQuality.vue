@@ -294,7 +294,7 @@ export default {
     }
     .container{
       width: 100%;
-      height: calc(100% - 85px);
+      height: calc(100% - 97px);
       margin-top: 16px;
       padding: 0 24px;
       box-sizing: border-box;

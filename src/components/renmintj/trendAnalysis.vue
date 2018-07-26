@@ -339,7 +339,7 @@ export default {
     }
   }
   .body{
-    height: calc(100% - 85px);
+    height: calc(100% - 99px);
     width: 100%;
     display: block;
     position: relative;

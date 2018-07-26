@@ -387,7 +387,7 @@ export default {
       }
       .table{
         width: 100%;
-        height: calc(100% - 85px);
+        height: calc(100% - 97px);
         padding-top:15px;
         .thead{
           .td{
