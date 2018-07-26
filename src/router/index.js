@@ -14,6 +14,7 @@ import importantEvent from '@/components/renmintj/importantEvent'
 import eventDetail from '@/components/renmintj/eventDetail'
 import trendAnalysis from '@/components/renmintj/trendAnalysis'
 import institutionRanking from '@/components/renmintj/institutionRanking'
+import institutionDetail from '@/components/renmintj/institutionDetail'
 import compensation from '@/components/renmintj/compensation'
 import documentQuality from '@/components/renmintj/documentQuality'
 import regionalAnalysis from '@/components/renmintj/regionalAnalysis'
@@ -78,6 +79,10 @@ const router = new Router({
     path: '/institutionRanking',
     name: 'institutionRanking',
     component: institutionRanking
+  }, {
+    path: '/institutionDetail/:id/:type',
+    name: 'institutionDetail',
+    component: institutionDetail
   }, {
     path: '/trendAnalysis',
     name: 'trendAnalysis',

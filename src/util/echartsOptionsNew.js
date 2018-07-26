@@ -1632,4 +1632,60 @@ let setPie4 = (data) => {
   }
   return option
 }
-export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6, setheatmap, setTreemap, setPie4}
+// 圆环图_机构详情 调解员信息
+let setPie5 = (data) => {
+  let option = {
+    title: {
+      text: '任职方式',
+      left: '46px',
+      top: 'center',
+      textStyle: {
+        color: '#f1f1f1',
+        fontSize: 14
+      }
+    },
+    legend: {
+      orient: '',
+      itemWidth: 12,
+      itemHeight: 6,
+      right: '5%',
+      top: '30%',
+      textStyle: {
+        color: 'rgba(241,241,241,0.8)',
+        fontSize: 12
+      },
+      data: data.map(item => {
+        return item.name
+      })
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: '{b}: {c} ({d}%)'
+    },
+    color: ['#F77C88', '#854DB5', '#9979CC', '#FED481', '#D9A701', '#D9A701', '#FBD939'],
+    series: [
+      {
+        name: 'seriesName',
+        type: 'pie',
+        center: ['80px', '50%'],
+        radius: ['45%', '55%'],
+        roseType: false,
+        avoidLabelOverlap: true,
+        labelLine: {
+          show: false,
+          lineStyle: {
+            color: 'rgba(241,241,241,0.8)'
+          }
+        },
+        label: {
+          normal: {
+            show: false
+          }
+        },
+        data: data
+      }
+    ]
+  }
+  return option
+}
+export default {setLine, setPie, setBar, setPie2, setBar2, setLine2, setLine3, setBar3, setBar4, setRadar, setBar5, setPie3, setBar6, setheatmap, setTreemap, setPie4, setPie5}
