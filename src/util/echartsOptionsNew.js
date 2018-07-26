@@ -1662,7 +1662,7 @@ let setPie5 = (data) => {
       trigger: 'item',
       formatter: '{b}: {c} ({d}%)'
     },
-    color: ['#F77C88', '#854DB5', '#9979CC', '#FED481', '#D9A701', '#D9A701', '#FBD939'],
+    color: ['#27FF88', '#FF6363', '#283946', '#FED481', '#D9A701', '#D9A701', '#FBD939'],
     series: [
       {
         name: 'seriesName',

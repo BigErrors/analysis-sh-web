@@ -130,31 +130,27 @@
               <div class="border"></div>
               <span>案件列表</span>
             </div>
-            <table class='table' cellspacing='0'>
-              <thead class="thead">
-              <tr>
-                <td width="10%" class='td'>序号</td>
-                <td width="15%" class='td'>分类</td>
-                <td width="35%" class='td'>名称</td>
-                <td width="10%" class='td'>日期</td>
-                <td width="10%" class='td'>状态</td>
-                <td width="10%" class='td'>操作</td>
-              </tr>
-              </thead>
-              <tbody class="tbody">
-                <tr v-for="(item,index) in shouLiAJLB" :key="index" v-if="index<7">
-                  <td class='td'>
-                    <span v-if="item.xuHao<=3" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
-                    <span v-if="item.xuHao>3" class="circle" :class="'circle4'">{{item.xuHao}}</span>
-                  </td>
-                  <td class='td'>{{item.fenLei}}</td>
-                  <td class='td'>{{item.mingChen}}</td>
-                  <td class='td'>{{item.riQi.slice(0,11)}}</td>
-                  <td class='td'>{{item.zhuangTai}}</td>
-                  <td class='td'><span class="detail" @click="changeRouter('eventDetail',item.id)">详情</span></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table_container">
+              <div class="line table_head">
+                <div class="row row1"><span>序号</span></div>
+                <div class="row row2"><span>分类</span></div>
+                <div class="row row3"><span>名称</span></div>
+                <div class="row row4"><span>日期</span></div>
+                <div class="row row5"><span>状态</span></div>
+                <div class="row row6"><span>操作</span></div>
+              </div>
+              <div class="line table_body" v-for ="(item,index) in shouLiAJLB" :key="index">
+                <div class="row row1">
+                  <span v-if="item.xuHao<=3" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
+                  <span v-if="item.xuHao>3" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+                </div>
+                <div class="row row2"><span>{{item.fenLei}}</span></div>
+                <div class="row row3"><span>{{item.mingChen}}</span></div>
+                <div class="row row4"><span>{{item.riQi.slice(0,11)}}</span></div>
+                <div class="row row5"><span>{{item.zhuangTai}}</span></div>
+                <div class="row row6"><span class="detail" @click="changeRouter('eventDetail',item.id)">详情</span></div>
+              </div>
+            </div>
             <div class="page">
               <el-pagination class="ej-pagination" current-page.sync="0" :page-size="7"
                 layout="prev, pager, next, total" @current-change="handleCurrentChange" :total="shouLiJFSL">
@@ -188,7 +184,19 @@ export default {
       shouLiJFSL: 0,
       tiaoJiePFJE: 0,
       tiaoJieCGL: 0,
-      shouLiAJRYPM: [],
+      shouLiAJRYPM: [{
+        name: '',
+        labelValue: '',
+        value: 0
+      }, {
+        name: '',
+        labelValue: '',
+        value: 0
+      }, {
+        name: '',
+        labelValue: '',
+        value: 0
+      }],
       tiaoJieYSL: 0,
       shouLiAJLB: [],
       page: 1,
@@ -674,45 +682,81 @@ export default {
           flex: 438;
           background: @blockBack;
           margin-top:8px;
-          .table{
+          .table_container{
             width: 100%;
             height: calc(100% - 112px);
-            .thead{
-              .td{
-                font-size:@fontSamll;
-                font-family:MicrosoftYaHei;
-                color:@fontGray;
-                height:22px;
-                text-align:center;
+            .table_head{
+              color:@fontGray;
+              height: calc(100% / 8 );
+            }
+            .table_body{
+              color:@fontWhite;
+              .row1{
+                span{
+                  width: 15px;
+                  height: 15px;
+                  border-radius: 50%;
+                  text-align: center;
+                  line-height: 14px;
+                }
+              }
+              .row6{
+                span{
+                  background: #F59B5B;
+                  padding:0 8px;
+                  border-radius: 12px;
+                  cursor: pointer;
+                }
               }
             }
-            .tbody{
-              .td{
-                font-size:@fontSamll;
-                font-family:MicrosoftYaHei;
-                color:@fontWhite;
-                text-align:center;
-                .detail{
-                  font-size:@fontSamll;
-                  font-family:MicrosoftYaHei;
-                  color:rgba(255,255,255,1);
-                  padding: 4px 15px;
-                  border-radius: 15px;
-                  background:#F59B5B;
-                  &:hover{
-                  cursor: pointer;
-                    background:#de7326;
-                  }
+            .line{
+              width: 100%;
+              height: calc(100% / 8 );
+              position: relative;
+              font-size:@fontSamll;
+              &:nth-of-type(2n-1){
+                background: @table;
+              }
+              .row{
+                float: left;
+                height: 100%;
+                position: relative;
+                span{
+                  position: absolute;
+                  left: 50%;
+                  top:50%;
+                  transform: translate(-50%,-50%);
                 }
               }
-              tr{
-                &:nth-of-type(2n-1){
-                  background:@table;
+              .row1{
+                width:10%;
+              }
+              .row2{
+                width:20%;
+                span{
+                  width: 100%;
+                  text-align: center;
                 }
-                &:hover{
-                  cursor: pointer;
-                  background: @tableHover;
+              }
+              .row3{
+                width:35%;
+                span{
+                  width: 100%;
+                  text-align: center;
                 }
+              }
+              .row4{
+                width:10%;
+                span{
+                  width: 100%;
+                  text-align: center;
+                }
+              }
+              .row5{
+                width:15%;
+              }
+              .row6{
+                width:10%;
               }
             }
             .circle{
