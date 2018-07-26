@@ -40,8 +40,8 @@
                   <span class="content">{{jigouXx.lianXiDH}}</span>
                 </div>
                 <div class="line">
-                  <label class="des" v-show="jigouXx.jiGouLX!=='司法局'&&jigouXx.jiGouLX!=='司法所'">机构类型：</label>
-                  <span class="content" v-show="jigouXx.jiGouLX!=='司法局'&&jigouXx.jiGouLX!=='司法所'">{{jigouXx.jiGouLX}}</span>
+                  <label class="des">机构类型：</label>
+                  <span class="content">{{jigouXx.jiGouLX}}</span>
                 </div>
                 <div class="line">
                   <label class="des" v-show="jigouXx.jiGouLX!=='司法局'&&jigouXx.jiGouLX!=='司法所'">业务类型：</label>
