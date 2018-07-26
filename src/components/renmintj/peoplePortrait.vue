@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="bottom">
-            <div class="bTitle" style="padding-top:5px">整体概览</div>
+            <div class="bTitle">案件列表</div>
             <table class='table' cellspacing='0'>
               <thead class="thead">
               <tr>
