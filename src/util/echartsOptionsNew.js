@@ -65,9 +65,9 @@ let setLine = (data, showYAxis, containLabel) => {
           x2: 0,
           y2: 1,
           colorStops: [{
-            offset: 0, color: '#49EAEE' // 0% 处的颜色
+            offset: 0, color: 'rgba(73,234,238,0.7)' // 0% 处的颜色
           }, {
-            offset: 1, color: '#000000' // 100% 处的颜色
+            offset: 1, color: 'rgba(73,234,238,0.2)' // 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
         }

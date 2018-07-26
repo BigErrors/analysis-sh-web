@@ -63,7 +63,7 @@
           <div class="row row11"><span :class="{yellowf:obj==='yewusyl'}" @click="sort('yewusyl')">业务系统使用率</span><i @click="sort('yewusyl')" class="init" :class="{bottom:obj==='yewusyl'&&reorder==='DESC',top:obj==='yewusyl'&&reorder==='ASC'}"></i></div>
         </div>
         <div class="t_body">
-          <div class="line" v-for="(item,index) in list" :key = index>
+          <div class="line" v-for="(item,index) in list" :key="index" @click="changeRouter('institutionDetail', item.id)">
             <div class="row row1">
               <span v-if="(index>2||pageInfo.currentPage>1)&&reorder==='DESC'" class="institutionRanking_content_span2">{{index+1+(pageInfo.currentPage-1)*10}}</span>
               <span v-if="reorder==='ASC'" class="institutionRanking_content_span2">{{pageInfo.total-(index)-(pageInfo.currentPage-1)*10}}</span>
@@ -214,8 +214,24 @@ export default {
       this.getData()
     },
     // 路由跳转
-    changeRouter (name) {
-      this.$router.push({name: name})
+    changeRouter (name, id) {
+      let target = {name: name}
+      if (name === 'institutionDetail') {
+        let type = this.chooseDefault[0]
+        switch (type) {
+          case 'JUSTICEBUREAU':
+            type = 'siFaJ'
+            break
+          case 'JUSTICEOFFICE':
+            type = 'siFaS'
+            break
+          case 'MEDIATIONCOMMITTEE':
+            type = 'tiaoWeiH'
+            break
+        }
+        target = {name: name, params: { id: id, type: type }}
+      }
+      this.$router.push(target)
     }
   }
 }

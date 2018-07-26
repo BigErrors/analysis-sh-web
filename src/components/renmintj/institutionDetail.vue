@@ -19,8 +19,8 @@
           <span class="navspan">机构详情</span>
         </div>
         <div class="navRight">
-          <span class="navbtn" :class="{active:timec==='今年'}" @click="timec='今年'">今年</span>
-          <span class="navbtn" :class="{active:timec==='本月'}" @click="timec='本月'">本月</span>
+          <span class="navbtn" :class="{active:timec==='jinNian'}" @click="timec='jinNian'">今年</span>
+          <span class="navbtn" :class="{active:timec==='benYue'}" @click="timec='benYue'">本月</span>
         </div>
       </div>
       <div class="content_container">
@@ -40,11 +40,11 @@
                   <span class="content">{{jigouXx.lianXiDH}}</span>
                 </div>
                 <div class="line">
-                  <label class="des">机构类型：</label>
-                  <span class="content">{{jigouXx.jiGouLX}}</span>
+                  <label class="des" v-show="jigouXx.jiGouLX!=='司法局'&&jigouXx.jiGouLX!=='司法所'">机构类型：</label>
+                  <span class="content" v-show="jigouXx.jiGouLX!=='司法局'&&jigouXx.jiGouLX!=='司法所'">{{jigouXx.jiGouLX}}</span>
                 </div>
                 <div class="line">
-                  <label class="des">业务类型：</label>
+                  <label class="des" v-show="jigouXx.jiGouLX!=='司法局'&&jigouXx.jiGouLX!=='司法所'">业务类型：</label>
                   <span v-for="(item,index) in jigouXx.yeWuLX" v-if="index<4" :key="index" class="btn">{{item.name}}</span>
                 </div>
               </div>
@@ -70,14 +70,14 @@
             </div>
             <div class="box">
               <div class="bTitle">受理案件排名</div>
-              <div class="line" v-for="(item,index) in shgouLiAJRYPM" :key="index">
+              <div class="line" v-for="(item,index) in shouLiAJRYPM" :key="index">
                 <div class="lineCenter">
                   <div class="line_span">
                     <span class="span_name">{{item.name}}</span>
-                    <span class="span_rate">{{item.value}}</span>
+                    <span class="span_rate">{{item.labelValue}}</span>
                   </div>
                   <div class="line_rate">
-                    <div class="line_rating" :style="{width:100*0.33+'%'}"></div>
+                    <div class="line_rating" :style="{width:100*item.value+'%'}"></div>
                   </div>
                 </div>
               </div>
@@ -188,12 +188,12 @@ export default {
       shouLiJFSL: 0,
       tiaoJiePFJE: 0,
       tiaoJieCGL: 0,
-      shgouLiAJRYPM: [],
+      shouLiAJRYPM: [],
       tiaoJieYSL: 0,
       shouLiAJLB: [],
       page: 1,
       myChart: {},
-      timec: '本月'
+      timec: 'benYue'
     }
   },
   computed: {
@@ -221,10 +221,9 @@ export default {
       this.getList()
     },
     draw (domName, option) {
-      if (this.myChart[domName]) {
-        this.$echarts.dispose(this.myChart[domName])
+      if (!this.myChart[domName]) {
+        this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       }
-      this.myChart[domName] = this.$echarts.init(document.getElementsByClassName(domName)[0])
       this.myChart[domName].setOption(option)
     },
     changeRouter (name, id) {
@@ -237,10 +236,10 @@ export default {
     getData () {
       let _this = this
       let id = _this.$route.params.id || ''
-      let jgtype = this.$route.params.jgtype
+      let type = this.$route.params.type
       let baseUrl = urlConfig.baseUrl
       let url = '/organizationDetails'
-      http.get(baseUrl + url, {id: id, time: _this.timec, jgtype: jgtype}, (res) => {
+      http.get(baseUrl + url, {id: id, time: _this.timec, categoryType: type}, (res) => {
         _this.jigouXx.jiGouLX = res.jiGouLX
         _this.jigouXx.tiaoWeiHMZ = res.tiaoWeiHMZ
         _this.jigouXx.lianXiDH = res.lianXiDH
@@ -251,7 +250,7 @@ export default {
         _this.shouLiJFSL = res.shouLiJFSL
         _this.tiaoJiePFJE = res.tiaoJiePFJE
         _this.tiaoJieCGL = res.tiaoJieCGL
-        _this.shgouLiAJRYPM = res.shgouLiAJRYPM
+        _this.shouLiAJRYPM = res.shouLiAJRYPM
         _this.tiaoJieYSL = res.tiaoJieYSL
         let echartsData = [
           {value: res.zhuanZhiZB, name: '专职'},
@@ -264,10 +263,10 @@ export default {
     getList () {
       let _this = this
       let id = _this.$route.params.id || ''
-      let jgtype = this.$route.params.jgtype
+      let type = this.$route.params.type
       let baseUrl = urlConfig.baseUrl
       let url = '/organizationDetailsCaseList'
-      http.get(baseUrl + url, {id: id, time: _this.timec, jgtype: jgtype, pagenumber: _this.page, pagecapacity: 7}, (res) => {
+      http.get(baseUrl + url, {id: id, time: _this.timec, categoryType: type, pageNumber: _this.page, pageCapacity: 7}, (res) => {
         this.shouLiAJLB = res.pageData
       })
     }

@@ -73,7 +73,7 @@
                 <div class="row row3">受理数量</div>
               </div>
               <div class="t_body">
-                <div class="line" v-for="(item, index) in anJianSLSBG" :key="index" @click="changeRouter(target3==='type1'?'institutionPortrait':'peoplePortrait',item.id)">
+                <div class="line" v-for="(item, index) in anJianSLSBG" :key="index" @click="changeRouter(target3==='type1'?'institutionDetail':'peoplePortrait',item.id)">
                   <div class="row row1">
                     <span v-if="index>2">{{index+1}}</span>
                     <img class="img"  v-if ="index===0" src='/static/renmintj/jingpai.png' />
@@ -282,8 +282,11 @@ export default {
     },
     changeRouter (name, id) {
       let target = {name: name}
-      if (name === 'peoplePortrait' || name === 'institutionPortrait') {
+      if (name === 'peoplePortrait') {
         target = {name: name, params: { id: id }}
+      } else if (name === 'institutionDetail') {
+        let type = 'tiaoWeiH'
+        target = {name: name, params: { id: id, type: type }}
       }
       this.$router.push(target)
     },

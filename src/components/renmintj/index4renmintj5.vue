@@ -4,7 +4,7 @@
 <template>
   <div class="index_container">
     <div class="head clearfix">
-      <div class="title" @click="changeRouter('moduleChoose')">基层司法大数据子平台</div>
+      <div class="title">基层司法大数据子平台</div>
       <div class="left">
         <el-cascader class="cascader" style="z-index: 1;" :options="area" placeholder="区域" v-model="areaDefault"></el-cascader>
       </div>
@@ -362,6 +362,8 @@ export default {
   },
   watch: {
     trendType: function (to, from) {
+      this.$echarts.dispose(this.myChart['trendAnalysis'])
+      delete this.myChart['trendAnalysis']
       this.draw('trendAnalysis', eosNew.setLine(this.trendData[to].slice(6, 12), true, true))
     },
     areaDefault: function (newValue, oldValue) {

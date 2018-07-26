@@ -3,7 +3,7 @@
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
-        <div class="back" @click="changeRouter('importantEvent')"></div>
+        <div class="back" @click="$router.back(-1)"></div>
       </div>
       <div class="right">
         <span>{{timeCom}}</span>
