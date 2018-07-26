@@ -25,6 +25,7 @@
             value-format="yyyy-MM-dd"
             :picker-options="pickerOptions">
           </el-date-picker>
+         <el-button size="small" plain style='margin-left:20px;' @click="reset">重置</el-button>
         </div>
       </div>
       <div class="content_container">
@@ -130,6 +131,7 @@
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
+import json from '@/util/dictionaryMapping'
 import * as d3 from 'd3'
 import * as viz from '../../../static/viz'
 
@@ -145,7 +147,8 @@ export default {
       pingJunTJSC: 0,
       jiuFenZL: 0,
       tiaoJieCGL: 0,
-      tiaoJiePCJE: 0
+      tiaoJiePCJE: 0,
+      area: 'SHJCK01000'
     }
   },
   computed: {
@@ -154,19 +157,34 @@ export default {
     }
   },
   watch: {
-    date (to, from) {
-      this.getData()
+    date (newValue, oldValue) {
+      this.area = 'SHJCK01000'
+      this.getSankeyData()
+      this.getOtherData()
+    },
+    area (newValue, oldValue) {
+      this.getOtherData()
     }
   },
   methods: {
-    getData () {
+    getSankeyData () {
       let _this = this
       let baseUrl = urlConfig.baseUrl
       let url = '/regionalAnalysis'
-      let param = {area: 'SHJCK01000',
-        startDate: _this.date[0],
-        endDate: _this.date[1]
-      }
+      let param = { area: 'SHJCK01000', startDate: _this.date[0], endDate: _this.date[1] }
+      http.get(baseUrl + url, param, (data) => {
+        let sankeyData = data.sangJiT.links.map(item => { return [item.source, item.target, item.value] })
+        _this.$nextTick(function () {
+          document.getElementById('sankey').innerHTML = ''
+          _this.setSankey(sankeyData)
+        })
+      })
+    },
+    getOtherData () {
+      let _this = this
+      let baseUrl = urlConfig.baseUrl
+      let url = '/regionalAnalysis'
+      let param = { area: _this.area, startDate: _this.date[0], endDate: _this.date[1] }
       http.get(baseUrl + url, param, (data) => {
         _this.anJianSLWRBPM = data.anJianSLWRBPM
         _this.pingJunPCJEPM = data.pingJunPCJEPM
@@ -176,11 +194,6 @@ export default {
         _this.jiuFenZL = data.jiuFenZL
         _this.tiaoJieCGL = data.tiaoJieCGL
         _this.tiaoJiePCJE = data.tiaoJiePCJE
-        let sankeyData = data.sangJiT.links.map(item => { return [item.source, item.target, item.value] })
-        _this.$nextTick(function () {
-          document.getElementById('sankey').innerHTML = ''
-          _this.setSankey(sankeyData)
-        })
       })
     },
     setSankey (data) {
@@ -199,19 +212,17 @@ export default {
         .min(125)
         .pad(20)
         .height(760)
-        .width(3400)
+        .width(3600)
         .orient('horizontal')
-        .barSize(20)
+        .barSize(15)
         .fill(d => clientFlowColor[d.secondary])
         .edgeOpacity(0.7)
 
       let board = d3.select('.midlle')
 
-      // 客流图坐标
       let flow = board.append('g')
         .attr('transform', 'translate(50,80)') // 16 = 20-4 20是左右边缘
         .call(bp)
-
       flow.selectAll('.mainBars').append('text').attr('class', 'label')
         .attr('x', d => {
           return d.part === 'primary' ? -d.width : (-d.width + 7)
@@ -219,22 +230,43 @@ export default {
         .attr('fill', '#ddd')
         .attr('text-anchor', 'start')
         .attr('y', d => {
-          return d.part === 'primary' ? -12 : 12
+          return d.part === 'primary' ? -12 : 10
         })
         .attr('writing-mode', d => {
           return d.part === 'primary' ? null : 'tb'
         })
         .attr('font-size', '30')
+        .attr('cursor', 'pointer')
         .text(d => {
           return d.key
         })
+
+      flow.selectAll('.mainBars').on('click', handleMouseClick)
+      let vue = this
+      function handleMouseClick (d, i) {
+        let areaValue = json.area.filter(item => {
+          if (item.label === d.key) {
+            return true
+          }
+        })
+        if (areaValue[0]) {
+          d3.selectAll('text').attr('fill', '#ddd')
+          d3.select(this).select('.label').attr('fill', 'orange')
+          vue.area = areaValue[0]['value']
+        }
+      }
+    },
+    reset () {
+      this.date = jsonUtil.defaultDataRage()
+      this.area = 'SHJCK01000'
     },
     changeRouter (name) {
       this.$router.push({name: name})
     }
   },
   created () {
-    this.getData()
+    this.getSankeyData()
+    this.getOtherData()
   },
   mounted () {}
 }
