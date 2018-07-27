@@ -1,3 +1,5 @@
+import json from './dictionaryMapping'
+
 let dateFormat = (dateTime, valueFormat) => {
   let newDate = new Date(dateTime)
   valueFormat = valueFormat || 'yyyy-MM-dd'
@@ -83,4 +85,13 @@ let defaultDataRage = () => {
   return [`${dateFormat(newDate, 'yyyy')}-01-01`, dateFormat(newDate)]
 }
 
-export default { dateFormat, pickerOptions, defaultDataRage }
+let findAreaNameByValue = (value) => {
+  let result = json.area.filter(item => {
+    if (item.value === value) {
+      return true
+    }
+  })
+  return result[0] ? result[0].label : '未知区域'
+}
+
+export default { dateFormat, pickerOptions, defaultDataRage, findAreaNameByValue }
