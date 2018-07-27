@@ -1,37 +1,39 @@
 <template>
   <div id='login'>
-    <div class="title">
-      <i class="icon icon-logo-login"></i>
-      <h2>上海市司法局</h2>
-      <!-- <h2>社会矛盾风险感控大数据平台</h2> -->
-    </div>
-    <div class="title1">
-    </div>
-    <div class="m-login">
-      <div class="wrap-login">
-        <div class="top">用户登录</div>
-        <div class="login-frame">
-          <div class="bar-input">
-            <i class="icon icon-user"></i>
-            <input type="text" id="name" class="form-control" :class='{blue: !userNameStatus}' v-model='userName' placeholder="请输入用户名" data-necessary="true" reservation="用户名" @focus='changeStatus("userName")'/>
-            <a class="btn btn-gray-delete" :class='{hide: userNameStatus}' @click='clearContent("userName")'>&times;</a>
-            <div class="errorBar"></div>
+    <div class="norepeat">
+      <div class="title">
+        <i class="icon icon-logo-login"></i>
+        <h2>上海市司法局</h2>
+        <!-- <h2>社会矛盾风险感控大数据平台</h2> -->
+      </div>
+      <div class="title1">
+      </div>
+      <div class="m-login">
+        <div class="wrap-login">
+          <div class="top">用户登录</div>
+          <div class="login-frame">
+            <div class="bar-input">
+              <i class="icon icon-user"></i>
+              <input type="text" id="name" class="form-control" :class='{blue: !userNameStatus}' v-model='userName' placeholder="请输入用户名" data-necessary="true" reservation="用户名" @focus='changeStatus("userName")'/>
+              <a class="btn btn-gray-delete" :class='{hide: userNameStatus}' @click='clearContent("userName")'>&times;</a>
+              <div class="errorBar"></div>
+            </div>
+            <div class="bar-input">
+              <i class="icon icon-lock"></i>
+              <input type="password" id="password" class="form-control" :class='{blue: !userPwdStatus}' v-model='userPwd' placeholder="请输入密码" data-necessary="true" reservation="密码" @focus='changeStatus("userPwd")'/>
+              <a class="btn btn-gray-delete" :class='{hide: userPwdStatus}' @click='clearContent("userPwd")'>&times;</a>
+              <div class="errorBar"></div>
+            </div>
+            <div class="bar-option" style="position:relative">
+              <input type="checkbox" name="rememberPwd" id="rememberPwd" class="form-control"/>
+              <span class="reminder">记住密码</span>
+              <a class="btn">忘记密码？</a>
+              <div class="error_Bar" style="bottom:-20px"></div>
+            </div>
           </div>
-          <div class="bar-input">
-            <i class="icon icon-lock"></i>
-            <input type="password" id="password" class="form-control" :class='{blue: !userPwdStatus}' v-model='userPwd' placeholder="请输入密码" data-necessary="true" reservation="密码" @focus='changeStatus("userPwd")'/>
-            <a class="btn btn-gray-delete" :class='{hide: userPwdStatus}' @click='clearContent("userPwd")'>&times;</a>
-            <div class="errorBar"></div>
+          <div class="footer">
+            <a class="btn" id="logining" @click='changeRouter'>登录</a>
           </div>
-          <div class="bar-option" style="position:relative">
-            <input type="checkbox" name="rememberPwd" id="rememberPwd" class="form-control"/>
-            <span class="reminder">记住密码</span>
-            <a class="btn">忘记密码？</a>
-            <div class="error_Bar" style="bottom:-20px"></div>
-          </div>
-        </div>
-        <div class="footer">
-          <a class="btn" id="logining" @click='changeRouter'>登录</a>
         </div>
       </div>
     </div>
@@ -84,9 +86,12 @@ export default {
 </script>
 
 <style scoped>
-.login{
-  max-height: 100%;
-  max-width: 100%;
+#login{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-width:1366px;
+  min-height: 766px;
 }
 .icon-logo-login {
   width: 39px;
@@ -408,7 +413,7 @@ textarea {
 }
 #login .title {
   position: absolute;
-  top: 207px;
+  top: -127px;
   left: 0;
   width: 100%;
   height: 34px;
@@ -426,7 +431,7 @@ textarea {
 }
 #login .title1 {
   position: absolute;
-  top: 256px;
+  top: -71px;
   left: 0;
   width: 100%;
   height: 40px;
@@ -486,6 +491,11 @@ textarea {
   font-size: 24px;
   transition: all 1.5s;
   color: #4565b9;
+}
+.norepeat{
+  width: 347px;
+  height: 322px;
+  position: relative;
 }
 #login .m-login {
   height: 322px;
