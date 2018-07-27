@@ -815,7 +815,8 @@ let setLine6 = (data, dataType, title) => {
       text: title,
       textStyle: {
         color: '#f1f1f1',
-        fontSize: 14
+        fontSize: 14,
+        fontWeight: 350
       }
     },
     tooltip: {
@@ -935,7 +936,7 @@ let setLine7 = (data, dataType) => {
       splitLine: {
         show: true,
         lineStyle: {
-          color: 'rgba(241,241,241,0.8)'
+          color: '#2a2f3d'
         }
       }
     },
@@ -1262,7 +1263,7 @@ let setMapbox = (caseData, centerPoint) => {
           'osm-tiles': {
             'type': 'raster',
             'tiles': [
-              `${osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
+              `${osmUrl}/styles/customDarkStyle/{z}/{x}/{y}.png`
             ],
             'tileSize': 256
           }

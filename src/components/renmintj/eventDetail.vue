@@ -1,5 +1,5 @@
 <template>
-  <div class="impEventDet_container">
+  <div class="eventDetail_container">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
@@ -18,9 +18,9 @@
         <div class="left1">
           <div class="title">
             <div class="border"></div>
-            <span>事件信息</span>
+            <span>{{eventDetail.zhongDianSJXX.zhongDiansjlx==='普通事件'?'事件信息':'重点事件信息'}}</span>
           </div>
-          <div class="eventType">{{eventDetail.zhongDianSJXX.zhongDiansjlx}}</div>
+          <div class="eventType" :class="{documents: eventDetail.zhongDianSJXX.zhongDiansjlx==='普通事件',reddocuments: eventDetail.zhongDianSJXX.zhongDiansjlx!=='普通事件'}">{{eventDetail.zhongDianSJXX.zhongDiansjlx}}</div>
           <div class="line clearfix">
             <label>时间：</label>
             <span>{{eventDetail.zhongDianSJXX.shiJian}}</span>
@@ -38,7 +38,7 @@
           <div class="line clearfix">
             <label style="float:left">描述：</label>
             <!-- 姓名超过六个字特殊处理 -->
-            <el-tooltip v-if="eventDetail.zhongDianSJXX.miaoShu.length>100" :content='eventDetail.zhongDianSJXX.miaoShu' placement="top">
+            <el-tooltip v-if="eventDetail.zhongDianSJXX.miaoShu.length>100" :content='eventDetail.zhongDianSJXX.miaoShu' :popper-class='"contentToolTip"' placement="bottom">
               <div class="content">{{eventDetail.zhongDianSJXX.miaoShu.slice(0,100)+'...'}}</div>
             </el-tooltip>
             <div class="content" v-if="eventDetail.zhongDianSJXX.miaoShu.length<=100" >{{eventDetail.zhongDianSJXX.miaoShu}}</div>
@@ -771,7 +771,7 @@ export default {
 @fontGray:rgba(241,241,241,0.8);
 @fontSamll:14px;
 @fontMiddle:16px;
-.impEventDet_container{
+.eventDetail_container{
   background: #0B131C;
   position: absolute;
   width: 100%;
@@ -886,12 +886,18 @@ export default {
         color:@fontWhite;
         display: block;
         padding-left: 50px;
-        background: url('/static/renmintj/icon_documents.png');
+        // background: url('/static/renmintj/icon_documents.png');
         background-repeat: no-repeat;
         background-position: left 12px center;
         height:26px;
         margin-top:10px;
         line-height: 30px;
+      }
+      .documents{
+        background-image:url(/static/renmintj/icon_documents.png)
+      }
+      .reddocuments{
+        background-image:url(/static/renmintj/icon_reddocuments.png)
       }
       .line{
         display: block;

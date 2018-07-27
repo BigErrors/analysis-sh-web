@@ -339,15 +339,16 @@ export default {
         } else {
           data = data.slice(0, 10).reverse()
         }
+        let areaName = jsonUtil.findAreaNameByValue(vue.areaDefault[0])
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
-            vue.title4 = '各区案件数量(TOP10)'
+            vue.title4 = `${areaName}受理数量(TOP10)`
           } else if (vue.type === '110联动') {
-            vue.title4 = '各区受理排名(TOP10)'
+            vue.title4 = `${areaName}案件数量(TOP10)`
           } else if (vue.type === '公共法律服务') {
-            vue.title4 = '各区服务数量(TOP10)'
+            vue.title4 = `${areaName}服务数量(TOP10)`
           } else if (vue.type === '纠纷排查') {
-            vue.title4 = '各机构排查排名(TOP10)'
+            vue.title4 = `${areaName}排查数量(TOP10)`
           }
           vue.draw('target4', eos.setBar3(data, ['#4D84FE', '#B3CAFF'], 'horizon', 'integer'))
         })

@@ -324,7 +324,7 @@ export default {
         'osm-tiles': {
           'type': 'raster',
           'tiles': [
-            `${urlConfig.osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
+            `${urlConfig.osmUrl}/styles/customDarkStyle/{z}/{x}/{y}.png`
           ],
           'tileSize': 256
         },
