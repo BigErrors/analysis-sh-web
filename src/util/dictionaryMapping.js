@@ -1,7 +1,7 @@
 let area = [{
   'label': '上海市',
   'value': 'SHJCK01000',
-  'coordinates': [121.5193, 31.263070]
+  'coordinates': [121.4193, 31.213070]
 }, {
   'label': '崇明区',
   'value': 'SHJCK01019',

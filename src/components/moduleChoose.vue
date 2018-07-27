@@ -335,7 +335,7 @@ export default {
           background-position:center center;
           background-repeat: no-repeat;
           &:hover{
-            background: url('/static/moduleImages/last发光.png')
+            background: url('/static/moduleImages/lastHover.png')
           }
         }
         .right{
@@ -350,7 +350,7 @@ export default {
           background-position:center center;
           background-repeat: no-repeat;
           &:hover{
-            background: url('/static/moduleImages/next发光.png')
+            background: url('/static/moduleImages/nextHover.png')
           }
         }
       }

@@ -319,7 +319,7 @@ export default {
     mapboxStyle: {
       'version': 8,
       'glyphs': `${urlConfig.osmUrl}/fonts/{fontstack}/{range}.pbf`,
-      'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite5',
+      'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite6',
       'sources': {
         'osm-tiles': {
           'type': 'raster',
@@ -432,17 +432,23 @@ export default {
         // 地图的旋转角度
         bearing: -10
       })
+      let myPopup = new mapboxgl.Popup()
       map.on('load', function (event) {
-        map.on('click', 'points', function (e) {
+        map.on('mouseenter', 'points', function (e) {
           vue.showDialog = false
+          map.getCanvas().style.cursor = 'pointer'
           let coordinates = e.features[0].geometry.coordinates.slice()
           let description = e.features[0].properties.description
           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
           }
-          new mapboxgl.Popup().setLngLat(coordinates)
+          myPopup.setLngLat(coordinates)
             .setHTML(description)
             .addTo(map)
+        })
+        map.on('mouseleave', 'points', function () {
+          map.getCanvas().style.cursor = ''
+          myPopup.remove()
         })
       })
     },
