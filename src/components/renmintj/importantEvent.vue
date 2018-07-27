@@ -408,8 +408,8 @@ export default {
               font-size:@fontSamll;
               font-family:MicrosoftYaHei;
               color:rgba(255,255,255,1);
-              padding: 4px 15px;
-              border-radius: 15px;
+              padding: 0 8px;
+              border-radius: 12px;
               background:#F59B5B;
               &:hover{
                cursor: pointer;

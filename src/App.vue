@@ -557,4 +557,10 @@ export default {
     display: block;
   }
 
+  .contentToolTip{
+     width: 400px !important;
+     font-size: 12px;
+     line-height: 20px;
+  }
+
 </style>
