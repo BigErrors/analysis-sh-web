@@ -63,7 +63,7 @@ let area = [{
   'value': 'SHJCK01003',
   'coordinates': [121.541702, 31.270352]
 }, {
-  'label': '黄埔区',
+  'label': '黄浦区',
   'value': 'SHJCK01002',
   'coordinates': [121.491, 31.237]
 }]

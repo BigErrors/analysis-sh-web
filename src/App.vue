@@ -480,6 +480,12 @@ export default {
     font-size: 12px !important;
   }
 
+  .regional_container .date_container .el-button {
+    background: rgba(20,156,250,0.2) !important;
+    border: 1px solid #149cfa !important;
+    color: #2e89fd !important;
+  }
+
   /* 赔偿金额 */
 
   .compensation_container .el-range-editor.el-input__inner {
