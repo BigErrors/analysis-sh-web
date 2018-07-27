@@ -586,6 +586,7 @@ export default {
 <style lang="less" scoped>
 @fontSamll:14px;
 @fontMiddle:16px;
+@tableHover:rgba(113, 116, 120, 0.6);
 .index_container {
   position: absolute;
   width: 100%;
@@ -756,7 +757,7 @@ export default {
             .table_tr:hover {
               .once{
                 cursor: pointer;
-                color: #149CFA;
+                background: @tableHover;
               }
             }
           }
