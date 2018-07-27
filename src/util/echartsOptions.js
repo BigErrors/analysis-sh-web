@@ -1262,7 +1262,7 @@ let setMapbox = (caseData, centerPoint) => {
           'osm-tiles': {
             'type': 'raster',
             'tiles': [
-              `${osmUrl}/styles/dark-matter/{z}/{x}/{y}.png`
+              `${osmUrl}/styles/customDarkStyle/{z}/{x}/{y}.png`
             ],
             'tileSize': 256
           }
