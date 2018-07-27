@@ -122,7 +122,7 @@ export default {
         total: 0
       },
       reorder: 'DESC',
-      obj: 'renyuansl',
+      obj: 'yewusl',
       loading: '',
       chooseArr: [{
         label: '区局',

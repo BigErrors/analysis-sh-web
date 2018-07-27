@@ -43,7 +43,7 @@
                 <div class="row row1"><span>排名</span></div>
                 <div class="row row2"><span>姓名</span></div>
                 <div class="row row3"><span>所属单位</span></div>
-                <div class="row row4"><span>优秀协议书质量</span></div>
+                <div class="row row4"><span>优秀协议书数量</span></div>
               </div>
               <div class="line table_body" v-for ="(item,index) in datas.topdoc" :key="index">
                 <div class="row row1"><span :class="index<3?'bg'+(index+1):'bg4'">{{index+1}}</span></div>

@@ -98,7 +98,7 @@
             </div>
             <div class="box">
               <div class="l_container clearfix">
-                <span class="span_title">调节成功率</span>
+                <span class="span_title">调解成功率</span>
                 <div class="span_content clearfix">
                   <span class="span1">{{tiaoJieCGL|rateFormat}}</span>
                 </div>
