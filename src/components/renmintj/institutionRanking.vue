@@ -46,6 +46,15 @@
               v-model="chooseDefault"
             ></el-cascader>
           </div>
+          <div class="date_container">
+            <el-cascader
+              class="cascader"
+              style="z-index:1;height:28px;line-height:28px;font-size:@fontSamll;width:120px"
+              :options="area"
+              placeholder="区域"
+              v-model="areaDefault"
+            ></el-cascader>
+          </div>
         </div>
       </div>
       <div class="table_container">
@@ -109,6 +118,7 @@
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
+import json from '@/util/dictionaryMapping'
 
 export default {
   data: function () {
@@ -134,7 +144,9 @@ export default {
         label: '调委会',
         value: 'MEDIATIONCOMMITTEE'
       }],
-      chooseDefault: ['JUSTICEBUREAU']
+      chooseDefault: ['JUSTICEBUREAU'],
+      area: json.area,
+      areaDefault: ['SHJCK01000']
     }
   },
   computed: {
@@ -148,6 +160,10 @@ export default {
       this.getData()
     },
     date: function (newValue, oldValue) {
+      this.pageInfo.currentPage = 1
+      this.getData()
+    },
+    areaDefault: function (newValue, oldValue) {
       this.pageInfo.currentPage = 1
       this.getData()
     }
@@ -170,7 +186,8 @@ export default {
         'reorder': _this.reorder,
         'excl': excel,
         'pagesize': 10,
-        'currentpage': _this.pageInfo.currentPage
+        'currentpage': _this.pageInfo.currentPage,
+        'location': _this.areaDefault[0]
       }
       if (excel === 0) {
         http.post(baseUrl + url, param, (data) => {
