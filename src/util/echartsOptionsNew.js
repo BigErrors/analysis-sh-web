@@ -1086,13 +1086,13 @@ let setBar5 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
   if (axisType === 'vertical') {
     option.series.push({
       type: 'bar',
-      name: name,
-      stack: 'bar',
       itemStyle: {
         color: '#383E4E'
       },
+      silent: true,
+      barGap: '-100%',
       data: data.map(function (obj) {
-        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
+        return maxValue
       })
     })
   }

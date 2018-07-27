@@ -77,13 +77,15 @@
               </thead>
               <tbody class="tbody">
               <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=4" @click="changeRouter('eventDetail', item.caseid)">
-                <td class='td'><span class="circle" :class="'circle'+(item.xuhao)">{{item.xuhao}}</span></td>
-                <td class='td'>{{item.mingcheng}}</td>
-                <td class='td'>{{item.shoulisj}}</td>
-                <td class='td'>{{item.jieansj}}</td>
-                <td class='td'>{{item.tiaojielx}}</td>
-                <td class='td'>{{item.wenshuzl}}</td>
-                <td class='td'>{{item.zhonghepf}}</td>
+                <td width="10%" class='td'><span class="circle" :class="'circle'+(item.xuhao)">{{item.xuhao}}</span></td>
+                <el-tooltip :content='item.mingcheng' placement="top">
+                  <td width="30%" class='td'><span class="span1">{{item.mingcheng}}</span></td>
+                </el-tooltip>
+                <td width="15%" class='td'>{{item.shoulisj}}</td>
+                <td width="15%" class='td'>{{item.jieansj}}</td>
+                <td width="10%" class='td'>{{item.tiaojielx}}</td>
+                <td width="10%" class='td'>{{item.wenshuzl}}</td>
+                <td width="10%" class='td'>{{item.zhonghepf}}</td>
               </tr>
               </tbody>
             </table>
@@ -501,6 +503,17 @@ export default {
                 font-family:MicrosoftYaHei;
                 color:@fontWhite;
                 text-align:center;
+                position: relative;
+                .span1{
+                  position:absolute;
+                  max-width: 100%;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%,-50%);
+                }
               }
               tr{
                 &:nth-of-type(2n-1){

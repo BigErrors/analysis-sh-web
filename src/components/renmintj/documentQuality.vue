@@ -48,7 +48,11 @@
               <div class="line table_body" v-for ="(item,index) in datas.topdoc" :key="index">
                 <div class="row row1"><span :class="index<3?'bg'+(index+1):'bg4'">{{index+1}}</span></div>
                 <div class="row row2"><span>{{item.name}}</span></div>
-                <div class="row row3"><span>{{item.danwei}}</span></div>
+                <div class="row row3">
+                  <el-tooltip :content='item.danwei' placement="top">
+                    <span>{{item.danwei}}</span>
+                  </el-tooltip>
+                </div>
                 <div class="row row4"><span>{{item.number}}</span></div>
               </div>
             </div>
@@ -416,7 +420,10 @@ export default {
                   position: absolute;
                   left: 0%;
                   top:50%;
-                  transform: translate(0%,-50%)
+                  transform: translate(0%,-50%);
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
                 }
               }
               .row4{

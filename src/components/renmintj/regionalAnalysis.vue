@@ -50,8 +50,9 @@
             <span class="span3">小时</span>
           </div>
         </div>
-        <!-- <div class="midlle"></div> -->
-        <svg class="midlle" id="sankey" viewBox="0,0,2000,1000" preserveAspectRatio="xMinYMin meet"></svg>
+        <div class="midlle">
+          <svg id="sankey"></svg>
+        </div>
         <div class="bottom">
           <div class="box">
             <div class="title">
@@ -143,7 +144,7 @@ export default {
       anJianSLWRBPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
       pingJunPCJEPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
       pingJunTJSCPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
-      tiaoJieSBLPM: [{name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}, {name: '', value: 0}],
+      tiaoJieSBLPM: [{name: '', value: 0, labelValue: 0}, {name: '', value: 0, labelValue: 0}, {name: '', value: 0, labelValue: 0}, {name: '', value: 0, labelValue: 0}, {name: '', value: 0, labelValue: 0}],
       pingJunTJSC: 0,
       jiuFenZL: 0,
       tiaoJieCGL: 0,
@@ -208,20 +209,23 @@ export default {
         clientFlowColor[name] = makeClientFlowColor(name)
       }
       let bp = viz.bP()
+      let width = document.getElementsByClassName('midlle')[0].clientWidth
+      let height = document.getElementsByClassName('midlle')[0].clientHeight
       bp.data(clientFlowData)
-        .min(125)
+        .min(0)
         .pad(20)
-        .height(760)
-        .width(3600)
+        .height(height - 80)
+        .width(width)
         .orient('horizontal')
         .barSize(15)
         .fill(d => clientFlowColor[d.secondary])
         .edgeOpacity(0.7)
 
-      let board = d3.select('.midlle')
-
+      let board = d3.select('#sankey')
+      board.attr('preserveAspectRatio', 'xMidYMid meet')
+        .attr('viewBox', '0 -20 ' + width + ' ' + (height))
       let flow = board.append('g')
-        .attr('transform', 'translate(50,80)') // 16 = 20-4 20是左右边缘
+        .attr('transform', 'translate(0,0)') // 16 = 20-4 20是左右边缘
         .call(bp)
       flow.selectAll('.mainBars').append('text').attr('class', 'label')
         .attr('x', d => {
@@ -235,7 +239,7 @@ export default {
         .attr('writing-mode', d => {
           return d.part === 'primary' ? null : 'tb'
         })
-        .attr('font-size', '30')
+        .attr('font-size', '11')
         .attr('cursor', 'pointer')
         .text(d => {
           return d.key
