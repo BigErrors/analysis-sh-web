@@ -3,7 +3,7 @@
     <div class="head">
       <div class="title"></div>
       <div class="time">{{timeCom}}</div>
-      <div class="close"></div>
+      <div class="close" @click="logout"></div>
     </div>
     <div class="body">
       <div class="container">
@@ -62,6 +62,8 @@
 
 <script>
 import jsonUtil from '@/util/jsonUtil'
+import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 
 export default {
   data: function () {
@@ -78,6 +80,16 @@ export default {
     }
   },
   methods: {
+    logout () {
+      let vue = this
+      let baseUrl = urlConfig.baseUrl
+      let url = '/logout'
+      let param = { username: vue.userName, password: vue.userPwd }
+      http.get(baseUrl + url, param, (data) => {
+        console.log(`用户已退出`)
+        vue.changeRouter({name: 'login'})
+      })
+    },
     // 路由跳转
     changeRouter (name) {
       if (name === 'http://rmtj.justice.gov.cn/') {

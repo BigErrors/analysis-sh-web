@@ -24,8 +24,8 @@ Vue.use(Router)
 const router = new Router({
   routes: [{
     path: '/',
-    name: 'moduleChoose',
-    component: moduleChoose
+    name: 'login',
+    component: login
   },
   {
     path: '/login',

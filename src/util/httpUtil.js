@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-07-19 16:38:10
+ * @Last Modified time: 2018-07-27 18:28:48
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -112,7 +112,12 @@ axios.interceptors.request.use(config => {
 
 // 拦截response
 axios.interceptors.response.use(data => {
-  return data
+  if (data.data.code === 10) {
+    Notification.error({message: '未登录'})
+    location.href = `http://${location.host}`
+  } else {
+    return data
+  }
 }, err => {
   return Promise.resolve(err)
 })
