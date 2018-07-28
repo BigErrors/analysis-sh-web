@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
+      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm')
     }
   },
   methods: {
