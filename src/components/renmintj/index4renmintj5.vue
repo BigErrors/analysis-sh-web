@@ -253,7 +253,7 @@
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">
       <div class="close" @click="showDialog=false">X</div>
       <div class="content">
-        <span class="address">{{dialogData.name}}</span>
+        <span class="address" @click="changeRouter('institutionDetail', dialogData.id)">{{dialogData.name}}</span>
         <br><span class="number">{{dialogData.value + '件'}}</span>
       </div>
     </div>
@@ -312,7 +312,8 @@ export default {
     showDialog: false,
     dialogData: {
       name: '',
-      value: ''
+      value: '',
+      id: ''
     },
     nothing: 0.1,
     interval: '',
@@ -394,8 +395,9 @@ export default {
       if (domName === 'map') {
         this.myChart[domName].on('click', function (params) {
           if (params.seriesName === '分布') {
-            vue.dialogData.name = params.name
-            vue.dialogData.value = params.value[2]
+            vue.dialogData.name = params.data.name
+            vue.dialogData.value = params.data.value[2]
+            vue.dialogData.id = params.data.id
             vue.offsetX = event.offsetX + 'px'
             vue.offsetY = event.offsetY + 'px'
             vue.showDialog = true
@@ -540,7 +542,8 @@ export default {
           vue.caseDistributionData = vue.caseDistributionData.map((item, index) => {
             return {
               name: item.diQu,
-              value: [item.jinDu, item.weiDu, item.jianShu]
+              value: [item.jinDu, item.weiDu, item.jianShu],
+              id: item.bianMa
             }
           })
         }
@@ -589,6 +592,9 @@ export default {
         target = {name: name, params: { id: param }}
       } else if (name === 'businessNum') {
         target = {name: name, params: { type: param }}
+      } else if (name === 'institutionDetail') {
+        let type = 'tiaoWeiH'
+        target = {name: name, params: { id: param, type: type }}
       }
       this.$router.push(target)
     }
@@ -1222,6 +1228,10 @@ export default {
       line-height: 28px;
       padding-left: 18px;
       background: url('/static/renmintjNew/didian.png') no-repeat left center;
+      &:hover {
+        cursor: pointer;
+        color: #FFF225;
+      }
     }
     .number {
       line-height: 18px;

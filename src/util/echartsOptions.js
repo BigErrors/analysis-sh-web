@@ -1242,7 +1242,7 @@ let setMapbox = (caseData, centerPoint) => {
     visualMap: [{
       type: 'continuous',
       show: false,
-      max: 30,
+      max: 100,
       calculable: true,
       realtime: false,
       inRange: {
