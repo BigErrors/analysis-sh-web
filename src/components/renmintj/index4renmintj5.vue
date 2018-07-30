@@ -404,6 +404,7 @@ export default {
     },
     drawMapbox () {
       let vue = this
+      vue.showDialog = false
       vue.mapboxStyle.sources.points.data.features = vue.keyEventsData.map((item, index) => {
         return {
           'type': 'Feature',
@@ -415,7 +416,8 @@ export default {
             'description': `<span style="font-size: 14px;color: #49EAEE;line-height:16px;">${item.type}</span>
                       <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/didian.png') no-repeat left center">${item.area}</span>
                       <br><span style="line-height:28px;padding-left:18px;background:url('/static/renmintjNew/shizhong.png') no-repeat left center">${item.date}</span>
-                      <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>`,
+                      <br><span style="line-height:18px;padding-left:18px;background:url('/static/renmintjNew/miaoshu.png') no-repeat left center">${item.detail}</span>
+                      <br><a style="display:none;">${item.id}</a>`,
             'icon': 'importantEvent'
           }
         }
@@ -435,7 +437,6 @@ export default {
       let myPopup = new mapboxgl.Popup()
       map.on('load', function (event) {
         map.on('mouseenter', 'points', function (e) {
-          vue.showDialog = false
           map.getCanvas().style.cursor = 'pointer'
           let coordinates = e.features[0].geometry.coordinates.slice()
           let description = e.features[0].properties.description
@@ -449,6 +450,11 @@ export default {
         map.on('mouseleave', 'points', function () {
           map.getCanvas().style.cursor = ''
           myPopup.remove()
+        })
+        map.on('click', 'points', function (e) {
+          const description = e.features[0].properties.description
+          const id = description.split('<a style="display:none;">')[1].split('</a>')[0]
+          vue.changeRouter('eventDetail', id)
         })
       })
     },
@@ -539,7 +545,8 @@ export default {
             type: item.shiJianLX,
             detail: item.xiangQing,
             area: item.xiangXiDZ,
-            date: item.riQi2
+            date: item.riQi2,
+            id: item.id
           }
         })
         vue.layerType = 'disputesDistribution'
