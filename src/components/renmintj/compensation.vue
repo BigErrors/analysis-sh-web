@@ -51,9 +51,9 @@
                 </div>
                 <div class="right">
                   <el-cascader
-                    :options="area"
+                    :options="type"
                     placeholder="机构类型"
-                    v-model="areaDefault"
+                    v-model="typeDefault"
                   ></el-cascader>
                 </div>
               </div>
@@ -64,7 +64,7 @@
                   <div class="row row3"><span>金额数量(万元)</span></div>
                 </div>
                 <div class="table_body">
-                  <div v-for="(item,index) in top5" :key="index" class="line" @click="changeRouter('institutionPortrait', item.id)">
+                  <div v-for="(item,index) in top5" :key="index" class="line" @click="changeRouter('institutionDetail', item.id)">
                     <div class="row row1">
                       <span v-if="index>2">{{index+1}}</span>
                       <img class="img"  v-if ="index===0" src='/static/renmintj/jingpai.png' />
@@ -101,8 +101,8 @@ export default {
   data () {
     return {
       myChart: {},
-      area: [{label: '区局', value: 'tiaojiej'}, {label: '调委会', value: 'tiaojiewyh'}, {label: '司法所', value: 'tiaojies'}],
-      areaDefault: ['tiaojiej'],
+      type: [{label: '区局', value: 'tiaojiej'}, {label: '调委会', value: 'tiaojiewyh'}, {label: '司法所', value: 'tiaojies'}],
+      typeDefault: ['tiaojiej'],
       freq: 'year',
       thismouthmoeny: 0,
       allmoeny: 0,
@@ -116,7 +116,7 @@ export default {
     }
   },
   watch: {
-    areaDefault (to, from) {
+    typeDefault (to, from) {
       this.getData()
     },
     freq (to, from) {
@@ -132,15 +132,27 @@ export default {
     },
     changeRouter (name, id) {
       let target = {name: name}
-      if (name === 'institutionPortrait') {
-        target = {name: name, params: { id: id }}
+      if (name === 'institutionDetail') {
+        let type = this.typeDefault[0]
+        switch (type) {
+          case 'tiaojiej':
+            type = 'siFaJ'
+            break
+          case 'tiaojies':
+            type = 'siFaS'
+            break
+          case 'tiaojiewyh':
+            type = 'tiaoWeiH'
+            break
+        }
+        target = {name: name, params: { id: id, type: type }}
       }
       this.$router.push(target)
     },
     getData () {
       let baseUrl = urlConfig.baseUrl
       let url = '/caseMoeny'
-      let param = {label: this.areaDefault[0], freq: this.freq}
+      let param = {label: this.typeDefault[0], freq: this.freq}
       let _this = this
       http.post(baseUrl + url, param, (data) => {
         this.allmoeny = data.allmoeny
@@ -148,7 +160,7 @@ export default {
         this.allcase = data.allcase
         this.top5 = data.top5
         this.$nextTick(() => {
-          this.draw('echarts_container', eosNew.setTreemap(_this, data.tree))
+          _this.draw('echarts_container', eosNew.setTreemap(_this, data.tree))
         })
       }, 'application/json', 'json')
     }
