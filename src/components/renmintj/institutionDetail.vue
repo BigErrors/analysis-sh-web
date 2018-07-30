@@ -70,7 +70,7 @@
             </div>
             <div class="box">
               <div class="bTitle">受理案件排名</div>
-              <div class="line" v-for="(item,index) in shouLiAJRYPM" :key="index">
+              <div class="line" v-for="(item,index) in shouLiAJRYPM" :key="index" @click="changeRouter('peoplePortrait', item.id)">
                 <div class="lineCenter">
                   <div class="line_span">
                     <span class="span_name">{{item.name}}</span>
@@ -220,7 +220,9 @@ export default {
   },
   watch: {
     timec: function (to, from) {
+      this.page = 1
       this.getData()
+      this.getList()
     }
   },
   methods: {
@@ -236,7 +238,7 @@ export default {
     },
     changeRouter (name, id) {
       let target = {name: name}
-      if (name === 'eventDetail') {
+      if (name === 'eventDetail' || name === 'peoplePortrait') {
         target = {name: name, params: { id: id }}
       }
       this.$router.push(target)
@@ -607,6 +609,10 @@ export default {
                   border-radius: 2px;
                 }
               }
+              &:hover{
+                cursor: pointer;
+                background: @tableHover;
+              }
             }
           }
         }
@@ -716,6 +722,10 @@ export default {
               font-size:@fontSamll;
               &:nth-of-type(2n-1){
                 background: @table;
+              }
+              &:hover{
+                cursor: pointer;
+                background: @tableHover;
               }
               .row{
                 float: left;
