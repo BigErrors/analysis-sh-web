@@ -135,10 +135,10 @@
             <img class="rImg" src="/static/renmintjNew/icon_zaixianry.png" />
             <div class="rSpanC">
               <div>
-                <span class="spanT">在线人数</span>
+                <span class="spanT">登录人数</span>
               </div>
               <div>
-                <span class="spanB">----</span>
+                <span class="spanB">{{onlineNumber}}</span>
               </div>
             </div>
           </div>
@@ -306,6 +306,7 @@ export default {
     },
     MechanismNumber: [],
     peopleCount: {},
+    onlineNumber: 0,
     offsetX: '0',
     offsetY: '0',
     showDialog: false,
@@ -517,6 +518,11 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.peopleCount = data
       })
+      url = '/onlineNumber'
+      // 在线人数
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.onlineNumber = data
+      })
       // 案件分布、重点关注
       let querylist = [{
         url: baseUrl + '/caseDistribution',
@@ -555,6 +561,27 @@ export default {
         })
       })
     },
+    updateData () {
+      let vue = this
+      let baseUrl = urlConfig.baseUrl
+      let reqParam = {
+        area: this.areaDefault[0]
+      }
+      let url = ''
+      // 业务数量
+      url = '/businessCount'
+      http.get(baseUrl + url, reqParam, (data) => {
+        data.map((item, index) => {
+          vue.casestatistics[item['biao']] = item['benYue']
+          vue.casestatisticsAll[item['biao']] = item['quanNian']
+        })
+      })
+      url = '/onlineNumber'
+      // 在线人数
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.onlineNumber = data
+      })
+    },
     // 路由跳转
     changeRouter (name, param) {
       let target = {name: name}
@@ -579,7 +606,8 @@ export default {
         i = 0
       }
       vue.trendType = list[i]
-    }, 6000)
+      vue.updateData()
+    }, 5000)
   },
   mounted () {
     let vue = this
