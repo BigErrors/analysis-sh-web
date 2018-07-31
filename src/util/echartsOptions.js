@@ -1389,4 +1389,143 @@ let setSankey = (data) => {
   return option
 }
 
-export default {setBar, setBar3, setBar4, setRadar2, setLine, setLine2, setLine4, setLine5, setLine6, setLine7, setPie, setPie2, setPie3, setPie4, setPie6, setMapbox, setSankey}
+let setBar5 = (dateRange, data) => {
+  dateRange = dateRange || ''
+  let xLabel = data || ['黄埔', '徐汇', '长宁', '静安', '普陀', '虹口', '杨浦', '闵行', '宝山', '嘉定', '浦东', '金山', '松江', '青浦', '奉贤', '崇明']
+  let value1 = data || [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3, 25, 15, 11, 10]
+  let value2 = data || [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3, 25, 15, 11, 10]
+  let option = {
+    tooltip: {
+      trigger: 'axis'
+    },
+    title: {
+      left: 'center',
+      text: dateRange,
+      textStyle: {
+        color: '#F1F1F1'
+      }
+    },
+    legend: {
+      right: 0,
+      data: ['登录人次', '热度'],
+      textStyle: {
+        color: '#F1F1F1'
+      }
+    },
+    grid: {
+      left: 60,
+      right: 60,
+      bottom: 30
+    },
+    xAxis: [
+      {
+        type: 'category',
+        data: xLabel,
+        axisLabel: {
+          color: '#F1F1F1'
+        },
+        axisLine: {
+          show: false
+        },
+        axisTick: {
+          show: false
+        },
+        axisPointer: {
+          type: 'shadow'
+        }
+      }
+    ],
+    yAxis: [{
+      type: 'value',
+      name: '登录人次',
+      nameTextStyle: {
+        color: '#F1F1F1'
+      },
+      splitNumber: 10,
+      axisLabel: {
+        formatter: '{value} 次',
+        color: '#F1F1F1'
+      },
+      axisLine: {
+        show: false
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#2A2F3D'
+        }
+      }
+    }, {
+      type: 'value',
+      name: '热度',
+      nameTextStyle: {
+        color: '#F1F1F1'
+      },
+      min: 0,
+      max: 100,
+      splitNumber: 10,
+      axisLabel: {
+        formatter: '{value} %',
+        color: '#F1F1F1'
+      },
+      axisLine: {
+        show: false
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#2A2F3D'
+        }
+      }
+    }],
+    series: [
+      {
+        name: '登录人次',
+        type: 'bar',
+        data: value1,
+        itemStyle: {
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+              offset: 0,
+              color: '#4D92E0'
+            }, {
+              offset: 1,
+              color: '#1167CC'
+            }],
+            globalCoord: false
+          }
+        }
+      },
+      {
+        name: '热度',
+        type: 'bar',
+        data: value2,
+        itemStyle: {
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+              offset: 0,
+              color: '#FFDA8A'
+            }, {
+              offset: 1,
+              color: '#FFAF3C'
+            }],
+            globalCoord: false
+          }
+        }
+      }
+    ]
+  }
+  return option
+}
+
+export default {setBar, setBar3, setBar4, setRadar2, setLine, setLine2, setLine4, setLine5, setLine6, setLine7, setPie, setPie2, setPie3, setPie4, setPie6, setMapbox, setSankey, setBar5}

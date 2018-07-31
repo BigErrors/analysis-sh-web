@@ -135,7 +135,7 @@
             <img class="rImg" src="/static/renmintjNew/icon_zaixianry.png" />
             <div class="rSpanC">
               <div>
-                <span class="spanT">登录人数</span>
+                <span class="spanT" @click="changeRouter('loadingNumber')">今日登录人次</span>
               </div>
               <div>
                 <span class="spanB">{{onlineNumber}}</span>
@@ -634,6 +634,8 @@ export default {
 @fontSamll:14px;
 @fontMiddle:16px;
 @tableHover:rgba(113, 116, 120, 0.6);
+@navActive: #FFF225;
+@titleHover: #149CFA;
 .index_container {
   position: absolute;
   width: 100%;
@@ -739,9 +741,12 @@ export default {
             color: rgba(186, 186, 186, 1);
             float: right;
             padding: 0 4px;
-            cursor: pointer;
             &:last-child {
               border: 0
+            }
+            &:hover {
+              cursor: pointer;
+              color: @navActive;
             }
           }
           .border{
@@ -752,7 +757,7 @@ export default {
             margin-top: 3px;
           }
           .active {
-            color: #FFF225;
+            color: @navActive;
           }
         }
         .trendAnalysis {
@@ -943,6 +948,10 @@ export default {
               color: rgba(186, 186, 186, 1);
               position: absolute;
               bottom: 0px;
+              &:hover{
+                cursor: pointer;
+                color: @titleHover;
+              }
             }
             .spanB {
               font-size: 20px;
@@ -1004,7 +1013,7 @@ export default {
       }
       .bTitle:hover {
         cursor: pointer;
-        color: #149CFA;
+        color: @titleHover;
       }
       .bContent {
         width: 25%;
@@ -1132,7 +1141,7 @@ export default {
     }
     .title:hover {
       cursor: pointer;
-      color: #149CFA;
+      color: @titleHover;
     }
   }
   .middle {
@@ -1164,7 +1173,7 @@ export default {
         background-position: left 12px center;
         background-repeat: no-repeat;
         &:hover{
-          color:#FFF225;
+          color:@navActive;
         }
       }
       .once1{
@@ -1174,7 +1183,7 @@ export default {
         }
       }
       .active1{
-        color:#FFF225;
+        color:@navActive;
         background-image: url('/static/renmintjNew/icon_disputes_y.png');
       }
       .once2{
@@ -1184,7 +1193,7 @@ export default {
         }
       }
       .active2{
-        color:#FFF225;
+        color:@navActive;
         background-image: url('/static/renmintjNew/icon_import_y.png');
       }
       .once3{
@@ -1194,7 +1203,7 @@ export default {
         }
       }
       .active3{
-        color:#FFF225;
+        color:@navActive;
         background-image: url('/static/renmintjNew/icon_institutions_y.png');
       }
     }
@@ -1230,7 +1239,7 @@ export default {
       background: url('/static/renmintjNew/didian.png') no-repeat left center;
       &:hover {
         cursor: pointer;
-        color: #FFF225;
+        color: @navActive;
       }
     }
     .number {

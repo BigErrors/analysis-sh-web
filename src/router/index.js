@@ -18,6 +18,7 @@ import institutionDetail from '@/components/renmintj/institutionDetail'
 import compensation from '@/components/renmintj/compensation'
 import documentQuality from '@/components/renmintj/documentQuality'
 import regionalAnalysis from '@/components/renmintj/regionalAnalysis'
+import loadingNumber from '@/components/renmintj/loadingNumber'
 
 Vue.use(Router)
 
@@ -99,6 +100,10 @@ const router = new Router({
     path: '/regionalAnalysis',
     name: 'regionalAnalysis',
     component: regionalAnalysis
+  }, {
+    path: '/loadingNumber',
+    name: 'loadingNumber',
+    component: loadingNumber
   }, {
     path: '*',
     component: moduleChoose

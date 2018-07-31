@@ -550,17 +550,65 @@ export default {
     border: 2px solid #f1f1f1 !important;
   }
 
-  .hide {
-    display: none;
-  }
-  .show {
-    display: block;
-  }
-
+  /* 事件详情 tooltip popper-class*/
   .contentToolTip{
      width: 400px !important;
      font-size: 12px;
      line-height: 20px;
+  }
+
+    /* 登录人次 */
+
+  .loadingNumber_container .el-range-editor.el-input__inner {
+    height: 30px !important;
+    background: #0B131C !important;
+    border-color: #C5C5C5 !important;
+  }
+
+  .loadingNumber_container .el-date-editor .el-range__icon {
+    line-height: 23px !important;
+  }
+
+  .loadingNumber_container .el-date-editor .el-range-separator {
+    line-height: 22px !important;
+  }
+
+  .loadingNumber_container .el-date-editor .el-range-input {
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.8) !important;
+  }
+
+  .loadingNumber_container .el-date-editor .el-range-separator {
+    color: rgba(241, 241, 241, 0.8) !important;
+  }
+
+  .loadingNumber_container .el-input--suffix .el-input__inner {
+    height: 28px !important;
+    background: #0B131C !important;
+    color: rgba(241, 241, 241, 0.8) !important;
+  }
+
+  .loadingNumber_container .el-input--mini {
+    border: 1px solid #C5C5C5 !important;
+    border-radius: 2px !important;
+  }
+
+  .loadingNumber_container .el-input--suffix .el-input__inner::-webkit-input-placeholder {
+    color: rgba(241, 241, 241, 0.8) !important;
+    font-size: 12px !important;
+  }
+
+  .loadingNumber_container .el-cascader {
+    height: 28px !important;
+  }
+
+  .loadingNumber_container .el-input__icon {
+    line-height: 30px !important;
+  }
+
+  .loadingNumber_container .el-cascader__label {
+    color: rgba(241, 241, 241, 0.8) !important;
+    font-size: 12px !important;
   }
 
 </style>
