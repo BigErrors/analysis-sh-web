@@ -22,14 +22,9 @@
           <div class="date_container">
             <el-date-picker
               v-model="date"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              value-format="yyyy-MM-dd"
-              :picker-options="pickerOptions">
+              type="week"
+              format="yyyy 第 WW 周"
+              :pickerOptions="pickerOptions">
             </el-date-picker>
           </div>
         </div>
@@ -41,16 +36,16 @@
 </template>
 
 <script>
-// import http from '@/util/httpUtil'
-// import urlConfig from '@/util/urlConfig'
+import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 import eos from '@/util/echartsOptions'
 
 export default {
   data () {
     return {
-      date: jsonUtil.defaultDataRage(),
-      pickerOptions: jsonUtil.pickerOptions,
+      date: jsonUtil.findWeekRangeByToday(new Date(), 1),
+      pickerOptions: jsonUtil.pickerDisabledDate,
       myChart: {}
     }
   },
@@ -72,16 +67,17 @@ export default {
       this.myChart[domName].setOption(option)
     },
     getData () {
-      // let _this = this
-      // let baseUrl = urlConfig.baseUrl
-      // let url = ''
-      // let param = { startDate: _this.date[0], endDate: _this.date[1] }
-      // http.get(baseUrl + url, param, (data) => {
-      //   _this.$nextTick(() => {})
-      // })
-      this.$nextTick(() => {
-        let dataRange = `${jsonUtil.dateFormat(this.date[0], 'yyyy年MM月dd日')}—${jsonUtil.dateFormat(this.date[1], 'yyyy年MM月dd日')}`
-        this.draw('content_container', eos.setBar5(dataRange))
+      let _this = this
+      let baseUrl = urlConfig.baseUrl
+      let url = '/peopleHotCount'
+      let monday = jsonUtil.dateFormat(jsonUtil.findWeekRangeByToday(_this.date, 1), 'yyyy-MM-dd')
+      let friday = jsonUtil.dateFormat(jsonUtil.findWeekRangeByToday(_this.date, 7), 'yyyy-MM-dd')
+      let param = { startdate: monday, enddate: friday }
+      http.get(baseUrl + url, param, (data) => {
+        _this.$nextTick(() => {
+          let dataRange = `${jsonUtil.dateFormat(monday, 'yyyy年MM月dd日')}—${jsonUtil.dateFormat(friday, 'yyyy年MM月dd日')}`
+          _this.draw('content_container', eos.setBar5(dataRange, data))
+        })
       })
     },
     changeRouter (name) {
