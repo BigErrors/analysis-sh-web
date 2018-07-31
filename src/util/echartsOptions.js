@@ -1399,7 +1399,7 @@ let setBar5 = (dateRange, data) => {
     value1 = data.map(item => { return item.login })
     value2 = data.map(item => { return (item.hot * 100).toFixed(1) })
   }
-  let maxValue1 = value1.length === 0 ? 1000 : parseInt(1.1 * Math.max(...value1))
+  let maxValue1 = value1.length === 0 ? 1000 : (10 - (parseInt(1.1 * Math.max(...value1)) % 10) + parseInt(1.1 * Math.max(...value1)))
   let interval1 = maxValue1 / 10
   let option = {
     tooltip: {
