@@ -313,6 +313,9 @@ export default {
         vue.total = data.peiChangJE.benNianDLJ
         vue.max = data.peiChangJE.danBiZD
         vue.avg = data.peiChangJE.pingJunMB
+        if (data.anJianLX.length === 0) {
+          data.anJianLX = [{name: '暂无数据', value: 0}]
+        }
         vue.$nextTick(function () {
           vue.target1 = 'type1'
           vue.target2 = 'type2'
