@@ -6,7 +6,7 @@
         <div class="back" @click="$router.back(-1)"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -101,12 +101,13 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 
 export default {
   name: 'importantEvent',
   components: {
-    digitalRolling
+    digitalRolling,
+    timeClock
   },
   data () {
     return {
@@ -124,11 +125,7 @@ export default {
       jinNianZS: 0
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   methods: {
     // 绘制echarts
     draw (domName, option) {

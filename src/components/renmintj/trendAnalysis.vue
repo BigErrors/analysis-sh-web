@@ -9,7 +9,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -119,12 +119,13 @@ import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 
 export default {
   name: 'trendAnalysis',
   components: {
-    digitalRolling
+    digitalRolling,
+    timeClock
   },
   data () {
     return {
@@ -153,11 +154,7 @@ export default {
       loading: false
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   watch: {
     typeDefault: function (newValue, oldValue) {
       this.limit = 0

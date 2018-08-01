@@ -9,7 +9,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -69,7 +69,7 @@
           <div class="row row8"><span :class="{yellowf:obj==='zixunrz'}" @click="sort('zixunrz')">咨询管理日志数</span><i @click="sort('zixunrz')" class="init" :class="{bottom:obj==='zixunrz'&&reorder==='DESC',top:obj==='zixunrz'&&reorder==='ASC'}"></i></div>
           <div class="row row9"><span :class="{yellowf:obj==='chunjufw'}" @click="sort('chunjufw')">村居服务数</span><i @click="sort('chunjufw')" class="init" :class="{bottom:obj==='chunjufw'&&reorder==='DESC',top:obj==='chunjufw'&&reorder==='ASC'}"></i></div>
           <div class="row row10"><span :class="{yellowf:obj==='faxuanhd'}" @click="sort('faxuanhd')">法宣活动数</span><i @click="sort('faxuanhd')" class="init" :class="{bottom:obj==='faxuanhd'&&reorder==='DESC',top:obj==='faxuanhd'&&reorder==='ASC'}"></i></div>
-          <div class="row row11"><span :class="{yellowf:obj==='yewusyl'}" @click="sort('yewusyl')">业务系统使用率</span><i @click="sort('yewusyl')" class="init" :class="{bottom:obj==='yewusyl'&&reorder==='DESC',top:obj==='yewusyl'&&reorder==='ASC'}"></i></div>
+          <div class="row row11"><span :class="{yellowf:obj==='denglurc'}" @click="sort('denglurc')">登录人次</span><i @click="sort('denglurc')" class="init" :class="{bottom:obj==='denglurc'&&reorder==='DESC',top:obj==='denglurc'&&reorder==='ASC'}"></i></div>
         </div>
         <div class="t_body">
           <div class="line" v-for="(item,index) in list" :key="index" @click="changeRouter('institutionDetail', item.id)">
@@ -96,7 +96,7 @@
             <div class="row row10"><span>{{item.faxuanhd}}</span></div>
             <!-- 暂时还没有业务系统使用率 -->
             <!-- <div class="row row11"><i class="icon_rate red"></i><span>47%</span></div> -->
-            <div class="row row11"><span>{{"--%"}}</span></div>
+            <div class="row row11"><span>{{item.denglurc}}</span></div>
           </div>
         </div>
       </div>
@@ -119,8 +119,12 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 import json from '@/util/dictionaryMapping'
+import timeClock from '../timeClock.vue'
 
 export default {
+  components: {
+    timeClock
+  },
   data: function () {
     return {
       date: jsonUtil.defaultDataRage(),
@@ -149,11 +153,7 @@ export default {
       areaDefault: ['SHJCK01000']
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   watch: {
     chooseDefault: function (newValue, oldValue) {
       this.pageInfo.currentPage = 1

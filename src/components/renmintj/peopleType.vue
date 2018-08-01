@@ -6,7 +6,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -129,10 +129,13 @@
 <script>
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 
 export default {
   name: 'peopleType',
+  components: {
+    timeClock
+  },
   data () {
     return {
       myChart: {},
@@ -141,11 +144,7 @@ export default {
       suiyxzbpm: []
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   filters: {
     numFormat (value) {
       return parseInt(value * 100) + '%'

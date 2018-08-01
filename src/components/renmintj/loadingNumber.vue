@@ -6,7 +6,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -40,8 +40,12 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 import eos from '@/util/echartsOptions'
+import timeClock from '../timeClock.vue'
 
 export default {
+  components: {
+    timeClock
+  },
   data () {
     return {
       date: jsonUtil.findWeekRangeByToday(new Date(), 1),
@@ -49,11 +53,7 @@ export default {
       myChart: {}
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   watch: {
     date (newValue, oldValue) {
       this.getData()

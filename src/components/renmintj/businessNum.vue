@@ -6,7 +6,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -189,11 +189,13 @@ import digitalRolling from '../digitalRolling.vue'
 import json from '@/util/dictionaryMapping'
 import eosNew from '@/util/echartsOptionsNew'
 import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 
 export default {
   name: 'businessNum',
   components: {
-    digitalRolling
+    digitalRolling,
+    timeClock
   },
   data () {
     return {
@@ -218,11 +220,7 @@ export default {
       title6: '处理状态'
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   watch: {
     type: function (newValue, oldValue) {
       this.areaDefault = ['SHJCK01000']

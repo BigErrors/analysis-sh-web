@@ -4,7 +4,7 @@
       <div class="left">
         <div class="back" @click="changeRouter({type: 'module',url:'moduleChoose'})"></div>
       </div>
-      <div class="right"><span>{{timeCom}}</span></div>
+      <div class="right"><time-clock></time-clock></div>
     </div>
     <div class="body">
       <div class="cover">
@@ -26,11 +26,12 @@
 
 <script>
 import flexBox from './flexBox.vue'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from './timeClock.vue'
 
 export default {
   components: {
-    flexBox
+    flexBox,
+    timeClock
   },
   data () {
     return {
@@ -170,9 +171,6 @@ export default {
     }
   },
   computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    },
     elHeight () {
       return parseInt(this.foptions.height) * 2 + parseInt(this.foptions.margin) + 'px'
     }

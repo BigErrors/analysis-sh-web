@@ -1,12 +1,15 @@
 <template>
-  <div class="pepleRanking_container">
+  <div class="pepleRanking_container" v-loading="loading"
+    element-loading-text="数据加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.5)">>
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -125,7 +128,12 @@
 import json from '@/util/dictionaryMapping'
 import http from '@/util/httpUtil'
 import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
+
 export default {
+  components: {
+    timeClock
+  },
   data: () => ({
     date: jsonUtil.defaultDataRage(),
     pickerOptions: jsonUtil.pickerOptions,
@@ -141,13 +149,10 @@ export default {
       pageSize: 10,
       total: 0
     },
-    mediators: []
+    mediators: [],
+    loading: ''
   }),
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   filters: {
     changeToRate: (value) => {
       return value * 100 + '%'
@@ -175,6 +180,7 @@ export default {
     getData (excl) {
       let exclV = excl || 0
       let vue = this
+      vue.loading = true
       let reqParam = {
         location: this.areaDefault[0],
         mediationtype: this.coordinationTypeDefault[0],
@@ -192,6 +198,7 @@ export default {
         http.post(url, reqParam, (data) => {
           vue.mediators = data.pageData
           vue.pageInfo.total = data.pageinfo.total
+          vue.loading = false
         }, 'application/json')
       } else {
         http.post(url, reqParam, (data) => {
@@ -205,6 +212,7 @@ export default {
           document.body.appendChild(a)
           a.click()
           a.remove()
+          vue.loading = false
         }, 'application/json', 'arraybuffer')
       }
     },

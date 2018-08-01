@@ -2,7 +2,7 @@
   <div class="moduleChoose_container">
     <div class="head">
       <div class="title"></div>
-      <div class="time">{{timeCom}}</div>
+      <div class="time"><time-clock :dateType="'yyyy/MM/dd D'"></time-clock></div>
       <div class="close" @click="logout"></div>
     </div>
     <div class="body">
@@ -61,11 +61,14 @@
 </template>
 
 <script>
-import jsonUtil from '@/util/jsonUtil'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
+import timeClock from './timeClock.vue'
 
 export default {
+  components: {
+    timeClock
+  },
   data: function () {
     return {
       mark: 1,
@@ -74,11 +77,7 @@ export default {
       lockClick: false // 给点击上锁，防止连续点击
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm')
-    }
-  },
+  computed: {},
   methods: {
     logout () {
       let vue = this

@@ -6,7 +6,7 @@
         <div class="back" @click="$router.back(-1)"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -678,9 +678,12 @@
 <script>
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 
 export default {
+  components: {
+    timeClock
+  },
   data: () => ({
     showWhich: [''],
     eventDetail: {
@@ -701,11 +704,7 @@ export default {
     anJanCLRYShow: [],
     page: 0
   }),
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   created () {
     let _this = this
     let id = _this.$route.params.id || '' // 人民调解步骤7

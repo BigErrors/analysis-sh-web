@@ -6,7 +6,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -135,8 +135,12 @@ import jsonUtil from '@/util/jsonUtil'
 import json from '@/util/dictionaryMapping'
 import * as d3 from 'd3'
 import * as viz from '../../../static/viz'
+import timeClock from '../timeClock.vue'
 
 export default {
+  components: {
+    timeClock
+  },
   data () {
     return {
       date: jsonUtil.defaultDataRage(),
@@ -152,11 +156,7 @@ export default {
       area: 'SHJCK01000'
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   watch: {
     date (newValue, oldValue) {
       this.area = 'SHJCK01000'

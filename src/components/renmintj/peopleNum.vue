@@ -6,7 +6,7 @@
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body">
@@ -63,10 +63,13 @@
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 
 export default {
   name: 'peopleNum',
+  components: {
+    timeClock
+  },
   data () {
     return {
       myChart: {},
@@ -74,11 +77,7 @@ export default {
       newPeople: 0 + '人'
     }
   },
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   methods: {
     // 绘制echarts
     draw (domName, option) {

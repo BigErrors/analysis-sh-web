@@ -9,7 +9,7 @@
         <el-cascader class="cascader" style="z-index: 1;" :options="area" placeholder="区域" v-model="areaDefault"></el-cascader>
       </div>
       <div class="right">
-        <span>{{timeCom}}</span>
+        <time-clock></time-clock>
       </div>
     </div>
     <div class="body clearfix">
@@ -58,9 +58,10 @@
         </div>
       </div>
       <div class="right">
-        <div class="title" @click="changeRouter('importantEvent')">
-          <!-- <span class="title_china">重点关注</span>
+        <!-- <div class="title" @click="changeRouter('importantEvent')">
+          <span class="title_china">重点关注</span>
           <span class="title_english">Priority order</span> -->
+        <div class="title">
           <span class="title_china">今日案件</span>
           <span class="title_english">Today's case</span>
         </div>
@@ -270,14 +271,15 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import jsonUtil from '@/util/jsonUtil'
+import timeClock from '../timeClock.vue'
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
 export default {
   name: 'index',
   components: {
     rollScreen,
-    digitalRolling
+    digitalRolling,
+    timeClock
   },
   data: () => ({
     area: json.area,
@@ -359,11 +361,7 @@ export default {
       ]
     }
   }),
-  computed: {
-    timeCom () {
-      return jsonUtil.dateFormat(new Date(), 'yyyy/MM/dd hh:mm D')
-    }
-  },
+  computed: {},
   watch: {
     trendType: function (to, from) {
       this.$echarts.dispose(this.myChart['trendAnalysis'])
