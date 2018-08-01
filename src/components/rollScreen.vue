@@ -88,15 +88,7 @@ export default {
       }
     }
   },
-  mounted: function () {
-    let _this = this
-    // 复制一份slot的节点，如果直接用同名slot会报错
-    if (_this.dLength !== null) {
-      for (let i = 0; i < _this.dLength; i++) {
-        _this.$el.childNodes[0].appendChild(_this.$slots.slide[i].elm.cloneNode(true))
-      }
-    }
-  }
+  mounted: function () {}
 }
 </script>
 

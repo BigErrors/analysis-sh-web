@@ -81,6 +81,12 @@
                   <span class="once">{{item.diQu}}</span>
                   <span class="once">{{item.riQi.split(' ')[0]}}</span>
                 </div>
+                <div v-for="(item,index) in importantEvent" :key="`copy${index}`" class="table_tr clearfix" @click="changeRouter('eventDetail',item.id)"
+                  slot="slide">
+                  <span class="once">{{item.shiJianLX}}</span>
+                  <span class="once">{{item.diQu}}</span>
+                  <span class="once">{{item.riQi.split(' ')[0]}}</span>
+                </div>
               </rollScreen>
             </div>
             <div v-if="importantEvent.length<6" class="table_body">
