@@ -75,7 +75,7 @@
           <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">成交金额</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
           <div class="row row9"><span>经典案例数</span></div>
           <div class="row row10"><span>表彰数</span></div>
-          <div class="row row11"><span>登录次数</span></div>
+          <div class="row row11" :class="{yellow:obj==='denglucs'}" @click="sort('denglucs')"><span>登录次数</span><i @click="sort('denglucs')" class="init" :class="{bottom:obj==='denglucs'&&reorder==='DESC',top:obj==='denglucs'&&reorder==='ASC'}"></i></div>
         </div>
         <div class="t_body">
           <div v-for="(item,index) in mediators" :key='index' class="line" @click="changeRouter('peoplePortrait', item.id_)">
