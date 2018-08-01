@@ -2,7 +2,7 @@
   <div class="pepleRanking_container" v-loading="loading"
     element-loading-text="数据加载中"
     element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.5)">>
+    element-loading-background="rgba(0, 0, 0, 0.5)">
     <div class="head clearfix">
       <div class="title">基层司法大数据子平台</div>
       <div class="left">
