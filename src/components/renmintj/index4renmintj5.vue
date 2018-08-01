@@ -59,8 +59,10 @@
       </div>
       <div class="right">
         <div class="title" @click="changeRouter('importantEvent')">
-          <span class="title_china">重点关注</span>
-          <span class="title_english">Priority order</span>
+          <!-- <span class="title_china">重点关注</span>
+          <span class="title_english">Priority order</span> -->
+          <span class="title_china">今日案件</span>
+          <span class="title_english">Today's case</span>
         </div>
         <div class="right1">
           <div class="table">
@@ -520,10 +522,15 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.peopleCount = data
       })
-      url = '/onlineNumber'
       // 在线人数
+      url = '/onlineNumber'
       http.get(baseUrl + url, reqParam, (data) => {
         vue.onlineNumber = data
+      })
+      // 今日案件
+      url = '/newDayCase'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.importantEvent = data
       })
       // 案件分布、重点关注
       let querylist = [{
@@ -535,7 +542,7 @@ export default {
       }]
       http.all(querylist, (dataList) => {
         // 重点关注
-        vue.importantEvent = dataList[1].data.data
+        // vue.importantEvent = dataList[1].data.data
         // 案件分布
         vue.caseDistributionData = dataList[0].data.data
         if (vue.caseDistributionData.length > 0) {
@@ -579,10 +586,15 @@ export default {
           vue.casestatisticsAll[item['biao']] = item['quanNian']
         })
       })
-      url = '/onlineNumber'
       // 在线人数
+      url = '/onlineNumber'
       http.get(baseUrl + url, reqParam, (data) => {
         vue.onlineNumber = data
+      })
+      // 今日案件
+      url = '/newDayCase'
+      http.get(baseUrl + url, reqParam, (data) => {
+        vue.importantEvent = data
       })
     },
     // 路由跳转
