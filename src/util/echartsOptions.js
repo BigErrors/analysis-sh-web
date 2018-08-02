@@ -1314,11 +1314,6 @@ let setMapbox = (caseData, centerPoint) => {
         ambient: {
           // 环境光的强度。
           intensity: 0
-        },
-        ambientCubemap: {
-          texture: './static/data-1491896094618-H1DmP-5px.hdr',
-          exposure: 1,
-          diffuseIntensity: 0.5
         }
       }
     },
