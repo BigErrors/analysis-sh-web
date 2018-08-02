@@ -34,7 +34,7 @@ let dateFormat = (dateTime, valueFormat) => {
   return valueFormat
 }
 
-// 时间选择器配置
+// 时间选择器配置--包含禁用日期、快捷选项和周起始日
 let pickerOptions = {
   disabledDate (time) {
     return time.getTime() > Date.now()
@@ -79,13 +79,16 @@ let pickerOptions = {
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
       picker.$emit('pick', [start, end])
     }
-  }]
+  }],
+  firstDayOfWeek: 1
 }
 
+// 时间选择器配置--包含禁用日期和周起始日
 let pickerDisabledDate = {
   disabledDate (time) {
     return time.getTime() > Date.now()
-  }
+  },
+  firstDayOfWeek: 1
 }
 
 // 时间范围选择器默认时间范围(本年)

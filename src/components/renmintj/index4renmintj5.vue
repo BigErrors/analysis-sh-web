@@ -221,7 +221,8 @@
       <div class="top clearfix">
         <div class="topY">
           <span class="h1"></span>
-          <span class="h2 topYh">本月</span>
+          <!-- <span class="h2 topYh">本月</span> -->
+          <span class="h2 topYh">今日</span>
           <span class="h3 topYh">全年</span>
         </div>
         <div class="topX" @click="changeRouter('businessNum','人民调解')">
@@ -512,7 +513,8 @@ export default {
       url = '/businessCount'
       http.get(baseUrl + url, reqParam, (data) => {
         data.map((item, index) => {
-          vue.casestatistics[item['biao']] = item['benYue']
+          // vue.casestatistics[item['biao']] = item['benYue']
+          vue.casestatistics[item['biao']] = item['jinRi']
           vue.casestatisticsAll[item['biao']] = item['quanNian']
         })
       })
@@ -586,7 +588,8 @@ export default {
       url = '/businessCount'
       http.get(baseUrl + url, reqParam, (data) => {
         data.map((item, index) => {
-          vue.casestatistics[item['biao']] = item['benYue']
+          // vue.casestatistics[item['biao']] = item['benYue']
+          vue.casestatistics[item['biao']] = item['jinRi']
           vue.casestatisticsAll[item['biao']] = item['quanNian']
         })
       })

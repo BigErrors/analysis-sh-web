@@ -145,7 +145,7 @@ let setBar = (data) => {
     grid: {
       containLabel: true,
       left: 10,
-      right: 40,
+      right: 70,
       top: '10%',
       bottom: '5%'
     },
