@@ -549,7 +549,7 @@ export default {
           .row3{
             width: 8%;
             span{
-              background: linear-gradient(left, #4481EB,#04BEFE);
+              background: linear-gradient(to left, #4481EB,#04BEFE);
               padding:4px 8px;
               border-radius: 6px;
               font-size:@fontSamll;
