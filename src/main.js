@@ -3,13 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import mycomponent from './components/index'
 import echarts from 'echarts'
 import 'echarts-gl'
 import wordcloud from 'wordcloud'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '../static/mapbox-gl.css'
-import mycomponent from './components/index'
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
@@ -23,5 +24,8 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  beforeCreate () {
+    window.mapboxgl = mapboxgl
+  }
 })
