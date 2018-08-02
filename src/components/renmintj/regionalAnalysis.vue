@@ -135,12 +135,8 @@ import jsonUtil from '@/util/jsonUtil'
 import json from '@/util/dictionaryMapping'
 import * as d3 from 'd3'
 import * as viz from '../../../static/viz'
-import timeClock from '../timeClock.vue'
 
 export default {
-  components: {
-    timeClock
-  },
   data () {
     return {
       date: jsonUtil.defaultDataRage(),

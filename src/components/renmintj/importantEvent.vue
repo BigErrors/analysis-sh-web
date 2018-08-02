@@ -101,13 +101,11 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
-import timeClock from '../timeClock.vue'
 
 export default {
   name: 'importantEvent',
   components: {
-    digitalRolling,
-    timeClock
+    digitalRolling
   },
   data () {
     return {

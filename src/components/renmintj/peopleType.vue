@@ -129,13 +129,9 @@
 <script>
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
-import timeClock from '../timeClock.vue'
 
 export default {
   name: 'peopleType',
-  components: {
-    timeClock
-  },
   data () {
     return {
       myChart: {},

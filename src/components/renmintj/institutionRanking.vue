@@ -119,12 +119,8 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 import json from '@/util/dictionaryMapping'
-import timeClock from '../timeClock.vue'
 
 export default {
-  components: {
-    timeClock
-  },
   data: function () {
     return {
       date: jsonUtil.defaultDataRage(),

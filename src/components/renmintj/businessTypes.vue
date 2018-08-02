@@ -164,12 +164,8 @@ import urlConfig from '@/util/urlConfig'
 import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 import eosNew from '@/util/echartsOptionsNew'
-import timeClock from '../timeClock.vue'
 
 export default {
-  components: {
-    timeClock
-  },
   data: function () {
     return {
       myChart: {},

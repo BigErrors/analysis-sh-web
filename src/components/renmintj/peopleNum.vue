@@ -63,13 +63,9 @@
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
-import timeClock from '../timeClock.vue'
 
 export default {
   name: 'peopleNum',
-  components: {
-    timeClock
-  },
   data () {
     return {
       myChart: {},

@@ -119,13 +119,11 @@ import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
-import timeClock from '../timeClock.vue'
 
 export default {
   name: 'trendAnalysis',
   components: {
-    digitalRolling,
-    timeClock
+    digitalRolling
   },
   data () {
     return {

@@ -278,15 +278,12 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import rollScreen from '../rollScreen.vue'
 import digitalRolling from '../digitalRolling.vue'
-import timeClock from '../timeClock.vue'
-var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
 export default {
   name: 'index',
   components: {
     rollScreen,
-    digitalRolling,
-    timeClock
+    digitalRolling
   },
   data: () => ({
     area: json.area,
@@ -432,7 +429,7 @@ export default {
           }
         }
       })
-      let map = new mapboxgl.Map({
+      let map = new window.mapboxgl.Map({
         container: 'map',
         style: vue.mapboxStyle,
         // 地图中心经纬度。经纬度用数组
@@ -444,7 +441,7 @@ export default {
         // 地图的旋转角度
         bearing: -10
       })
-      let myPopup = new mapboxgl.Popup()
+      let myPopup = new window.mapboxgl.Popup()
       map.on('load', function (event) {
         map.on('mouseenter', 'points', function (e) {
           map.getCanvas().style.cursor = 'pointer'

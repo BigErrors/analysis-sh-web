@@ -189,13 +189,11 @@ import digitalRolling from '../digitalRolling.vue'
 import json from '@/util/dictionaryMapping'
 import eosNew from '@/util/echartsOptionsNew'
 import jsonUtil from '@/util/jsonUtil'
-import timeClock from '../timeClock.vue'
 
 export default {
   name: 'businessNum',
   components: {
-    digitalRolling,
-    timeClock
+    digitalRolling
   },
   data () {
     return {

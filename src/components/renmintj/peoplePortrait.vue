@@ -106,13 +106,9 @@ import eosNew from '@/util/echartsOptionsNew'
 import wos from '@/util/wordcloudOptions'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
-import timeClock from '../timeClock.vue'
 
 export default {
   name: 'peoplePortrait',
-  components: {
-    timeClock
-  },
   data () {
     return {
       myChart: {},

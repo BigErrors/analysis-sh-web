@@ -26,12 +26,10 @@
 
 <script>
 import flexBox from './flexBox.vue'
-import timeClock from './timeClock.vue'
 
 export default {
   components: {
-    flexBox,
-    timeClock
+    flexBox
   },
   data () {
     return {

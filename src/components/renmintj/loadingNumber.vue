@@ -40,12 +40,8 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 import eos from '@/util/echartsOptions'
-import timeClock from '../timeClock.vue'
 
 export default {
-  components: {
-    timeClock
-  },
   data () {
     return {
       date: jsonUtil.findWeekRangeByToday(new Date(), 1),

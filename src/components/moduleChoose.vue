@@ -63,12 +63,8 @@
 <script>
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
-import timeClock from './timeClock.vue'
 
 export default {
-  components: {
-    timeClock
-  },
   data: function () {
     return {
       mark: 1,

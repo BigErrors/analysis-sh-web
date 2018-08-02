@@ -128,12 +128,8 @@
 import json from '@/util/dictionaryMapping'
 import http from '@/util/httpUtil'
 import jsonUtil from '@/util/jsonUtil'
-import timeClock from '../timeClock.vue'
 
 export default {
-  components: {
-    timeClock
-  },
   data: () => ({
     date: jsonUtil.defaultDataRage(),
     pickerOptions: jsonUtil.pickerOptions,
