@@ -23,7 +23,7 @@
           <div class="eventType" :class="{documents: eventDetail.zhongDianSJXX.zhongDiansjlx==='普通事件',reddocuments: eventDetail.zhongDianSJXX.zhongDiansjlx!=='普通事件'}">{{eventDetail.zhongDianSJXX.zhongDiansjlx}}</div>
           <div class="line clearfix">
             <label>时间：</label>
-            <span>{{eventDetail.zhongDianSJXX.shiJian}}</span>
+            <span>{{eventDetail.zhongDianSJXX.shiJian|dateFormat}}</span>
             <label>地点：</label>
             <span style="width: 25em;">{{eventDetail.zhongDianSJXX.diDian}}</span>
           </div>
@@ -136,25 +136,25 @@
             <div class="leftContainer">
               <div class="cleft a1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft a2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft a3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
               </div>
               <div class="cleft a4">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou4.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft a5">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou5.mingCheng}}</span>
               </div>
               <div class="cleft a6">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou6.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou5.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou6.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou5.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou6.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft a7">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou7.mingCheng}}</span>
@@ -230,15 +230,15 @@
             <div class="leftContainer">
               <div class="cleft b1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft b2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft b3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou3.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou3.shiJian|dateFormat}}</span>
               </div>
             </div>
             <div class="rightContainer">
@@ -292,19 +292,19 @@
             <div class="leftContainer">
               <div class="cleft c1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou1.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou2.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou3.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou3.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c4">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
-                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
+                <span class="ctime" v-if="eventDetail.anJianCLGC.buZhou4.zhuangTai===1">{{eventDetail.anJianCLGC.buZhou4.shiJian|dateFormat}}</span>
               </div>
             </div>
             <div class="rightContainer">
@@ -357,11 +357,11 @@
             <div class="leftContainer">
               <div class="cleft b1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft b2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft b3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
@@ -393,7 +393,7 @@
                 </div>
                 <div class="cline">
                   <span class="clable">报案时间：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shiJian}}</span>
+                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
                 </div>
               </div>
             </div>
@@ -409,11 +409,11 @@
             <div class="leftContainer">
               <div class="cleft b1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft b2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft b3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
@@ -454,18 +454,18 @@
             <div class="leftContainer">
               <div class="cleft c1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
               </div>
               <div class="cleft c4">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou4.shiJian|dateFormat}}</span>
               </div>
             </div>
             <div class="rightContainer">
@@ -494,7 +494,7 @@
                 </div>
                 <div class="cline">
                   <span class="clable">报案时间：</span>
-                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shiJian}}</span>
+                  <span class="cspan">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
                 </div>
               </div>
               <div class="cright c3" v-if="eventDetail.anJianCLGC.buZhou3.zhuangTai===1">
@@ -533,18 +533,18 @@
             <div class="leftContainer">
               <div class="cleft c1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou2.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft c3">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou3.mingCheng}}</span>
               </div>
               <div class="cleft c4">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou4.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou4.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou4.shiJian|dateFormat}}</span>
               </div>
             </div>
             <div class="rightContainer">
@@ -602,7 +602,7 @@
             <div class="leftContainer">
               <div class="cleft d1">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou1.mingCheng}}</span>
-                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian.slice(0,16)}}</span>
+                <span class="ctime">{{eventDetail.anJianCLGC.buZhou1.shiJian|dateFormat}}</span>
               </div>
               <div class="cleft d2">
                 <span class="ctitle">{{eventDetail.anJianCLGC.buZhou2.mingCheng}}</span>
@@ -678,28 +678,34 @@
 <script>
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
+import jsonUtil from '@/util/jsonUtil'
 
 export default {
   data: () => ({
     showWhich: [''],
     eventDetail: {
-      'zhongDianSJXX': {
-        'zhongDiansjlx': '',
-        'shiJian': '',
-        'diDian': '',
-        'zhuangTai': '',
-        'leiXing': '',
-        'miaoShu': '',
-        'jieGuo': ''
+      zhongDianSJXX: {
+        zhongDiansjlx: '',
+        shiJian: '',
+        diDian: '',
+        zhuangTai: '',
+        leiXing: '',
+        miaoShu: '',
+        jieGuo: ''
       },
-      'anJanCLRY': [],
-      'dangShiRXX': [],
-      'anJianCLGC': {}
+      anJanCLRY: [],
+      dangShiRXX: [],
+      anJianCLGC: {}
     },
     anJanCLRY: [],
     anJanCLRYShow: [],
     page: 0
   }),
+  filters: {
+    dateFormat: function (value) {
+      return jsonUtil.dateFormat(value)
+    }
+  },
   computed: {},
   created () {
     let _this = this
