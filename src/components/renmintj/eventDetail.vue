@@ -703,7 +703,11 @@ export default {
   }),
   filters: {
     dateFormat: function (value) {
-      return jsonUtil.dateFormat(value)
+      if (value === '未知') {
+        return value
+      } else {
+        return jsonUtil.dateFormat(value)
+      }
     }
   },
   computed: {},
