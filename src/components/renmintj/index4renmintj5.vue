@@ -326,6 +326,8 @@ export default {
     nothing: 0.1,
     interval: '',
     layerType: 'disputesDistribution',
+    map: '',
+    myPopup: new window.mapboxgl.Popup(),
     mapboxStyle: {
       'version': 8,
       'glyphs': `${urlConfig.osmUrl}/fonts/{fontstack}/{range}.pbf`,
@@ -378,13 +380,12 @@ export default {
     },
     layerType: function (newValue, oldValue) {
       let vue = this
-      document.getElementById('map').innerHTML = ''
-      document.getElementById('map').style = ''
       if (newValue === 'importantEvent') {
         vue.$echarts.dispose(vue.myChart['map'])
         delete vue.myChart['map']
         vue.drawMapbox()
       } else {
+        vue.map.remove()
         vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(vue.areaDefault[0])))
       }
     }
@@ -429,7 +430,7 @@ export default {
           }
         }
       })
-      let map = new window.mapboxgl.Map({
+      vue.map = new window.mapboxgl.Map({
         container: 'map',
         style: vue.mapboxStyle,
         // 地图中心经纬度。经纬度用数组
@@ -441,24 +442,23 @@ export default {
         // 地图的旋转角度
         bearing: -10
       })
-      let myPopup = new window.mapboxgl.Popup()
-      map.on('load', function (event) {
-        map.on('mouseenter', 'points', function (e) {
-          map.getCanvas().style.cursor = 'pointer'
+      vue.map.on('load', function (event) {
+        vue.map.on('mouseenter', 'points', function (e) {
+          vue.map.getCanvas().style.cursor = 'pointer'
           let coordinates = e.features[0].geometry.coordinates.slice()
           let description = e.features[0].properties.description
           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
           }
-          myPopup.setLngLat(coordinates)
+          vue.myPopup.setLngLat(coordinates)
             .setHTML(description)
-            .addTo(map)
+            .addTo(vue.map)
         })
-        map.on('mouseleave', 'points', function () {
-          map.getCanvas().style.cursor = ''
-          myPopup.remove()
+        vue.map.on('mouseleave', 'points', function () {
+          vue.map.getCanvas().style.cursor = ''
+          vue.myPopup.remove()
         })
-        map.on('click', 'points', function (e) {
+        vue.map.on('click', 'points', function (e) {
           const description = e.features[0].properties.description
           const id = description.split('<a style="display:none;">')[1].split('</a>')[0]
           vue.changeRouter('eventDetail', id)
@@ -641,6 +641,13 @@ export default {
   },
   beforeDestroy () {
     clearInterval(this.interval)
+    this.$echarts.dispose(this.myChart['businessTypes'])
+    this.$echarts.dispose(this.myChart['trendAnalysis'])
+    if (this.layerType === 'importantEvent') {
+      this.map.remove()
+    } else {
+      this.$echarts.dispose(this.myChart['map'])
+    }
   }
 }
 
