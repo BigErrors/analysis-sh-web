@@ -1165,26 +1165,10 @@ let setPie3 = (data, title, bgColorOpacity, titlePosition) => {
   return option
 }
 // 柱状图_业务类型 案件处理状态 和 处置情况
-let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValueAxis, rotate) => {
+let setBar6 = (data, color, axisType, dataType, barMaxWidth) => {
   barMaxWidth = 25
   // 找出value中的最大值
   let maxValue = Math.max(...data.map(function (obj) { return obj.value }))
-  if (portrait) {
-    maxValue = data.reduce(function (total, item) {
-      return total + item.value
-    }, 0)
-  }
-  let displayValueAxis = function () {
-    let result = false
-    if (axisType === 'vertical') {
-      if (showValueAxis === false) {
-        result = false
-      } else {
-        result = true
-      }
-    }
-    return result
-  }
   let valueAxis = [{
     type: 'value',
     axisLine: {
@@ -1194,15 +1178,8 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       show: false
     },
     axisLabel: {
-      show: displayValueAxis(),
-      interval: 'auto',
-      color: 'rgba(241,241,241,0.8)',
-      fontSize: barMaxWidth < 12 ? barMaxWidth : 2,
-      formatter: dataType === 'percent' ? '{value} %' : '{value}'
+      show: false
     },
-    // value最大值的类型：percent，integer
-    // max: Number.parseInt(dataType === 'percent' ? (1.0 * maxValue * 100) : (1.0 * maxValue)),
-    max: Number.parseInt(dataType === 'percent' ? (100) : (1.0 * maxValue)),
     splitNumber: 4,
     splitLine: {
       show: true,
@@ -1265,6 +1242,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       type: 'bar',
       name: name,
       stack: 'bar',
+      barMaxWidth: barMaxWidth,
       z: 3,
       itemStyle: {
         color: {
@@ -1297,6 +1275,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       type: 'bar',
       name: name,
       stack: 'bar',
+      barMaxWidth: barMaxWidth,
       itemStyle: {
         color: '#383E4E'
       },
@@ -1305,26 +1284,7 @@ let setBar6 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       })
     })
   }
-  if (barMaxWidth) {
-    option.series[0].barMaxWidth = barMaxWidth
-    if (axisType === 'vertical') {
-      option.series[1].barMaxWidth = barMaxWidth
-    }
-  }
-  if (portrait) {
-    option.series.push({
-      type: 'bar',
-      name: name,
-      stack: 'bar',
-      itemStyle: {
-        color: '#132665'
-      },
-      barMaxWidth: barMaxWidth,
-      data: data.map(function (obj) {
-        return dataType === 'percent' ? (Number.parseInt((maxValue - obj.value) * 100)) : (maxValue - obj.value)
-      })
-    })
-  }
+
   return option
 }
 // 雷达图_人员详情 综合能力

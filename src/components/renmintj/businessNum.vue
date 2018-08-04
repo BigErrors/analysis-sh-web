@@ -341,7 +341,7 @@ export default {
             vue.title4 = `${areaName}受理数量(TOP10)`
           } else if (vue.type === '110联动') {
             vue.title4 = `${areaName}案件数量(TOP10)`
-          } else if (vue.type === '公共法律服务') {
+          } else if (vue.type === '公共法律服务' || vue.type === '村居服务') {
             vue.title4 = `${areaName}服务数量(TOP10)`
           } else if (vue.type === '纠纷排查') {
             vue.title4 = `${areaName}排查数量(TOP10)`
@@ -351,7 +351,7 @@ export default {
       })
       url = '/caseCountDown1'
       http.get(baseUrl + url, reqParam, (data) => {
-        if (vue.type === '公共法律服务') {
+        if (vue.type === '公共法律服务' || vue.type === '村居服务') {
           data = data.map(item => {
             return {name: item.time, type: item.type, value: item.value}
           })
@@ -365,8 +365,8 @@ export default {
             vue.draw('target5', eosNew.setPie4(data))
           } else if (vue.type === '110联动') {
             vue.title6 = '处置情况'
-            vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer', 36, undefined, false, 30))
-          } else if (vue.type === '公共法律服务') {
+            vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer'))
+          } else if (vue.type === '公共法律服务' || vue.type === '村居服务') {
             vue.title5 = '服务热点'
             vue.draw('target5', eos.setLine7(data, 'integer', undefined, true))
           } else if (vue.type === '纠纷排查') {
@@ -383,11 +383,11 @@ export default {
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
             vue.title6 = '案件处理状态'
-            vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer', 36, undefined, false, 30))
+            vue.draw('target6', eosNew.setBar6(data, ['#4D92E0', '#1167CC'], 'vertical', 'integer'))
           } else if (vue.type === '110联动') {
             vue.title5 = '所在人群'
             vue.draw('target5', eosNew.setPie4(data))
-          } else if (vue.type === '公共法律服务') {
+          } else if (vue.type === '公共法律服务' || vue.type === '村居服务') {
             vue.title6 = '调解占比'
             vue.draw('target6', eosNew.setPie4(data))
           } else if (vue.type === '纠纷排查') {
