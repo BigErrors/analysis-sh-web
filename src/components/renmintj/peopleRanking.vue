@@ -71,11 +71,11 @@
           <div class="row row1">排名</div>
           <div class="row row2">姓名</div>
           <div class="row row3"><span>所属机构</span></div>
-          <div class="row row4"><span :class="{yellow:obj==='yewusl'}" @click="sort('yewusl')">业务量</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
+          <div class="row row4"><span :class="{yellow:obj==='yewusl'}" @click="sort('yewusl')">调解案件数</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
           <div class="row row5"><span :class="{yellow:obj==='tiaojiecgl'}" @click="sort('tiaojiecgl')">成功率</span><i @click="sort('tiaojiecgl')" class="init" :class="{bottom:obj==='tiaojiecgl'&&reorder==='DESC',top:obj==='tiaojiecgl'&&reorder==='ASC'}"></i></div>
           <div class="row row6"><span>缓解率</span></div>
           <div class="row row7"><span :class="{yellow:obj==='pingjuntjzq'}" @click="sort('pingjuntjzq')">平均调解周期</span><i @click="sort('pingjuntjzq')" class="init" :class="{bottom:obj==='pingjuntjzq'&&reorder==='DESC',top:obj==='pingjuntjzq'&&reorder==='ASC'}"></i></div>
-          <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">成交金额</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
+          <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">调处金额</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
           <div class="row row9"><span>经典案例数</span></div>
           <div class="row row10"><span>表彰数</span></div>
           <div class="row row11" :class="{yellow:obj==='denglucs'}" @click="sort('denglucs')"><span>登录次数</span><i @click="sort('denglucs')" class="init" :class="{bottom:obj==='denglucs'&&reorder==='DESC',top:obj==='denglucs'&&reorder==='ASC'}"></i></div>
