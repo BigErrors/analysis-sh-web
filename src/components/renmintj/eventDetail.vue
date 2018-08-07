@@ -1,7 +1,7 @@
 <template>
   <div class="eventDetail_container">
     <div class="head clearfix">
-      <div class="title">基层司法大数据子平台</div>
+      <div class="title">社会矛盾风险感知大数据平台</div>
       <div class="left">
         <div class="back" @click="$router.back(-1)"></div>
       </div>
@@ -776,6 +776,7 @@ export default {
 @fontGray:rgba(241,241,241,0.8);
 @fontSamll:14px;
 @fontMiddle:16px;
+@fontBig:23px;
 .eventDetail_container{
   background: #0B131C;
   position: absolute;
@@ -795,7 +796,7 @@ export default {
     .title{
       position: absolute;
       top: 17px;
-      font-size:20px;
+      font-size:@fontBig;
       font-family:RTWSYueGoTrial-Regular;
       color:rgba(254,254,254,1);
       left: 50%;

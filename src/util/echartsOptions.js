@@ -805,7 +805,8 @@ let setLine5 = (data, callback) => {
 let setLine6 = (data, dataType, title) => {
   let option = {
     grid: {
-      containLabel: false
+      containLabel: false,
+      left: 70
     },
     color: ['#30FF8D'],
     title: {
