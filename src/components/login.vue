@@ -271,6 +271,7 @@ a:active {
   line-height: 40px;
   text-align: center;
   background: url('/static/renmintjNew/font.png') no-repeat center;
+  background-size: 290px 28px;
 }
 #login .m-gallery {
   position: relative;
