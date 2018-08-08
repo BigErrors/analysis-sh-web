@@ -4,7 +4,7 @@
 <template>
   <div class="index_container">
     <div class="head clearfix">
-      <div class="title">社会矛盾风险感知大数据平台</div>
+      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
       <div class="left">
         <el-cascader class="cascader" style="z-index: 1;" :options="area" placeholder="区域" v-model="areaDefault"></el-cascader>
       </div>
@@ -656,7 +656,7 @@ export default {
 <style lang="less" scoped>
 @fontSamll:14px;
 @fontMiddle:16px;
-@fontBig:23px;
+@fontBig:20px;
 @tableHover:rgba(113, 116, 120, 0.6);
 @navActive: #FFF225;
 @titleHover: #149CFA;
