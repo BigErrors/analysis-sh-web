@@ -218,7 +218,7 @@ export default {
         width: 100%;
         height: 33px;
         top: 30px;
-        background-image: url('/static/renmintjNew/font.png');
+        background-image: url('/static/renmintjNew/font0.png');
         background-position: center center;
         background-repeat: no-repeat;
       }

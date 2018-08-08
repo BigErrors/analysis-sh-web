@@ -264,8 +264,8 @@ a:active {
 #login .title1 {
   position: absolute;
   top: -71px;
-  left: 0;
-  width: 100%;
+  left: -10%;
+  width: 120%;
   height: 40px;
   padding-top: 27px;
   line-height: 40px;
