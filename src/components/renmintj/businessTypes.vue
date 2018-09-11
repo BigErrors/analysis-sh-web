@@ -1,7 +1,7 @@
 <template>
   <div class="busiTypes_container">
     <div class="head clearfix">
-      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
+      <div class="title">司法大数据服务应用系统</div>
       <div class="left">
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>

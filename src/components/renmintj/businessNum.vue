@@ -1,7 +1,7 @@
 <template>
   <div class="busiNum_container">
     <div class="head clearfix">
-      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
+      <div class="title">司法大数据服务应用系统</div>
       <div class="left">
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
@@ -236,7 +236,11 @@ export default {
       for (let i = 0; i < this.table.length; i++) {
         sum += parseInt(this.table[i].value)
       }
-      return (value / sum * 100).toFixed(2) + '%'
+      if (sum === 0) {
+        return '0%'
+      } else {
+        return (value / sum * 100).toFixed(2) + '%'
+      }
     },
     // 绘制echarts
     draw (domName, option) {

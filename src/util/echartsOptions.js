@@ -198,7 +198,7 @@ let setBar3 = (data, color, axisType, dataType, barMaxWidth, portrait, showValue
       containLabel: function () { if (axisType === 'horizon') { return true } else { return false } },
       top: 20,
       left: 20,
-      right: 50,
+      right: 60,
       bottom: 20
     },
     // axisType有两种：vertical，xAxis显示类目，yAxis显示数值；horizon，xAxis显示数值，yAxis显示类目

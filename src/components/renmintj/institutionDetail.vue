@@ -1,7 +1,7 @@
 <template>
   <div class="insdetail_container">
     <div class="head clearfix">
-      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
+      <div class="title">司法大数据服务应用系统</div>
       <div class="left">
         <div class="back" @click="$router.back(-1)"></div>
       </div>
@@ -70,7 +70,7 @@
             </div>
             <div class="box">
               <div class="bTitle">受理案件排名</div>
-              <div class="line" v-for="(item,index) in shouLiAJRYPM" :key="index" @click="changeRouter('peoplePortrait', item.id)">
+              <div class="line" v-if="shouLiAJRYPM.length!==0" v-for="(item,index) in shouLiAJRYPM" :key="index" @click="changeRouter('peoplePortrait', item.id)">
                 <div class="lineCenter">
                   <div class="line_span">
                     <span class="span_name">{{item.name}}</span>
@@ -80,6 +80,9 @@
                     <div class="line_rating" :style="{width:100*item.value+'%'}"></div>
                   </div>
                 </div>
+              </div>
+              <div v-if="shouLiAJRYPM.length===0" style="text-align:center;padding-top:15px;">
+                <span style="color: #f1f1f1;font-size: 16px;">暂无数据</span>
               </div>
             </div>
           </div>
@@ -139,16 +142,20 @@
                 <div class="row row5"><span>状态</span></div>
                 <div class="row row6"><span>操作</span></div>
               </div>
-              <div class="line table_body" v-for ="(item,index) in shouLiAJLB" :key="index">
+              <div class="line table_body" v-if="shouLiAJLB.length!==0" v-for ="(item,index) in shouLiAJLB" :key="index">
                 <div class="row row1">
                   <span v-if="item.xuHao<=3" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
                   <span v-if="item.xuHao>3" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+                  <span v-if="item.xuHao>=100" class="circle">{{item.xuHao}}</span>
                 </div>
                 <div class="row row2"><span>{{item.fenLei}}</span></div>
                 <div class="row row3"><span>{{item.mingChen}}</span></div>
                 <div class="row row4"><span>{{item.riQi.slice(0,11)}}</span></div>
                 <div class="row row5"><span>{{item.zhuangTai}}</span></div>
                 <div class="row row6"><span class="detail" @click="changeRouter('eventDetail',item.id)">详情</span></div>
+              </div>
+              <div v-if="shouLiAJLB.length===0" style="text-align:center;padding-top:15px;">
+                <span style="color: #f1f1f1;font-size: 16px;">暂无数据</span>
               </div>
             </div>
             <div class="page">

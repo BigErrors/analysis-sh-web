@@ -1,7 +1,7 @@
 <template>
   <div class='importantEvent_container'>
     <div class="head clearfix">
-      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
+      <div class="title">司法大数据服务应用系统</div>
       <div class="left">
         <div class="back" @click="$router.back(-1)"></div>
       </div>
@@ -74,7 +74,8 @@
             <tr v-for="(item,index) in table.currentList" :key="index" v-if="index<=9">
               <td class='td'>
                 <span v-if="item.xuHao<=3" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
-                <span v-if="item.xuHao>3" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+                <span v-if="item.xuHao>3&&item.xuHao<100" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+                <span v-if="item.xuHao>=100" class="circle">{{item.xuHao}}</span>
               </td>
               <td class='td'>{{item.shiJianLX}}</td>
               <td class='td'>{{item.diQu}}</td>

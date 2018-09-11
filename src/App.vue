@@ -146,7 +146,6 @@ export default {
 
   .el-pager li {
     background: rgba(255, 255, 255, 0) !important;
-    width: 28px!important;
     min-width: 28px!important;
   }
 
@@ -158,10 +157,11 @@ export default {
   }
 
   .el-pager li.active {
-    color: #FEFEFE !important;
+    /* color: #FEFEFE !important; */
+    color: #409EFF !important;
     cursor: default !important;
-    border-radius: 28px !important;
-    background: #409EFF !important;
+    /* border-radius: 28px !important; */
+    /* background: #409EFF !important; */
   }
 
   .el-pagination .btn-next,

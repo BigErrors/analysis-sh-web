@@ -4,7 +4,7 @@
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.5)">
     <div class="head clearfix">
-      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
+      <div class="title">司法大数据服务应用系统</div>
       <div class="left">
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>
@@ -74,8 +74,8 @@
           <div class="row row4"><span :class="{yellow:obj==='yewusl'}" @click="sort('yewusl')">调解案件数</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
           <div class="row row5"><span :class="{yellow:obj==='tiaojiecgl'}" @click="sort('tiaojiecgl')">成功率</span><i @click="sort('tiaojiecgl')" class="init" :class="{bottom:obj==='tiaojiecgl'&&reorder==='DESC',top:obj==='tiaojiecgl'&&reorder==='ASC'}"></i></div>
           <div class="row row6"><span>缓解率</span></div>
-          <div class="row row7"><span :class="{yellow:obj==='pingjuntjzq'}" @click="sort('pingjuntjzq')">平均调解周期</span><i @click="sort('pingjuntjzq')" class="init" :class="{bottom:obj==='pingjuntjzq'&&reorder==='DESC',top:obj==='pingjuntjzq'&&reorder==='ASC'}"></i></div>
-          <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">调处金额</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
+          <div class="row row7"><span :class="{yellow:obj==='pingjuntjzq'}" @click="sort('pingjuntjzq')">平均调解周期(天)</span><i @click="sort('pingjuntjzq')" class="init" :class="{bottom:obj==='pingjuntjzq'&&reorder==='DESC',top:obj==='pingjuntjzq'&&reorder==='ASC'}"></i></div>
+          <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">调处金额(元)</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
           <div class="row row9"><span>经典案例数</span></div>
           <div class="row row10"><span>表彰数</span></div>
           <div class="row row11" :class="{yellow:obj==='denglucs'}" @click="sort('denglucs')"><span>登录次数</span><i @click="sort('denglucs')" class="init" :class="{bottom:obj==='denglucs'&&reorder==='DESC',top:obj==='denglucs'&&reorder==='ASC'}"></i></div>

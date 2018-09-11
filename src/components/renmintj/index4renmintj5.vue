@@ -4,7 +4,7 @@
 <template>
   <div class="index_container">
     <div class="head clearfix">
-      <div class="title">智慧司法–社会矛盾风险感知子平台</div>
+      <div class="title">司法大数据服务应用系统</div>
       <div class="left">
         <el-cascader class="cascader" style="z-index: 1;" :options="area" placeholder="区域" v-model="areaDefault"></el-cascader>
       </div>
@@ -62,7 +62,7 @@
           <span class="title_china">重点关注</span>
           <span class="title_english">Priority order</span> -->
         <div class="title">
-          <span class="title_china">今日案件</span>
+          <span class="title_china" @click="changeRouter('importantEvent')">重点案件</span>
           <span class="title_english">Today's case</span>
         </div>
         <div class="right1">
