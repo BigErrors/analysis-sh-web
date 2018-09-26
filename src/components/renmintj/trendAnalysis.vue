@@ -4,7 +4,7 @@
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.5)">
     <div class="head clearfix">
-      <div class="title">司法大数据服务应用系统</div>
+      <div class="title">智慧调解大数据平台</div>
       <div class="left">
         <div class="back" @click="changeRouter('index4renmintj')"></div>
       </div>

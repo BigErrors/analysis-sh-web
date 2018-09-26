@@ -4,7 +4,7 @@
 <template>
   <div class="index_container">
     <div class="head clearfix">
-      <div class="title">司法大数据服务应用系统</div>
+      <div class="title">智慧调解大数据平台</div>
       <div class="left">
         <el-cascader class="cascader" style="z-index: 1;" :options="area" placeholder="区域" v-model="areaDefault"></el-cascader>
       </div>
