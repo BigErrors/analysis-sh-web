@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "build-image": "npm run build && docker build -t nginx/analysis ./docker && docker run --rm -d -p 8081:80/tcp nginx/analysis:latest"
+    "build-image": "npm run build && docker build -t nginx/analysis ./docker"
   },
   "dependencies": {
     "echarts": "4.1.0",
