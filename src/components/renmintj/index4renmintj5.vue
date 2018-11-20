@@ -58,11 +58,8 @@
         </div>
       </div>
       <div class="right">
-        <!-- <div class="title" @click="changeRouter('importantEvent')">
-          <span class="title_china">重点关注</span>
-          <span class="title_english">Priority order</span> -->
-        <div class="title">
-          <span class="title_china" @click="changeRouter('importantEvent')">重点案件</span>
+        <div class="title disable">
+          <span class="title_china">今日案件</span>
           <span class="title_english">Today's case</span>
         </div>
         <div class="right1">
@@ -1166,6 +1163,11 @@ export default {
     .title:hover {
       cursor: pointer;
       color: @titleHover;
+    }
+    .disable{
+      cursor: default !important;
+      color: rgba(237, 237, 237, 1) !important;
+      background: url('') !important;
     }
   }
   .middle {
