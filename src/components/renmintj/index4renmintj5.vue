@@ -328,7 +328,7 @@ export default {
     mapboxStyle: {
       'version': 8,
       'glyphs': `${urlConfig.osmUrl}/fonts/{fontstack}/{range}.pbf`,
-      'sprite': 'http://7xu37n.com1.z0.glb.clouddn.com/sprite6',
+      'sprite': `${window.location.origin}/static/sprite6`,
       'sources': {
         'osm-tiles': {
           'type': 'raster',
