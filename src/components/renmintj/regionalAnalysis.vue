@@ -37,11 +37,11 @@
           </div>
           <div class="box">
             <span class="span1"><span class="spans">调解成功率</span></span>
-            <span class="span2">{{tiaoJieCGL+'%'}}</span>
+            <span class="span2">{{tiaoJieCGL.toFixed(2)+'%'}}</span>
           </div>
           <div class="box">
             <span class="span1"><span class="spans">调解赔付金额</span></span>
-            <span class="span2">{{$echarts.format.addCommas(tiaoJiePCJE)}}</span>
+            <span class="span2">{{$echarts.format.addCommas(tiaoJiePCJE.toFixed(2))}}</span>
             <span class="span3">万元</span>
           </div>
           <div class="box">

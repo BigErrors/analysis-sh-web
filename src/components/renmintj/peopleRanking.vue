@@ -73,12 +73,9 @@
           <div class="row row3"><span>所属机构</span></div>
           <div class="row row4"><span :class="{yellow:obj==='yewusl'}" @click="sort('yewusl')">调解案件数</span><i @click="sort('yewusl')" class="init" :class="{bottom:obj==='yewusl'&&reorder==='DESC',top:obj==='yewusl'&&reorder==='ASC'}"></i></div>
           <div class="row row5"><span :class="{yellow:obj==='tiaojiecgl'}" @click="sort('tiaojiecgl')">成功率</span><i @click="sort('tiaojiecgl')" class="init" :class="{bottom:obj==='tiaojiecgl'&&reorder==='DESC',top:obj==='tiaojiecgl'&&reorder==='ASC'}"></i></div>
-          <div class="row row6"><span>缓解率</span></div>
-          <div class="row row7"><span :class="{yellow:obj==='pingjuntjzq'}" @click="sort('pingjuntjzq')">平均调解周期(天)</span><i @click="sort('pingjuntjzq')" class="init" :class="{bottom:obj==='pingjuntjzq'&&reorder==='DESC',top:obj==='pingjuntjzq'&&reorder==='ASC'}"></i></div>
-          <div class="row row8"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">调处金额(元)</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
-          <div class="row row9"><span>经典案例数</span></div>
-          <div class="row row10"><span>表彰数</span></div>
-          <div class="row row11" :class="{yellow:obj==='denglucs'}" @click="sort('denglucs')"><span>登录次数</span><i @click="sort('denglucs')" class="init" :class="{bottom:obj==='denglucs'&&reorder==='DESC',top:obj==='denglucs'&&reorder==='ASC'}"></i></div>
+          <div class="row row6"><span :class="{yellow:obj==='pingjuntjzq'}" @click="sort('pingjuntjzq')">平均调解周期(天)</span><i @click="sort('pingjuntjzq')" class="init" :class="{bottom:obj==='pingjuntjzq'&&reorder==='DESC',top:obj==='pingjuntjzq'&&reorder==='ASC'}"></i></div>
+          <div class="row row7"><span :class="{yellow:obj==='chengjiaoje'}" @click="sort('chengjiaoje')">调处金额(元)</span><i @click="sort('chengjiaoje')" class="init" :class="{bottom:obj==='chengjiaoje'&&reorder==='DESC',top:obj==='chengjiaoje'&&reorder==='ASC'}"></i></div>
+          <div class="row row8" :class="{yellow:obj==='denglucs'}" @click="sort('denglucs')"><span>登录次数</span><i @click="sort('denglucs')" class="init" :class="{bottom:obj==='denglucs'&&reorder==='DESC',top:obj==='denglucs'&&reorder==='ASC'}"></i></div>
         </div>
         <div class="t_body">
           <div v-for="(item,index) in mediators" :key='index' class="line" @click="changeRouter('peoplePortrait', item.id_)">
@@ -101,12 +98,9 @@
                <i class="icon_rate" :class="{red:item.tiaojiecgl<0.6,yellow:item.tiaojiecgl<0.8&&item.tiaojiecgl>=0.6,green:item.tiaojiecgl>=0.8}"></i>
                <span>{{item.tiaojiecgl|changeToRate}}</span>
               </div>
-             <div class="row row6"><i class="icon_rate red"></i><span>0%</span></div>
-             <div class="row row7"><span>{{item.pingjuntjzq}}</span></div>
-             <div class="row row8"><span>{{$echarts.format.addCommas(item.chengjiaoje)}}</span></div>
-             <div class="row row9"><span>0</span></div>
-             <div class="row row10"><span>0</span></div>
-             <div class="row row11"><span>{{item.denglucs}}</span></div>
+             <div class="row row6"><span>{{item.pingjuntjzq}}</span></div>
+             <div class="row row7"><span>{{$echarts.format.addCommas(item.chengjiaoje)}}</span></div>
+             <div class="row row8"><span>{{item.denglucs}}</span></div>
           </div>
         </div>
       </div>
@@ -128,6 +122,7 @@
 import json from '@/util/dictionaryMapping'
 import http from '@/util/httpUtil'
 import jsonUtil from '@/util/jsonUtil'
+import { findAreaNameByValue, findCoordinationTypeByValue } from '@/util/index'
 
 export default {
   data: () => ({
@@ -198,12 +193,11 @@ export default {
         }, 'application/json')
       } else {
         http.post(url, reqParam, (data) => {
-          let date = new Date()
-          let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+          let filefix = `${vue.date[0]}至${vue.date[1]} ${findAreaNameByValue(vue.areaDefault[0])}${findCoordinationTypeByValue(vue.coordinationTypeDefault[0])}调解员数据.xls`
           let blob = new Blob([data]) // 创建一个blob对象
           let a = document.createElement('a') // 创建一个<a></a>标签
           a.href = URL.createObjectURL(blob) // response is a blob
-          a.download = filefix + '表格.xls' // 文件名称
+          a.download = filefix // 文件名称
           a.style.display = 'none'
           document.body.appendChild(a)
           a.click()
@@ -445,32 +439,23 @@ export default {
           padding-left: 12px;
         }
         .row3{
-          width: 16%;
+          width: 24%;
           text-align: left;
           padding-left: 25px;
         }
         .row4{
-          width: 8%;
+          width: 12%;
         }
         .row5{
-          width: 8%;
+          width: 12%;
         }
         .row6{
-          width: 8%;
+          width: 12%;
         }
         .row7{
-          width: 8%;
+          width: 12%;
         }
         .row8{
-          width: 8%;
-        }
-        .row9{
-          width: 8%;
-        }
-        .row10{
-          width: 8%;
-        }
-        .row11{
           width: 10%;
         }
       }
@@ -550,17 +535,20 @@ export default {
             }
           }
           .row3{
-            width:16%;
+            width:24%;
             text-align: left;
             span{
               font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
               color: @fontWhite;
               width: 18em;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              white-space: nowrap;
             }
           }
           .row4{
-            width: 8%;
+            width: 12%;
             span{
               background: linear-gradient(to left, #4481EB,#04BEFE);
               padding:4px 8px;
@@ -571,7 +559,7 @@ export default {
             }
           }
           .row5{
-            width: 8%;
+            width: 12%;
             span{
               font-size: @fontSamll;
               font-family: HiraginoSansGB-W3;
@@ -589,25 +577,7 @@ export default {
             }
           }
           .row6{
-            width: 8%;
-            span{
-              font-size: @fontSamll;
-              font-family: HiraginoSansGB-W3;
-              color: @fontWhite;
-              transform: translate(0,-50%);
-            }
-            .icon_rate{
-              position: absolute;
-              top:50%;
-              right: 55%;
-              transform: translateY(-50%);
-              width: 4px;
-              height: 4px;
-              border-radius: 50%;
-            }
-          }
-          .row7{
-            width: 8%;
+            width: 12%;
             span{
               background: rgba(77,132,254,1);
               border-radius: 2px;
@@ -615,31 +585,15 @@ export default {
               color: @fontWhite;
             }
           }
+          .row7{
+            width: 12%;
+            span{
+              font-size: @fontSamll;
+              font-family: HiraginoSansGB-W3;
+              color: @fontWhite;
+            }
+          }
           .row8{
-            width: 8%;
-            span{
-              font-size: @fontSamll;
-              font-family: HiraginoSansGB-W3;
-              color: @fontWhite;
-            }
-          }
-          .row9{
-            width: 8%;
-            span{
-              font-size: @fontSamll;
-              font-family: HiraginoSansGB-W3;
-              color: @fontWhite;
-            }
-          }
-          .row10{
-            width: 8%;
-            span{
-              font-size: @fontSamll;
-              font-family: HiraginoSansGB-W3;
-              color: @fontWhite;
-            }
-          }
-          .row11{
             width: 10%;
             span{
               font-size: @fontSamll;

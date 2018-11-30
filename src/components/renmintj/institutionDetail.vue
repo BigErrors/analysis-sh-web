@@ -145,8 +145,8 @@
               <div class="line table_body" v-if="shouLiAJLB.length!==0" v-for ="(item,index) in shouLiAJLB" :key="index">
                 <div class="row row1">
                   <span v-if="item.xuHao<=3" class="circle" :class="'circle'+(item.xuHao)">{{item.xuHao}}</span>
-                  <span v-if="item.xuHao>3" class="circle" :class="'circle4'">{{item.xuHao}}</span>
-                  <span v-if="item.xuHao>=100" class="circle">{{item.xuHao}}</span>
+                  <span v-if="item.xuHao>3&&item.xuHao<10" class="circle" :class="'circle4'">{{item.xuHao}}</span>
+                  <span v-if="item.xuHao>=10" class="circle">{{item.xuHao}}</span>
                 </div>
                 <div class="row row2"><span>{{item.fenLei}}</span></div>
                 <div class="row row3"><span>{{item.mingChen}}</span></div>

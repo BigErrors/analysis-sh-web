@@ -119,6 +119,7 @@ import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
 import json from '@/util/dictionaryMapping'
+import { findAreaNameByValue } from '@/util/index'
 
 export default {
   data: function () {
@@ -193,12 +194,11 @@ export default {
         }, 'application/json')
       } else {
         http.post(baseUrl + url, param, (data) => {
-          let date = new Date()
-          let filefix = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+          let filefix = `${_this.date[0]}至${_this.date[1]} ${findAreaNameByValue(_this.areaDefault[0])}${_this.findChooseArrTypeByValue(_this.chooseDefault[0])}机构排名数据.xls`
           let blob = new Blob([data]) // 创建一个blob对象
           let a = document.createElement('a') // 创建一个<a></a>标签
           a.href = URL.createObjectURL(blob) // response is a blob
-          a.download = filefix + '表格.xls' // 文件名称
+          a.download = filefix // 文件名称
           a.style.display = 'none'
           document.body.appendChild(a)
           a.click()
@@ -245,6 +245,14 @@ export default {
         target = {name: name, params: { id: id, type: type }}
       }
       this.$router.push(target)
+    },
+    findChooseArrTypeByValue (value) {
+      let result = this.chooseArr.filter(item => {
+        if (item.value === value) {
+          return true
+        }
+      })
+      return result.length === 1 ? result[0].label : '未知类别'
     }
   }
 }

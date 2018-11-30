@@ -73,7 +73,7 @@
                 <div class="row row3">受理数量</div>
               </div>
               <div class="t_body">
-                <div class="line" v-for="(item, index) in anJianSLSBG" :key="index" @click="changeRouter(target3==='type1'?'institutionDetail':'peoplePortrait',item.id)">
+                <div class="line" v-if="anJianSLSBG.length>0" v-for="(item, index) in anJianSLSBG" :key="index" @click="changeRouter(target3==='type1'?'institutionDetail':'peoplePortrait',item.id)">
                   <div class="row row1">
                     <span v-if="index>2">{{index+1}}</span>
                     <img class="img"  v-if ="index===0" src='/static/renmintj/jingpai.png' />
@@ -83,6 +83,7 @@
                   <div class="row row2"><span>{{item.name}}</span></div>
                   <div class="row row3"><span>{{item.value}}</span></div>
                 </div>
+                <div v-if="anJianSLSBG.length===0" class="nodata">暂无数据</div>
               </div>
             </div>
           </div>
@@ -600,6 +601,13 @@ export default {
               height: calc(100% - 24px);
               position: relative;
               display: block;
+              .nodata{
+                margin-top: 30px;
+                text-align:center;
+                font-size:@fontSamll;
+                font-family:HiraginoSansGB-W3;
+                color:@fontGray;
+              }
               .line{
                 height: 20%;
                 display: block;
