@@ -149,13 +149,13 @@ export default {
       jiuFenZL: 0,
       tiaoJieCGL: 0,
       tiaoJiePCJE: 0,
-      area: 'SHJCK01000'
+      area: localStorage.getItem('area')
     }
   },
   computed: {},
   watch: {
     date (newValue, oldValue) {
-      this.area = 'SHJCK01000'
+      this.area = localStorage.getItem('area')
       this.getSankeyData()
       this.getOtherData()
     },
@@ -168,7 +168,7 @@ export default {
       let _this = this
       let baseUrl = urlConfig.baseUrl
       let url = '/regionalAnalysis'
-      let param = { area: 'SHJCK01000', startDate: _this.date[0], endDate: _this.date[1] }
+      let param = { area: localStorage.getItem('area'), startDate: _this.date[0], endDate: _this.date[1] }
       http.get(baseUrl + url, param, (data) => {
         let sankeyData = data.sangJiT.links.map(item => { return [item.source, item.target, item.value] })
         _this.$nextTick(function () {
@@ -258,7 +258,7 @@ export default {
     },
     reset () {
       this.date = jsonUtil.defaultDataRage()
-      this.area = 'SHJCK01000'
+      this.area = localStorage.getItem('area')
     },
     changeRouter (name) {
       this.$router.push({name: name})

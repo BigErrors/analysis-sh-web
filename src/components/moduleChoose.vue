@@ -82,8 +82,14 @@ export default {
       let param = { username: vue.userName, password: vue.userPwd }
       http.get(baseUrl + url, param, (data) => {
         console.log(`用户已退出`)
+        vue.removePermission()
         vue.changeRouter({name: 'login'})
       })
+    },
+    // 清除权限
+    removePermission () {
+      // 将本地存储的数据权限清除
+      localStorage.removeItem('area')
     },
     // 路由跳转
     changeRouter (name) {

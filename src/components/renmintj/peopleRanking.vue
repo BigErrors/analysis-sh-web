@@ -123,6 +123,7 @@ import json from '@/util/dictionaryMapping'
 import http from '@/util/httpUtil'
 import jsonUtil from '@/util/jsonUtil'
 import { findAreaNameByValue, findCoordinationTypeByValue } from '@/util/index'
+import { dataPermission } from '@/util/permission'
 
 export default {
   data: () => ({
@@ -130,8 +131,8 @@ export default {
     pickerOptions: jsonUtil.pickerOptions,
     obj: 'yewusl',
     reorder: 'DESC',
-    area: json.area,
-    areaDefault: ['SHJCK01000'],
+    area: dataPermission(localStorage.getItem('area')),
+    areaDefault: [localStorage.getItem('area')],
     coordinationType: json.coordinationType,
     coordinationTypeDefault: ['allinformation'],
     nameSearch: '',
@@ -193,7 +194,7 @@ export default {
         }, 'application/json')
       } else {
         http.post(url, reqParam, (data) => {
-          let filefix = `${vue.date[0]}至${vue.date[1]} ${findAreaNameByValue(vue.areaDefault[0])}${findCoordinationTypeByValue(vue.coordinationTypeDefault[0])}调解员数据.xls`
+          let filefix = `${vue.date[0]}至${vue.date[1]} ${findAreaNameByValue(this.areaDefault)}${findCoordinationTypeByValue(vue.coordinationTypeDefault[0])}调解员数据.xls`
           let blob = new Blob([data]) // 创建一个blob对象
           let a = document.createElement('a') // 创建一个<a></a>标签
           a.href = URL.createObjectURL(blob) // response is a blob

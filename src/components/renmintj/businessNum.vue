@@ -186,7 +186,7 @@ import eos from '@/util/echartsOptions'
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
-import json from '@/util/dictionaryMapping'
+import { dataPermission } from '@/util/permission'
 import eosNew from '@/util/echartsOptionsNew'
 import jsonUtil from '@/util/jsonUtil'
 
@@ -211,8 +211,8 @@ export default {
       type2Title: '',
       table: [],
       keyMap: {'人民调解': 'MBM_CASE', '110联动': 'MMS_ALARM110INFO', '公共法律服务': 'WWS_CONSULT', '纠纷排查': 'CDS_INVESTIGATIONFEEDBAC', '村居服务': 'AMS_VILLAGESERVICELOG'},
-      area: json.area,
-      areaDefault: ['SHJCK01000'],
+      area: dataPermission(localStorage.getItem('area')),
+      areaDefault: [localStorage.getItem('area')],
       title4: '各区案件数量(TOP10)',
       title5: '来源分布',
       title6: '处理状态'
@@ -221,7 +221,7 @@ export default {
   computed: {},
   watch: {
     type: function (newValue, oldValue) {
-      this.areaDefault = ['SHJCK01000']
+      this.areaDefault = [localStorage.getItem('area')]
     },
     areaDefault: function (newValue, oldValue) {
       this.getData()
@@ -339,7 +339,7 @@ export default {
         } else {
           data = data.slice(0, 10).reverse()
         }
-        let areaName = jsonUtil.findAreaNameByValue(vue.areaDefault[0])
+        let areaName = jsonUtil.findAreaNameByValue(this.areaDefault)
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
             vue.title4 = `${areaName}受理数量(TOP10)`

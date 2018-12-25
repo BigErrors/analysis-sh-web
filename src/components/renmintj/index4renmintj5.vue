@@ -268,7 +268,7 @@
 </template>
 
 <script>
-import json from '@/util/dictionaryMapping'
+import { dataPermission } from '@/util/permission'
 import eos from '@/util/echartsOptions'
 import eosNew from '@/util/echartsOptionsNew'
 import http from '@/util/httpUtil'
@@ -283,8 +283,8 @@ export default {
     digitalRolling
   },
   data: () => ({
-    area: json.area,
-    areaDefault: ['SHJCK01000'],
+    area: dataPermission(localStorage.getItem('area')),
+    areaDefault: [localStorage.getItem('area')],
     pro1: 0,
     pro2: 0,
     trendType: 'data_tj',
@@ -383,7 +383,7 @@ export default {
         vue.drawMapbox()
       } else {
         vue.map.remove()
-        vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(vue.areaDefault[0])))
+        vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(this.areaDefault[0])))
       }
     }
   },
@@ -431,7 +431,7 @@ export default {
         container: 'map',
         style: vue.mapboxStyle,
         // 地图中心经纬度。经纬度用数组
-        center: vue.findCoordinates(vue.areaDefault[0]),
+        center: vue.findCoordinates(vue.areaDefault),
         // 地图的缩放等级
         zoom: 10,
         // 视角俯视的倾斜角度
@@ -567,7 +567,7 @@ export default {
         })
         vue.layerType = 'disputesDistribution'
         vue.$nextTick(function () {
-          vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(vue.areaDefault[0])))
+          vue.draw('map', eos.setMapbox(vue.caseDistributionData, vue.findCoordinates(this.areaDefault[0])))
         })
       })
     },

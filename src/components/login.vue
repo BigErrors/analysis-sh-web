@@ -45,6 +45,7 @@
 <script>
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
+// import { dataPermission } from '@/util/permission'
 
 export default {
   name: 'login',
@@ -67,6 +68,7 @@ export default {
       let param = { username: vue.userName, password: vue.userPwd }
       http.get(baseUrl + url, param, (data) => {
         console.log(`${data.username}登陆成功`)
+        vue.setPermission(data.areacode)
         vue.changeRouter()
       })
     },
@@ -77,8 +79,14 @@ export default {
       let param = {}
       http.get(baseUrl + url, param, (data) => {
         console.log(`已登陆`)
+        // vue.setPermission(data.areacode)
         vue.changeRouter()
       })
+    },
+    // 设置权限
+    setPermission (areacode) {
+      // 将数据权限本地存储
+      localStorage.setItem('area', areacode)
     },
     changeRouter () {
       this.$router.push({name: 'moduleChoose'})

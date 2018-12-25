@@ -118,7 +118,7 @@
 import http from '@/util/httpUtil'
 import urlConfig from '@/util/urlConfig'
 import jsonUtil from '@/util/jsonUtil'
-import json from '@/util/dictionaryMapping'
+import { dataPermission } from '@/util/permission'
 import { findAreaNameByValue } from '@/util/index'
 
 export default {
@@ -146,8 +146,8 @@ export default {
         value: 'MEDIATIONCOMMITTEE'
       }],
       chooseDefault: ['JUSTICEBUREAU'],
-      area: json.area,
-      areaDefault: ['SHJCK01000']
+      area: dataPermission(localStorage.getItem('area')),
+      areaDefault: [localStorage.getItem('area')]
     }
   },
   computed: {},
@@ -194,7 +194,7 @@ export default {
         }, 'application/json')
       } else {
         http.post(baseUrl + url, param, (data) => {
-          let filefix = `${_this.date[0]}至${_this.date[1]} ${findAreaNameByValue(_this.areaDefault[0])}${_this.findChooseArrTypeByValue(_this.chooseDefault[0])}机构排名数据.xls`
+          let filefix = `${_this.date[0]}至${_this.date[1]} ${findAreaNameByValue(_this.areaDefault)}${_this.findChooseArrTypeByValue(_this.chooseDefault[0])}机构排名数据.xls`
           let blob = new Blob([data]) // 创建一个blob对象
           let a = document.createElement('a') // 创建一个<a></a>标签
           a.href = URL.createObjectURL(blob) // response is a blob

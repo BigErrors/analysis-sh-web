@@ -119,6 +119,7 @@ import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 import urlConfig from '@/util/urlConfig'
 import digitalRolling from '../digitalRolling.vue'
+import { dataPermission } from '@/util/permission'
 
 export default {
   name: 'trendAnalysis',
@@ -138,8 +139,8 @@ export default {
       max: 0,
       average: 0,
       maxMonth: '0000-00',
-      area: json.area,
-      areaDefault: ['SHJCK01000'],
+      area: dataPermission(localStorage.getItem('area')),
+      areaDefault: [localStorage.getItem('area')],
       type: json.businessType,
       typeDefault: ['人民调解'],
       date: [],

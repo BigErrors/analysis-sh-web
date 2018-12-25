@@ -165,6 +165,7 @@ import urlConfig from '@/util/urlConfig'
 import http from '@/util/httpUtil'
 import json from '@/util/dictionaryMapping'
 import eosNew from '@/util/echartsOptionsNew'
+import { dataPermission } from '@/util/permission'
 
 export default {
   data: function () {
@@ -180,9 +181,9 @@ export default {
         data: []
       },
       tjtype: '行专调解',
-      area: json.area,
+      area: dataPermission(localStorage.getItem('area')),
       selectDefault: {
-        areaDefault: ['SHJCK01000'],
+        areaDefault: [localStorage.getItem('area')],
         typeDefault: ['民事']
       },
       xingZhuanTJS: 0,
