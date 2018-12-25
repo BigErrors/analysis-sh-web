@@ -96,8 +96,8 @@
             </div>
           </div>
         </div>
-        <div class="title">
-          <span class="title_china" @click="changeRouter('documentQuality')">工作质量</span>
+        <div class="title disable">
+          <span class="title_china">工作质量</span>
           <span class="title_english">Work quality</span>
         </div>
         <div class="right2">
@@ -141,7 +141,7 @@
             <img class="rImg" src="/static/renmintjNew/icon_zaixianry.png" />
             <div class="rSpanC">
               <div>
-                <span class="spanT" @click="changeRouter('loadingNumber')">今日登录人次</span>
+                <span class="spanT disable">今日登录人次</span>
               </div>
               <div>
                 <span class="spanB">{{onlineNumber}}</span>
@@ -183,7 +183,7 @@
             </div>
           </div>
         </div>
-        <div class="bottom2" @click="changeRouter('peopleNum')">
+        <div class="bottom2" @click="changeRouter('peopleRanking')">
           <div class="bTitle">人员总数</div>
           <div class="bContent">
             <img src="/static/renmintjNew/icon_tiaojiey.png" />
@@ -248,13 +248,12 @@
       <!-- 地图容器 -->
       <div class="map" id="map"></div>
       <!-- 选择框 -->
-      <div class="other">
+      <!-- <div class="other">
         <div class="once once1" @click="layerType='disputesDistribution'" :class="{active1:layerType==='disputesDistribution'}">纠纷态势</div>
         <div class="once once2" @click="layerType='importantEvent'" :class="{active2:layerType==='importantEvent'}">重点关注</div>
-        <!-- <div class="once once3" @click="layerType='mechanismDistribution'" :class="{active3:layerType==='mechanismDistribution'}">机构分布</div> -->
-      </div>
+      </div> -->
       <!-- 区域分析 -->
-      <div class="leftChoose" @click="changeRouter('regionalAnalysis')"></div>
+      <!-- <div class="leftChoose" @click="changeRouter('regionalAnalysis')"></div> -->
     </div>
     <!-- 案件分布弹框 -->
     <div class="dialog" :style="{'left': offsetX,'top': offsetY}" v-if="showDialog">

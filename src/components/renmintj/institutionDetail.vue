@@ -16,7 +16,7 @@
       </div>
       <div class="nav2 clearfix">
         <div class="navLeft">
-          <span class="navspan">机构详情</span>
+          <span class="navspan"></span>
         </div>
         <div class="navRight">
           <span class="navbtn" :class="{active:timec==='jinNian'}" @click="timec='jinNian'">今年</span>

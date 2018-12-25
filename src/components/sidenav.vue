@@ -1,9 +1,9 @@
 <template>
   <div class="nav_container" @mouseleave="show=false" :class="{show:show,unshow:!show}">
-    <div class="box box2" @click="$router.push('/')">
+    <!-- <div class="box box2" @click="$router.push('/')">
       <div class="img"></div>
       <span class="description">返回转盘</span>
-    </div>
+    </div> -->
     <div class="box box10" @click="$router.push('/index4renmintj')">
       <div class="img"></div>
       <span class="description">返回首页</span>
@@ -16,14 +16,14 @@
       <div class="img"></div>
       <span class="description">业务类型</span>
     </div>
-    <div class="box box1" @click="$router.push('/importantEvent')">
+    <!-- <div class="box box1" @click="$router.push('/importantEvent')">
       <div class="img"></div>
       <span class="description">重点关注</span>
-    </div>
-    <div class="box box7" @click="$router.push('/regionalAnalysis')">
+    </div> -->
+    <!-- <div class="box box7" @click="$router.push('/regionalAnalysis')">
       <div class="img"></div>
       <span class="description">区域分析</span>
-    </div>
+    </div> -->
     <div class="box box8" @click="$router.push('/trendAnalysis')">
       <div class="img"></div>
       <span class="description">趋势分析</span>
@@ -36,10 +36,10 @@
       <div class="img"></div>
       <span class="description">人员排名</span>
     </div>
-    <div class="box box4" @click="$router.push('/documentQuality')">
+    <!-- <div class="box box4" @click="$router.push('/documentQuality')">
       <div class="img"></div>
       <span class="description">工作质量</span>
-    </div>
+    </div> -->
     <div class="switch" @mouseenter="show=true" :class="{open:!show,close:show}"></div>
   </div>
 </template>

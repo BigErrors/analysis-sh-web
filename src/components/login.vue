@@ -89,7 +89,7 @@ export default {
       localStorage.setItem('area', areacode)
     },
     changeRouter () {
-      this.$router.push({name: 'moduleChoose'})
+      this.$router.push({name: 'index4renmintj'})
     },
     changeStatus (type) {
       if (type === 'userName') {

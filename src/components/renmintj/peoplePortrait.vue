@@ -16,9 +16,7 @@
       </div>
       <div class="nav2 clearfix">
         <div class="navLeft">
-          <span class="navspan" @click="changeRouter('peopleNum')">数量分析</span>
-          <span class="navspan" @click="changeRouter('peopleType')">属性分析</span>
-          <span class="navspan active" @click="changeRouter('peopleRanking')">排名分析</span>
+          <span class="navspan"></span>
         </div>
       </div>
       <div class="content_container">
@@ -291,7 +289,7 @@ export default {
       box-sizing: border-box;
       .navLeft{
         float: left;
-        border-bottom:1px solid @fontGray;
+        // border-bottom:1px solid @fontGray;
         .navspan{
           font-size:14px;
           font-family:HiraginoSansGB-W3;
