@@ -431,7 +431,7 @@ export default {
         container: 'map',
         style: vue.mapboxStyle,
         // 地图中心经纬度。经纬度用数组
-        center: vue.findCoordinates(vue.areaDefault),
+        center: vue.findCoordinates(vue.areaDefault[0]),
         // 地图的缩放等级
         zoom: 10,
         // 视角俯视的倾斜角度
