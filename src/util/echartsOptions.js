@@ -1280,7 +1280,7 @@ let setMapbox = (caseData, centerPoint) => {
       // center: [121.5193, 31.163070],
       center: centerPoint,
       // 地图的缩放等级
-      zoom: 9,
+      zoom: 11,
       // 视角俯视的倾斜角度
       pitch: 60,
       // 地图的旋转角度
