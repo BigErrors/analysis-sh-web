@@ -501,7 +501,7 @@ export default {
       http.get(baseUrl + url, reqParam, (data) => {
         vue.pro1 = (data.hangZhuanBL * 100).toFixed(1)
         vue.pro2 = (100 - data.hangZhuanBL * 100).toFixed(1)
-        vue.draw('businessTypes', eosNew.setBar(data.yeWuLXHSL.reverse()))
+        vue.draw('businessTypes', eosNew.setBar(data.yeWuLXHSL.reverse().slice(0, 9)))
       })
       // 业务数量
       url = '/businessCount'
