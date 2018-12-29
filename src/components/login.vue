@@ -3,7 +3,7 @@
     <div class="norepeat">
       <div class="title">
         <i class="icon icon-logo-login"></i>
-        <h2>上海市司法局</h2>
+        <h2>松江区司法局</h2>
       </div>
       <div class="title1">
       </div>
@@ -278,7 +278,7 @@ a:active {
   padding-top: 27px;
   line-height: 40px;
   text-align: center;
-  background: url('/static/renmintjNew/font.png') no-repeat center;
+  background: url('/static/renmintjNew/font1.png') no-repeat center;
 }
 #login .m-gallery {
   position: relative;
