@@ -83,6 +83,17 @@ export default {
         vue.changeRouter()
       })
     },
+    getPermission () {
+      let vue = this
+      let baseUrl = urlConfig.baseUrl
+      let url = '/userInfo'
+      let param = {}
+      http.get(baseUrl + url, param, (data) => {
+        console.log(`已登陆`)
+        vue.setPermission(data.areacode)
+        vue.changeRouter()
+      })
+    },
     // 设置权限
     setPermission (areacode) {
       // 将数据权限本地存储
@@ -111,7 +122,7 @@ export default {
     }
   },
   created () {
-    this.getStatus()
+    this.getPermission()
   },
   mounted () {}
 }

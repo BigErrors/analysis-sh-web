@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-10 09:26:29
+ * @Last Modified time: 2019-01-04 08:49:48
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -105,6 +105,11 @@ http.post = (url, param, callback, contentType, responseType) => {
 
 // 拦截request
 axios.interceptors.request.use(config => {
+  let token = ''
+  if (location.search.split('token=')[1]) {
+    token = decodeURIComponent(location.search.split('token=')[1].split('/')[0])
+  }
+  config.headers.token = token
   return config
 }, err => {
   return Promise.resolve(err)
@@ -113,9 +118,8 @@ axios.interceptors.request.use(config => {
 // 拦截response
 axios.interceptors.response.use(res => {
   if (res.data.code === 10) {
-    Notification.error({message: '未登录'})
-    location.href = `http://${location.host}`
-    // location.href = res.data.data
+    Notification.error({message: '未登录||登录失效'})
+    location.href = res.data.data
   } else {
     return res
   }
