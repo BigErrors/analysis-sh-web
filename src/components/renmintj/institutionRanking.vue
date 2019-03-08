@@ -145,7 +145,7 @@ export default {
         label: '调委会',
         value: 'MEDIATIONCOMMITTEE'
       }],
-      chooseDefault: ['JUSTICEBUREAU'],
+      chooseDefault: ['JUSTICEOFFICE'],
       area: dataPermission(localStorage.getItem('area')),
       areaDefault: [localStorage.getItem('area')]
     }
