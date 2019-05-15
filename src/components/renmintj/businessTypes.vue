@@ -260,7 +260,7 @@ export default {
       this.draw('target82', eosNew.setBar5(nianLingFB, ['#2D65DD', '#2D65DD'], 'vertical', 'integer', 32, false, false))
     },
     tjtype: function (newValue, oldValue) {
-      this.selectDefault.areaDefault = ['SHJCK01000']
+      this.selectDefault.areaDefault = [localStorage.getItem('area')]
       this.selectDefault.typeDefault = ['民事']
     },
     selectDefault: {
