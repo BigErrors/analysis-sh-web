@@ -17,7 +17,7 @@ const router = new Router({
   routes: [{
     path: '/',
     redirect: {
-      name: 'login'
+      name: 'index4renmintj'
     }
   },
   {

@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import http from '@/util/httpUtil'
+import urlConfig from '@/util/urlConfig'
 export default {
   name: 'App',
   data () {
@@ -13,8 +15,26 @@ export default {
   watch: {},
   computed: {},
   filters: {},
-  methods: {},
-  created () {},
+  methods: {
+    getPermission () {
+      let vue = this
+      let baseUrl = urlConfig.baseUrl
+      let url = '/userInfo'
+      let param = {}
+      http.get(baseUrl + url, param, (data) => {
+        console.log(`已登陆`)
+        vue.setPermission(data.areacode)
+      })
+    },
+    // 设置权限
+    setPermission (areacode) {
+      // 将数据权限本地存储
+      localStorage.setItem('area', areacode)
+    }
+  },
+  created () {
+    this.getPermission()
+  },
   mounted () {}
 }
 
