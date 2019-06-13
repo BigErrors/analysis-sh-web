@@ -339,7 +339,7 @@ export default {
         } else {
           data = data.slice(0, 10).reverse()
         }
-        let areaName = jsonUtil.findAreaNameByValue(this.areaDefault)
+        let areaName = jsonUtil.findAreaNameByValue(this.areaDefault[0])
         vue.$nextTick(function () {
           if (vue.type === '人民调解') {
             vue.title4 = `${areaName}受理数量(TOP10)`
