@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-04-20 11:49:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2019-01-04 08:49:48
+ * @Last Modified time: 2019-06-11 17:28:40
  */
 import axios from 'axios'
 import {Notification} from 'element-ui'
@@ -118,7 +118,6 @@ axios.interceptors.request.use(config => {
 // 拦截response
 axios.interceptors.response.use(res => {
   if (res.data.code === 10) {
-    Notification.error({message: '未登录||登录失效'})
     location.href = res.data.data
   } else {
     return res
@@ -139,14 +138,6 @@ http.error = (err) => {
     // http.ClientRequest in node.js
     console.log('Error Request', err.request)
     Notification.error({message: err.request})
-  } else {
-    // Something happened in setting up the request that triggered an Error
-    console.log('Error', err)
-    if (err === {}) {
-      Notification.error({message: '数据异常'})
-    } else {
-      Notification.error({message: err.message})
-    }
   }
 }
 
