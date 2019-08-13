@@ -211,6 +211,15 @@
                   <span class="cspan">{{eventDetail.anJianCLGC.buZhou4.shiFouJXSFQR}}</span>
                 </div>
               </div>
+              <div class="cright a5" v-if="eventDetail.anJianCLGC.buZhou5.zhuangTai===1">
+                <div class="cline">
+                  <span class="clable">协议内容：</span>
+                  <el-tooltip v-if="eventDetail.anJianCLGC.buZhou5.neiRong.length>40" :content='eventDetail.anJianCLGC.buZhou5.neiRong' :popper-class='"contentToolTip"' placement="top-start">
+                    <span class="cspan">{{eventDetail.anJianCLGC.buZhou5.neiRong.slice(0,40)+'...'}}</span>
+                  </el-tooltip>
+                  <span class="cspan" v-else>{{eventDetail.anJianCLGC.buZhou5.neiRong}}</span>
+                </div>
+              </div>
               <div class="cright a6" v-if="eventDetail.anJianCLGC.buZhou6.zhuangTai===1">
                 <div class="cline">
                   <span class="clable">回访记录：</span>
