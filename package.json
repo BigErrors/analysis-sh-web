@@ -1,5 +1,5 @@
 {
-  "name": "analysis",
+  "name": "analysis-sh-web",
   "version": "1.0.0",
   "description": "Visualization Analysis Project 4 Justice",
   "author": "Peiwen <Javapeiwen2010@gmail.com>",
@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "build-image": "npm run build && docker build -t nginx/analysis ./docker"
+    "build-image": "npm run build && docker build -t 192.168.93.172/oa-bpsc-sh/analysis-sh-web:latest ./docker"
   },
   "dependencies": {
     "echarts": "4.1.0",
