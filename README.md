@@ -9,7 +9,7 @@ yarn install
 
 ### 开发环境运行
 ```
-yarn serve
+yarn dev
 ```
 
 ### 构建生产环境代码
@@ -29,5 +29,5 @@ docker tag 192.168.93.172/oa-bpsc-sh/analysis-sh-web:latest 192.168.93.172/oa-bp
 
 ### 将镜像启动为容器
 ```
-docker run --name=analysis-sh-web --restart=always -d -p 8860:80 -e LOCATION='\/peopleMediate\/V1.0.0.3' -e PROXY_PASS='http:\/\/192.168.93.70:8860' 192.168.93.172/oa-bpsc-sh/analysis-sh-web:<版本号>
+docker run --name=analysis-sh-web --restart=always -d -p 9001:80 -e LOCATION='\/peopleMediate\/V1.0.0.3' -e PROXY_PASS='http:\/\/192.168.93.70:8860' 192.168.93.172/oa-bpsc-sh/analysis-sh-web:<版本号>
 ```
