@@ -3,7 +3,7 @@
     <div class="norepeat">
       <div class="title">
         <i class="icon icon-logo-login"></i>
-        <h2>上海市司法局</h2>
+        <h2>XX市司法局</h2>
       </div>
       <div class="title1">
       </div>
